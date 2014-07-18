@@ -198,4 +198,4 @@ FakesAssemblies/
 
 #4DIAC files
 .project
-.old*
+.xml.*
