@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="T1_Counter">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="4DIAC-IDE" Date="2014-07-10" Organization="4DIAC-Consortium" Version="0.0"/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Initialization Request" Name="INIT" Type="Event">
+        <With Var="QI"/>
+      </Event>
+      <Event Comment="Normal Execution Request" Name="REQ" Type="Event">
+        <With Var="QI"/>
+        <With Var="sProgram"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Initialization Confirm" Name="INITO" Type="Event">
+        <With Var="QO"/>
+      </Event>
+      <Event Comment="Execution Confirmation" Name="CNF" Type="Event">
+        <With Var="QO"/>
+        <With Var="sBlock"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Input event qualifier" InitialValue="TRUE" Name="QI" Type="BOOL"/>
+      <VarDeclaration ArraySize="8" Comment="String array holding the blocks to be executed" InitialValue="[0,0,0,0,0,0,0,0]" Name="sProgram" Type="STRING"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Output event qualifier" Name="QO" Type="BOOL"/>
+      <VarDeclaration Comment="String containing the next block to be executed" InitialValue="Empty" Name="sBlock" Type="STRING"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration Comment="Instruction counter" InitialValue="0" Name="Ins_Counter" Type="INT"/>
+    </InternalVars>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="550.0" y="425.0"/>
+      <ECState Comment="Initialization" Name="INIT" x="920.0" y="140.0">
+        <ECAction Algorithm="INIT" Output="INITO"/>
+      </ECState>
+      <ECState Comment="Normal execution" Name="REQ" x="215.0" y="750.0">
+        <ECAction Algorithm="REQ" Output="CNF"/>
+      </ECState>
+      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="START" x="920.0" y="425.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="INIT" x="550.0" y="140.0"/>
+      <ECTransition Comment="" Condition="REQ&amp;QI" Destination="REQ" Source="START" x="550.0" y="600.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ" x="215.0" y="425.0"/>
+    </ECC>
+    <Algorithm Comment="Initialization algorithm" Name="INIT">
+      <ST Text="QI := TRUE;&#10;Ins_Counter := 0;"/>
+    </Algorithm>
+    <Algorithm Comment="Normally executed algorithm" Name="REQ">
+      <ST Text="IF Ins_Counter&lt;= 7 THEN&#10;&#9;sBlock := sProgram[Ins_Counter];&#10;&#9;Ins_Counter := Ins_Counter +1;&#10;&#9;QO := TRUE;&#10;ELSE&#10;&#9;(*Default instructions here*)&#10;&#9;QO:= FALSE;&#10;END_IF;&#10;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>
