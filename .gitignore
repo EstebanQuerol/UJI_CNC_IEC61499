@@ -195,3 +195,7 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
+#4DIAC files
+.project
+.old*
