@@ -1,0 +1,7 @@
+LIBRARY
+EXPORTS
+CNC8070Connect
+CNC8070Disconnect
+CNC8070IsConnected
+CNC8070ExecuteBlock
+CNC8070Start

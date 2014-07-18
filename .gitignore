@@ -106,6 +106,9 @@ dlldata.c
 *.pidb
 *.svclog
 *.scc
+*.vcxproj.*
+*.vcxproj
+*.tlog
 
 # Chutzpah Test files
 _Chutzpah*
@@ -199,3 +202,4 @@ FakesAssemblies/
 #4DIAC files
 .project
 .xml.*
+4DIAC_Project/.metadata
