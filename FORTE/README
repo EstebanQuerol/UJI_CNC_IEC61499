@@ -1,0 +1,61 @@
+README for FORTE
+================
+
+This is first and simple usage documentation for 
+FORTE: the FORDIAC Run-Time Environment
+
+
+Development environment:
+========================
+  1. Get Cygwin and the Cywin development packages
+  2. Get CMake (cmake.org)
+  3. We strongly recommend Eclipse with CDT for developing  
+  4. (optional) get boost.test (included in boost-framework) for testing 
+
+Compile for PCs:
+=======================
+  1. Use CMake (e.g., cmake-gui) to set up development environment
+     1.1. set source directory to FORTE main directory
+     1.2. set target directory
+       we recommend using a separate directory for binaries (e.g. /bin/posix) 
+       within the FORTE main directory structure
+     1.3. change settings and select modules to be included
+     1.4. configure
+     1.5. generate makefiles
+     1.6. multiple setups/platforms can be maintained at the same time 
+       1.6.1. set different target directory and repeat from 1.2.    
+  2. Directly in Cygwin
+  	 2.1. Go into the defined target directory
+  	 2.2. Run "make" 
+  	 2.2.1. the resulting forte will be in the directory
+  	 		{target dir}/src	
+  3. Within Eclipse 
+  	 3.1. Import the project
+  	 3.2. Choose/create make target "all" in the target directory
+  	 3.3. the resulting forte will be in the directory
+  	 		{target dir}/src
+  
+Compile for DIGI Connect ME (to be updated for CMake):
+======================================================
+  1. General steps	
+	 1.1 First of all you need to copy the board support package with all libraries and 
+	     includes files into the directory bin/digime.
+	 1.2 Add the files appconf.h and appconf_api.c which come along with the examples of 
+	     NetOS into the directory src/arch/netos
+	 1.3 configure appconf.h to your application's values           
+  2. Directly in Cygwin
+  	 2.1 Go into the FORTE main directory
+  	 2.2 Run setup_pc script: ./setup_digimi.sh
+  	 2.3 Run make script: ./fortemake.sh all
+  	 2.4 The resulting forte will be in the directory
+  	 		./bin/digime/src	
+  3. Within Eclipse 
+  	 3.1 Import the project
+  	 3.2 Choose setup_digime from the make targets
+  	 3.3 Choose all from the make targets
+  	 3.4 The resulting forte will be in the directory
+  	 		./bin/digime/src
+ 
+ 
+
+  

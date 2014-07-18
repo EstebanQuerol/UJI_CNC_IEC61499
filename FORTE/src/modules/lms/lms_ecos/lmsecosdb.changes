@@ -1,0 +1,30 @@
+
+
+package CYGPKG_HAL_ARM_MINDSTORMSNXT {
+	alias		{ "Lego Mindstorms NXT" hal_arm_mindstormsnxt arm_at91_mindstormsnxt }
+	directory	hal/arm/at91/mindstormsnxt
+	script		hal_arm_mindstormsnxt.cdl
+	hardware
+        description "
+	The mindstormsnxt HAL package provides the support needed to run eCos on 
+        a Lego Mindstorms NXT kit."
+}
+
+target mindstormsnxt {
+	alias { "Lego Mindstorms NXT kit" at91_mindstormsnxt }
+	packages { CYGPKG_HAL_ARM
+                   CYGPKG_HAL_ARM_AT91
+                   CYGPKG_HAL_ARM_AT91SAM7
+                   CYGPKG_HAL_ARM_MINDSTORMSNXT
+                   CYGPKG_IO_SERIAL_ARM_AT91
+                   CYGPKG_DEVS_FLASH_AT91
+                   CYGPKG_DEVS_SPI_ARM_AT91
+                   CYGPKG_DEVICES_WATCHDOG_ARM_AT91WDTC
+                   CYGPKG_DEVS_USB_AT91
+                   CYGPKG_IO_USB
+                   CYGPKG_IO_USB_SLAVE
+        }
+        description "
+        The mindstormsnxt target provides the packages needed to run eCos on a 
+        Lego Mindstorms NXT kit."
+}
