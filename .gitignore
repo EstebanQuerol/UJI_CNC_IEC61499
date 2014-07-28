@@ -65,6 +65,7 @@ Icon
 
 # Build results
 FORTE/bin/
+CNCResources/CNC8070API/Debug/
 
 # Roslyn cache directories
 *.ide/
@@ -107,7 +108,6 @@ dlldata.c
 *.svclog
 *.scc
 *.vcxproj.*
-*.vcxproj
 *.tlog
 
 # Chutzpah Test files
@@ -198,8 +198,3 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
-
-#4DIAC files
-.project
-.xml.*
-4DIAC_Project/.metadata
