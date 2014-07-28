@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="FORTE_REMOTE_TESTER_SETTINGS">
+		<item value="127.0.0.1" key="lastIp"/>
+	</section>
+</section>
