@@ -8,17 +8,22 @@
 
 #include "thread.h"
 #include "../devlog.h"
+#include "objbase.h"
 
 DWORD WINAPI CWin32Thread::threadFunction(LPVOID arguments){
   // Get pointer to CThread object out of void pointer
   CWin32Thread *pThread = (CWin32Thread *) arguments;
 
   // if pointer is ok
-  if(0 != pThread){
+ if (0 != pThread){
+    CoInitializeEx(NULL, COINITBASE_MULTITHREADED);
+
     pThread->m_bAlive = true;
     pThread->run();
     pThread->m_bAlive = false;
     pThread->m_nThreadHandle = 0;
+
+	CoUninitialize();
   }
   else{
     DEVLOG_ERROR("pThread pointer is 0!");
@@ -74,7 +79,17 @@ void CWin32Thread::start(void){
 }
 
 void CWin32Thread::selfSuspend(void){
-  WaitForSingleObject(m_hSelfSuspendSemaphore, INFINITE);
+  // WaitForSingleObject(m_hSelfSuspendSemaphore, INFINITE);
+  while (true) {
+    DWORD waitResult = MsgWaitForMultipleObjects(1, &m_hSelfSuspendSemaphore, FALSE, INFINITE, QS_POSTMESSAGE | QS_SENDMESSAGE);
+	if (waitResult == (WAIT_OBJECT_0 + 1)) {
+		MSG msg;
+		PeekMessage(&msg, NULL, 0, 0, PM_REMOVE);
+		DispatchMessage(&msg);
+	} else {
+		break;
+	}
+  }
 }
 
 void CWin32Thread::resumeSelfSuspend(void){
@@ -108,6 +123,17 @@ void CWin32Thread::end(void){
 void CWin32Thread::join(void){
   //check if the thread is still running and that we are not calling join from inside the thread
   if((0 != m_nThreadHandle) && (GetCurrentThreadId() != m_nThreadID)){
-    WaitForSingleObject(m_nThreadHandle, INFINITE);
+    // WaitForSingleObject(m_nThreadHandle, INFINITE);
+	while (true) {
+	  DWORD waitResult = MsgWaitForMultipleObjects(1, &m_nThreadHandle, FALSE, INFINITE, QS_POSTMESSAGE | QS_SENDMESSAGE);
+	  if (waitResult == (WAIT_OBJECT_0 + 1)) {
+	    MSG msg;
+		PeekMessage(&msg, NULL, 0, 0, PM_REMOVE);
+		DispatchMessage(&msg);
+	  } else {
+		break;
+	  }
+	}
   }
 }
+

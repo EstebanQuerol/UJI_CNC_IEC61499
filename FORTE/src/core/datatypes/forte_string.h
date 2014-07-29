@@ -65,6 +65,8 @@ class CIEC_STRING : public CIEC_ANY_STRING{
      */
     virtual int toString(char* pa_acValue, unsigned int pa_nBufferSize) const ;
 
+	virtual int toString(char* pa_acValue, unsigned int pa_nBufferSize, int mode) const;
+
     /*! \brief Converts a UTF-8 encoded string to a STRING (ISO 10646 Row 00 internally)
     *
     *   This command implements a conversion function from a UTF-8

@@ -63,6 +63,35 @@ int CIEC_STRING::toString(char* pa_acValue, unsigned int pa_nBufferSize) const {
   return nRetVal + 2;
 }
 
+int CIEC_STRING::toString(char* pa_acValue, unsigned int pa_nBufferSize, int mode) const {
+	int nRetVal = -1;
+	if (static_cast<unsigned int>(length()) < pa_nBufferSize){
+		//*pa_acValue = '\'';
+		//pa_acValue++;
+		TForteUInt16 nLen = length();
+		int nUsedBytes = 0;
+		//pa_nBufferSize -= 2;
+		if (0 < nLen){
+			const char * acValue = getValue();
+			for (unsigned int i = 0; i < nLen; ++i){
+				if (static_cast<unsigned int >(nUsedBytes) >= pa_nBufferSize){
+					return -1;
+				}
+				nUsedBytes += dollarEscapeChar(pa_acValue + nUsedBytes, acValue[i], 2);
+			}
+
+		}
+		else{
+			*pa_acValue = '\0';
+		}
+		nRetVal = nUsedBytes;
+		//pa_acValue[nRetVal] = '\'';
+		pa_acValue[nRetVal] = '\0';
+	}
+	return nRetVal;
+}
+
+
 #ifdef FORTE_UNICODE_SUPPORT
 int CIEC_STRING::fromUTF8(const char *pa_pacValue, int pa_nLen, bool pa_bUnescape) {
   unsigned int nMaxWidth;
