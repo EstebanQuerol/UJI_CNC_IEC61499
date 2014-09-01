@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L0_State">
+  <Identification Description="Basic FB to handle CNC service status" Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-08-25" Organization="UJI" Version="0.0"/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Initialization Request" Name="INIT" Type="Event"/>
+      <Event Comment="Request CNC state" Name="REQ" Type="Event"/>
+      <Event Comment="Service state update request" Name="UPDT" Type="Event">
+        <With Var="StateIn"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Initialization Confirm" Name="INITO" Type="Event"/>
+      <Event Comment="Execution Confirmation" Name="CNF" Type="Event">
+        <With Var="ServiceState"/>
+      </Event>
+      <Event Comment="CNC state Update indication" Name="UPDTO" Type="Event">
+        <With Var="StateOut"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="CNC state enumeration" Name="StateIn" Type="USINT"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="CNC state enumeration" InitialValue="0" Name="StateOut" Type="USINT"/>
+      <VarDeclaration Comment="CNC service state enumeration" InitialValue="0" Name="ServiceState" Type="USINT"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration Comment="Current CNC state" InitialValue="0" Name="CNCState" Type="USINT"/>
+      <VarDeclaration Comment="Current CNC service state" InitialValue="0" Name="CurrentServiceState" Type="USINT"/>
+    </InternalVars>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="2280.0" y="950.0"/>
+      <ECState Comment="Initialization" Name="INIT" x="2660.0" y="570.0">
+        <ECAction Algorithm="INIT" Output="INITO"/>
+      </ECState>
+      <ECState Comment="Normal execution" Name="REQ" x="2470.0" y="1330.0">
+        <ECAction Algorithm="REQ" Output="CNF"/>
+      </ECState>
+      <ECState Comment="" Name="UPDT" x="1235.0" y="950.0">
+        <ECAction Algorithm="UPDT" Output="UPDTO"/>
+      </ECState>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ" x="2350.0" y="1275.0"/>
+      <ECTransition Comment="" Condition="REQ" Destination="REQ" Source="START" x="2695.0" y="1140.0"/>
+      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="START" x="2370.0" y="695.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="INIT" x="2825.0" y="940.0"/>
+      <ECTransition Comment="" Condition="UPDT" Destination="UPDT" Source="START" x="2000.0" y="760.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="UPDT" x="1970.0" y="1285.0"/>
+    </ECC>
+    <Algorithm Comment="Initialization algorithm" Name="INIT">
+      <ST Text="CNCState := 0;&#10;CurrentServiceState := 0;"/>
+    </Algorithm>
+    <Algorithm Comment="Normally executed algorithm" Name="REQ">
+      <ST Text="ServiceState := CurrentServiceState;"/>
+    </Algorithm>
+    <Algorithm Comment="CNC State update algorithm" Name="UPDT">
+      <ST Text="CNCState := StateIn;&#10;StateOut := CNCState;&#10;IF(CNCState = 1) THEN&#10;&#9;CurrentServiceState := 1;&#10;ELSIF (CNCState = 2) THEN&#10;&#9;CurrentServiceState := 2;&#10;ELSE&#10;&#9;CurrentServiceState := 0;&#10;END_IF;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>
