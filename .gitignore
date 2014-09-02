@@ -200,5 +200,5 @@ UpgradeLog*.htm
 FakesAssemblies/
 
 ##4DIAC files
-.xml.*
+*.xml.*
 4DIAC_Project/.metadata
