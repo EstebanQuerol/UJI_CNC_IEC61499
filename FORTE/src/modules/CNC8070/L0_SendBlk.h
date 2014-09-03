@@ -12,15 +12,17 @@
 #ifndef _L0_SENDBLK_H_
 #define _L0_SENDBLK_H_
 
-#include <funcbloc.h>
+#include <esfb.h>
 #include <forte_usint.h>
 #include <forte_wstring.h>
 #include <forte_string.h>
 #include <forte_bool.h>
 #include <CNC8070.h>
-#include <stdio.h>
+#include <extevhan.h>
+#include <resource.h>
+#include <devexec.h>
 
-class FORTE_L0_SendBlk : public CFunctionBlock, public CCNC8070CommunicationHandler{
+class FORTE_L0_SendBlk : public CEventSourceFB, public CCNC8070CommunicationHandler, public CExternalEventHandler {
   DECLARE_FIRMWARE_FB(FORTE_L0_SendBlk)
 
 private:
@@ -29,8 +31,8 @@ private:
   CIEC_BOOL &QI() {
     return *static_cast<CIEC_BOOL*>(getDI(0));
   };
-
   CIEC_WSTRING &PARAMS() {
+
     return *static_cast<CIEC_WSTRING*>(getDI(1));
   };
 
@@ -68,22 +70,60 @@ private:
 virtual void setInitialValues();
 
   void executeEvent(int pa_nEIID);
+  int m_nExtEvHandID_inh;
 
 public:
-  FUNCTION_BLOCK_CTOR(FORTE_L0_SendBlk){
+	EVENT_SOURCE_FUNCTION_BLOCK_CTOR(FORTE_L0_SendBlk){
+		m_stEventSourceEventEntry.m_poFB = this; 
+		setEventChainExecutor(pa_poSrcRes->getResourceEventExecution());
+		
+		m_nExtEvHandID_inh = getDeviceExecution()->registerExternalEventHandler(this);
   };
 
   virtual ~FORTE_L0_SendBlk(){};
 
   //CNC8070COmmunicationHandler methods
-  virtual void Log(LOGTYPE a_lType, const char * a_lMsg);
-  virtual void OnNotReady();
-  virtual void OnReady();
-  virtual void OnStarted();
-  virtual void OnExecuting();
-  virtual void OnInterrupted();
-  virtual void OnInterruptedByError();
 
+  /*!\brief maps the CNC API logs to FORTE DEVLOG
+  *
+  * \param a_lType type of information to log
+  * \param a_lMsg string to be printed
+  */
+  virtual void Log(LOGTYPE a_lType, const char * a_lMsg);
+  /*!\brief handler for CNC Not Ready state
+  */
+  virtual void OnNotReady();
+  /*!\brief handler for CNC Ready state
+  */
+  virtual void OnReady();
+  /*!\brief handler for CNC started state
+  */
+  virtual void OnStarted();
+  /*!\brief handler for CNC Executing state
+  */
+  virtual void OnExecuting();
+  /*!\brief handler for CNC Interrupted state
+  */
+  virtual void OnInterrupted();
+  /*!\brief handler for CNC Interrupted by error state
+  */
+  virtual void OnInterruptedByError();
+  /*!\brief Enable this event source
+  */
+  virtual void enableHandler(void);
+  /*!\brief Disable this event source
+  */
+  virtual void disableHandler(void);
+  /*!\brief Sets the priority of the event source
+  *
+  * \param pa_nPriority new priority of the event source
+  */
+  virtual void setPriority(int pa_nPriority);
+  /*!\brief Get the current priority of the event source
+  *
+  * \return current priority
+  */
+  virtual int getPriority(void) const;
 };
 
 #endif //close the ifdef sequence from the beginning of the file
