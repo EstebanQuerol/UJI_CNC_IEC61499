@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L0_IncomEx">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="4DIAC-IDE" Date="2014-09-04" Organization="4DIAC-Consortium" Version="0.0"/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="CNC Interrupted event" Name="Interrupted" Type="Event"/>
+      <Event Comment="CNC Interrupted by Error" Name="InterrupErr" Type="Event"/>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Execution Confirmation" Name="CNF" Type="Event">
+        <With Var="RID"/>
+      </Event>
+    </EventOutputs>
+    <InputVars/>
+    <OutputVars>
+      <VarDeclaration Comment="Error return ID" Name="RID" Type="USINT"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="550.0" y="425.0"/>
+      <ECState Comment="Initialization" Name="Interr" x="920.0" y="140.0">
+        <ECAction Algorithm="Interr" Output="CNF"/>
+      </ECState>
+      <ECState Comment="Normal execution" Name="Error" x="215.0" y="750.0">
+        <ECAction Algorithm="Error" Output="CNF"/>
+      </ECState>
+      <ECTransition Comment="" Condition="Interrupted" Destination="Interr" Source="START" x="920.0" y="425.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="Interr" x="550.0" y="140.0"/>
+      <ECTransition Comment="" Condition="InterrupErr" Destination="Error" Source="START" x="550.0" y="600.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="Error" x="215.0" y="425.0"/>
+    </ECC>
+    <Algorithm Comment="CNC Interrupted algo" Name="Interr">
+      <ST Text="RID := 1;"/>
+    </Algorithm>
+    <Algorithm Comment="CNC interrupted by error algo" Name="Error">
+      <ST Text="RID := 2;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L0_CompletedEx">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-09-04" Organization="UJI" Version="0.0"/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="CNC Ready event" Name="OnReady" Type="Event"/>
+      <Event Comment="CNC Executing event" Name="OnExecuting" Type="Event"/>
+      <Event Comment="CNC NotReadyEvent" Name="OnNotReady" Type="Event"/>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Execution succed" Name="Success" Type="Event">
+        <With Var="RID"/>
+      </Event>
+    </EventOutputs>
+    <InputVars/>
+    <OutputVars>
+      <VarDeclaration Comment="Execution returned ID" Name="RID" Type="USINT"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <ECC>
+      <ECState Comment="Initial State" Name="NotReady" x="380.0" y="570.0"/>
+      <ECState Comment="Initialization" Name="Ready" x="1330.0" y="190.0">
+        <ECAction Algorithm="Ready" Output="Success"/>
+      </ECState>
+      <ECState Comment="Normal execution" Name="Executing" x="1330.0" y="855.0"/>
+      <ECTransition Comment="" Condition="OnReady" Destination="Ready" Source="NotReady" x="905.0" y="405.0"/>
+      <ECTransition Comment="" Condition="OnExecuting" Destination="Executing" Source="Ready" x="1760.0" y="580.0"/>
+      <ECTransition Comment="" Condition="OnReady" Destination="Ready" Source="Executing" x="1290.0" y="600.0"/>
+      <ECTransition Comment="" Condition="OnNotReady" Destination="NotReady" Source="Executing" x="860.0" y="970.0"/>
+      <ECTransition Comment="" Condition="OnNotReady" Destination="NotReady" Source="Ready" x="550.0" y="220.0"/>
+    </ECC>
+    <Algorithm Comment="Successful action algo" Name="Ready">
+      <ST Text="RID:=0;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

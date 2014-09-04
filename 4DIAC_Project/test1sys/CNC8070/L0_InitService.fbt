@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L0_InitService">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-09-04" Organization="UJI" Version="0.0"/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Initialization Request" Name="INIT" Type="Event">
+        <With Var="QI1"/>
+      </Event>
+      <Event Comment="Service Initialization completed" Name="INITSer" Type="Event">
+        <With Var="QI2"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Initialization confirmation" Name="INITO" Type="Event">
+        <With Var="QO1"/>
+      </Event>
+      <Event Comment="Service Initialization" Name="INITOSer" Type="Event">
+        <With Var="QO2"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Input event qualifier" Name="QI1" Type="BOOL"/>
+      <VarDeclaration Comment="Input event qualifier" Name="QI2" Type="BOOL"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Output event qualifier" Name="QO1" Type="BOOL"/>
+      <VarDeclaration Comment="Output event qualifier" Name="QO2" Type="BOOL"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="550.0" y="425.0"/>
+      <ECState Comment="Initialization" Name="INIT" x="920.0" y="140.0">
+        <ECAction Algorithm="INIT" Output="INITOSer"/>
+      </ECState>
+      <ECState Comment="Normal execution" Name="COMPLETED" x="570.0" y="855.0">
+        <ECAction Algorithm="INITCOM" Output="INITO"/>
+      </ECState>
+      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="START" x="920.0" y="425.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="INIT" x="550.0" y="140.0"/>
+      <ECTransition Comment="" Condition="INITSer" Destination="COMPLETED" Source="START" x="740.0" y="665.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="COMPLETED" x="290.0" y="770.0"/>
+    </ECC>
+    <Algorithm Comment="Initialization algorithm" Name="INIT">
+      <ST Text="QO2:=QI1;"/>
+    </Algorithm>
+    <Algorithm Comment="Normally executed algorithm" Name="INITCOM">
+      <ST Text="QO1:=QI2;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

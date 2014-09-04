@@ -2,7 +2,7 @@
 <!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
 <FBType Comment="Basic Function Block Type" Name="L0_ReqManager">
   <Identification Standard="61499-2"/>
-  <VersionInfo Author="4DIAC-IDE" Date="2014-09-01" Organization="4DIAC-Consortium" Version="0.0"/>
+  <VersionInfo Author="EQUEROL" Date="2014-09-01" Organization="UJI" Version="0.0"/>
   <InterfaceList>
     <EventInputs>
       <Event Comment="Initialization Request" Name="INIT" Type="Event">
@@ -10,6 +10,9 @@
       </Event>
       <Event Comment="Normal Execution Request" Name="REQ" Type="Event">
         <With Var="QI"/>
+      </Event>
+      <Event Comment="Update CNC State" Name="UPDT" Type="Event">
+        <With Var="RIDIn"/>
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -19,33 +22,52 @@
       <Event Comment="Execution Confirmation" Name="CNF" Type="Event">
         <With Var="QO"/>
       </Event>
+      <Event Comment="Service Execution indication" Name="IND" Type="Event">
+        <With Var="QO"/>
+        <With Var="RIDOut"/>
+      </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration Comment="Input event qualifier" Name="QI" Type="BOOL"/>
+      <VarDeclaration Comment="Execution returned value" Name="RIDIn" Type="USINT"/>
     </InputVars>
     <OutputVars>
       <VarDeclaration Comment="Output event qualifier" Name="QO" Type="BOOL"/>
+      <VarDeclaration Comment="Execution returned value" Name="RIDOut" Type="USINT"/>
     </OutputVars>
   </InterfaceList>
   <BasicFB>
+    <InternalVars>
+      <VarDeclaration Comment="Variable to control if an order was sent " Name="ExecutionRequested" Type="BOOL"/>
+    </InternalVars>
     <ECC>
-      <ECState Comment="Initial State" Name="START" x="550.0" y="425.0"/>
+      <ECState Comment="Initial State" Name="IDLE" x="550.0" y="425.0"/>
       <ECState Comment="Initialization" Name="INIT" x="920.0" y="140.0">
         <ECAction Algorithm="INIT" Output="INITO"/>
       </ECState>
-      <ECState Comment="Normal execution" Name="REQ" x="215.0" y="750.0">
+      <ECState Comment="Normal execution" Name="REQ" x="1140.0" y="475.0">
         <ECAction Algorithm="REQ" Output="CNF"/>
       </ECState>
-      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="START" x="920.0" y="425.0"/>
-      <ECTransition Comment="" Condition="1" Destination="START" Source="INIT" x="550.0" y="140.0"/>
-      <ECTransition Comment="" Condition="REQ" Destination="REQ" Source="START" x="550.0" y="600.0"/>
-      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ" x="215.0" y="425.0"/>
+      <ECState Comment="" Name="ExecutionRequested" x="1045.0" y="855.0"/>
+      <ECState Comment="" Name="ExecutionDone" x="1140.0" y="1235.0">
+        <ECAction Algorithm="UPDT" Output="IND"/>
+      </ECState>
+      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="IDLE" x="880.0" y="325.0"/>
+      <ECTransition Comment="" Condition="1" Destination="IDLE" Source="INIT" x="550.0" y="140.0"/>
+      <ECTransition Comment="" Condition="REQ" Destination="REQ" Source="IDLE" x="855.0" y="510.0"/>
+      <ECTransition Comment="" Condition="1" Destination="ExecutionRequested" Source="REQ" x="1250.0" y="735.0"/>
+      <ECTransition Comment="" Condition="UPDT" Destination="ExecutionDone" Source="ExecutionRequested" x="1290.0" y="1105.0"/>
+      <ECTransition Comment="" Condition="1" Destination="IDLE" Source="ExecutionDone" x="425.0" y="1255.0"/>
+      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="ExecutionRequested" x="1865.0" y="535.0"/>
     </ECC>
     <Algorithm Comment="Initialization algorithm" Name="INIT">
-      <ST Text=""/>
+      <ST Text="IF(ExecutionRequested = TRUE) THEN&#10;&#9;ExecutionRequested := FALSE;&#10;&#9;(*TODO: Complete this algorithm to enable service recovery*)&#10;&#9;(*In process action will be lost*)&#10;END_IF;&#10;&#9;(*TODO: handle service inhibition*)"/>
     </Algorithm>
     <Algorithm Comment="Normally executed algorithm" Name="REQ">
-      <ST Text=""/>
+      <ST Text="ExecutionRequested := TRUE;"/>
+    </Algorithm>
+    <Algorithm Comment="Requested action completed" Name="UPDT">
+      <ST Text="IF(ExecutionRequested = TRUE AND RIDIn=0 ) THEN&#10;&#9;(*Execution success*)&#10;&#9;ExecutionRequested := FALSE;&#10;ELSE&#10;END_IF;&#10;&#10;"/>
     </Algorithm>
   </BasicFB>
 </FBType>

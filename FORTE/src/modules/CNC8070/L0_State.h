@@ -14,6 +14,7 @@
 
 #include <basicfb.h>
 #include <forte_usint.h>
+#include <forte_bool.h>
 
 class FORTE_L0_State: public CBasicFB{
   DECLARE_FIRMWARE_FB(FORTE_L0_State)
@@ -25,6 +26,10 @@ private:
     return *static_cast<CIEC_USINT*>(getDI(0));
   };
 
+  CIEC_BOOL &QI() {
+    return *static_cast<CIEC_BOOL*>(getDI(1));
+  };
+
   static const CStringDictionary::TStringId scm_anDataOutputNames[];
   static const CStringDictionary::TStringId scm_anDataOutputTypeIds[];
   CIEC_USINT &StateOut() {
@@ -33,6 +38,10 @@ private:
 
   CIEC_USINT &ServiceState() {
     return *static_cast<CIEC_USINT*>(getDO(1));
+  };
+
+  CIEC_BOOL &QO() {
+    return *static_cast<CIEC_BOOL*>(getDO(2));
   };
 
   static const TEventID scm_nEventINITID = 0;
@@ -64,7 +73,7 @@ private:
 
   static const SInternalVarsInformation scm_stInternalVars;
 
-   FORTE_BASIC_FB_DATA_ARRAY(3, 1, 2, 2, 0);
+   FORTE_BASIC_FB_DATA_ARRAY(3, 2, 3, 2, 0);
 
 virtual void setInitialValues();
   void alg_INIT(void);

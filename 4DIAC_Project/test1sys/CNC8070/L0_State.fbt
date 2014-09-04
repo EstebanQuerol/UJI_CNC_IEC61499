@@ -22,10 +22,12 @@
     </EventOutputs>
     <InputVars>
       <VarDeclaration Comment="CNC state enumeration" Name="StateIn" Type="USINT"/>
+      <VarDeclaration Comment="Input event qualifier" Name="QI" Type="BOOL"/>
     </InputVars>
     <OutputVars>
       <VarDeclaration Comment="CNC state enumeration" InitialValue="0" Name="StateOut" Type="USINT"/>
       <VarDeclaration Comment="CNC service state enumeration" InitialValue="0" Name="ServiceState" Type="USINT"/>
+      <VarDeclaration Comment="Output Event Qualifier" Name="QO" Type="BOOL"/>
     </OutputVars>
   </InterfaceList>
   <BasicFB>
