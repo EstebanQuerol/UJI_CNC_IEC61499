@@ -5,14 +5,12 @@
   <VersionInfo Author="EQUEROL" Date="2014-08-25" Organization="UJI" Version="0.0"/>
   <InterfaceList>
     <EventInputs>
-      <Event Comment="Initialization Request" Name="INIT" Type="Event"/>
       <Event Comment="Request CNC state" Name="REQ" Type="Event"/>
       <Event Comment="Service state update request" Name="UPDT" Type="Event">
         <With Var="StateIn"/>
       </Event>
     </EventInputs>
     <EventOutputs>
-      <Event Comment="Initialization Confirm" Name="INITO" Type="Event"/>
       <Event Comment="Execution Confirmation" Name="CNF" Type="Event">
         <With Var="ServiceState"/>
       </Event>
@@ -22,12 +20,10 @@
     </EventOutputs>
     <InputVars>
       <VarDeclaration Comment="CNC state enumeration" Name="StateIn" Type="USINT"/>
-      <VarDeclaration Comment="Input event qualifier" Name="QI" Type="BOOL"/>
     </InputVars>
     <OutputVars>
       <VarDeclaration Comment="CNC state enumeration" InitialValue="0" Name="StateOut" Type="USINT"/>
       <VarDeclaration Comment="CNC service state enumeration" InitialValue="0" Name="ServiceState" Type="USINT"/>
-      <VarDeclaration Comment="Output Event Qualifier" Name="QO" Type="BOOL"/>
     </OutputVars>
   </InterfaceList>
   <BasicFB>
@@ -38,7 +34,7 @@
     <ECC>
       <ECState Comment="Initial State" Name="START" x="2280.0" y="950.0"/>
       <ECState Comment="Initialization" Name="INIT" x="2660.0" y="570.0">
-        <ECAction Algorithm="INIT" Output="INITO"/>
+        <ECAction/>
       </ECState>
       <ECState Comment="Normal execution" Name="REQ" x="2470.0" y="1330.0">
         <ECAction Algorithm="REQ" Output="CNF"/>
@@ -48,14 +44,11 @@
       </ECState>
       <ECTransition Comment="" Condition="1" Destination="START" Source="REQ" x="2350.0" y="1275.0"/>
       <ECTransition Comment="" Condition="REQ" Destination="REQ" Source="START" x="2695.0" y="1140.0"/>
-      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="START" x="2370.0" y="695.0"/>
+      <ECTransition Comment="" Condition="" Destination="INIT" Source="START" x="2370.0" y="695.0"/>
       <ECTransition Comment="" Condition="1" Destination="START" Source="INIT" x="2825.0" y="940.0"/>
       <ECTransition Comment="" Condition="UPDT" Destination="UPDT" Source="START" x="2000.0" y="760.0"/>
       <ECTransition Comment="" Condition="1" Destination="START" Source="UPDT" x="1970.0" y="1285.0"/>
     </ECC>
-    <Algorithm Comment="Initialization algorithm" Name="INIT">
-      <ST Text="CNCState := 0;&#10;CurrentServiceState := 0;"/>
-    </Algorithm>
     <Algorithm Comment="Normally executed algorithm" Name="REQ">
       <ST Text="ServiceState := CurrentServiceState;"/>
     </Algorithm>
