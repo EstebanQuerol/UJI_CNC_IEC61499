@@ -25,7 +25,7 @@ const TDataIOID FORTE_L0_StateHandler::scm_anEIWith[] = {0, 255};
 const CStringDictionary::TStringId FORTE_L0_StateHandler::scm_anEventInputNames[] = {g_nStringIdREQ};
 
 const TForteInt16 FORTE_L0_StateHandler::scm_anEOWithIndexes[] = {-1, -1, -1, -1, -1, -1};
-const CStringDictionary::TStringId FORTE_L0_StateHandler::scm_anEventOutputNames[] = {g_nStringIdOnReady, g_nStringIdOnNotReady, g_nStringIdOnInterrupted, g_nStringIdOnIntError, g_nStringIdOnExecution};
+const CStringDictionary::TStringId FORTE_L0_StateHandler::scm_anEventOutputNames[] = {g_nStringIdOnReady, g_nStringIdOnExecution, g_nStringIdOnNotReady, g_nStringIdOnInterrupted, g_nStringIdOnIntError};
 
 const SFBInterfaceSpec FORTE_L0_StateHandler::scm_stFBInterfaceSpec = {
   1,  scm_anEventInputNames,  scm_anEIWith,  scm_anEIWithIndexes,

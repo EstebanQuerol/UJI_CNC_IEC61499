@@ -16,30 +16,30 @@
 
 DEFINE_FIRMWARE_FB(FORTE_L0_State, g_nStringIdL0_State)
 
-const CStringDictionary::TStringId FORTE_L0_State::scm_anDataInputNames[] = {g_nStringIdStateIn, g_nStringIdQI};
+const CStringDictionary::TStringId FORTE_L0_State::scm_anDataInputNames[] = {g_nStringIdStateIn};
 
-const CStringDictionary::TStringId FORTE_L0_State::scm_anDataInputTypeIds[] = {g_nStringIdUSINT, g_nStringIdBOOL};
+const CStringDictionary::TStringId FORTE_L0_State::scm_anDataInputTypeIds[] = {g_nStringIdUSINT};
 
-const CStringDictionary::TStringId FORTE_L0_State::scm_anDataOutputNames[] = {g_nStringIdStateOut, g_nStringIdServiceState, g_nStringIdQO};
+const CStringDictionary::TStringId FORTE_L0_State::scm_anDataOutputNames[] = {g_nStringIdStateOut, g_nStringIdServiceState};
 
-const CStringDictionary::TStringId FORTE_L0_State::scm_anDataOutputTypeIds[] = {g_nStringIdUSINT, g_nStringIdUSINT, g_nStringIdBOOL};
+const CStringDictionary::TStringId FORTE_L0_State::scm_anDataOutputTypeIds[] = {g_nStringIdUSINT, g_nStringIdUSINT};
 
-const TForteInt16 FORTE_L0_State::scm_anEIWithIndexes[] = {-1, -1, 0};
+const TForteInt16 FORTE_L0_State::scm_anEIWithIndexes[] = {-1, 0};
 const TDataIOID FORTE_L0_State::scm_anEIWith[] = {0, 255};
-const CStringDictionary::TStringId FORTE_L0_State::scm_anEventInputNames[] = {g_nStringIdINIT, g_nStringIdREQ, g_nStringIdUPDT};
+const CStringDictionary::TStringId FORTE_L0_State::scm_anEventInputNames[] = {g_nStringIdREQ, g_nStringIdUPDT};
 
-const TDataIOID FORTE_L0_State::scm_anEOWith[] = {1, 255, 0, 255, 2, 255};
-const TForteInt16 FORTE_L0_State::scm_anEOWithIndexes[] = {-1, 0, 2, 4};
-const CStringDictionary::TStringId FORTE_L0_State::scm_anEventOutputNames[] = {g_nStringIdINITO, g_nStringIdCNF, g_nStringIdUPDTO};
+const TDataIOID FORTE_L0_State::scm_anEOWith[] = {1, 255, 0, 255};
+const TForteInt16 FORTE_L0_State::scm_anEOWithIndexes[] = {0, 2, -1};
+const CStringDictionary::TStringId FORTE_L0_State::scm_anEventOutputNames[] = {g_nStringIdCNF, g_nStringIdUPDTO};
 
 const CStringDictionary::TStringId FORTE_L0_State::scm_anInternalsNames[] = {g_nStringIdCNCState, g_nStringIdCurrentServiceState};
 
 const CStringDictionary::TStringId FORTE_L0_State::scm_anInternalsTypeIds[] = {g_nStringIdUSINT, g_nStringIdUSINT};
 
 const SFBInterfaceSpec FORTE_L0_State::scm_stFBInterfaceSpec = {
-  3,  scm_anEventInputNames,  scm_anEIWith,  scm_anEIWithIndexes,
-  3,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  2,  scm_anDataInputNames, scm_anDataInputTypeIds,
-  3,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
+  2,  scm_anEventInputNames,  scm_anEIWith,  scm_anEIWithIndexes,
+  2,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  1,  scm_anDataInputNames, scm_anDataInputTypeIds,
+  2,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
   0, 0
 };
 
@@ -52,11 +52,6 @@ void FORTE_L0_State::setInitialValues(){
   ServiceState() = 0;
   CNCState() = 0;
   CurrentServiceState() = 0;
-}
-
-void FORTE_L0_State::alg_INIT(void){
-CNCState() = 0;
-CurrentServiceState() = 0;
 }
 
 void FORTE_L0_State::alg_REQ(void){
@@ -85,8 +80,6 @@ void FORTE_L0_State::enterStateSTART(void){
 
 void FORTE_L0_State::enterStateINIT(void){
   m_nECCState = scm_nStateINIT;
-  alg_INIT();
-  sendOutputEvent( scm_nEventINITOID);
 }
 
 void FORTE_L0_State::enterStateREQ(void){
@@ -110,18 +103,9 @@ void FORTE_L0_State::executeEvent(int pa_nEIID){
         if(scm_nEventREQID == pa_nEIID)
           enterStateREQ();
         else
-        if(scm_nEventINITID == pa_nEIID)
-          enterStateINIT();
-        else
-        if(scm_nEventUPDTID == pa_nEIID)
-          enterStateUPDT();
-        else
           bTransitionCleared  = false; //no transition cleared
         break;
       case scm_nStateINIT:
-        if(1)
-          enterStateSTART();
-        else
           bTransitionCleared  = false; //no transition cleared
         break;
       case scm_nStateREQ:
@@ -131,9 +115,6 @@ void FORTE_L0_State::executeEvent(int pa_nEIID){
           bTransitionCleared  = false; //no transition cleared
         break;
       case scm_nStateUPDT:
-        if(1)
-          enterStateSTART();
-        else
           bTransitionCleared  = false; //no transition cleared
         break;
       default:
