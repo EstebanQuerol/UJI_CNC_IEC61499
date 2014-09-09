@@ -17,6 +17,22 @@
 #include <forte_uint.h>
 #include <forte_string.h>
 #include <forte_bool.h>
+#include <string.h>
+#include <iostream>
+#include <string>
+
+//CNC Command IDs number of parameters defines
+#define CNCID_7_PN 1
+#define CNCID_8_PN 1
+#define CNCID_9_PN 1
+#define CNCID_10_PN 4
+#define CNCID_11_PN 4
+#define CNCID_16_PN 6
+#define CNCID_20_PN_MIN 1
+#define CNCID_20_PN_MAX 3
+
+#define ENCAP_CHARBUFFER_SIZE 100
+
 
 class FORTE_L0_CNCEncap: public CFunctionBlock{
   DECLARE_FIRMWARE_FB(FORTE_L0_CNCEncap)
@@ -68,11 +84,27 @@ private:
 
   void executeEvent(int pa_nEIID);
 
+  char ** m_ppacParamArray; //Array to hold parameters strings once parsed
+  int m_nAllocatedstrings;//Number of allocated strings, used to free memory once done
+  char * m_pacParamstr;//Pointer to hold parameters string once converted from CIEC_STRING
+  char m_acBuffer[ENCAP_CHARBUFFER_SIZE];// buffer to hold output string while building it
+
 public:
   FUNCTION_BLOCK_CTOR(FORTE_L0_CNCEncap){
   };
 
-  virtual ~FORTE_L0_CNCEncap(){};
+  virtual ~FORTE_L0_CNCEncap(){}; 
+
+  /*!\brief Parse the received string containing the operation parameters
+  *  This function allocates memory if success, caller must free it when
+  *  done 
+  * \return number of parsed strings if success, -1 otherwise
+  */
+  int ParseReceivedData(char * pa_pacValue, UINT pa_nMembers);
+  /*!\brief Build the CNC command string for each Command ID
+  * \return 1 if build success, -1 otherwise
+  */
+  int BuildCNCString(UINT pa_nCmdID, UINT pa_nMembers);
 
 };
 

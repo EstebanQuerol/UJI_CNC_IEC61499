@@ -131,7 +131,7 @@ void FORTE_L0_SendBlk::OnReady()
 void FORTE_L0_SendBlk::OnStarted()
 {
 	DEVLOG_INFO("CNC Started\n");
-	void * pa_pvData = forte_malloc(sizeof(char) * sBlock().length() + 1);
+	void * pa_pvData = forte_malloc(sizeof(char) * (sBlock().length() + 1));
 	if (-1 != sBlock().toString((char *)pa_pvData, static_cast<unsigned int>(sBlock().length() + 1), 1)){
 		CNC8070ExecuteBlock((char*)pa_pvData);
 	}
