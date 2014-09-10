@@ -52,8 +52,7 @@ void FORTE_L0_SendBlk::executeEvent(int pa_nEIID){
 			CNC8070Connect(this);
 			QO() = TRUE;
 		}
-		else
-		{
+		else{
 			CNC8070Disconnect();
 			QO() = FALSE;
 		}
@@ -65,7 +64,9 @@ void FORTE_L0_SendBlk::executeEvent(int pa_nEIID){
 			QO() = TRUE;
 		}
 		else{
-			//TODO Add a way to interrupt CNC activity with REQ-
+			//Encapsulation error
+			//TODO Handle this case
+			QO() = FALSE;
 			DEVLOG_DEBUG("NOT supported");
 		}
 		sendOutputEvent(scm_nEventCNFID);
@@ -106,8 +107,7 @@ void FORTE_L0_SendBlk::OnNotReady()
 {
 	DEVLOG_INFO("CNC not Ready\n");
 	CNCState() = 0;
-	if (getDeviceExecution()->extEvHandlerIsAllowed(m_nExtEvHandID_inh))
-	{
+	if (getDeviceExecution()->extEvHandlerIsAllowed(m_nExtEvHandID_inh)){
 		getDeviceExecution()->startNewEventChain(this);
 	}
 	else{
@@ -119,8 +119,7 @@ void FORTE_L0_SendBlk::OnReady()
 {
 	DEVLOG_INFO("CNC Ready\n");
 	CNCState() = 1;
-	if (getDeviceExecution()->extEvHandlerIsAllowed(m_nExtEvHandID_inh))
-	{ 
+	if (getDeviceExecution()->extEvHandlerIsAllowed(m_nExtEvHandID_inh)){ 
 		getDeviceExecution()->startNewEventChain(this);
 	}
 	else{
@@ -131,19 +130,21 @@ void FORTE_L0_SendBlk::OnReady()
 void FORTE_L0_SendBlk::OnStarted()
 {
 	DEVLOG_INFO("CNC Started\n");
-	void * pa_pvData = forte_malloc(sizeof(char) * (sBlock().length() + 1));
-	if (-1 != sBlock().toString((char *)pa_pvData, static_cast<unsigned int>(sBlock().length() + 1), 1)){
-		CNC8070ExecuteBlock((char*)pa_pvData);
+	char * pacTempString = (char*)forte_malloc(sizeof(char)* (sBlock().length() + 1));
+	if (pacTempString != NULL){
+		if (-1 != sBlock().toString(pacTempString, static_cast<unsigned int>(sBlock().length() + 1), 1)){
+			CNC8070ExecuteBlock(pacTempString);
+		}
+		forte_free(pacTempString);
+		pacTempString = NULL;
 	}
-	forte_free(pa_pvData);
 }
 
 void FORTE_L0_SendBlk::OnExecuting()
 {
 	DEVLOG_INFO("CNC Executing\n");
 	CNCState() = 2;
-	if (getDeviceExecution()->extEvHandlerIsAllowed(m_nExtEvHandID_inh))
-	{
+	if (getDeviceExecution()->extEvHandlerIsAllowed(m_nExtEvHandID_inh)){
 		getDeviceExecution()->startNewEventChain(this);
 	}
 	else{
@@ -156,8 +157,7 @@ void FORTE_L0_SendBlk::OnInterrupted()
 {
 	DEVLOG_INFO("CNC Execution Interrupted\n");
 	CNCState() = 3;
-	if (getDeviceExecution()->extEvHandlerIsAllowed(m_nExtEvHandID_inh))
-	{
+	if (getDeviceExecution()->extEvHandlerIsAllowed(m_nExtEvHandID_inh)){
 		getDeviceExecution()->startNewEventChain(this);
 	}
 	else{
@@ -169,8 +169,7 @@ void FORTE_L0_SendBlk::OnInterruptedByError()
 {
 	DEVLOG_ERROR("CNC unexpected error\n");
 	CNCState() = 4;
-	if (getDeviceExecution()->extEvHandlerIsAllowed(m_nExtEvHandID_inh))
-	{
+	if (getDeviceExecution()->extEvHandlerIsAllowed(m_nExtEvHandID_inh)){
 		getDeviceExecution()->startNewEventChain(this);
 	}
 	else{

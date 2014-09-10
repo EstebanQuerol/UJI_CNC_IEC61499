@@ -185,9 +185,6 @@ BOOL CCNC8070APILib::DisconnectCNC()
 
 		m_oHandler->Log(LOG_INFORMATION, "CNC Disconnected!\n");
 	}
-	else {
-		m_oHandler->Log(LOG_WARNING, "CNC already disconnected!\n");
-	}
 
 	return !m_bConnected;
 }

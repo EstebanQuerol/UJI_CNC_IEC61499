@@ -28,8 +28,12 @@
 #define CNCID_10_PN 4
 #define CNCID_11_PN 4
 #define CNCID_16_PN 6
+#define CNCID_17_PN 1
 #define CNCID_20_PN_MIN 1
 #define CNCID_20_PN_MAX 3
+#define CNCID_21_PN 0
+#define CNCID_25_PN 6
+#define CNCID_26_PN 13
 
 #define ENCAP_CHARBUFFER_SIZE 100
 
