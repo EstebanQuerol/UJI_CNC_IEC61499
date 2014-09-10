@@ -5,13 +5,17 @@
   <VersionInfo Author="EQUEROL" Date="2014-08-25" Organization="UJI" Version="0.0"/>
   <InterfaceList>
     <EventInputs>
-      <Event Comment="Request CNC state" Name="REQ" Type="Event"/>
+      <Event Comment="Request CNC state" Name="REQ1" Type="Event"/>
+      <Event Comment="Request CNC state" Name="REQ2" Type="Event"/>
       <Event Comment="Service state update request" Name="UPDT" Type="Event">
         <With Var="StateIn"/>
       </Event>
     </EventInputs>
     <EventOutputs>
-      <Event Comment="Execution Confirmation" Name="CNF" Type="Event">
+      <Event Comment="Execution Confirmation" Name="CNF1" Type="Event">
+        <With Var="ServiceState"/>
+      </Event>
+      <Event Comment="Execution Confirmation" Name="CNF2" Type="Event">
         <With Var="ServiceState"/>
       </Event>
       <Event Comment="CNC state Update indication" Name="UPDTO" Type="Event">
@@ -33,21 +37,21 @@
     </InternalVars>
     <ECC>
       <ECState Comment="Initial State" Name="START" x="2280.0" y="950.0"/>
-      <ECState Comment="Initialization" Name="INIT" x="2660.0" y="570.0">
-        <ECAction/>
-      </ECState>
-      <ECState Comment="Normal execution" Name="REQ" x="2470.0" y="1330.0">
-        <ECAction Algorithm="REQ" Output="CNF"/>
+      <ECState Comment="Normal execution" Name="REQ1" x="2470.0" y="1330.0">
+        <ECAction Algorithm="REQ" Output="CNF1"/>
       </ECState>
       <ECState Comment="" Name="UPDT" x="1235.0" y="950.0">
         <ECAction Algorithm="UPDT" Output="UPDTO"/>
       </ECState>
-      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ" x="2350.0" y="1275.0"/>
-      <ECTransition Comment="" Condition="REQ" Destination="REQ" Source="START" x="2695.0" y="1140.0"/>
-      <ECTransition Comment="" Condition="" Destination="INIT" Source="START" x="2370.0" y="695.0"/>
-      <ECTransition Comment="" Condition="1" Destination="START" Source="INIT" x="2825.0" y="940.0"/>
-      <ECTransition Comment="" Condition="UPDT" Destination="UPDT" Source="START" x="2000.0" y="760.0"/>
+      <ECState Comment="" Name="REQ2" x="3000.0" y="440.0">
+        <ECAction Algorithm="REQ" Output="CNF2"/>
+      </ECState>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ1" x="2350.0" y="1275.0"/>
+      <ECTransition Comment="" Condition="REQ1" Destination="REQ1" Source="START" x="2695.0" y="1140.0"/>
       <ECTransition Comment="" Condition="1" Destination="START" Source="UPDT" x="1970.0" y="1285.0"/>
+      <ECTransition Comment="" Condition="UPDT" Destination="UPDT" Source="START" x="1825.0" y="755.0"/>
+      <ECTransition Comment="" Condition="REQ2" Destination="REQ2" Source="START" x="2635.0" y="615.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ2" x="2895.0" y="795.0"/>
     </ECC>
     <Algorithm Comment="Normally executed algorithm" Name="REQ">
       <ST Text="ServiceState := CurrentServiceState;"/>

@@ -24,21 +24,21 @@ const CStringDictionary::TStringId FORTE_L0_State::scm_anDataOutputNames[] = {g_
 
 const CStringDictionary::TStringId FORTE_L0_State::scm_anDataOutputTypeIds[] = {g_nStringIdUSINT, g_nStringIdUSINT};
 
-const TForteInt16 FORTE_L0_State::scm_anEIWithIndexes[] = {-1, 0};
+const TForteInt16 FORTE_L0_State::scm_anEIWithIndexes[] = {-1, -1, 0};
 const TDataIOID FORTE_L0_State::scm_anEIWith[] = {0, 255};
-const CStringDictionary::TStringId FORTE_L0_State::scm_anEventInputNames[] = {g_nStringIdREQ, g_nStringIdUPDT};
+const CStringDictionary::TStringId FORTE_L0_State::scm_anEventInputNames[] = {g_nStringIdREQ1, g_nStringIdREQ2, g_nStringIdUPDT};
 
-const TDataIOID FORTE_L0_State::scm_anEOWith[] = {1, 255, 0, 255};
-const TForteInt16 FORTE_L0_State::scm_anEOWithIndexes[] = {0, 2, -1};
-const CStringDictionary::TStringId FORTE_L0_State::scm_anEventOutputNames[] = {g_nStringIdCNF, g_nStringIdUPDTO};
+const TDataIOID FORTE_L0_State::scm_anEOWith[] = {1, 255, 1, 255, 0, 255};
+const TForteInt16 FORTE_L0_State::scm_anEOWithIndexes[] = {0, 2, 4, -1};
+const CStringDictionary::TStringId FORTE_L0_State::scm_anEventOutputNames[] = {g_nStringIdCNF1, g_nStringIdCNF2, g_nStringIdUPDTO};
 
 const CStringDictionary::TStringId FORTE_L0_State::scm_anInternalsNames[] = {g_nStringIdCNCState, g_nStringIdCurrentServiceState};
 
 const CStringDictionary::TStringId FORTE_L0_State::scm_anInternalsTypeIds[] = {g_nStringIdUSINT, g_nStringIdUSINT};
 
 const SFBInterfaceSpec FORTE_L0_State::scm_stFBInterfaceSpec = {
-  2,  scm_anEventInputNames,  scm_anEIWith,  scm_anEIWithIndexes,
-  2,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  1,  scm_anDataInputNames, scm_anDataInputTypeIds,
+  3,  scm_anEventInputNames,  scm_anEIWith,  scm_anEIWithIndexes,
+  3,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  1,  scm_anDataInputNames, scm_anDataInputTypeIds,
   2,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
   0, 0
 };
@@ -78,14 +78,10 @@ void FORTE_L0_State::enterStateSTART(void){
   m_nECCState = scm_nStateSTART;
 }
 
-void FORTE_L0_State::enterStateINIT(void){
-  m_nECCState = scm_nStateINIT;
-}
-
-void FORTE_L0_State::enterStateREQ(void){
-  m_nECCState = scm_nStateREQ;
+void FORTE_L0_State::enterStateREQ1(void){
+  m_nECCState = scm_nStateREQ1;
   alg_REQ();
-  sendOutputEvent( scm_nEventCNFID);
+  sendOutputEvent( scm_nEventCNF1ID);
 }
 
 void FORTE_L0_State::enterStateUPDT(void){
@@ -94,27 +90,45 @@ void FORTE_L0_State::enterStateUPDT(void){
   sendOutputEvent( scm_nEventUPDTOID);
 }
 
+void FORTE_L0_State::enterStateREQ2(void){
+  m_nECCState = scm_nStateREQ2;
+  alg_REQ();
+  sendOutputEvent( scm_nEventCNF2ID);
+}
+
 void FORTE_L0_State::executeEvent(int pa_nEIID){
   bool bTransitionCleared;
   do{
     bTransitionCleared = true;
     switch(m_nECCState){
       case scm_nStateSTART:
-        if(scm_nEventREQID == pa_nEIID)
-          enterStateREQ();
+        if(scm_nEventREQ1ID == pa_nEIID)
+          enterStateREQ1();
+        else
+        if(scm_nEventUPDTID == pa_nEIID)
+          enterStateUPDT();
+        else
+        if(scm_nEventREQ2ID == pa_nEIID)
+          enterStateREQ2();
         else
           bTransitionCleared  = false; //no transition cleared
         break;
-      case scm_nStateINIT:
-          bTransitionCleared  = false; //no transition cleared
-        break;
-      case scm_nStateREQ:
+      case scm_nStateREQ1:
         if(1)
           enterStateSTART();
         else
           bTransitionCleared  = false; //no transition cleared
         break;
       case scm_nStateUPDT:
+        if(1)
+          enterStateSTART();
+        else
+          bTransitionCleared  = false; //no transition cleared
+        break;
+      case scm_nStateREQ2:
+        if(1)
+          enterStateSTART();
+        else
           bTransitionCleared  = false; //no transition cleared
         break;
       default:

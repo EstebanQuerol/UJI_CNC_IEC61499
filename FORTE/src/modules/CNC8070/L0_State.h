@@ -35,14 +35,16 @@ private:
     return *static_cast<CIEC_USINT*>(getDO(1));
   };
 
-  static const TEventID scm_nEventREQID = 0;
-  static const TEventID scm_nEventUPDTID = 1;
+  static const TEventID scm_nEventREQ1ID = 0;
+  static const TEventID scm_nEventREQ2ID = 1;
+  static const TEventID scm_nEventUPDTID = 2;
   static const TForteInt16 scm_anEIWithIndexes[];
   static const TDataIOID scm_anEIWith[];
   static const CStringDictionary::TStringId scm_anEventInputNames[];
 
-  static const TEventID scm_nEventCNFID = 0;
-  static const TEventID scm_nEventUPDTOID = 1;
+  static const TEventID scm_nEventCNF1ID = 0;
+  static const TEventID scm_nEventCNF2ID = 1;
+  static const TEventID scm_nEventUPDTOID = 2;
   static const TForteInt16 scm_anEOWithIndexes[];
   static const TDataIOID scm_anEOWith[];
   static const CStringDictionary::TStringId scm_anEventOutputNames[];
@@ -62,20 +64,20 @@ private:
 
   static const SInternalVarsInformation scm_stInternalVars;
 
-   FORTE_BASIC_FB_DATA_ARRAY(2, 1, 2, 2, 0);
+   FORTE_BASIC_FB_DATA_ARRAY(3, 1, 2, 2, 0);
 
 virtual void setInitialValues();
   void alg_REQ(void);
   void alg_UPDT(void);
   static const TForteInt16 scm_nStateSTART = 0;
-  static const TForteInt16 scm_nStateINIT = 1;
-  static const TForteInt16 scm_nStateREQ = 2;
-  static const TForteInt16 scm_nStateUPDT = 3;
+  static const TForteInt16 scm_nStateREQ1 = 1;
+  static const TForteInt16 scm_nStateUPDT = 2;
+  static const TForteInt16 scm_nStateREQ2 = 3;
 
   void enterStateSTART(void);
-  void enterStateINIT(void);
-  void enterStateREQ(void);
+  void enterStateREQ1(void);
   void enterStateUPDT(void);
+  void enterStateREQ2(void);
 
   virtual void executeEvent(int pa_nEIID);
 

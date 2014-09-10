@@ -83,8 +83,6 @@ private:
 
   static const SCFB_FBConnectionData scm_astEventConnections[];
 
-  static const SCFB_FBFannedOutConnectionData scm_astFannedOutEventConnections[];
-
   static const SCFB_FBConnectionData scm_astDataConnections[];
 
   static const SCFB_FBFannedOutConnectionData scm_astFannedOutDataConnections[];
