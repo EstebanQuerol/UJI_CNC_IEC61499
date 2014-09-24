@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <libraryElement:AutomationSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:libraryElement="org.fordiac.ide.model.libraryElement" name="test1sys" id="_58HE4AW2EeSiM4Z8Q7JyDw">
   <versionInfo author="Author" organization="4DIAC-Consortium" version="1.0"/>
+  <identification/>
   <application comment="" name="test1app">
     <fBNetwork href="test1app.xml#//@fbNetwork"/>
   </application>

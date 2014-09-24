@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Part Router based on part family" Name="L3_PartRouterF">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-09-24" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Initialization Request" Name="INIT" Type="Event">
+        <With Var="SelFamily"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Initialization Confirm" Name="INITO" Type="Event"/>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Routing condition" Name="SelFamily" Type="UINT"/>
+    </InputVars>
+    <OutputVars/>
+    <Sockets>
+      <AdapterDeclaration Comment="Input Part" Name="L3_APart" Type="L3_APart"/>
+    </Sockets>
+    <Plugs>
+      <AdapterDeclaration Comment="Output Part 1" Name="L3_APart1" Type="L3_APart"/>
+      <AdapterDeclaration Comment="Output part 2" Name="L3_APart2" Type="L3_APart"/>
+    </Plugs>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration Comment="Variable to select output event" InitialValue="FALSE" Name="Select" Type="BOOL"/>
+    </InternalVars>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="2090.0" y="570.0"/>
+      <ECState Comment="Initialization" Name="INIT" x="2205.0" y="145.0"/>
+      <ECState Name="REQ" x="3480.0" y="715.0">
+        <ECAction Algorithm="REQ"/>
+      </ECState>
+      <ECState Name="REQ1" x="4050.0" y="525.0">
+        <ECAction Output="L3_APart1.REQ"/>
+      </ECState>
+      <ECState Name="REQ2" x="4050.0" y="905.0">
+        <ECAction Output="L3_APart2.REQ"/>
+      </ECState>
+      <ECState Name="RSP" x="3345.0" y="1665.0">
+        <ECAction Algorithm="RSP"/>
+      </ECState>
+      <ECState Name="RSP1" x="4020.0" y="1485.0">
+        <ECAction Output="L3_APart1.RSP"/>
+      </ECState>
+      <ECState Name="RSP2" x="4010.0" y="1760.0">
+        <ECAction Output="L3_APart2.RSP"/>
+      </ECState>
+      <ECState Name="CNF1" x="380.0" y="570.0">
+        <ECAction Algorithm="CNF1" Output="L3_APart.CNF"/>
+      </ECState>
+      <ECState Name="IND1" x="1045.0" y="1805.0">
+        <ECAction Algorithm="IND1" Output="L3_APart.IND"/>
+      </ECState>
+      <ECState Name="CNF2" x="380.0" y="1045.0">
+        <ECAction Algorithm="CNF2" Output="L3_APart.CNF"/>
+      </ECState>
+      <ECState Name="IND2" x="1995.0" y="1995.0">
+        <ECAction Algorithm="IND2" Output="L3_APart.IND"/>
+      </ECState>
+      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="START" x="2330.0" y="450.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="INIT" x="2170.0" y="375.0"/>
+      <ECTransition Comment="" Condition="L3_APart.REQ" Destination="REQ" Source="START" x="3025.0" y="705.0"/>
+      <ECTransition Comment="" Condition="Select = TRUE" Destination="REQ1" Source="REQ" x="3660.0" y="575.0"/>
+      <ECTransition Comment="" Condition="Select = FALSE" Destination="REQ2" Source="REQ" x="3580.0" y="1055.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ1" x="3385.0" y="375.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ2" x="3560.0" y="1165.0"/>
+      <ECTransition Comment="" Condition="L3_APart.RSP" Destination="RSP" Source="START" x="2810.0" y="1280.0"/>
+      <ECTransition Comment="" Condition="Select = TRUE" Destination="RSP1" Source="RSP" x="3570.0" y="1530.0"/>
+      <ECTransition Comment="" Condition="Select = FALSE" Destination="RSP2" Source="RSP" x="3530.0" y="1870.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="RSP1" x="3055.0" y="1215.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="RSP2" x="3465.0" y="2080.0"/>
+      <ECTransition Comment="" Condition="L3_APart1.CNF" Destination="CNF1" Source="START" x="1365.0" y="305.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="CNF1" x="1365.0" y="140.0"/>
+      <ECTransition Comment="" Condition="L3_APart1.IND" Destination="IND1" Source="START" x="1100.0" y="1545.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="IND1" x="1550.0" y="1255.0"/>
+      <ECTransition Comment="" Condition="L3_APart2.CNF" Destination="CNF2" Source="START" x="770.0" y="875.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="CNF2" x="1355.0" y="855.0"/>
+      <ECTransition Comment="" Condition="L3_APart2.IND" Destination="IND2" Source="START" x="1960.0" y="1310.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="IND2" x="2210.0" y="1290.0"/>
+    </ECC>
+    <Algorithm Comment="Routes REQ event and data" Name="REQ">
+      <ST Text="IF L3_APart.FamilyP = SelFamily THEN&#10;(*Map input request to output 1*)&#10;L3_APart1.PartIDP := L3_APart.PartIDP;&#10;L3_APart1.FamilyP := L3_APart.FamilyP;&#10;L3_APart1.TypeP := L3_APart.TypeP;&#10;L3_APart1.Lotsize := L3_APart.Lotsize;&#10;L3_APart1.Deadline := L3_APart.Deadline;&#10;Select := TRUE;&#10;&#10;ELSE&#10;(*Map input request to output 2*)&#10;L3_APart2.PartIDP := L3_APart.PartIDP;&#10;L3_APart2.FamilyP := L3_APart.FamilyP;&#10;L3_APart2.TypeP := L3_APart.TypeP;&#10;L3_APart2.Lotsize := L3_APart.Lotsize;&#10;L3_APart2.Deadline := L3_APart.Deadline;&#10;Select := FALSE; &#10;&#10;END_IF;"/>
+    </Algorithm>
+    <Algorithm Comment="Routes RSP event and data" Name="RSP">
+      <ST Text="IF L3_APart.FamilyP = SelFamily THEN&#10;(*Map input request to output 1*)&#10;L3_APart1.FamilyP := L3_APart.FamilyP;&#10;L3_APart1.TypeP := L3_APart.TypeP;&#10;L3_APart1.Deadline := L3_APart.Deadline;&#10;Select := TRUE;&#10;&#10;ELSE&#10;(*Map input request to output 2*)&#10;L3_APart2.FamilyP := L3_APart.FamilyP;&#10;L3_APart2.TypeP := L3_APart.TypeP;&#10;L3_APart2.Deadline := L3_APart.Deadline;&#10;Select := FALSE; &#10;&#10;END_IF;"/>
+    </Algorithm>
+    <Algorithm Comment="Routes CNF1 event and data" Name="CNF1">
+      <ST Text="(*No data needs to be mapped in this case*)&#10;(*To be used in the future if is needed to return any data with CNF event*)"/>
+    </Algorithm>
+    <Algorithm Comment="Routes IND1 event and data" Name="IND1">
+      <ST Text="(*Map input IND1 to common output*)&#10;L3_APart.PartIDS := L3_APart1.PartIDS;&#10;L3_APart.FamilyS := L3_APart1.FamilyS;&#10;L3_APart.TypeS := L3_APart1.TypeS;"/>
+    </Algorithm>
+    <Algorithm Comment="Routes CNF2 event and data" Name="CNF2">
+      <ST Text="(*No data needs to be mapped in this case*)&#10;(*To be used in the future if is needed to return any data with CNF event*)"/>
+    </Algorithm>
+    <Algorithm Comment="Routes IND2 event and data" Name="IND2">
+      <ST Text="(*Map input IND2 to common output*)&#10;L3_APart.PartIDS := L3_APart2.PartIDS;&#10;L3_APart.FamilyS := L3_APart2.FamilyS;&#10;L3_APart.TypeS := L3_APart2.TypeS;&#10;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>
