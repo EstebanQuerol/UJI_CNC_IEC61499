@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="CM_Merge2E2USINT">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-09-04" Organization="UJI" Version="0.0"/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Event 1 to merge" Name="E1" Type="Event">
+        <With Var="E1In"/>
+      </Event>
+      <Event Comment="Event 2 to merge" Name="E2" Type="Event">
+        <With Var="E2In"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Event Output" Name="EO" Type="Event">
+        <With Var="Out"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="E1In" Type="USINT"/>
+      <VarDeclaration Name="E2In" Type="USINT"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Merge output" Name="Out" Type="USINT"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="550.0" y="425.0"/>
+      <ECState Comment="" Name="IN1" x="380.0" y="855.0">
+        <ECAction Algorithm="E1" Output="EO"/>
+      </ECState>
+      <ECState Comment="" Name="IN2" x="1235.0" y="855.0">
+        <ECAction Algorithm="E2" Output="EO"/>
+      </ECState>
+      <ECTransition Comment="" Condition="E1" Destination="IN1" Source="START" x="250.0" y="545.0"/>
+      <ECTransition Comment="" Condition="E2" Destination="IN2" Source="START" x="1090.0" y="550.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="IN1" x="515.0" y="695.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="IN2" x="1010.0" y="700.0"/>
+    </ECC>
+    <Algorithm Comment="new algorithm" Name="E1">
+      <ST Text="Out := E1In;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="E2">
+      <ST Text="Out := E2In;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

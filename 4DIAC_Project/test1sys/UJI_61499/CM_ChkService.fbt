@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="CM_ChkService">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-09-04" Organization="UJI" Version="0.0"/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Normal Execution Request" Name="REQ" Type="Event"/>
+      <Event Comment="Service State response" Name="RSP" Type="Event">
+        <With Var="ServiceState"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Request Service State" Name="REQS" Type="Event"/>
+      <Event Comment="Service is UP" Name="UP" Type="Event"/>
+      <Event Comment="Service is down" Name="DOWN" Type="Event"/>
+      <Event Comment="Service is up but busy" Name="BUSY" Type="Event"/>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="CNC Service State" Name="ServiceState" Type="USINT"/>
+    </InputVars>
+    <OutputVars/>
+  </InterfaceList>
+  <BasicFB>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="550.0" y="425.0"/>
+      <ECState Comment="" Name="REQ" x="1425.0" y="95.0">
+        <ECAction Output="REQS"/>
+      </ECState>
+      <ECState Comment="" Name="UP" x="95.0" y="1045.0">
+        <ECAction Output="UP"/>
+      </ECState>
+      <ECState Comment="" Name="DOWN" x="1425.0" y="1235.0">
+        <ECAction Output="DOWN"/>
+      </ECState>
+      <ECState Comment="" Name="BUSY" x="1995.0" y="570.0">
+        <ECAction Output="BUSY"/>
+      </ECState>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ" x="1170.0" y="360.0"/>
+      <ECTransition Comment="" Condition="REQ" Destination="REQ" Source="START" x="775.0" y="165.0"/>
+      <ECTransition Comment="" Condition="RSP&amp;ServiceState=1" Destination="UP" Source="START" x="340.0" y="680.0"/>
+      <ECTransition Comment="" Condition="RSP&amp;ServiceState=0" Destination="DOWN" Source="START" x="1480.0" y="935.0"/>
+      <ECTransition Comment="" Condition="RSP&amp;ServiceState=2" Destination="BUSY" Source="START" x="1525.0" y="455.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="BUSY" x="1410.0" y="690.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="DOWN" x="1100.0" y="880.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="UP" x="615.0" y="835.0"/>
+    </ECC>
+    <Algorithm Comment="Initialization algorithm" Name="INIT">
+      <ST Text=""/>
+    </Algorithm>
+    <Algorithm Comment="Normally executed algorithm" Name="REQ">
+      <ST Text=""/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

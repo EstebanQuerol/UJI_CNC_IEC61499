@@ -115,7 +115,24 @@ BOOL CCNC8070APILib::ConnectCNC(CCNC8070CommunicationHandler * a_oHandler)
 				SysFreeString(l_sVarName);
 
 				l_hR = m_oVars->ReadInt(m_hVarStatus, NO_HVAR_INDEX, NO_HVAR_INDEX, &m_lStatus);
-
+				//Actualizamos el estaddo inicial para que el servicio CNC en FORTE sepa que esta listo
+				switch (m_lStatus) {
+				case 0:
+					OnNotReady();
+					break;
+				case 1:
+					OnReady();
+					break;
+				case 2:
+					OnExecuting();
+					break;
+				case 3:
+					OnInterrupted();
+					break;
+				case 4:
+					OnInterruptedByError();
+					break;
+				}
 				l_hR = m_oVars->OpenReport(m_hVarStatus, &l_lRetVal);
 
 				l_hR = CreateRemoteInstance(__uuidof(CNC8070_Plc), __uuidof(IFCDualPlc), l_sHostName, l_pItf);
@@ -167,9 +184,6 @@ BOOL CCNC8070APILib::DisconnectCNC()
 		m_bConnected = FALSE;
 
 		m_oHandler->Log(LOG_INFORMATION, "CNC Disconnected!\n");
-	}
-	else {
-		m_oHandler->Log(LOG_WARNING, "CNC already disconnected!\n");
 	}
 
 	return !m_bConnected;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
 <FBType Comment="Service Interface Function Block Type" Name="L0_SendBlk">
-  <Identification Standard="61499-2"/>
-  <VersionInfo Author="4DIAC-IDE" Date="2014-08-25" Organization="4DIAC-Consortium" Version="0.0"/>
+  <Identification Description="SIFB used to send G-code to the CNC through COM comunication." Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-08-25" Organization="UJI" Version="0.0"/>
   <InterfaceList>
     <EventInputs>
       <Event Comment="Service Initialization" Name="INIT" Type="Event">
@@ -11,38 +11,28 @@
       </Event>
       <Event Comment="Service Request" Name="REQ" Type="Event">
         <With Var="QI"/>
-        <With Var="SD"/>
-      </Event>
-      <Event Comment="Application Response to IND" Name="RSP" Type="Event">
-        <With Var="QI"/>
-        <With Var="SD"/>
+        <With Var="sBlock"/>
       </Event>
     </EventInputs>
     <EventOutputs>
       <Event Comment="Initialization Confirm" Name="INITO" Type="Event">
         <With Var="QO"/>
-        <With Var="STATUS"/>
       </Event>
       <Event Comment="Confirmation of Requested Service" Name="CNF" Type="Event">
         <With Var="QO"/>
-        <With Var="STATUS"/>
-        <With Var="RD"/>
       </Event>
       <Event Comment="Indication from Resource" Name="IND" Type="Event">
-        <With Var="QO"/>
-        <With Var="STATUS"/>
-        <With Var="RD"/>
+        <With Var="CNCState"/>
       </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration Comment="Event Input Qualifier" Name="QI" Type="BOOL"/>
       <VarDeclaration Comment="Service Parameters" Name="PARAMS" Type="WSTRING"/>
-      <VarDeclaration Comment="Output data to resource" Name="SD" Type="ANY"/>
+      <VarDeclaration Comment="Output data to resource" Name="sBlock" Type="STRING"/>
     </InputVars>
     <OutputVars>
       <VarDeclaration Comment="Event Output Qualifier" Name="QO" Type="BOOL"/>
-      <VarDeclaration Comment="Service Status" Name="STATUS" Type="WSTRING"/>
-      <VarDeclaration Comment="Input data from resource" Name="RD" Type="ANY"/>
+      <VarDeclaration Comment="CNC State" InitialValue="0" Name="CNCState" Type="USINT"/>
     </OutputVars>
   </InterfaceList>
   <Service Comment="Service Interface Function Block Type" LeftInterface="APPLICATION" RightInterface="RESOURCE">
@@ -81,21 +71,11 @@
         <InputPrimitive Event="indicate" Interface="RESOURCE" Parameters="RD"/>
         <OutputPrimitive Event="IND+" Interface="APPLICATION" Parameters="RD"/>
       </ServiceTransaction>
-      <ServiceTransaction>
-        <InputPrimitive Event="RSP" Interface="APPLICATION" Parameters="QI,SD"/>
-        <OutputPrimitive Event="response" Interface="RESOURCE" Parameters="QI,SD"/>
-      </ServiceTransaction>
     </ServiceSequence>
     <ServiceSequence Name="indication_inhibited">
       <ServiceTransaction>
         <InputPrimitive Event="indicate" Interface="RESOURCE" Parameters="RD,QI=FALSE"/>
         <OutputPrimitive Event="inhibited" Interface="RESOURCE"/>
-      </ServiceTransaction>
-    </ServiceSequence>
-    <ServiceSequence Name="error_indication">
-      <ServiceTransaction>
-        <InputPrimitive Event="error" Interface="RESOURCE" Parameters="STATUS"/>
-        <OutputPrimitive Event="IND-" Interface="APPLICATION" Parameters="STATUS"/>
       </ServiceTransaction>
     </ServiceSequence>
     <ServiceSequence Name="application_initiated_termination">
