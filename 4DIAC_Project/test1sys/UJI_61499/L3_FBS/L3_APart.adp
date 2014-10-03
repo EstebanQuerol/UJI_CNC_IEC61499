@@ -30,7 +30,7 @@
     <InputVars>
       <VarDeclaration Comment="Identifier of the last created part" Name="PartIDS" Type="UINT"/>
       <VarDeclaration Comment="Part's Family" Name="FamilyS" Type="UINT"/>
-      <VarDeclaration Comment="Part's Type" Name="TypeS" Type="WSTRING"/>
+      <VarDeclaration Comment="Part's Type" Name="TypeS" Type="UINT"/>
     </InputVars>
     <OutputVars>
       <VarDeclaration Comment="Identifier of the 1st part" Name="PartIDP" Type="UINT"/>

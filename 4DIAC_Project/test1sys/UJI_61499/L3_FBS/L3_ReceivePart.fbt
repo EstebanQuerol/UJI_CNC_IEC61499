@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L3_ReceivePart">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-10-02" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Normal Execution Request" Name="REQ" Type="Event">
+        <With Var="PartIDIn"/>
+        <With Var="FamilyIn"/>
+        <With Var="TypeIn"/>
+      </Event>
+      <Event Comment="Response, Part correctly added" Name="RSP" Type="Event">
+        <With Var="Deadline"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Execution Confirmation" Name="CNF" Type="Event">
+        <With Var="PartIDOut"/>
+        <With Var="FamilyOut"/>
+        <With Var="TypeOut"/>
+      </Event>
+      <Event Comment="Indicate that part was correctly added" Name="IND" Type="Event">
+        <With Var="DeadlineS"/>
+        <With Var="TypeS"/>
+        <With Var="FamilyS"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Part's identifier" Name="PartIDIn" Type="UINT"/>
+      <VarDeclaration Comment="Part's family" Name="FamilyIn" Type="UINT"/>
+      <VarDeclaration Comment="Part's type" Name="TypeIn" Type="UINT"/>
+      <VarDeclaration Name="Deadline" Type="DATE_AND_TIME"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Part's identifier" Name="PartIDOut" Type="UINT"/>
+      <VarDeclaration Comment="Part's family " Name="FamilyOut" Type="UINT"/>
+      <VarDeclaration Comment="Part's type" Name="TypeOut" Type="UINT"/>
+      <VarDeclaration Comment="Part's family" Name="FamilyS" Type="UINT"/>
+      <VarDeclaration Comment="Part's type" Name="TypeS" Type="UINT"/>
+      <VarDeclaration Comment="Updated deadline for this pair family-type" Name="DeadlineS" Type="DATE_AND_TIME"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration Comment="ID of the part being updated" Name="CurrentID" Type="UINT"/>
+      <VarDeclaration Comment="Family of the part being updated" Name="CurrentFamily" Type="UINT"/>
+      <VarDeclaration Comment="Type of the part being updated" Name="CurrentType" Type="UINT"/>
+      <VarDeclaration Comment="Internal Variable" Name="LostIND" Type="BOOL"/>
+      <VarDeclaration ArraySize="25" Comment="Circular buffer" InitialValue="[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]" Name="CompletedIDS" Type="UINT"/>
+      <VarDeclaration ArraySize="25" Comment="Circular buffer" Name="CompletedFamilies" Type="UINT"/>
+      <VarDeclaration ArraySize="25" Comment="Circular buffer" Name="CompletedTypes" Type="UINT"/>
+      <VarDeclaration ArraySize="25" Comment="Circular buffer" Name="CompletedDeadlines" Type="DATE_AND_TIME"/>
+      <VarDeclaration Comment="Completed actions vector Index. Points to the oldest entry in the vector" InitialValue="0" Name="Index" Type="UINT"/>
+      <VarDeclaration Comment="boucle variable" Name="i" Type="UINT"/>
+    </InternalVars>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="760.0" y="285.0"/>
+      <ECState Comment="Normal execution" Name="REQ" x="1330.0" y="570.0">
+        <ECAction Algorithm="REQ" Output="CNF"/>
+      </ECState>
+      <ECState Name="REQUESTING" x="1330.0" y="1045.0"/>
+      <ECState Name="REQHANDLER" x="2280.0" y="1045.0">
+        <ECAction Algorithm="HDL"/>
+      </ECState>
+      <ECState Name="LOSTIND" x="3230.0" y="760.0">
+        <ECAction Output="IND"/>
+      </ECState>
+      <ECState Name="RSP" x="1330.0" y="1520.0">
+        <ECAction Algorithm="RSP" Output="IND"/>
+      </ECState>
+      <ECTransition Comment="" Condition="REQ" Destination="REQ" Source="START" x="1320.0" y="370.0"/>
+      <ECTransition Comment="" Condition="RSP" Destination="RSP" Source="REQUESTING" x="1530.0" y="1370.0"/>
+      <ECTransition Comment="" Condition="1" Destination="REQUESTING" Source="REQ" x="1425.0" y="825.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="RSP" x="670.0" y="1295.0"/>
+      <ECTransition Comment="" Condition="REQ" Destination="REQHANDLER" Source="REQUESTING" x="2065.0" y="1085.0"/>
+      <ECTransition Comment="" Condition="1" Destination="REQUESTING" Source="LOSTIND" x="2075.0" y="805.0"/>
+      <ECTransition Comment="" Condition="LostIND=TRUE" Destination="LOSTIND" Source="REQHANDLER" x="2875.0" y="940.0"/>
+      <ECTransition Comment="" Condition="LostIND=FALSE" Destination="REQUESTING" Source="REQHANDLER" x="2645.0" y="1395.0"/>
+    </ECC>
+    <Algorithm Comment="Normally executed algorithm" Name="REQ">
+      <ST Text="(*Update current action data*)&#10;CurrentID := PartIDIn;&#10;CurrentFamily := FamilyIn;&#10;CurrentType := TypeIn;&#10;(*Map input to output*)&#10;PartIDOut := PartIDIn;&#10;FamilyOut := FamilyIn;&#10;TypeOut := TypeIn;"/>
+    </Algorithm>
+    <Algorithm Comment="Algorithm to handle lost IND and Timeouts while receiving IND" Name="HDL">
+      <ST Text="(*New request arrived while processing one*)&#10;(*Verify if the request is a previously completed action*)&#10;i := 0;&#10;LostIND := FALSE;&#10;WHILE (i &lt; 25 )DO&#10;&#9;IF ( PartIDIn =CompletedIDS[i] ) THEN&#10;&#9;&#9;(*Received request has already been processed*)&#10;&#9;&#9;(*Send IND*)&#10;&#9;&#9;LostIND := TRUE;&#10;&#9;&#9;(*Update output values*)&#10;&#9;&#9;FamilyS := CompletedFamilies[i];&#10;&#9;&#9;TypeS := CompletedTypes[i];&#10;&#9;&#9;DeadlineS := CompletedDeadlines[i];&#10;&#9;&#9;(*exit loop*)&#10;&#9;&#9;i := 26;&#10;&#9;ELSE&#10;&#9;&#9;i := i + 1;&#10;&#9;END_IF;&#10;END_WHILE; "/>
+    </Algorithm>
+    <Algorithm Comment="algorithm to register completed actions" Name="RSP">
+      <ST Text="(*Completed Action*)&#10;CompletedIDS[Index] := CurrentID;&#10;CompletedFamilies[Index] := CurrentFamily;&#10;CompletedTypes[Index] := CurrentType;&#10;CompletedDeadlines[Index] := Deadline;&#10;&#10;(*Increase Index*)&#10;Index :=mod(Index+1, 25);&#10;&#10;(*Map input to output*)&#10;FamilyS := CurrentFamily;&#10;TypeS := CurrentType;&#10;DeadlineS := Deadline;&#10;&#10;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

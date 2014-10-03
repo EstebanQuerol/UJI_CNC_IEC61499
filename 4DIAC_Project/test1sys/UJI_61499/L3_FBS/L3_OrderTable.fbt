@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Service Interface Function Block Type" Name="L3_OrderTable">
+  <Identification Description="This SIFB holds a table where are stacked all manufacturing orders. Table is updated every time that an individual part is completed.&#9;" Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-09-29" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Service Initialization" Name="INIT" Type="Event">
+        <With Var="QI"/>
+      </Event>
+      <Event Comment="Insert a new order into the table" Name="Insert" Type="Event">
+        <With Var="Family"/>
+        <With Var="Type"/>
+        <With Var="Lotsize"/>
+        <With Var="DeadlineIn"/>
+      </Event>
+      <Event Comment="Update the table with manufacturing results" Name="Update" Type="Event">
+        <With Var="PartIDS"/>
+        <With Var="FamilyS"/>
+        <With Var="TypeS"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Initialization Confirm" Name="INITO" Type="Event">
+        <With Var="QO"/>
+      </Event>
+      <Event Comment="Confirmation of insertion" Name="CNF1" Type="Event">
+        <With Var="PartIDP"/>
+        <With Var="FamilyP"/>
+        <With Var="TypeP"/>
+        <With Var="LotsizeP"/>
+        <With Var="DeadlineOut"/>
+      </Event>
+      <Event Comment="confirmation of update" Name="CNF2" Type="Event">
+        <With Var="DeadlineOut"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Event Input Qualifier" Name="QI" Type="BOOL"/>
+      <VarDeclaration Comment="Part's family" Name="Family" Type="UINT"/>
+      <VarDeclaration Comment="Part's type" Name="Type" Type="UINT"/>
+      <VarDeclaration Comment="Number of parts to be manufactured" Name="Lotsize" Type="UINT"/>
+      <VarDeclaration Comment="Deadline of the lot to be inserted" Name="DeadlineIn" Type="DATE_AND_TIME"/>
+      <VarDeclaration Comment="Part Identifier" Name="PartIDS" Type="UINT"/>
+      <VarDeclaration Comment="Part's family" Name="FamilyS" Type="UINT"/>
+      <VarDeclaration Comment="Part's type" Name="TypeS" Type="UINT"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Event Output Qualifier" Name="QO" Type="BOOL"/>
+      <VarDeclaration Comment="Part identifier" Name="PartIDP" Type="UINT"/>
+      <VarDeclaration Comment="Part's family" Name="FamilyP" Type="UINT"/>
+      <VarDeclaration Comment="Part's type" Name="TypeP" Type="UINT"/>
+      <VarDeclaration Comment="lot size" Name="LotsizeP" Type="UINT"/>
+      <VarDeclaration Comment="Updated deadline" Name="DeadlineOut" Type="DATE_AND_TIME"/>
+    </OutputVars>
+  </InterfaceList>
+  <Service Comment="Service Interface Function Block Type" LeftInterface="APPLICATION" RightInterface="RESOURCE">
+    <ServiceSequence Name="normal_establishment">
+      <ServiceTransaction>
+        <InputPrimitive Event="INIT+" Interface="APPLICATION" Parameters="PARAMS"/>
+        <OutputPrimitive Event="INITO+" Interface="APPLICATION" Parameters="PARAMS"/>
+      </ServiceTransaction>
+    </ServiceSequence>
+    <ServiceSequence Name="unsuccessful_establishment">
+      <ServiceTransaction>
+        <InputPrimitive Event="INIT+" Interface="APPLICATION" Parameters="PARAMS"/>
+        <OutputPrimitive Event="INITO-" Interface="APPLICATION" Parameters="STATUS"/>
+      </ServiceTransaction>
+    </ServiceSequence>
+    <ServiceSequence Name="insertion_confirm">
+      <ServiceTransaction>
+        <InputPrimitive Event="Insert" Interface="APPLICATION" Parameters="SD"/>
+        <OutputPrimitive Event="CNF1" Interface="APPLICATION" Parameters="RD"/>
+      </ServiceTransaction>
+    </ServiceSequence>
+    <ServiceSequence Name="application_initiated_termination">
+      <ServiceTransaction>
+        <InputPrimitive Event="INIT-" Interface="APPLICATION"/>
+        <OutputPrimitive Event="INITO-" Interface="APPLICATION" Parameters="STATUS"/>
+      </ServiceTransaction>
+    </ServiceSequence>
+    <ServiceSequence Name="resource_initiated_termination">
+      <ServiceTransaction>
+        <OutputPrimitive Event="INITO-" Interface="APPLICATION" Parameters="STATUS"/>
+      </ServiceTransaction>
+    </ServiceSequence>
+    <ServiceSequence Name="update_confirm">
+      <ServiceTransaction>
+        <InputPrimitive Event="Update" Interface="APPLICATION" Parameters=""/>
+        <OutputPrimitive Event="CNF2" Interface="APPLICATION"/>
+      </ServiceTransaction>
+    </ServiceSequence>
+  </Service>
+</FBType>

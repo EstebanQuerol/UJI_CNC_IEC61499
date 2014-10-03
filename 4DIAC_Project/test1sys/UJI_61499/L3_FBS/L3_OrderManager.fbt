@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Composite Function Block Type" Name="L3_OrderManager">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-10-02" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Initialization Request" Name="INIT" Type="Event">
+        <With Var="QI"/>
+      </Event>
+      <Event Comment="Normal Execution Request" Name="REQ" Type="Event">
+        <With Var="Family"/>
+        <With Var="Type"/>
+        <With Var="Lotsize"/>
+        <With Var="Deadline"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Initialization Confirm" Name="INITO" Type="Event">
+        <With Var="QO"/>
+      </Event>
+      <Event Comment="Execution Confirmation" Name="CNF" Type="Event"/>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Input event qualifier" Name="QI" Type="BOOL"/>
+      <VarDeclaration Comment="Family od the parts to be manufactured" Name="Family" Type="UINT"/>
+      <VarDeclaration Comment="Type of the parts to be manufactured" Name="Type" Type="UINT"/>
+      <VarDeclaration Comment="Number of part to be manufactured" Name="Lotsize" Type="UINT"/>
+      <VarDeclaration Comment="Order delivery date and time" Name="Deadline" Type="DATE_AND_TIME"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Output event qualifier" Name="QO" Type="BOOL"/>
+    </OutputVars>
+    <Plugs>
+      <AdapterDeclaration Name="L3_APart" Type="L3_APart" x="7315.0" y="760.0"/>
+    </Plugs>
+  </InterfaceList>
+  <FBNetwork>
+    <FB Name="L3_OrderTable" Type="L3_OrderTable" x="2850.0" y="190.0"/>
+    <FB Name="L3_ReceivePart" Type="L3_ReceivePart" x="4560.0" y="2280.0"/>
+    <FB Name="L3_SendPart" Type="L3_SendPart" x="4655.0" y="95.0"/>
+    <FB Name="Send_Timeout" Type="E_TimeOut" x="4655.0" y="1330.0"/>
+    <FB Name="L3_OrderInput" Type="L3_OrderInput" x="950.0" y="95.0"/>
+    <FB Name="L3_PartMerge" Type="L3_PartMerge" x="6270.0" y="760.0"/>
+    <DataConnections>
+      <Connection Destination="L3_SendPart.PartIDIn" Source="L3_OrderTable.PartIDP" dx1="290.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_SendPart.FamilyIn" Source="L3_OrderTable.FamilyP" dx1="355.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_SendPart.TypeIn" Source="L3_OrderTable.TypeP" dx1="405.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_SendPart.LotsizeIn" Source="L3_OrderTable.LotsizeP" dx1="475.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_SendPart.DeadlineIn" Source="L3_OrderTable.DeadlineOut" dx1="540.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="Send_Timeout.TimeOutSocket" Source="L3_SendPart.ATimeOut" dx1="130.0" dx2="0.0" dy="-115.0"/>
+      <Connection Destination="L3_OrderTable.PartIDS" Source="L3_ReceivePart.PartIDOut" dx1="390.0" dx2="-315.0" dy="1575.0"/>
+      <Connection Destination="L3_OrderTable.FamilyS" Source="L3_ReceivePart.FamilyOut" dx1="300.0" dx2="-265.0" dy="1430.0"/>
+      <Connection Destination="L3_OrderTable.TypeS" Source="L3_ReceivePart.TypeOut" dx1="190.0" dx2="-165.0" dy="1290.0"/>
+      <Connection Destination="L3_ReceivePart.Deadline" Source="L3_OrderTable.DeadlineOut" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_OrderTable.Family" Source="L3_OrderInput.FamilyOut" dx1="645.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_OrderTable.Type" Source="L3_OrderInput.TypeOut" dx1="560.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_OrderTable.Lotsize" Source="L3_OrderInput.LotsizeOut" dx1="465.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_OrderTable.DeadlineIn" Source="L3_OrderInput.DeadlineOut" dx1="385.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_ReceivePart.PartIDIn" Source="L3_APart.PartIDS" dx1="595.0" dx2="-200.0" dy="65.0"/>
+      <Connection Destination="L3_ReceivePart.FamilyIn" Source="L3_APart.FamilyS" dx1="485.0" dx2="-280.0" dy="-110.0"/>
+      <Connection Destination="L3_ReceivePart.TypeIn" Source="L3_APart.TypeS" dx1="330.0" dx2="-385.0" dy="-295.0"/>
+      <Connection Destination="L3_PartMerge.PartIDP1" Source="L3_SendPart.PartIDP" dx1="600.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_PartMerge.FamilyP1" Source="L3_SendPart.FamilyP" dx1="500.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_PartMerge.TypeP1" Source="L3_SendPart.TypeP" dx1="390.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_PartMerge.Lotsize1" Source="L3_SendPart.LotsizeP" dx1="310.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_PartMerge.Deadline1" Source="L3_SendPart.DeadlineP" dx1="240.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_PartMerge.FamilyP2" Source="L3_ReceivePart.FamilyS" dx1="565.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_PartMerge.TypeP2" Source="L3_ReceivePart.TypeS" dx1="690.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_PartMerge.Deadline2" Source="L3_ReceivePart.DeadlineS" dx1="1000.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_APart.PartIDP" Source="L3_PartMerge.PartIDP" dx1="390.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_APart.FamilyP" Source="L3_PartMerge.FamilyP" dx1="320.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_APart.TypeP" Source="L3_PartMerge.TypeP" dx1="265.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_APart.Lotsize" Source="L3_PartMerge.Lotsize" dx1="200.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_APart.Deadline" Source="L3_PartMerge.Deadline" dx1="150.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_OrderInput.FamilyIn" Source="Family" dx1="485.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_OrderInput.TypeIn" Source="Type" dx1="395.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_OrderInput.LotsizeIn" Source="Lotsize" dx1="320.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_OrderInput.DeadlineIn" Source="Deadline" dx1="235.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_OrderTable.QI" Source="QI" dx1="2305.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="QO" Source="L3_OrderTable.QO" dx1="160.0" dx2="0.0" dy="0.0"/>
+    </DataConnections>
+    <EventConnections>
+      <Connection Destination="L3_SendPart.REQ" Source="L3_OrderTable.CNF1" dx1="540.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_OrderTable.Update" Source="L3_ReceivePart.CNF" dx1="505.0" dx2="-385.0" dy="2140.0"/>
+      <Connection Destination="L3_ReceivePart.RSP" Source="L3_OrderTable.CNF2" dx1="210.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_OrderTable.Insert" Source="L3_OrderInput.CNF" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_OrderInput.RSP" Source="L3_SendPart.IND" dx1="200.0" dx2="0.0" dy="-350.0"/>
+      <Connection Destination="L3_ReceivePart.REQ" Source="L3_APart.IND" dx1="725.0" dx2="0.0" dy="445.0"/>
+      <Connection Destination="L3_SendPart.RSP" Source="L3_APart.CNF" dx1="290.0" dx2="-195.0" dy="-595.0"/>
+      <Connection Destination="L3_PartMerge.REQIN" Source="L3_SendPart.CNF" dx1="765.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_PartMerge.RSPIN" Source="L3_ReceivePart.IND" dx1="385.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_APart.REQ" Source="L3_PartMerge.REQOUT" dx1="485.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_APart.RSP" Source="L3_PartMerge.RSPOUT" dx1="390.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_OrderInput.REQ" Source="REQ" dx1="380.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_OrderTable.INIT" Source="INIT" dx1="2410.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="INITO" Source="L3_OrderTable.INITO" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="CNF" Source="L3_OrderInput.IND" dx1="230.0" dx2="0.0" dy="0.0"/>
+    </EventConnections>
+  </FBNetwork>
+</FBType>
