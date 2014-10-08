@@ -20,26 +20,24 @@ const CStringDictionary::TStringId FORTE_L3_SendPart::scm_anDataInputNames[] = {
 
 const CStringDictionary::TStringId FORTE_L3_SendPart::scm_anDataInputTypeIds[] = {g_nStringIdUINT, g_nStringIdUINT, g_nStringIdUINT, g_nStringIdUINT, g_nStringIdDATE_AND_TIME};
 
-const CStringDictionary::TStringId FORTE_L3_SendPart::scm_anDataOutputNames[] = {g_nStringIdPartIDP, g_nStringIdFamilyP, g_nStringIdTypeP, g_nStringIdLotsizeP, g_nStringIdDeadlineP};
+const CStringDictionary::TStringId FORTE_L3_SendPart::scm_anDataOutputNames[] = {g_nStringIdTimeoutDT, g_nStringIdPartIDP, g_nStringIdFamilyP, g_nStringIdTypeP, g_nStringIdLotsizeP, g_nStringIdDeadlineP};
 
-const CStringDictionary::TStringId FORTE_L3_SendPart::scm_anDataOutputTypeIds[] = {g_nStringIdUINT, g_nStringIdUINT, g_nStringIdUINT, g_nStringIdUINT, g_nStringIdDATE_AND_TIME};
+const CStringDictionary::TStringId FORTE_L3_SendPart::scm_anDataOutputTypeIds[] = {g_nStringIdTIME, g_nStringIdUINT, g_nStringIdUINT, g_nStringIdUINT, g_nStringIdUINT, g_nStringIdDATE_AND_TIME};
 
-const TForteInt16 FORTE_L3_SendPart::scm_anEIWithIndexes[] = {0, -1};
+const TForteInt16 FORTE_L3_SendPart::scm_anEIWithIndexes[] = {0, -1, -1};
 const TDataIOID FORTE_L3_SendPart::scm_anEIWith[] = {0, 1, 2, 3, 4, 255};
-const CStringDictionary::TStringId FORTE_L3_SendPart::scm_anEventInputNames[] = {g_nStringIdREQ, g_nStringIdRSP};
+const CStringDictionary::TStringId FORTE_L3_SendPart::scm_anEventInputNames[] = {g_nStringIdREQ, g_nStringIdRSP, g_nStringIdTimeout};
 
-const TDataIOID FORTE_L3_SendPart::scm_anEOWith[] = {0, 1, 2, 3, 4, 255};
-const TForteInt16 FORTE_L3_SendPart::scm_anEOWithIndexes[] = {0, -1, -1};
-const CStringDictionary::TStringId FORTE_L3_SendPart::scm_anEventOutputNames[] = {g_nStringIdCNF, g_nStringIdIND};
-
-const SAdapterInstanceDef FORTE_L3_SendPart::scm_astAdapterInstances[] = {
-{g_nStringIdATimeOut, g_nStringIdATimeOut, true }};
+const TDataIOID FORTE_L3_SendPart::scm_anEOWith[] = {1, 2, 3, 4, 5, 255, 0, 255};
+const TForteInt16 FORTE_L3_SendPart::scm_anEOWithIndexes[] = {0, -1, 6, -1, -1};
+const CStringDictionary::TStringId FORTE_L3_SendPart::scm_anEventOutputNames[] = {g_nStringIdCNF, g_nStringIdIND, g_nStringIdStart, g_nStringIdStop};
 
 const SFBInterfaceSpec FORTE_L3_SendPart::scm_stFBInterfaceSpec = {
-  2,  scm_anEventInputNames,  scm_anEIWith,  scm_anEIWithIndexes,
-  2,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  5,  scm_anDataInputNames, scm_anDataInputTypeIds,
-  5,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
-  1,scm_astAdapterInstances};
+  3,  scm_anEventInputNames,  scm_anEIWith,  scm_anEIWithIndexes,
+  4,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  5,  scm_anDataInputNames, scm_anDataInputTypeIds,
+  6,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
+  0, 0
+};
 
 void FORTE_L3_SendPart::alg_REQ(void){
 PartIDP() = PartIDIn();
@@ -50,7 +48,7 @@ DeadlineP() = DeadlineIn();
 }
 
 void FORTE_L3_SendPart::alg_TO(void){
-ATimeOut().DT() = CIEC_TIME("1000ms");
+TimeoutDT() = CIEC_TIME("2000ms");
 }
 
 
@@ -63,7 +61,7 @@ void FORTE_L3_SendPart::enterStateREQ(void){
   alg_REQ();
   sendOutputEvent( scm_nEventCNFID);
   alg_TO();
-  sendAdapterEvent(scm_nATimeOutAdpNum, FORTE_ATimeOut::scm_nEventSTARTID);
+  sendOutputEvent( scm_nEventStartID);
 }
 
 void FORTE_L3_SendPart::enterStateSENDING(void){
@@ -74,12 +72,12 @@ void FORTE_L3_SendPart::enterStateTimeOut(void){
   m_nECCState = scm_nStateTimeOut;
   sendOutputEvent( scm_nEventCNFID);
   alg_TO();
-  sendAdapterEvent(scm_nATimeOutAdpNum, FORTE_ATimeOut::scm_nEventSTARTID);
+  sendOutputEvent( scm_nEventStartID);
 }
 
 void FORTE_L3_SendPart::enterStateSTOPTIMER(void){
   m_nECCState = scm_nStateSTOPTIMER;
-  sendAdapterEvent(scm_nATimeOutAdpNum, FORTE_ATimeOut::scm_nEventSTOPID);
+  sendOutputEvent( scm_nEventStopID);
   sendOutputEvent( scm_nEventINDID);
 }
 
@@ -101,7 +99,7 @@ void FORTE_L3_SendPart::executeEvent(int pa_nEIID){
           bTransitionCleared  = false; //no transition cleared
         break;
       case scm_nStateSENDING:
-        if(ATimeOut().TimeOut() == pa_nEIID)
+        if(scm_nEventTimeoutID == pa_nEIID)
           enterStateTimeOut();
         else
         if(scm_nEventRSPID == pa_nEIID)

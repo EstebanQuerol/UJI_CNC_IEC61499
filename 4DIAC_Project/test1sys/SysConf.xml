@@ -249,8 +249,8 @@
           <children xsi:type="org.fordiac.ide.model.ui:FBView" fb="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@fBs.0">
             <position x="-285" y="-76"/>
             <backgroundColor red="255" green="255" blue="255"/>
-            <interfaceElements iInterfaceElement="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@fBs.0/@interface/@eventOutputs.0" outConnections="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.22 //@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.30" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork"/>
-            <interfaceElements iInterfaceElement="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@fBs.0/@interface/@eventOutputs.1" outConnections="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.23 //@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.31" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork"/>
+            <interfaceElements iInterfaceElement="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@fBs.0/@interface/@eventOutputs.0" outConnections="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.22 //@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.29" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork"/>
+            <interfaceElements iInterfaceElement="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@fBs.0/@interface/@eventOutputs.1" outConnections="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.23 //@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.30" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork"/>
             <interfaceElements iInterfaceElement="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@fBs.0/@interface/@eventOutputs.2" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork"/>
           </children>
           <children xsi:type="org.fordiac.ide.model.ui:FBView">
@@ -265,7 +265,7 @@
               <iInterfaceElement xsi:type="libraryElement:VarDeclaration" href="Debug_APP.xml#//@fbNetwork/@fBs.3/@interface/@inputVars.0"/>
               <applicationInterfaceElement href="Debug_APP.xml#//@children.3/@interfaceElements.1"/>
             </interfaceElements>
-            <interfaceElements inConnections="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.28" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork">
+            <interfaceElements inConnections="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.31" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork">
               <iInterfaceElement xsi:type="libraryElement:AdapterDeclaration" href="Debug_APP.xml#//@fbNetwork/@fBs.3/@interface/@inputVars.1"/>
               <applicationInterfaceElement href="Debug_APP.xml#//@children.3/@interfaceElements.2"/>
             </interfaceElements>
@@ -659,7 +659,7 @@
               <iInterfaceElement xsi:type="libraryElement:VarDeclaration" href="Debug_APP.xml#//@fbNetwork/@fBs.13/@interface/@inputVars.0"/>
               <applicationInterfaceElement href="Debug_APP.xml#//@children.13/@interfaceElements.2"/>
             </interfaceElements>
-            <interfaceElements outConnections="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.29" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork">
+            <interfaceElements outConnections="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.28" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork">
               <iInterfaceElement xsi:type="libraryElement:Event" href="Debug_APP.xml#//@fbNetwork/@fBs.13/@interface/@eventOutputs.0"/>
               <applicationInterfaceElement href="Debug_APP.xml#//@children.13/@interfaceElements.3"/>
             </interfaceElements>
@@ -840,14 +840,14 @@
             <applicationFB href="Debug_APP.xml#//@children.16"/>
           </children>
           <children xsi:type="org.fordiac.ide.model.ui:FBView">
-            <position y="38"/>
+            <position x="-19" y="38"/>
             <backgroundColor red="255" green="255" blue="255"/>
             <fb href="Debug_APP.xml#//@fbNetwork/@fBs.17"/>
-            <interfaceElements inConnections="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.30 //@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.31" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork">
+            <interfaceElements inConnections="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.29 //@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.30" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork">
               <iInterfaceElement xsi:type="libraryElement:Event" href="Debug_APP.xml#//@fbNetwork/@fBs.17/@interface/@eventInputs.0"/>
               <applicationInterfaceElement href="Debug_APP.xml#//@children.17/@interfaceElements.0"/>
             </interfaceElements>
-            <interfaceElements inConnections="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.29" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork">
+            <interfaceElements inConnections="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.28" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork">
               <iInterfaceElement xsi:type="libraryElement:Event" href="Debug_APP.xml#//@fbNetwork/@fBs.17/@interface/@eventInputs.1"/>
               <applicationInterfaceElement href="Debug_APP.xml#//@children.17/@interfaceElements.1"/>
             </interfaceElements>
@@ -883,7 +883,7 @@
               <iInterfaceElement xsi:type="libraryElement:VarDeclaration" href="Debug_APP.xml#//@fbNetwork/@fBs.17/@interface/@outputVars.0"/>
               <applicationInterfaceElement href="Debug_APP.xml#//@children.17/@interfaceElements.9"/>
             </interfaceElements>
-            <interfaceElements outConnections="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.28" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork">
+            <interfaceElements outConnections="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@connections.31" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork">
               <iInterfaceElement xsi:type="libraryElement:AdapterDeclaration" href="Debug_APP.xml#//@fbNetwork/@fBs.17/@interface/@outputVars.1"/>
               <applicationInterfaceElement href="Debug_APP.xml#//@children.17/@interfaceElements.10"/>
             </interfaceElements>
@@ -917,10 +917,10 @@
           <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" connectionElement="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@dataConnections.11" source="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.6/@interfaceElements.4" destination="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.16/@interfaceElements.5"/>
           <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" connectionElement="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@dataConnections.12" source="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.11/@interfaceElements.4" destination="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.17/@interfaceElements.5"/>
           <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" connectionElement="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@eventConnections.14" source="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.18/@interfaceElements.7" destination="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.1/@interfaceElements.0"/>
-          <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" connectionElement="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@dataConnections.13" source="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.18/@interfaceElements.10" destination="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.1/@interfaceElements.2"/>
           <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" connectionElement="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@eventConnections.15" source="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.14/@interfaceElements.3" destination="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.18/@interfaceElements.1"/>
           <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" connectionElement="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@eventConnections.16" source="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.0/@interfaceElements.0" destination="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.18/@interfaceElements.0"/>
           <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" connectionElement="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@eventConnections.17" source="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.0/@interfaceElements.1" destination="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.18/@interfaceElements.0"/>
+          <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" connectionElement="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@dataConnections.13" source="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.18/@interfaceElements.10" destination="//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.1/@interfaceElements.2"/>
           <fbNetworks>
             <uiFBNetwork href="test1app.xml#/"/>
           </fbNetworks>
@@ -1215,7 +1215,7 @@
             <source href="Debug_APP.xml#//@fbNetwork/@fBs.7/@interface/@outputVars.0"/>
             <destination href="Debug_APP.xml#//@fbNetwork/@fBs.16/@interface/@inputVars.3"/>
           </dataConnections>
-          <dataConnections dx1="44">
+          <dataConnections>
             <source href="Debug_APP.xml#//@fbNetwork/@fBs.17/@interface/@outputVars.1"/>
             <destination href="Debug_APP.xml#//@fbNetwork/@fBs.3/@interface/@inputVars.1"/>
           </dataConnections>
@@ -1273,18 +1273,18 @@
           <eventConnections dx1="55" resourceConnection="true" source="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@fBs.0/@interface/@eventOutputs.1">
             <destination href="Debug_APP.xml#//@fbNetwork/@fBs.13/@interface/@eventInputs.0"/>
           </eventConnections>
-          <eventConnections dx1="44">
+          <eventConnections dx1="75">
             <source href="Debug_APP.xml#//@fbNetwork/@fBs.17/@interface/@eventOutputs.0"/>
             <destination href="Debug_APP.xml#//@fbNetwork/@fBs.3/@interface/@eventInputs.0"/>
           </eventConnections>
-          <eventConnections>
+          <eventConnections dx1="24">
             <source href="Debug_APP.xml#//@fbNetwork/@fBs.13/@interface/@eventOutputs.0"/>
             <destination href="Debug_APP.xml#//@fbNetwork/@fBs.17/@interface/@eventInputs.1"/>
           </eventConnections>
-          <eventConnections dx1="176" resourceConnection="true" source="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@fBs.0/@interface/@eventOutputs.0">
+          <eventConnections dx1="164" resourceConnection="true" source="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@fBs.0/@interface/@eventOutputs.0">
             <destination href="Debug_APP.xml#//@fbNetwork/@fBs.17/@interface/@eventInputs.0"/>
           </eventConnections>
-          <eventConnections dx1="162" resourceConnection="true" source="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@fBs.0/@interface/@eventOutputs.1">
+          <eventConnections dx1="164" resourceConnection="true" source="//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@fBs.0/@interface/@eventOutputs.1">
             <destination href="Debug_APP.xml#//@fbNetwork/@fBs.17/@interface/@eventInputs.0"/>
           </eventConnections>
           <mappedFBs href="Debug_APP.xml#//@fbNetwork/@fBs.3"/>

@@ -14,6 +14,7 @@
         <With Var="DeadlineIn"/>
       </Event>
       <Event Comment="Response indicating the correct reception of the order" Name="RSP" Type="Event"/>
+      <Event Comment="Timeout" Name="Timeout" Type="Event"/>
     </EventInputs>
     <EventOutputs>
       <Event Comment="Execution Confirmation" Name="CNF" Type="Event">
@@ -24,6 +25,10 @@
         <With Var="DeadlineP"/>
       </Event>
       <Event Comment="Indication of efectively sent order" Name="IND" Type="Event"/>
+      <Event Comment="Start Timeout" Name="Start" Type="Event">
+        <With Var="TimeoutDT"/>
+      </Event>
+      <Event Comment="Stop Timeout" Name="Stop" Type="Event"/>
     </EventOutputs>
     <InputVars>
       <VarDeclaration Comment="Part's identifier" Name="PartIDIn" Type="UINT"/>
@@ -33,35 +38,33 @@
       <VarDeclaration Comment="Order deadline" Name="DeadlineIn" Type="DATE_AND_TIME"/>
     </InputVars>
     <OutputVars>
+      <VarDeclaration Comment="Timeout time" Name="TimeoutDT" Type="TIME"/>
       <VarDeclaration Comment="Part's identifier" Name="PartIDP" Type="UINT"/>
       <VarDeclaration Comment="Part's family" Name="FamilyP" Type="UINT"/>
       <VarDeclaration Comment="Part's type" Name="TypeP" Type="UINT"/>
       <VarDeclaration Comment="Number of parts to be manufatured" Name="LotsizeP" Type="UINT"/>
       <VarDeclaration Comment="Order deadline" Name="DeadlineP" Type="DATE_AND_TIME"/>
     </OutputVars>
-    <Plugs>
-      <AdapterDeclaration Name="ATimeOut" Type="ATimeOut"/>
-    </Plugs>
   </InterfaceList>
   <BasicFB>
     <ECC>
       <ECState Comment="Initial State" Name="START" x="855.0" y="285.0"/>
       <ECState Comment="Normal execution" Name="REQ" x="1520.0" y="475.0">
         <ECAction Algorithm="REQ" Output="CNF"/>
-        <ECAction Algorithm="TO" Output="ATimeOut.START"/>
+        <ECAction Algorithm="TO" Output="Start"/>
       </ECState>
       <ECState Name="SENDING" x="1520.0" y="855.0"/>
       <ECState Name="TimeOut" x="2280.0" y="1330.0">
         <ECAction Output="CNF"/>
-        <ECAction Algorithm="TO" Output="ATimeOut.START"/>
+        <ECAction Algorithm="TO" Output="Start"/>
       </ECState>
       <ECState Name="STOPTIMER" x="855.0" y="1330.0">
-        <ECAction Output="ATimeOut.STOP"/>
+        <ECAction Output="Stop"/>
         <ECAction Output="IND"/>
       </ECState>
       <ECTransition Comment="" Condition="REQ" Destination="REQ" Source="START" x="1495.0" y="370.0"/>
       <ECTransition Comment="" Condition="1" Destination="SENDING" Source="REQ" x="1670.0" y="695.0"/>
-      <ECTransition Comment="" Condition="ATimeOut.TimeOut" Destination="TimeOut" Source="SENDING" x="2235.0" y="1195.0"/>
+      <ECTransition Comment="" Condition="Timeout" Destination="TimeOut" Source="SENDING" x="2235.0" y="1195.0"/>
       <ECTransition Comment="" Condition="RSP" Destination="STOPTIMER" Source="SENDING" x="1470.0" y="1110.0"/>
       <ECTransition Comment="" Condition="1" Destination="START" Source="STOPTIMER" x="755.0" y="850.0"/>
       <ECTransition Comment="" Condition="1" Destination="SENDING" Source="TimeOut" x="2695.0" y="995.0"/>
@@ -70,7 +73,7 @@
       <ST Text="PartIDP := PartIDIn;&#10;FamilyP := FamilyIn;&#10;TypeP := TypeIn;&#10;LotsizeP := LotsizeIn;&#10;DeadlineP := DeadlineIn;"/>
     </Algorithm>
     <Algorithm Comment="new algorithm" Name="TO">
-      <ST Text="ATimeOut.DT := TIME#1000ms;"/>
+      <ST Text="TimeoutDT := TIME#2000ms;"/>
     </Algorithm>
   </BasicFB>
 </FBType>

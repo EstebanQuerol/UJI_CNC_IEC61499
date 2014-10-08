@@ -78,7 +78,7 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.3/@interface/@inputVars.0" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.1/@interfaceElements.1"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.3/@interface/@inputVars.1" inConnections="//@connections.26" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.3/@interface/@inputVars.1" inConnections="//@connections.27" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.1/@interfaceElements.2"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.3/@interface/@eventOutputs.0" outConnections="//@connections.5" fbNetwork="//@fbNetwork">
@@ -311,7 +311,7 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.13/@interface/@inputVars.0" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.14/@interfaceElements.2"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.13/@interface/@eventOutputs.0" outConnections="//@connections.27" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.13/@interface/@eventOutputs.0" outConnections="//@connections.26" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.14/@interfaceElements.3"/>
     </interfaceElements>
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.14"/>
@@ -449,12 +449,12 @@
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.17"/>
   </children>
   <children xsi:type="org.fordiac.ide.model.ui:FBView" fb="//@fbNetwork/@fBs.17">
-    <position x="-38" y="38"/>
+    <position x="-19" y="38"/>
     <backgroundColor red="255" green="255" blue="255"/>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.17/@interface/@eventInputs.0" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.18/@interfaceElements.0"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.17/@interface/@eventInputs.1" inConnections="//@connections.27" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.17/@interface/@eventInputs.1" inConnections="//@connections.26" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.18/@interfaceElements.1"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.17/@interface/@inputVars.0" fbNetwork="//@fbNetwork">
@@ -481,7 +481,7 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.17/@interface/@outputVars.0" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.18/@interfaceElements.9"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.17/@interface/@outputVars.1" outConnections="//@connections.26" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.17/@interface/@outputVars.1" outConnections="//@connections.27" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.18/@interfaceElements.10"/>
     </interfaceElements>
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.2/@uIResourceDiagram/@children.18"/>
@@ -564,11 +564,11 @@
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.17/@interfaceElements.7" destination="//@children.3/@interfaceElements.0">
     <connectionElement xsi:type="libraryElement:EventConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@eventConnections.14"/>
   </connections>
-  <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.17/@interfaceElements.10" destination="//@children.3/@interfaceElements.2">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@dataConnections.13"/>
-  </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.13/@interfaceElements.3" destination="//@children.17/@interfaceElements.1">
     <connectionElement xsi:type="libraryElement:EventConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@eventConnections.15"/>
+  </connections>
+  <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.17/@interfaceElements.10" destination="//@children.3/@interfaceElements.2">
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@dataConnections.13"/>
   </connections>
   <fbNetwork>
     <fBs name="L3_PartRouterF_1_0" identifier="true" id="_uSgT0ESIEeSzUdKp6kFO5g" fbtPath="UJI_61499\L3_FBS\L3_PartRouterF.fbt">
@@ -889,7 +889,7 @@
           <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@eventConnections.15"/>
         </eventOutputs>
         <inputVars name="DT" comment="Delay Time" isInput="true" arraySize="-1" typeName="TIME" withs="//@fbNetwork/@fBs.13/@interface/@eventInputs.0/@with.0">
-          <value value="T#2000ms"/>
+          <value value="T#10000ms"/>
         </inputVars>
       </interface>
       <position x="153" y="210"/>
@@ -1018,7 +1018,7 @@
       <position x="1672" y="399"/>
       <resource href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork"/>
     </fBs>
-    <fBs name="L3_OrderManager" identifier="true" id="_1Z30QErMEeSvz-EluF4QpQ" fbtPath="UJI_61499\L3_FBS\L3_OrderManager.fbt">
+    <fBs name="L3_OrderManager" identifier="true" id="_xcm-cE7zEeSrRJEdzb47dA" fbtPath="UJI_61499\L3_FBS\L3_OrderManager.fbt">
       <interface plugs="//@fbNetwork/@fBs.17/@interface/@outputVars.1">
         <eventInputs name="INIT" comment="Initialization Request" isInput="true">
           <with variables="//@fbNetwork/@fBs.17/@interface/@inputVars.0"/>
@@ -1040,16 +1040,16 @@
         <inputVars name="QI" comment="Input event qualifier" isInput="true" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.17/@interface/@eventInputs.0/@with.0">
           <value value="1"/>
         </inputVars>
-        <inputVars name="Family" comment="Family od the parts to be manufactured" isInput="true" typeName="UINT" withs="//@fbNetwork/@fBs.17/@interface/@eventInputs.1/@with.0">
+        <inputVars name="Family" comment="Family od the parts to be manufactured" isInput="true" arraySize="-1" typeName="UINT" withs="//@fbNetwork/@fBs.17/@interface/@eventInputs.1/@with.0">
           <value value="1"/>
         </inputVars>
-        <inputVars name="Type" comment="Type of the parts to be manufactured" isInput="true" typeName="UINT" withs="//@fbNetwork/@fBs.17/@interface/@eventInputs.1/@with.1">
+        <inputVars name="Type" comment="Type of the parts to be manufactured" isInput="true" arraySize="-1" typeName="UINT" withs="//@fbNetwork/@fBs.17/@interface/@eventInputs.1/@with.1">
           <value value="1"/>
         </inputVars>
-        <inputVars name="Lotsize" comment="Number of part to be manufactured" isInput="true" typeName="UINT" withs="//@fbNetwork/@fBs.17/@interface/@eventInputs.1/@with.2">
+        <inputVars name="Lotsize" comment="Number of part to be manufactured" isInput="true" arraySize="-1" typeName="UINT" withs="//@fbNetwork/@fBs.17/@interface/@eventInputs.1/@with.2">
           <value value="10"/>
         </inputVars>
-        <inputVars name="Deadline" comment="Order delivery date and time" isInput="true" typeName="DATE_AND_TIME" withs="//@fbNetwork/@fBs.17/@interface/@eventInputs.1/@with.3">
+        <inputVars name="Deadline" comment="Order delivery date and time" isInput="true" arraySize="-1" typeName="DATE_AND_TIME" withs="//@fbNetwork/@fBs.17/@interface/@eventInputs.1/@with.3">
           <value/>
         </inputVars>
         <outputVars name="QO" comment="Output event qualifier" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.17/@interface/@eventOutputs.0/@with.0"/>
@@ -1057,7 +1057,7 @@
           <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork/@dataConnections.13"/>
         </outputVars>
       </interface>
-      <position x="-69" y="53"/>
+      <position x="19" y="68"/>
       <resource href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork"/>
     </fBs>
     <application href="test1sys.xml#//@application.2"/>
