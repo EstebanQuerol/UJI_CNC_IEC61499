@@ -1038,16 +1038,16 @@
         </eventOutputs>
         <eventOutputs name="CNF" comment="Execution Confirmation"/>
         <inputVars name="QI" comment="Input event qualifier" isInput="true" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.17/@interface/@eventInputs.0/@with.0">
-          <value/>
+          <value value="1"/>
         </inputVars>
         <inputVars name="Family" comment="Family od the parts to be manufactured" isInput="true" typeName="UINT" withs="//@fbNetwork/@fBs.17/@interface/@eventInputs.1/@with.0">
-          <value/>
+          <value value="1"/>
         </inputVars>
         <inputVars name="Type" comment="Type of the parts to be manufactured" isInput="true" typeName="UINT" withs="//@fbNetwork/@fBs.17/@interface/@eventInputs.1/@with.1">
-          <value/>
+          <value value="1"/>
         </inputVars>
         <inputVars name="Lotsize" comment="Number of part to be manufactured" isInput="true" typeName="UINT" withs="//@fbNetwork/@fBs.17/@interface/@eventInputs.1/@with.2">
-          <value/>
+          <value value="10"/>
         </inputVars>
         <inputVars name="Deadline" comment="Order delivery date and time" isInput="true" typeName="DATE_AND_TIME" withs="//@fbNetwork/@fBs.17/@interface/@eventInputs.1/@with.3">
           <value/>

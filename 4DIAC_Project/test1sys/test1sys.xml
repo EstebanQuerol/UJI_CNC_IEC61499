@@ -11,6 +11,9 @@
   <application comment="" name="Debug_APP">
     <fBNetwork href="Debug_APP.xml#//@fbNetwork"/>
   </application>
+  <application comment="" name="Debug_APP2">
+    <fBNetwork href="Debug_APP2.xml#//@fbNetwork"/>
+  </application>
   <systemConfiguration>
     <systemConfigurationNetwork href="SysConf.xml#//@systemConfigNetwork"/>
   </systemConfiguration>

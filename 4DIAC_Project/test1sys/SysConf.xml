@@ -48,6 +48,10 @@
             <size width="-1" height="-1"/>
             <uiFBNetwork href="Debug_APP.xml#/"/>
           </fbNetworks>
+          <fbNetworks>
+            <size width="-1" height="-1"/>
+            <uiFBNetwork href="Debug_APP2.xml#/"/>
+          </fbNetworks>
           <mappingEditorSize width="-1" height="250"/>
         </uIResourceDiagram>
       </resources>
@@ -232,6 +236,10 @@
           <fbNetworks>
             <size width="-1" height="-1"/>
             <uiFBNetwork href="Debug_APP.xml#/"/>
+          </fbNetworks>
+          <fbNetworks>
+            <size width="-1" height="-1"/>
+            <uiFBNetwork href="Debug_APP2.xml#/"/>
           </fbNetworks>
           <mappingEditorSize width="-1" height="250"/>
         </uIResourceDiagram>
@@ -922,6 +930,113 @@
           <fbNetworks>
             <uiFBNetwork href="Debug_APP.xml#/"/>
           </fbNetworks>
+          <fbNetworks>
+            <size width="-1" height="-1"/>
+            <uiFBNetwork href="Debug_APP2.xml#/"/>
+          </fbNetworks>
+          <mappingEditorSize width="-1" height="250"/>
+        </uIResourceDiagram>
+      </resources>
+      <resources resourceElement="//@systemConfigNetwork/@devices.0/@resource.3">
+        <uIResourceDiagram resourceElement="//@systemConfigNetwork/@devices.0/@resource.3" activeNetwork="//@children.0/@resourceContainerView/@resources.3/@uIResourceDiagram/@fbNetworks.0">
+          <children xsi:type="org.fordiac.ide.model.ui:FBView" fb="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork/@fBs.0">
+            <position x="2" y="2"/>
+            <backgroundColor red="255" green="255" blue="255"/>
+            <interfaceElements iInterfaceElement="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork/@fBs.0/@interface/@eventOutputs.0" outConnections="//@children.0/@resourceContainerView/@resources.3/@uIResourceDiagram/@connections.0" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork"/>
+            <interfaceElements iInterfaceElement="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork/@fBs.0/@interface/@eventOutputs.1" outConnections="//@children.0/@resourceContainerView/@resources.3/@uIResourceDiagram/@connections.1" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork"/>
+            <interfaceElements iInterfaceElement="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork/@fBs.0/@interface/@eventOutputs.2" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork"/>
+          </children>
+          <children xsi:type="org.fordiac.ide.model.ui:FBView">
+            <position x="228" y="95"/>
+            <backgroundColor red="255" green="255" blue="255"/>
+            <fb href="Debug_APP2.xml#//@fbNetwork/@fBs.0"/>
+            <interfaceElements inConnections="//@children.0/@resourceContainerView/@resources.3/@uIResourceDiagram/@connections.0 //@children.0/@resourceContainerView/@resources.3/@uIResourceDiagram/@connections.1" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork">
+              <iInterfaceElement xsi:type="libraryElement:Event" href="Debug_APP2.xml#//@fbNetwork/@fBs.0/@interface/@eventInputs.0"/>
+              <applicationInterfaceElement href="Debug_APP2.xml#//@children.0/@interfaceElements.0"/>
+            </interfaceElements>
+            <interfaceElements fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork">
+              <iInterfaceElement xsi:type="libraryElement:Event" href="Debug_APP2.xml#//@fbNetwork/@fBs.0/@interface/@eventInputs.1"/>
+              <applicationInterfaceElement href="Debug_APP2.xml#//@children.0/@interfaceElements.1"/>
+            </interfaceElements>
+            <interfaceElements fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork">
+              <iInterfaceElement xsi:type="libraryElement:VarDeclaration" href="Debug_APP2.xml#//@fbNetwork/@fBs.0/@interface/@inputVars.0"/>
+              <applicationInterfaceElement href="Debug_APP2.xml#//@children.0/@interfaceElements.2"/>
+            </interfaceElements>
+            <interfaceElements outConnections="//@children.0/@resourceContainerView/@resources.3/@uIResourceDiagram/@connections.2" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork">
+              <iInterfaceElement xsi:type="libraryElement:Event" href="Debug_APP2.xml#//@fbNetwork/@fBs.0/@interface/@eventOutputs.0"/>
+              <applicationInterfaceElement href="Debug_APP2.xml#//@children.0/@interfaceElements.3"/>
+            </interfaceElements>
+            <applicationFB href="Debug_APP2.xml#//@children.0"/>
+          </children>
+          <children xsi:type="org.fordiac.ide.model.ui:FBView">
+            <position x="570" y="152"/>
+            <backgroundColor red="255" green="255" blue="255"/>
+            <fb href="Debug_APP2.xml#//@fbNetwork/@fBs.1"/>
+            <interfaceElements inConnections="//@children.0/@resourceContainerView/@resources.3/@uIResourceDiagram/@connections.2" fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork">
+              <iInterfaceElement xsi:type="libraryElement:Event" href="Debug_APP2.xml#//@fbNetwork/@fBs.1/@interface/@eventInputs.0"/>
+              <applicationInterfaceElement href="Debug_APP2.xml#//@children.1/@interfaceElements.0"/>
+            </interfaceElements>
+            <interfaceElements fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork">
+              <iInterfaceElement xsi:type="libraryElement:Event" href="Debug_APP2.xml#//@fbNetwork/@fBs.1/@interface/@eventInputs.1"/>
+              <applicationInterfaceElement href="Debug_APP2.xml#//@children.1/@interfaceElements.1"/>
+            </interfaceElements>
+            <interfaceElements fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork">
+              <iInterfaceElement xsi:type="libraryElement:Event" href="Debug_APP2.xml#//@fbNetwork/@fBs.1/@interface/@eventInputs.2"/>
+              <applicationInterfaceElement href="Debug_APP2.xml#//@children.1/@interfaceElements.2"/>
+            </interfaceElements>
+            <interfaceElements fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork">
+              <iInterfaceElement xsi:type="libraryElement:VarDeclaration" href="Debug_APP2.xml#//@fbNetwork/@fBs.1/@interface/@inputVars.0"/>
+              <applicationInterfaceElement href="Debug_APP2.xml#//@children.1/@interfaceElements.3"/>
+            </interfaceElements>
+            <interfaceElements fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork">
+              <iInterfaceElement xsi:type="libraryElement:VarDeclaration" href="Debug_APP2.xml#//@fbNetwork/@fBs.1/@interface/@inputVars.1"/>
+              <applicationInterfaceElement href="Debug_APP2.xml#//@children.1/@interfaceElements.4"/>
+            </interfaceElements>
+            <interfaceElements fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork">
+              <iInterfaceElement xsi:type="libraryElement:VarDeclaration" href="Debug_APP2.xml#//@fbNetwork/@fBs.1/@interface/@inputVars.2"/>
+              <applicationInterfaceElement href="Debug_APP2.xml#//@children.1/@interfaceElements.5"/>
+            </interfaceElements>
+            <interfaceElements fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork">
+              <iInterfaceElement xsi:type="libraryElement:VarDeclaration" href="Debug_APP2.xml#//@fbNetwork/@fBs.1/@interface/@inputVars.3"/>
+              <applicationInterfaceElement href="Debug_APP2.xml#//@children.1/@interfaceElements.6"/>
+            </interfaceElements>
+            <interfaceElements fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork">
+              <iInterfaceElement xsi:type="libraryElement:VarDeclaration" href="Debug_APP2.xml#//@fbNetwork/@fBs.1/@interface/@inputVars.4"/>
+              <applicationInterfaceElement href="Debug_APP2.xml#//@children.1/@interfaceElements.7"/>
+            </interfaceElements>
+            <interfaceElements fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork">
+              <iInterfaceElement xsi:type="libraryElement:VarDeclaration" href="Debug_APP2.xml#//@fbNetwork/@fBs.1/@interface/@inputVars.5"/>
+              <applicationInterfaceElement href="Debug_APP2.xml#//@children.1/@interfaceElements.8"/>
+            </interfaceElements>
+            <interfaceElements fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork">
+              <iInterfaceElement xsi:type="libraryElement:Event" href="Debug_APP2.xml#//@fbNetwork/@fBs.1/@interface/@eventOutputs.0"/>
+              <applicationInterfaceElement href="Debug_APP2.xml#//@children.1/@interfaceElements.9"/>
+            </interfaceElements>
+            <interfaceElements fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork">
+              <iInterfaceElement xsi:type="libraryElement:VarDeclaration" href="Debug_APP2.xml#//@fbNetwork/@fBs.1/@interface/@outputVars.0"/>
+              <applicationInterfaceElement href="Debug_APP2.xml#//@children.1/@interfaceElements.10"/>
+            </interfaceElements>
+            <interfaceElements fbNetwork="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork">
+              <iInterfaceElement xsi:type="libraryElement:AdapterDeclaration" href="Debug_APP2.xml#//@fbNetwork/@fBs.1/@interface/@outputVars.1"/>
+              <applicationInterfaceElement href="Debug_APP2.xml#//@children.1/@interfaceElements.11"/>
+            </interfaceElements>
+            <applicationFB href="Debug_APP2.xml#//@children.1"/>
+          </children>
+          <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" connectionElement="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork/@eventConnections.0" source="//@children.0/@resourceContainerView/@resources.3/@uIResourceDiagram/@children.0/@interfaceElements.0" destination="//@children.0/@resourceContainerView/@resources.3/@uIResourceDiagram/@children.1/@interfaceElements.0"/>
+          <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" connectionElement="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork/@eventConnections.1" source="//@children.0/@resourceContainerView/@resources.3/@uIResourceDiagram/@children.0/@interfaceElements.1" destination="//@children.0/@resourceContainerView/@resources.3/@uIResourceDiagram/@children.1/@interfaceElements.0"/>
+          <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" connectionElement="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork/@eventConnections.2" source="//@children.0/@resourceContainerView/@resources.3/@uIResourceDiagram/@children.1/@interfaceElements.3" destination="//@children.0/@resourceContainerView/@resources.3/@uIResourceDiagram/@children.2/@interfaceElements.0"/>
+          <fbNetworks>
+            <uiFBNetwork href="test1app.xml#/"/>
+          </fbNetworks>
+          <fbNetworks>
+            <uiFBNetwork href="test2app.xml#/"/>
+          </fbNetworks>
+          <fbNetworks>
+            <uiFBNetwork href="Debug_APP.xml#/"/>
+          </fbNetworks>
+          <fbNetworks>
+            <uiFBNetwork href="Debug_APP2.xml#/"/>
+          </fbNetworks>
           <mappingEditorSize width="-1" height="250"/>
         </uIResourceDiagram>
       </resources>
@@ -1190,6 +1305,30 @@
           <mappedFBs href="Debug_APP.xml#//@fbNetwork/@fBs.15"/>
           <mappedFBs href="Debug_APP.xml#//@fbNetwork/@fBs.16"/>
           <mappedFBs href="Debug_APP.xml#//@fbNetwork/@fBs.17"/>
+        </fBNetwork>
+      </resource>
+      <resource name="Debug_res2" identifier="true" type="Resources\EMB_RES.res">
+        <fBNetwork>
+          <fBs xsi:type="libraryElement:ResourceTypeFB" name="START" identifier="true" id="_FCFYAE4qEeS-j_lluf10mw" resourceTypeFB="true" fbtPath="events\E_RESTART.fbt">
+            <interface>
+              <eventOutputs name="COLD" comment="Cold Restart" outputConnections="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork/@eventConnections.0"/>
+              <eventOutputs name="WARM" comment="Warm Restart" outputConnections="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork/@eventConnections.1"/>
+              <eventOutputs name="STOP" comment="Resource is Stopping"/>
+            </interface>
+            <position x="2" y="2"/>
+          </fBs>
+          <eventConnections resourceConnection="true" source="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork/@fBs.0/@interface/@eventOutputs.0">
+            <destination href="Debug_APP2.xml#//@fbNetwork/@fBs.0/@interface/@eventInputs.0"/>
+          </eventConnections>
+          <eventConnections resourceConnection="true" source="//@systemConfigNetwork/@devices.0/@resource.3/@fBNetwork/@fBs.0/@interface/@eventOutputs.1">
+            <destination href="Debug_APP2.xml#//@fbNetwork/@fBs.0/@interface/@eventInputs.0"/>
+          </eventConnections>
+          <eventConnections dx1="184">
+            <source href="Debug_APP2.xml#//@fbNetwork/@fBs.0/@interface/@eventOutputs.0"/>
+            <destination href="Debug_APP2.xml#//@fbNetwork/@fBs.1/@interface/@eventInputs.0"/>
+          </eventConnections>
+          <mappedFBs href="Debug_APP2.xml#//@fbNetwork/@fBs.0"/>
+          <mappedFBs href="Debug_APP2.xml#//@fbNetwork/@fBs.1"/>
         </fBNetwork>
       </resource>
       <varDeclarations name="MGR_ID" comment="Device manager socket ID" isInput="true" arraySize="-1" typeName="WSTRING">

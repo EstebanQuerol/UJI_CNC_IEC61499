@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L3_FaultyMHDLR">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-10-06" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Request from core to update faulty machines vector" Name="REQ1" Type="Event"/>
+      <Event Comment="Indicates a change in the state of a machine" Name="REQ2" Type="Event">
+        <With Var="MID"/>
+        <With Var="State"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Execution Confirmation" Name="CNF" Type="Event">
+        <With Var="MFaulty"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Faulty machine identifier" Name="MID" Type="USINT"/>
+      <VarDeclaration Comment="Machine state" Name="State" Type="BOOL"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ArraySize="15" Comment="Faulty machines vector" Name="MFaulty" Type="USINT"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration ArraySize="15" Comment="Internal Variable" InitialValue="[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]" Name="FaultyMachines" Type="USINT"/>
+      <VarDeclaration Comment="loop variable" Name="i" Type="USINT"/>
+    </InternalVars>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="550.0" y="425.0"/>
+      <ECState Comment="Normal execution" Name="REQ1" x="1615.0" y="285.0">
+        <ECAction Algorithm="REQ1" Output="CNF"/>
+      </ECState>
+      <ECState Name="REQ2" x="1235.0" y="950.0">
+        <ECAction Algorithm="REQ2"/>
+      </ECState>
+      <ECTransition Comment="" Condition="REQ1" Destination="REQ1" Source="START" x="1170.0" y="465.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ1" x="1020.0" y="285.0"/>
+      <ECTransition Comment="" Condition="REQ2" Destination="REQ2" Source="START" x="1020.0" y="790.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ2" x="865.0" y="915.0"/>
+    </ECC>
+    <Algorithm Comment="Update core machine state vector" Name="REQ1">
+      <ST Text="(*This algo send to the core the changes in the machine state since last call*)&#10;FOR i := 0 TO 14 DO&#10;&#9;&#9;MFaulty[i] := FaultyMachines[i];&#10;&#9;&#9;FaultyMachines[i] := 0;&#10;END_FOR;"/>
+    </Algorithm>
+    <Algorithm Comment="Handles the arrival of changes in machine status" Name="REQ2">
+      <ST Text="IF State = true THEN&#10;&#9;(*Machine repaired*)&#10;&#9;FaultyMachines[MID] := 2; &#10;ELSE&#10;&#9;(*Machine breakdown*)&#10;&#9;FaultyMachines[MID] := 1; &#10;END_IF;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>
