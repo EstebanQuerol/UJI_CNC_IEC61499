@@ -3,19 +3,8 @@
 <AdapterType Name="L3_AAssignMachine">
   <Identification Standard="61499-1"/>
   <VersionInfo Author="EQUEROL" Date="2008-04-22" Organization="UJI" Version="0.0"/>
-  <CompilerInfo/>
   <InterfaceList>
-    <EventInputs>
-      <Event Comment="Confirmation from socket to check request" Name="CNF1" Type="Event">
-        <With Var="MTypeS"/>
-        <With Var="MStateS"/>
-        <With Var="MPriorityS"/>
-        <With Var="MAssignS"/>
-      </Event>
-      <Event Comment="Confirmation from socket to assign request" Name="CNF2" Type="Event">
-        <With Var="MFinalAssignS"/>
-      </Event>
-    </EventInputs>
+    <EventInputs/>
     <EventOutputs>
       <Event Comment="Plugin request to check needed machines" Name="CHK" Type="Event">
         <With Var="MTypeP"/>
@@ -27,13 +16,7 @@
         <With Var="MFinalAssignP"/>
       </Event>
     </EventOutputs>
-    <InputVars>
-      <VarDeclaration ArraySize="15" Comment="Machine Type vector" Name="MTypeS" Type="USINT"/>
-      <VarDeclaration ArraySize="15" Comment="Machine state vector" Name="MStateS" Type="USINT"/>
-      <VarDeclaration ArraySize="15" Comment="Machine allocations priority vector" Name="MPriorityS" Type="INT"/>
-      <VarDeclaration ArraySize="15" Comment="Machine-PP assignation vector" Name="MAssignS" Type="UINT"/>
-      <VarDeclaration ArraySize="15" Comment="Machine-PP assignation vector" Name="MFinalAssignS" Type="UINT"/>
-    </InputVars>
+    <InputVars/>
     <OutputVars>
       <VarDeclaration ArraySize="15" Comment="Machine Type vector" InitialValue="" Name="MTypeP" Type="USINT"/>
       <VarDeclaration ArraySize="15" Comment="Machine State vector" InitialValue="" Name="MStateP" Type="USINT"/>

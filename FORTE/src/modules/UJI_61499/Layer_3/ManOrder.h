@@ -1,10 +1,6 @@
 /*************************************************************************
-*** FORTE Library Element
-***
-*** This file was generated using the 4DIAC FORTE Export Filter V1.0.x!
-***
 *** Name: ManOrder
-*** Description: Class to contant all the information related with a
+*** Description: Class containing all the information related with a
 ***				 manufacturing order
 *** Version: 0
 *************************************************************************/
