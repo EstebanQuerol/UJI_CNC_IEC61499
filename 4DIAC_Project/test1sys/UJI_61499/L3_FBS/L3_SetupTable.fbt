@@ -20,6 +20,7 @@
     <EventOutputs>
       <Event Comment="Initialization Confirm" Name="INITO" Type="Event">
         <With Var="QO"/>
+        <With Var="MaxSetup"/>
       </Event>
       <Event Comment="Confirmation of Requested Service" Name="CNF" Type="Event">
         <With Var="PartInfo"/>
@@ -39,6 +40,7 @@
     </InputVars>
     <OutputVars>
       <VarDeclaration Comment="Event Output Qualifier" Name="QO" Type="BOOL"/>
+      <VarDeclaration Comment="Number of setups in the process plan" Name="MaxSetup" Type="UINT"/>
       <VarDeclaration ArraySize="3" Comment="Part ID, Part family, Part type" Name="PartInfo" Type="UINT"/>
       <VarDeclaration ArraySize="20" Comment="Operation identifiers" Name="OPIDS" Type="UINT"/>
       <VarDeclaration ArraySize="20" Comment="Operations parameters" Name="OPParams" Type="STRING"/>
