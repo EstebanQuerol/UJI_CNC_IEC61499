@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L3_NewPartHDLR">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-11-04" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Execution request" Name="REQ1" Type="Event">
+        <With Var="PartIDIn"/>
+        <With Var="LotsizeIn"/>
+        <With Var="DeadlineIn"/>
+      </Event>
+      <Event Comment="Normal Execution Request" Name="REQ2" Type="Event"/>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Execution confirm" Name="CNF1" Type="Event"/>
+      <Event Comment="Execution Confirmation" Name="CNF2" Type="Event">
+        <With Var="PartIDOut"/>
+        <With Var="LotsizeOut"/>
+        <With Var="DeadlineOut"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Identifier of the 1st part to be created" Name="PartIDIn" Type="UINT"/>
+      <VarDeclaration Comment="Number of parts to be manufactured" Name="LotsizeIn" Type="UINT"/>
+      <VarDeclaration Comment="Parts delivery deadline" Name="DeadlineIn" Type="DATE_AND_TIME"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Part identifier" Name="PartIDOut" Type="UINT"/>
+      <VarDeclaration Comment="Number of parts to be manufactured" Name="LotsizeOut" Type="UINT"/>
+      <VarDeclaration Comment="Parts delivery date" Name="DeadlineOut" Type="DATE_AND_TIME"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration ArraySize="10" Comment="Buffer to hold incoming orders's identifiers" InitialValue="[0,0,0,0,0,0,0,0,0,0]" Name="PartBuffer" Type="UINT"/>
+      <VarDeclaration ArraySize="10" Comment="Buffer to hold incoming orders' lotsize" InitialValue="[0,0,0,0,0,0,0,0,0,0]" Name="SizesBuffer" Type="UINT"/>
+      <VarDeclaration ArraySize="10" Comment="Buffer to hold incoming orders's deadlines" InitialValue="" Name="DeadlinesBuffer" Type="DATE_AND_TIME"/>
+      <VarDeclaration Comment="Index pointing to the head of the buffer" InitialValue="0" Name="HeadIndex" Type="USINT"/>
+      <VarDeclaration Comment="Index pointing to the tail of the buffer" InitialValue="0" Name="TailIndex" Type="USINT"/>
+      <VarDeclaration Comment="Internal Variable" InitialValue="10" Name="BufferSize" Type="USINT"/>
+    </InternalVars>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="550.0" y="425.0"/>
+      <ECState Comment="Initialization" Name="REQ1" x="1710.0" y="190.0">
+        <ECAction Algorithm="REQ1" Output="CNF1"/>
+      </ECState>
+      <ECState Comment="Normal execution" Name="REQ2" x="570.0" y="1235.0">
+        <ECAction Algorithm="REQ2" Output="CNF2"/>
+      </ECState>
+      <ECTransition Comment="" Condition="REQ1" Destination="REQ1" Source="START" x="1200.0" y="410.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ1" x="1020.0" y="265.0"/>
+      <ECTransition Comment="" Condition="REQ2" Destination="REQ2" Source="START" x="850.0" y="845.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ2" x="515.0" y="880.0"/>
+    </ECC>
+    <Algorithm Comment="Normally executed algorithm" Name="REQ1">
+      <ST Text="IF PartBuffer[HeadIndex] &lt;&gt; PartIDIn THEN&#10;&#9;(*Stack the received order*)&#10;&#9;PartBuffer[HeadIndex] := PartIDIn;&#10;&#9;SizesBuffer[HeadIndex] := LotsizeIn;&#10;&#9;DeadlinesBuffer[HeadIndex] := DeadlineIn;&#10;&#9;&#10;&#9;(*PostIncrement HeadIndex*)&#10;&#9;HeadIndex := HeadIndex + 1;&#10;&#9;IF HeadIndex &gt;= BufferSize THEN&#10;&#9;&#9;HeadIndex := 0;&#10;&#9;END_IF;&#10;&#9;&#10;&#9;(*Check if buffer is full*)&#10;&#9;IF HeadIndex = TailIndex THEN&#10;&#9;&#9;(*Buffer is full, HeadIndex can't be incremented*)&#10;&#9;&#9;IF HeadIndex = 0 THEN&#10;&#9;&#9;&#9;HeadIndex := BufferSize - 1;&#10;&#9;&#9;ELSE&#10;&#9;&#9;&#9;HeadIndex := HeadIndex - 1;&#10;&#9;&#9;END_IF;&#9;&#10;&#9;END_IF;&#10;ELSE&#10;&#9;(*Retransmited Order, RSP event must have been lost*)&#10;&#9;(*Do nothing and send CNF1 event*)&#10;END_IF;"/>
+    </Algorithm>
+    <Algorithm Comment="Normal execution algo" Name="REQ2">
+      <ST Text="IF HeadIndex = TailIndex THEN&#10;&#9;(*Buffer is empty*)&#10;&#9;PartIDOut := 0;&#10;&#9;LotsizeOut := 0;&#10;&#9;DeadlineOut := DT#0-0-0-0:00:00;&#10;ELSE&#10;&#9;PartIDOut := PartBuffer[TailIndex];&#10;&#9;LotsizeOut := SizesBuffer[TailIndex];&#10;&#9;DeadlineOut := DeadlinesBuffer[TailIndex];&#10;&#9;(*Increase tail index*)&#10;&#9;TailIndex := TailIndex + 1;&#10;&#9;IF TailIndex &gt;= BufferSize THEN&#10;&#9;&#9;TailIndex := 0;&#10;&#9;END_IF;&#10;END_IF;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

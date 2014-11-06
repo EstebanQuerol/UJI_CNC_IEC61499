@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L3_MachineAllocator">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-11-06" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Normal Execution Request" Name="REQ" Type="Event">
+        <With Var="MFinalAssignIn"/>
+      </Event>
+      <Event Comment="Request from PPTable" Name="REQ2" Type="Event">
+        <With Var="SetupIDIn"/>
+        <With Var="PartIDIn"/>
+      </Event>
+      <Event Comment="Response from the PPTable" Name="RSP2" Type="Event"/>
+      <Event Comment="Response from the machine" Name="RSP1" Type="Event"/>
+      <Event Comment="Timeout expired" Name="Timeout" Type="Event"/>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Request Confirm" Name="CNF" Type="Event">
+        <With Var="MFinalAssignOut"/>
+      </Event>
+      <Event Comment="Indicate to the PPTable that the setup was correctly assigned" Name="IND2" Type="Event">
+        <With Var="PartIDOut"/>
+      </Event>
+      <Event Comment="Send a setup to a machine" Name="IND1" Type="Event">
+        <With Var="MID"/>
+        <With Var="SetupID"/>
+        <With Var="PartIDOut"/>
+      </Event>
+      <Event Comment="Timeout start" Name="Start" Type="Event">
+        <With Var="Delay"/>
+      </Event>
+      <Event Comment="Timeout stop" Name="Stop" Type="Event"/>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ArraySize="15" Comment="Machine-PP Assignation vector" Name="MFinalAssignIn" Type="UINT"/>
+      <VarDeclaration ArraySize="15" Comment="Part identifiers vector" Name="PartIDIn" Type="UINT"/>
+      <VarDeclaration ArraySize="15" Comment="Setup identifiers vector" Name="SetupIDIn" Type="USINT"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Part identifier" Name="PartIDOut" Type="UINT"/>
+      <VarDeclaration Comment="Setup identifier" Name="SetupID" Type="USINT"/>
+      <VarDeclaration Comment="Machine identifier" Name="MID" Type="USINT"/>
+      <VarDeclaration Comment="Timeout delay in ms" Name="Delay" Type="TIME"/>
+      <VarDeclaration ArraySize="15" Comment="Machine-PP Assignation vector" Name="MFinalAssignOut" Type="UINT"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration Comment="Variable indicating if there is any setup to be assigned or not" InitialValue="FALSE" Name="AssignRemaining" Type="BOOL"/>
+      <VarDeclaration Comment="loop variable" Name="i" Type="USINT"/>
+      <VarDeclaration ArraySize="15" Comment="Internal Variable" InitialValue="[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]" Name="IFinalAssign" Type="UINT"/>
+      <VarDeclaration Comment="Identifier of the part being assigned" InitialValue="0" Name="CurrentPartID" Type="UINT"/>
+      <VarDeclaration Comment="Identifier of the setup being assigned" InitialValue="0" Name="CurrentSetupID" Type="USINT"/>
+      <VarDeclaration Comment="Timeouts counter" InitialValue="0" Name="TOCounter" Type="USINT"/>
+    </InternalVars>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="1045.0" y="570.0"/>
+      <ECState Comment="Normal execution" Name="REQ" x="2945.0" y="475.0">
+        <ECAction Algorithm="REQ"/>
+      </ECState>
+      <ECState Name="REQ2" x="365.0" y="300.0"/>
+      <ECState Name="SEND" x="3515.0" y="855.0">
+        <ECAction Algorithm="SEND" Output="IND1"/>
+        <ECAction Algorithm="SETTO" Output="Start"/>
+      </ECState>
+      <ECState Name="PREREQ" x="1900.0" y="475.0">
+        <ECAction Algorithm="PREREQ"/>
+      </ECState>
+      <ECState Name="NOMACHINE" x="1710.0" y="1235.0">
+        <ECAction Algorithm="NM" Output="CNF"/>
+      </ECState>
+      <ECState Name="WAIT" x="3515.0" y="1425.0"/>
+      <ECState Name="RSP1" x="2850.0" y="1900.0">
+        <ECAction Algorithm="RSP1" Output="IND2"/>
+        <ECAction Output="Stop"/>
+      </ECState>
+      <ECState Name="TIMEOUT" x="3990.0" y="1425.0">
+        <ECAction Algorithm="TO"/>
+      </ECState>
+      <ECState Name="FAILED" x="4275.0" y="2000.0">
+        <ECAction Algorithm="FAILED"/>
+      </ECState>
+      <ECState Name="RSP2" x="2185.0" y="1900.0">
+        <ECAction Algorithm="RSP2"/>
+      </ECState>
+      <ECTransition Comment="" Condition="REQ2" Destination="REQ2" Source="START" x="965.0" y="325.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ2" x="720.0" y="530.0"/>
+      <ECTransition Comment="" Condition="REQ" Destination="PREREQ" Source="START" x="1540.0" y="475.0"/>
+      <ECTransition Comment="" Condition="1" Destination="REQ" Source="PREREQ" x="2460.0" y="285.0"/>
+      <ECTransition Comment="" Condition="AssignRemaining = FALSE" Destination="NOMACHINE" Source="REQ" x="2485.0" y="870.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="NOMACHINE" x="1415.0" y="980.0"/>
+      <ECTransition Comment="" Condition="AssignRemaining = TRUE" Destination="SEND" Source="REQ" x="3280.0" y="710.0"/>
+      <ECTransition Comment="" Condition="1" Destination="WAIT" Source="SEND" x="3605.0" y="1165.0"/>
+      <ECTransition Comment="" Condition="1" Destination="WAIT" Source="RSP1" x="3395.0" y="1740.0"/>
+      <ECTransition Comment="" Condition="RSP1" Destination="RSP1" Source="WAIT" x="3135.0" y="1615.0"/>
+      <ECTransition Comment="" Condition="Timeout" Destination="TIMEOUT" Source="WAIT" x="3855.0" y="1295.0"/>
+      <ECTransition Comment="" Condition="TOCounter &lt;= 3" Destination="SEND" Source="TIMEOUT" x="4425.0" y="605.0"/>
+      <ECTransition Comment="" Condition="TOCounter &gt; 4" Destination="FAILED" Source="TIMEOUT" x="4220.0" y="1740.0"/>
+      <ECTransition Comment="" Condition="1" Destination="REQ" Source="FAILED" x="4765.0" y="465.0"/>
+      <ECTransition Comment="" Condition="RSP2" Destination="RSP2" Source="WAIT" x="2840.0" y="1550.0"/>
+      <ECTransition Comment="" Condition="1" Destination="REQ" Source="RSP2" x="2710.0" y="1245.0"/>
+    </ECC>
+    <Algorithm Comment="Normally executed algorithm" Name="REQ">
+      <ST Text="AssignRemaining := FALSE;&#10;WHILE ( i &lt;15 AND NOT AssignRemaining ) DO&#10;&#9;(*Check if any part can be assigned to a machine*)&#10;&#9;IF IFinalAssign[i] = PartIDIn[i] THEN&#10;&#9;&#9;(*This part can be assigned*)&#10;&#9;&#9;CurrentPartID := PartIDIn[i];&#10;&#9;&#9;CurrentSetupID := SetupIDIn[i];&#10;&#9;&#9;AssignRemaining := TRUE;&#10;&#9;END_IF;&#10;&#9;i := i +1;&#10;END_WHILE;"/>
+    </Algorithm>
+    <Algorithm Comment="Timeout algorithm" Name="SETTO">
+      <ST Text="Delay := TIME#1000ms;"/>
+    </Algorithm>
+    <Algorithm Comment="Algorithm to initialize internal variables for this request" Name="PREREQ">
+      <ST Text="FOR i:=0 TO 14 DO&#10;&#9;IFinalAssign[i] := MFinalAssignIn[i];&#10;END_FOR;&#10;i :=0;"/>
+    </Algorithm>
+    <Algorithm Comment="No machine to be assigned algo" Name="NM">
+      <ST Text="FOR i:=0 TO 14 DO&#10;&#9; MFinalAssignOut[i] := IFinalAssign[i];&#10;END_FOR;"/>
+    </Algorithm>
+    <Algorithm Comment="Assign setup algo" Name="SEND">
+      <ST Text="(*A setup needs to be assigned*)&#10;PartIDOut:= CurrentPartID;&#10;SetupID := CurrentSetupID;&#10;MID := i;"/>
+    </Algorithm>
+    <Algorithm Comment="Response from the machine algo" Name="RSP1">
+      <ST Text="TOCounter := 0;&#10;PartIDOut := CurrentPartID;"/>
+    </Algorithm>
+    <Algorithm Comment="Timeout algo" Name="TO">
+      <ST Text="TOCounter := TOCounter + 1;"/>
+    </Algorithm>
+    <Algorithm Comment="FAILED algo" Name="FAILED">
+      <ST Text="TOCounter := 0;"/>
+    </Algorithm>
+    <Algorithm Comment="Response from PPTable algo" Name="RSP2">
+      <ST Text="(*Setup was succesfully assigned*)&#10;IFinalAssign[i] := 0;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

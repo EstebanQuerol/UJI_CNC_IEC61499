@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L3_MachineChecker">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-11-06" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Normal Execution Request" Name="REQ" Type="Event">
+        <With Var="MTypeIn"/>
+        <With Var="MStateIn"/>
+        <With Var="MPriorityIn"/>
+        <With Var="MAssignIn"/>
+      </Event>
+      <Event Comment="Response from PPTable" Name="RSP" Type="Event">
+        <With Var="Priority"/>
+        <With Var="PartID"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Execution Confirmation" Name="CNF" Type="Event">
+        <With Var="MTypeOut"/>
+        <With Var="MStateOut"/>
+        <With Var="MPriorityOut"/>
+        <With Var="MAssignOut"/>
+      </Event>
+      <Event Comment="Indication to the process plan table" Name="IND" Type="Event"/>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ArraySize="15" Comment="Machine type vector" Name="MTypeIn" Type="USINT"/>
+      <VarDeclaration ArraySize="15" Comment="Machine state vector" Name="MStateIn" Type="USINT"/>
+      <VarDeclaration ArraySize="15" Comment="Machine priorities vector" Name="MPriorityIn" Type="INT"/>
+      <VarDeclaration ArraySize="15" Comment="Machine assignation vector" Name="MAssignIn" Type="UINT"/>
+      <VarDeclaration ArraySize="15" Comment="PP priorities vector" Name="Priority" Type="INT"/>
+      <VarDeclaration ArraySize="15" Comment="Part identifiers vector" Name="PartID" Type="UINT"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ArraySize="15" Comment="Machine type vector" Name="MTypeOut" Type="USINT"/>
+      <VarDeclaration ArraySize="15" Comment="MAchine state vector" Name="MStateOut" Type="USINT"/>
+      <VarDeclaration ArraySize="15" Comment="Machine priorities vector" Name="MPriorityOut" Type="INT"/>
+      <VarDeclaration ArraySize="15" Comment="Machine assignation vector" Name="MAssignOut" Type="UINT"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration Comment="loop variable" InitialValue="0" Name="i" Type="USINT"/>
+    </InternalVars>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="550.0" y="425.0"/>
+      <ECState Comment="Normal execution" Name="REQ" x="1330.0" y="380.0">
+        <ECAction Output="IND"/>
+      </ECState>
+      <ECState Name="RSP" x="675.0" y="955.0">
+        <ECAction Algorithm="RSP" Output="CNF"/>
+      </ECState>
+      <ECTransition Comment="" Condition="REQ" Destination="REQ" Source="START" x="1035.0" y="560.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ" x="975.0" y="260.0"/>
+      <ECTransition Comment="" Condition="RSP" Destination="RSP" Source="START" x="825.0" y="770.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="RSP" x="415.0" y="730.0"/>
+    </ECC>
+    <Algorithm Comment="Response from PPTable algorithm" Name="RSP">
+      <ST Text="FOR i := 0 TO 14 DO&#10;&#9;MTypeOut[i] := MTypeIn[i];&#10;&#9;MStateOut[i] := MStateIn[i];&#10;&#9;IF Priority[i] &lt; MPriorityIn[i] THEN&#10;&#9;&#9;(*1st to get into the vector has preference when prios are equal*)&#10;&#9;&#9;MPriorityOut[i] := Priority[i];&#10;&#9;&#9;MAssignOut[i] := PartID[i];&#10;&#9;ELSE&#10;&#9;&#9;MPriorityOut[i] := MPriorityIn[i];&#10;&#9;&#9;MAssignOut[i] := MAssignIn[i];&#9;&#9;&#10;&#9;END_IF;&#10;END_FOR;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>
