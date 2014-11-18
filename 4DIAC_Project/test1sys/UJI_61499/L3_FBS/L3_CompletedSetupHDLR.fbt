@@ -8,7 +8,7 @@
     <EventInputs>
       <Event Comment="Completed parts request" Name="REQ1" Type="Event"/>
       <Event Comment="Normal execution request" Name="REQ" Type="Event">
-        <With Var="PartIDIn"/>
+        <With Var="PartInfo"/>
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -18,7 +18,7 @@
       <Event Comment="Execution confirmation" Name="CNF" Type="Event"/>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration Comment="Part identifier" Name="PartIDIn" Type="UINT"/>
+      <VarDeclaration ArraySize="3" Comment="Part identifier, Family and type" Name="PartInfo" Type="UINT"/>
     </InputVars>
     <OutputVars>
       <VarDeclaration Comment="Part identifier" Name="PartIDOut" Type="UINT"/>
@@ -45,7 +45,7 @@
       <ECTransition Comment="" Condition="1" Destination="START" Source="REQ1" x="635.0" y="1150.0"/>
     </ECC>
     <Algorithm Comment="Normally executed algorithm" Name="REQ">
-      <ST Text="(*Stack the received part*)&#10;PartBuffer[HeadIndex] := PartIDIn;&#10;&#10;(*PostIncrement HeadIndex*)&#10;HeadIndex := HeadIndex + 1;&#10;IF HeadIndex &gt;= BufferSize THEN&#10;&#9;(*HeadIndex =% 15*)&#10;&#9;HeadIndex := 0;&#10;END_IF;&#10;&#10;(*Check if buffer is full*)&#10;IF HeadIndex = TailIndex THEN&#10;&#9;(*Buffer is full, HeadIndex can't be incremented*)&#10;&#9;IF HeadIndex = 0 THEN&#10;&#9;&#9;HeadIndex := BufferSize -1;&#10;&#9;ELSE&#10;&#9;&#9;HeadIndex := HeadIndex - 1;&#10;&#9;END_IF;&#9;&#10;END_IF;"/>
+      <ST Text="(*Stack the received part*)&#10;PartBuffer[HeadIndex] := PartInfo[0];&#10;&#10;(*PostIncrement HeadIndex*)&#10;HeadIndex := HeadIndex + 1;&#10;IF HeadIndex &gt;= BufferSize THEN&#10;&#9;(*HeadIndex =% 15*)&#10;&#9;HeadIndex := 0;&#10;END_IF;&#10;&#10;(*Check if buffer is full*)&#10;IF HeadIndex = TailIndex THEN&#10;&#9;(*Buffer is full, HeadIndex can't be incremented*)&#10;&#9;IF HeadIndex = 0 THEN&#10;&#9;&#9;HeadIndex := BufferSize -1;&#10;&#9;ELSE&#10;&#9;&#9;HeadIndex := HeadIndex - 1;&#10;&#9;END_IF;&#9;&#10;END_IF;"/>
     </Algorithm>
     <Algorithm Comment="Completed part request" Name="REQ1">
       <ST Text="IF HeadIndex = TailIndex THEN&#10;&#9;(*Buffer is empty*)&#10;&#9;PartIDOut := 0;&#10;ELSE&#10;&#9;PartIDOut := PartBuffer[TailIndex];&#10;&#9;(*Increase tail index*)&#10;&#9;TailIndex := TailIndex + 1;&#10;&#9;IF TailIndex &gt;= BufferSize THEN&#10;&#9;&#9;(* TaiIndex =% 15*)&#10;&#9;&#9;TailIndex := 0;&#10;&#9;END_IF;&#10;END_IF;"/>

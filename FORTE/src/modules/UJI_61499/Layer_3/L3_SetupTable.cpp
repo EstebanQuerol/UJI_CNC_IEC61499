@@ -18,32 +18,32 @@ DEFINE_FIRMWARE_FB(FORTE_L3_SetupTable, g_nStringIdL3_SetupTable)
 
 const CStringDictionary::TStringId FORTE_L3_SetupTable::scm_anDataInputNames[] = {g_nStringIdQI, g_nStringIdFamily, g_nStringIdType, g_nStringIdPartID, g_nStringIdSetupID, g_nStringIdMID};
 
-const CStringDictionary::TStringId FORTE_L3_SetupTable::scm_anDataInputTypeIds[] = {g_nStringIdBOOL, g_nStringIdUINT, g_nStringIdUINT, g_nStringIdUINT, g_nStringIdUSINT, g_nStringIdUINT};
+const CStringDictionary::TStringId FORTE_L3_SetupTable::scm_anDataInputTypeIds[] = {g_nStringIdBOOL, g_nStringIdUINT, g_nStringIdUINT, g_nStringIdUINT, g_nStringIdUSINT, g_nStringIdUSINT};
 
-const CStringDictionary::TStringId FORTE_L3_SetupTable::scm_anDataOutputNames[] = {g_nStringIdQO, g_nStringIdMaxSetup, g_nStringIdPartInfo, g_nStringIdOPIDS, g_nStringIdOPParams, g_nStringIdFixture, g_nStringIdMID2};
+const CStringDictionary::TStringId FORTE_L3_SetupTable::scm_anDataOutputNames[] = {g_nStringIdQO, g_nStringIdPartInfo, g_nStringIdMID2, g_nStringIdOPIDS, g_nStringIdOPParams, g_nStringIdFixture};
 
-const CStringDictionary::TStringId FORTE_L3_SetupTable::scm_anDataOutputTypeIds[] = {g_nStringIdBOOL, g_nStringIdUINT, g_nStringIdARRAY, 3, g_nStringIdUINT, g_nStringIdARRAY, 20, g_nStringIdUINT, g_nStringIdARRAY, 20, g_nStringIdSTRING, g_nStringIdSTRING, g_nStringIdUINT};
+const CStringDictionary::TStringId FORTE_L3_SetupTable::scm_anDataOutputTypeIds[] = {g_nStringIdBOOL, g_nStringIdARRAY, 3, g_nStringIdUINT, g_nStringIdUSINT, g_nStringIdARRAY, 20, g_nStringIdUINT, g_nStringIdARRAY, 20, g_nStringIdSTRING, g_nStringIdSTRING};
 
 const TForteInt16 FORTE_L3_SetupTable::scm_anEIWithIndexes[] = {0, 4};
 const TDataIOID FORTE_L3_SetupTable::scm_anEIWith[] = {0, 1, 2, 255, 3, 4, 5, 255};
 const CStringDictionary::TStringId FORTE_L3_SetupTable::scm_anEventInputNames[] = {g_nStringIdINIT, g_nStringIdREQ};
 
-const TDataIOID FORTE_L3_SetupTable::scm_anEOWith[] = {0, 1, 255, 2, 3, 4, 5, 6, 255};
-const TForteInt16 FORTE_L3_SetupTable::scm_anEOWithIndexes[] = {0, 3, -1};
+const TDataIOID FORTE_L3_SetupTable::scm_anEOWith[] = {0, 255, 1, 3, 4, 5, 2, 255};
+const TForteInt16 FORTE_L3_SetupTable::scm_anEOWithIndexes[] = {0, 2, -1};
 const CStringDictionary::TStringId FORTE_L3_SetupTable::scm_anEventOutputNames[] = {g_nStringIdINITO, g_nStringIdCNF};
 
 const SFBInterfaceSpec FORTE_L3_SetupTable::scm_stFBInterfaceSpec = {
   2,  scm_anEventInputNames,  scm_anEIWith,  scm_anEIWithIndexes,
   2,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  6,  scm_anDataInputNames, scm_anDataInputTypeIds,
-  7,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
+  6,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
   0, 0
 };
+
 
 void FORTE_L3_SetupTable::executeEvent(int pa_nEIID){
   int i; //Loop variable
   switch(pa_nEIID){
     case scm_nEventINITID:
-		MaxSetup() = 0;
 		if (QI() == true){
 			m_nFamily = Family();
 			m_nType = Type();
@@ -55,7 +55,6 @@ void FORTE_L3_SetupTable::executeEvent(int pa_nEIID){
 			PPArray::Initilizate();
 			m_poThisPP = PPArray::getProcessPlan(m_nFamily, m_nType);
 			if (m_poThisPP != NULL){
-				MaxSetup() = m_poThisPP->getNumberOfSetups();
 				QO() = true;
 			}
 			else{

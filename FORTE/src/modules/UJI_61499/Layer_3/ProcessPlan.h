@@ -31,13 +31,18 @@ public:
 	* \return number of setups
 	*/
 	TForteUInt16 getNumberOfSetups(){ return m_nNumberOfSetups; };
+	/*!\Get setup type by index
+	* \param pa_nIndex 1-based vector index
+	* \return setup
+	*/
+	TForteUInt8 getSetupTypeByIndex(TForteUInt16 pa_nIndex);
 	/*!\Add a setup to the processplan
 	* \param pa_nSetupIndex position within the vector where to insert the operation, 1-based index
 	* \param pa_nSize number of operations in the setup
 	* \param pa_sFixture setpu's fixture
 	* \return true if success, false otherwhise
 	*/
-	bool addSetup(int pa_nSetupIndex, TForteUInt16 pa_nSize, std::string pa_sFixture);
+	bool addSetup(int pa_nSetupIndex, TForteUInt8 pa_nType, TForteUInt16 pa_nSize, std::string pa_sFixture);
 	/*!\Add a operation to a setup
 	* \param pa_nSetupIndex position within the setups vector where to insert the operation, 1-based index
 	* \param pa_nOperationIndex position within the operation vector  where to insert the operation, 1-based index

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
-<FBType Comment="Service Interface Function Block Type" Name="L3_SetupTable">
+<FBType Comment="Service Interface Function Block Type" Name="L3_PPTable">
   <Identification Standard="61499-2"/>
-  <VersionInfo Author="EQUEROL" Date="2014-10-28" Organization="UJI" Version="0.0"/>
+  <VersionInfo Author="EQUEROL" Date="2014-11-06" Organization="UJI" Version="0.0"/>
   <CompilerInfo/>
   <InterfaceList>
     <EventInputs>
@@ -12,9 +12,22 @@
         <With Var="Type"/>
       </Event>
       <Event Comment="Service Request" Name="REQ" Type="Event">
-        <With Var="PartID"/>
-        <With Var="SetupID"/>
+        <With Var="MType"/>
+      </Event>
+      <Event Comment="Service request 2" Name="REQ2" Type="Event">
         <With Var="MID"/>
+        <With Var="PartIDIn3"/>
+      </Event>
+      <Event Comment="Application Response to IND" Name="RSP1" Type="Event">
+        <With Var="PartIDIn1"/>
+        <With Var="LotsizeIn"/>
+        <With Var="DeadlineIn1"/>
+      </Event>
+      <Event Comment="Application Response to IND" Name="RSP2" Type="Event">
+        <With Var="PartIDIn2"/>
+      </Event>
+      <Event Comment="Application Response to IND" Name="RSP3" Type="Event">
+        <With Var="DeadlineIn2"/>
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -22,28 +35,36 @@
         <With Var="QO"/>
       </Event>
       <Event Comment="Confirmation of Requested Service" Name="CNF" Type="Event">
-        <With Var="PartInfo"/>
-        <With Var="OPIDS"/>
-        <With Var="OPParams"/>
-        <With Var="Fixture"/>
-        <With Var="MID2"/>
+        <With Var="vPartIDOut"/>
+        <With Var="vPriority"/>
+        <With Var="vSetup"/>
+      </Event>
+      <Event Comment="Request 2 execution confirm" Name="CNF2" Type="Event"/>
+      <Event Comment="Indication from Resource" Name="IND1" Type="Event"/>
+      <Event Comment="Indication from Resource" Name="IND2" Type="Event"/>
+      <Event Comment="Indication from Resource" Name="IND3" Type="Event">
+        <With Var="PartIDOut"/>
       </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration Comment="Event Input Qualifier" Name="QI" Type="BOOL"/>
       <VarDeclaration Comment="Process plan family" Name="Family" Type="UINT"/>
-      <VarDeclaration Comment="Proces plan type" Name="Type" Type="UINT"/>
-      <VarDeclaration Comment="Part to be assigned identifier" Name="PartID" Type="UINT"/>
-      <VarDeclaration Comment="Setup identifier" Name="SetupID" Type="USINT"/>
-      <VarDeclaration Comment="Destination machine identifier" Name="MID" Type="USINT"/>
+      <VarDeclaration Comment="Process plan type" Name="Type" Type="UINT"/>
+      <VarDeclaration ArraySize="15" Comment="Machine types vector" Name="MType" Type="USINT"/>
+      <VarDeclaration Comment="Part identifier" Name="PartIDIn1" Type="UINT"/>
+      <VarDeclaration Comment="Number of parts to be manufactured" Name="LotsizeIn" Type="UINT"/>
+      <VarDeclaration Comment="Parts delivery time" Name="DeadlineIn1" Type="DATE_AND_TIME"/>
+      <VarDeclaration Comment="Part identifier" Name="PartIDIn2" Type="UINT"/>
+      <VarDeclaration Comment="Delivery time" Name="DeadlineIn2" Type="DATE_AND_TIME"/>
+      <VarDeclaration Comment="Part identifier" Name="PartIDIn3" Type="UINT"/>
+      <VarDeclaration Comment="Machine identifier" Name="MID" Type="USINT"/>
     </InputVars>
     <OutputVars>
       <VarDeclaration Comment="Event Output Qualifier" Name="QO" Type="BOOL"/>
-      <VarDeclaration ArraySize="3" Comment="Part ID, Part family, Part type" Name="PartInfo" Type="UINT"/>
-      <VarDeclaration Comment="Destination machine identifier" Name="MID2" Type="USINT"/>
-      <VarDeclaration ArraySize="20" Comment="Operation identifiers" Name="OPIDS" Type="UINT"/>
-      <VarDeclaration ArraySize="20" Comment="Operations parameters" Name="OPParams" Type="STRING"/>
-      <VarDeclaration Comment="Setup fixture" Name="Fixture" Type="STRING"/>
+      <VarDeclaration ArraySize="15" Comment="Vector of parts used in the assignation" Name="vPartIDOut" Type="UINT"/>
+      <VarDeclaration ArraySize="15" Comment="Vector of priorities" Name="vPriority" Type="INT"/>
+      <VarDeclaration ArraySize="15" Comment="Vector of setups" Name="vSetup" Type="USINT"/>
+      <VarDeclaration Comment="Part identifier" Name="PartIDOut" Type="UINT"/>
     </OutputVars>
   </InterfaceList>
   <Service Comment="Service Interface Function Block Type" LeftInterface="APPLICATION" RightInterface="RESOURCE">

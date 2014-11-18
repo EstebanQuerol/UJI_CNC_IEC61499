@@ -14,13 +14,19 @@
 class Setup
 {
 private :
+	TForteUInt8 m_nType; //Type of the machine needed to execute the setup
 	TForteUInt16 m_nSize; //Number of operations in the setup
 	std::vector<Operation> m_vOperations; //Vector holding all the operations of the setup
 	std::string m_sFixture; //String with the setup fixture information
 public:
-	Setup(TForteUInt16 pa_size, std::string pa_fixture);
+	Setup(TForteUInt8 pa_nType, TForteUInt16 pa_size, std::string pa_fixture);
 	Setup(const Setup &pa_setup);
 	~Setup();
+	/*!\Get setup Type
+	*	Inlined function
+	* \return setup size
+	*/
+	TForteUInt8 getSetupType(){ return m_nType; };
 	/*!\Get setup size
 	*	Inlined function
 	* \return setup size

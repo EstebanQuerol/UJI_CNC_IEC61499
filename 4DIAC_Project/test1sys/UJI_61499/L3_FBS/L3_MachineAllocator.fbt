@@ -23,6 +23,7 @@
       </Event>
       <Event Comment="Indicate to the PPTable that the setup was correctly assigned" Name="IND2" Type="Event">
         <With Var="PartIDOut"/>
+        <With Var="MID"/>
       </Event>
       <Event Comment="Send a setup to a machine" Name="IND1" Type="Event">
         <With Var="MID"/>
@@ -119,7 +120,7 @@
       <ST Text="(*A setup needs to be assigned*)&#10;PartIDOut:= CurrentPartID;&#10;SetupID := CurrentSetupID;&#10;MID := i;"/>
     </Algorithm>
     <Algorithm Comment="Response from the machine algo" Name="RSP1">
-      <ST Text="TOCounter := 0;&#10;PartIDOut := CurrentPartID;"/>
+      <ST Text="TOCounter := 0;&#10;PartIDOut := CurrentPartID;&#10;MID := i;"/>
     </Algorithm>
     <Algorithm Comment="Timeout algo" Name="TO">
       <ST Text="TOCounter := TOCounter + 1;"/>

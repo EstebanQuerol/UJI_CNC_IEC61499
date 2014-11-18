@@ -90,7 +90,7 @@ if((HeadIndex() == TailIndex())){
 	/* Buffer is empty*/
 	PartIDOut() = 0;
 	LotsizeOut() = 0;
-	DeadlineOut() = CIEC_DT("0")-0-0-0 : 00 : 00;
+	DeadlineOut() = 0;
 }
 else{
 	PartIDOut() = PartBuffer()[TailIndex()];

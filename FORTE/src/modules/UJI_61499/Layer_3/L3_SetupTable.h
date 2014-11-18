@@ -48,8 +48,8 @@ private:
     return *static_cast<CIEC_USINT*>(getDI(4));
   };
 
-  CIEC_UINT &MID() {
-    return *static_cast<CIEC_UINT*>(getDI(5));
+  CIEC_USINT &MID() {
+    return *static_cast<CIEC_USINT*>(getDI(5));
   };
 
   static const CStringDictionary::TStringId scm_anDataOutputNames[];
@@ -58,16 +58,16 @@ private:
     return *static_cast<CIEC_BOOL*>(getDO(0));
   };
 
-  CIEC_UINT &MaxSetup() {
-    return *static_cast<CIEC_UINT*>(getDO(1));
-  };
-
   CIEC_UINT *PartInfo() {
-    return (CIEC_UINT*)(*static_cast<CIEC_ARRAY *>(getDO(2)))[0]; //the first element marks the start of the array
+    return (CIEC_UINT*)(*static_cast<CIEC_ARRAY *>(getDO(1)))[0]; //the first element marks the start of the array
   };
 
   CIEC_ARRAY &PartInfo_Array() {
-    return *static_cast<CIEC_ARRAY*>(getDO(2));
+    return *static_cast<CIEC_ARRAY*>(getDO(1));
+  };
+
+  CIEC_USINT &MID2() {
+    return *static_cast<CIEC_USINT*>(getDO(2));
   };
 
   CIEC_UINT *OPIDS() {
@@ -90,10 +90,6 @@ private:
     return *static_cast<CIEC_STRING*>(getDO(5));
   };
 
-  CIEC_UINT &MID2() {
-    return *static_cast<CIEC_UINT*>(getDO(6));
-  };
-
   static const TEventID scm_nEventINITID = 0;
   static const TEventID scm_nEventREQID = 1;
   static const TForteInt16 scm_anEIWithIndexes[];
@@ -108,7 +104,7 @@ private:
 
   static const SFBInterfaceSpec scm_stFBInterfaceSpec;
 
-   FORTE_FB_DATA_ARRAY(2, 6, 7, 0);
+   FORTE_FB_DATA_ARRAY(2, 6, 6, 0);
 
   void executeEvent(int pa_nEIID);
 

@@ -28,8 +28,8 @@ const TForteInt16 FORTE_L3_MachineAllocator::scm_anEIWithIndexes[] = {0, 2, -1, 
 const TDataIOID FORTE_L3_MachineAllocator::scm_anEIWith[] = {0, 255, 2, 1, 255};
 const CStringDictionary::TStringId FORTE_L3_MachineAllocator::scm_anEventInputNames[] = {g_nStringIdREQ, g_nStringIdREQ2, g_nStringIdRSP2, g_nStringIdRSP1, g_nStringIdTimeout};
 
-const TDataIOID FORTE_L3_MachineAllocator::scm_anEOWith[] = {4, 255, 0, 255, 2, 1, 0, 255, 3, 255};
-const TForteInt16 FORTE_L3_MachineAllocator::scm_anEOWithIndexes[] = {0, 2, 4, 8, -1, -1};
+const TDataIOID FORTE_L3_MachineAllocator::scm_anEOWith[] = {4, 255, 0, 2, 255, 2, 1, 0, 255, 3, 255};
+const TForteInt16 FORTE_L3_MachineAllocator::scm_anEOWithIndexes[] = {0, 2, 5, 9, -1, -1};
 const CStringDictionary::TStringId FORTE_L3_MachineAllocator::scm_anEventOutputNames[] = {g_nStringIdCNF, g_nStringIdIND2, g_nStringIdIND1, g_nStringIdStart, g_nStringIdStop};
 
 const CStringDictionary::TStringId FORTE_L3_MachineAllocator::scm_anInternalsNames[] = {g_nStringIdAssignRemaining, g_nStringIdi, g_nStringIdIFinalAssign, g_nStringIdCurrentPartID, g_nStringIdCurrentSetupID, g_nStringIdTOCounter};
@@ -127,6 +127,7 @@ MID() = i();
 void FORTE_L3_MachineAllocator::alg_RSP1(void){
 TOCounter() = 0;
 PartIDOut() = CurrentPartID();
+MID() = i();
 }
 
 void FORTE_L3_MachineAllocator::alg_TO(void){

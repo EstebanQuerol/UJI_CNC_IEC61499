@@ -24,7 +24,9 @@
         <With Var="MPriorityOut"/>
         <With Var="MAssignOut"/>
       </Event>
-      <Event Comment="Indication to the process plan table" Name="IND" Type="Event"/>
+      <Event Comment="Indication to the process plan table" Name="IND" Type="Event">
+        <With Var="MTypeOut"/>
+      </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration ArraySize="15" Comment="Machine type vector" Name="MTypeIn" Type="USINT"/>

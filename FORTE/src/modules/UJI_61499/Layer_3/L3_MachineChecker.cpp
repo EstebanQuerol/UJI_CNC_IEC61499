@@ -28,8 +28,8 @@ const TForteInt16 FORTE_L3_MachineChecker::scm_anEIWithIndexes[] = {0, 5};
 const TDataIOID FORTE_L3_MachineChecker::scm_anEIWith[] = {0, 1, 2, 3, 255, 4, 5, 255};
 const CStringDictionary::TStringId FORTE_L3_MachineChecker::scm_anEventInputNames[] = {g_nStringIdREQ, g_nStringIdRSP};
 
-const TDataIOID FORTE_L3_MachineChecker::scm_anEOWith[] = {0, 1, 2, 3, 255};
-const TForteInt16 FORTE_L3_MachineChecker::scm_anEOWithIndexes[] = {0, -1, -1};
+const TDataIOID FORTE_L3_MachineChecker::scm_anEOWith[] = {0, 1, 2, 3, 255, 0, 255};
+const TForteInt16 FORTE_L3_MachineChecker::scm_anEOWithIndexes[] = {0, 5, -1};
 const CStringDictionary::TStringId FORTE_L3_MachineChecker::scm_anEventOutputNames[] = {g_nStringIdCNF, g_nStringIdIND};
 
 const CStringDictionary::TStringId FORTE_L3_MachineChecker::scm_anInternalsNames[] = {g_nStringIdi};
