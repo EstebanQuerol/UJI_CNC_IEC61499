@@ -25,7 +25,7 @@ const CStringDictionary::TStringId FORTE_L3_ProcessPlan::scm_anDataOutputNames[]
 const CStringDictionary::TStringId FORTE_L3_ProcessPlan::scm_anDataOutputTypeIds[] = {g_nStringIdBOOL};
 
 const TForteInt16 FORTE_L3_ProcessPlan::scm_anEIWithIndexes[] = {0};
-const TDataIOID FORTE_L3_ProcessPlan::scm_anEIWith[] = {0, 255};
+const TDataIOID FORTE_L3_ProcessPlan::scm_anEIWith[] = {0, 1, 2, 255};
 const CStringDictionary::TStringId FORTE_L3_ProcessPlan::scm_anEventInputNames[] = {g_nStringIdINIT};
 
 const TDataIOID FORTE_L3_ProcessPlan::scm_anEOWith[] = {0, 255};

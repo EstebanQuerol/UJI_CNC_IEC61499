@@ -74,13 +74,17 @@ private:
 
   static const SAdapterInstanceDef scm_astAdapterInstances[];
 
-  FORTE_L3_AAssignMachine& L3_AAssignMachine() {
+  FORTE_L3_AAssignMachine& AMachine_Plug() {
     return (*static_cast<FORTE_L3_AAssignMachine*>(m_apoAdapters[0]));
   };
-  static const int scm_nL3_AAssignMachineAdpNum = 0;
+  static const int scm_nAMachine_PlugAdpNum = 0;
+  FORTE_L3_AAssignMachine& AMachine_Socket() {
+    return (*static_cast<FORTE_L3_AAssignMachine*>(m_apoAdapters[1]));
+  };
+  static const int scm_nAMachine_SocketAdpNum = 1;
   static const SFBInterfaceSpec scm_stFBInterfaceSpec;
 
-   FORTE_FB_DATA_ARRAY(1, 6, 1, 1);
+   FORTE_FB_DATA_ARRAY(1, 6, 1, 2);
 
 virtual void setInitialValues();
 

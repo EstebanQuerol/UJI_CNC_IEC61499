@@ -8,6 +8,8 @@
     <EventInputs>
       <Event Comment="Initialization Request" Name="INIT" Type="Event">
         <With Var="QI"/>
+        <With Var="Family"/>
+        <With Var="Type"/>
       </Event>
     </EventInputs>
     <EventOutputs>

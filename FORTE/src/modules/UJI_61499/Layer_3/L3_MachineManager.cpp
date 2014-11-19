@@ -33,13 +33,14 @@ const TForteInt16 FORTE_L3_MachineManager::scm_anEOWithIndexes[] = {0, -1};
 const CStringDictionary::TStringId FORTE_L3_MachineManager::scm_anEventOutputNames[] = {g_nStringIdINITO};
 
 const SAdapterInstanceDef FORTE_L3_MachineManager::scm_astAdapterInstances[] = {
-{g_nStringIdL3_AAssignMachine, g_nStringIdL3_AAssignMachine, true }};
+{g_nStringIdL3_AAssignMachine, g_nStringIdAMachine_Plug, true },
+{g_nStringIdL3_AAssignMachine, g_nStringIdAMachine_Socket, false }};
 
 const SFBInterfaceSpec FORTE_L3_MachineManager::scm_stFBInterfaceSpec = {
   3,  scm_anEventInputNames,  scm_anEIWith,  scm_anEIWithIndexes,
   1,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  6,  scm_anDataInputNames, scm_anDataInputTypeIds,
   1,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
-  1,scm_astAdapterInstances};
+  2,scm_astAdapterInstances};
 
 
 void FORTE_L3_MachineManager::setInitialValues(){
@@ -61,34 +62,34 @@ const SCFB_FBConnectionData FORTE_L3_MachineManager::scm_astEventConnections[] =
   {GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdINIT), -1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdINIT), 3},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_ReleasedMHDLR, g_nStringIdCNF), 0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdRSP1), 3},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_FaultyMHDLR, g_nStringIdCNF), 1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdRSP2), 3},
-  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_AAssignMachine, g_nStringIdCNF1), CCompositeFB::scm_nAdapterMarker |0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdRSP3), 3},
-  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_AAssignMachine, g_nStringIdCNF2), CCompositeFB::scm_nAdapterMarker |0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdRSP4), 3},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdINITO), 3, GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdINITO), -1},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdIND1), 3, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_ReleasedMHDLR, g_nStringIdREQ2), 0},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdIND2), 3, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_FaultyMHDLR, g_nStringIdREQ1), 1},
-  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdIND3), 3, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_AAssignMachine, g_nStringIdCHK), CCompositeFB::scm_nAdapterMarker |0},
-  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdIND4), 3, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_AAssignMachine, g_nStringIdASG), CCompositeFB::scm_nAdapterMarker |0},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdIND3), 3, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdAMachine_Plug, g_nStringIdCHK), CCompositeFB::scm_nAdapterMarker |0},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdIND4), 3, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdAMachine_Plug, g_nStringIdASG), CCompositeFB::scm_nAdapterMarker |0},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdStart), 3, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdCORE_TIMEOUT, g_nStringIdSTART), 2},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdStop), 3, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdCORE_TIMEOUT, g_nStringIdSTOP), 2},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdCORE_TIMEOUT, g_nStringIdEO), 2, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdTimeOut), 3},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdAMachine_Socket, g_nStringIdCHK), CCompositeFB::scm_nAdapterMarker |1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdRSP3), 3},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdAMachine_Socket, g_nStringIdASG), CCompositeFB::scm_nAdapterMarker |1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdRSP4), 3},
 };
 
 const SCFB_FBConnectionData FORTE_L3_MachineManager::scm_astDataConnections[] = {
   {GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdMID1), -1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_ReleasedMHDLR, g_nStringIdMID), 0},
   {GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdMID2), -1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_FaultyMHDLR, g_nStringIdMID), 1},
   {GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdState), -1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_FaultyMHDLR, g_nStringIdState), 1},
-  {GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdMType), -1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_AAssignMachine, g_nStringIdMTypeP), CCompositeFB::scm_nAdapterMarker |0},
+  {GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdMType), -1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdAMachine_Plug, g_nStringIdMTypeP), CCompositeFB::scm_nAdapterMarker |0},
   {GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdQI), -1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdQI), 3},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_ReleasedMHDLR, g_nStringIdMReleased), 0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdMReleased), 3},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_FaultyMHDLR, g_nStringIdMFaulty), 1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdMFaulty), 3},
-  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_AAssignMachine, g_nStringIdMAssignS), CCompositeFB::scm_nAdapterMarker |0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdMAssignS), 3},
-  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_AAssignMachine, g_nStringIdMFinalAssignS), CCompositeFB::scm_nAdapterMarker |0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdMFinalAssignS), 3},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdQO), 3, GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdQO), -1},
-  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdMStateP), 3, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_AAssignMachine, g_nStringIdMStateP), CCompositeFB::scm_nAdapterMarker |0},
-  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdMPriority), 3, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_AAssignMachine, g_nStringIdMPriorityP), CCompositeFB::scm_nAdapterMarker |0},
-  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdMAssignP), 3, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_AAssignMachine, g_nStringIdMAssignP), CCompositeFB::scm_nAdapterMarker |0},
-  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdMFinalAssignP), 3, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_AAssignMachine, g_nStringIdMFinalAssignP), CCompositeFB::scm_nAdapterMarker |0},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdMStateP), 3, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdAMachine_Plug, g_nStringIdMStateP), CCompositeFB::scm_nAdapterMarker |0},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdMPriority), 3, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdAMachine_Plug, g_nStringIdMPriorityP), CCompositeFB::scm_nAdapterMarker |0},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdMAssignP), 3, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdAMachine_Plug, g_nStringIdMAssignP), CCompositeFB::scm_nAdapterMarker |0},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdMFinalAssignP), 3, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdAMachine_Plug, g_nStringIdMFinalAssignP), CCompositeFB::scm_nAdapterMarker |0},
   {GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdPeriod), -1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdCORE_TIMEOUT, g_nStringIdDT), 2},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdAMachine_Socket, g_nStringIdMAssignP), CCompositeFB::scm_nAdapterMarker |1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdMAssignS), 3},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdAMachine_Socket, g_nStringIdMFinalAssignP), CCompositeFB::scm_nAdapterMarker |1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL3_MMCore, g_nStringIdMFinalAssignS), 3},
 };
 
 const SCFB_FBNData FORTE_L3_MachineManager::scm_stFBNData = {
