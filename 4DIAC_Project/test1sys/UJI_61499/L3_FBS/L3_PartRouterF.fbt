@@ -31,7 +31,9 @@
     </InternalVars>
     <ECC>
       <ECState Comment="Initial State" Name="START" x="2090.0" y="570.0"/>
-      <ECState Comment="Initialization" Name="INIT" x="2205.0" y="145.0"/>
+      <ECState Comment="Initialization" Name="INIT" x="2205.0" y="145.0">
+        <ECAction Output="INITO"/>
+      </ECState>
       <ECState Name="REQ" x="3480.0" y="715.0">
         <ECAction Algorithm="REQ"/>
       </ECState>

@@ -32,7 +32,9 @@
     </InternalVars>
     <ECC>
       <ECState Comment="Initial State" Name="START" x="1615.0" y="570.0"/>
-      <ECState Comment="Initialization" Name="INIT" x="1615.0" y="95.0"/>
+      <ECState Comment="Initialization" Name="INIT" x="1615.0" y="95.0">
+        <ECAction Output="INITO"/>
+      </ECState>
       <ECState Comment="Normal execution" Name="REQ1" x="3040.0" y="190.0">
         <ECAction Algorithm="REQ1" Output="ASetupC.REQ"/>
       </ECState>

@@ -35,7 +35,9 @@
       <ECState Comment="Normal execution" Name="REQ" x="2850.0" y="570.0">
         <ECAction Algorithm="REQ"/>
       </ECState>
-      <ECState Name="INIT" x="2130.0" y="90.0"/>
+      <ECState Name="INIT" x="2130.0" y="90.0">
+        <ECAction Output="INITO"/>
+      </ECState>
       <ECState Name="REQ1" x="3705.0" y="380.0">
         <ECAction Output="ASetup1.REQ"/>
       </ECState>

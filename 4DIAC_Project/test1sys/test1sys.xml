@@ -17,6 +17,9 @@
   <application comment="" name="L3_APP">
     <fBNetwork href="L3_APP.xml#//@fbNetwork"/>
   </application>
+  <application comment="" name="Control_GUI">
+    <fBNetwork href="Control_GUI.xml#//@fbNetwork"/>
+  </application>
   <systemConfiguration>
     <systemConfigurationNetwork href="SysConf.xml#//@systemConfigNetwork"/>
   </systemConfiguration>

@@ -124,6 +124,7 @@ void FORTE_L3_PartRouterF::enterStateSTART(void){
 
 void FORTE_L3_PartRouterF::enterStateINIT(void){
   m_nECCState = scm_nStateINIT;
+  sendOutputEvent( scm_nEventINITOID);
 }
 
 void FORTE_L3_PartRouterF::enterStateREQ(void){

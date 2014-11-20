@@ -181,6 +181,7 @@ void FORTE_L3_SetupRouterM::enterStateREQ(void){
 
 void FORTE_L3_SetupRouterM::enterStateINIT(void){
   m_nECCState = scm_nStateINIT;
+  sendOutputEvent( scm_nEventINITOID);
 }
 
 void FORTE_L3_SetupRouterM::enterStateREQ1(void){

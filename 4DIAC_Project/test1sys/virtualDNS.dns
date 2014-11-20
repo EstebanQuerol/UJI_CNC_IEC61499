@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<virtualDNS:VirtualDNSManagement xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:virtualDNS="org.fordiac.ide.virtualDNS"/>
+<virtualDNS:VirtualDNSManagement xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:virtualDNS="org.fordiac.ide.virtualDNS" activeVirtualDNS="//@availableDNSCollections.0">
+  <availableDNSCollections name="Test_Conf">
+    <virtualDNSEntries name="localhost" value="127.0.0.1"/>
+    <virtualDNSEntries name="MacnineNumber" value="5"/>
+    <virtualDNSEntries name="IP_L3" value="127.0.0.1"/>
+  </availableDNSCollections>
+</virtualDNS:VirtualDNSManagement>

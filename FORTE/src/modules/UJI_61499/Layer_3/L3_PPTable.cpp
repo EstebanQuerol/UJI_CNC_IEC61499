@@ -168,8 +168,8 @@ void FORTE_L3_PPTable::executeEvent(int pa_nEIID){
 		else{
 			QO() = FALSE;
 		}
-		break;
 		sendOutputEvent(scm_nEventINITOID);
+		break;
 
 	case scm_nEventREQID:
 		//Request if any NewPart arrived since last REQ event
