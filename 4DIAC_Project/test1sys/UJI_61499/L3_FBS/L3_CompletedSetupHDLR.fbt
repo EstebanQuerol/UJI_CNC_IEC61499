@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L3_CompletedSetupHDLR">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-11-03" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Completed parts request" Name="REQ1" Type="Event"/>
+      <Event Comment="Normal execution request" Name="REQ" Type="Event">
+        <With Var="PartInfo"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Conpleted setup request confirmation" Name="CNF1" Type="Event">
+        <With Var="PartIDOut"/>
+      </Event>
+      <Event Comment="Execution confirmation" Name="CNF" Type="Event"/>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ArraySize="3" Comment="Part identifier, Family and type" Name="PartInfo" Type="UINT"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Part identifier" Name="PartIDOut" Type="UINT"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration ArraySize="15" Comment="Buffer to hold received &quot;parts&quot; i.e parts which setups have been completed; FIFO discipline" InitialValue="[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]" Name="PartBuffer" Type="UINT"/>
+      <VarDeclaration Comment="Position within the buffer where next part to be send is stock" InitialValue="0" Name="TailIndex" Type="USINT"/>
+      <VarDeclaration Comment="Poisiton within the buffer where next completed part will be stock" InitialValue="0" Name="HeadIndex" Type="USINT"/>
+      <VarDeclaration Comment="const buffer size" InitialValue="15" Name="BufferSize" Type="USINT"/>
+    </InternalVars>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="550.0" y="425.0"/>
+      <ECState Comment="Normal execution" Name="REQ" x="1615.0" y="475.0">
+        <ECAction Algorithm="REQ" Output="CNF"/>
+      </ECState>
+      <ECState Name="REQ1" x="570.0" y="1805.0">
+        <ECAction Algorithm="REQ1" Output="CNF1"/>
+      </ECState>
+      <ECTransition Comment="" Condition="REQ" Destination="REQ" Source="START" x="1215.0" y="275.0"/>
+      <ECTransition Comment="" Condition="REQ1" Destination="REQ1" Source="START" x="435.0" y="1170.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ" x="1190.0" y="585.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ1" x="635.0" y="1150.0"/>
+    </ECC>
+    <Algorithm Comment="Normally executed algorithm" Name="REQ">
+      <ST Text="(*Stack the received part*)&#10;PartBuffer[HeadIndex] := PartInfo[0];&#10;&#10;(*PostIncrement HeadIndex*)&#10;HeadIndex := HeadIndex + 1;&#10;IF HeadIndex &gt;= BufferSize THEN&#10;&#9;(*HeadIndex =% 15*)&#10;&#9;HeadIndex := 0;&#10;END_IF;&#10;&#10;(*Check if buffer is full*)&#10;IF HeadIndex = TailIndex THEN&#10;&#9;(*Buffer is full, HeadIndex can't be incremented*)&#10;&#9;IF HeadIndex = 0 THEN&#10;&#9;&#9;HeadIndex := BufferSize -1;&#10;&#9;ELSE&#10;&#9;&#9;HeadIndex := HeadIndex - 1;&#10;&#9;END_IF;&#9;&#10;END_IF;"/>
+    </Algorithm>
+    <Algorithm Comment="Completed part request" Name="REQ1">
+      <ST Text="IF HeadIndex = TailIndex THEN&#10;&#9;(*Buffer is empty*)&#10;&#9;PartIDOut := 0;&#10;ELSE&#10;&#9;PartIDOut := PartBuffer[TailIndex];&#10;&#9;(*Increase tail index*)&#10;&#9;TailIndex := TailIndex + 1;&#10;&#9;IF TailIndex &gt;= BufferSize THEN&#10;&#9;&#9;(* TaiIndex =% 15*)&#10;&#9;&#9;TailIndex := 0;&#10;&#9;END_IF;&#10;END_IF;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

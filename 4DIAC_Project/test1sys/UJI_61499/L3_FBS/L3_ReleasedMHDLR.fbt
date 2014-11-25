@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L3_ReleasedMHDLR">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-10-06" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Response from PP, released machine" Name="REQ1" Type="Event">
+        <With Var="MID"/>
+      </Event>
+      <Event Comment="Normal Execution Request" Name="REQ2" Type="Event"/>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Execution Confirmation" Name="CNF" Type="Event">
+        <With Var="MReleased"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="released machine Identifier" Name="MID" Type="USINT"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ArraySize="15" Comment="Vector holding released machines since last call" Name="MReleased" Type="USINT"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration ArraySize="15" Comment="vector holding released machines since last call" InitialValue="[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]" Name="ReleasedMachines" Type="USINT"/>
+      <VarDeclaration Comment="loop variable" Name="i" Type="USINT"/>
+    </InternalVars>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="570.0" y="475.0"/>
+      <ECState Comment="Normal execution" Name="REQ2" x="1615.0" y="475.0">
+        <ECAction Algorithm="REQ2" Output="CNF"/>
+      </ECState>
+      <ECState Name="REQ1" x="945.0" y="1085.0">
+        <ECAction Algorithm="REQ1"/>
+      </ECState>
+      <ECTransition Comment="" Condition="REQ2" Destination="REQ2" Source="START" x="1210.0" y="610.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ2" x="1195.0" y="300.0"/>
+      <ECTransition Comment="" Condition="REQ1" Destination="REQ1" Source="START" x="980.0" y="810.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ1" x="690.0" y="915.0"/>
+    </ECC>
+    <Algorithm Comment="Normally executed algorithm" Name="REQ2">
+      <ST Text="(*This algo send to the core the released machines and resets the internal vector*)&#10;FOR i := 0 TO 14 DO&#10;&#9;&#9;MReleased[i] := ReleasedMachines[i];&#10;&#9;&#9;ReleasedMachines[i] := 0;&#10;END_FOR;"/>
+    </Algorithm>
+    <Algorithm Comment="Update released machines vector" Name="REQ1">
+      <ST Text="IF MID&gt;=0 AND MID &lt;15 THEN&#10;&#9;ReleasedMachines[MID] := 2;&#10;END_IF;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

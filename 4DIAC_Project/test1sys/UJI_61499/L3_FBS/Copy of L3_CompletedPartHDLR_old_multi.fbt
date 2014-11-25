@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="Copy of L3_CompletedPartHDLR_old_multi">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-11-04" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Initialization Request" Name="INIT" Type="Event">
+        <With Var="QI"/>
+        <With Var="FamilyIn"/>
+        <With Var="TypeIn"/>
+      </Event>
+      <Event Comment="Normal Execution Request" Name="REQ" Type="Event">
+        <With Var="PartIDIn"/>
+      </Event>
+      <Event Comment="Response from OrderManager" Name="RSP" Type="Event"/>
+      <Event Comment="Timeout" Name="Timeout" Type="Event"/>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Initialization Confirm" Name="INITO" Type="Event">
+        <With Var="QO"/>
+      </Event>
+      <Event Comment="Execution Confirmation" Name="CNF" Type="Event">
+        <With Var="QO"/>
+      </Event>
+      <Event Comment="Indication to the OrderManager" Name="IND" Type="Event">
+        <With Var="PartIDOut"/>
+        <With Var="FamilyOut"/>
+        <With Var="TypeOut"/>
+      </Event>
+      <Event Comment="Timeout start" Name="Start" Type="Event">
+        <With Var="Delay"/>
+      </Event>
+      <Event Comment="Timeout stop" Name="Stop" Type="Event"/>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Input event qualifier" Name="QI" Type="BOOL"/>
+      <VarDeclaration Comment="PP Family" Name="FamilyIn" Type="UINT"/>
+      <VarDeclaration Comment="PP type" Name="TypeIn" Type="UINT"/>
+      <VarDeclaration Comment="Completed part identifier" Name="PartIDIn" Type="UINT"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Output event qualifier" Name="QO" Type="BOOL"/>
+      <VarDeclaration Comment="Part identifier" Name="PartIDOut" Type="UINT"/>
+      <VarDeclaration Comment="PP family" Name="FamilyOut" Type="UINT"/>
+      <VarDeclaration Comment="PP type" Name="TypeOut" Type="UINT"/>
+      <VarDeclaration Comment="Timeout delay" Name="Delay" Type="TIME"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration ArraySize="10" Comment="Buffer holding completed parts" InitialValue="[0,0,0,0,0,0,0,0,0,0]" Name="PartBuffer" Type="UINT"/>
+      <VarDeclaration Comment="Buffer size" InitialValue="10" Name="BufferSize" Type="USINT"/>
+      <VarDeclaration Comment="Pointer to the head of the buffer" InitialValue="0" Name="HeadIndex" Type="USINT"/>
+      <VarDeclaration Comment="Pointer to the end of the buffer" InitialValue="0" Name="TailIndex" Type="USINT"/>
+      <VarDeclaration Comment="Variable indicating if the last part was received" InitialValue="false" Name="LastPart" Type="BOOL"/>
+    </InternalVars>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="550.0" y="425.0"/>
+      <ECState Comment="Initialization" Name="INIT" x="1330.0" y="95.0">
+        <ECAction Algorithm="INIT" Output="INITO"/>
+      </ECState>
+      <ECState Comment="Normal execution" Name="REQ" x="1330.0" y="665.0">
+        <ECAction Algorithm="REQ" Output="CNF"/>
+      </ECState>
+      <ECState Name="RECEIVING" x="1900.0" y="1045.0"/>
+      <ECState Name="SENDING" x="1045.0" y="1330.0">
+        <ECAction Algorithm="SEND" Output="IND"/>
+        <ECAction Algorithm="TO" Output="Start"/>
+      </ECState>
+      <ECState Name="RSP" x="1195.0" y="1970.0">
+        <ECAction/>
+      </ECState>
+      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="START" x="1060.0" y="305.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="INIT" x="845.0" y="200.0"/>
+      <ECTransition Comment="" Condition="REQ" Destination="REQ" Source="START" x="1075.0" y="570.0"/>
+      <ECTransition Comment="" Condition="LastPart = FALSE" Destination="RECEIVING" Source="REQ" x="1775.0" y="915.0"/>
+      <ECTransition Comment="" Condition="LastPart = TRUE" Destination="SENDING" Source="REQ" x="1140.0" y="1035.0"/>
+      <ECTransition Comment="" Condition="REQ" Destination="REQ" Source="RECEIVING" x="1910.0" y="520.0"/>
+    </ECC>
+    <Algorithm Comment="Initialization algorithm" Name="INIT">
+      <ST Text=""/>
+    </Algorithm>
+    <Algorithm Comment="Normally executed algorithm" Name="REQ">
+      <ST Text="IF PartIDIn &lt;&gt; 0 THEN&#10;&#9;LastPart := FALSE;&#10;&#9;(*Stack the received order*)&#10;&#9;PartBuffer[HeadIndex] := PartIDIn;&#10;&#9;&#10;&#9;(*PostIncrement HeadIndex*)&#10;&#9;HeadIndex := HeadIndex + 1;&#10;&#9;IF HeadIndex &gt;= BufferSize THEN&#10;&#9;&#9;HeadIndex := 0;&#10;&#9;END_IF;&#10;&#9;&#10;&#9;(*Check if buffer is full*)&#10;&#9;IF HeadIndex = TailIndex THEN&#10;&#9;&#9;(*Buffer is full, HeadIndex can't be incremented*)&#10;&#9;&#9;IF HeadIndex = 0 THEN&#10;&#9;&#9;&#9;HeadIndex := BufferSize - 1;&#10;&#9;&#9;ELSE&#10;&#9;&#9;&#9;HeadIndex := HeadIndex - 1;&#10;&#9;&#9;END_IF;&#9;&#10;&#9;END_IF;&#10;ELSE&#10;&#9;(*Last part received, start sending to order manager*)&#10;&#9;LastPart := TRUE;&#10;END_IF;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="RSP">
+      <ST Text="(*Part correctly send*)&#10;(*Increase tail index*)&#10;TailIndex := TailIndex + 1;&#10;IF TailIndex &gt;= BufferSize THEN&#10;&#9;TailIndex := 0;&#10;END_IF;&#10;IF TailIndex = HeadIndex THEN&#10;&#9;LastPart := TRUE;&#10;ELSE&#10;&#9;LastPart := FALSE;&#10;END_IF;"/>
+    </Algorithm>
+    <Algorithm Comment="send algo" Name="SEND">
+      <ST Text="PartIDOut := PartBuffer[TailIndex];&#10;FamilyOut := FamilyIn;&#10;TypeOut := TypeIn;"/>
+    </Algorithm>
+    <Algorithm Comment="TimeOut algo" Name="TO">
+      <ST Text="Delay := TIME#1000ms;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

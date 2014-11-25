@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L3_CompletedPartHDLR">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-11-04" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Initialization Request" Name="INIT" Type="Event">
+        <With Var="QI"/>
+        <With Var="FamilyIn"/>
+        <With Var="TypeIn"/>
+      </Event>
+      <Event Comment="Normal Execution Request" Name="REQ" Type="Event">
+        <With Var="PartIDIn"/>
+      </Event>
+      <Event Comment="Response from OrderManager" Name="RSP" Type="Event">
+        <With Var="DeadlineIn"/>
+      </Event>
+      <Event Comment="Timeout" Name="Timeout" Type="Event"/>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Initialization Confirm" Name="INITO" Type="Event">
+        <With Var="QO"/>
+        <With Var="FamilyOut"/>
+        <With Var="TypeOut"/>
+      </Event>
+      <Event Comment="Execution Confirmation" Name="CNF" Type="Event">
+        <With Var="QO"/>
+        <With Var="DeadlineOut"/>
+      </Event>
+      <Event Comment="Indication to the OrderManager" Name="IND" Type="Event">
+        <With Var="PartIDOut"/>
+        <With Var="FamilyOut"/>
+        <With Var="TypeOut"/>
+      </Event>
+      <Event Comment="Timeout start" Name="Start" Type="Event">
+        <With Var="Delay"/>
+      </Event>
+      <Event Comment="Timeout stop" Name="Stop" Type="Event"/>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Input event qualifier" Name="QI" Type="BOOL"/>
+      <VarDeclaration Comment="PP Family" Name="FamilyIn" Type="UINT"/>
+      <VarDeclaration Comment="PP type" Name="TypeIn" Type="UINT"/>
+      <VarDeclaration Comment="Completed part identifier" Name="PartIDIn" Type="UINT"/>
+      <VarDeclaration Comment="New pp devilery time" Name="DeadlineIn" Type="DATE_AND_TIME"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Output event qualifier" Name="QO" Type="BOOL"/>
+      <VarDeclaration Comment="Part identifier" Name="PartIDOut" Type="UINT"/>
+      <VarDeclaration Comment="PP family" Name="FamilyOut" Type="UINT"/>
+      <VarDeclaration Comment="PP type" Name="TypeOut" Type="UINT"/>
+      <VarDeclaration Comment="Timeout delay" Name="Delay" Type="TIME"/>
+      <VarDeclaration Comment="New PP deliverty time" Name="DeadlineOut" Type="DATE_AND_TIME"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="550.0" y="425.0"/>
+      <ECState Comment="Initialization" Name="INIT" x="1330.0" y="95.0">
+        <ECAction Algorithm="INIT" Output="INITO"/>
+      </ECState>
+      <ECState Comment="Normal execution" Name="REQ" x="1330.0" y="665.0">
+        <ECAction Algorithm="REQ" Output="IND"/>
+        <ECAction Algorithm="TO" Output="Start"/>
+      </ECState>
+      <ECState Name="RSP" x="1425.0" y="1330.0">
+        <ECAction Algorithm="RSP" Output="CNF"/>
+        <ECAction Output="Stop"/>
+      </ECState>
+      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="START" x="1060.0" y="305.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="INIT" x="845.0" y="200.0"/>
+      <ECTransition Comment="" Condition="REQ" Destination="REQ" Source="START" x="1075.0" y="570.0"/>
+      <ECTransition Comment="" Condition="RSP" Destination="RSP" Source="REQ" x="1440.0" y="1015.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="RSP" x="770.0" y="1120.0"/>
+      <ECTransition Comment="" Condition="Timeout" Destination="REQ" Source="RSP" x="1195.0" y="985.0"/>
+    </ECC>
+    <Algorithm Comment="Initialization algorithm" Name="INIT">
+      <ST Text="IF QI = TRUE THEN&#10;&#9;FamilyOut := FamilyIn;&#10;&#9;TypeOut := TypeIn;&#10;&#9;QO := TRUE;&#10;ELSE&#10;&#9;QO := FALSE;&#10;END_IF;"/>
+    </Algorithm>
+    <Algorithm Comment="Normally executed algorithm" Name="REQ">
+      <ST Text="PartIDOut := PartIDIn;&#10;FamilyOut := FamilyIn;&#10;TypeOut := TypeIn;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="RSP">
+      <ST Text="DeadlineOut := DeadlineIn;"/>
+    </Algorithm>
+    <Algorithm Comment="TimeOut algo" Name="TO">
+      <ST Text="Delay := TIME#1000ms;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L3_SetupRouterM">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="4DIAC-IDE" Date="2014-11-19" Organization="4DIAC-Consortium" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Type="Event">
+        <With Var="SelMachine"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Type="Event"/>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Routing condition" Name="SelMachine" Type="USINT"/>
+    </InputVars>
+    <OutputVars/>
+    <Sockets>
+      <AdapterDeclaration Name="ASetup" Type="L3_ASetup"/>
+    </Sockets>
+    <Plugs>
+      <AdapterDeclaration Name="ASetup1" Type="L3_ASetup"/>
+      <AdapterDeclaration Name="ASetup2" Type="L3_ASetup"/>
+    </Plugs>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration Comment="loop variable" Name="i" Type="USINT"/>
+      <VarDeclaration Comment="Routing condition" Name="Select" Type="BOOL"/>
+    </InternalVars>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="1995.0" y="475.0"/>
+      <ECState Comment="Normal execution" Name="REQ" x="2850.0" y="570.0">
+        <ECAction Algorithm="REQ"/>
+      </ECState>
+      <ECState Name="INIT" x="2130.0" y="90.0">
+        <ECAction Output="INITO"/>
+      </ECState>
+      <ECState Name="REQ1" x="3705.0" y="380.0">
+        <ECAction Output="ASetup1.REQ"/>
+      </ECState>
+      <ECState Name="REQ2" x="3705.0" y="760.0">
+        <ECAction Output="ASetup2.REQ"/>
+      </ECState>
+      <ECState Name="RSP" x="2895.0" y="1295.0">
+        <ECAction Algorithm="RSP"/>
+      </ECState>
+      <ECState Name="RSP1" x="3730.0" y="1165.0">
+        <ECAction Output="ASetup1.RSP"/>
+      </ECState>
+      <ECState Name="RSP2" x="3705.0" y="1425.0">
+        <ECAction Output="ASetup2.RSP"/>
+      </ECState>
+      <ECState Name="CNF1" x="2280.0" y="1805.0">
+        <ECAction Algorithm="CNF1" Output="ASetup.CNF"/>
+      </ECState>
+      <ECState Name="CNF2" x="1425.0" y="1520.0">
+        <ECAction Algorithm="CNF2" Output="ASetup.CNF"/>
+      </ECState>
+      <ECState Name="IND1" x="760.0" y="380.0">
+        <ECAction Algorithm="IND1" Output="ASetup.IND"/>
+      </ECState>
+      <ECState Name="IND2" x="760.0" y="950.0">
+        <ECAction Algorithm="IND2" Output="ASetup.IND"/>
+      </ECState>
+      <ECTransition Comment="" Condition="ASetup.REQ" Destination="REQ" Source="START" x="2660.0" y="465.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ" x="2580.0" y="705.0"/>
+      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="START" x="2010.0" y="300.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="INIT" x="2190.0" y="305.0"/>
+      <ECTransition Comment="" Condition="Select = TRUE" Destination="REQ1" Source="REQ" x="3265.0" y="405.0"/>
+      <ECTransition Comment="" Condition="Select = FALSE" Destination="REQ2" Source="REQ" x="3230.0" y="835.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ1" x="2905.0" y="265.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ2" x="2820.0" y="965.0"/>
+      <ECTransition Comment="" Condition="ASetup.RSP" Destination="RSP" Source="START" x="2475.0" y="920.0"/>
+      <ECTransition Comment="" Condition="Select = TRUE" Destination="RSP1" Source="RSP" x="3280.0" y="1160.0"/>
+      <ECTransition Comment="" Condition="Select = FALSE" Destination="RSP2" Source="RSP" x="3360.0" y="1520.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="RSP1" x="2920.0" y="960.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="RSP2" x="3020.0" y="1715.0"/>
+      <ECTransition Comment="" Condition="ASetup1.IND" Destination="IND1" Source="START" x="1360.0" y="260.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="IND1" x="1265.0" y="620.0"/>
+      <ECTransition Comment="" Condition="ASetup2.IND" Destination="IND2" Source="START" x="1435.0" y="760.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="IND2" x="1185.0" y="1145.0"/>
+      <ECTransition Comment="" Condition="ASetup2.CNF" Destination="CNF2" Source="START" x="1750.0" y="1050.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="CNF2" x="1890.0" y="1145.0"/>
+      <ECTransition Comment="" Condition="ASetup1.CNF" Destination="CNF1" Source="START" x="2135.0" y="1260.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="CNF1" x="2385.0" y="1265.0"/>
+    </ECC>
+    <Algorithm Comment="Normally executed algorithm" Name="REQ">
+      <ST Text="IF ASetup.MID = SelMachine THEN&#10;&#9;Select := TRUE;&#10;&#9;FOR i:=0 TO 2 DO&#10;&#9;&#9;ASetup1.PartInfoP[i] :=ASetup.PartInfoP[i];&#10;&#9;END_FOR;&#10;&#9;ASetup1.MID := ASetup.MID;&#10;&#9;FOR i:=0 TO 19 DO&#10;&#9;&#9;ASetup1.OPIDS[i] := ASetup.OPIDS[i];&#10;&#9;&#9;ASetup1.OPParams[i] := ASetup.OPParams[i];&#10;&#9;END_FOR;&#10;&#9;ASetup1.Fixture := ASetup.Fixture;&#10;ELSE&#10;&#9;Select := FALSE;&#10;&#9;FOR i:=0 TO 2 DO&#10;&#9;&#9;ASetup2.PartInfoP[i] :=ASetup.PartInfoP[i];&#10;&#9;END_FOR;&#10;&#9;ASetup2.MID := ASetup.MID;&#10;&#9;FOR i:=0 TO 19 DO&#10;&#9;&#9;ASetup2.OPIDS[i] := ASetup.OPIDS[i];&#10;&#9;&#9;ASetup2.OPParams[i] := ASetup.OPParams[i];&#10;&#9;END_FOR;&#10;&#9;ASetup2.Fixture := ASetup.Fixture;&#10;END_IF;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="RSP">
+      <ST Text="IF ASetup.MID = SelMachine THEN&#10;&#9;Select := TRUE;&#10;&#9;ASetup1.MID := ASetup.MID;&#10;ELSE&#10;&#9;Select := FALSE;&#10;&#9;ASetup2.MID := ASetup.MID;&#10;END_IF;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="CNF1">
+      <ST Text="ASetup.PartInfoS[0] := ASetup1.PartInfoS[0];&#10;ASetup.PartInfoS[1] := ASetup1.PartInfoS[1];&#10;ASetup.PartInfoS[2] := ASetup1.PartInfoS[2];"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="CNF2">
+      <ST Text="ASetup.PartInfoS[0] := ASetup2.PartInfoS[0];&#10;ASetup.PartInfoS[1] := ASetup2.PartInfoS[1];&#10;ASetup.PartInfoS[2] := ASetup2.PartInfoS[2];"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="IND1">
+      <ST Text="ASetup.PartInfoS[0] := ASetup1.PartInfoS[0];&#10;ASetup.PartInfoS[1] := ASetup1.PartInfoS[1];&#10;ASetup.PartInfoS[2] := ASetup1.PartInfoS[2];&#10;ASetup.ENDID := ASetup1.ENDID;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="IND2">
+      <ST Text="ASetup.PartInfoS[0] := ASetup2.PartInfoS[0];&#10;ASetup.PartInfoS[1] := ASetup2.PartInfoS[1];&#10;ASetup.PartInfoS[2] := ASetup2.PartInfoS[2];&#10;ASetup.ENDID := ASetup2.ENDID;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

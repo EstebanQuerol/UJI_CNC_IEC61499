@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L3_PartDesEncap">
+  <Identification Description="This block is used to desencapsulate all the events and data, used to manage the manufacturing of part, from an adapter." Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-09-24" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Normal Execution Request" Name="CNF" Type="Event"/>
+      <Event Comment="Ended part indication" Name="IND" Type="Event">
+        <With Var="PartIDS"/>
+        <With Var="FamilyS"/>
+        <With Var="TypeS"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Execution Confirmation" Name="REQ" Type="Event">
+        <With Var="PartIDP"/>
+        <With Var="FamilyP"/>
+        <With Var="TypeP"/>
+        <With Var="Lotsize"/>
+        <With Var="Deadline"/>
+      </Event>
+      <Event Comment="Ended part reception confirmation" Name="RSP" Type="Event">
+        <With Var="FamilyP"/>
+        <With Var="TypeP"/>
+        <With Var="Deadline"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Part identifier" Name="PartIDS" Type="UINT"/>
+      <VarDeclaration Comment="Part's family" Name="FamilyS" Type="UINT"/>
+      <VarDeclaration Comment="Part's type" Name="TypeS" Type="UINT"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Identifier of the 1st part to be manufactured" Name="PartIDP" Type="UINT"/>
+      <VarDeclaration Comment="Part's family" Name="FamilyP" Type="UINT"/>
+      <VarDeclaration Comment="Part's type" Name="TypeP" Type="UINT"/>
+      <VarDeclaration Comment="Number of parts to be in the order" Name="Lotsize" Type="UINT"/>
+      <VarDeclaration Comment="Deadline of next part to be delivered" Name="Deadline" Type="DATE_AND_TIME"/>
+    </OutputVars>
+    <Sockets>
+      <AdapterDeclaration Name="L3_APart" Type="L3_APart"/>
+    </Sockets>
+  </InterfaceList>
+  <BasicFB>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="1900.0" y="665.0"/>
+      <ECState Comment="Normal execution" Name="REQ" x="2755.0" y="285.0">
+        <ECAction Algorithm="REQ" Output="REQ"/>
+      </ECState>
+      <ECState Name="RSP" x="2755.0" y="855.0">
+        <ECAction Algorithm="RSP" Output="RSP"/>
+      </ECState>
+      <ECState Name="CNF" x="855.0" y="380.0">
+        <ECAction Algorithm="CNF" Output="L3_APart.CNF"/>
+      </ECState>
+      <ECState Name="IND" x="1425.0" y="1330.0">
+        <ECAction Algorithm="IND" Output="L3_APart.IND"/>
+      </ECState>
+      <ECTransition Comment="" Condition="L3_APart.REQ" Destination="REQ" Source="START" x="2455.0" y="590.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ" x="2260.0" y="405.0"/>
+      <ECTransition Comment="" Condition="L3_APart.RSP" Destination="RSP" Source="START" x="2510.0" y="770.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="RSP" x="2370.0" y="975.0"/>
+      <ECTransition Comment="" Condition="CNF" Destination="CNF" Source="START" x="1375.0" y="720.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="CNF" x="1455.0" y="625.0"/>
+      <ECTransition Comment="" Condition="IND" Destination="IND" Source="START" x="1540.0" y="1020.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="IND" x="1870.0" y="1035.0"/>
+    </ECC>
+    <Algorithm Comment="Receives REQ event and data from the adapter" Name="REQ">
+      <ST Text="PartIDP := L3_APart.PartIDP;&#10;FamilyP := L3_APart.FamilyP;&#10;TypeP := L3_APart.TypeP;&#10;Lotsize := L3_APart.Lotsize;&#10;Deadline := L3_APart.Deadline;"/>
+    </Algorithm>
+    <Algorithm Comment="Receives RSPevent and data from the adapter" Name="RSP">
+      <ST Text="FamilyP := L3_APart.FamilyP;&#10;TypeP := L3_APart.TypeP;&#10;Deadline := L3_APart.Deadline;"/>
+    </Algorithm>
+    <Algorithm Comment="Sends IND event and data through the adapter" Name="IND">
+      <ST Text="L3_APart.PartIDS := PartIDS;&#10;L3_APart.FamilyS := FamilyS;&#10;L3_APart.TypeS := TypeS;"/>
+    </Algorithm>
+    <Algorithm Comment="Sends CNF event and data through the adapter" Name="CNF">
+      <ST Text="(*Nothing for now*)"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

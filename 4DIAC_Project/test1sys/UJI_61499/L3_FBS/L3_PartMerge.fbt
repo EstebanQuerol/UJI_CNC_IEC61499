@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Part adapter encapculation" Name="L3_PartMerge">
+  <Identification Description="This block is used to encapsulate all the events and data, used to manage the manufacturing of part, into an adapter." Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-09-24" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Normal Execution Request" Name="REQIN" Type="Event">
+        <With Var="FamilyP1"/>
+        <With Var="TypeP1"/>
+        <With Var="Lotsize1"/>
+        <With Var="Deadline1"/>
+        <With Var="PartIDP1"/>
+      </Event>
+      <Event Comment="Ended part reception confirmation" Name="RSPIN" Type="Event">
+        <With Var="FamilyP2"/>
+        <With Var="TypeP2"/>
+        <With Var="Deadline2"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Execution Confirmation" Name="REQOUT" Type="Event">
+        <With Var="PartIDP"/>
+        <With Var="FamilyP"/>
+        <With Var="TypeP"/>
+        <With Var="Lotsize"/>
+        <With Var="Deadline"/>
+      </Event>
+      <Event Comment="Ended part indication" Name="RSPOUT" Type="Event">
+        <With Var="PartIDP"/>
+        <With Var="FamilyP"/>
+        <With Var="TypeP"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Identifier of the 1st part to be manufactured" Name="PartIDP1" Type="UINT"/>
+      <VarDeclaration Comment="Part's family" Name="FamilyP1" Type="UINT"/>
+      <VarDeclaration Comment="Part's type" Name="TypeP1" Type="UINT"/>
+      <VarDeclaration Comment="Number of parts to be in the order" Name="Lotsize1" Type="UINT"/>
+      <VarDeclaration Comment="Deadline of next part to be delivered" Name="Deadline1" Type="DATE_AND_TIME"/>
+      <VarDeclaration Comment="Part's family" Name="FamilyP2" Type="UINT"/>
+      <VarDeclaration Comment="Part's type" Name="TypeP2" Type="UINT"/>
+      <VarDeclaration Comment="Deadline of next part to be delivered" Name="Deadline2" Type="DATE_AND_TIME"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Part identifier" Name="PartIDP" Type="UINT"/>
+      <VarDeclaration Comment="Part's family" Name="FamilyP" Type="UINT"/>
+      <VarDeclaration Comment="Part's type" Name="TypeP" Type="UINT"/>
+      <VarDeclaration Comment="Number of parts to be in the order" Name="Lotsize" Type="UINT"/>
+      <VarDeclaration Comment="Deadline of next part to be delivered" Name="Deadline" Type="DATE_AND_TIME"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="1710.0" y="475.0"/>
+      <ECState Comment="Normal execution" Name="REQ" x="2660.0" y="95.0">
+        <ECAction Algorithm="REQ" Output="REQOUT"/>
+      </ECState>
+      <ECState Name="RSP" x="1140.0" y="1140.0">
+        <ECAction Algorithm="RSP" Output="RSPOUT"/>
+      </ECState>
+      <ECTransition Comment="" Condition="REQIN" Destination="REQ" Source="START" x="2245.0" y="385.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ" x="2105.0" y="245.0"/>
+      <ECTransition Comment="" Condition="RSPIN" Destination="RSP" Source="START" x="1135.0" y="780.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="RSP" x="1530.0" y="890.0"/>
+    </ECC>
+    <Algorithm Comment="Sends REQ event and data through the adapter" Name="REQ">
+      <ST Text="(*Map input data into the adapter*)&#10;PartIDP := PartIDP1;&#10;FamilyP := FamilyP1;&#10;TypeP := TypeP1;&#10;Lotsize := Lotsize1;&#10;Deadline := Deadline1;"/>
+    </Algorithm>
+    <Algorithm Comment="Sends RSP event and data through the adapter" Name="RSP">
+      <ST Text="(*Map input data into the adapter*)&#10;FamilyP := FamilyP2;&#10;TypeP := TypeP2;&#10;Deadline := Deadline2;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>
