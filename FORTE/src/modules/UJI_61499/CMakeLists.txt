@@ -4,6 +4,6 @@ forte_add_subdirectory(Layer_3)
 #############################################################################
 # *UJI_61499 FB/ Common FBs
 #############################################################################
-forte_add_sourcefile_hcpp( CM_ChkService CM_Merge2E2USINT)
+forte_add_sourcefile_hcpp( CM_ChkService CM_Merge2E2USINT CM_Merge2PartInfo )
 
 

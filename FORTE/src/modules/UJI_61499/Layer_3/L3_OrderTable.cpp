@@ -52,10 +52,12 @@ void FORTE_L3_OrderTable::executeEvent(int pa_nEIID){
 			if (!sm_vOrdersTable.empty()){
 				sm_vOrdersTable.swap(std::vector<ManOrder>());
 			}
+			QO() = TRUE;
 		}
 		else{
 			//Empty the vector
 			sm_vOrdersTable.swap(std::vector<ManOrder>());
+			QO() = FALSE;
 		}
       sendOutputEvent(scm_nEventINITOID);
       break;

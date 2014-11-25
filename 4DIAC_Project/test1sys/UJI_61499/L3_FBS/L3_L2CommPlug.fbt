@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Composite Function Block Type" Name="L3_L2CommPlug">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-11-25" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Initialization Request" Name="CNF" Type="Event">
+        <With Var="PartInfoS"/>
+      </Event>
+      <Event Comment="Normal Execution Request" Name="IND" Type="Event">
+        <With Var="PartInfoS"/>
+        <With Var="ENDID"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Initialization Confirm" Name="REQ" Type="Event">
+        <With Var="PartInfoP"/>
+        <With Var="MID"/>
+        <With Var="OPIDS"/>
+        <With Var="OPParams"/>
+        <With Var="Fixture"/>
+      </Event>
+      <Event Comment="Execution Confirmation" Name="RSP" Type="Event">
+        <With Var="MID"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ArraySize="3" Comment="Part ID, family, type" Name="PartInfoS" Type="UINT"/>
+      <VarDeclaration Comment="Setup execution returned code" Name="ENDID" Type="USINT"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration ArraySize="3" Comment="Part ID, Family, Type" Name="PartInfoP" Type="UINT"/>
+      <VarDeclaration Comment="Destination machine identifier" Name="MID" Type="USINT"/>
+      <VarDeclaration ArraySize="20" Comment="Operations Identifiers" Name="OPIDS" Type="UINT"/>
+      <VarDeclaration ArraySize="20" Comment="Operation parameters" Name="OPParams" Type="STRING"/>
+      <VarDeclaration Comment="Fixture to be used with the setup" Name="Fixture" Type="STRING"/>
+    </OutputVars>
+    <Sockets>
+      <AdapterDeclaration Name="L3_ASetup" Type="L3_ASetup" x="1805.0" y="570.0"/>
+    </Sockets>
+  </InterfaceList>
+  <FBNetwork>
+    <DataConnections>
+      <Connection Destination="L3_ASetup.PartInfoS" Source="PartInfoS" dx1="1055.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_ASetup.ENDID" Source="ENDID" dx1="925.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="PartInfoP" Source="L3_ASetup.PartInfoP" dx1="435.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="MID" Source="L3_ASetup.MID" dx1="515.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="OPIDS" Source="L3_ASetup.OPIDS" dx1="605.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="OPParams" Source="L3_ASetup.OPParams" dx1="710.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="Fixture" Source="L3_ASetup.Fixture" dx1="775.0" dx2="0.0" dy="0.0"/>
+    </DataConnections>
+    <EventConnections>
+      <Connection Destination="L3_ASetup.CNF" Source="CNF" dx1="1250.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_ASetup.IND" Source="IND" dx1="1150.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="REQ" Source="L3_ASetup.REQ" dx1="185.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="RSP" Source="L3_ASetup.RSP" dx1="325.0" dx2="0.0" dy="0.0"/>
+    </EventConnections>
+  </FBNetwork>
+</FBType>

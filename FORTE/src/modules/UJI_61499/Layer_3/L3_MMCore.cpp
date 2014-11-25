@@ -75,7 +75,7 @@ void FORTE_L3_MMCore::alg_INIT(void){
   }
 ;
 MachineCounter() = 0;
-QI() = true;
+QO() = true;
 }
 
 void FORTE_L3_MMCore::alg_RSP1(void){

@@ -119,7 +119,7 @@
       <ECTransition Comment="" Condition="1" Destination="STARTTIMER" Source="INIT" x="295.0" y="1030.0"/>
     </ECC>
     <Algorithm Comment="Initialization algorithm" Name="INIT">
-      <ST Text="(*Reset internal variables*)&#10;FOR i := 0 TO 14 DO&#10;&#9;MState[i] := 0;&#10;&#9;MAssignP[i] := 0;&#10;&#9;MPriority[i] := 0;&#10;END_FOR;&#10;MachineCounter := 0;&#10;QI := TRUE;"/>
+      <ST Text="(*Reset internal variables*)&#10;FOR i := 0 TO 14 DO&#10;&#9;MState[i] := 0;&#10;&#9;MAssignP[i] := 0;&#10;&#9;MPriority[i] := 0;&#10;END_FOR;&#10;MachineCounter := 0;&#10;QO := TRUE;"/>
     </Algorithm>
     <Algorithm Comment="Algorithm to update released machines" Name="RSP1">
       <ST Text="(*This algo is in charge of updating the released machines since last time that CORE sequence was executed*)&#10;FOR i := 0 TO 14 DO&#10;&#9;IF MReleased[i] = 2 THEN&#10;&#9;&#9;(*Machine was released*)&#10;&#9;&#9;MState[i] := 2;&#10;&#9;END_IF;&#10;END_FOR;"/>
