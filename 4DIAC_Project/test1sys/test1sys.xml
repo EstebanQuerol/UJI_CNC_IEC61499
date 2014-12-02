@@ -20,6 +20,9 @@
   <application comment="" name="Control_GUI">
     <fBNetwork href="Control_GUI.xml#//@fbNetwork"/>
   </application>
+  <application comment="" name="App_8070_A">
+    <fBNetwork href="App_8070_A.xml#//@fbNetwork"/>
+  </application>
   <systemConfiguration>
     <systemConfigurationNetwork href="SysConf.xml#//@systemConfigNetwork"/>
   </systemConfiguration>
