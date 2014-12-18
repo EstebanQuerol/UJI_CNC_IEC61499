@@ -177,6 +177,6 @@
     <eventConnections source="//@fbNetwork/@fBs.0/@interface/@eventOutputs.2" destination="//@fbNetwork/@fBs.2/@interface/@eventInputs.2"/>
     <eventConnections source="//@fbNetwork/@fBs.1/@interface/@eventOutputs.0" destination="//@fbNetwork/@fBs.0/@interface/@eventInputs.0"/>
     <eventConnections dx2="-77" dy="312" source="//@fbNetwork/@fBs.0/@interface/@eventOutputs.0" destination="//@fbNetwork/@fBs.3/@interface/@eventInputs.0"/>
-    <application href="test1sys.xml#//@application.1"/>
+    <application href="test1sys.xml#//@application.0"/>
   </fbNetwork>
 </org.fordiac.ide.model.ui:UIFBNetwork>

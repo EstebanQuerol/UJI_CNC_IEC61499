@@ -1766,6 +1766,6 @@
       <position x="2197" y="706"/>
       <resource href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork"/>
     </fBs>
-    <application href="test1sys.xml#//@application.4"/>
+    <application href="test1sys.xml#//@application.0"/>
   </fbNetwork>
 </org.fordiac.ide.model.ui:UIFBNetwork>

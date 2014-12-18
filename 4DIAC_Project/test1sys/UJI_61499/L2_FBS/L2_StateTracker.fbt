@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L2_StateTracker">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-12-04" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Service Initialization Request" Name="INIT" Type="Event">
+        <With Var="QI"/>
+      </Event>
+      <Event Comment="Service response to initialization" Name="RSP1" Type="Event">
+        <With Var="QI2"/>
+      </Event>
+      <Event Comment="Service state request response" Name="RSP2" Type="Event">
+        <With Var="ServiceStateIn"/>
+      </Event>
+      <Event Comment="Delay timeout" Name="Timeout" Type="Event"/>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Update Machine state" Name="UPDT" Type="Event">
+        <With Var="ServiceStateOut"/>
+      </Event>
+      <Event Comment="Indicate Service to change state" Name="INITO" Type="Event">
+        <With Var="QO"/>
+      </Event>
+      <Event Comment="Request machine service state" Name="IND" Type="Event">
+        <With Var="QO"/>
+      </Event>
+      <Event Comment="Timeout start" Name="Start" Type="Event">
+        <With Var="Delay"/>
+      </Event>
+      <Event Comment="Timeout stop" Name="Stop" Type="Event"/>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Input event qualifier" Name="QI" Type="BOOL"/>
+      <VarDeclaration Comment="Input event qualifier" Name="QI2" Type="BOOL"/>
+      <VarDeclaration Comment="Machine service state" Name="ServiceStateIn" Type="USINT"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Machine service state" Name="ServiceStateOut" Type="USINT"/>
+      <VarDeclaration Comment="Output event qualifier" Name="QO" Type="BOOL"/>
+      <VarDeclaration Comment="Timeout delay" Name="Delay" Type="TIME"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration Comment="Timeouts counter" InitialValue="0" Name="TOCounter" Type="USINT"/>
+      <VarDeclaration Comment="Maximum number fo timeouts" InitialValue="10" Name="MaxTO" Type="USINT"/>
+      <VarDeclaration Comment="This flag indicates if the service is supposed to be running or not" InitialValue="FALSE" Name="ServiceWorking" Type="BOOL"/>
+    </InternalVars>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="190.0" y="95.0"/>
+      <ECState Comment="Initialization" Name="INIT" x="190.0" y="570.0">
+        <ECAction Algorithm="INIT" Output="INITO"/>
+        <ECAction Output="Stop"/>
+      </ECState>
+      <ECState Comment="Normal execution" Name="UPDT" x="1615.0" y="950.0">
+        <ECAction Output="UPDT"/>
+      </ECState>
+      <ECState Name="InitCompleted" x="1615.0" y="475.0">
+        <ECAction Algorithm="INITO"/>
+      </ECState>
+      <ECState Name="UPD" x="1520.0" y="1235.0">
+        <ECAction Algorithm="UPDT" Output="Stop"/>
+      </ECState>
+      <ECState Name="RequestState" x="190.0" y="1425.0">
+        <ECAction Output="IND"/>
+        <ECAction Algorithm="DT2" Output="Start"/>
+      </ECState>
+      <ECState Name="KeepAlive" x="190.0" y="1045.0">
+        <ECAction Algorithm="DT1" Output="Start"/>
+      </ECState>
+      <ECState Name="Requesting" x="475.0" y="1900.0"/>
+      <ECState Name="TO2" x="380.0" y="2280.0">
+        <ECAction Algorithm="TO2"/>
+      </ECState>
+      <ECState Name="LostCommunication" x="1995.0" y="2090.0">
+        <ECAction Algorithm="LOST"/>
+      </ECState>
+      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="START" x="270.0" y="390.0"/>
+      <ECTransition Comment="" Condition="1" Destination="UPDT" Source="InitCompleted" x="1855.0" y="775.0"/>
+      <ECTransition Comment="" Condition="1" Destination="UPDT" Source="UPD" x="1705.0" y="1160.0"/>
+      <ECTransition Comment="" Condition="1" Destination="Requesting" Source="RequestState" x="525.0" y="1750.0"/>
+      <ECTransition Comment="" Condition="Timeout" Destination="RequestState" Source="KeepAlive" x="315.0" y="1295.0"/>
+      <ECTransition Comment="" Condition="RSP2" Destination="UPD" Source="Requesting" x="1520.0" y="1745.0"/>
+      <ECTransition Comment="" Condition="ServiceWorking = TRUE" Destination="KeepAlive" Source="UPDT" x="645.0" y="900.0"/>
+      <ECTransition Comment="" Condition="RSP1" Destination="InitCompleted" Source="INIT" x="905.0" y="405.0"/>
+      <ECTransition Comment="" Condition="Timeout" Destination="TO2" Source="Requesting" x="635.0" y="2165.0"/>
+      <ECTransition Comment="" Condition="TOCounter &lt;= MaxTO" Destination="RequestState" Source="TO2" x="105.0" y="1930.0"/>
+      <ECTransition Comment="" Condition="TOCounter &gt; MaxTO" Destination="LostCommunication" Source="TO2" x="1160.0" y="2535.0"/>
+      <ECTransition Comment="" Condition="1" Destination="UPDT" Source="LostCommunication" x="2320.0" y="1385.0"/>
+      <ECTransition Comment="" Condition="ServiceWorking = FALSE" Destination="START" Source="UPDT" x="1330.0" y="760.0"/>
+      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="KeepAlive" x="165.0" y="825.0"/>
+      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="Requesting" x="-110.0" y="1075.0"/>
+    </ECC>
+    <Algorithm Comment="Initialization algorithm" Name="INIT">
+      <ST Text="IF QI = TRUE THEN&#10;&#9;QO := TRUE;&#10;ELSE&#10;&#9;QO := FALSE;&#10;END_IF;&#9;"/>
+    </Algorithm>
+    <Algorithm Comment="Update service state algo" Name="UPDT">
+      <ST Text="ServiceStateOut := ServiceStateIn;&#10;(*Reset timeouts counter*)&#10;TOCounter := 0;"/>
+    </Algorithm>
+    <Algorithm Comment="Initialization completed algo" Name="INITO">
+      <ST Text="(*This algo is called once the machine initialization is completed*)&#10;IF QI2 = TRUE THEN&#10;&#9;(*Initialization succed*)&#10;&#9;ServiceStateOut := 1;&#10;&#9;ServiceWorking := TRUE;&#10;ELSE &#10;&#9;ServiceStateOut := 0;&#10;&#9;ServiceWorking := FALSE;&#10;END_IF;"/>
+    </Algorithm>
+    <Algorithm Comment="Keep alive algo" Name="DT1">
+      <ST Text="(*Periodic machine check*)&#10;Delay := TIME#60000ms;"/>
+    </Algorithm>
+    <Algorithm Comment="REQS algo" Name="DT2">
+      <ST Text="(*A Machine is expected to answer within a second to a request state event*)&#10;Delay := TIME#1000ms;"/>
+    </Algorithm>
+    <Algorithm Comment="Algorithm to control the number fo timeouts while requesting the service state" Name="TO2">
+      <ST Text="TOCounter := TOCounter + 1;"/>
+    </Algorithm>
+    <Algorithm Comment="lost communication algo" Name="LOST">
+      <ST Text="(*We lost the communication with the Machine service*)&#10;ServiceStateOut :=  0;&#10;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

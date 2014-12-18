@@ -1060,6 +1060,6 @@
       <position x="19" y="68"/>
       <resource href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.2/@fBNetwork"/>
     </fBs>
-    <application href="test1sys.xml#//@application.2"/>
+    <application href="test1sys.xml#//@application.0"/>
   </fbNetwork>
 </org.fordiac.ide.model.ui:UIFBNetwork>
