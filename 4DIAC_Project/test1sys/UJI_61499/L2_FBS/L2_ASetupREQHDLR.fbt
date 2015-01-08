@@ -12,9 +12,7 @@
       </Event>
       <Event Comment="Normal Execution Request" Name="REQ" Type="Event">
         <With Var="PartInfoIn"/>
-        <With Var="FixtureIn"/>
-        <With Var="OPParamsIn"/>
-        <With Var="OPIDIn"/>
+        <With Var="SetupIn"/>
         <With Var="MIDIn"/>
       </Event>
     </EventInputs>
@@ -25,9 +23,7 @@
       <Event Comment="Execution Confirmation" Name="CNF" Type="Event">
         <With Var="PartInfoOut"/>
         <With Var="MIDOut"/>
-        <With Var="OPIDOut"/>
-        <With Var="FixtureOut"/>
-        <With Var="OPParamsOut"/>
+        <With Var="SetupOut"/>
       </Event>
     </EventOutputs>
     <InputVars>
@@ -35,17 +31,13 @@
       <VarDeclaration Comment="Machine identifier" Name="MID" Type="USINT"/>
       <VarDeclaration ArraySize="3" Comment="Part ID, family and type" Name="PartInfoIn" Type="UINT"/>
       <VarDeclaration Comment="Machine identifier" Name="MIDIn" Type="USINT"/>
-      <VarDeclaration ArraySize="20" Comment="Operation identifiers vector" Name="OPIDIn" Type="UINT"/>
-      <VarDeclaration ArraySize="20" Comment="Operation parameters" Name="OPParamsIn" Type="STRING"/>
-      <VarDeclaration Comment="Setup fixture" Name="FixtureIn" Type="STRING"/>
+      <VarDeclaration Comment="Subphase to execute" Name="SetupIn" Type="STRING"/>
     </InputVars>
     <OutputVars>
       <VarDeclaration Name="QO" Type="BOOL"/>
       <VarDeclaration Comment="Machine identifier" Name="MIDOut" Type="USINT"/>
-      <VarDeclaration ArraySize="4" Comment="Part identifier, family and type" Name="PartInfoOut" Type="UINT"/>
-      <VarDeclaration ArraySize="20" Comment="Operation identifiers" Name="OPIDOut" Type="UINT"/>
-      <VarDeclaration ArraySize="20" Comment="Operation parameters" Name="OPParamsOut" Type="STRING"/>
-      <VarDeclaration Comment="Setupfixture" Name="FixtureOut" Type="STRING"/>
+      <VarDeclaration ArraySize="3" Comment="Part identifier, family and type" Name="PartInfoOut" Type="UINT"/>
+      <VarDeclaration Comment="Subphase to execute" Name="SetupOut" Type="STRING"/>
     </OutputVars>
   </InterfaceList>
   <BasicFB>
@@ -77,7 +69,7 @@
       <ST Text="QO := QI;&#10;MIDOut := MID;"/>
     </Algorithm>
     <Algorithm Comment="Normally executed algorithm" Name="REQ">
-      <ST Text="IF MIDIn = MID THEN&#10;&#9;(*The received packet is for this machine, map outputs*)&#10;&#9;Accepted := TRUE;&#10;&#9;PartInfoOut[3] := 0;&#10;&#9;PartInfoOut[0] := PartInfoIn[0];&#10;&#9;PartInfoOut[1] := PartInfoIn[1];&#10;&#9;PartInfoOut[2] := PartInfoIn[2];&#10;&#9;FOR i :=0 TO 19 DO&#10;&#9;&#9;OPIDOut[i] := OPIDIn[i];&#10;&#9;&#9;OPParamsOut[i] := OPParamsIn[i];&#10;&#9;&#9;IF OPIDOut[i] &lt;&gt;0 THEN&#10;&#9;&#9;&#9;//Count the number of operations in the setup&#10;&#9;&#9;&#9;PartInfoOut[3] := PartInfoOut[3] + 1;&#10;&#9;&#9;END_IF;&#10;&#9;END_FOR;&#10;&#9;FixtureOut := FixtureIn;&#10;ELSE&#10;&#9;Accepted := FALSE;&#10;END_IF;"/>
+      <ST Text="IF MIDIn = MID THEN&#10;&#9;(*The received packet is for this machine, map outputs*)&#10;&#9;Accepted := TRUE;&#10;&#9;PartInfoOut[0] := PartInfoIn[0];&#10;&#9;PartInfoOut[1] := PartInfoIn[1];&#10;&#9;PartInfoOut[2] := PartInfoIn[2];&#10;&#9;SetupOut :=SetupIn;&#10;ELSE&#10;&#9;Accepted := FALSE;&#10;END_IF;"/>
     </Algorithm>
   </BasicFB>
 </FBType>

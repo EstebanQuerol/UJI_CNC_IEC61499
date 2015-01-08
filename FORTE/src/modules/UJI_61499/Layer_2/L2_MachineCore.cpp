@@ -16,35 +16,35 @@
 
 DEFINE_FIRMWARE_FB(FORTE_L2_MachineCore, g_nStringIdL2_MachineCore)
 
-const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anDataInputNames[] = {g_nStringIdServiceState, g_nStringIdPartInfoIn, g_nStringIdENDOPID};
+const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anDataInputNames[] = {g_nStringIdServiceState, g_nStringIdPartInfoIn, g_nStringIdENDOPID, g_nStringIdENDSetupID};
 
-const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anDataInputTypeIds[] = {g_nStringIdUSINT, g_nStringIdARRAY, 4, g_nStringIdUINT, g_nStringIdUSINT};
+const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anDataInputTypeIds[] = {g_nStringIdUSINT, g_nStringIdARRAY, 4, g_nStringIdUINT, g_nStringIdUSINT, g_nStringIdUSINT};
 
-const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anDataOutputNames[] = {g_nStringIdNextOP, g_nStringIdPartInfoOut, g_nStringIdENDID, g_nStringIdMachineState, g_nStringIdDelay};
+const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anDataOutputNames[] = {g_nStringIdNextCode, g_nStringIdPartInfoOut, g_nStringIdENDID, g_nStringIdMachineState, g_nStringIdDelay};
 
 const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anDataOutputTypeIds[] = {g_nStringIdUSINT, g_nStringIdARRAY, 3, g_nStringIdUINT, g_nStringIdUSINT, g_nStringIdBOOL, g_nStringIdTIME};
 
-const TForteInt16 FORTE_L2_MachineCore::scm_anEIWithIndexes[] = {0, 2, -1, -1, 4};
-const TDataIOID FORTE_L2_MachineCore::scm_anEIWith[] = {0, 255, 1, 255, 2, 255};
-const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anEventInputNames[] = {g_nStringIdUPDT, g_nStringIdREQ, g_nStringIdRSP, g_nStringIdtimeout, g_nStringIdCompletedOP};
+const TForteInt16 FORTE_L2_MachineCore::scm_anEIWithIndexes[] = {0, 2, -1, -1, 4, 6};
+const TDataIOID FORTE_L2_MachineCore::scm_anEIWith[] = {0, 255, 1, 255, 2, 255, 3, 255};
+const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anEventInputNames[] = {g_nStringIdUPDT, g_nStringIdREQ, g_nStringIdRSP, g_nStringIdtimeout, g_nStringIdCompletedOP, g_nStringIdCompletedSetup};
 
 const TDataIOID FORTE_L2_MachineCore::scm_anEOWith[] = {0, 255, 1, 255, 1, 2, 255, 3, 255, 4, 255};
 const TForteInt16 FORTE_L2_MachineCore::scm_anEOWithIndexes[] = {-1, 0, 2, 4, -1, 7, 9, -1, -1};
 const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anEventOutputNames[] = {g_nStringIdRENEW, g_nStringIdNEXT, g_nStringIdCNF, g_nStringIdIND, g_nStringIdFREE, g_nStringIdERROR, g_nStringIdstart, g_nStringIdstop};
 
-const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anInternalsNames[] = {g_nStringIdState, g_nStringIdCurrentPart, g_nStringIdCurrentFamily, g_nStringIdCurrentType, g_nStringIdLostCNF, g_nStringIdisCompleted, g_nStringIdCurrentOP, g_nStringIdMaxOP, g_nStringIdinError};
+const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anInternalsNames[] = {g_nStringIdState, g_nStringIdCurrentPart, g_nStringIdCurrentFamily, g_nStringIdCurrentType, g_nStringIdLostCNF, g_nStringIdinError};
 
-const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anInternalsTypeIds[] = {g_nStringIdUSINT, g_nStringIdUINT, g_nStringIdUINT, g_nStringIdUINT, g_nStringIdBOOL, g_nStringIdBOOL, g_nStringIdUSINT, g_nStringIdUSINT, g_nStringIdBOOL};
+const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anInternalsTypeIds[] = {g_nStringIdUSINT, g_nStringIdUINT, g_nStringIdUINT, g_nStringIdUINT, g_nStringIdBOOL, g_nStringIdBOOL};
 
 const SFBInterfaceSpec FORTE_L2_MachineCore::scm_stFBInterfaceSpec = {
-  5,  scm_anEventInputNames,  scm_anEIWith,  scm_anEIWithIndexes,
-  8,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  3,  scm_anDataInputNames, scm_anDataInputTypeIds,
+  6,  scm_anEventInputNames,  scm_anEIWith,  scm_anEIWithIndexes,
+  8,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  4,  scm_anDataInputNames, scm_anDataInputTypeIds,
   5,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
   0, 0
 };
 
 
-const SInternalVarsInformation FORTE_L2_MachineCore::scm_stInternalVars = {9, scm_anInternalsNames, scm_anInternalsTypeIds};
+const SInternalVarsInformation FORTE_L2_MachineCore::scm_stInternalVars = {6, scm_anInternalsNames, scm_anInternalsTypeIds};
 
 
 void FORTE_L2_MachineCore::setInitialValues(){
@@ -54,9 +54,6 @@ void FORTE_L2_MachineCore::setInitialValues(){
   CurrentFamily() = 0;
   CurrentType() = 0;
   LostCNF() = false;
-  isCompleted() = true;
-  CurrentOP() = 0;
-  MaxOP() = 0;
   inError() = false;
 }
 
@@ -66,8 +63,7 @@ void FORTE_L2_MachineCore::alg_REQ(void){
 CurrentPart() = PartInfoIn()[0];
 CurrentFamily() = PartInfoIn()[1];
 CurrentType() = PartInfoIn()[2];
-MaxOP() = PartInfoIn()[3];
-CurrentOP() = 0;// Reset operation counter index	ENDOPID() = 0;
+ENDOPID() = 0;
 }
 
 void FORTE_L2_MachineCore::alg_UPDT(void){
@@ -84,35 +80,9 @@ else
 inError() = false;
 }
 
-void FORTE_L2_MachineCore::alg_NEXT(void){
-/* Verify if last operation succed*/
-if((ENDOPID() == 1)){
-	/* Last operation didn't success but it can be redone*/
-	CurrentOP() = CurrentOP()-1;
-}
-else
-  if((ENDOPID() == 2)){
-	/* Last operation didn't success and it can't be redone*/
-	isCompleted() = true;
-	ENDID() = 2;
-	return;
-};
-
-if((CurrentOP() <= MaxOP())){
-	/* More operations to be executed*/
-	isCompleted() = false;
-}
-else{
-	/* The setup is completed, release the part*/
-	isCompleted() = true;
-	ENDID() = 0;
-};
-}
-
 void FORTE_L2_MachineCore::alg_SENDOP(void){
 /* Post-incremented index*/
-CurrentOP() = CurrentOP()+1;
-NextOP() = CurrentOP()-1;
+ENDOPID() = NextCode();
 }
 
 void FORTE_L2_MachineCore::alg_CNF(void){
@@ -134,13 +104,14 @@ else{
 }
 
 void FORTE_L2_MachineCore::alg_DT(void){
-Delay() = CIEC_TIME("300ms");
+Delay() = CIEC_TIME("TIME#300ms");
 }
 
 void FORTE_L2_MachineCore::alg_IND(void){
 PartInfoOut()[0] = CurrentPart();
 PartInfoOut()[1] = CurrentFamily();
 PartInfoOut()[2] = CurrentType();
+ENDOPID() = ENDSetupID();
 }
 
 void FORTE_L2_MachineCore::alg_EIE(void){
@@ -187,11 +158,6 @@ void FORTE_L2_MachineCore::enterStateREQ(void){
 
 void FORTE_L2_MachineCore::enterStateExecuting(void){
   m_nECCState = scm_nStateExecuting;
-}
-
-void FORTE_L2_MachineCore::enterStateNextOP(void){
-  m_nECCState = scm_nStateNextOP;
-  alg_NEXT();
 }
 
 void FORTE_L2_MachineCore::enterStateCompleted(void){
@@ -271,27 +237,21 @@ void FORTE_L2_MachineCore::executeEvent(int pa_nEIID){
         break;
       case scm_nStateREQ:
         if(1)
-          enterStateNextOP();
+          enterStateSendNext();
         else
           bTransitionCleared  = false; //no transition cleared
         break;
       case scm_nStateExecuting:
-        if(scm_nEventCompletedOPID == pa_nEIID)
-          enterStateNextOP();
-        else
         if(scm_nEventREQID == pa_nEIID)
           enterStateNewREQ();
         else
         if((scm_nEventUPDTID == pa_nEIID) && (ServiceState() == 0))
           enterStateErroInExecution();
         else
-          bTransitionCleared  = false; //no transition cleared
-        break;
-      case scm_nStateNextOP:
-        if(isCompleted() == true)
+        if(scm_nEventCompletedSetupID == pa_nEIID)
           enterStateCompleted();
         else
-        if(isCompleted() == false)
+        if(scm_nEventCompletedOPID == pa_nEIID)
           enterStateSendNext();
         else
           bTransitionCleared  = false; //no transition cleared
@@ -351,7 +311,7 @@ void FORTE_L2_MachineCore::executeEvent(int pa_nEIID){
           bTransitionCleared  = false; //no transition cleared
         break;
       default:
-      DEVLOG_ERROR("The state is not in the valid range! The state value is: %d. The max value can be: 13.", m_nECCState.operator TForteUInt16 ());
+      DEVLOG_ERROR("The state is not in the valid range! The state value is: %d. The max value can be: 12.", m_nECCState.operator TForteUInt16 ());
         m_nECCState = 0; //0 is always the initial state
         break;
     }

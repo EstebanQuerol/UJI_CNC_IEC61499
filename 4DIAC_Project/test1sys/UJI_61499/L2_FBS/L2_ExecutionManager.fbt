@@ -1,46 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
-<FBType Comment="Service Interface Function Block Type" Name="L3_SetupTable">
+<FBType Comment="Service Interface Function Block Type" Name="L2_ExecutionManager">
   <Identification Standard="61499-2"/>
-  <VersionInfo Author="EQUEROL" Date="2014-10-28" Organization="UJI" Version="0.0"/>
-  <VersionInfo Author="EQUEROL" Date="2015-01-08" Organization="UJI" Remarks="modified data outputs" Version="1.0"/>
+  <VersionInfo Author="EQUEROL" Date="2015-01-08" Organization="UJI" Version="0.0"/>
   <CompilerInfo/>
   <InterfaceList>
     <EventInputs>
       <Event Comment="Service Initialization" Name="INIT" Type="Event">
         <With Var="QI"/>
-        <With Var="Family"/>
-        <With Var="Type"/>
+        <With Var="Setup"/>
       </Event>
-      <Event Comment="Service Request" Name="REQ" Type="Event">
-        <With Var="PartID"/>
-        <With Var="SetupID"/>
-        <With Var="MID"/>
+      <Event Comment="Start a new setup" Name="RENEW" Type="Event">
+        <With Var="Setup"/>
+      </Event>
+      <Event Comment="Execute next operation in the setup" Name="NEXT" Type="Event">
+        <With Var="NextCode"/>
       </Event>
     </EventInputs>
     <EventOutputs>
       <Event Comment="Initialization Confirm" Name="INITO" Type="Event">
         <With Var="QO"/>
       </Event>
-      <Event Comment="Confirmation of Requested Service" Name="CNF" Type="Event">
-        <With Var="PartInfo"/>
-        <With Var="MID2"/>
-        <With Var="Setup"/>
+      <Event Comment="Execute next operation" Name="ExecuteOP" Type="Event">
+        <With Var="Operation"/>
+      </Event>
+      <Event Comment="Indication from Resource" Name="IND" Type="Event">
+        <With Var="QO"/>
       </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration Comment="Event Input Qualifier" Name="QI" Type="BOOL"/>
-      <VarDeclaration Comment="Process plan family" Name="Family" Type="UINT"/>
-      <VarDeclaration Comment="Proces plan type" Name="Type" Type="UINT"/>
-      <VarDeclaration Comment="Part to be assigned identifier" Name="PartID" Type="UINT"/>
-      <VarDeclaration Comment="Setup identifier" Name="SetupID" Type="USINT"/>
-      <VarDeclaration Comment="Destination machine identifier" Name="MID" Type="USINT"/>
+      <VarDeclaration Comment="Setup to be executed" Name="Setup" Type="STRING"/>
+      <VarDeclaration Comment="Variable to track errors on previous operations" Name="NextCode" Type="USINT"/>
     </InputVars>
     <OutputVars>
       <VarDeclaration Comment="Event Output Qualifier" Name="QO" Type="BOOL"/>
-      <VarDeclaration ArraySize="3" Comment="Part ID, Part family, Part type" Name="PartInfo" Type="UINT"/>
-      <VarDeclaration Comment="Destination machine identifier" Name="MID2" Type="USINT"/>
-      <VarDeclaration Comment="Subphase of the process plan to be executed " Name="Setup" Type="STRING"/>
+      <VarDeclaration Comment="Next operation information" Name="Operation" Type="STRING"/>
     </OutputVars>
   </InterfaceList>
   <Service Comment="Service Interface Function Block Type" LeftInterface="APPLICATION" RightInterface="RESOURCE">

@@ -1,5 +1,7 @@
 #include "PP_DDBB.h"
-
+//Initialize static members
+std::unordered_map<TForteUInt16, PP_Family> PP_DDBB::sm_umapFamilyMap;
+bool PP_DDBB::sm_bInitialized = FALSE; //Initialization flag
 
 PP_DDBB::PP_DDBB()
 {

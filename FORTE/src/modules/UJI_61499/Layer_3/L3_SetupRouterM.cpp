@@ -67,26 +67,7 @@ if((ASetup().MID() == SelMachine())){
   }
 ;
 	ASetup1().MID() = ASetup().MID();
-	  {
-    bool isi_Up = ((1) > 0);
-    i() = 0;
-    while(!(((isi_Up) && (i() > (19))) ||
-            ((!isi_Up) && (i() < (19))))){
-
-		ASetup1().OPIDS()[i()] = ASetup().OPIDS()[i()];
-		ASetup1().OPParams()[i()] = ASetup().OPParams()[i()];
-	
-      if(((isi_Up) && ((1) > 0)) || 
-         ((!isi_Up) && ((1) < 0))){
-        i() = i() + (1);
-      }
-      else{
-        i() = i() - (1);
-      }
-    }
-  }
-;
-	ASetup1().Fixture() = ASetup().Fixture();
+	ASetup1().Setup() = ASetup().Setup();
 }
 else{
 	Select() = false;
@@ -109,26 +90,7 @@ else{
   }
 ;
 	ASetup2().MID() = ASetup().MID();
-	  {
-    bool isi_Up = ((1) > 0);
-    i() = 0;
-    while(!(((isi_Up) && (i() > (19))) ||
-            ((!isi_Up) && (i() < (19))))){
-
-		ASetup2().OPIDS()[i()] = ASetup().OPIDS()[i()];
-		ASetup2().OPParams()[i()] = ASetup().OPParams()[i()];
-	
-      if(((isi_Up) && ((1) > 0)) || 
-         ((!isi_Up) && ((1) < 0))){
-        i() = i() + (1);
-      }
-      else{
-        i() = i() - (1);
-      }
-    }
-  }
-;
-	ASetup2().Fixture() = ASetup().Fixture();
+ASetup2().Setup() = ASetup().Setup();
 };
 }
 

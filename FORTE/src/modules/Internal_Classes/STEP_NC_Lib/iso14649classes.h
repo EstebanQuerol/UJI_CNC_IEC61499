@@ -1,4 +1,5 @@
-
+#ifndef _ISO14649CLASSES_H_
+#define _ISO14649CLASSES_H_
 /************************************************************************
   DISCLAIMER:
   This software was produced by the National Institute of Standards
@@ -16484,4 +16485,4 @@ public:
 };
 
 /********************************************************************/
-
+#endif

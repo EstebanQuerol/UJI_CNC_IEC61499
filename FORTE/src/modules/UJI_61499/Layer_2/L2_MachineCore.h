@@ -13,10 +13,10 @@
 #define _L2_MACHINECORE_H_
 
 #include <basicfb.h>
-#include <forte_time.h>
 #include <forte_usint.h>
-#include <forte_uint.h>
 #include <forte_bool.h>
+#include <forte_time.h>
+#include <forte_uint.h>
 #include <forte_array.h>
 
 class FORTE_L2_MachineCore: public CBasicFB{
@@ -41,9 +41,13 @@ private:
     return *static_cast<CIEC_USINT*>(getDI(2));
   };
 
+  CIEC_USINT &ENDSetupID() {
+    return *static_cast<CIEC_USINT*>(getDI(3));
+  };
+
   static const CStringDictionary::TStringId scm_anDataOutputNames[];
   static const CStringDictionary::TStringId scm_anDataOutputTypeIds[];
-  CIEC_USINT &NextOP() {
+  CIEC_USINT &NextCode() {
     return *static_cast<CIEC_USINT*>(getDO(0));
   };
 
@@ -72,6 +76,7 @@ private:
   static const TEventID scm_nEventRSPID = 2;
   static const TEventID scm_nEventtimeoutID = 3;
   static const TEventID scm_nEventCompletedOPID = 4;
+  static const TEventID scm_nEventCompletedSetupID = 5;
   static const TForteInt16 scm_anEIWithIndexes[];
   static const TDataIOID scm_anEIWith[];
   static const CStringDictionary::TStringId scm_anEventInputNames[];
@@ -110,20 +115,8 @@ private:
     return *static_cast<CIEC_BOOL*>(getVarInternal(4));
   };
 
-  CIEC_BOOL &isCompleted() {
-    return *static_cast<CIEC_BOOL*>(getVarInternal(5));
-  };
-
-  CIEC_USINT &CurrentOP() {
-    return *static_cast<CIEC_USINT*>(getVarInternal(6));
-  };
-
-  CIEC_USINT &MaxOP() {
-    return *static_cast<CIEC_USINT*>(getVarInternal(7));
-  };
-
   CIEC_BOOL &inError() {
-    return *static_cast<CIEC_BOOL*>(getVarInternal(8));
+    return *static_cast<CIEC_BOOL*>(getVarInternal(5));
   };
 
   static const SFBInterfaceSpec scm_stFBInterfaceSpec;
@@ -131,12 +124,11 @@ private:
 
   static const SInternalVarsInformation scm_stInternalVars;
 
-   FORTE_BASIC_FB_DATA_ARRAY(8, 3, 5, 9, 0);
+   FORTE_BASIC_FB_DATA_ARRAY(8, 4, 5, 6, 0);
 
 virtual void setInitialValues();
   void alg_REQ(void);
   void alg_UPDT(void);
-  void alg_NEXT(void);
   void alg_SENDOP(void);
   void alg_CNF(void);
   void alg_NEWREQ(void);
@@ -150,14 +142,13 @@ virtual void setInitialValues();
   static const TForteInt16 scm_nStatetoError = 3;
   static const TForteInt16 scm_nStateREQ = 4;
   static const TForteInt16 scm_nStateExecuting = 5;
-  static const TForteInt16 scm_nStateNextOP = 6;
-  static const TForteInt16 scm_nStateCompleted = 7;
-  static const TForteInt16 scm_nStateSendNext = 8;
-  static const TForteInt16 scm_nStateNewREQ = 9;
-  static const TForteInt16 scm_nStateLostCNF = 10;
-  static const TForteInt16 scm_nStateWAIT = 11;
-  static const TForteInt16 scm_nStateRSP = 12;
-  static const TForteInt16 scm_nStateErroInExecution = 13;
+  static const TForteInt16 scm_nStateCompleted = 6;
+  static const TForteInt16 scm_nStateSendNext = 7;
+  static const TForteInt16 scm_nStateNewREQ = 8;
+  static const TForteInt16 scm_nStateLostCNF = 9;
+  static const TForteInt16 scm_nStateWAIT = 10;
+  static const TForteInt16 scm_nStateRSP = 11;
+  static const TForteInt16 scm_nStateErroInExecution = 12;
 
   void enterStateNotReady(void);
   void enterStateToReady(void);
@@ -165,7 +156,6 @@ virtual void setInitialValues();
   void enterStatetoError(void);
   void enterStateREQ(void);
   void enterStateExecuting(void);
-  void enterStateNextOP(void);
   void enterStateCompleted(void);
   void enterStateSendNext(void);
   void enterStateNewREQ(void);

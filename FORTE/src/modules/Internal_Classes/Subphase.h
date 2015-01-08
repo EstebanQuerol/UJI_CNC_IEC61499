@@ -11,7 +11,7 @@
 #include <vector>
 #include "Operation.h"
 #include <string>
-#include "iso14649classes.hh"
+#include "iso14649classes.h"
 class Subphase
 {
 private :
@@ -20,6 +20,7 @@ private :
 public:
 	Subphase(TForteUInt8 pa_nMTypeID,workplan * pa_poWorkplan);
 	Subphase(const Subphase &pa_Subphase);
+	Subphase::Subphase();
 	~Subphase();
 	/*!\Get Subphase Type
 	*	Inlined function

@@ -7,6 +7,7 @@
  *** Description: Composite Function Block Type
  *** Version: 
  ***     0.0: 2014-11-25/EQUEROL - UJI - 
+ ***     1.0: 2015-01-08/EQUEROL - UJI - modified adapter definition
  *************************************************************************/
 
 #ifndef _L3_L2COMMPLUG_H_
@@ -15,8 +16,8 @@
 #include <cfb.h>
 #include <typelib.h>
 #include <forte_usint.h>
-#include <forte_uint.h>
 #include <forte_string.h>
+#include <forte_uint.h>
 #include <forte_array.h>
 #include "L3_ASetup.h"
 
@@ -52,24 +53,8 @@ private:
     return *static_cast<CIEC_USINT*>(getDO(1));
   };
 
-  CIEC_UINT *OPIDS() {
-    return (CIEC_UINT*)(*static_cast<CIEC_ARRAY *>(getDO(2)))[0]; //the first element marks the start of the array
-  };
-
-  CIEC_ARRAY &OPIDS_Array() {
-    return *static_cast<CIEC_ARRAY*>(getDO(2));
-  };
-
-  CIEC_STRING *OPParams() {
-    return (CIEC_STRING*)(*static_cast<CIEC_ARRAY *>(getDO(3)))[0]; //the first element marks the start of the array
-  };
-
-  CIEC_ARRAY &OPParams_Array() {
-    return *static_cast<CIEC_ARRAY*>(getDO(3));
-  };
-
-  CIEC_STRING &Fixture() {
-    return *static_cast<CIEC_STRING*>(getDO(4));
+  CIEC_STRING &Setup() {
+    return *static_cast<CIEC_STRING*>(getDO(2));
   };
 
   static const TEventID scm_nEventCNFID = 0;
@@ -92,7 +77,7 @@ private:
   static const int scm_nL3_ASetupAdpNum = 0;
   static const SFBInterfaceSpec scm_stFBInterfaceSpec;
 
-   FORTE_FB_DATA_ARRAY(2, 2, 5, 1);
+   FORTE_FB_DATA_ARRAY(2, 2, 3, 1);
 
   static const SCFB_FBConnectionData scm_astEventConnections[];
 

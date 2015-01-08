@@ -10,7 +10,7 @@
   See NIST Administration Manual 4.09.07 b and Appendix I.
 ************************************************************************/
 
-#include "iso14649classesDirect.hh"
+#include "iso14649classes.h"
 #include <stdio.h>   // for printf, etc.
 
 void printDouble(
@@ -86,6 +86,23 @@ void inputFile::printSelf()
   inputEnd->printSelf();
 }
 
+fileStart * inputFile::get_inputStart()
+  {return inputStart;}
+void inputFile::set_inputStart(fileStart * inputStartIn)
+  {inputStart = inputStartIn;}
+headerSection * inputFile::get_inputHeader()
+  {return inputHeader;}
+void inputFile::set_inputHeader(headerSection * inputHeaderIn)
+  {inputHeader = inputHeaderIn;}
+dataSection * inputFile::get_inputData()
+  {return inputData;}
+void inputFile::set_inputData(dataSection * inputDataIn)
+  {inputData = inputDataIn;}
+fileEnd * inputFile::get_inputEnd()
+  {return inputEnd;}
+void inputFile::set_inputEnd(fileEnd * inputEndIn)
+  {inputEnd = inputEndIn;}
+
 /********************************************************************/
 
 /* instance */
@@ -98,6 +115,9 @@ instance::instance(instanceId * iIdIn)
 }
 
 instance::~instance(){}
+
+instanceId * instance::get_iId(){return iId;}
+void instance::set_iId(instanceId * iIdIn){iId = iIdIn;}
 
 /********************************************************************/
 
@@ -219,6 +239,55 @@ void address::printSelf()
   printf(")");
 }
 
+aString * address::get_internalLocation()
+  {return internalLocation;}
+void address::set_internalLocation(aString * internalLocationIn)
+  {internalLocation = internalLocationIn;}
+aString * address::get_streetNumber()
+  {return streetNumber;}
+void address::set_streetNumber(aString * streetNumberIn)
+  {streetNumber = streetNumberIn;}
+aString * address::get_street()
+  {return street;}
+void address::set_street(aString * streetIn)
+  {street = streetIn;}
+aString * address::get_postalBox()
+  {return postalBox;}
+void address::set_postalBox(aString * postalBoxIn)
+  {postalBox = postalBoxIn;}
+aString * address::get_town()
+  {return town;}
+void address::set_town(aString * townIn)
+  {town = townIn;}
+aString * address::get_region()
+  {return region;}
+void address::set_region(aString * regionIn)
+  {region = regionIn;}
+aString * address::get_postalCode()
+  {return postalCode;}
+void address::set_postalCode(aString * postalCodeIn)
+  {postalCode = postalCodeIn;}
+aString * address::get_country()
+  {return country;}
+void address::set_country(aString * countryIn)
+  {country = countryIn;}
+aString * address::get_facsimileNumber()
+  {return facsimileNumber;}
+void address::set_facsimileNumber(aString * facsimileNumberIn)
+  {facsimileNumber = facsimileNumberIn;}
+aString * address::get_telephoneNumber()
+  {return telephoneNumber;}
+void address::set_telephoneNumber(aString * telephoneNumberIn)
+  {telephoneNumber = telephoneNumberIn;}
+aString * address::get_electronicMailAddress()
+  {return electronicMailAddress;}
+void address::set_electronicMailAddress(aString * electronicMailAddressIn)
+  {electronicMailAddress = electronicMailAddressIn;}
+aString * address::get_telexNumber()
+  {return telexNumber;}
+void address::set_telexNumber(aString * telexNumberIn)
+  {telexNumber = telexNumberIn;}
+
 /********************************************************************/
 
 /* aheadOrBehind */
@@ -311,6 +380,11 @@ approachRetractStrategy::~approachRetractStrategy(){}
 int approachRetractStrategy::isA(int aType)
     { return (aType == approachRetractStrategy_E); }
 
+direction * approachRetractStrategy::get_toolOrientation()
+  {return toolOrientation;}
+void approachRetractStrategy::set_toolOrientation(direction * toolOrientationIn)
+  {toolOrientation = toolOrientationIn;}
+
 /********************************************************************/
 
 /* approval */
@@ -337,11 +411,20 @@ void approval::printSelf()
 {
   printf("APPROVAL");
   printf("(");
-  status->iId->printSelf();
+  status->get_iId()->printSelf();
   printf(",");
   printString(level);
   printf(")");
 }
+
+approvalStatus * approval::get_status()
+  {return status;}
+void approval::set_status(approvalStatus * statusIn)
+  {status = statusIn;}
+char * approval::get_level()
+  {return level;}
+void approval::set_level(char * levelIn)
+  {level = levelIn;}
 
 /********************************************************************/
 
@@ -371,6 +454,11 @@ void approvalStatus::printSelf()
   printf(")");
 }
 
+char * approvalStatus::get_name()
+  {return name;}
+void approvalStatus::set_name(char * nameIn)
+  {name = nameIn;}
+
 /********************************************************************/
 
 /* aString */
@@ -395,6 +483,11 @@ void aString::printSelf()
 {
   printString(theString);
 }
+
+char * aString::get_theString()
+  {return theString;}
+void aString::set_theString(char * theStringIn)
+  {theString = theStringIn;}
 
 /********************************************************************/
 
@@ -946,6 +1039,11 @@ void channel::printSelf()
   printf(")");
 }
 
+char * channel::get_itsId()
+  {return itsId;}
+void channel::set_itsId(char * itsIdIn)
+  {itsId = itsIdIn;}
+
 /********************************************************************/
 
 /* circularOffset */
@@ -977,6 +1075,15 @@ void circularOffset::printSelf()
   printf(")");
 }
 
+double circularOffset::get_angularOffset()
+  {return angularOffset;}
+void circularOffset::set_angularOffset(double angularOffsetIn)
+  {angularOffset = angularOffsetIn;}
+int circularOffset::get_index()
+  {return index;}
+void circularOffset::set_index(int indexIn)
+  {index = indexIn;}
+
 /********************************************************************/
 
 /* circularOmit */
@@ -1004,6 +1111,11 @@ void circularOmit::printSelf()
   printf(")");
 }
 
+int circularOmit::get_index()
+  {return index;}
+void circularOmit::set_index(int indexIn)
+  {index = indexIn;}
+
 /********************************************************************/
 
 /* comparisonExpression */
@@ -1024,6 +1136,15 @@ int comparisonExpression::isA(int aType)
     { return ((aType == comparisonExpression_E) ||
 	      (aType == booleanExpression_E));
     }
+
+ncVariable * comparisonExpression::get_operand1()
+  {return operand1;}
+void comparisonExpression::set_operand1(ncVariable * operand1In)
+  {operand1 = operand1In;}
+rvalue * comparisonExpression::get_operand2()
+  {return operand2;}
+void comparisonExpression::set_operand2(rvalue * operand2In)
+  {operand2 = operand2In;}
 
 /********************************************************************/
 
@@ -1058,9 +1179,22 @@ void compositeCurveSegment::printSelf()
   printf(",");
   sameSense->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(parentCurve))->iId->printSelf();
+  (dynamic_cast<instance *>(parentCurve))->get_iId()->printSelf();
   printf(")");
 }
+
+transitionCode * compositeCurveSegment::get_transition()
+  {return transition;}
+void compositeCurveSegment::set_transition(transitionCode * transitionIn)
+  {transition = transitionIn;}
+boolean * compositeCurveSegment::get_sameSense()
+  {return sameSense;}
+void compositeCurveSegment::set_sameSense(boolean * sameSenseIn)
+  {sameSense = sameSenseIn;}
+curve * compositeCurveSegment::get_parentCurve()
+  {return parentCurve;}
+void compositeCurveSegment::set_parentCurve(curve * parentCurveIn)
+  {parentCurve = parentCurveIn;}
 
 /********************************************************************/
 
@@ -1165,6 +1299,19 @@ void coordinatedUniversalTimeOffset::printSelf()
   sense->printSelf();
   printf(")");
 }
+
+int coordinatedUniversalTimeOffset::get_hourOffset()
+  {return hourOffset;}
+void coordinatedUniversalTimeOffset::set_hourOffset(int hourOffsetIn)
+  {hourOffset = hourOffsetIn;}
+integer * coordinatedUniversalTimeOffset::get_minuteOffset()
+  {return minuteOffset;}
+void coordinatedUniversalTimeOffset::set_minuteOffset(integer * minuteOffsetIn)
+  {minuteOffset = minuteOffsetIn;}
+aheadOrBehind * coordinatedUniversalTimeOffset::get_sense()
+  {return sense;}
+void coordinatedUniversalTimeOffset::set_sense(aheadOrBehind * senseIn)
+  {sense = senseIn;}
 
 /********************************************************************/
 
@@ -1285,12 +1432,12 @@ void cutterContactTrajectory::printSelf()
     printf("$");
   printf(",");
   if (itsTechnology)
-    (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+    (dynamic_cast<instance *>(itsTechnology))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   if (itsMachineFunctions)
-    (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+    (dynamic_cast<instance *>(itsMachineFunctions))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
@@ -1299,10 +1446,10 @@ void cutterContactTrajectory::printSelf()
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(basiccurve))->iId->printSelf();
+  (dynamic_cast<instance *>(basiccurve))->get_iId()->printSelf();
   printf(",");
   if (itsToolaxis)
-    (dynamic_cast<instance *>(itsToolaxis))->iId->printSelf();
+    (dynamic_cast<instance *>(itsToolaxis))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
@@ -1312,6 +1459,43 @@ void cutterContactTrajectory::printSelf()
     printf("$");
   printf(")");
 }
+
+boolean * cutterContactTrajectory::get_itsPriority()
+  {return itsPriority;}
+void cutterContactTrajectory::set_itsPriority(boolean * itsPriorityIn)
+  {itsPriority = itsPriorityIn;}
+toolpathType * cutterContactTrajectory::get_itsType()
+  {return itsType;}
+void cutterContactTrajectory::set_itsType(toolpathType * itsTypeIn)
+  {itsType = itsTypeIn;}
+toolpathSpeedprofile * cutterContactTrajectory::get_itsSpeed()
+  {return itsSpeed;}
+void cutterContactTrajectory::set_itsSpeed(toolpathSpeedprofile * itsSpeedIn)
+  {itsSpeed = itsSpeedIn;}
+technology * cutterContactTrajectory::get_itsTechnology()
+  {return itsTechnology;}
+void cutterContactTrajectory::set_itsTechnology(technology * itsTechnologyIn)
+  {itsTechnology = itsTechnologyIn;}
+machineFunctions * cutterContactTrajectory::get_itsMachineFunctions()
+  {return itsMachineFunctions;}
+void cutterContactTrajectory::set_itsMachineFunctions(machineFunctions * itsMachineFunctionsIn)
+  {itsMachineFunctions = itsMachineFunctionsIn;}
+boolean * cutterContactTrajectory::get_itsDirection()
+  {return itsDirection;}
+void cutterContactTrajectory::set_itsDirection(boolean * itsDirectionIn)
+  {itsDirection = itsDirectionIn;}
+curveWithSurfaceNormalSelect * cutterContactTrajectory::get_basiccurve()
+  {return basiccurve;}
+void cutterContactTrajectory::set_basiccurve(curveWithSurfaceNormalSelect * basiccurveIn)
+  {basiccurve = basiccurveIn;}
+boundedCurve * cutterContactTrajectory::get_itsToolaxis()
+  {return itsToolaxis;}
+void cutterContactTrajectory::set_itsToolaxis(boundedCurve * itsToolaxisIn)
+  {itsToolaxis = itsToolaxisIn;}
+contactType * cutterContactTrajectory::get_itsContactType()
+  {return itsContactType;}
+void cutterContactTrajectory::set_itsContactType(contactType * itsContactTypeIn)
+  {itsContactType = itsContactTypeIn;}
 
 /********************************************************************/
 
@@ -1348,12 +1532,12 @@ void cuttingComponent::printSelf()
   printDouble(toolOffsetLength);
   printf(",");
   if (itsMaterial)
-    itsMaterial->iId->printSelf();
+    itsMaterial->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   if (technologicalData)
-    technologicalData->iId->printSelf();
+    technologicalData->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
@@ -1363,11 +1547,32 @@ void cuttingComponent::printSelf()
     printf("$");
   printf(",");
   if (itsTechnology)
-    itsTechnology->iId->printSelf();
+    itsTechnology->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
 }
+
+double cuttingComponent::get_toolOffsetLength()
+  {return toolOffsetLength;}
+void cuttingComponent::set_toolOffsetLength(double toolOffsetLengthIn)
+  {toolOffsetLength = toolOffsetLengthIn;}
+material * cuttingComponent::get_itsMaterial()
+  {return itsMaterial;}
+void cuttingComponent::set_itsMaterial(material * itsMaterialIn)
+  {itsMaterial = itsMaterialIn;}
+cuttingEdgeTechnologicalData * cuttingComponent::get_technologicalData()
+  {return technologicalData;}
+void cuttingComponent::set_technologicalData(cuttingEdgeTechnologicalData * technologicalDataIn)
+  {technologicalData = technologicalDataIn;}
+real * cuttingComponent::get_expectedToolLife()
+  {return expectedToolLife;}
+void cuttingComponent::set_expectedToolLife(real * expectedToolLifeIn)
+  {expectedToolLife = expectedToolLifeIn;}
+millingTechnology * cuttingComponent::get_itsTechnology()
+  {return itsTechnology;}
+void cuttingComponent::set_itsTechnology(millingTechnology * itsTechnologyIn)
+  {itsTechnology = itsTechnologyIn;}
 
 /********************************************************************/
 
@@ -1416,6 +1621,19 @@ void cuttingEdgeTechnologicalData::printSelf()
   printf(")");
 }
 
+real * cuttingEdgeTechnologicalData::get_cuttingAngle()
+  {return cuttingAngle;}
+void cuttingEdgeTechnologicalData::set_cuttingAngle(real * cuttingAngleIn)
+  {cuttingAngle = cuttingAngleIn;}
+real * cuttingEdgeTechnologicalData::get_freeAngle()
+  {return freeAngle;}
+void cuttingEdgeTechnologicalData::set_freeAngle(real * freeAngleIn)
+  {freeAngle = freeAngleIn;}
+real * cuttingEdgeTechnologicalData::get_auxAngle()
+  {return auxAngle;}
+void cuttingEdgeTechnologicalData::set_auxAngle(real * auxAngleIn)
+  {auxAngle = auxAngleIn;}
+
 /********************************************************************/
 
 /* dataSection */
@@ -1459,7 +1677,7 @@ void dataSection::printSelf()
            iter != items->end();
            iter++)
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           printf("=");
           (*iter)->printSelf();
           printf(";\n");
@@ -1467,6 +1685,19 @@ void dataSection::printSelf()
     }
   sectionEnd->printSelf();
 }
+
+dataStarter * dataSection::get_dataStart()
+  {return dataStart;}
+void dataSection::set_dataStart(dataStarter * dataStartIn)
+  {dataStart = dataStartIn;}
+std::list<instance *> * dataSection::get_items()
+  {return items;}
+void dataSection::set_items(std::list<instance *> * itemsIn)
+  {items = itemsIn;}
+endSection * dataSection::get_sectionEnd()
+  {return sectionEnd;}
+void dataSection::set_sectionEnd(endSection * sectionEndIn)
+  {sectionEnd = sectionEndIn;}
 
 /********************************************************************/
 
@@ -1505,6 +1736,11 @@ date::~date(){}
 int date::isA(int aType)
     { return (aType == date_E); }
 
+int date::get_yearComponent()
+  {return yearComponent;}
+void date::set_yearComponent(int yearComponentIn)
+  {yearComponent = yearComponentIn;}
+
 /********************************************************************/
 
 /* dateAndTime */
@@ -1530,11 +1766,20 @@ void dateAndTime::printSelf()
 {
   printf("DATE_AND_TIME");
   printf("(");
-  (dynamic_cast<instance *>(dateComponent))->iId->printSelf();
+  (dynamic_cast<instance *>(dateComponent))->get_iId()->printSelf();
   printf(",");
-  timeComponent->iId->printSelf();
+  timeComponent->get_iId()->printSelf();
   printf(")");
 }
+
+date * dateAndTime::get_dateComponent()
+  {return dateComponent;}
+void dateAndTime::set_dateComponent(date * dateComponentIn)
+  {dateComponent = dateComponentIn;}
+localTime * dateAndTime::get_timeComponent()
+  {return timeComponent;}
+void dateAndTime::set_timeComponent(localTime * timeComponentIn)
+  {timeComponent = timeComponentIn;}
 
 /********************************************************************/
 
@@ -1607,6 +1852,31 @@ void drillingTypeStrategy::printSelf()
   printf(")");
 }
 
+real * drillingTypeStrategy::get_reducedCutAtStart()
+  {return reducedCutAtStart;}
+void drillingTypeStrategy::set_reducedCutAtStart(real * reducedCutAtStartIn)
+  {reducedCutAtStart = reducedCutAtStartIn;}
+real * drillingTypeStrategy::get_reducedFeedAtStart()
+  {return reducedFeedAtStart;}
+void drillingTypeStrategy::set_reducedFeedAtStart(real * reducedFeedAtStartIn)
+  {reducedFeedAtStart = reducedFeedAtStartIn;}
+real * drillingTypeStrategy::get_depthOfStart()
+  {return depthOfStart;}
+void drillingTypeStrategy::set_depthOfStart(real * depthOfStartIn)
+  {depthOfStart = depthOfStartIn;}
+real * drillingTypeStrategy::get_reducedCutAtEnd()
+  {return reducedCutAtEnd;}
+void drillingTypeStrategy::set_reducedCutAtEnd(real * reducedCutAtEndIn)
+  {reducedCutAtEnd = reducedCutAtEndIn;}
+real * drillingTypeStrategy::get_reducedFeedAtEnd()
+  {return reducedFeedAtEnd;}
+void drillingTypeStrategy::set_reducedFeedAtEnd(real * reducedFeedAtEndIn)
+  {reducedFeedAtEnd = reducedFeedAtEndIn;}
+real * drillingTypeStrategy::get_depthOfEnd()
+  {return depthOfEnd;}
+void drillingTypeStrategy::set_depthOfEnd(real * depthOfEndIn)
+  {depthOfEnd = depthOfEndIn;}
+
 /********************************************************************/
 
 /* endSection */
@@ -1644,6 +1914,11 @@ executable::~executable(){}
 int executable::isA(int aType)
     { return (aType == executable_E); }
 
+char * executable::get_itsId()
+  {return itsId;}
+void executable::set_itsId(char * itsIdIn)
+  {itsId = itsIdIn;}
+
 /********************************************************************/
 
 /* fileDescription */
@@ -1677,6 +1952,15 @@ void fileDescription::printSelf()
   printf(")");
   printf(";\n");
 }
+
+parenStringListFull * fileDescription::get_description()
+  {return description;}
+void fileDescription::set_description(parenStringListFull * descriptionIn)
+  {description = descriptionIn;}
+char * fileDescription::get_implementationLevel()
+  {return implementationLevel;}
+void fileDescription::set_implementationLevel(char * implementationLevelIn)
+  {implementationLevel = implementationLevelIn;}
 
 /********************************************************************/
 
@@ -1757,6 +2041,35 @@ void fileName::printSelf()
   printf(";\n");
 }
 
+char * fileName::get_name()
+  {return name;}
+void fileName::set_name(char * nameIn)
+  {name = nameIn;}
+char * fileName::get_timeStamp()
+  {return timeStamp;}
+void fileName::set_timeStamp(char * timeStampIn)
+  {timeStamp = timeStampIn;}
+parenStringListFull * fileName::get_author()
+  {return author;}
+void fileName::set_author(parenStringListFull * authorIn)
+  {author = authorIn;}
+parenStringListFull * fileName::get_organization()
+  {return organization;}
+void fileName::set_organization(parenStringListFull * organizationIn)
+  {organization = organizationIn;}
+char * fileName::get_preprocessorVersion()
+  {return preprocessorVersion;}
+void fileName::set_preprocessorVersion(char * preprocessorVersionIn)
+  {preprocessorVersion = preprocessorVersionIn;}
+char * fileName::get_originatingSystem()
+  {return originatingSystem;}
+void fileName::set_originatingSystem(char * originatingSystemIn)
+  {originatingSystem = originatingSystemIn;}
+char * fileName::get_authorization()
+  {return authorization;}
+void fileName::set_authorization(char * authorizationIn)
+  {authorization = authorizationIn;}
+
 /********************************************************************/
 
 /* fileSchema */
@@ -1785,6 +2098,11 @@ void fileSchema::printSelf()
   printf(")");
   printf(";\n");
 }
+
+parenStringList * fileSchema::get_schemaIdentifiers()
+  {return schemaIdentifiers;}
+void fileSchema::set_schemaIdentifiers(parenStringList * schemaIdentifiersIn)
+  {schemaIdentifiers = schemaIdentifiersIn;}
 
 /********************************************************************/
 
@@ -1882,6 +2200,23 @@ freeformStrategy::~freeformStrategy(){}
 
 int freeformStrategy::isA(int aType)
     { return (aType == freeformStrategy_E); }
+
+pathmodeType * freeformStrategy::get_pathmode()
+  {return pathmode;}
+void freeformStrategy::set_pathmode(pathmodeType * pathmodeIn)
+  {pathmode = pathmodeIn;}
+cutmodeType * freeformStrategy::get_cutmode()
+  {return cutmode;}
+void freeformStrategy::set_cutmode(cutmodeType * cutmodeIn)
+  {cutmode = cutmodeIn;}
+tolerances * freeformStrategy::get_itsMillingTolerances()
+  {return itsMillingTolerances;}
+void freeformStrategy::set_itsMillingTolerances(tolerances * itsMillingTolerancesIn)
+  {itsMillingTolerances = itsMillingTolerancesIn;}
+real * freeformStrategy::get_stepover()
+  {return stepover;}
+void freeformStrategy::set_stepover(real * stepoverIn)
+  {stepover = stepoverIn;}
 
 /********************************************************************/
 
@@ -1999,6 +2334,27 @@ void headerSection::printSelf()
   sectionEnd->printSelf();
 }
 
+headerStarter * headerSection::get_headerStart()
+  {return headerStart;}
+void headerSection::set_headerStart(headerStarter * headerStartIn)
+  {headerStart = headerStartIn;}
+fileDescription * headerSection::get_headerDescription()
+  {return headerDescription;}
+void headerSection::set_headerDescription(fileDescription * headerDescriptionIn)
+  {headerDescription = headerDescriptionIn;}
+fileName * headerSection::get_headerName()
+  {return headerName;}
+void headerSection::set_headerName(fileName * headerNameIn)
+  {headerName = headerNameIn;}
+fileSchema * headerSection::get_headerSchema()
+  {return headerSchema;}
+void headerSection::set_headerSchema(fileSchema * headerSchemaIn)
+  {headerSchema = headerSchemaIn;}
+endSection * headerSection::get_sectionEnd()
+  {return sectionEnd;}
+void headerSection::set_sectionEnd(endSection * sectionEndIn)
+  {sectionEnd = sectionEndIn;}
+
 /********************************************************************/
 
 /* headerStarter */
@@ -2059,21 +2415,34 @@ void inProcessGeometry::printSelf()
   printf("IN_PROCESS_GEOMETRY");
   printf("(");
   if (asIs)
-    asIs->iId->printSelf();
+    asIs->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   if (toBe)
-    toBe->iId->printSelf();
+    toBe->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   if (removal)
-    removal->iId->printSelf();
+    removal->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
 }
+
+advancedBrepShapeRepresentation * inProcessGeometry::get_asIs()
+  {return asIs;}
+void inProcessGeometry::set_asIs(advancedBrepShapeRepresentation * asIsIn)
+  {asIs = asIsIn;}
+advancedBrepShapeRepresentation * inProcessGeometry::get_toBe()
+  {return toBe;}
+void inProcessGeometry::set_toBe(advancedBrepShapeRepresentation * toBeIn)
+  {toBe = toBeIn;}
+advancedBrepShapeRepresentation * inProcessGeometry::get_removal()
+  {return removal;}
+void inProcessGeometry::set_removal(advancedBrepShapeRepresentation * removalIn)
+  {removal = removalIn;}
 
 /********************************************************************/
 
@@ -2100,6 +2469,11 @@ void instanceId::printSelf()
   printf("%d", val);
 }
 
+int instanceId::get_val()
+  {return val;}
+void instanceId::set_val(int valIn)
+  {val = valIn;}
+
 /********************************************************************/
 
 /* integer */
@@ -2123,6 +2497,11 @@ void integer::printSelf()
 {
   printf("%d", val);
 }
+
+int integer::get_val()
+  {return val;}
+void integer::set_val(int valIn)
+  {val = valIn;}
 
 /********************************************************************/
 
@@ -2243,9 +2622,9 @@ leadingLineStrategy::leadingLineStrategy(
 
 leadingLineStrategy::~leadingLineStrategy()
 {
-  delete pathmode;
-  delete cutmode;
-  delete stepover;
+  delete get_pathmode();
+  delete get_cutmode();
+  delete get_stepover();
 }
 
 int leadingLineStrategy::isA(int aType)
@@ -2257,20 +2636,25 @@ void leadingLineStrategy::printSelf()
 {
   printf("LEADING_LINE_STRATEGY");
   printf("(");
-  pathmode->printSelf();
+  get_pathmode()->printSelf();
   printf(",");
-  cutmode->printSelf();
+  get_cutmode()->printSelf();
   printf(",");
-  itsMillingTolerances->iId->printSelf();
+  get_itsMillingTolerances()->get_iId()->printSelf();
   printf(",");
-  if (stepover)
-    stepover->printSelf();
+  if (get_stepover())
+    get_stepover()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsLine))->iId->printSelf();
+  (dynamic_cast<instance *>(itsLine))->get_iId()->printSelf();
   printf(")");
 }
+
+boundedCurve * leadingLineStrategy::get_itsLine()
+  {return itsLine;}
+void leadingLineStrategy::set_itsLine(boundedCurve * itsLineIn)
+  {itsLine = itsLineIn;}
 
 /********************************************************************/
 
@@ -2366,9 +2750,26 @@ void localTime::printSelf()
     secondComponent->printSelf();
   else
     printf("$");
-  zone->iId->printSelf();
+  zone->get_iId()->printSelf();
   printf(")");
 }
+
+int localTime::get_hourComponent()
+  {return hourComponent;}
+void localTime::set_hourComponent(int hourComponentIn)
+  {hourComponent = hourComponentIn;}
+integer * localTime::get_minuteComponent()
+  {return minuteComponent;}
+void localTime::set_minuteComponent(integer * minuteComponentIn)
+  {minuteComponent = minuteComponentIn;}
+real * localTime::get_secondComponent()
+  {return secondComponent;}
+void localTime::set_secondComponent(real * secondComponentIn)
+  {secondComponent = secondComponentIn;}
+coordinatedUniversalTimeOffset * localTime::get_zone()
+  {return zone;}
+void localTime::set_zone(coordinatedUniversalTimeOffset * zoneIn)
+  {zone = zoneIn;}
 
 /********************************************************************/
 
@@ -2471,11 +2872,20 @@ void machinedSurface::printSelf()
 {
   printf("MACHINED_SURFACE");
   printf("(");
-  (dynamic_cast<instance *>(itsMachiningFeature))->iId->printSelf();
+  (dynamic_cast<instance *>(itsMachiningFeature))->get_iId()->printSelf();
   printf(",");
   surfaceElement->printSelf();
   printf(")");
 }
+
+machiningFeature * machinedSurface::get_itsMachiningFeature()
+  {return itsMachiningFeature;}
+void machinedSurface::set_itsMachiningFeature(machiningFeature * itsMachiningFeatureIn)
+  {itsMachiningFeature = itsMachiningFeatureIn;}
+bottomOrSide * machinedSurface::get_surfaceElement()
+  {return surfaceElement;}
+void machinedSurface::set_surfaceElement(bottomOrSide * surfaceElementIn)
+  {surfaceElement = surfaceElementIn;}
 
 /********************************************************************/
 
@@ -2506,6 +2916,11 @@ machiningTool::~machiningTool(){}
 int machiningTool::isA(int aType)
     { return (aType == machiningTool_E); }
 
+char * machiningTool::get_itsId()
+  {return itsId;}
+void machiningTool::set_itsId(char * itsIdIn)
+  {itsId = itsIdIn;}
+
 /********************************************************************/
 
 /* manufacturingFeature */
@@ -2526,6 +2941,19 @@ manufacturingFeature::~manufacturingFeature(){}
 
 int manufacturingFeature::isA(int aType)
     { return (aType == manufacturingFeature_E); }
+
+char * manufacturingFeature::get_itsId()
+  {return itsId;}
+void manufacturingFeature::set_itsId(char * itsIdIn)
+  {itsId = itsIdIn;}
+workpiece * manufacturingFeature::get_itsWorkpiece()
+  {return itsWorkpiece;}
+void manufacturingFeature::set_itsWorkpiece(workpiece * itsWorkpieceIn)
+  {itsWorkpiece = itsWorkpieceIn;}
+parenMachiningOperationList * manufacturingFeature::get_itsOperations()
+  {return itsOperations;}
+void manufacturingFeature::set_itsOperations(parenMachiningOperationList * itsOperationsIn)
+  {itsOperations = itsOperationsIn;}
 
 /********************************************************************/
 
@@ -2564,6 +2992,19 @@ void material::printSelf()
   materialProperty->printSelf();
   printf(")");
 }
+
+char * material::get_standardIdentifier()
+  {return standardIdentifier;}
+void material::set_standardIdentifier(char * standardIdentifierIn)
+  {standardIdentifier = standardIdentifierIn;}
+char * material::get_materialIdentifier()
+  {return materialIdentifier;}
+void material::set_materialIdentifier(char * materialIdentifierIn)
+  {materialIdentifier = materialIdentifierIn;}
+parenPropertyParameterList * material::get_materialProperty()
+  {return materialProperty;}
+void material::set_materialProperty(parenPropertyParameterList * materialPropertyIn)
+  {materialProperty = materialPropertyIn;}
 
 /********************************************************************/
 
@@ -2640,18 +3081,59 @@ void millingMachineFunctions::printSelf()
   chipRemoval->printSelf();
   printf(",");
   if (orientedSpindleStop)
-    orientedSpindleStop->iId->printSelf();
+    orientedSpindleStop->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   if (itsProcessModel)
-    itsProcessModel->iId->printSelf();
+    itsProcessModel->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   otherFunctions->printSelf();
   printf(")");
 }
+
+boolean * millingMachineFunctions::get_coolant()
+  {return coolant;}
+void millingMachineFunctions::set_coolant(boolean * coolantIn)
+  {coolant = coolantIn;}
+real * millingMachineFunctions::get_coolantPressure()
+  {return coolantPressure;}
+void millingMachineFunctions::set_coolantPressure(real * coolantPressureIn)
+  {coolantPressure = coolantPressureIn;}
+boolean * millingMachineFunctions::get_mist()
+  {return mist;}
+void millingMachineFunctions::set_mist(boolean * mistIn)
+  {mist = mistIn;}
+boolean * millingMachineFunctions::get_throughSpindleCoolant()
+  {return throughSpindleCoolant;}
+void millingMachineFunctions::set_throughSpindleCoolant(boolean * throughSpindleCoolantIn)
+  {throughSpindleCoolant = throughSpindleCoolantIn;}
+real * millingMachineFunctions::get_throughPressure()
+  {return throughPressure;}
+void millingMachineFunctions::set_throughPressure(real * throughPressureIn)
+  {throughPressure = throughPressureIn;}
+parenStringList * millingMachineFunctions::get_axisClamping()
+  {return axisClamping;}
+void millingMachineFunctions::set_axisClamping(parenStringList * axisClampingIn)
+  {axisClamping = axisClampingIn;}
+boolean * millingMachineFunctions::get_chipRemoval()
+  {return chipRemoval;}
+void millingMachineFunctions::set_chipRemoval(boolean * chipRemovalIn)
+  {chipRemoval = chipRemovalIn;}
+direction * millingMachineFunctions::get_orientedSpindleStop()
+  {return orientedSpindleStop;}
+void millingMachineFunctions::set_orientedSpindleStop(direction * orientedSpindleStopIn)
+  {orientedSpindleStop = orientedSpindleStopIn;}
+processModelList * millingMachineFunctions::get_itsProcessModel()
+  {return itsProcessModel;}
+void millingMachineFunctions::set_itsProcessModel(processModelList * itsProcessModelIn)
+  {itsProcessModel = itsProcessModelIn;}
+parenPropertyParameterList * millingMachineFunctions::get_otherFunctions()
+  {return otherFunctions;}
+void millingMachineFunctions::set_otherFunctions(parenPropertyParameterList * otherFunctionsIn)
+  {otherFunctions = otherFunctionsIn;}
 
 /********************************************************************/
 
@@ -2728,6 +3210,35 @@ void millingToolDimension::printSelf()
   printf(")");
 }
 
+double millingToolDimension::get_diameter()
+  {return diameter;}
+void millingToolDimension::set_diameter(double diameterIn)
+  {diameter = diameterIn;}
+real * millingToolDimension::get_toolTopAngle()
+  {return toolTopAngle;}
+void millingToolDimension::set_toolTopAngle(real * toolTopAngleIn)
+  {toolTopAngle = toolTopAngleIn;}
+real * millingToolDimension::get_toolCircumferenceAngle()
+  {return toolCircumferenceAngle;}
+void millingToolDimension::set_toolCircumferenceAngle(real * toolCircumferenceAngleIn)
+  {toolCircumferenceAngle = toolCircumferenceAngleIn;}
+real * millingToolDimension::get_cuttingEdgeLength()
+  {return cuttingEdgeLength;}
+void millingToolDimension::set_cuttingEdgeLength(real * cuttingEdgeLengthIn)
+  {cuttingEdgeLength = cuttingEdgeLengthIn;}
+real * millingToolDimension::get_edgeRadius()
+  {return edgeRadius;}
+void millingToolDimension::set_edgeRadius(real * edgeRadiusIn)
+  {edgeRadius = edgeRadiusIn;}
+real * millingToolDimension::get_edgeCenterVertical()
+  {return edgeCenterVertical;}
+void millingToolDimension::set_edgeCenterVertical(real * edgeCenterVerticalIn)
+  {edgeCenterVertical = edgeCenterVerticalIn;}
+real * millingToolDimension::get_edgeCenterHorizontal()
+  {return edgeCenterHorizontal;}
+void millingToolDimension::set_edgeCenterHorizontal(real * edgeCenterHorizontalIn)
+  {edgeCenterHorizontal = edgeCenterHorizontalIn;}
+
 /********************************************************************/
 
 /* multipleArityBooleanExpression */
@@ -2746,6 +3257,11 @@ int multipleArityBooleanExpression::isA(int aType)
     { return ((aType == multipleArityBooleanExpression_E) ||
 	      (aType == booleanExpression_E));
     }
+
+parenBooleanExpressionListFull * multipleArityBooleanExpression::get_operands()
+  {return operands;}
+void multipleArityBooleanExpression::set_operands(parenBooleanExpressionListFull * operandsIn)
+  {operands = operandsIn;}
 
 /********************************************************************/
 
@@ -2802,6 +3318,15 @@ void offsetVector::printSelf()
   printf(")");
 }
 
+parenNcVariableListFull * offsetVector::get_translate()
+  {return translate;}
+void offsetVector::set_translate(parenNcVariableListFull * translateIn)
+  {translate = translateIn;}
+parenNcVariableListFull * offsetVector::get_rotate()
+  {return rotate;}
+void offsetVector::set_rotate(parenNcVariableListFull * rotateIn)
+  {rotate = rotateIn;}
+
 /********************************************************************/
 
 /* operation */
@@ -2821,6 +3346,15 @@ operation::~operation(){}
 int operation::isA(int aType)
     { return (aType == operation_E); }
 
+toolpathList * operation::get_itsToolpath()
+  {return itsToolpath;}
+void operation::set_itsToolpath(toolpathList * itsToolpathIn)
+  {itsToolpath = itsToolpathIn;}
+toolDirection * operation::get_itsToolDirection()
+  {return itsToolDirection;}
+void operation::set_itsToolDirection(toolDirection * itsToolDirectionIn)
+  {itsToolDirection = itsToolDirectionIn;}
+
 /********************************************************************/
 
 /* optionalStop */
@@ -2835,7 +3369,7 @@ optionalStop::optionalStop(
 
 optionalStop::~optionalStop()
 {
-  delete itsId;
+  delete get_itsId();
 }
 
 int optionalStop::isA(int aType)
@@ -2848,7 +3382,7 @@ void optionalStop::printSelf()
 {
   printf("OPTIONAL_STOP");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(")");
 }
 
@@ -2866,7 +3400,7 @@ orExpression::orExpression(
 
 orExpression::~orExpression()
 {
-  delete operands;
+  delete get_operands();
 }
 
 int orExpression::isA(int aType)
@@ -2879,7 +3413,7 @@ void orExpression::printSelf()
 {
   printf("OR_EXPRESSION");
   printf("(");
-  operands->printSelf();
+  get_operands()->printSelf();
   printf(")");
 }
 
@@ -2911,11 +3445,16 @@ void ordinalDate::printSelf()
 {
   printf("ORDINAL_DATE");
   printf("(");
-  printf("%d", yearComponent);
+  printf("%d", get_yearComponent());
   printf(",");
   printf("%d", dayComponent);
   printf(")");
 }
+
+int ordinalDate::get_dayComponent()
+  {return dayComponent;}
+void ordinalDate::set_dayComponent(int dayComponentIn)
+  {dayComponent = dayComponentIn;}
 
 /********************************************************************/
 
@@ -2945,7 +3484,7 @@ void parenAxis2placement3dListFull::printSelf()
       std::list<axis2placement3d *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -2953,6 +3492,11 @@ void parenAxis2placement3dListFull::printSelf()
     }
   printf(")");
 }
+
+std::list<axis2placement3d *> * parenAxis2placement3dListFull::get_theList()
+  {return theList;}
+void parenAxis2placement3dListFull::set_theList(std::list<axis2placement3d *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -2982,7 +3526,7 @@ void parenBooleanExpressionListFull::printSelf()
       std::list<booleanExpression *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (dynamic_cast<instance *>(*iter))->iId->printSelf();
+          (dynamic_cast<instance *>(*iter))->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -2990,6 +3534,11 @@ void parenBooleanExpressionListFull::printSelf()
     }
   printf(")");
 }
+
+std::list<booleanExpression *> * parenBooleanExpressionListFull::get_theList()
+  {return theList;}
+void parenBooleanExpressionListFull::set_theList(std::list<booleanExpression *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3014,7 +3563,7 @@ void parenBossList::printSelf()
       std::list<boss *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3027,6 +3576,11 @@ parenBossList::~parenBossList()
 {
   delete theList;
 }
+
+std::list<boss *> * parenBossList::get_theList()
+  {return theList;}
+void parenBossList::set_theList(std::list<boss *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3056,7 +3610,7 @@ void parenBoundedCurveListFull::printSelf()
       std::list<boundedCurve *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (dynamic_cast<instance *>(*iter))->iId->printSelf();
+          (dynamic_cast<instance *>(*iter))->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3064,6 +3618,11 @@ void parenBoundedCurveListFull::printSelf()
     }
   printf(")");
 }
+
+std::list<boundedCurve *> * parenBoundedCurveListFull::get_theList()
+  {return theList;}
+void parenBoundedCurveListFull::set_theList(std::list<boundedCurve *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3093,7 +3652,7 @@ void parenBoundedSurfaceListFull::printSelf()
       std::list<boundedSurface *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (dynamic_cast<instance *>(*iter))->iId->printSelf();
+          (dynamic_cast<instance *>(*iter))->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3101,6 +3660,11 @@ void parenBoundedSurfaceListFull::printSelf()
     }
   printf(")");
 }
+
+std::list<boundedSurface *> * parenBoundedSurfaceListFull::get_theList()
+  {return theList;}
+void parenBoundedSurfaceListFull::set_theList(std::list<boundedSurface *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3125,7 +3689,7 @@ void parenCartesianPointList::printSelf()
       std::list<cartesianPoint *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3138,6 +3702,11 @@ parenCartesianPointList::~parenCartesianPointList()
 {
   delete theList;
 }
+
+std::list<cartesianPoint *> * parenCartesianPointList::get_theList()
+  {return theList;}
+void parenCartesianPointList::set_theList(std::list<cartesianPoint *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3167,7 +3736,7 @@ void parenCartesianPointListFull::printSelf()
       std::list<cartesianPoint *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3175,6 +3744,11 @@ void parenCartesianPointListFull::printSelf()
     }
   printf(")");
 }
+
+std::list<cartesianPoint *> * parenCartesianPointListFull::get_theList()
+  {return theList;}
+void parenCartesianPointListFull::set_theList(std::list<cartesianPoint *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3199,7 +3773,7 @@ void parenCircularOffsetList::printSelf()
       std::list<circularOffset *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3212,6 +3786,11 @@ parenCircularOffsetList::~parenCircularOffsetList()
 {
   delete theList;
 }
+
+std::list<circularOffset *> * parenCircularOffsetList::get_theList()
+  {return theList;}
+void parenCircularOffsetList::set_theList(std::list<circularOffset *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3236,7 +3815,7 @@ void parenCircularOmitList::printSelf()
       std::list<circularOmit *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3249,6 +3828,11 @@ parenCircularOmitList::~parenCircularOmitList()
 {
   delete theList;
 }
+
+std::list<circularOmit *> * parenCircularOmitList::get_theList()
+  {return theList;}
+void parenCircularOmitList::set_theList(std::list<circularOmit *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3278,7 +3862,7 @@ void parenCompositeCurveSegmentListFull::printSelf()
       std::list<compositeCurveSegment *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3286,6 +3870,11 @@ void parenCompositeCurveSegmentListFull::printSelf()
     }
   printf(")");
 }
+
+std::list<compositeCurveSegment *> * parenCompositeCurveSegmentListFull::get_theList()
+  {return theList;}
+void parenCompositeCurveSegmentListFull::set_theList(std::list<compositeCurveSegment *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3315,7 +3904,7 @@ void parenCompoundFeatureSelectListFull::printSelf()
       std::list<compoundFeatureSelect *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (dynamic_cast<instance *>(*iter))->iId->printSelf();
+          (dynamic_cast<instance *>(*iter))->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3323,6 +3912,11 @@ void parenCompoundFeatureSelectListFull::printSelf()
     }
   printf(")");
 }
+
+std::list<compoundFeatureSelect *> * parenCompoundFeatureSelectListFull::get_theList()
+  {return theList;}
+void parenCompoundFeatureSelectListFull::set_theList(std::list<compoundFeatureSelect *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3352,7 +3946,7 @@ void parenCuttingComponentListFull::printSelf()
       std::list<cuttingComponent *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3360,6 +3954,11 @@ void parenCuttingComponentListFull::printSelf()
     }
   printf(")");
 }
+
+std::list<cuttingComponent *> * parenCuttingComponentListFull::get_theList()
+  {return theList;}
+void parenCuttingComponentListFull::set_theList(std::list<cuttingComponent *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3384,7 +3983,7 @@ void parenExecutableList::printSelf()
       std::list<executable *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (dynamic_cast<instance *>(*iter))->iId->printSelf();
+          (dynamic_cast<instance *>(*iter))->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3397,6 +3996,11 @@ parenExecutableList::~parenExecutableList()
 {
   delete theList;
 }
+
+std::list<executable *> * parenExecutableList::get_theList()
+  {return theList;}
+void parenExecutableList::set_theList(std::list<executable *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3426,7 +4030,7 @@ void parenExecutableListFull::printSelf()
       std::list<executable *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (dynamic_cast<instance *>(*iter))->iId->printSelf();
+          (dynamic_cast<instance *>(*iter))->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3434,6 +4038,11 @@ void parenExecutableListFull::printSelf()
     }
   printf(")");
 }
+
+std::list<executable *> * parenExecutableListFull::get_theList()
+  {return theList;}
+void parenExecutableListFull::set_theList(std::list<executable *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3463,7 +4072,7 @@ void parenFaceBoundListFull::printSelf()
       std::list<faceBound *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3471,6 +4080,11 @@ void parenFaceBoundListFull::printSelf()
     }
   printf(")");
 }
+
+std::list<faceBound *> * parenFaceBoundListFull::get_theList()
+  {return theList;}
+void parenFaceBoundListFull::set_theList(std::list<faceBound *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3500,7 +4114,7 @@ void parenFaceListFull::printSelf()
       std::list<face *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (dynamic_cast<instance *>(*iter))->iId->printSelf();
+          (dynamic_cast<instance *>(*iter))->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3508,6 +4122,11 @@ void parenFaceListFull::printSelf()
     }
   printf(")");
 }
+
+std::list<face *> * parenFaceListFull::get_theList()
+  {return theList;}
+void parenFaceListFull::set_theList(std::list<face *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3555,6 +4174,11 @@ void parenIntegerListFull::printSelf()
   printf(")");
 }
 
+std::list<integer *> * parenIntegerListFull::get_theList()
+  {return theList;}
+void parenIntegerListFull::set_theList(std::list<integer *> * theListIn)
+  {theList = theListIn;}
+
 /********************************************************************/
 
 /* parenMachinedSurfaceListFull */
@@ -3583,7 +4207,7 @@ void parenMachinedSurfaceListFull::printSelf()
       std::list<machinedSurface *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3591,6 +4215,11 @@ void parenMachinedSurfaceListFull::printSelf()
     }
   printf(")");
 }
+
+std::list<machinedSurface *> * parenMachinedSurfaceListFull::get_theList()
+  {return theList;}
+void parenMachinedSurfaceListFull::set_theList(std::list<machinedSurface *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3620,7 +4249,7 @@ void parenMachiningFeatureListFull::printSelf()
       std::list<machiningFeature *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (dynamic_cast<instance *>(*iter))->iId->printSelf();
+          (dynamic_cast<instance *>(*iter))->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3628,6 +4257,11 @@ void parenMachiningFeatureListFull::printSelf()
     }
   printf(")");
 }
+
+std::list<machiningFeature *> * parenMachiningFeatureListFull::get_theList()
+  {return theList;}
+void parenMachiningFeatureListFull::set_theList(std::list<machiningFeature *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3652,7 +4286,7 @@ void parenMachiningOperationList::printSelf()
       std::list<machiningOperation *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (dynamic_cast<instance *>(*iter))->iId->printSelf();
+          (dynamic_cast<instance *>(*iter))->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3665,6 +4299,11 @@ parenMachiningOperationList::~parenMachiningOperationList()
 {
   delete theList;
 }
+
+std::list<machiningOperation *> * parenMachiningOperationList::get_theList()
+  {return theList;}
+void parenMachiningOperationList::set_theList(std::list<machiningOperation *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3694,7 +4333,7 @@ void parenNcVariableListFull::printSelf()
       std::list<ncVariable *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3702,6 +4341,11 @@ void parenNcVariableListFull::printSelf()
     }
   printf(")");
 }
+
+std::list<ncVariable *> * parenNcVariableListFull::get_theList()
+  {return theList;}
+void parenNcVariableListFull::set_theList(std::list<ncVariable *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3731,7 +4375,7 @@ void parenOrientedEdgeListFull::printSelf()
       std::list<orientedEdge *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3739,6 +4383,11 @@ void parenOrientedEdgeListFull::printSelf()
     }
   printf(")");
 }
+
+std::list<orientedEdge *> * parenOrientedEdgeListFull::get_theList()
+  {return theList;}
+void parenOrientedEdgeListFull::set_theList(std::list<orientedEdge *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3786,6 +4435,11 @@ void parenParenCartesianPointListFullListFull::printSelf()
   printf(")");
 }
 
+std::list<parenCartesianPointListFull *> * parenParenCartesianPointListFullListFull::get_theList()
+  {return theList;}
+void parenParenCartesianPointListFullListFull::set_theList(std::list<parenCartesianPointListFull *> * theListIn)
+  {theList = theListIn;}
+
 /********************************************************************/
 
 /* parenParenRealListFullListFull */
@@ -3832,6 +4486,11 @@ void parenParenRealListFullListFull::printSelf()
   printf(")");
 }
 
+std::list<parenRealListFull *> * parenParenRealListFullListFull::get_theList()
+  {return theList;}
+void parenParenRealListFullListFull::set_theList(std::list<parenRealListFull *> * theListIn)
+  {theList = theListIn;}
+
 /********************************************************************/
 
 /* parenProcessModelLiszt */
@@ -3860,7 +4519,7 @@ void parenProcessModelLiszt::printSelf()
       std::list<processModel *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3868,6 +4527,11 @@ void parenProcessModelLiszt::printSelf()
     }
   printf(")");
 }
+
+std::list<processModel *> * parenProcessModelLiszt::get_theList()
+  {return theList;}
+void parenProcessModelLiszt::set_theList(std::list<processModel *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3892,7 +4556,7 @@ void parenPropertyParameterList::printSelf()
       std::list<propertyParameter *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (dynamic_cast<instance *>(*iter))->iId->printSelf();
+          (dynamic_cast<instance *>(*iter))->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3905,6 +4569,11 @@ parenPropertyParameterList::~parenPropertyParameterList()
 {
   delete theList;
 }
+
+std::list<propertyParameter *> * parenPropertyParameterList::get_theList()
+  {return theList;}
+void parenPropertyParameterList::set_theList(std::list<propertyParameter *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -3952,6 +4621,11 @@ void parenRealListFull::printSelf()
   printf(")");
 }
 
+std::list<real *> * parenRealListFull::get_theList()
+  {return theList;}
+void parenRealListFull::set_theList(std::list<real *> * theListIn)
+  {theList = theListIn;}
+
 /********************************************************************/
 
 /* parenRectangularOffsetList */
@@ -3975,7 +4649,7 @@ void parenRectangularOffsetList::printSelf()
       std::list<rectangularOffset *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -3988,6 +4662,11 @@ parenRectangularOffsetList::~parenRectangularOffsetList()
 {
   delete theList;
 }
+
+std::list<rectangularOffset *> * parenRectangularOffsetList::get_theList()
+  {return theList;}
+void parenRectangularOffsetList::set_theList(std::list<rectangularOffset *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -4012,7 +4691,7 @@ void parenRectangularOmitList::printSelf()
       std::list<rectangularOmit *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -4025,6 +4704,11 @@ parenRectangularOmitList::~parenRectangularOmitList()
 {
   delete theList;
 }
+
+std::list<rectangularOmit *> * parenRectangularOmitList::get_theList()
+  {return theList;}
+void parenRectangularOmitList::set_theList(std::list<rectangularOmit *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -4054,7 +4738,7 @@ void parenRepresentationItemListFull::printSelf()
       std::list<representationItem *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (dynamic_cast<instance *>(*iter))->iId->printSelf();
+          (dynamic_cast<instance *>(*iter))->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -4062,6 +4746,11 @@ void parenRepresentationItemListFull::printSelf()
     }
   printf(")");
 }
+
+std::list<representationItem *> * parenRepresentationItemListFull::get_theList()
+  {return theList;}
+void parenRepresentationItemListFull::set_theList(std::list<representationItem *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -4086,7 +4775,7 @@ void parenSetupInstructionList::printSelf()
       std::list<setupInstruction *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -4099,6 +4788,11 @@ parenSetupInstructionList::~parenSetupInstructionList()
 {
   delete theList;
 }
+
+std::list<setupInstruction *> * parenSetupInstructionList::get_theList()
+  {return theList;}
+void parenSetupInstructionList::set_theList(std::list<setupInstruction *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -4123,7 +4817,7 @@ void parenSlotEndTypeList::printSelf()
       std::list<slotEndType *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (dynamic_cast<instance *>(*iter))->iId->printSelf();
+          (dynamic_cast<instance *>(*iter))->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -4136,6 +4830,11 @@ parenSlotEndTypeList::~parenSlotEndTypeList()
 {
   delete theList;
 }
+
+std::list<slotEndType *> * parenSlotEndTypeList::get_theList()
+  {return theList;}
+void parenSlotEndTypeList::set_theList(std::list<slotEndType *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -4160,7 +4859,7 @@ void parenSpecificationUsageConstraintList::printSelf()
       std::list<specificationUsageConstraint *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -4173,6 +4872,11 @@ parenSpecificationUsageConstraintList::~parenSpecificationUsageConstraintList()
 {
   delete theList;
 }
+
+std::list<specificationUsageConstraint *> * parenSpecificationUsageConstraintList::get_theList()
+  {return theList;}
+void parenSpecificationUsageConstraintList::set_theList(std::list<specificationUsageConstraint *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -4220,6 +4924,11 @@ parenStringList::~parenStringList()
   delete theList;
 }
 
+std::list<char *> * parenStringList::get_theList()
+  {return theList;}
+void parenStringList::set_theList(std::list<char *> * theListIn)
+  {theList = theListIn;}
+
 /********************************************************************/
 
 /* parenStringListFull */
@@ -4266,6 +4975,11 @@ void parenStringListFull::printSelf()
   printf(")");
 }
 
+std::list<char *> * parenStringListFull::get_theList()
+  {return theList;}
+void parenStringListFull::set_theList(std::list<char *> * theListIn)
+  {theList = theListIn;}
+
 /********************************************************************/
 
 /* parenToolpathLisztFull */
@@ -4294,7 +5008,7 @@ void parenToolpathLisztFull::printSelf()
       std::list<toolpath *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (dynamic_cast<instance *>(*iter))->iId->printSelf();
+          (dynamic_cast<instance *>(*iter))->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -4302,6 +5016,11 @@ void parenToolpathLisztFull::printSelf()
     }
   printf(")");
 }
+
+std::list<toolpath *> * parenToolpathLisztFull::get_theList()
+  {return theList;}
+void parenToolpathLisztFull::set_theList(std::list<toolpath *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -4340,6 +5059,11 @@ void parenTrimmingSelectListFull::printSelf()
   printf(")");
 }
 
+std::list<trimmingSelect *> * parenTrimmingSelectListFull::get_theList()
+  {return theList;}
+void parenTrimmingSelectListFull::set_theList(std::list<trimmingSelect *> * theListIn)
+  {theList = theListIn;}
+
 /********************************************************************/
 
 /* parenWorkpieceList */
@@ -4363,7 +5087,7 @@ void parenWorkpieceList::printSelf()
       std::list<workpiece *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -4376,6 +5100,11 @@ parenWorkpieceList::~parenWorkpieceList()
 {
   delete theList;
 }
+
+std::list<workpiece *> * parenWorkpieceList::get_theList()
+  {return theList;}
+void parenWorkpieceList::set_theList(std::list<workpiece *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -4400,7 +5129,7 @@ void parenWorkpieceSetupList::printSelf()
       std::list<workpieceSetup *>::iterator iter;
       for (iter = theList->begin(); ; )
         {
-          (*iter)->iId->printSelf();
+          (*iter)->get_iId()->printSelf();
           if (++iter == theList->end())
             break;
           printf(",");
@@ -4413,6 +5142,11 @@ parenWorkpieceSetupList::~parenWorkpieceSetupList()
 {
   delete theList;
 }
+
+std::list<workpieceSetup *> * parenWorkpieceSetupList::get_theList()
+  {return theList;}
+void parenWorkpieceSetupList::set_theList(std::list<workpieceSetup *> * theListIn)
+  {theList = theListIn;}
 
 /********************************************************************/
 
@@ -4444,7 +5178,7 @@ void partialAreaDefinition::printSelf()
   printf("(");
   printDouble(effectiveLength);
   printf(",");
-  placement->iId->printSelf();
+  placement->get_iId()->printSelf();
   printf(",");
   if (maximumLength)
     maximumLength->printSelf();
@@ -4452,6 +5186,19 @@ void partialAreaDefinition::printSelf()
     printf("$");
   printf(")");
 }
+
+double partialAreaDefinition::get_effectiveLength()
+  {return effectiveLength;}
+void partialAreaDefinition::set_effectiveLength(double effectiveLengthIn)
+  {effectiveLength = effectiveLengthIn;}
+axis2placement3d * partialAreaDefinition::get_placement()
+  {return placement;}
+void partialAreaDefinition::set_placement(axis2placement3d * placementIn)
+  {placement = placementIn;}
+real * partialAreaDefinition::get_maximumLength()
+  {return maximumLength;}
+void partialAreaDefinition::set_maximumLength(real * maximumLengthIn)
+  {maximumLength = maximumLengthIn;}
 
 /********************************************************************/
 
@@ -4576,6 +5323,31 @@ void person::printSelf()
   printf(")");
 }
 
+char * person::get_id()
+  {return id;}
+void person::set_id(char * idIn)
+  {id = idIn;}
+aString * person::get_lastName()
+  {return lastName;}
+void person::set_lastName(aString * lastNameIn)
+  {lastName = lastNameIn;}
+aString * person::get_firstName()
+  {return firstName;}
+void person::set_firstName(aString * firstNameIn)
+  {firstName = firstNameIn;}
+parenStringListFull * person::get_middleNames()
+  {return middleNames;}
+void person::set_middleNames(parenStringListFull * middleNamesIn)
+  {middleNames = middleNamesIn;}
+parenStringListFull * person::get_prefixTitles()
+  {return prefixTitles;}
+void person::set_prefixTitles(parenStringListFull * prefixTitlesIn)
+  {prefixTitles = prefixTitlesIn;}
+parenStringListFull * person::get_suffixTitles()
+  {return suffixTitles;}
+void person::set_suffixTitles(parenStringListFull * suffixTitlesIn)
+  {suffixTitles = suffixTitlesIn;}
+
 /********************************************************************/
 
 /* personAndAddress */
@@ -4601,14 +5373,23 @@ void personAndAddress::printSelf()
 {
   printf("PERSON_AND_ADDRESS");
   printf("(");
-  itsPerson->iId->printSelf();
+  itsPerson->get_iId()->printSelf();
   printf(",");
   if (itsAddress)
-    itsAddress->iId->printSelf();
+    itsAddress->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
 }
+
+person * personAndAddress::get_itsPerson()
+  {return itsPerson;}
+void personAndAddress::set_itsPerson(person * itsPersonIn)
+  {itsPerson = itsPersonIn;}
+address * personAndAddress::get_itsAddress()
+  {return itsAddress;}
+void personAndAddress::set_itsAddress(address * itsAddressIn)
+  {itsAddress = itsAddressIn;}
 
 /********************************************************************/
 
@@ -4633,9 +5414,9 @@ planeCcStrategy::planeCcStrategy(
 
 planeCcStrategy::~planeCcStrategy()
 {
-  delete pathmode;
-  delete cutmode;
-  delete stepover;
+  delete get_pathmode();
+  delete get_cutmode();
+  delete get_stepover();
 }
 
 int planeCcStrategy::isA(int aType)
@@ -4647,20 +5428,25 @@ void planeCcStrategy::printSelf()
 {
   printf("PLANE_CC_STRATEGY");
   printf("(");
-  pathmode->printSelf();
+  get_pathmode()->printSelf();
   printf(",");
-  cutmode->printSelf();
+  get_cutmode()->printSelf();
   printf(",");
-  itsMillingTolerances->iId->printSelf();
+  get_itsMillingTolerances()->get_iId()->printSelf();
   printf(",");
-  if (stepover)
-    stepover->printSelf();
+  if (get_stepover())
+    get_stepover()->printSelf();
   else
     printf("$");
   printf(",");
-  itsPlaneNormal->iId->printSelf();
+  itsPlaneNormal->get_iId()->printSelf();
   printf(")");
 }
+
+direction * planeCcStrategy::get_itsPlaneNormal()
+  {return itsPlaneNormal;}
+void planeCcStrategy::set_itsPlaneNormal(direction * itsPlaneNormalIn)
+  {itsPlaneNormal = itsPlaneNormalIn;}
 
 /********************************************************************/
 
@@ -4685,9 +5471,9 @@ planeClStrategy::planeClStrategy(
 
 planeClStrategy::~planeClStrategy()
 {
-  delete pathmode;
-  delete cutmode;
-  delete stepover;
+  delete get_pathmode();
+  delete get_cutmode();
+  delete get_stepover();
 }
 
 int planeClStrategy::isA(int aType)
@@ -4699,20 +5485,25 @@ void planeClStrategy::printSelf()
 {
   printf("PLANE_CL_STRATEGY");
   printf("(");
-  pathmode->printSelf();
+  get_pathmode()->printSelf();
   printf(",");
-  cutmode->printSelf();
+  get_cutmode()->printSelf();
   printf(",");
-  itsMillingTolerances->iId->printSelf();
+  get_itsMillingTolerances()->get_iId()->printSelf();
   printf(",");
-  if (stepover)
-    stepover->printSelf();
+  if (get_stepover())
+    get_stepover()->printSelf();
   else
     printf("$");
   printf(",");
-  itsPlaneNormal->iId->printSelf();
+  itsPlaneNormal->get_iId()->printSelf();
   printf(")");
 }
+
+direction * planeClStrategy::get_itsPlaneNormal()
+  {return itsPlaneNormal;}
+void planeClStrategy::set_itsPlaneNormal(direction * itsPlaneNormalIn)
+  {itsPlaneNormal = itsPlaneNormalIn;}
 
 /********************************************************************/
 
@@ -4764,8 +5555,8 @@ void plungeHelix::printSelf()
 {
   printf("PLUNGE_HELIX");
   printf("(");
-  if (toolOrientation)
-    toolOrientation->iId->printSelf();
+  if (get_toolOrientation())
+    get_toolOrientation()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
@@ -4774,6 +5565,15 @@ void plungeHelix::printSelf()
   printDouble(angle);
   printf(")");
 }
+
+double plungeHelix::get_radius()
+  {return radius;}
+void plungeHelix::set_radius(double radiusIn)
+  {radius = radiusIn;}
+double plungeHelix::get_angle()
+  {return angle;}
+void plungeHelix::set_angle(double angleIn)
+  {angle = angleIn;}
 
 /********************************************************************/
 
@@ -4804,14 +5604,19 @@ void plungeRamp::printSelf()
 {
   printf("PLUNGE_RAMP");
   printf("(");
-  if (toolOrientation)
-    toolOrientation->iId->printSelf();
+  if (get_toolOrientation())
+    get_toolOrientation()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   printDouble(angle);
   printf(")");
 }
+
+double plungeRamp::get_angle()
+  {return angle;}
+void plungeRamp::set_angle(double angleIn)
+  {angle = angleIn;}
 
 /********************************************************************/
 
@@ -4839,8 +5644,8 @@ void plungeToolaxis::printSelf()
 {
   printf("PLUNGE_TOOLAXIS");
   printf("(");
-  if (toolOrientation)
-    toolOrientation->iId->printSelf();
+  if (get_toolOrientation())
+    get_toolOrientation()->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
@@ -4877,8 +5682,8 @@ void plungeZigzag::printSelf()
 {
   printf("PLUNGE_ZIGZAG");
   printf("(");
-  if (toolOrientation)
-    toolOrientation->iId->printSelf();
+  if (get_toolOrientation())
+    get_toolOrientation()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
@@ -4887,6 +5692,15 @@ void plungeZigzag::printSelf()
   printDouble(width);
   printf(")");
 }
+
+double plungeZigzag::get_angle()
+  {return angle;}
+void plungeZigzag::set_angle(double angleIn)
+  {angle = angleIn;}
+double plungeZigzag::get_width()
+  {return width;}
+void plungeZigzag::set_width(double widthIn)
+  {width = widthIn;}
 
 /********************************************************************/
 
@@ -4933,6 +5747,15 @@ void processModel::printSelf()
   printf(")");
 }
 
+char * processModel::get_iniDataFile()
+  {return iniDataFile;}
+void processModel::set_iniDataFile(char * iniDataFileIn)
+  {iniDataFile = iniDataFileIn;}
+char * processModel::get_itsType()
+  {return itsType;}
+void processModel::set_itsType(char * itsTypeIn)
+  {itsType = itsTypeIn;}
+
 /********************************************************************/
 
 /* processModelList */
@@ -4961,6 +5784,11 @@ void processModelList::printSelf()
   printf(")");
 }
 
+parenProcessModelLiszt * processModelList::get_itsList()
+  {return itsList;}
+void processModelList::set_itsList(parenProcessModelLiszt * itsListIn)
+  {itsList = itsListIn;}
+
 /********************************************************************/
 
 /* profile */
@@ -4977,6 +5805,11 @@ profile::~profile(){}
 
 int profile::isA(int aType)
     { return (aType == profile_E); }
+
+axis2placement3d * profile::get_placement()
+  {return placement;}
+void profile::set_placement(axis2placement3d * placementIn)
+  {placement = placementIn;}
 
 /********************************************************************/
 
@@ -5023,7 +5856,7 @@ programStop::programStop(
 
 programStop::~programStop()
 {
-  delete itsId;
+  delete get_itsId();
 }
 
 int programStop::isA(int aType)
@@ -5036,7 +5869,7 @@ void programStop::printSelf()
 {
   printf("PROGRAM_STOP");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(")");
 }
 
@@ -5077,26 +5910,51 @@ void project::printSelf()
   printf("(");
   printString(itsId);
   printf(",");
-  mainWorkplan->iId->printSelf();
+  mainWorkplan->get_iId()->printSelf();
   printf(",");
   itsWorkpieces->printSelf();
   printf(",");
   if (itsOwner)
-    itsOwner->iId->printSelf();
+    itsOwner->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   if (itsRelease)
-    itsRelease->iId->printSelf();
+    itsRelease->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   if (itsStatus)
-    itsStatus->iId->printSelf();
+    itsStatus->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
 }
+
+char * project::get_itsId()
+  {return itsId;}
+void project::set_itsId(char * itsIdIn)
+  {itsId = itsIdIn;}
+workplan * project::get_mainWorkplan()
+  {return mainWorkplan;}
+void project::set_mainWorkplan(workplan * mainWorkplanIn)
+  {mainWorkplan = mainWorkplanIn;}
+parenWorkpieceList * project::get_itsWorkpieces()
+  {return itsWorkpieces;}
+void project::set_itsWorkpieces(parenWorkpieceList * itsWorkpiecesIn)
+  {itsWorkpieces = itsWorkpiecesIn;}
+personAndAddress * project::get_itsOwner()
+  {return itsOwner;}
+void project::set_itsOwner(personAndAddress * itsOwnerIn)
+  {itsOwner = itsOwnerIn;}
+dateAndTime * project::get_itsRelease()
+  {return itsRelease;}
+void project::set_itsRelease(dateAndTime * itsReleaseIn)
+  {itsRelease = itsReleaseIn;}
+approval * project::get_itsStatus()
+  {return itsStatus;}
+void project::set_itsStatus(approval * itsStatusIn)
+  {itsStatus = itsStatusIn;}
 
 /********************************************************************/
 
@@ -5114,6 +5972,11 @@ propertyParameter::~propertyParameter(){}
 
 int propertyParameter::isA(int aType)
     { return (aType == propertyParameter_E); }
+
+char * propertyParameter::get_parameterName()
+  {return parameterName;}
+void propertyParameter::set_parameterName(char * parameterNameIn)
+  {parameterName = parameterNameIn;}
 
 /********************************************************************/
 
@@ -5142,11 +6005,20 @@ void radiusedPocketBottomCondition::printSelf()
 {
   printf("RADIUSED_POCKET_BOTTOM_CONDITION");
   printf("(");
-  floorRadiusCenter->iId->printSelf();
+  floorRadiusCenter->get_iId()->printSelf();
   printf(",");
-  floorRadius->iId->printSelf();
+  floorRadius->get_iId()->printSelf();
   printf(")");
 }
+
+cartesianPoint * radiusedPocketBottomCondition::get_floorRadiusCenter()
+  {return floorRadiusCenter;}
+void radiusedPocketBottomCondition::set_floorRadiusCenter(cartesianPoint * floorRadiusCenterIn)
+  {floorRadiusCenter = floorRadiusCenterIn;}
+tolerancedLengthMeasure * radiusedPocketBottomCondition::get_floorRadius()
+  {return floorRadius;}
+void radiusedPocketBottomCondition::set_floorRadius(tolerancedLengthMeasure * floorRadiusIn)
+  {floorRadius = floorRadiusIn;}
 
 /********************************************************************/
 
@@ -5177,7 +6049,7 @@ void rectangularOffset::printSelf()
 {
   printf("RECTANGULAR_OFFSET");
   printf("(");
-  offsetDirection->iId->printSelf();
+  offsetDirection->get_iId()->printSelf();
   printf(",");
   printDouble(offsetDistance);
   printf(",");
@@ -5186,6 +6058,23 @@ void rectangularOffset::printSelf()
   printf("%d", columnIndex);
   printf(")");
 }
+
+direction * rectangularOffset::get_offsetDirection()
+  {return offsetDirection;}
+void rectangularOffset::set_offsetDirection(direction * offsetDirectionIn)
+  {offsetDirection = offsetDirectionIn;}
+double rectangularOffset::get_offsetDistance()
+  {return offsetDistance;}
+void rectangularOffset::set_offsetDistance(double offsetDistanceIn)
+  {offsetDistance = offsetDistanceIn;}
+int rectangularOffset::get_rowIndex()
+  {return rowIndex;}
+void rectangularOffset::set_rowIndex(int rowIndexIn)
+  {rowIndex = rowIndexIn;}
+int rectangularOffset::get_columnIndex()
+  {return columnIndex;}
+void rectangularOffset::set_columnIndex(int columnIndexIn)
+  {columnIndex = columnIndexIn;}
 
 /********************************************************************/
 
@@ -5218,6 +6107,15 @@ void rectangularOmit::printSelf()
   printf(")");
 }
 
+int rectangularOmit::get_rowIndex()
+  {return rowIndex;}
+void rectangularOmit::set_rowIndex(int rowIndexIn)
+  {rowIndex = rowIndexIn;}
+int rectangularOmit::get_columnIndex()
+  {return columnIndex;}
+void rectangularOmit::set_columnIndex(int columnIndexIn)
+  {columnIndex = columnIndexIn;}
+
 /********************************************************************/
 
 /* region */
@@ -5243,6 +6141,11 @@ int region::isA(int aType)
     { return ((aType == region_E) ||
 	      (aType == manufacturingFeature_E));
     }
+
+axis2placement3d * region::get_featurePlacement()
+  {return featurePlacement;}
+void region::set_featurePlacement(axis2placement3d * featurePlacementIn)
+  {featurePlacement = featurePlacementIn;}
 
 /********************************************************************/
 
@@ -5271,8 +6174,8 @@ regionProjection::regionProjection(
 
 regionProjection::~regionProjection()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
 }
 
 int regionProjection::isA(int aType)
@@ -5285,24 +6188,37 @@ void regionProjection::printSelf()
 {
   printf("REGION_PROJECTION");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  if (featurePlacement)
-    featurePlacement->iId->printSelf();
+  if (get_featurePlacement())
+    get_featurePlacement()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(projCurve))->iId->printSelf();
+  (dynamic_cast<instance *>(projCurve))->get_iId()->printSelf();
   printf(",");
-  projDir->iId->printSelf();
+  projDir->get_iId()->printSelf();
   printf(",");
-  depth->iId->printSelf();
+  depth->get_iId()->printSelf();
   printf(")");
 }
+
+boundedCurve * regionProjection::get_projCurve()
+  {return projCurve;}
+void regionProjection::set_projCurve(boundedCurve * projCurveIn)
+  {projCurve = projCurveIn;}
+direction * regionProjection::get_projDir()
+  {return projDir;}
+void regionProjection::set_projDir(direction * projDirIn)
+  {projDir = projDirIn;}
+tolerancedLengthMeasure * regionProjection::get_depth()
+  {return depth;}
+void regionProjection::set_depth(tolerancedLengthMeasure * depthIn)
+  {depth = depthIn;}
 
 /********************************************************************/
 
@@ -5327,8 +6243,8 @@ regionSurfaceList::regionSurfaceList(
 
 regionSurfaceList::~regionSurfaceList()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
   delete surfaceList;
 }
 
@@ -5342,20 +6258,25 @@ void regionSurfaceList::printSelf()
 {
   printf("REGION_SURFACE_LIST");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  if (featurePlacement)
-    featurePlacement->iId->printSelf();
+  if (get_featurePlacement())
+    get_featurePlacement()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   surfaceList->printSelf();
   printf(")");
 }
+
+parenBoundedSurfaceListFull * regionSurfaceList::get_surfaceList()
+  {return surfaceList;}
+void regionSurfaceList::set_surfaceList(parenBoundedSurfaceListFull * surfaceListIn)
+  {surfaceList = surfaceListIn;}
 
 /********************************************************************/
 
@@ -5378,6 +6299,19 @@ representationParent::~representationParent(){}
 int representationParent::isA(int aType)
     { return (aType == representationParent_E); }
 
+char * representationParent::get_name()
+  {return name;}
+void representationParent::set_name(char * nameIn)
+  {name = nameIn;}
+parenRepresentationItemListFull * representationParent::get_items()
+  {return items;}
+void representationParent::set_items(parenRepresentationItemListFull * itemsIn)
+  {items = itemsIn;}
+representationContext * representationParent::get_contextOfItems()
+  {return contextOfItems;}
+void representationParent::set_contextOfItems(representationContext * contextOfItemsIn)
+  {contextOfItems = contextOfItemsIn;}
+
 /********************************************************************/
 
 /* representation */
@@ -5396,9 +6330,9 @@ representation::representation(
 
 representation::~representation()
 {
-  delete name;
-  delete items;
-  delete contextOfItems;
+  delete get_name();
+  delete get_items();
+  delete get_contextOfItems();
 }
 
 int representation::isA(int aType)
@@ -5410,11 +6344,11 @@ void representation::printSelf()
 {
   printf("REPRESENTATION");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  items->printSelf();
+  get_items()->printSelf();
   printf(",");
-  contextOfItems->printSelf();
+  get_contextOfItems()->printSelf();
   printf(")");
 }
 
@@ -5451,6 +6385,15 @@ void representationContext::printSelf()
   printf(")");
 }
 
+char * representationContext::get_contextIdentifier()
+  {return contextIdentifier;}
+void representationContext::set_contextIdentifier(char * contextIdentifierIn)
+  {contextIdentifier = contextIdentifierIn;}
+char * representationContext::get_contextType()
+  {return contextType;}
+void representationContext::set_contextType(char * contextTypeIn)
+  {contextType = contextTypeIn;}
+
 /********************************************************************/
 
 /* representationItem */
@@ -5467,6 +6410,11 @@ representationItem::~representationItem(){}
 
 int representationItem::isA(int aType)
     { return (aType == representationItem_E); }
+
+char * representationItem::get_name()
+  {return name;}
+void representationItem::set_name(char * nameIn)
+  {name = nameIn;}
 
 /********************************************************************/
 
@@ -5563,7 +6511,7 @@ selective::selective(
 
 selective::~selective()
 {
-  delete itsId;
+  delete get_itsId();
   delete itsElements;
 }
 
@@ -5577,11 +6525,16 @@ void selective::printSelf()
 {
   printf("SELECTIVE");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
   itsElements->printSelf();
   printf(")");
 }
+
+parenExecutableListFull * selective::get_itsElements()
+  {return itsElements;}
+void selective::set_itsElements(parenExecutableListFull * itsElementsIn)
+  {itsElements = itsElementsIn;}
 
 /********************************************************************/
 
@@ -5597,7 +6550,7 @@ setMark::setMark(
 
 setMark::~setMark()
 {
-  delete itsId;
+  delete get_itsId();
 }
 
 int setMark::isA(int aType)
@@ -5610,7 +6563,7 @@ void setMark::printSelf()
 {
   printf("SET_MARK");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(")");
 }
 
@@ -5648,15 +6601,32 @@ void setup::printSelf()
   printString(itsId);
   printf(",");
   if (itsOrigin)
-    itsOrigin->iId->printSelf();
+    itsOrigin->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsSecplane))->iId->printSelf();
+  (dynamic_cast<instance *>(itsSecplane))->get_iId()->printSelf();
   printf(",");
   itsWorkpieceSetup->printSelf();
   printf(")");
 }
+
+char * setup::get_itsId()
+  {return itsId;}
+void setup::set_itsId(char * itsIdIn)
+  {itsId = itsIdIn;}
+axis2placement3d * setup::get_itsOrigin()
+  {return itsOrigin;}
+void setup::set_itsOrigin(axis2placement3d * itsOriginIn)
+  {itsOrigin = itsOriginIn;}
+elementarySurface * setup::get_itsSecplane()
+  {return itsSecplane;}
+void setup::set_itsSecplane(elementarySurface * itsSecplaneIn)
+  {itsSecplane = itsSecplaneIn;}
+parenWorkpieceSetupList * setup::get_itsWorkpieceSetup()
+  {return itsWorkpieceSetup;}
+void setup::set_itsWorkpieceSetup(parenWorkpieceSetupList * itsWorkpieceSetupIn)
+  {itsWorkpieceSetup = itsWorkpieceSetupIn;}
 
 /********************************************************************/
 
@@ -5696,6 +6666,15 @@ void setupInstruction::printSelf()
     printf("$");
   printf(")");
 }
+
+aString * setupInstruction::get_description()
+  {return description;}
+void setupInstruction::set_description(aString * descriptionIn)
+  {description = descriptionIn;}
+aString * setupInstruction::get_externalDocument()
+  {return externalDocument;}
+void setupInstruction::set_externalDocument(aString * externalDocumentIn)
+  {externalDocument = externalDocumentIn;}
 
 /********************************************************************/
 
@@ -5738,9 +6717,9 @@ shapeRepresentation::shapeRepresentation(
 
 shapeRepresentation::~shapeRepresentation()
 {
-  delete name;
-  delete items;
-  delete contextOfItems;
+  delete get_name();
+  delete get_items();
+  delete get_contextOfItems();
 }
 
 int shapeRepresentation::isA(int aType)
@@ -5753,11 +6732,11 @@ void shapeRepresentation::printSelf()
 {
   printf("SHAPE_REPRESENTATION");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  items->printSelf();
+  get_items()->printSelf();
   printf(",");
-  contextOfItems->printSelf();
+  get_contextOfItems()->printSelf();
   printf(")");
 }
 
@@ -5822,6 +6801,23 @@ void specification::printSelf()
   printf(")");
 }
 
+parenSpecificationUsageConstraintList * specification::get_constraint()
+  {return constraint;}
+void specification::set_constraint(parenSpecificationUsageConstraintList * constraintIn)
+  {constraint = constraintIn;}
+char * specification::get_specificationId()
+  {return specificationId;}
+void specification::set_specificationId(char * specificationIdIn)
+  {specificationId = specificationIdIn;}
+aString * specification::get_specificationDescription()
+  {return specificationDescription;}
+void specification::set_specificationDescription(aString * specificationDescriptionIn)
+  {specificationDescription = specificationDescriptionIn;}
+aString * specification::get_specificationClass()
+  {return specificationClass;}
+void specification::set_specificationClass(aString * specificationClassIn)
+  {specificationClass = specificationClassIn;}
+
 /********************************************************************/
 
 /* specificationUsageConstraint */
@@ -5855,6 +6851,15 @@ void specificationUsageConstraint::printSelf()
   printString(classId);
   printf(")");
 }
+
+char * specificationUsageConstraint::get_element()
+  {return element;}
+void specificationUsageConstraint::set_element(char * elementIn)
+  {element = elementIn;}
+char * specificationUsageConstraint::get_classId()
+  {return classId;}
+void specificationUsageConstraint::set_classId(char * classIdIn)
+  {classId = classIdIn;}
 
 /********************************************************************/
 
@@ -6002,6 +7007,27 @@ void surfaceTextureParameter::printSelf()
   printf(")");
 }
 
+double surfaceTextureParameter::get_itsValue()
+  {return itsValue;}
+void surfaceTextureParameter::set_itsValue(double itsValueIn)
+  {itsValue = itsValueIn;}
+char * surfaceTextureParameter::get_parameterName()
+  {return parameterName;}
+void surfaceTextureParameter::set_parameterName(char * parameterNameIn)
+  {parameterName = parameterNameIn;}
+char * surfaceTextureParameter::get_measuringMethod()
+  {return measuringMethod;}
+void surfaceTextureParameter::set_measuringMethod(char * measuringMethodIn)
+  {measuringMethod = measuringMethodIn;}
+aString * surfaceTextureParameter::get_parameterIndex()
+  {return parameterIndex;}
+void surfaceTextureParameter::set_parameterIndex(aString * parameterIndexIn)
+  {parameterIndex = parameterIndexIn;}
+parenMachinedSurfaceListFull * surfaceTextureParameter::get_appliedSurfaces()
+  {return appliedSurfaces;}
+void surfaceTextureParameter::set_appliedSurfaces(parenMachinedSurfaceListFull * appliedSurfacesIn)
+  {appliedSurfaces = appliedSurfacesIn;}
+
 /********************************************************************/
 
 /* taperSelect */
@@ -6032,6 +7058,15 @@ technology::~technology(){}
 
 int technology::isA(int aType)
     { return (aType == technology_E); }
+
+real * technology::get_feedrate()
+  {return feedrate;}
+void technology::set_feedrate(real * feedrateIn)
+  {feedrate = feedrateIn;}
+toolReferencePoint * technology::get_feedrateReference()
+  {return feedrateReference;}
+void technology::set_feedrateReference(toolReferencePoint * feedrateReferenceIn)
+  {feedrateReference = feedrateReferenceIn;}
 
 /********************************************************************/
 
@@ -6129,9 +7164,18 @@ void tolerancedLengthMeasure::printSelf()
   printf("(");
   printDouble(theoreticalSize);
   printf(",");
-  implicitTolerance->iId->printSelf();
+  implicitTolerance->get_iId()->printSelf();
   printf(")");
 }
+
+double tolerancedLengthMeasure::get_theoreticalSize()
+  {return theoreticalSize;}
+void tolerancedLengthMeasure::set_theoreticalSize(double theoreticalSizeIn)
+  {theoreticalSize = theoreticalSizeIn;}
+plusMinusValue * tolerancedLengthMeasure::get_implicitTolerance()
+  {return implicitTolerance;}
+void tolerancedLengthMeasure::set_implicitTolerance(plusMinusValue * implicitToleranceIn)
+  {implicitTolerance = implicitToleranceIn;}
 
 /********************************************************************/
 
@@ -6163,6 +7207,15 @@ void tolerances::printSelf()
   printDouble(scallopHeight);
   printf(")");
 }
+
+double tolerances::get_chordalTolerance()
+  {return chordalTolerance;}
+void tolerances::set_chordalTolerance(double chordalToleranceIn)
+  {chordalTolerance = chordalToleranceIn;}
+double tolerances::get_scallopHeight()
+  {return scallopHeight;}
+void tolerances::set_scallopHeight(double scallopHeightIn)
+  {scallopHeight = scallopHeightIn;}
 
 /********************************************************************/
 
@@ -6237,6 +7290,27 @@ toolpath::~toolpath(){}
 int toolpath::isA(int aType)
     { return (aType == toolpath_E); }
 
+boolean * toolpath::get_itsPriority()
+  {return itsPriority;}
+void toolpath::set_itsPriority(boolean * itsPriorityIn)
+  {itsPriority = itsPriorityIn;}
+toolpathType * toolpath::get_itsType()
+  {return itsType;}
+void toolpath::set_itsType(toolpathType * itsTypeIn)
+  {itsType = itsTypeIn;}
+toolpathSpeedprofile * toolpath::get_itsSpeed()
+  {return itsSpeed;}
+void toolpath::set_itsSpeed(toolpathSpeedprofile * itsSpeedIn)
+  {itsSpeed = itsSpeedIn;}
+technology * toolpath::get_itsTechnology()
+  {return itsTechnology;}
+void toolpath::set_itsTechnology(technology * itsTechnologyIn)
+  {itsTechnology = itsTechnologyIn;}
+machineFunctions * toolpath::get_itsMachineFunctions()
+  {return itsMachineFunctions;}
+void toolpath::set_itsMachineFunctions(machineFunctions * itsMachineFunctionsIn)
+  {itsMachineFunctions = itsMachineFunctionsIn;}
+
 /********************************************************************/
 
 /* toolpathList */
@@ -6265,6 +7339,11 @@ void toolpathList::printSelf()
   printf(")");
 }
 
+parenToolpathLisztFull * toolpathList::get_itsList()
+  {return itsList;}
+void toolpathList::set_itsList(parenToolpathLisztFull * itsListIn)
+  {itsList = itsListIn;}
+
 /********************************************************************/
 
 /* toolpathSpeedprofile */
@@ -6284,7 +7363,7 @@ void toolpathSpeedprofile::printSelf()
   else if (this->isA(speedName_E))
     (dynamic_cast<speedName *>(this))->printSelf();
   else if (this->isA(toolpathSpeed_E))
-    (dynamic_cast<instance *>(this))->iId->printSelf();
+    (dynamic_cast<instance *>(this))->get_iId()->printSelf();
 }
 
 /********************************************************************/
@@ -6526,6 +7605,11 @@ void touchProbe::printSelf()
   printf(")");
 }
 
+char * touchProbe::get_itsId()
+  {return itsId;}
+void touchProbe::set_itsId(char * itsIdIn)
+  {itsId = itsIdIn;}
+
 /********************************************************************/
 
 /* trajectory */
@@ -6555,6 +7639,11 @@ int trajectory::isA(int aType)
     { return ((aType == trajectory_E) ||
 	      (aType == toolpath_E));
     }
+
+boolean * trajectory::get_itsDirection()
+  {return itsDirection;}
+void trajectory::set_itsDirection(boolean * itsDirectionIn)
+  {itsDirection = itsDirectionIn;}
 
 /********************************************************************/
 
@@ -6681,6 +7770,15 @@ int transitionFeature::isA(int aType)
 	      (aType == manufacturingFeature_E));
     }
 
+machiningFeature * transitionFeature::get_firstFeature()
+  {return firstFeature;}
+void transitionFeature::set_firstFeature(machiningFeature * firstFeatureIn)
+  {firstFeature = firstFeatureIn;}
+machiningFeature * transitionFeature::get_secondFeature()
+  {return secondFeature;}
+void transitionFeature::set_secondFeature(machiningFeature * secondFeatureIn)
+  {secondFeature = secondFeatureIn;}
+
 /********************************************************************/
 
 /* travelPath */
@@ -6697,6 +7795,11 @@ travelPath::~travelPath(){}
 
 int travelPath::isA(int aType)
     { return (aType == travelPath_E); }
+
+axis2placement3d * travelPath::get_placement()
+  {return placement;}
+void travelPath::set_placement(axis2placement3d * placementIn)
+  {placement = placementIn;}
 
 /********************************************************************/
 
@@ -6788,7 +7891,7 @@ int trimmingSelect::isA(int aType)
 void trimmingSelect::printSelf()
 {
   if (this->isA(cartesianPoint_E))
-    (dynamic_cast<instance *>(this))->iId->printSelf();
+    (dynamic_cast<instance *>(this))->get_iId()->printSelf();
   else if (this->isA(real_E))
     (dynamic_cast<real *>(this))->printSelf();
 }
@@ -6842,6 +7945,11 @@ int two5DmanufacturingFeature::isA(int aType)
 	      (aType == manufacturingFeature_E));
     }
 
+axis2placement3d * two5DmanufacturingFeature::get_featurePlacement()
+  {return featurePlacement;}
+void two5DmanufacturingFeature::set_featurePlacement(axis2placement3d * featurePlacementIn)
+  {featurePlacement = featurePlacementIn;}
+
 /********************************************************************/
 
 /* two5DmillingStrategy */
@@ -6861,6 +7969,15 @@ two5DmillingStrategy::~two5DmillingStrategy(){}
 int two5DmillingStrategy::isA(int aType)
     { return (aType == two5DmillingStrategy_E); }
 
+real * two5DmillingStrategy::get_overlap()
+  {return overlap;}
+void two5DmillingStrategy::set_overlap(real * overlapIn)
+  {overlap = overlapIn;}
+boolean * two5DmillingStrategy::get_allowMultiplePasses()
+  {return allowMultiplePasses;}
+void two5DmillingStrategy::set_allowMultiplePasses(boolean * allowMultiplePassesIn)
+  {allowMultiplePasses = allowMultiplePassesIn;}
+
 /********************************************************************/
 
 /* unaryBooleanExpression */
@@ -6879,6 +7996,11 @@ int unaryBooleanExpression::isA(int aType)
     { return ((aType == unaryBooleanExpression_E) ||
 	      (aType == booleanExpression_E));
     }
+
+booleanExpression * unaryBooleanExpression::get_operand()
+  {return operand;}
+void unaryBooleanExpression::set_operand(booleanExpression * operandIn)
+  {operand = operandIn;}
 
 /********************************************************************/
 
@@ -6901,8 +8023,8 @@ unidirectionalMilling::unidirectionalMilling(
 
 unidirectionalMilling::~unidirectionalMilling()
 {
-  delete overlap;
-  delete allowMultiplePasses;
+  delete get_overlap();
+  delete get_allowMultiplePasses();
   delete cutmode;
 }
 
@@ -6915,18 +8037,18 @@ void unidirectionalMilling::printSelf()
 {
   printf("UNIDIRECTIONAL_MILLING");
   printf("(");
-  if (overlap)
-    overlap->printSelf();
+  if (get_overlap())
+    get_overlap()->printSelf();
   else
     printf("$");
   printf(",");
-  if (allowMultiplePasses)
-    allowMultiplePasses->printSelf();
+  if (get_allowMultiplePasses())
+    get_allowMultiplePasses()->printSelf();
   else
     printf("$");
   printf(",");
   if (feedDirection)
-    feedDirection->iId->printSelf();
+    feedDirection->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
@@ -6936,6 +8058,15 @@ void unidirectionalMilling::printSelf()
     printf("$");
   printf(")");
 }
+
+direction * unidirectionalMilling::get_feedDirection()
+  {return feedDirection;}
+void unidirectionalMilling::set_feedDirection(direction * feedDirectionIn)
+  {feedDirection = feedDirectionIn;}
+cutmodeType * unidirectionalMilling::get_cutmode()
+  {return cutmode;}
+void unidirectionalMilling::set_cutmode(cutmodeType * cutmodeIn)
+  {cutmode = cutmodeIn;}
 
 /********************************************************************/
 
@@ -6954,7 +8085,7 @@ unloadTool::unloadTool(
 
 unloadTool::~unloadTool()
 {
-  delete itsId;
+  delete get_itsId();
 }
 
 int unloadTool::isA(int aType)
@@ -6967,14 +8098,19 @@ void unloadTool::printSelf()
 {
   printf("UNLOAD_TOOL");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
   if (itsTool)
-    (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+    (dynamic_cast<instance *>(itsTool))->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
 }
+
+machiningTool * unloadTool::get_itsTool()
+  {return itsTool;}
+void unloadTool::set_itsTool(machiningTool * itsToolIn)
+  {itsTool = itsToolIn;}
 
 /********************************************************************/
 
@@ -7001,9 +8137,9 @@ uvStrategy::uvStrategy(
 
 uvStrategy::~uvStrategy()
 {
-  delete pathmode;
-  delete cutmode;
-  delete stepover;
+  delete get_pathmode();
+  delete get_cutmode();
+  delete get_stepover();
 }
 
 int uvStrategy::isA(int aType)
@@ -7015,22 +8151,31 @@ void uvStrategy::printSelf()
 {
   printf("UV_STRATEGY");
   printf("(");
-  pathmode->printSelf();
+  get_pathmode()->printSelf();
   printf(",");
-  cutmode->printSelf();
+  get_cutmode()->printSelf();
   printf(",");
-  itsMillingTolerances->iId->printSelf();
+  get_itsMillingTolerances()->get_iId()->printSelf();
   printf(",");
-  if (stepover)
-    stepover->printSelf();
+  if (get_stepover())
+    get_stepover()->printSelf();
   else
     printf("$");
   printf(",");
-  forwardDirection->iId->printSelf();
+  forwardDirection->get_iId()->printSelf();
   printf(",");
-  sidewardDirection->iId->printSelf();
+  sidewardDirection->get_iId()->printSelf();
   printf(")");
 }
+
+direction * uvStrategy::get_forwardDirection()
+  {return forwardDirection;}
+void uvStrategy::set_forwardDirection(direction * forwardDirectionIn)
+  {forwardDirection = forwardDirectionIn;}
+direction * uvStrategy::get_sidewardDirection()
+  {return sidewardDirection;}
+void uvStrategy::set_sidewardDirection(direction * sidewardDirectionIn)
+  {sidewardDirection = sidewardDirectionIn;}
 
 /********************************************************************/
 
@@ -7069,7 +8214,7 @@ vertexPoint::vertexPoint(
 
 vertexPoint::~vertexPoint()
 {
-  delete name;
+  delete get_name();
 }
 
 int vertexPoint::isA(int aType)
@@ -7083,11 +8228,16 @@ void vertexPoint::printSelf()
 {
   printf("VERTEX_POINT");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  (dynamic_cast<instance *>(vertexGeometry))->iId->printSelf();
+  (dynamic_cast<instance *>(vertexGeometry))->get_iId()->printSelf();
   printf(")");
 }
+
+point * vertexPoint::get_vertexGeometry()
+  {return vertexGeometry;}
+void vertexPoint::set_vertexGeometry(point * vertexGeometryIn)
+  {vertexGeometry = vertexGeometryIn;}
 
 /********************************************************************/
 
@@ -7106,7 +8256,7 @@ waitForMark::waitForMark(
 
 waitForMark::~waitForMark()
 {
-  delete itsId;
+  delete get_itsId();
 }
 
 int waitForMark::isA(int aType)
@@ -7119,11 +8269,16 @@ void waitForMark::printSelf()
 {
   printf("WAIT_FOR_MARK");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsChannel->iId->printSelf();
+  itsChannel->get_iId()->printSelf();
   printf(")");
 }
+
+channel * waitForMark::get_itsChannel()
+  {return itsChannel;}
+void waitForMark::set_itsChannel(channel * itsChannelIn)
+  {itsChannel = itsChannelIn;}
 
 /********************************************************************/
 
@@ -7156,7 +8311,7 @@ void weekOfYearAndDayDate::printSelf()
 {
   printf("WEEEK_OF_YEAR_AND_DAY_DATE");
   printf("(");
-  printf("%d", yearComponent);
+  printf("%d", get_yearComponent());
   printf(",");
   printf("%d", weekComponent);
   printf(",");
@@ -7166,6 +8321,15 @@ void weekOfYearAndDayDate::printSelf()
     printf("$");
   printf(")");
 }
+
+int weekOfYearAndDayDate::get_weekComponent()
+  {return weekComponent;}
+void weekOfYearAndDayDate::set_weekComponent(int weekComponentIn)
+  {weekComponent = weekComponentIn;}
+integer * weekOfYearAndDayDate::get_dayComponent()
+  {return dayComponent;}
+void weekOfYearAndDayDate::set_dayComponent(integer * dayComponentIn)
+  {dayComponent = dayComponentIn;}
 
 /********************************************************************/
 
@@ -7186,7 +8350,7 @@ whileStatement::whileStatement(
 
 whileStatement::~whileStatement()
 {
-  delete itsId;
+  delete get_itsId();
 }
 
 int whileStatement::isA(int aType)
@@ -7199,13 +8363,22 @@ void whileStatement::printSelf()
 {
   printf("WHILE_STATEMENT");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  (dynamic_cast<instance *>(condition))->iId->printSelf();
+  (dynamic_cast<instance *>(condition))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(body))->iId->printSelf();
+  (dynamic_cast<instance *>(body))->get_iId()->printSelf();
   printf(")");
 }
+
+booleanExpression * whileStatement::get_condition()
+  {return condition;}
+void whileStatement::set_condition(booleanExpression * conditionIn)
+  {condition = conditionIn;}
+executable * whileStatement::get_body()
+  {return body;}
+void whileStatement::set_body(executable * bodyIn)
+  {body = bodyIn;}
 
 /********************************************************************/
 
@@ -7232,9 +8405,14 @@ void woodruffSlotEndType::printSelf()
 {
   printf("WOODRUFF_SLOT_END_TYPE");
   printf("(");
-  radius->iId->printSelf();
+  radius->get_iId()->printSelf();
   printf(")");
 }
+
+tolerancedLengthMeasure * woodruffSlotEndType::get_radius()
+  {return radius;}
+void woodruffSlotEndType::set_radius(tolerancedLengthMeasure * radiusIn)
+  {radius = radiusIn;}
 
 /********************************************************************/
 
@@ -7257,6 +8435,11 @@ int workingstep::isA(int aType)
     { return ((aType == workingstep_E) ||
 	      (aType == executable_E));
     }
+
+elementarySurface * workingstep::get_itsSecplane()
+  {return itsSecplane;}
+void workingstep::set_itsSecplane(elementarySurface * itsSecplaneIn)
+  {itsSecplane = itsSecplaneIn;}
 
 /********************************************************************/
 
@@ -7299,7 +8482,7 @@ void workpiece::printSelf()
   printString(itsId);
   printf(",");
   if (itsMaterial)
-    itsMaterial->iId->printSelf();
+    itsMaterial->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
@@ -7309,23 +8492,52 @@ void workpiece::printSelf()
     printf("$");
   printf(",");
   if (itsRawpiece)
-    itsRawpiece->iId->printSelf();
+    itsRawpiece->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   if (itsGeometry)
-    itsGeometry->iId->printSelf();
+    itsGeometry->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   if (itsBoundingGeometry)
-    (dynamic_cast<instance *>(itsBoundingGeometry))->iId->printSelf();
+    (dynamic_cast<instance *>(itsBoundingGeometry))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   clampingPositions->printSelf();
   printf(")");
 }
+
+char * workpiece::get_itsId()
+  {return itsId;}
+void workpiece::set_itsId(char * itsIdIn)
+  {itsId = itsIdIn;}
+material * workpiece::get_itsMaterial()
+  {return itsMaterial;}
+void workpiece::set_itsMaterial(material * itsMaterialIn)
+  {itsMaterial = itsMaterialIn;}
+real * workpiece::get_globalTolerance()
+  {return globalTolerance;}
+void workpiece::set_globalTolerance(real * globalToleranceIn)
+  {globalTolerance = globalToleranceIn;}
+workpiece * workpiece::get_itsRawpiece()
+  {return itsRawpiece;}
+void workpiece::set_itsRawpiece(workpiece * itsRawpieceIn)
+  {itsRawpiece = itsRawpieceIn;}
+advancedBrepShapeRepresentation * workpiece::get_itsGeometry()
+  {return itsGeometry;}
+void workpiece::set_itsGeometry(advancedBrepShapeRepresentation * itsGeometryIn)
+  {itsGeometry = itsGeometryIn;}
+boundingGeometrySelect * workpiece::get_itsBoundingGeometry()
+  {return itsBoundingGeometry;}
+void workpiece::set_itsBoundingGeometry(boundingGeometrySelect * itsBoundingGeometryIn)
+  {itsBoundingGeometry = itsBoundingGeometryIn;}
+parenCartesianPointList * workpiece::get_clampingPositions()
+  {return clampingPositions;}
+void workpiece::set_clampingPositions(parenCartesianPointList * clampingPositionsIn)
+  {clampingPositions = clampingPositionsIn;}
 
 /********************************************************************/
 
@@ -7360,9 +8572,9 @@ void workpieceSetup::printSelf()
 {
   printf("WORKPIECE_SETUP");
   printf("(");
-  itsWorkpiece->iId->printSelf();
+  itsWorkpiece->get_iId()->printSelf();
   printf(",");
-  itsOrigin->iId->printSelf();
+  itsOrigin->get_iId()->printSelf();
   printf(",");
   if (itsOffset)
     itsOffset->printSelf();
@@ -7370,13 +8582,34 @@ void workpieceSetup::printSelf()
     printf("$");
   printf(",");
   if (itsRestrictedArea)
-    (dynamic_cast<instance *>(itsRestrictedArea))->iId->printSelf();
+    (dynamic_cast<instance *>(itsRestrictedArea))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   itsInstructions->printSelf();
   printf(")");
 }
+
+workpiece * workpieceSetup::get_itsWorkpiece()
+  {return itsWorkpiece;}
+void workpieceSetup::set_itsWorkpiece(workpiece * itsWorkpieceIn)
+  {itsWorkpiece = itsWorkpieceIn;}
+axis2placement3d * workpieceSetup::get_itsOrigin()
+  {return itsOrigin;}
+void workpieceSetup::set_itsOrigin(axis2placement3d * itsOriginIn)
+  {itsOrigin = itsOriginIn;}
+offsetVector * workpieceSetup::get_itsOffset()
+  {return itsOffset;}
+void workpieceSetup::set_itsOffset(offsetVector * itsOffsetIn)
+  {itsOffset = itsOffsetIn;}
+restrictedAreaSelect * workpieceSetup::get_itsRestrictedArea()
+  {return itsRestrictedArea;}
+void workpieceSetup::set_itsRestrictedArea(restrictedAreaSelect * itsRestrictedAreaIn)
+  {itsRestrictedArea = itsRestrictedAreaIn;}
+parenSetupInstructionList * workpieceSetup::get_itsInstructions()
+  {return itsInstructions;}
+void workpieceSetup::set_itsInstructions(parenSetupInstructionList * itsInstructionsIn)
+  {itsInstructions = itsInstructionsIn;}
 
 /********************************************************************/
 
@@ -7401,7 +8634,7 @@ workplan::workplan(
 
 workplan::~workplan()
 {
-  delete itsId;
+  delete get_itsId();
   delete itsElements;
 }
 
@@ -7415,26 +8648,43 @@ void workplan::printSelf()
 {
   printf("WORKPLAN");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
   itsElements->printSelf();
   printf(",");
   if (itsChannel)
-    itsChannel->iId->printSelf();
+    itsChannel->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   if (itsSetup)
-    itsSetup->iId->printSelf();
+    itsSetup->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   if (itsEffect)
-    itsEffect->iId->printSelf();
+    itsEffect->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
 }
+
+parenExecutableList * workplan::get_itsElements()
+  {return itsElements;}
+void workplan::set_itsElements(parenExecutableList * itsElementsIn)
+  {itsElements = itsElementsIn;}
+channel * workplan::get_itsChannel()
+  {return itsChannel;}
+void workplan::set_itsChannel(channel * itsChannelIn)
+  {itsChannel = itsChannelIn;}
+setup * workplan::get_itsSetup()
+  {return itsSetup;}
+void workplan::set_itsSetup(setup * itsSetupIn)
+  {itsSetup = itsSetupIn;}
+inProcessGeometry * workplan::get_itsEffect()
+  {return itsEffect;}
+void workplan::set_itsEffect(inProcessGeometry * itsEffectIn)
+  {itsEffect = itsEffectIn;}
 
 /********************************************************************/
 
@@ -7483,14 +8733,19 @@ void alongPath::printSelf()
 {
   printf("ALONG_PATH");
   printf("(");
-  if (toolOrientation)
-    toolOrientation->iId->printSelf();
+  if (get_toolOrientation())
+    get_toolOrientation()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  path->iId->printSelf();
+  path->get_iId()->printSelf();
   printf(")");
 }
+
+toolpathList * alongPath::get_path()
+  {return path;}
+void alongPath::set_path(toolpathList * pathIn)
+  {path = pathIn;}
 
 /********************************************************************/
 
@@ -7506,7 +8761,7 @@ andExpression::andExpression(
 
 andExpression::~andExpression()
 {
-  delete operands;
+  delete get_operands();
 }
 
 int andExpression::isA(int aType)
@@ -7519,7 +8774,7 @@ void andExpression::printSelf()
 {
   printf("AND_EXPRESSION");
   printf("(");
-  operands->printSelf();
+  get_operands()->printSelf();
   printf(")");
 }
 
@@ -7553,6 +8808,11 @@ void angleTaper::printSelf()
   printf(")");
 }
 
+real * angleTaper::get_angle()
+  {return angle;}
+void angleTaper::set_angle(real * angleIn)
+  {angle = angleIn;}
+
 /********************************************************************/
 
 /* apRetractAngle */
@@ -7584,8 +8844,8 @@ void apRetractAngle::printSelf()
 {
   printf("AP_RETRACT_ANGLE");
   printf("(");
-  if (toolOrientation)
-    toolOrientation->iId->printSelf();
+  if (get_toolOrientation())
+    get_toolOrientation()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
@@ -7594,6 +8854,15 @@ void apRetractAngle::printSelf()
   printDouble(travelLength);
   printf(")");
 }
+
+double apRetractAngle::get_angle()
+  {return angle;}
+void apRetractAngle::set_angle(double angleIn)
+  {angle = angleIn;}
+double apRetractAngle::get_travelLength()
+  {return travelLength;}
+void apRetractAngle::set_travelLength(double travelLengthIn)
+  {travelLength = travelLengthIn;}
 
 /********************************************************************/
 
@@ -7624,14 +8893,19 @@ void apRetractTangent::printSelf()
 {
   printf("AP_RETRACT_TANGENT");
   printf("(");
-  if (toolOrientation)
-    toolOrientation->iId->printSelf();
+  if (get_toolOrientation())
+    get_toolOrientation()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   printDouble(radius);
   printf(")");
 }
+
+double apRetractTangent::get_radius()
+  {return radius;}
+void apRetractTangent::set_radius(double radiusIn)
+  {radius = radiusIn;}
 
 /********************************************************************/
 
@@ -7652,7 +8926,7 @@ assignment::assignment(
 
 assignment::~assignment()
 {
-  delete itsId;
+  delete get_itsId();
 }
 
 int assignment::isA(int aType)
@@ -7665,13 +8939,22 @@ void assignment::printSelf()
 {
   printf("ASSIGNMENT");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsLvalue->iId->printSelf();
+  itsLvalue->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsRvalue))->iId->printSelf();
+  (dynamic_cast<instance *>(itsRvalue))->get_iId()->printSelf();
   printf(")");
 }
+
+ncVariable * assignment::get_itsLvalue()
+  {return itsLvalue;}
+void assignment::set_itsLvalue(ncVariable * itsLvalueIn)
+  {itsLvalue = itsLvalueIn;}
+rvalue * assignment::get_itsRvalue()
+  {return itsRvalue;}
+void assignment::set_itsRvalue(rvalue * itsRvalueIn)
+  {itsRvalue = itsRvalueIn;}
 
 /********************************************************************/
 
@@ -7702,9 +8985,9 @@ axisTrajectory::axisTrajectory(
 
 axisTrajectory::~axisTrajectory()
 {
-  delete itsPriority;
-  delete itsType;
-  delete itsDirection;
+  delete get_itsPriority();
+  delete get_itsType();
+  delete get_itsDirection();
   delete axisList;
   delete commands;
 }
@@ -7719,27 +9002,27 @@ void axisTrajectory::printSelf()
 {
   printf("AXIS_TRAJECTORY");
   printf("(");
-  itsPriority->printSelf();
+  get_itsPriority()->printSelf();
   printf(",");
-  itsType->printSelf();
+  get_itsType()->printSelf();
   printf(",");
-  if (itsSpeed)
-    itsSpeed->printSelf();
+  if (get_itsSpeed())
+    get_itsSpeed()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsTechnology)
-    (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  if (get_itsTechnology())
+    (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachineFunctions)
-    (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  if (get_itsMachineFunctions())
+    (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsDirection)
-    itsDirection->printSelf();
+  if (get_itsDirection())
+    get_itsDirection()->printSelf();
   else
     printf("$");
   printf(",");
@@ -7748,6 +9031,15 @@ void axisTrajectory::printSelf()
   commands->printSelf();
   printf(")");
 }
+
+parenStringListFull * axisTrajectory::get_axisList()
+  {return axisList;}
+void axisTrajectory::set_axisList(parenStringListFull * axisListIn)
+  {axisList = axisListIn;}
+parenBoundedCurveListFull * axisTrajectory::get_commands()
+  {return commands;}
+void axisTrajectory::set_commands(parenBoundedCurveListFull * commandsIn)
+  {commands = commandsIn;}
 
 /********************************************************************/
 
@@ -7774,8 +9066,8 @@ bidirectionalContour::bidirectionalContour(
 
 bidirectionalContour::~bidirectionalContour()
 {
-  delete overlap;
-  delete allowMultiplePasses;
+  delete get_overlap();
+  delete get_allowMultiplePasses();
   delete stepoverDirection;
   delete rotationDirection;
   delete spiralCutmode;
@@ -7790,18 +9082,18 @@ void bidirectionalContour::printSelf()
 {
   printf("BIDIRECTIONAL_CONTOUR");
   printf("(");
-  if (overlap)
-    overlap->printSelf();
+  if (get_overlap())
+    get_overlap()->printSelf();
   else
     printf("$");
   printf(",");
-  if (allowMultiplePasses)
-    allowMultiplePasses->printSelf();
+  if (get_allowMultiplePasses())
+    get_allowMultiplePasses()->printSelf();
   else
     printf("$");
   printf(",");
   if (feedDirection)
-    feedDirection->iId->printSelf();
+    feedDirection->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
@@ -7819,6 +9111,23 @@ void bidirectionalContour::printSelf()
     printf("$");
   printf(")");
 }
+
+direction * bidirectionalContour::get_feedDirection()
+  {return feedDirection;}
+void bidirectionalContour::set_feedDirection(direction * feedDirectionIn)
+  {feedDirection = feedDirectionIn;}
+leftOrRight * bidirectionalContour::get_stepoverDirection()
+  {return stepoverDirection;}
+void bidirectionalContour::set_stepoverDirection(leftOrRight * stepoverDirectionIn)
+  {stepoverDirection = stepoverDirectionIn;}
+rotDirection * bidirectionalContour::get_rotationDirection()
+  {return rotationDirection;}
+void bidirectionalContour::set_rotationDirection(rotDirection * rotationDirectionIn)
+  {rotationDirection = rotationDirectionIn;}
+cutmodeType * bidirectionalContour::get_spiralCutmode()
+  {return spiralCutmode;}
+void bidirectionalContour::set_spiralCutmode(cutmodeType * spiralCutmodeIn)
+  {spiralCutmode = spiralCutmodeIn;}
 
 /********************************************************************/
 
@@ -7843,8 +9152,8 @@ bidirectionalMilling::bidirectionalMilling(
 
 bidirectionalMilling::~bidirectionalMilling()
 {
-  delete overlap;
-  delete allowMultiplePasses;
+  delete get_overlap();
+  delete get_allowMultiplePasses();
   delete stepoverDirection;
   delete itsStrokeConnectionStrategy;
 }
@@ -7858,18 +9167,18 @@ void bidirectionalMilling::printSelf()
 {
   printf("BIDIRECTIONAL_MILLING");
   printf("(");
-  if (overlap)
-    overlap->printSelf();
+  if (get_overlap())
+    get_overlap()->printSelf();
   else
     printf("$");
   printf(",");
-  if (allowMultiplePasses)
-    allowMultiplePasses->printSelf();
+  if (get_allowMultiplePasses())
+    get_allowMultiplePasses()->printSelf();
   else
     printf("$");
   printf(",");
   if (feedDirection)
-    feedDirection->iId->printSelf();
+    feedDirection->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
@@ -7884,6 +9193,19 @@ void bidirectionalMilling::printSelf()
     printf("$");
   printf(")");
 }
+
+direction * bidirectionalMilling::get_feedDirection()
+  {return feedDirection;}
+void bidirectionalMilling::set_feedDirection(direction * feedDirectionIn)
+  {feedDirection = feedDirectionIn;}
+leftOrRight * bidirectionalMilling::get_stepoverDirection()
+  {return stepoverDirection;}
+void bidirectionalMilling::set_stepoverDirection(leftOrRight * stepoverDirectionIn)
+  {stepoverDirection = stepoverDirectionIn;}
+strokeConnectionStrategy * bidirectionalMilling::get_itsStrokeConnectionStrategy()
+  {return itsStrokeConnectionStrategy;}
+void bidirectionalMilling::set_itsStrokeConnectionStrategy(strokeConnectionStrategy * itsStrokeConnectionStrategyIn)
+  {itsStrokeConnectionStrategy = itsStrokeConnectionStrategyIn;}
 
 /********************************************************************/
 
@@ -7905,6 +9227,15 @@ int binaryBooleanExpression::isA(int aType)
     { return ((aType == binaryBooleanExpression_E) ||
 	      (aType == booleanExpression_E));
     }
+
+booleanExpression * binaryBooleanExpression::get_operand1()
+  {return operand1;}
+void binaryBooleanExpression::set_operand1(booleanExpression * operand1In)
+  {operand1 = operand1In;}
+booleanExpression * binaryBooleanExpression::get_operand2()
+  {return operand2;}
+void binaryBooleanExpression::set_operand2(booleanExpression * operand2In)
+  {operand2 = operand2In;}
 
 /********************************************************************/
 
@@ -7964,13 +9295,22 @@ void calendarDate::printSelf()
 {
   printf("CALENDAR_DATE");
   printf("(");
-  printf("%d", yearComponent);
+  printf("%d", get_yearComponent());
   printf(",");
   printf("%d", dayComponent);
   printf(",");
   printf("%d", monthComponent);
   printf(")");
 }
+
+int calendarDate::get_dayComponent()
+  {return dayComponent;}
+void calendarDate::set_dayComponent(int dayComponentIn)
+  {dayComponent = dayComponentIn;}
+int calendarDate::get_monthComponent()
+  {return monthComponent;}
+void calendarDate::set_monthComponent(int monthComponentIn)
+  {monthComponent = monthComponentIn;}
 
 /********************************************************************/
 
@@ -7988,8 +9328,8 @@ centerMilling::centerMilling(
 
 centerMilling::~centerMilling()
 {
-  delete overlap;
-  delete allowMultiplePasses;
+  delete get_overlap();
+  delete get_allowMultiplePasses();
 }
 
 int centerMilling::isA(int aType)
@@ -8001,13 +9341,13 @@ void centerMilling::printSelf()
 {
   printf("CENTER_MILLING");
   printf("(");
-  if (overlap)
-    overlap->printSelf();
+  if (get_overlap())
+    get_overlap()->printSelf();
   else
     printf("$");
   printf(",");
-  if (allowMultiplePasses)
-    allowMultiplePasses->printSelf();
+  if (get_allowMultiplePasses())
+    get_allowMultiplePasses()->printSelf();
   else
     printf("$");
   printf(")");
@@ -8040,8 +9380,8 @@ chamfer::chamfer(
 
 chamfer::~chamfer()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
 }
 
 int chamfer::isA(int aType)
@@ -8055,21 +9395,30 @@ void chamfer::printSelf()
 {
   printf("CHAMFER");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(firstFeature))->iId->printSelf();
+  (dynamic_cast<instance *>(get_firstFeature()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(secondFeature))->iId->printSelf();
+  (dynamic_cast<instance *>(get_secondFeature()))->get_iId()->printSelf();
   printf(",");
   printDouble(angleToPlane);
   printf(",");
-  firstOffsetAmount->iId->printSelf();
+  firstOffsetAmount->get_iId()->printSelf();
   printf(")");
 }
+
+double chamfer::get_angleToPlane()
+  {return angleToPlane;}
+void chamfer::set_angleToPlane(double angleToPlaneIn)
+  {angleToPlane = angleToPlaneIn;}
+tolerancedLengthMeasure * chamfer::get_firstOffsetAmount()
+  {return firstOffsetAmount;}
+void chamfer::set_firstOffsetAmount(tolerancedLengthMeasure * firstOffsetAmountIn)
+  {firstOffsetAmount = firstOffsetAmountIn;}
 
 /********************************************************************/
 
@@ -8092,6 +9441,11 @@ int circularPath::isA(int aType)
     { return ((aType == circularPath_E) ||
 	      (aType == travelPath_E));
     }
+
+tolerancedLengthMeasure * circularPath::get_radius()
+  {return radius;}
+void circularPath::set_radius(tolerancedLengthMeasure * radiusIn)
+  {radius = radiusIn;}
 
 /********************************************************************/
 
@@ -8140,9 +9494,9 @@ void comparisonEqual::printSelf()
 {
   printf("COMPARISON_EQUAL");
   printf("(");
-  operand1->iId->printSelf();
+  get_operand1()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(operand2))->iId->printSelf();
+  (dynamic_cast<instance *>(get_operand2()))->get_iId()->printSelf();
   printf(")");
 }
 
@@ -8174,9 +9528,9 @@ void comparisonGreater::printSelf()
 {
   printf("COMPARISON_GREATER");
   printf("(");
-  operand1->iId->printSelf();
+  get_operand1()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(operand2))->iId->printSelf();
+  (dynamic_cast<instance *>(get_operand2()))->get_iId()->printSelf();
   printf(")");
 }
 
@@ -8208,9 +9562,9 @@ void comparisonGreaterEqual::printSelf()
 {
   printf("COMPARISON_GREATER_EQUAL");
   printf("(");
-  operand1->iId->printSelf();
+  get_operand1()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(operand2))->iId->printSelf();
+  (dynamic_cast<instance *>(get_operand2()))->get_iId()->printSelf();
   printf(")");
 }
 
@@ -8242,9 +9596,9 @@ void comparisonLess::printSelf()
 {
   printf("COMPARISON_LESS");
   printf("(");
-  operand1->iId->printSelf();
+  get_operand1()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(operand2))->iId->printSelf();
+  (dynamic_cast<instance *>(get_operand2()))->get_iId()->printSelf();
   printf(")");
 }
 
@@ -8276,9 +9630,9 @@ void comparisonLessEqual::printSelf()
 {
   printf("COMPARISON_LESS_EQUAL");
   printf("(");
-  operand1->iId->printSelf();
+  get_operand1()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(operand2))->iId->printSelf();
+  (dynamic_cast<instance *>(get_operand2()))->get_iId()->printSelf();
   printf(")");
 }
 
@@ -8310,9 +9664,9 @@ void comparisonNotEqual::printSelf()
 {
   printf("COMPARISON_NOT_EQUAL");
   printf("(");
-  operand1->iId->printSelf();
+  get_operand1()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(operand2))->iId->printSelf();
+  (dynamic_cast<instance *>(get_operand2()))->get_iId()->printSelf();
   printf(")");
 }
 
@@ -8344,12 +9698,12 @@ void completeCircularPath::printSelf()
 {
   printf("COMPLETE_CIRCULAR_PATH");
   printf("(");
-  if (placement)
-    placement->iId->printSelf();
+  if (get_placement())
+    get_placement()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  radius->iId->printSelf();
+  get_radius()->get_iId()->printSelf();
   printf(")");
 }
 
@@ -8381,6 +9735,11 @@ int compoundFeature::isA(int aType)
 	      (aType == two5DmanufacturingFeature_E) ||
 	      (aType == manufacturingFeature_E));
     }
+
+parenCompoundFeatureSelectListFull * compoundFeature::get_elements()
+  {return elements;}
+void compoundFeature::set_elements(parenCompoundFeatureSelectListFull * elementsIn)
+  {elements = elementsIn;}
 
 /********************************************************************/
 
@@ -8414,11 +9773,20 @@ void conicalHoleBottom::printSelf()
   tipAngle->printSelf();
   printf(",");
   if (tipRadius)
-    tipRadius->iId->printSelf();
+    tipRadius->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
 }
+
+real * conicalHoleBottom::get_tipAngle()
+  {return tipAngle;}
+void conicalHoleBottom::set_tipAngle(real * tipAngleIn)
+  {tipAngle = tipAngleIn;}
+tolerancedLengthMeasure * conicalHoleBottom::get_tipRadius()
+  {return tipRadius;}
+void conicalHoleBottom::set_tipRadius(tolerancedLengthMeasure * tipRadiusIn)
+  {tipRadius = tipRadiusIn;}
 
 /********************************************************************/
 
@@ -8442,6 +9810,11 @@ int connectedFaceSet::isA(int aType)
 	      (aType == topologicalRepresentationItem_E) ||
 	      (aType == representationItem_E));
     }
+
+parenFaceListFull * connectedFaceSet::get_cfsFaces()
+  {return cfsFaces;}
+void connectedFaceSet::set_cfsFaces(parenFaceListFull * cfsFacesIn)
+  {cfsFaces = cfsFacesIn;}
 
 /********************************************************************/
 
@@ -8468,8 +9841,8 @@ contourBidirectional::contourBidirectional(
 
 contourBidirectional::~contourBidirectional()
 {
-  delete overlap;
-  delete allowMultiplePasses;
+  delete get_overlap();
+  delete get_allowMultiplePasses();
   delete stepoverDirection;
   delete rotationDirection;
   delete spiralCutmode;
@@ -8484,18 +9857,18 @@ void contourBidirectional::printSelf()
 {
   printf("CONTOUR_BIDIRECTIONAL");
   printf("(");
-  if (overlap)
-    overlap->printSelf();
+  if (get_overlap())
+    get_overlap()->printSelf();
   else
     printf("$");
   printf(",");
-  if (allowMultiplePasses)
-    allowMultiplePasses->printSelf();
+  if (get_allowMultiplePasses())
+    get_allowMultiplePasses()->printSelf();
   else
     printf("$");
   printf(",");
   if (feedDirection)
-    feedDirection->iId->printSelf();
+    feedDirection->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
@@ -8513,6 +9886,23 @@ void contourBidirectional::printSelf()
     printf("$");
   printf(")");
 }
+
+direction * contourBidirectional::get_feedDirection()
+  {return feedDirection;}
+void contourBidirectional::set_feedDirection(direction * feedDirectionIn)
+  {feedDirection = feedDirectionIn;}
+leftOrRight * contourBidirectional::get_stepoverDirection()
+  {return stepoverDirection;}
+void contourBidirectional::set_stepoverDirection(leftOrRight * stepoverDirectionIn)
+  {stepoverDirection = stepoverDirectionIn;}
+rotDirection * contourBidirectional::get_rotationDirection()
+  {return rotationDirection;}
+void contourBidirectional::set_rotationDirection(rotDirection * rotationDirectionIn)
+  {rotationDirection = rotationDirectionIn;}
+cutmodeType * contourBidirectional::get_spiralCutmode()
+  {return spiralCutmode;}
+void contourBidirectional::set_spiralCutmode(cutmodeType * spiralCutmodeIn)
+  {spiralCutmode = spiralCutmodeIn;}
 
 /********************************************************************/
 
@@ -8535,8 +9925,8 @@ contourParallel::contourParallel(
 
 contourParallel::~contourParallel()
 {
-  delete overlap;
-  delete allowMultiplePasses;
+  delete get_overlap();
+  delete get_allowMultiplePasses();
   delete rotationDirection;
   delete cutmode;
 }
@@ -8550,13 +9940,13 @@ void contourParallel::printSelf()
 {
   printf("CONTOUR_PARALLEL");
   printf("(");
-  if (overlap)
-    overlap->printSelf();
+  if (get_overlap())
+    get_overlap()->printSelf();
   else
     printf("$");
   printf(",");
-  if (allowMultiplePasses)
-    allowMultiplePasses->printSelf();
+  if (get_allowMultiplePasses())
+    get_allowMultiplePasses()->printSelf();
   else
     printf("$");
   printf(",");
@@ -8568,6 +9958,15 @@ void contourParallel::printSelf()
     printf("$");
   printf(")");
 }
+
+rotDirection * contourParallel::get_rotationDirection()
+  {return rotationDirection;}
+void contourParallel::set_rotationDirection(rotDirection * rotationDirectionIn)
+  {rotationDirection = rotationDirectionIn;}
+cutmodeType * contourParallel::get_cutmode()
+  {return cutmode;}
+void contourParallel::set_cutmode(cutmodeType * cutmodeIn)
+  {cutmode = cutmodeIn;}
 
 /********************************************************************/
 
@@ -8590,8 +9989,8 @@ contourSpiral::contourSpiral(
 
 contourSpiral::~contourSpiral()
 {
-  delete overlap;
-  delete allowMultiplePasses;
+  delete get_overlap();
+  delete get_allowMultiplePasses();
   delete rotationDirection;
   delete cutmode;
 }
@@ -8605,13 +10004,13 @@ void contourSpiral::printSelf()
 {
   printf("CONTOUR_SPIRAL");
   printf("(");
-  if (overlap)
-    overlap->printSelf();
+  if (get_overlap())
+    get_overlap()->printSelf();
   else
     printf("$");
   printf(",");
-  if (allowMultiplePasses)
-    allowMultiplePasses->printSelf();
+  if (get_allowMultiplePasses())
+    get_allowMultiplePasses()->printSelf();
   else
     printf("$");
   printf(",");
@@ -8623,6 +10022,15 @@ void contourSpiral::printSelf()
     printf("$");
   printf(")");
 }
+
+rotDirection * contourSpiral::get_rotationDirection()
+  {return rotationDirection;}
+void contourSpiral::set_rotationDirection(rotDirection * rotationDirectionIn)
+  {rotationDirection = rotationDirectionIn;}
+cutmodeType * contourSpiral::get_cutmode()
+  {return cutmode;}
+void contourSpiral::set_cutmode(cutmodeType * cutmodeIn)
+  {cutmode = cutmodeIn;}
 
 /********************************************************************/
 
@@ -8646,9 +10054,9 @@ counterboreHole::counterboreHole(
 
 counterboreHole::~counterboreHole()
 {
-  delete itsId;
-  delete itsOperations;
-  delete elements;
+  delete get_itsId();
+  delete get_itsOperations();
+  delete get_elements();
 }
 
 int counterboreHole::isA(int aType)
@@ -8662,15 +10070,15 @@ void counterboreHole::printSelf()
 {
   printf("COUNTERBORE_HOLE");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  elements->printSelf();
+  get_elements()->printSelf();
   printf(")");
 }
 
@@ -8696,9 +10104,9 @@ countersunkHole::countersunkHole(
 
 countersunkHole::~countersunkHole()
 {
-  delete itsId;
-  delete itsOperations;
-  delete elements;
+  delete get_itsId();
+  delete get_itsOperations();
+  delete get_elements();
 }
 
 int countersunkHole::isA(int aType)
@@ -8712,15 +10120,15 @@ void countersunkHole::printSelf()
 {
   printf("COUNTERSUNK_HOLE");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  elements->printSelf();
+  get_elements()->printSelf();
   printf(")");
 }
 
@@ -8751,11 +10159,20 @@ void curveWithNormalVector::printSelf()
 {
   printf("CURVE_WITH_NORMAL_VECTOR");
   printf("(");
-  (dynamic_cast<instance *>(basiccurve))->iId->printSelf();
+  (dynamic_cast<instance *>(basiccurve))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(surfaceNormal))->iId->printSelf();
+  (dynamic_cast<instance *>(surfaceNormal))->get_iId()->printSelf();
   printf(")");
 }
+
+boundedCurve * curveWithNormalVector::get_basiccurve()
+  {return basiccurve;}
+void curveWithNormalVector::set_basiccurve(boundedCurve * basiccurveIn)
+  {basiccurve = basiccurveIn;}
+boundedCurve * curveWithNormalVector::get_surfaceNormal()
+  {return surfaceNormal;}
+void curveWithNormalVector::set_surfaceNormal(boundedCurve * surfaceNormalIn)
+  {surfaceNormal = surfaceNormalIn;}
 
 /********************************************************************/
 
@@ -8788,9 +10205,9 @@ cutterLocationTrajectory::cutterLocationTrajectory(
 
 cutterLocationTrajectory::~cutterLocationTrajectory()
 {
-  delete itsPriority;
-  delete itsType;
-  delete itsDirection;
+  delete get_itsPriority();
+  delete get_itsType();
+  delete get_itsDirection();
 }
 
 int cutterLocationTrajectory::isA(int aType)
@@ -8803,43 +10220,56 @@ void cutterLocationTrajectory::printSelf()
 {
   printf("CUTTER_LOCATION_TRAJECTORY");
   printf("(");
-  itsPriority->printSelf();
+  get_itsPriority()->printSelf();
   printf(",");
-  itsType->printSelf();
+  get_itsType()->printSelf();
   printf(",");
-  if (itsSpeed)
-    itsSpeed->printSelf();
+  if (get_itsSpeed())
+    get_itsSpeed()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsTechnology)
-    (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  if (get_itsTechnology())
+    (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachineFunctions)
-    (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  if (get_itsMachineFunctions())
+    (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsDirection)
-    itsDirection->printSelf();
+  if (get_itsDirection())
+    get_itsDirection()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(basiccurve))->iId->printSelf();
+  (dynamic_cast<instance *>(basiccurve))->get_iId()->printSelf();
   printf(",");
   if (itsToolaxis)
-    (dynamic_cast<instance *>(itsToolaxis))->iId->printSelf();
+    (dynamic_cast<instance *>(itsToolaxis))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   if (surfaceNormal)
-    (dynamic_cast<instance *>(surfaceNormal))->iId->printSelf();
+    (dynamic_cast<instance *>(surfaceNormal))->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
 }
+
+boundedCurve * cutterLocationTrajectory::get_basiccurve()
+  {return basiccurve;}
+void cutterLocationTrajectory::set_basiccurve(boundedCurve * basiccurveIn)
+  {basiccurve = basiccurveIn;}
+boundedCurve * cutterLocationTrajectory::get_itsToolaxis()
+  {return itsToolaxis;}
+void cutterLocationTrajectory::set_itsToolaxis(boundedCurve * itsToolaxisIn)
+  {itsToolaxis = itsToolaxisIn;}
+boundedCurve * cutterLocationTrajectory::get_surfaceNormal()
+  {return surfaceNormal;}
+void cutterLocationTrajectory::set_surfaceNormal(boundedCurve * surfaceNormalIn)
+  {surfaceNormal = surfaceNormalIn;}
 
 /********************************************************************/
 
@@ -8867,6 +10297,19 @@ int cuttingTool::isA(int aType)
 	      (aType == machiningTool_E));
     }
 
+toolBody * cuttingTool::get_itsToolBody()
+  {return itsToolBody;}
+void cuttingTool::set_itsToolBody(toolBody * itsToolBodyIn)
+  {itsToolBody = itsToolBodyIn;}
+parenCuttingComponentListFull * cuttingTool::get_itsCuttingEdge()
+  {return itsCuttingEdge;}
+void cuttingTool::set_itsCuttingEdge(parenCuttingComponentListFull * itsCuttingEdgeIn)
+  {itsCuttingEdge = itsCuttingEdgeIn;}
+real * cuttingTool::get_overallAssemblyLength()
+  {return overallAssemblyLength;}
+void cuttingTool::set_overallAssemblyLength(real * overallAssemblyLengthIn)
+  {overallAssemblyLength = overallAssemblyLengthIn;}
+
 /********************************************************************/
 
 /* definitionalRepresentation */
@@ -8885,9 +10328,9 @@ definitionalRepresentation::definitionalRepresentation(
 
 definitionalRepresentation::~definitionalRepresentation()
 {
-  delete name;
-  delete items;
-  delete contextOfItems;
+  delete get_name();
+  delete get_items();
+  delete get_contextOfItems();
 }
 
 int definitionalRepresentation::isA(int aType)
@@ -8899,11 +10342,11 @@ void definitionalRepresentation::printSelf()
 {
   printf("DEFINITIONAL_REPRESENTATION");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  items->printSelf();
+  get_items()->printSelf();
   printf(",");
-  contextOfItems->printSelf();
+  get_contextOfItems()->printSelf();
   printf(")");
 }
 
@@ -8924,7 +10367,7 @@ descriptiveParameter::descriptiveParameter(
 
 descriptiveParameter::~descriptiveParameter()
 {
-  delete parameterName;
+  delete get_parameterName();
   delete descriptiveString;
 }
 
@@ -8937,11 +10380,16 @@ void descriptiveParameter::printSelf()
 {
   printf("DESCRIPTIVE_PARAMETER");
   printf("(");
-  printString(parameterName);
+  printString(get_parameterName());
   printf(",");
   printString(descriptiveString);
   printf(")");
 }
+
+char * descriptiveParameter::get_descriptiveString()
+  {return descriptiveString;}
+void descriptiveParameter::set_descriptiveString(char * descriptiveStringIn)
+  {descriptiveString = descriptiveStringIn;}
 
 /********************************************************************/
 
@@ -8968,9 +10416,14 @@ void diameterTaper::printSelf()
 {
   printf("DIAMETER_TAPER");
   printf("(");
-  finalDiameter->iId->printSelf();
+  finalDiameter->get_iId()->printSelf();
   printf(")");
 }
+
+tolerancedLengthMeasure * diameterTaper::get_finalDiameter()
+  {return finalDiameter;}
+void diameterTaper::set_finalDiameter(tolerancedLengthMeasure * finalDiameterIn)
+  {finalDiameter = finalDiameterIn;}
 
 /********************************************************************/
 
@@ -8989,7 +10442,7 @@ displayMessage::displayMessage(
 
 displayMessage::~displayMessage()
 {
-  delete itsId;
+  delete get_itsId();
   delete itsText;
 }
 
@@ -9003,11 +10456,16 @@ void displayMessage::printSelf()
 {
   printf("DISPLAY_MESSAGE");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
   printString(itsText);
   printf(")");
 }
+
+char * displayMessage::get_itsText()
+  {return itsText;}
+void displayMessage::set_itsText(char * itsTextIn)
+  {itsText = itsTextIn;}
 
 /********************************************************************/
 
@@ -9034,6 +10492,15 @@ int edge::isA(int aType)
 	      (aType == representationItem_E));
     }
 
+vertex * edge::get_edgeStart()
+  {return edgeStart;}
+void edge::set_edgeStart(vertex * edgeStartIn)
+  {edgeStart = edgeStartIn;}
+vertex * edge::get_edgeEnd()
+  {return edgeEnd;}
+void edge::set_edgeEnd(vertex * edgeEndIn)
+  {edgeEnd = edgeEndIn;}
+
 /********************************************************************/
 
 /* edgeCurve */
@@ -9057,7 +10524,7 @@ edgeCurve::edgeCurve(
 
 edgeCurve::~edgeCurve()
 {
-  delete name;
+  delete get_name();
   delete sameSense;
 }
 
@@ -9072,17 +10539,26 @@ void edgeCurve::printSelf()
 {
   printf("EDGE_CURVE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  (dynamic_cast<instance *>(edgeStart))->iId->printSelf();
+  (dynamic_cast<instance *>(get_edgeStart()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(edgeEnd))->iId->printSelf();
+  (dynamic_cast<instance *>(get_edgeEnd()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(edgeGeometry))->iId->printSelf();
+  (dynamic_cast<instance *>(edgeGeometry))->get_iId()->printSelf();
   printf(",");
   sameSense->printSelf();
   printf(")");
 }
+
+curve * edgeCurve::get_edgeGeometry()
+  {return edgeGeometry;}
+void edgeCurve::set_edgeGeometry(curve * edgeGeometryIn)
+  {edgeGeometry = edgeGeometryIn;}
+boolean * edgeCurve::get_sameSense()
+  {return sameSense;}
+void edgeCurve::set_sameSense(boolean * sameSenseIn)
+  {sameSense = sameSenseIn;}
 
 /********************************************************************/
 
@@ -9113,8 +10589,8 @@ edgeRound::edgeRound(
 
 edgeRound::~edgeRound()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
 }
 
 int edgeRound::isA(int aType)
@@ -9128,29 +10604,42 @@ void edgeRound::printSelf()
 {
   printf("EDGE_ROUND");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(firstFeature))->iId->printSelf();
+  (dynamic_cast<instance *>(get_firstFeature()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(secondFeature))->iId->printSelf();
+  (dynamic_cast<instance *>(get_secondFeature()))->get_iId()->printSelf();
   printf(",");
-  radius->iId->printSelf();
+  radius->get_iId()->printSelf();
   printf(",");
   if (firstOffsetAmount)
-    firstOffsetAmount->iId->printSelf();
+    firstOffsetAmount->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   if (secondOffsetAmount)
-    secondOffsetAmount->iId->printSelf();
+    secondOffsetAmount->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
 }
+
+tolerancedLengthMeasure * edgeRound::get_radius()
+  {return radius;}
+void edgeRound::set_radius(tolerancedLengthMeasure * radiusIn)
+  {radius = radiusIn;}
+tolerancedLengthMeasure * edgeRound::get_firstOffsetAmount()
+  {return firstOffsetAmount;}
+void edgeRound::set_firstOffsetAmount(tolerancedLengthMeasure * firstOffsetAmountIn)
+  {firstOffsetAmount = firstOffsetAmountIn;}
+tolerancedLengthMeasure * edgeRound::get_secondOffsetAmount()
+  {return secondOffsetAmount;}
+void edgeRound::set_secondOffsetAmount(tolerancedLengthMeasure * secondOffsetAmountIn)
+  {secondOffsetAmount = secondOffsetAmountIn;}
 
 /********************************************************************/
 
@@ -9166,7 +10655,7 @@ exchangePallet::exchangePallet(
 
 exchangePallet::~exchangePallet()
 {
-  delete itsId;
+  delete get_itsId();
 }
 
 int exchangePallet::isA(int aType)
@@ -9179,7 +10668,7 @@ void exchangePallet::printSelf()
 {
   printf("EXCHANGE_PALLET");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(")");
 }
 
@@ -9199,8 +10688,8 @@ explicitStrategy::explicitStrategy(
 
 explicitStrategy::~explicitStrategy()
 {
-  delete overlap;
-  delete allowMultiplePasses;
+  delete get_overlap();
+  delete get_allowMultiplePasses();
 }
 
 int explicitStrategy::isA(int aType)
@@ -9212,13 +10701,13 @@ void explicitStrategy::printSelf()
 {
   printf("EXPLICIT_STRATEGY");
   printf("(");
-  if (overlap)
-    overlap->printSelf();
+  if (get_overlap())
+    get_overlap()->printSelf();
   else
     printf("$");
   printf(",");
-  if (allowMultiplePasses)
-    allowMultiplePasses->printSelf();
+  if (get_allowMultiplePasses())
+    get_allowMultiplePasses()->printSelf();
   else
     printf("$");
   printf(")");
@@ -9247,6 +10736,11 @@ int face::isA(int aType)
 	      (aType == representationItem_E));
     }
 
+parenFaceBoundListFull * face::get_bounds()
+  {return bounds;}
+void face::set_bounds(parenFaceBoundListFull * boundsIn)
+  {bounds = boundsIn;}
+
 /********************************************************************/
 
 /* faceBoundParent */
@@ -9272,6 +10766,15 @@ int faceBoundParent::isA(int aType)
 	      (aType == representationItem_E));
     }
 
+loop * faceBoundParent::get_bound()
+  {return bound;}
+void faceBoundParent::set_bound(loop * boundIn)
+  {bound = boundIn;}
+boolean * faceBoundParent::get_orientation()
+  {return orientation;}
+void faceBoundParent::set_orientation(boolean * orientationIn)
+  {orientation = orientationIn;}
+
 /********************************************************************/
 
 /* faceBound */
@@ -9290,8 +10793,8 @@ faceBound::faceBound(
 
 faceBound::~faceBound()
 {
-  delete name;
-  delete orientation;
+  delete get_name();
+  delete get_orientation();
 }
 
 int faceBound::isA(int aType)
@@ -9305,11 +10808,11 @@ void faceBound::printSelf()
 {
   printf("FACE_BOUND");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  (dynamic_cast<instance *>(bound))->iId->printSelf();
+  (dynamic_cast<instance *>(get_bound()))->get_iId()->printSelf();
   printf(",");
-  orientation->printSelf();
+  get_orientation()->printSelf();
   printf(")");
 }
 
@@ -9331,8 +10834,8 @@ faceOuterBound::faceOuterBound(
 
 faceOuterBound::~faceOuterBound()
 {
-  delete name;
-  delete orientation;
+  delete get_name();
+  delete get_orientation();
 }
 
 int faceOuterBound::isA(int aType)
@@ -9346,11 +10849,11 @@ void faceOuterBound::printSelf()
 {
   printf("FACE_OUTER_BOUND");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  (dynamic_cast<instance *>(bound))->iId->printSelf();
+  (dynamic_cast<instance *>(get_bound()))->get_iId()->printSelf();
   printf(",");
-  orientation->printSelf();
+  get_orientation()->printSelf();
   printf(")");
 }
 
@@ -9382,6 +10885,15 @@ int faceSurface::isA(int aType)
 	      (aType == representationItem_E));
     }
 
+surface * faceSurface::get_faceGeometry()
+  {return faceGeometry;}
+void faceSurface::set_faceGeometry(surface * faceGeometryIn)
+  {faceGeometry = faceGeometryIn;}
+boolean * faceSurface::get_sameSense()
+  {return sameSense;}
+void faceSurface::set_sameSense(boolean * sameSenseIn)
+  {sameSense = sameSenseIn;}
+
 /********************************************************************/
 
 /* feedstop */
@@ -9407,8 +10919,8 @@ feedstop::feedstop(
 
 feedstop::~feedstop()
 {
-  delete itsPriority;
-  delete itsType;
+  delete get_itsPriority();
+  delete get_itsType();
 }
 
 int feedstop::isA(int aType)
@@ -9420,28 +10932,33 @@ void feedstop::printSelf()
 {
   printf("FEEDSTOP");
   printf("(");
-  itsPriority->printSelf();
+  get_itsPriority()->printSelf();
   printf(",");
-  itsType->printSelf();
+  get_itsType()->printSelf();
   printf(",");
-  if (itsSpeed)
-    itsSpeed->printSelf();
+  if (get_itsSpeed())
+    get_itsSpeed()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsTechnology)
-    (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  if (get_itsTechnology())
+    (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachineFunctions)
-    (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  if (get_itsMachineFunctions())
+    (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   printDouble(dwell);
   printf(")");
 }
+
+double feedstop::get_dwell()
+  {return dwell;}
+void feedstop::set_dwell(double dwellIn)
+  {dwell = dwellIn;}
 
 /********************************************************************/
 
@@ -9499,6 +11016,15 @@ void fiveAxesConstTiltYaw::printSelf()
   printf(")");
 }
 
+double fiveAxesConstTiltYaw::get_tiltAngle()
+  {return tiltAngle;}
+void fiveAxesConstTiltYaw::set_tiltAngle(double tiltAngleIn)
+  {tiltAngle = tiltAngleIn;}
+double fiveAxesConstTiltYaw::get_yawAngle()
+  {return yawAngle;}
+void fiveAxesConstTiltYaw::set_yawAngle(double yawAngleIn)
+  {yawAngle = yawAngleIn;}
+
 /********************************************************************/
 
 /* flatHoleBottom */
@@ -9550,11 +11076,20 @@ void flatSlotEndType::printSelf()
 {
   printf("FLAT_SLOT_END_TYPE");
   printf("(");
-  cornerRadius1->iId->printSelf();
+  cornerRadius1->get_iId()->printSelf();
   printf(",");
-  cornerRadius2->iId->printSelf();
+  cornerRadius2->get_iId()->printSelf();
   printf(")");
 }
+
+tolerancedLengthMeasure * flatSlotEndType::get_cornerRadius1()
+  {return cornerRadius1;}
+void flatSlotEndType::set_cornerRadius1(tolerancedLengthMeasure * cornerRadius1In)
+  {cornerRadius1 = cornerRadius1In;}
+tolerancedLengthMeasure * flatSlotEndType::get_cornerRadius2()
+  {return cornerRadius2;}
+void flatSlotEndType::set_cornerRadius2(tolerancedLengthMeasure * cornerRadius2In)
+  {cornerRadius2 = cornerRadius2In;}
 
 /********************************************************************/
 
@@ -9582,9 +11117,14 @@ void flatWithRadiusHoleBottom::printSelf()
 {
   printf("FLAT_WITH_RADIUS_HOLE_BOTTOM");
   printf("(");
-  cornerRadius->iId->printSelf();
+  cornerRadius->get_iId()->printSelf();
   printf(")");
 }
+
+tolerancedLengthMeasure * flatWithRadiusHoleBottom::get_cornerRadius()
+  {return cornerRadius;}
+void flatWithRadiusHoleBottom::set_cornerRadius(tolerancedLengthMeasure * cornerRadiusIn)
+  {cornerRadius = cornerRadiusIn;}
 
 /********************************************************************/
 
@@ -9615,14 +11155,19 @@ void generalClosedProfile::printSelf()
 {
   printf("GENERAL_CLOSED_PROFILE");
   printf("(");
-  if (placement)
-    placement->iId->printSelf();
+  if (get_placement())
+    get_placement()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(closedProfileShape))->iId->printSelf();
+  (dynamic_cast<instance *>(closedProfileShape))->get_iId()->printSelf();
   printf(")");
 }
+
+boundedCurve * generalClosedProfile::get_closedProfileShape()
+  {return closedProfileShape;}
+void generalClosedProfile::set_closedProfileShape(boundedCurve * closedProfileShapeIn)
+  {closedProfileShape = closedProfileShapeIn;}
 
 /********************************************************************/
 
@@ -9652,14 +11197,19 @@ void generalPath::printSelf()
 {
   printf("GENERAL_PATH");
   printf("(");
-  if (placement)
-    placement->iId->printSelf();
+  if (get_placement())
+    get_placement()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(sweptPath))->iId->printSelf();
+  (dynamic_cast<instance *>(sweptPath))->get_iId()->printSelf();
   printf(")");
 }
+
+boundedCurve * generalPath::get_sweptPath()
+  {return sweptPath;}
+void generalPath::set_sweptPath(boundedCurve * sweptPathIn)
+  {sweptPath = sweptPathIn;}
 
 /********************************************************************/
 
@@ -9686,9 +11236,14 @@ void generalPocketBottomCondition::printSelf()
 {
   printf("GENERAL_POCKET_BOTTOM_CONDITION");
   printf("(");
-  (dynamic_cast<instance *>(shape))->iId->printSelf();
+  (dynamic_cast<instance *>(shape))->get_iId()->printSelf();
   printf(")");
 }
+
+region * generalPocketBottomCondition::get_shape()
+  {return shape;}
+void generalPocketBottomCondition::set_shape(region * shapeIn)
+  {shape = shapeIn;}
 
 /********************************************************************/
 
@@ -9730,7 +11285,7 @@ ifStatement::ifStatement(
 
 ifStatement::~ifStatement()
 {
-  delete itsId;
+  delete get_itsId();
 }
 
 int ifStatement::isA(int aType)
@@ -9743,18 +11298,31 @@ void ifStatement::printSelf()
 {
   printf("IF_STATEMENT");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  (dynamic_cast<instance *>(condition))->iId->printSelf();
+  (dynamic_cast<instance *>(condition))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(trueBranch))->iId->printSelf();
+  (dynamic_cast<instance *>(trueBranch))->get_iId()->printSelf();
   printf(",");
   if (falseBranch)
-    (dynamic_cast<instance *>(falseBranch))->iId->printSelf();
+    (dynamic_cast<instance *>(falseBranch))->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
 }
+
+booleanExpression * ifStatement::get_condition()
+  {return condition;}
+void ifStatement::set_condition(booleanExpression * conditionIn)
+  {condition = conditionIn;}
+executable * ifStatement::get_trueBranch()
+  {return trueBranch;}
+void ifStatement::set_trueBranch(executable * trueBranchIn)
+  {trueBranch = trueBranchIn;}
+executable * ifStatement::get_falseBranch()
+  {return falseBranch;}
+void ifStatement::set_falseBranch(executable * falseBranchIn)
+  {falseBranch = falseBranchIn;}
 
 /********************************************************************/
 
@@ -9773,7 +11341,7 @@ indexPallet::indexPallet(
 
 indexPallet::~indexPallet()
 {
-  delete itsId;
+  delete get_itsId();
 }
 
 int indexPallet::isA(int aType)
@@ -9786,11 +11354,16 @@ void indexPallet::printSelf()
 {
   printf("INDEX_PALLET");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
   printf("%d", its_index);
   printf(")");
 }
+
+int indexPallet::get_its_index()
+  {return its_index;}
+void indexPallet::set_its_index(int its_indexIn)
+  {its_index = its_indexIn;}
 
 /********************************************************************/
 
@@ -9809,7 +11382,7 @@ indexTable::indexTable(
 
 indexTable::~indexTable()
 {
-  delete itsId;
+  delete get_itsId();
 }
 
 int indexTable::isA(int aType)
@@ -9822,11 +11395,16 @@ void indexTable::printSelf()
 {
   printf("INDEX_TABLE");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
   printf("%d", its_index);
   printf(")");
 }
+
+int indexTable::get_its_index()
+  {return its_index;}
+void indexTable::set_its_index(int its_indexIn)
+  {its_index = its_indexIn;}
 
 /********************************************************************/
 
@@ -9869,6 +11447,19 @@ void limitsAndFits::printSelf()
   printf(")");
 }
 
+double limitsAndFits::get_deviation()
+  {return deviation;}
+void limitsAndFits::set_deviation(double deviationIn)
+  {deviation = deviationIn;}
+double limitsAndFits::get_grade()
+  {return grade;}
+void limitsAndFits::set_grade(double gradeIn)
+  {grade = gradeIn;}
+fittingType * limitsAndFits::get_itsFittingType()
+  {return itsFittingType;}
+void limitsAndFits::set_itsFittingType(fittingType * itsFittingTypeIn)
+  {itsFittingType = itsFittingTypeIn;}
+
 /********************************************************************/
 
 /* linearPath */
@@ -9899,16 +11490,25 @@ void linearPath::printSelf()
 {
   printf("LINEAR_PATH");
   printf("(");
-  if (placement)
-    placement->iId->printSelf();
+  if (get_placement())
+    get_placement()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  distance->iId->printSelf();
+  distance->get_iId()->printSelf();
   printf(",");
-  itsDirection->iId->printSelf();
+  itsDirection->get_iId()->printSelf();
   printf(")");
 }
+
+tolerancedLengthMeasure * linearPath::get_distance()
+  {return distance;}
+void linearPath::set_distance(tolerancedLengthMeasure * distanceIn)
+  {distance = distanceIn;}
+direction * linearPath::get_itsDirection()
+  {return itsDirection;}
+void linearPath::set_itsDirection(direction * itsDirectionIn)
+  {itsDirection = itsDirectionIn;}
 
 /********************************************************************/
 
@@ -9927,7 +11527,7 @@ loadTool::loadTool(
 
 loadTool::~loadTool()
 {
-  delete itsId;
+  delete get_itsId();
 }
 
 int loadTool::isA(int aType)
@@ -9940,11 +11540,16 @@ void loadTool::printSelf()
 {
   printf("LOAD_TOOL");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(itsTool))->get_iId()->printSelf();
   printf(")");
 }
+
+machiningTool * loadTool::get_itsTool()
+  {return itsTool;}
+void loadTool::set_itsTool(machiningTool * itsToolIn)
+  {itsTool = itsToolIn;}
 
 /********************************************************************/
 
@@ -10019,6 +11624,11 @@ int machiningFeature::isA(int aType)
 	      (aType == manufacturingFeature_E));
     }
 
+elementarySurface * machiningFeature::get_depth()
+  {return depth;}
+void machiningFeature::set_depth(elementarySurface * depthIn)
+  {depth = depthIn;}
+
 /********************************************************************/
 
 /* machiningOperation */
@@ -10053,6 +11663,31 @@ int machiningOperation::isA(int aType)
 	      (aType == operation_E));
     }
 
+char * machiningOperation::get_itsId()
+  {return itsId;}
+void machiningOperation::set_itsId(char * itsIdIn)
+  {itsId = itsIdIn;}
+real * machiningOperation::get_retractPlane()
+  {return retractPlane;}
+void machiningOperation::set_retractPlane(real * retractPlaneIn)
+  {retractPlane = retractPlaneIn;}
+cartesianPoint * machiningOperation::get_startPoint()
+  {return startPoint;}
+void machiningOperation::set_startPoint(cartesianPoint * startPointIn)
+  {startPoint = startPointIn;}
+machiningTool * machiningOperation::get_itsTool()
+  {return itsTool;}
+void machiningOperation::set_itsTool(machiningTool * itsToolIn)
+  {itsTool = itsToolIn;}
+technology * machiningOperation::get_itsTechnology()
+  {return itsTechnology;}
+void machiningOperation::set_itsTechnology(technology * itsTechnologyIn)
+  {itsTechnology = itsTechnologyIn;}
+machineFunctions * machiningOperation::get_itsMachineFunctions()
+  {return itsMachineFunctions;}
+void machiningOperation::set_itsMachineFunctions(machineFunctions * itsMachineFunctionsIn)
+  {itsMachineFunctions = itsMachineFunctionsIn;}
+
 /********************************************************************/
 
 /* machiningWorkingstep */
@@ -10076,7 +11711,7 @@ machiningWorkingstep::machiningWorkingstep(
 
 machiningWorkingstep::~machiningWorkingstep()
 {
-  delete itsId;
+  delete get_itsId();
 }
 
 int machiningWorkingstep::isA(int aType)
@@ -10089,20 +11724,33 @@ void machiningWorkingstep::printSelf()
 {
   printf("MACHINING_WORKINGSTEP");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  (dynamic_cast<instance *>(itsSecplane))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsSecplane()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsFeature))->iId->printSelf();
+  (dynamic_cast<instance *>(itsFeature))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsOperation))->iId->printSelf();
+  (dynamic_cast<instance *>(itsOperation))->get_iId()->printSelf();
   printf(",");
   if (itsEffect)
-    itsEffect->iId->printSelf();
+    itsEffect->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
 }
+
+manufacturingFeature * machiningWorkingstep::get_itsFeature()
+  {return itsFeature;}
+void machiningWorkingstep::set_itsFeature(manufacturingFeature * itsFeatureIn)
+  {itsFeature = itsFeatureIn;}
+machiningOperation * machiningWorkingstep::get_itsOperation()
+  {return itsOperation;}
+void machiningWorkingstep::set_itsOperation(machiningOperation * itsOperationIn)
+  {itsOperation = itsOperationIn;}
+inProcessGeometry * machiningWorkingstep::get_itsEffect()
+  {return itsEffect;}
+void machiningWorkingstep::set_itsEffect(inProcessGeometry * itsEffectIn)
+  {itsEffect = itsEffectIn;}
 
 /********************************************************************/
 
@@ -10129,9 +11777,9 @@ millingCuttingTool::millingCuttingTool(
 
 millingCuttingTool::~millingCuttingTool()
 {
-  delete itsId;
-  delete itsCuttingEdge;
-  delete overallAssemblyLength;
+  delete get_itsId();
+  delete get_itsCuttingEdge();
+  delete get_overallAssemblyLength();
   delete toolHolderDiameterForSpindleOrientation;
 }
 
@@ -10145,19 +11793,19 @@ void millingCuttingTool::printSelf()
 {
   printf("MILLING_CUTTING_TOOL");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  (dynamic_cast<instance *>(itsToolBody))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsToolBody()))->get_iId()->printSelf();
   printf(",");
-  itsCuttingEdge->printSelf();
+  get_itsCuttingEdge()->printSelf();
   printf(",");
-  if (overallAssemblyLength)
-    overallAssemblyLength->printSelf();
+  if (get_overallAssemblyLength())
+    get_overallAssemblyLength()->printSelf();
   else
     printf("$");
   printf(",");
   if (directionForSpindleOrientation)
-    directionForSpindleOrientation->iId->printSelf();
+    directionForSpindleOrientation->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
@@ -10167,6 +11815,15 @@ void millingCuttingTool::printSelf()
     printf("$");
   printf(")");
 }
+
+direction * millingCuttingTool::get_directionForSpindleOrientation()
+  {return directionForSpindleOrientation;}
+void millingCuttingTool::set_directionForSpindleOrientation(direction * directionForSpindleOrientationIn)
+  {directionForSpindleOrientation = directionForSpindleOrientationIn;}
+real * millingCuttingTool::get_toolHolderDiameterForSpindleOrientation()
+  {return toolHolderDiameterForSpindleOrientation;}
+void millingCuttingTool::set_toolHolderDiameterForSpindleOrientation(real * toolHolderDiameterForSpindleOrientationIn)
+  {toolHolderDiameterForSpindleOrientation = toolHolderDiameterForSpindleOrientationIn;}
 
 /********************************************************************/
 
@@ -10205,6 +11862,11 @@ int millingMachiningOperation::isA(int aType)
 	      (aType == operation_E));
     }
 
+real * millingMachiningOperation::get_overcutLength()
+  {return overcutLength;}
+void millingMachiningOperation::set_overcutLength(real * overcutLengthIn)
+  {overcutLength = overcutLengthIn;}
+
 /********************************************************************/
 
 /* millingTechnology */
@@ -10236,8 +11898,8 @@ millingTechnology::millingTechnology(
 
 millingTechnology::~millingTechnology()
 {
-  delete feedrate;
-  delete feedrateReference;
+  delete get_feedrate();
+  delete get_feedrateReference();
   delete cutspeed;
   delete spindle;
   delete feedratePerTooth;
@@ -10256,12 +11918,12 @@ void millingTechnology::printSelf()
 {
   printf("MILLING_TECHNOLOGY");
   printf("(");
-  if (feedrate)
-    feedrate->printSelf();
+  if (get_feedrate())
+    get_feedrate()->printSelf();
   else
     printf("$");
   printf(",");
-  feedrateReference->printSelf();
+  get_feedrateReference()->printSelf();
   printf(",");
   if (cutspeed)
     cutspeed->printSelf();
@@ -10291,6 +11953,35 @@ void millingTechnology::printSelf()
   printf(")");
 }
 
+real * millingTechnology::get_cutspeed()
+  {return cutspeed;}
+void millingTechnology::set_cutspeed(real * cutspeedIn)
+  {cutspeed = cutspeedIn;}
+real * millingTechnology::get_spindle()
+  {return spindle;}
+void millingTechnology::set_spindle(real * spindleIn)
+  {spindle = spindleIn;}
+real * millingTechnology::get_feedratePerTooth()
+  {return feedratePerTooth;}
+void millingTechnology::set_feedratePerTooth(real * feedratePerToothIn)
+  {feedratePerTooth = feedratePerToothIn;}
+boolean * millingTechnology::get_synchronizeSpindleWithFeed()
+  {return synchronizeSpindleWithFeed;}
+void millingTechnology::set_synchronizeSpindleWithFeed(boolean * synchronizeSpindleWithFeedIn)
+  {synchronizeSpindleWithFeed = synchronizeSpindleWithFeedIn;}
+boolean * millingTechnology::get_inhibitFeedrateOverride()
+  {return inhibitFeedrateOverride;}
+void millingTechnology::set_inhibitFeedrateOverride(boolean * inhibitFeedrateOverrideIn)
+  {inhibitFeedrateOverride = inhibitFeedrateOverrideIn;}
+boolean * millingTechnology::get_inhibitSpindleOverride()
+  {return inhibitSpindleOverride;}
+void millingTechnology::set_inhibitSpindleOverride(boolean * inhibitSpindleOverrideIn)
+  {inhibitSpindleOverride = inhibitSpindleOverrideIn;}
+boolean * millingTechnology::get_itsAdaptiveControl()
+  {return itsAdaptiveControl;}
+void millingTechnology::set_itsAdaptiveControl(boolean * itsAdaptiveControlIn)
+  {itsAdaptiveControl = itsAdaptiveControlIn;}
+
 /********************************************************************/
 
 /* millingToolBody */
@@ -10317,6 +12008,27 @@ int millingToolBody::isA(int aType)
     { return ((aType == millingToolBody_E) ||
 	      (aType == toolBody_E));
     }
+
+millingToolDimension * millingToolBody::get_dimension()
+  {return dimension;}
+void millingToolBody::set_dimension(millingToolDimension * dimensionIn)
+  {dimension = dimensionIn;}
+integer * millingToolBody::get_numberOfTeeth()
+  {return numberOfTeeth;}
+void millingToolBody::set_numberOfTeeth(integer * numberOfTeethIn)
+  {numberOfTeeth = numberOfTeethIn;}
+hand * millingToolBody::get_handOfCut()
+  {return handOfCut;}
+void millingToolBody::set_handOfCut(hand * handOfCutIn)
+  {handOfCut = handOfCutIn;}
+boolean * millingToolBody::get_coolantThroughTool()
+  {return coolantThroughTool;}
+void millingToolBody::set_coolantThroughTool(boolean * coolantThroughToolIn)
+  {coolantThroughTool = coolantThroughToolIn;}
+real * millingToolBody::get_pilotLength()
+  {return pilotLength;}
+void millingToolBody::set_pilotLength(real * pilotLengthIn)
+  {pilotLength = pilotLengthIn;}
 
 /********************************************************************/
 
@@ -10360,6 +12072,15 @@ int millingTypeOperation::isA(int aType)
 	      (aType == operation_E));
     }
 
+approachRetractStrategy * millingTypeOperation::get_approach()
+  {return approach;}
+void millingTypeOperation::set_approach(approachRetractStrategy * approachIn)
+  {approach = approachIn;}
+approachRetractStrategy * millingTypeOperation::get_retract()
+  {return retract;}
+void millingTypeOperation::set_retract(approachRetractStrategy * retractIn)
+  {retract = retractIn;}
+
 /********************************************************************/
 
 /* ncConstant */
@@ -10397,6 +12118,15 @@ void ncConstant::printSelf()
     printf("$");
   printf(")");
 }
+
+char * ncConstant::get_itsName()
+  {return itsName;}
+void ncConstant::set_itsName(char * itsNameIn)
+  {itsName = itsNameIn;}
+real * ncConstant::get_initialValue()
+  {return initialValue;}
+void ncConstant::set_initialValue(real * initialValueIn)
+  {initialValue = initialValueIn;}
 
 /********************************************************************/
 
@@ -10436,6 +12166,15 @@ void ncVariable::printSelf()
   printf(")");
 }
 
+char * ncVariable::get_itsName()
+  {return itsName;}
+void ncVariable::set_itsName(char * itsNameIn)
+  {itsName = itsNameIn;}
+real * ncVariable::get_initialValue()
+  {return initialValue;}
+void ncVariable::set_initialValue(real * initialValueIn)
+  {initialValue = initialValueIn;}
+
 /********************************************************************/
 
 /* ngonClosedProfile */
@@ -10470,18 +12209,31 @@ void ngonClosedProfile::printSelf()
 {
   printf("NGON_CLOSED_PROFILE");
   printf("(");
-  if (placement)
-    placement->iId->printSelf();
+  if (get_placement())
+    get_placement()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  diameter->iId->printSelf();
+  diameter->get_iId()->printSelf();
   printf(",");
   printf("%d", numberOfSides);
   printf(",");
   circumscribedOrAcrossFlats->printSelf();
   printf(")");
 }
+
+tolerancedLengthMeasure * ngonClosedProfile::get_diameter()
+  {return diameter;}
+void ngonClosedProfile::set_diameter(tolerancedLengthMeasure * diameterIn)
+  {diameter = diameterIn;}
+int ngonClosedProfile::get_numberOfSides()
+  {return numberOfSides;}
+void ngonClosedProfile::set_numberOfSides(int numberOfSidesIn)
+  {numberOfSides = numberOfSidesIn;}
+boolean * ngonClosedProfile::get_circumscribedOrAcrossFlats()
+  {return circumscribedOrAcrossFlats;}
+void ngonClosedProfile::set_circumscribedOrAcrossFlats(boolean * circumscribedOrAcrossFlatsIn)
+  {circumscribedOrAcrossFlats = circumscribedOrAcrossFlatsIn;}
 
 /********************************************************************/
 
@@ -10500,7 +12252,7 @@ nonSequential::nonSequential(
 
 nonSequential::~nonSequential()
 {
-  delete itsId;
+  delete get_itsId();
   delete itsElements;
 }
 
@@ -10514,11 +12266,16 @@ void nonSequential::printSelf()
 {
   printf("NON_SEQUENTIAL");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
   itsElements->printSelf();
   printf(")");
 }
+
+parenExecutableListFull * nonSequential::get_itsElements()
+  {return itsElements;}
+void nonSequential::set_itsElements(parenExecutableListFull * itsElementsIn)
+  {itsElements = itsElementsIn;}
 
 /********************************************************************/
 
@@ -10546,7 +12303,7 @@ void notExpression::printSelf()
 {
   printf("NOT_EXPRESSION");
   printf("(");
-  (dynamic_cast<instance *>(operand))->iId->printSelf();
+  (dynamic_cast<instance *>(get_operand()))->get_iId()->printSelf();
   printf(")");
 }
 
@@ -10569,7 +12326,7 @@ numericParameter::numericParameter(
 
 numericParameter::~numericParameter()
 {
-  delete parameterName;
+  delete get_parameterName();
   delete itsParameterUnit;
 }
 
@@ -10582,13 +12339,22 @@ void numericParameter::printSelf()
 {
   printf("NUMERIC_PARAMETER");
   printf("(");
-  printString(parameterName);
+  printString(get_parameterName());
   printf(",");
   printDouble(itsParameterValue);
   printf(",");
   printString(itsParameterUnit);
   printf(")");
 }
+
+double numericParameter::get_itsParameterValue()
+  {return itsParameterValue;}
+void numericParameter::set_itsParameterValue(double itsParameterValueIn)
+  {itsParameterValue = itsParameterValueIn;}
+char * numericParameter::get_itsParameterUnit()
+  {return itsParameterUnit;}
+void numericParameter::set_itsParameterUnit(char * itsParameterUnitIn)
+  {itsParameterUnit = itsParameterUnitIn;}
 
 /********************************************************************/
 
@@ -10648,8 +12414,8 @@ openShell::openShell(
 
 openShell::~openShell()
 {
-  delete name;
-  delete cfsFaces;
+  delete get_name();
+  delete get_cfsFaces();
 }
 
 int openShell::isA(int aType)
@@ -10664,9 +12430,9 @@ void openShell::printSelf()
 {
   printf("OPEN_SHELL");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  cfsFaces->printSelf();
+  get_cfsFaces()->printSelf();
   printf(")");
 }
 
@@ -10716,7 +12482,7 @@ orientedEdge::orientedEdge(
 
 orientedEdge::~orientedEdge()
 {
-  delete name;
+  delete get_name();
   delete orientation;
 }
 
@@ -10731,17 +12497,26 @@ void orientedEdge::printSelf()
 {
   printf("ORIENTED_EDGE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  (dynamic_cast<instance *>(edgeStart))->iId->printSelf();
+  (dynamic_cast<instance *>(get_edgeStart()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(edgeEnd))->iId->printSelf();
+  (dynamic_cast<instance *>(get_edgeEnd()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(edgeElement))->iId->printSelf();
+  (dynamic_cast<instance *>(edgeElement))->get_iId()->printSelf();
   printf(",");
   orientation->printSelf();
   printf(")");
 }
+
+edge * orientedEdge::get_edgeElement()
+  {return edgeElement;}
+void orientedEdge::set_edgeElement(edge * edgeElementIn)
+  {edgeElement = edgeElementIn;}
+boolean * orientedEdge::get_orientation()
+  {return orientation;}
+void orientedEdge::set_orientation(boolean * orientationIn)
+  {orientation = orientationIn;}
 
 /********************************************************************/
 
@@ -10760,7 +12535,7 @@ parallel::parallel(
 
 parallel::~parallel()
 {
-  delete itsId;
+  delete get_itsId();
   delete branches;
 }
 
@@ -10774,11 +12549,16 @@ void parallel::printSelf()
 {
   printf("PARALLEL");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
   branches->printSelf();
   printf(")");
 }
+
+parenExecutableListFull * parallel::get_branches()
+  {return branches;}
+void parallel::set_branches(parenExecutableListFull * branchesIn)
+  {branches = branchesIn;}
 
 /********************************************************************/
 
@@ -10838,16 +12618,21 @@ void partialCircularPath::printSelf()
 {
   printf("PARTIAL_CIRCULAR_PATH");
   printf("(");
-  if (placement)
-    placement->iId->printSelf();
+  if (get_placement())
+    get_placement()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  radius->iId->printSelf();
+  get_radius()->get_iId()->printSelf();
   printf(",");
   printDouble(sweepAngle);
   printf(")");
 }
+
+double partialCircularPath::get_sweepAngle()
+  {return sweepAngle;}
+void partialCircularPath::set_sweepAngle(double sweepAngleIn)
+  {sweepAngle = sweepAngleIn;}
 
 /********************************************************************/
 
@@ -10880,16 +12665,25 @@ void partialCircularProfile::printSelf()
 {
   printf("PARTIAL_CIRCULAR_PROFILE");
   printf("(");
-  if (placement)
-    placement->iId->printSelf();
+  if (get_placement())
+    get_placement()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  radius->iId->printSelf();
+  radius->get_iId()->printSelf();
   printf(",");
   printDouble(sweepAngle);
   printf(")");
 }
+
+tolerancedLengthMeasure * partialCircularProfile::get_radius()
+  {return radius;}
+void partialCircularProfile::set_radius(tolerancedLengthMeasure * radiusIn)
+  {radius = radiusIn;}
+double partialCircularProfile::get_sweepAngle()
+  {return sweepAngle;}
+void partialCircularProfile::set_sweepAngle(double sweepAngleIn)
+  {sweepAngle = sweepAngleIn;}
 
 /********************************************************************/
 
@@ -10913,6 +12707,11 @@ int placement::isA(int aType)
 	      (aType == geometricRepresentationItem_E) ||
 	      (aType == representationItem_E));
     }
+
+cartesianPoint * placement::get_location()
+  {return location;}
+void placement::set_location(cartesianPoint * locationIn)
+  {location = locationIn;}
 
 /********************************************************************/
 
@@ -10945,8 +12744,8 @@ planarFace::planarFace(
 
 planarFace::~planarFace()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
   delete itsBoss;
 }
 
@@ -10962,28 +12761,45 @@ void planarFace::printSelf()
 {
   printf("PLANAR_FACE");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(depth))->iId->printSelf();
+  (dynamic_cast<instance *>(get_depth()))->get_iId()->printSelf();
   printf(",");
-  courseOfTravel->iId->printSelf();
+  courseOfTravel->get_iId()->printSelf();
   printf(",");
-  removalBoundary->iId->printSelf();
+  removalBoundary->get_iId()->printSelf();
   printf(",");
   if (faceBoundary)
-    (dynamic_cast<instance *>(faceBoundary))->iId->printSelf();
+    (dynamic_cast<instance *>(faceBoundary))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   itsBoss->printSelf();
   printf(")");
 }
+
+linearPath * planarFace::get_courseOfTravel()
+  {return courseOfTravel;}
+void planarFace::set_courseOfTravel(linearPath * courseOfTravelIn)
+  {courseOfTravel = courseOfTravelIn;}
+linearProfile * planarFace::get_removalBoundary()
+  {return removalBoundary;}
+void planarFace::set_removalBoundary(linearProfile * removalBoundaryIn)
+  {removalBoundary = removalBoundaryIn;}
+closedProfile * planarFace::get_faceBoundary()
+  {return faceBoundary;}
+void planarFace::set_faceBoundary(closedProfile * faceBoundaryIn)
+  {faceBoundary = faceBoundaryIn;}
+parenBossList * planarFace::get_itsBoss()
+  {return itsBoss;}
+void planarFace::set_itsBoss(parenBossList * itsBossIn)
+  {itsBoss = itsBossIn;}
 
 /********************************************************************/
 
@@ -11045,6 +12861,19 @@ void plusMinusValue::printSelf()
   printf(")");
 }
 
+double plusMinusValue::get_upperLimit()
+  {return upperLimit;}
+void plusMinusValue::set_upperLimit(double upperLimitIn)
+  {upperLimit = upperLimitIn;}
+double plusMinusValue::get_lowerLimit()
+  {return lowerLimit;}
+void plusMinusValue::set_lowerLimit(double lowerLimitIn)
+  {lowerLimit = lowerLimitIn;}
+int plusMinusValue::get_significantDigits()
+  {return significantDigits;}
+void plusMinusValue::set_significantDigits(int significantDigitsIn)
+  {significantDigits = significantDigitsIn;}
+
 /********************************************************************/
 
 /* pocket */
@@ -11085,6 +12914,27 @@ int pocket::isA(int aType)
 	      (aType == two5DmanufacturingFeature_E) ||
 	      (aType == manufacturingFeature_E));
     }
+
+parenBossList * pocket::get_itsBoss()
+  {return itsBoss;}
+void pocket::set_itsBoss(parenBossList * itsBossIn)
+  {itsBoss = itsBossIn;}
+real * pocket::get_slope()
+  {return slope;}
+void pocket::set_slope(real * slopeIn)
+  {slope = slopeIn;}
+pocketBottomCondition * pocket::get_bottomCondition()
+  {return bottomCondition;}
+void pocket::set_bottomCondition(pocketBottomCondition * bottomConditionIn)
+  {bottomCondition = bottomConditionIn;}
+tolerancedLengthMeasure * pocket::get_planarRadius()
+  {return planarRadius;}
+void pocket::set_planarRadius(tolerancedLengthMeasure * planarRadiusIn)
+  {planarRadius = planarRadiusIn;}
+tolerancedLengthMeasure * pocket::get_orthogonalRadius()
+  {return orthogonalRadius;}
+void pocket::set_orthogonalRadius(tolerancedLengthMeasure * orthogonalRadiusIn)
+  {orthogonalRadius = orthogonalRadiusIn;}
 
 /********************************************************************/
 
@@ -11139,6 +12989,11 @@ int profileFeature::isA(int aType)
 	      (aType == manufacturingFeature_E));
     }
 
+linearPath * profileFeature::get_profileSweptShape()
+  {return profileSweptShape;}
+void profileFeature::set_profileSweptShape(linearPath * profileSweptShapeIn)
+  {profileSweptShape = profileSweptShapeIn;}
+
 /********************************************************************/
 
 /* profileFloor */
@@ -11159,6 +13014,15 @@ int profileFloor::isA(int aType)
     { return ((aType == profileFloor_E) ||
 	      (aType == profileSelect_E));
     }
+
+real * profileFloor::get_floorRadius()
+  {return floorRadius;}
+void profileFloor::set_floorRadius(real * floorRadiusIn)
+  {floorRadius = floorRadiusIn;}
+boolean * profileFloor::get_startOrEnd()
+  {return startOrEnd;}
+void profileFloor::set_startOrEnd(boolean * startOrEndIn)
+  {startOrEnd = startOrEndIn;}
 
 /********************************************************************/
 
@@ -11204,7 +13068,7 @@ rapidMovement::rapidMovement(
 
 rapidMovement::~rapidMovement()
 {
-  delete itsId;
+  delete get_itsId();
 }
 
 int rapidMovement::isA(int aType)
@@ -11218,17 +13082,17 @@ void rapidMovement::printSelf()
 {
   printf("RAPID_MOVEMENT");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  (dynamic_cast<instance *>(itsSecplane))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsSecplane()))->get_iId()->printSelf();
   printf(",");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
@@ -11260,6 +13124,11 @@ void real::printSelf()
 {
   printDouble(val);
 }
+
+double real::get_val()
+  {return val;}
+void real::set_val(double valIn)
+  {val = valIn;}
 
 /********************************************************************/
 
@@ -11320,16 +13189,25 @@ void rectangularClosedProfile::printSelf()
 {
   printf("RECTANGULAR_CLOSED_PROFILE");
   printf("(");
-  if (placement)
-    placement->iId->printSelf();
+  if (get_placement())
+    get_placement()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  profileWidth->iId->printSelf();
+  profileWidth->get_iId()->printSelf();
   printf(",");
-  profileLength->iId->printSelf();
+  profileLength->get_iId()->printSelf();
   printf(")");
 }
+
+tolerancedLengthMeasure * rectangularClosedProfile::get_profileWidth()
+  {return profileWidth;}
+void rectangularClosedProfile::set_profileWidth(tolerancedLengthMeasure * profileWidthIn)
+  {profileWidth = profileWidthIn;}
+tolerancedLengthMeasure * rectangularClosedProfile::get_profileLength()
+  {return profileLength;}
+void rectangularClosedProfile::set_profileLength(tolerancedLengthMeasure * profileLengthIn)
+  {profileLength = profileLengthIn;}
 
 /********************************************************************/
 
@@ -11360,6 +13238,11 @@ int replicateFeature::isA(int aType)
 	      (aType == manufacturingFeature_E));
     }
 
+two5DmanufacturingFeature * replicateFeature::get_replicateBaseFeature()
+  {return replicateBaseFeature;}
+void replicateFeature::set_replicateBaseFeature(two5DmanufacturingFeature * replicateBaseFeatureIn)
+  {replicateBaseFeature = replicateBaseFeatureIn;}
+
 /********************************************************************/
 
 /* rightCircularCylinder */
@@ -11381,7 +13264,7 @@ rightCircularCylinder::rightCircularCylinder(
 
 rightCircularCylinder::~rightCircularCylinder()
 {
-  delete name;
+  delete get_name();
 }
 
 int rightCircularCylinder::isA(int aType)
@@ -11396,15 +13279,28 @@ void rightCircularCylinder::printSelf()
 {
   printf("RIGHT_CIRCULAR_CYLINDER");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  position->iId->printSelf();
+  position->get_iId()->printSelf();
   printf(",");
   printDouble(height);
   printf(",");
   printDouble(radius);
   printf(")");
 }
+
+axis1placement * rightCircularCylinder::get_position()
+  {return position;}
+void rightCircularCylinder::set_position(axis1placement * positionIn)
+  {position = positionIn;}
+double rightCircularCylinder::get_height()
+  {return height;}
+void rightCircularCylinder::set_height(double heightIn)
+  {height = heightIn;}
+double rightCircularCylinder::get_radius()
+  {return radius;}
+void rightCircularCylinder::set_radius(double radiusIn)
+  {radius = radiusIn;}
 
 /********************************************************************/
 
@@ -11433,8 +13329,8 @@ roundedEnd::roundedEnd(
 
 roundedEnd::~roundedEnd()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
 }
 
 int roundedEnd::isA(int aType)
@@ -11449,21 +13345,30 @@ void roundedEnd::printSelf()
 {
   printf("ROUNDED_END");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(depth))->iId->printSelf();
+  (dynamic_cast<instance *>(get_depth()))->get_iId()->printSelf();
   printf(",");
-  courseOfTravel->iId->printSelf();
+  courseOfTravel->get_iId()->printSelf();
   printf(",");
-  partialCircularBoundary->iId->printSelf();
+  partialCircularBoundary->get_iId()->printSelf();
   printf(")");
 }
+
+linearPath * roundedEnd::get_courseOfTravel()
+  {return courseOfTravel;}
+void roundedEnd::set_courseOfTravel(linearPath * courseOfTravelIn)
+  {courseOfTravel = courseOfTravelIn;}
+partialCircularProfile * roundedEnd::get_partialCircularBoundary()
+  {return partialCircularBoundary;}
+void roundedEnd::set_partialCircularBoundary(partialCircularProfile * partialCircularBoundaryIn)
+  {partialCircularBoundary = partialCircularBoundaryIn;}
 
 /********************************************************************/
 
@@ -11494,14 +13399,19 @@ void roundedUProfile::printSelf()
 {
   printf("ROUNDED_U_PROFILE");
   printf("(");
-  if (placement)
-    placement->iId->printSelf();
+  if (get_placement())
+    get_placement()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  width->iId->printSelf();
+  width->get_iId()->printSelf();
   printf(")");
 }
+
+tolerancedLengthMeasure * roundedUProfile::get_width()
+  {return width;}
+void roundedUProfile::set_width(tolerancedLengthMeasure * widthIn)
+  {width = widthIn;}
 
 /********************************************************************/
 
@@ -11532,8 +13442,8 @@ roundHole::roundHole(
 
 roundHole::~roundHole()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
 }
 
 int roundHole::isA(int aType)
@@ -11548,26 +13458,39 @@ void roundHole::printSelf()
 {
   printf("ROUND_HOLE");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(depth))->iId->printSelf();
+  (dynamic_cast<instance *>(get_depth()))->get_iId()->printSelf();
   printf(",");
-  diameter->iId->printSelf();
+  diameter->get_iId()->printSelf();
   printf(",");
   if (changeInDiameter)
-    (dynamic_cast<instance *>(changeInDiameter))->iId->printSelf();
+    (dynamic_cast<instance *>(changeInDiameter))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(bottomCondition))->iId->printSelf();
+  (dynamic_cast<instance *>(bottomCondition))->get_iId()->printSelf();
   printf(")");
 }
+
+tolerancedLengthMeasure * roundHole::get_diameter()
+  {return diameter;}
+void roundHole::set_diameter(tolerancedLengthMeasure * diameterIn)
+  {diameter = diameterIn;}
+taperSelect * roundHole::get_changeInDiameter()
+  {return changeInDiameter;}
+void roundHole::set_changeInDiameter(taperSelect * changeInDiameterIn)
+  {changeInDiameter = changeInDiameterIn;}
+holeBottomCondition * roundHole::get_bottomCondition()
+  {return bottomCondition;}
+void roundHole::set_bottomCondition(holeBottomCondition * bottomConditionIn)
+  {bottomCondition = bottomConditionIn;}
 
 /********************************************************************/
 
@@ -11607,6 +13530,15 @@ int shapeProfile::isA(int aType)
 	      (aType == manufacturingFeature_E));
     }
 
+profileSelect * shapeProfile::get_floorCondition()
+  {return floorCondition;}
+void shapeProfile::set_floorCondition(profileSelect * floorConditionIn)
+  {floorCondition = floorConditionIn;}
+direction * shapeProfile::get_removalDirection()
+  {return removalDirection;}
+void shapeProfile::set_removalDirection(direction * removalDirectionIn)
+  {removalDirection = removalDirectionIn;}
+
 /********************************************************************/
 
 /* slot */
@@ -11636,8 +13568,8 @@ slot::slot(
 
 slot::~slot()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
   delete endConditions;
 }
 
@@ -11653,23 +13585,36 @@ void slot::printSelf()
 {
   printf("SLOT");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(depth))->iId->printSelf();
+  (dynamic_cast<instance *>(get_depth()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(courseOfTravel))->iId->printSelf();
+  (dynamic_cast<instance *>(courseOfTravel))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(sweptShape))->iId->printSelf();
+  (dynamic_cast<instance *>(sweptShape))->get_iId()->printSelf();
   printf(",");
   endConditions->printSelf();
   printf(")");
 }
+
+travelPath * slot::get_courseOfTravel()
+  {return courseOfTravel;}
+void slot::set_courseOfTravel(travelPath * courseOfTravelIn)
+  {courseOfTravel = courseOfTravelIn;}
+openProfile * slot::get_sweptShape()
+  {return sweptShape;}
+void slot::set_sweptShape(openProfile * sweptShapeIn)
+  {sweptShape = sweptShapeIn;}
+parenSlotEndTypeList * slot::get_endConditions()
+  {return endConditions;}
+void slot::set_endConditions(parenSlotEndTypeList * endConditionsIn)
+  {endConditions = endConditionsIn;}
 
 /********************************************************************/
 
@@ -11739,8 +13684,8 @@ sphericalCap::sphericalCap(
 
 sphericalCap::~sphericalCap()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
 }
 
 int sphericalCap::isA(int aType)
@@ -11755,21 +13700,30 @@ void sphericalCap::printSelf()
 {
   printf("SPHERICAL_CAP");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(depth))->iId->printSelf();
+  (dynamic_cast<instance *>(get_depth()))->get_iId()->printSelf();
   printf(",");
-  internalAngle->iId->printSelf();
+  internalAngle->get_iId()->printSelf();
   printf(",");
-  radius->iId->printSelf();
+  radius->get_iId()->printSelf();
   printf(")");
 }
+
+numericParameter * sphericalCap::get_internalAngle()
+  {return internalAngle;}
+void sphericalCap::set_internalAngle(numericParameter * internalAngleIn)
+  {internalAngle = internalAngleIn;}
+numericParameter * sphericalCap::get_radius()
+  {return radius;}
+void sphericalCap::set_radius(numericParameter * radiusIn)
+  {radius = radiusIn;}
 
 /********************************************************************/
 
@@ -11797,9 +13751,14 @@ void sphericalHoleBottom::printSelf()
 {
   printf("SPHERICAL_HOLE_BOTTOM");
   printf("(");
-  radius->iId->printSelf();
+  radius->get_iId()->printSelf();
   printf(")");
 }
+
+tolerancedLengthMeasure * sphericalHoleBottom::get_radius()
+  {return radius;}
+void sphericalHoleBottom::set_radius(tolerancedLengthMeasure * radiusIn)
+  {radius = radiusIn;}
 
 /********************************************************************/
 
@@ -11838,22 +13797,43 @@ void squareUProfile::printSelf()
 {
   printf("SQUARE_U_PROFILE");
   printf("(");
-  if (placement)
-    placement->iId->printSelf();
+  if (get_placement())
+    get_placement()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  width->iId->printSelf();
+  width->get_iId()->printSelf();
   printf(",");
-  firstRadius->iId->printSelf();
+  firstRadius->get_iId()->printSelf();
   printf(",");
   printDouble(firstAngle);
   printf(",");
-  secondRadius->iId->printSelf();
+  secondRadius->get_iId()->printSelf();
   printf(",");
   printDouble(secondAngle);
   printf(")");
 }
+
+tolerancedLengthMeasure * squareUProfile::get_width()
+  {return width;}
+void squareUProfile::set_width(tolerancedLengthMeasure * widthIn)
+  {width = widthIn;}
+tolerancedLengthMeasure * squareUProfile::get_firstRadius()
+  {return firstRadius;}
+void squareUProfile::set_firstRadius(tolerancedLengthMeasure * firstRadiusIn)
+  {firstRadius = firstRadiusIn;}
+double squareUProfile::get_firstAngle()
+  {return firstAngle;}
+void squareUProfile::set_firstAngle(double firstAngleIn)
+  {firstAngle = firstAngleIn;}
+tolerancedLengthMeasure * squareUProfile::get_secondRadius()
+  {return secondRadius;}
+void squareUProfile::set_secondRadius(tolerancedLengthMeasure * secondRadiusIn)
+  {secondRadius = secondRadiusIn;}
+double squareUProfile::get_secondAngle()
+  {return secondAngle;}
+void squareUProfile::set_secondAngle(double secondAngleIn)
+  {secondAngle = secondAngleIn;}
 
 /********************************************************************/
 
@@ -11884,8 +13864,8 @@ step::step(
 
 step::~step()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
   delete itsBoss;
 }
 
@@ -11901,26 +13881,39 @@ void step::printSelf()
 {
   printf("STEP");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(depth))->iId->printSelf();
+  (dynamic_cast<instance *>(get_depth()))->get_iId()->printSelf();
   printf(",");
-  openBoundary->iId->printSelf();
+  openBoundary->get_iId()->printSelf();
   printf(",");
   if (wallBoundary)
-    wallBoundary->iId->printSelf();
+    wallBoundary->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   itsBoss->printSelf();
   printf(")");
 }
+
+linearPath * step::get_openBoundary()
+  {return openBoundary;}
+void step::set_openBoundary(linearPath * openBoundaryIn)
+  {openBoundary = openBoundaryIn;}
+veeProfile * step::get_wallBoundary()
+  {return wallBoundary;}
+void step::set_wallBoundary(veeProfile * wallBoundaryIn)
+  {wallBoundary = wallBoundaryIn;}
+parenBossList * step::get_itsBoss()
+  {return itsBoss;}
+void step::set_itsBoss(parenBossList * itsBossIn)
+  {itsBoss = itsBossIn;}
 
 /********************************************************************/
 
@@ -11965,6 +13958,11 @@ int sweptSurface::isA(int aType)
 	      (aType == geometricRepresentationItem_E) ||
 	      (aType == representationItem_E));
     }
+
+curve * sweptSurface::get_sweptCurve()
+  {return sweptCurve;}
+void sweptSurface::set_sweptCurve(curve * sweptCurveIn)
+  {sweptCurve = sweptCurveIn;}
 
 /********************************************************************/
 
@@ -12019,10 +14017,10 @@ taperedReamer::taperedReamer(
 
 taperedReamer::~taperedReamer()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
   delete taperAngle;
 }
 
@@ -12037,25 +14035,25 @@ void taperedReamer::printSelf()
 {
   printf("TAPERED_REAMER");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(",");
@@ -12065,6 +14063,11 @@ void taperedReamer::printSelf()
     printf("$");
   printf(")");
 }
+
+real * taperedReamer::get_taperAngle()
+  {return taperAngle;}
+void taperedReamer::set_taperAngle(real * taperAngleIn)
+  {taperAngle = taperAngleIn;}
 
 /********************************************************************/
 
@@ -12109,20 +14112,53 @@ void teeProfile::printSelf()
 {
   printf("TEE_PROFILE");
   printf("(");
-  if (placement)
-    placement->iId->printSelf();
+  if (get_placement())
+    get_placement()->get_iId()->printSelf();
   else
     printf("$");
   printDouble(firstAngle);
   printDouble(secondAngle);
-  crossBarWidth->iId->printSelf();
-  crossBarDepth->iId->printSelf();
-  radius->iId->printSelf();
-  width->iId->printSelf();
-  firstOffset->iId->printSelf();
-  secondOffset->iId->printSelf();
+  crossBarWidth->get_iId()->printSelf();
+  crossBarDepth->get_iId()->printSelf();
+  radius->get_iId()->printSelf();
+  width->get_iId()->printSelf();
+  firstOffset->get_iId()->printSelf();
+  secondOffset->get_iId()->printSelf();
   printf(")");
 }
+
+double teeProfile::get_firstAngle()
+  {return firstAngle;}
+void teeProfile::set_firstAngle(double firstAngleIn)
+  {firstAngle = firstAngleIn;}
+double teeProfile::get_secondAngle()
+  {return secondAngle;}
+void teeProfile::set_secondAngle(double secondAngleIn)
+  {secondAngle = secondAngleIn;}
+tolerancedLengthMeasure * teeProfile::get_crossBarWidth()
+  {return crossBarWidth;}
+void teeProfile::set_crossBarWidth(tolerancedLengthMeasure * crossBarWidthIn)
+  {crossBarWidth = crossBarWidthIn;}
+tolerancedLengthMeasure * teeProfile::get_crossBarDepth()
+  {return crossBarDepth;}
+void teeProfile::set_crossBarDepth(tolerancedLengthMeasure * crossBarDepthIn)
+  {crossBarDepth = crossBarDepthIn;}
+tolerancedLengthMeasure * teeProfile::get_radius()
+  {return radius;}
+void teeProfile::set_radius(tolerancedLengthMeasure * radiusIn)
+  {radius = radiusIn;}
+tolerancedLengthMeasure * teeProfile::get_width()
+  {return width;}
+void teeProfile::set_width(tolerancedLengthMeasure * widthIn)
+  {width = widthIn;}
+tolerancedLengthMeasure * teeProfile::get_firstOffset()
+  {return firstOffset;}
+void teeProfile::set_firstOffset(tolerancedLengthMeasure * firstOffsetIn)
+  {firstOffset = firstOffsetIn;}
+tolerancedLengthMeasure * teeProfile::get_secondOffset()
+  {return secondOffset;}
+void teeProfile::set_secondOffset(tolerancedLengthMeasure * secondOffsetIn)
+  {secondOffset = secondOffsetIn;}
 
 /********************************************************************/
 
@@ -12173,6 +14209,43 @@ int thread::isA(int aType)
 	      (aType == manufacturingFeature_E));
     }
 
+partialAreaDefinition * thread::get_partialProfile()
+  {return partialProfile;}
+void thread::set_partialProfile(partialAreaDefinition * partialProfileIn)
+  {partialProfile = partialProfileIn;}
+parenMachiningFeatureListFull * thread::get_appliedShape()
+  {return appliedShape;}
+void thread::set_appliedShape(parenMachiningFeatureListFull * appliedShapeIn)
+  {appliedShape = appliedShapeIn;}
+boolean * thread::get_innerOrOuterThread()
+  {return innerOrOuterThread;}
+void thread::set_innerOrOuterThread(boolean * innerOrOuterThreadIn)
+  {innerOrOuterThread = innerOrOuterThreadIn;}
+descriptiveParameter * thread::get_qualifier()
+  {return qualifier;}
+void thread::set_qualifier(descriptiveParameter * qualifierIn)
+  {qualifier = qualifierIn;}
+descriptiveParameter * thread::get_fitClass()
+  {return fitClass;}
+void thread::set_fitClass(descriptiveParameter * fitClassIn)
+  {fitClass = fitClassIn;}
+descriptiveParameter * thread::get_form()
+  {return form;}
+void thread::set_form(descriptiveParameter * formIn)
+  {form = formIn;}
+double thread::get_majorDiameter()
+  {return majorDiameter;}
+void thread::set_majorDiameter(double majorDiameterIn)
+  {majorDiameter = majorDiameterIn;}
+numericParameter * thread::get_numberOfThreads()
+  {return numberOfThreads;}
+void thread::set_numberOfThreads(numericParameter * numberOfThreadsIn)
+  {numberOfThreads = numberOfThreadsIn;}
+descriptiveParameter * thread::get_threadHand()
+  {return threadHand;}
+void thread::set_threadHand(descriptiveParameter * threadHandIn)
+  {threadHand = threadHandIn;}
+
 /********************************************************************/
 
 /* threeAxes */
@@ -12221,9 +14294,14 @@ void threeAxesTiltedTool::printSelf()
 {
   printf("THREE_AXES_TILTED_TOOL");
   printf("(");
-  itsToolDirection->iId->printSelf();
+  itsToolDirection->get_iId()->printSelf();
   printf(")");
 }
+
+direction * threeAxesTiltedTool::get_itsToolDirection()
+  {return itsToolDirection;}
+void threeAxesTiltedTool::set_itsToolDirection(direction * itsToolDirectionIn)
+  {itsToolDirection = itsToolDirectionIn;}
 
 /********************************************************************/
 
@@ -12247,8 +14325,8 @@ toolpathFeature::toolpathFeature(
 
 toolpathFeature::~toolpathFeature()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
 }
 
 int toolpathFeature::isA(int aType)
@@ -12263,15 +14341,15 @@ void toolpathFeature::printSelf()
 {
   printf("TOOLPATH_FEATURE");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(depth))->iId->printSelf();
+  (dynamic_cast<instance *>(get_depth()))->get_iId()->printSelf();
   printf(")");
 }
 
@@ -12300,9 +14378,14 @@ void toolpathSpeed::printSelf()
 {
   printf("TOOLPATH_SPEED");
   printf("(");
-  (dynamic_cast<instance *>(speed))->iId->printSelf();
+  (dynamic_cast<instance *>(speed))->get_iId()->printSelf();
   printf(")");
 }
+
+bSplineCurve * toolpathSpeed::get_speed()
+  {return speed;}
+void toolpathSpeed::set_speed(bSplineCurve * speedIn)
+  {speed = speedIn;}
 
 /********************************************************************/
 
@@ -12329,10 +14412,10 @@ topologicalRegion::topologicalRegion(
 
 topologicalRegion::~topologicalRegion()
 {
-  delete itsId;
-  delete itsOperations;
-  delete name;
-  delete cfsFaces;
+  delete get_itsId();
+  delete get_itsOperations();
+  delete get_name();
+  delete get_cfsFaces();
 }
 
 int topologicalRegion::isA(int aType)
@@ -12349,20 +14432,20 @@ void topologicalRegion::printSelf()
 {
   printf("TOPOLOGICAL_REGION");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  if (featurePlacement)
-    featurePlacement->iId->printSelf();
+  if (get_featurePlacement())
+    get_featurePlacement()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  printString(name);
+  printString(get_name());
   printf(",");
-  cfsFaces->printSelf();
+  get_cfsFaces()->printSelf();
   printf(")");
 }
 
@@ -12396,6 +14479,11 @@ int touchProbing::isA(int aType)
 	      (aType == workingstep_E) ||
 	      (aType == executable_E));
     }
+
+ncVariable * touchProbing::get_measuredOffset()
+  {return measuredOffset;}
+void touchProbing::set_measuredOffset(ncVariable * measuredOffsetIn)
+  {measuredOffset = measuredOffsetIn;}
 
 /********************************************************************/
 
@@ -12442,6 +14530,11 @@ int two5DmillingOperation::isA(int aType)
 	      (aType == operation_E));
     }
 
+two5DmillingStrategy * two5DmillingOperation::get_itsMachiningStrategy()
+  {return itsMachiningStrategy;}
+void two5DmillingOperation::set_itsMachiningStrategy(two5DmillingStrategy * itsMachiningStrategyIn)
+  {itsMachiningStrategy = itsMachiningStrategyIn;}
+
 /********************************************************************/
 
 /* userDefinedTool */
@@ -12467,10 +14560,10 @@ userDefinedTool::userDefinedTool(
 
 userDefinedTool::~userDefinedTool()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
   delete identifier;
 }
 
@@ -12484,31 +14577,36 @@ void userDefinedTool::printSelf()
 {
   printf("USER_DEFINED_TOOL");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(",");
   printString(identifier);
   printf(")");
 }
+
+char * userDefinedTool::get_identifier()
+  {return identifier;}
+void userDefinedTool::set_identifier(char * identifierIn)
+  {identifier = identifierIn;}
 
 /********************************************************************/
 
@@ -12529,7 +14627,7 @@ vector::vector(
 
 vector::~vector()
 {
-  delete name;
+  delete get_name();
 }
 
 int vector::isA(int aType)
@@ -12542,13 +14640,22 @@ void vector::printSelf()
 {
   printf("VECTOR");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  orientation->iId->printSelf();
+  orientation->get_iId()->printSelf();
   printf(",");
   printDouble(magnitude);
   printf(")");
 }
+
+direction * vector::get_orientation()
+  {return orientation;}
+void vector::set_orientation(direction * orientationIn)
+  {orientation = orientationIn;}
+double vector::get_magnitude()
+  {return magnitude;}
+void vector::set_magnitude(double magnitudeIn)
+  {magnitude = magnitudeIn;}
 
 /********************************************************************/
 
@@ -12583,18 +14690,31 @@ void veeProfile::printSelf()
 {
   printf("VEE_PROFILE");
   printf("(");
-  if (placement)
-    placement->iId->printSelf();
+  if (get_placement())
+    get_placement()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  profileRadius->iId->printSelf();
+  profileRadius->get_iId()->printSelf();
   printf(",");
   printDouble(profileAngle);
   printf(",");
   printDouble(tiltAngle);
   printf(")");
 }
+
+tolerancedLengthMeasure * veeProfile::get_profileRadius()
+  {return profileRadius;}
+void veeProfile::set_profileRadius(tolerancedLengthMeasure * profileRadiusIn)
+  {profileRadius = profileRadiusIn;}
+double veeProfile::get_profileAngle()
+  {return profileAngle;}
+void veeProfile::set_profileAngle(double profileAngleIn)
+  {profileAngle = profileAngleIn;}
+double veeProfile::get_tiltAngle()
+  {return tiltAngle;}
+void veeProfile::set_tiltAngle(double tiltAngleIn)
+  {tiltAngle = tiltAngleIn;}
 
 /********************************************************************/
 
@@ -12613,7 +14733,7 @@ vertexLoop::vertexLoop(
 
 vertexLoop::~vertexLoop()
 {
-  delete name;
+  delete get_name();
 }
 
 int vertexLoop::isA(int aType)
@@ -12627,11 +14747,16 @@ void vertexLoop::printSelf()
 {
   printf("VERTEX_LOOP");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  (dynamic_cast<instance *>(loopVertex))->iId->printSelf();
+  (dynamic_cast<instance *>(loopVertex))->get_iId()->printSelf();
   printf(")");
 }
+
+vertex * vertexLoop::get_loopVertex()
+  {return loopVertex;}
+void vertexLoop::set_loopVertex(vertex * loopVertexIn)
+  {loopVertex = loopVertexIn;}
 
 /********************************************************************/
 
@@ -12664,7 +14789,7 @@ workpieceCompleteProbing::workpieceCompleteProbing(
 
 workpieceCompleteProbing::~workpieceCompleteProbing()
 {
-  delete itsId;
+  delete get_itsId();
   delete computedOffset;
 }
 
@@ -12680,31 +14805,48 @@ void workpieceCompleteProbing::printSelf()
 {
   printf("WORKPIECE_COMPLETE_PROBING");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  (dynamic_cast<instance *>(itsSecplane))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsSecplane()))->get_iId()->printSelf();
   printf(",");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  measuredOffset->iId->printSelf();
+  get_measuredOffset()->get_iId()->printSelf();
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  itsWorkpiece->get_iId()->printSelf();
   printf(",");
-  probingDistance->iId->printSelf();
+  probingDistance->get_iId()->printSelf();
   printf(",");
-  itsProbe->iId->printSelf();
+  itsProbe->get_iId()->printSelf();
   printf(",");
   computedOffset->printSelf();
   printf(")");
 }
+
+workpiece * workpieceCompleteProbing::get_itsWorkpiece()
+  {return itsWorkpiece;}
+void workpieceCompleteProbing::set_itsWorkpiece(workpiece * itsWorkpieceIn)
+  {itsWorkpiece = itsWorkpieceIn;}
+tolerancedLengthMeasure * workpieceCompleteProbing::get_probingDistance()
+  {return probingDistance;}
+void workpieceCompleteProbing::set_probingDistance(tolerancedLengthMeasure * probingDistanceIn)
+  {probingDistance = probingDistanceIn;}
+touchProbe * workpieceCompleteProbing::get_itsProbe()
+  {return itsProbe;}
+void workpieceCompleteProbing::set_itsProbe(touchProbe * itsProbeIn)
+  {itsProbe = itsProbeIn;}
+offsetVector * workpieceCompleteProbing::get_computedOffset()
+  {return computedOffset;}
+void workpieceCompleteProbing::set_computedOffset(offsetVector * computedOffsetIn)
+  {computedOffset = computedOffsetIn;}
 
 /********************************************************************/
 
@@ -12739,7 +14881,7 @@ workpieceProbing::workpieceProbing(
 
 workpieceProbing::~workpieceProbing()
 {
-  delete itsId;
+  delete get_itsId();
 }
 
 int workpieceProbing::isA(int aType)
@@ -12754,33 +14896,54 @@ void workpieceProbing::printSelf()
 {
   printf("WORKPIECE_PROBING");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  (dynamic_cast<instance *>(itsSecplane))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsSecplane()))->get_iId()->printSelf();
   printf(",");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  measuredOffset->iId->printSelf();
+  get_measuredOffset()->get_iId()->printSelf();
   printf(",");
-  startPosition->iId->printSelf();
+  startPosition->get_iId()->printSelf();
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  itsWorkpiece->get_iId()->printSelf();
   printf(",");
-  itsDirection->iId->printSelf();
+  itsDirection->get_iId()->printSelf();
   printf(",");
-  expectedValue->iId->printSelf();
+  expectedValue->get_iId()->printSelf();
   printf(",");
-  itsProbe->iId->printSelf();
+  itsProbe->get_iId()->printSelf();
   printf(")");
 }
+
+axis2placement3d * workpieceProbing::get_startPosition()
+  {return startPosition;}
+void workpieceProbing::set_startPosition(axis2placement3d * startPositionIn)
+  {startPosition = startPositionIn;}
+workpiece * workpieceProbing::get_itsWorkpiece()
+  {return itsWorkpiece;}
+void workpieceProbing::set_itsWorkpiece(workpiece * itsWorkpieceIn)
+  {itsWorkpiece = itsWorkpieceIn;}
+direction * workpieceProbing::get_itsDirection()
+  {return itsDirection;}
+void workpieceProbing::set_itsDirection(direction * itsDirectionIn)
+  {itsDirection = itsDirectionIn;}
+tolerancedLengthMeasure * workpieceProbing::get_expectedValue()
+  {return expectedValue;}
+void workpieceProbing::set_expectedValue(tolerancedLengthMeasure * expectedValueIn)
+  {expectedValue = expectedValueIn;}
+touchProbe * workpieceProbing::get_itsProbe()
+  {return itsProbe;}
+void workpieceProbing::set_itsProbe(touchProbe * itsProbeIn)
+  {itsProbe = itsProbeIn;}
 
 /********************************************************************/
 
@@ -12810,9 +14973,9 @@ void xorExpression::printSelf()
 {
   printf("XOR_EXPRESSION");
   printf("(");
-  (dynamic_cast<instance *>(operand1))->iId->printSelf();
+  (dynamic_cast<instance *>(get_operand1()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(operand2))->iId->printSelf();
+  (dynamic_cast<instance *>(get_operand2()))->get_iId()->printSelf();
   printf(")");
 }
 
@@ -12834,9 +14997,9 @@ advancedBrepShapeRepresentation::advancedBrepShapeRepresentation(
 
 advancedBrepShapeRepresentation::~advancedBrepShapeRepresentation()
 {
-  delete name;
-  delete items;
-  delete contextOfItems;
+  delete get_name();
+  delete get_items();
+  delete get_contextOfItems();
 }
 
 int advancedBrepShapeRepresentation::isA(int aType)
@@ -12851,11 +15014,11 @@ void advancedBrepShapeRepresentation::printSelf()
 {
   printf("ADVANCED_BREP_SHAPE_REPRESENTATION");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  items->printSelf();
+  get_items()->printSelf();
   printf(",");
-  contextOfItems->printSelf();
+  get_contextOfItems()->printSelf();
   printf(")");
 }
 
@@ -12879,9 +15042,9 @@ advancedFace::advancedFace(
 
 advancedFace::~advancedFace()
 {
-  delete name;
-  delete bounds;
-  delete sameSense;
+  delete get_name();
+  delete get_bounds();
+  delete get_sameSense();
 }
 
 int advancedFace::isA(int aType)
@@ -12896,13 +15059,13 @@ void advancedFace::printSelf()
 {
   printf("ADVANCED_FACE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  bounds->printSelf();
+  get_bounds()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(faceGeometry))->iId->printSelf();
+  (dynamic_cast<instance *>(get_faceGeometry()))->get_iId()->printSelf();
   printf(",");
-  sameSense->printSelf();
+  get_sameSense()->printSelf();
   printf(")");
 }
 
@@ -12939,6 +15102,15 @@ int approachLiftPath::isA(int aType)
 	      (aType == toolpath_E));
     }
 
+cartesianPoint * approachLiftPath::get_fixPoint()
+  {return fixPoint;}
+void approachLiftPath::set_fixPoint(cartesianPoint * fixPointIn)
+  {fixPoint = fixPointIn;}
+direction * approachLiftPath::get_fixPointDir()
+  {return fixPointDir;}
+void approachLiftPath::set_fixPointDir(direction * fixPointDirIn)
+  {fixPointDir = fixPointDirIn;}
+
 /********************************************************************/
 
 /* axis1placement */
@@ -12958,7 +15130,7 @@ axis1placement::axis1placement(
 
 axis1placement::~axis1placement()
 {
-  delete name;
+  delete get_name();
 }
 
 int axis1placement::isA(int aType)
@@ -12972,13 +15144,18 @@ void axis1placement::printSelf()
 {
   printf("AXIS1_PLACEMENT");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  location->iId->printSelf();
+  get_location()->get_iId()->printSelf();
   printf(",");
-  axis->iId->printSelf();
+  axis->get_iId()->printSelf();
   printf(")");
 }
+
+direction * axis1placement::get_axis()
+  {return axis;}
+void axis1placement::set_axis(direction * axisIn)
+  {axis = axisIn;}
 
 /********************************************************************/
 
@@ -13001,7 +15178,7 @@ axis2placement3d::axis2placement3d(
 
 axis2placement3d::~axis2placement3d()
 {
-  delete name;
+  delete get_name();
 }
 
 int axis2placement3d::isA(int aType)
@@ -13015,18 +15192,27 @@ void axis2placement3d::printSelf()
 {
   printf("AXIS2_PLACEMENT_3D");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  location->iId->printSelf();
+  get_location()->get_iId()->printSelf();
   printf(",");
-  axis->iId->printSelf();
+  axis->get_iId()->printSelf();
   printf(",");
   if (refDirection)
-    refDirection->iId->printSelf();
+    refDirection->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
 }
+
+direction * axis2placement3d::get_axis()
+  {return axis;}
+void axis2placement3d::set_axis(direction * axisIn)
+  {axis = axisIn;}
+direction * axis2placement3d::get_refDirection()
+  {return refDirection;}
+void axis2placement3d::set_refDirection(direction * refDirectionIn)
+  {refDirection = refDirectionIn;}
 
 /********************************************************************/
 
@@ -13051,7 +15237,7 @@ block::block(
 
 block::~block()
 {
-  delete name;
+  delete get_name();
 }
 
 int block::isA(int aType)
@@ -13066,9 +15252,9 @@ void block::printSelf()
 {
   printf("BLOCK");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  position->iId->printSelf();
+  position->get_iId()->printSelf();
   printf(",");
   printDouble(x);
   printf(",");
@@ -13077,6 +15263,23 @@ void block::printSelf()
   printDouble(z);
   printf(")");
 }
+
+axis2placement3d * block::get_position()
+  {return position;}
+void block::set_position(axis2placement3d * positionIn)
+  {position = positionIn;}
+double block::get_x()
+  {return x;}
+void block::set_x(double xIn)
+  {x = xIn;}
+double block::get_y()
+  {return y;}
+void block::set_y(double yIn)
+  {y = yIn;}
+double block::get_z()
+  {return z;}
+void block::set_z(double zIn)
+  {z = zIn;}
 
 /********************************************************************/
 
@@ -13100,10 +15303,10 @@ boringTool::boringTool(
 
 boringTool::~boringTool()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
 }
 
 int boringTool::isA(int aType)
@@ -13116,25 +15319,25 @@ void boringTool::printSelf()
 {
   printf("BORING_TOOL");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(")");
@@ -13167,8 +15370,8 @@ boss::boss(
 
 boss::~boss()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
   delete slope;
 }
 
@@ -13184,17 +15387,17 @@ void boss::printSelf()
 {
   printf("BOSS");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(depth))->iId->printSelf();
+  (dynamic_cast<instance *>(get_depth()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsBoundary))->iId->printSelf();
+  (dynamic_cast<instance *>(itsBoundary))->get_iId()->printSelf();
   printf(",");
   if (slope)
     slope->printSelf();
@@ -13202,6 +15405,15 @@ void boss::printSelf()
     printf("$");
   printf(")");
 }
+
+closedProfile * boss::get_itsBoundary()
+  {return itsBoundary;}
+void boss::set_itsBoundary(closedProfile * itsBoundaryIn)
+  {itsBoundary = itsBoundaryIn;}
+real * boss::get_slope()
+  {return slope;}
+void boss::set_slope(real * slopeIn)
+  {slope = slopeIn;}
 
 /********************************************************************/
 
@@ -13257,6 +15469,23 @@ int bottomAndSideMilling::isA(int aType)
 	      (aType == operation_E));
     }
 
+real * bottomAndSideMilling::get_axialCuttingDepth()
+  {return axialCuttingDepth;}
+void bottomAndSideMilling::set_axialCuttingDepth(real * axialCuttingDepthIn)
+  {axialCuttingDepth = axialCuttingDepthIn;}
+real * bottomAndSideMilling::get_radialCuttingDepth()
+  {return radialCuttingDepth;}
+void bottomAndSideMilling::set_radialCuttingDepth(real * radialCuttingDepthIn)
+  {radialCuttingDepth = radialCuttingDepthIn;}
+real * bottomAndSideMilling::get_allowanceSide()
+  {return allowanceSide;}
+void bottomAndSideMilling::set_allowanceSide(real * allowanceSideIn)
+  {allowanceSide = allowanceSideIn;}
+real * bottomAndSideMilling::get_allowanceBottom()
+  {return allowanceBottom;}
+void bottomAndSideMilling::set_allowanceBottom(real * allowanceBottomIn)
+  {allowanceBottom = allowanceBottomIn;}
+
 /********************************************************************/
 
 /* bottomAndSideRoughMilling */
@@ -13301,13 +15530,13 @@ bottomAndSideRoughMilling::bottomAndSideRoughMilling(
 
 bottomAndSideRoughMilling::~bottomAndSideRoughMilling()
 {
-  delete itsId;
-  delete retractPlane;
-  delete overcutLength;
-  delete axialCuttingDepth;
-  delete radialCuttingDepth;
-  delete allowanceSide;
-  delete allowanceBottom;
+  delete get_itsId();
+  delete get_retractPlane();
+  delete get_overcutLength();
+  delete get_axialCuttingDepth();
+  delete get_radialCuttingDepth();
+  delete get_allowanceSide();
+  delete get_allowanceBottom();
 }
 
 int bottomAndSideRoughMilling::isA(int aType)
@@ -13324,71 +15553,71 @@ void bottomAndSideRoughMilling::printSelf()
 {
   printf("BOTTOM_AND_SIDE_ROUGH_MILLING");
   printf("(");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  if (retractPlane)
-    retractPlane->printSelf();
+  if (get_retractPlane())
+    get_retractPlane()->printSelf();
   else
     printf("$");
   printf(",");
-  if (startPoint)
-    startPoint->iId->printSelf();
+  if (get_startPoint())
+    get_startPoint()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTool()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   printf(",");
-  if (overcutLength)
-    overcutLength->printSelf();
+  if (get_overcutLength())
+    get_overcutLength()->printSelf();
   else
     printf("$");
   printf(",");
-  if (approach)
-    (dynamic_cast<instance *>(approach))->iId->printSelf();
+  if (get_approach())
+    (dynamic_cast<instance *>(get_approach()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (retract)
-    (dynamic_cast<instance *>(retract))->iId->printSelf();
+  if (get_retract())
+    (dynamic_cast<instance *>(get_retract()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachiningStrategy)
-    (dynamic_cast<instance *>(itsMachiningStrategy))->iId->printSelf();
+  if (get_itsMachiningStrategy())
+    (dynamic_cast<instance *>(get_itsMachiningStrategy()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (axialCuttingDepth)
-    axialCuttingDepth->printSelf();
+  if (get_axialCuttingDepth())
+    get_axialCuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (radialCuttingDepth)
-    radialCuttingDepth->printSelf();
+  if (get_radialCuttingDepth())
+    get_radialCuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (allowanceSide)
-    allowanceSide->printSelf();
+  if (get_allowanceSide())
+    get_allowanceSide()->printSelf();
   else
     printf("$");
   printf(",");
-  if (allowanceBottom)
-    allowanceBottom->printSelf();
+  if (get_allowanceBottom())
+    get_allowanceBottom()->printSelf();
   else
     printf("$");
   printf(")");
@@ -13452,6 +15681,35 @@ int bSplineSurface::isA(int aType)
 	      (aType == representationItem_E));
     }
 
+integer * bSplineSurface::get_uDegree()
+  {return uDegree;}
+void bSplineSurface::set_uDegree(integer * uDegreeIn)
+  {uDegree = uDegreeIn;}
+integer * bSplineSurface::get_vDegree()
+  {return vDegree;}
+void bSplineSurface::set_vDegree(integer * vDegreeIn)
+  {vDegree = vDegreeIn;}
+parenParenCartesianPointListFullListFull * bSplineSurface::get_controlPointsList()
+  {return controlPointsList;}
+void bSplineSurface::set_controlPointsList(parenParenCartesianPointListFullListFull * controlPointsListIn)
+  {controlPointsList = controlPointsListIn;}
+bSplineSurfaceForm * bSplineSurface::get_surfaceForm()
+  {return surfaceForm;}
+void bSplineSurface::set_surfaceForm(bSplineSurfaceForm * surfaceFormIn)
+  {surfaceForm = surfaceFormIn;}
+logical * bSplineSurface::get_uClosed()
+  {return uClosed;}
+void bSplineSurface::set_uClosed(logical * uClosedIn)
+  {uClosed = uClosedIn;}
+logical * bSplineSurface::get_vClosed()
+  {return vClosed;}
+void bSplineSurface::set_vClosed(logical * vClosedIn)
+  {vClosed = vClosedIn;}
+logical * bSplineSurface::get_selfIntersect()
+  {return selfIntersect;}
+void bSplineSurface::set_selfIntersect(logical * selfIntersectIn)
+  {selfIntersect = selfIntersectIn;}
+
 /********************************************************************/
 
 /* bSplineSurfaceWithKnots */
@@ -13491,14 +15749,14 @@ bSplineSurfaceWithKnots::bSplineSurfaceWithKnots(
 
 bSplineSurfaceWithKnots::~bSplineSurfaceWithKnots()
 {
-  delete name;
-  delete uDegree;
-  delete vDegree;
-  delete controlPointsList;
-  delete surfaceForm;
-  delete uClosed;
-  delete vClosed;
-  delete selfIntersect;
+  delete get_name();
+  delete get_uDegree();
+  delete get_vDegree();
+  delete get_controlPointsList();
+  delete get_surfaceForm();
+  delete get_uClosed();
+  delete get_vClosed();
+  delete get_selfIntersect();
   delete uMultiplicities;
   delete vMultiplicities;
   delete uKnots;
@@ -13519,21 +15777,21 @@ void bSplineSurfaceWithKnots::printSelf()
 {
   printf("B_SPLINE_SURFACE_WITH_KNOTS");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  uDegree->printSelf();
+  get_uDegree()->printSelf();
   printf(",");
-  vDegree->printSelf();
+  get_vDegree()->printSelf();
   printf(",");
-  controlPointsList->printSelf();
+  get_controlPointsList()->printSelf();
   printf(",");
-  surfaceForm->printSelf();
+  get_surfaceForm()->printSelf();
   printf(",");
-  uClosed->printSelf();
+  get_uClosed()->printSelf();
   printf(",");
-  vClosed->printSelf();
+  get_vClosed()->printSelf();
   printf(",");
-  selfIntersect->printSelf();
+  get_selfIntersect()->printSelf();
   printf(",");
   uMultiplicities->printSelf();
   printf(",");
@@ -13546,6 +15804,27 @@ void bSplineSurfaceWithKnots::printSelf()
   knotSpec->printSelf();
   printf(")");
 }
+
+parenIntegerListFull * bSplineSurfaceWithKnots::get_uMultiplicities()
+  {return uMultiplicities;}
+void bSplineSurfaceWithKnots::set_uMultiplicities(parenIntegerListFull * uMultiplicitiesIn)
+  {uMultiplicities = uMultiplicitiesIn;}
+parenIntegerListFull * bSplineSurfaceWithKnots::get_vMultiplicities()
+  {return vMultiplicities;}
+void bSplineSurfaceWithKnots::set_vMultiplicities(parenIntegerListFull * vMultiplicitiesIn)
+  {vMultiplicities = vMultiplicitiesIn;}
+parenRealListFull * bSplineSurfaceWithKnots::get_uKnots()
+  {return uKnots;}
+void bSplineSurfaceWithKnots::set_uKnots(parenRealListFull * uKnotsIn)
+  {uKnots = uKnotsIn;}
+parenRealListFull * bSplineSurfaceWithKnots::get_vKnots()
+  {return vKnots;}
+void bSplineSurfaceWithKnots::set_vKnots(parenRealListFull * vKnotsIn)
+  {vKnots = vKnotsIn;}
+knotType * bSplineSurfaceWithKnots::get_knotSpec()
+  {return knotSpec;}
+void bSplineSurfaceWithKnots::set_knotSpec(knotType * knotSpecIn)
+  {knotSpec = knotSpecIn;}
 
 /********************************************************************/
 
@@ -13564,7 +15843,7 @@ cartesianPoint::cartesianPoint(
 
 cartesianPoint::~cartesianPoint()
 {
-  delete name;
+  delete get_name();
   delete coordinates;
 }
 
@@ -13580,11 +15859,16 @@ void cartesianPoint::printSelf()
 {
   printf("CARTESIAN_POINT");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
   coordinates->printSelf();
   printf(")");
 }
+
+parenRealListFull * cartesianPoint::get_coordinates()
+  {return coordinates;}
+void cartesianPoint::set_coordinates(parenRealListFull * coordinatesIn)
+  {coordinates = coordinatesIn;}
 
 /********************************************************************/
 
@@ -13629,10 +15913,10 @@ catalogueThread::catalogueThread(
 
 catalogueThread::~catalogueThread()
 {
-  delete itsId;
-  delete itsOperations;
-  delete appliedShape;
-  delete innerOrOuterThread;
+  delete get_itsId();
+  delete get_itsOperations();
+  delete get_appliedShape();
+  delete get_innerOrOuterThread();
 }
 
 int catalogueThread::isA(int aType)
@@ -13648,40 +15932,45 @@ void catalogueThread::printSelf()
 {
   printf("CATALOGUE_THREAD");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(depth))->iId->printSelf();
+  (dynamic_cast<instance *>(get_depth()))->get_iId()->printSelf();
   printf(",");
-  partialProfile->iId->printSelf();
+  get_partialProfile()->get_iId()->printSelf();
   printf(",");
-  appliedShape->printSelf();
+  get_appliedShape()->printSelf();
   printf(",");
-  innerOrOuterThread->printSelf();
+  get_innerOrOuterThread()->printSelf();
   printf(",");
-  if (qualifier)
-    qualifier->iId->printSelf();
+  if (get_qualifier())
+    get_qualifier()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  fitClass->iId->printSelf();
+  get_fitClass()->get_iId()->printSelf();
   printf(",");
-  form->iId->printSelf();
+  get_form()->get_iId()->printSelf();
   printf(",");
-  printDouble(majorDiameter);
+  printDouble(get_majorDiameter());
   printf(",");
-  numberOfThreads->iId->printSelf();
+  get_numberOfThreads()->get_iId()->printSelf();
   printf(",");
-  threadHand->iId->printSelf();
+  get_threadHand()->get_iId()->printSelf();
   printf(",");
-  documentation->iId->printSelf();
+  documentation->get_iId()->printSelf();
   printf(")");
 }
+
+specification * catalogueThread::get_documentation()
+  {return documentation;}
+void catalogueThread::set_documentation(specification * documentationIn)
+  {documentation = documentationIn;}
 
 /********************************************************************/
 
@@ -13705,10 +15994,10 @@ centerDrill::centerDrill(
 
 centerDrill::~centerDrill()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
 }
 
 int centerDrill::isA(int aType)
@@ -13721,25 +16010,25 @@ void centerDrill::printSelf()
 {
   printf("CENTER_DRILL");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(")");
@@ -13774,14 +16063,19 @@ void circularClosedProfile::printSelf()
 {
   printf("CIRCULAR_CLOSED_PROFILE");
   printf("(");
-  if (placement)
-    placement->iId->printSelf();
+  if (get_placement())
+    get_placement()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  diameter->iId->printSelf();
+  diameter->get_iId()->printSelf();
   printf(")");
 }
+
+tolerancedLengthMeasure * circularClosedProfile::get_diameter()
+  {return diameter;}
+void circularClosedProfile::set_diameter(tolerancedLengthMeasure * diameterIn)
+  {diameter = diameterIn;}
 
 /********************************************************************/
 
@@ -13814,8 +16108,8 @@ circularClosedShapeProfile::circularClosedShapeProfile(
 
 circularClosedShapeProfile::~circularClosedShapeProfile()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
 }
 
 int circularClosedShapeProfile::isA(int aType)
@@ -13832,25 +16126,30 @@ void circularClosedShapeProfile::printSelf()
 {
   printf("CIRCULAR_CLOSED_SHAPE_PROFILE");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(depth))->iId->printSelf();
+  (dynamic_cast<instance *>(get_depth()))->get_iId()->printSelf();
   printf(",");
-  profileSweptShape->iId->printSelf();
+  get_profileSweptShape()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(floorCondition))->iId->printSelf();
+  (dynamic_cast<instance *>(get_floorCondition()))->get_iId()->printSelf();
   printf(",");
-  removalDirection->iId->printSelf();
+  get_removalDirection()->get_iId()->printSelf();
   printf(",");
-  closedBoundary->iId->printSelf();
+  closedBoundary->get_iId()->printSelf();
   printf(")");
 }
+
+circularClosedProfile * circularClosedShapeProfile::get_closedBoundary()
+  {return closedBoundary;}
+void circularClosedShapeProfile::set_closedBoundary(circularClosedProfile * closedBoundaryIn)
+  {closedBoundary = closedBoundaryIn;}
 
 /********************************************************************/
 
@@ -13887,8 +16186,8 @@ circularPattern::circularPattern(
 
 circularPattern::~circularPattern()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
   delete relocatedBaseFeature;
   delete missingBaseFeature;
 }
@@ -13904,15 +16203,15 @@ void circularPattern::printSelf()
 {
   printf("CIRCULAR_PATTERN");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(replicateBaseFeature))->iId->printSelf();
+  (dynamic_cast<instance *>(get_replicateBaseFeature()))->get_iId()->printSelf();
   printf(",");
   printDouble(angleIncrement);
   printf(",");
@@ -13923,13 +16222,38 @@ void circularPattern::printSelf()
   missingBaseFeature->printSelf();
   printf(",");
   if (baseFeatureDiameter)
-    baseFeatureDiameter->iId->printSelf();
+    baseFeatureDiameter->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   printDouble(baseFeatureRotation);
   printf(")");
 }
+
+double circularPattern::get_angleIncrement()
+  {return angleIncrement;}
+void circularPattern::set_angleIncrement(double angleIncrementIn)
+  {angleIncrement = angleIncrementIn;}
+int circularPattern::get_numberOfFeature()
+  {return numberOfFeature;}
+void circularPattern::set_numberOfFeature(int numberOfFeatureIn)
+  {numberOfFeature = numberOfFeatureIn;}
+parenCircularOffsetList * circularPattern::get_relocatedBaseFeature()
+  {return relocatedBaseFeature;}
+void circularPattern::set_relocatedBaseFeature(parenCircularOffsetList * relocatedBaseFeatureIn)
+  {relocatedBaseFeature = relocatedBaseFeatureIn;}
+parenCircularOmitList * circularPattern::get_missingBaseFeature()
+  {return missingBaseFeature;}
+void circularPattern::set_missingBaseFeature(parenCircularOmitList * missingBaseFeatureIn)
+  {missingBaseFeature = missingBaseFeatureIn;}
+tolerancedLengthMeasure * circularPattern::get_baseFeatureDiameter()
+  {return baseFeatureDiameter;}
+void circularPattern::set_baseFeatureDiameter(tolerancedLengthMeasure * baseFeatureDiameterIn)
+  {baseFeatureDiameter = baseFeatureDiameterIn;}
+double circularPattern::get_baseFeatureRotation()
+  {return baseFeatureRotation;}
+void circularPattern::set_baseFeatureRotation(double baseFeatureRotationIn)
+  {baseFeatureRotation = baseFeatureRotationIn;}
 
 /********************************************************************/
 
@@ -13966,10 +16290,10 @@ closedPocket::closedPocket(
 
 closedPocket::~closedPocket()
 {
-  delete itsId;
-  delete itsOperations;
-  delete itsBoss;
-  delete slope;
+  delete get_itsId();
+  delete get_itsOperations();
+  delete get_itsBoss();
+  delete get_slope();
 }
 
 int closedPocket::isA(int aType)
@@ -13985,38 +16309,43 @@ void closedPocket::printSelf()
 {
   printf("CLOSED_POCKET");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(depth))->iId->printSelf();
+  (dynamic_cast<instance *>(get_depth()))->get_iId()->printSelf();
   printf(",");
-  itsBoss->printSelf();
+  get_itsBoss()->printSelf();
   printf(",");
-  if (slope)
-    slope->printSelf();
+  if (get_slope())
+    get_slope()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(bottomCondition))->iId->printSelf();
+  (dynamic_cast<instance *>(get_bottomCondition()))->get_iId()->printSelf();
   printf(",");
-  if (planarRadius)
-    planarRadius->iId->printSelf();
+  if (get_planarRadius())
+    get_planarRadius()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (orthogonalRadius)
-    orthogonalRadius->iId->printSelf();
+  if (get_orthogonalRadius())
+    get_orthogonalRadius()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(featureBoundary))->iId->printSelf();
+  (dynamic_cast<instance *>(featureBoundary))->get_iId()->printSelf();
   printf(")");
 }
+
+closedProfile * closedPocket::get_featureBoundary()
+  {return featureBoundary;}
+void closedPocket::set_featureBoundary(closedProfile * featureBoundaryIn)
+  {featureBoundary = featureBoundaryIn;}
 
 /********************************************************************/
 
@@ -14034,8 +16363,8 @@ closedShell::closedShell(
 
 closedShell::~closedShell()
 {
-  delete name;
-  delete cfsFaces;
+  delete get_name();
+  delete get_cfsFaces();
 }
 
 int closedShell::isA(int aType)
@@ -14049,9 +16378,9 @@ void closedShell::printSelf()
 {
   printf("CLOSED_SHELL");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  cfsFaces->printSelf();
+  get_cfsFaces()->printSelf();
   printf(")");
 }
 
@@ -14080,10 +16409,10 @@ combinedDrillAndReamer::combinedDrillAndReamer(
 
 combinedDrillAndReamer::~combinedDrillAndReamer()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
   delete drillLength;
 }
 
@@ -14098,25 +16427,25 @@ void combinedDrillAndReamer::printSelf()
 {
   printf("COMBINED_DRILL_AND_REAMER");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(",");
@@ -14126,6 +16455,11 @@ void combinedDrillAndReamer::printSelf()
     printf("$");
   printf(")");
 }
+
+real * combinedDrillAndReamer::get_drillLength()
+  {return drillLength;}
+void combinedDrillAndReamer::set_drillLength(real * drillLengthIn)
+  {drillLength = drillLengthIn;}
 
 /********************************************************************/
 
@@ -14152,10 +16486,10 @@ combinedDrillAndTap::combinedDrillAndTap(
 
 combinedDrillAndTap::~combinedDrillAndTap()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
   delete drillLength;
 }
 
@@ -14170,25 +16504,25 @@ void combinedDrillAndTap::printSelf()
 {
   printf("COMBINED_DRILL_AND_TAP");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   if (drillLength)
@@ -14197,6 +16531,11 @@ void combinedDrillAndTap::printSelf()
     printf("$");
   printf(")");
 }
+
+real * combinedDrillAndTap::get_drillLength()
+  {return drillLength;}
+void combinedDrillAndTap::set_drillLength(real * drillLengthIn)
+  {drillLength = drillLengthIn;}
 
 /********************************************************************/
 
@@ -14253,8 +16592,8 @@ connectSecplane::connectSecplane(
 
 connectSecplane::~connectSecplane()
 {
-  delete itsPriority;
-  delete itsType;
+  delete get_itsPriority();
+  delete get_itsType();
 }
 
 int connectSecplane::isA(int aType)
@@ -14268,36 +16607,45 @@ void connectSecplane::printSelf()
 {
   printf("CONNECT_SECPLANE");
   printf("(");
-  itsPriority->printSelf();
+  get_itsPriority()->printSelf();
   printf(",");
-  itsType->printSelf();
+  get_itsType()->printSelf();
   printf(",");
-  if (itsSpeed)
-    itsSpeed->printSelf();
+  if (get_itsSpeed())
+    get_itsSpeed()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsTechnology)
-    (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  if (get_itsTechnology())
+    (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachineFunctions)
-    (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  if (get_itsMachineFunctions())
+    (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   if (upDir)
-    upDir->iId->printSelf();
+    upDir->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   if (downDir)
-    downDir->iId->printSelf();
+    downDir->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
 }
+
+direction * connectSecplane::get_upDir()
+  {return upDir;}
+void connectSecplane::set_upDir(direction * upDirIn)
+  {upDir = upDirIn;}
+direction * connectSecplane::get_downDir()
+  {return downDir;}
+void connectSecplane::set_downDir(direction * downDirIn)
+  {downDir = downDirIn;}
 
 /********************************************************************/
 
@@ -14422,10 +16770,10 @@ definedThread::definedThread(
 
 definedThread::~definedThread()
 {
-  delete itsId;
-  delete itsOperations;
-  delete appliedShape;
-  delete innerOrOuterThread;
+  delete get_itsId();
+  delete get_itsOperations();
+  delete get_appliedShape();
+  delete get_innerOrOuterThread();
   delete minorDiameter;
   delete crest;
 }
@@ -14443,36 +16791,36 @@ void definedThread::printSelf()
 {
   printf("DEFINED_THREAD");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(depth))->iId->printSelf();
+  (dynamic_cast<instance *>(get_depth()))->get_iId()->printSelf();
   printf(",");
-  partialProfile->iId->printSelf();
+  get_partialProfile()->get_iId()->printSelf();
   printf(",");
-  appliedShape->printSelf();
+  get_appliedShape()->printSelf();
   printf(",");
-  innerOrOuterThread->printSelf();
+  get_innerOrOuterThread()->printSelf();
   printf(",");
-  if (qualifier)
-    qualifier->iId->printSelf();
+  if (get_qualifier())
+    get_qualifier()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  fitClass->iId->printSelf();
+  get_fitClass()->get_iId()->printSelf();
   printf(",");
-  form->iId->printSelf();
+  get_form()->get_iId()->printSelf();
   printf(",");
-  printDouble(majorDiameter);
+  printDouble(get_majorDiameter());
   printf(",");
-  numberOfThreads->iId->printSelf();
+  get_numberOfThreads()->get_iId()->printSelf();
   printf(",");
-  threadHand->iId->printSelf();
+  get_threadHand()->get_iId()->printSelf();
   printf(",");
   printDouble(pitchDiameter);
   printf(",");
@@ -14487,6 +16835,19 @@ void definedThread::printSelf()
     printf("$");
   printf(")");
 }
+
+double definedThread::get_pitchDiameter()
+  {return pitchDiameter;}
+void definedThread::set_pitchDiameter(double pitchDiameterIn)
+  {pitchDiameter = pitchDiameterIn;}
+real * definedThread::get_minorDiameter()
+  {return minorDiameter;}
+void definedThread::set_minorDiameter(real * minorDiameterIn)
+  {minorDiameter = minorDiameterIn;}
+real * definedThread::get_crest()
+  {return crest;}
+void definedThread::set_crest(real * crestIn)
+  {crest = crestIn;}
 
 /********************************************************************/
 
@@ -14505,7 +16866,7 @@ direction::direction(
 
 direction::~direction()
 {
-  delete name;
+  delete get_name();
   delete directionRatios;
 }
 
@@ -14519,11 +16880,16 @@ void direction::printSelf()
 {
   printf("DIRECTION");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
   directionRatios->printSelf();
   printf(")");
 }
+
+parenRealListFull * direction::get_directionRatios()
+  {return directionRatios;}
+void direction::set_directionRatios(parenRealListFull * directionRatiosIn)
+  {directionRatios = directionRatiosIn;}
 
 /********************************************************************/
 
@@ -14601,6 +16967,27 @@ int drillingTypeOperation::isA(int aType)
 	      (aType == operation_E));
     }
 
+real * drillingTypeOperation::get_cuttingDepth()
+  {return cuttingDepth;}
+void drillingTypeOperation::set_cuttingDepth(real * cuttingDepthIn)
+  {cuttingDepth = cuttingDepthIn;}
+real * drillingTypeOperation::get_previousDiameter()
+  {return previousDiameter;}
+void drillingTypeOperation::set_previousDiameter(real * previousDiameterIn)
+  {previousDiameter = previousDiameterIn;}
+real * drillingTypeOperation::get_dwellTimeBottom()
+  {return dwellTimeBottom;}
+void drillingTypeOperation::set_dwellTimeBottom(real * dwellTimeBottomIn)
+  {dwellTimeBottom = dwellTimeBottomIn;}
+real * drillingTypeOperation::get_feedOnRetract()
+  {return feedOnRetract;}
+void drillingTypeOperation::set_feedOnRetract(real * feedOnRetractIn)
+  {feedOnRetract = feedOnRetractIn;}
+drillingTypeStrategy * drillingTypeOperation::get_itsMachiningStrategy()
+  {return itsMachiningStrategy;}
+void drillingTypeOperation::set_itsMachiningStrategy(drillingTypeStrategy * itsMachiningStrategyIn)
+  {itsMachiningStrategy = itsMachiningStrategyIn;}
+
 /********************************************************************/
 
 /* edgeLoop */
@@ -14618,7 +17005,7 @@ edgeLoop::edgeLoop(
 
 edgeLoop::~edgeLoop()
 {
-  delete name;
+  delete get_name();
   delete edgeList;
 }
 
@@ -14633,11 +17020,16 @@ void edgeLoop::printSelf()
 {
   printf("EDGE_LOOP");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
   edgeList->printSelf();
   printf(")");
 }
+
+parenOrientedEdgeListFull * edgeLoop::get_edgeList()
+  {return edgeList;}
+void edgeLoop::set_edgeList(parenOrientedEdgeListFull * edgeListIn)
+  {edgeList = edgeListIn;}
 
 /********************************************************************/
 
@@ -14662,6 +17054,11 @@ int elementarySurface::isA(int aType)
 	      (aType == geometricRepresentationItem_E) ||
 	      (aType == representationItem_E));
     }
+
+axis2placement3d * elementarySurface::get_position()
+  {return position;}
+void elementarySurface::set_position(axis2placement3d * positionIn)
+  {position = positionIn;}
 
 /********************************************************************/
 
@@ -14700,9 +17097,9 @@ freeformOperation::freeformOperation(
 
 freeformOperation::~freeformOperation()
 {
-  delete itsId;
-  delete retractPlane;
-  delete overcutLength;
+  delete get_itsId();
+  delete get_retractPlane();
+  delete get_overcutLength();
 }
 
 int freeformOperation::isA(int aType)
@@ -14717,55 +17114,60 @@ void freeformOperation::printSelf()
 {
   printf("FREEFORM_OPERATION");
   printf("(");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  if (retractPlane)
-    retractPlane->printSelf();
+  if (get_retractPlane())
+    get_retractPlane()->printSelf();
   else
     printf("$");
   printf(",");
-  if (startPoint)
-    startPoint->iId->printSelf();
+  if (get_startPoint())
+    get_startPoint()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTool()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   printf(",");
-  if (overcutLength)
-    overcutLength->printSelf();
+  if (get_overcutLength())
+    get_overcutLength()->printSelf();
   else
     printf("$");
   printf(",");
-  if (approach)
-    (dynamic_cast<instance *>(approach))->iId->printSelf();
+  if (get_approach())
+    (dynamic_cast<instance *>(get_approach()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (retract)
-    (dynamic_cast<instance *>(retract))->iId->printSelf();
+  if (get_retract())
+    (dynamic_cast<instance *>(get_retract()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   if (itsMachiningStrategy)
-    (dynamic_cast<instance *>(itsMachiningStrategy))->iId->printSelf();
+    (dynamic_cast<instance *>(itsMachiningStrategy))->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
 }
+
+freeformStrategy * freeformOperation::get_itsMachiningStrategy()
+  {return itsMachiningStrategy;}
+void freeformOperation::set_itsMachiningStrategy(freeformStrategy * itsMachiningStrategyIn)
+  {itsMachiningStrategy = itsMachiningStrategyIn;}
 
 /********************************************************************/
 
@@ -14794,8 +17196,8 @@ generalOutsideProfile::generalOutsideProfile(
 
 generalOutsideProfile::~generalOutsideProfile()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
 }
 
 int generalOutsideProfile::isA(int aType)
@@ -14811,21 +17213,26 @@ void generalOutsideProfile::printSelf()
 {
   printf("GENERAL_OUTSIDE_PROFILE");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(depth))->iId->printSelf();
+  (dynamic_cast<instance *>(get_depth()))->get_iId()->printSelf();
   printf(",");
-  profileSweptShape->iId->printSelf();
+  get_profileSweptShape()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(featureBoundary))->iId->printSelf();
+  (dynamic_cast<instance *>(featureBoundary))->get_iId()->printSelf();
   printf(")");
 }
+
+profile * generalOutsideProfile::get_featureBoundary()
+  {return featureBoundary;}
+void generalOutsideProfile::set_featureBoundary(profile * featureBoundaryIn)
+  {featureBoundary = featureBoundaryIn;}
 
 /********************************************************************/
 
@@ -14852,8 +17259,8 @@ generalPattern::generalPattern(
 
 generalPattern::~generalPattern()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
   delete replicateLocations;
 }
 
@@ -14868,19 +17275,24 @@ void generalPattern::printSelf()
 {
   printf("GENERAL_PATTERN");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(replicateBaseFeature))->iId->printSelf();
+  (dynamic_cast<instance *>(get_replicateBaseFeature()))->get_iId()->printSelf();
   printf(",");
   replicateLocations->printSelf();
   printf(")");
 }
+
+parenAxis2placement3dListFull * generalPattern::get_replicateLocations()
+  {return replicateLocations;}
+void generalPattern::set_replicateLocations(parenAxis2placement3dListFull * replicateLocationsIn)
+  {replicateLocations = replicateLocationsIn;}
 
 /********************************************************************/
 
@@ -14911,14 +17323,19 @@ void generalProfile::printSelf()
 {
   printf("GENERAL_PROFILE");
   printf("(");
-  if (placement)
-    placement->iId->printSelf();
+  if (get_placement())
+    get_placement()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsProfile))->iId->printSelf();
+  (dynamic_cast<instance *>(itsProfile))->get_iId()->printSelf();
   printf(")");
 }
+
+boundedCurve * generalProfile::get_itsProfile()
+  {return itsProfile;}
+void generalProfile::set_itsProfile(boundedCurve * itsProfileIn)
+  {itsProfile = itsProfileIn;}
 
 /********************************************************************/
 
@@ -14939,8 +17356,8 @@ generalProfileFloor::generalProfileFloor(
 
 generalProfileFloor::~generalProfileFloor()
 {
-  delete floorRadius;
-  delete startOrEnd;
+  delete get_floorRadius();
+  delete get_startOrEnd();
 }
 
 int generalProfileFloor::isA(int aType)
@@ -14953,16 +17370,21 @@ void generalProfileFloor::printSelf()
 {
   printf("GENERAL_PROFILE_FLOOR");
   printf("(");
-  if (floorRadius)
-    floorRadius->printSelf();
+  if (get_floorRadius())
+    get_floorRadius()->printSelf();
   else
     printf("$");
   printf(",");
-  startOrEnd->printSelf();
+  get_startOrEnd()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(floor))->iId->printSelf();
+  (dynamic_cast<instance *>(floor))->get_iId()->printSelf();
   printf(")");
 }
+
+face * generalProfileFloor::get_floor()
+  {return floor;}
+void generalProfileFloor::set_floor(face * floorIn)
+  {floor = floorIn;}
 
 /********************************************************************/
 
@@ -14995,8 +17417,8 @@ generalShapeProfile::generalShapeProfile(
 
 generalShapeProfile::~generalShapeProfile()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
 }
 
 int generalShapeProfile::isA(int aType)
@@ -15013,25 +17435,30 @@ void generalShapeProfile::printSelf()
 {
   printf("GENERAL_SHAPE_PROFILE");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(depth))->iId->printSelf();
+  (dynamic_cast<instance *>(get_depth()))->get_iId()->printSelf();
   printf(",");
-  profileSweptShape->iId->printSelf();
+  get_profileSweptShape()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(floorCondition))->iId->printSelf();
+  (dynamic_cast<instance *>(get_floorCondition()))->get_iId()->printSelf();
   printf(",");
-  removalDirection->iId->printSelf();
+  get_removalDirection()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(profileBoundary))->iId->printSelf();
+  (dynamic_cast<instance *>(profileBoundary))->get_iId()->printSelf();
   printf(")");
 }
+
+profile * generalShapeProfile::get_profileBoundary()
+  {return profileBoundary;}
+void generalShapeProfile::set_profileBoundary(profile * profileBoundaryIn)
+  {profileBoundary = profileBoundaryIn;}
 
 /********************************************************************/
 
@@ -15054,7 +17481,7 @@ helix::helix(
 
 helix::~helix()
 {
-  delete name;
+  delete get_name();
 }
 
 int helix::isA(int aType)
@@ -15068,15 +17495,28 @@ void helix::printSelf()
 {
   printf("HELIX");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  position->iId->printSelf();
+  position->get_iId()->printSelf();
   printf(",");
   printDouble(radius);
   printf(",");
   printDouble(pitch);
   printf(")");
 }
+
+axis2placement3d * helix::get_position()
+  {return position;}
+void helix::set_position(axis2placement3d * positionIn)
+  {position = positionIn;}
+double helix::get_radius()
+  {return radius;}
+void helix::set_radius(double radiusIn)
+  {radius = radiusIn;}
+double helix::get_pitch()
+  {return pitch;}
+void helix::set_pitch(double pitchIn)
+  {pitch = pitchIn;}
 
 /********************************************************************/
 
@@ -15097,7 +17537,7 @@ line::line(
 
 line::~line()
 {
-  delete name;
+  delete get_name();
 }
 
 int line::isA(int aType)
@@ -15111,13 +17551,22 @@ void line::printSelf()
 {
   printf("LINE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  pnt->iId->printSelf();
+  pnt->get_iId()->printSelf();
   printf(",");
-  dir->iId->printSelf();
+  dir->get_iId()->printSelf();
   printf(")");
 }
+
+cartesianPoint * line::get_pnt()
+  {return pnt;}
+void line::set_pnt(cartesianPoint * pntIn)
+  {pnt = pntIn;}
+vector * line::get_dir()
+  {return dir;}
+void line::set_dir(vector * dirIn)
+  {dir = dirIn;}
 
 /********************************************************************/
 
@@ -15148,14 +17597,19 @@ void linearProfile::printSelf()
 {
   printf("LINEAR_PROFILE");
   printf("(");
-  if (placement)
-    placement->iId->printSelf();
+  if (get_placement())
+    get_placement()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  profileLength->iId->printSelf();
+  profileLength->get_iId()->printSelf();
   printf(")");
 }
+
+numericParameter * linearProfile::get_profileLength()
+  {return profileLength;}
+void linearProfile::set_profileLength(numericParameter * profileLengthIn)
+  {profileLength = profileLengthIn;}
 
 /********************************************************************/
 
@@ -15174,7 +17628,7 @@ manifoldSolidBrep::manifoldSolidBrep(
 
 manifoldSolidBrep::~manifoldSolidBrep()
 {
-  delete name;
+  delete get_name();
 }
 
 int manifoldSolidBrep::isA(int aType)
@@ -15188,11 +17642,16 @@ void manifoldSolidBrep::printSelf()
 {
   printf("MANIFOLD_SOLID_BREP");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  outer->iId->printSelf();
+  outer->get_iId()->printSelf();
   printf(")");
 }
+
+closedShell * manifoldSolidBrep::get_outer()
+  {return outer;}
+void manifoldSolidBrep::set_outer(closedShell * outerIn)
+  {outer = outerIn;}
 
 /********************************************************************/
 
@@ -15244,10 +17703,10 @@ millingThreadingTool::millingThreadingTool(
 
 millingThreadingTool::~millingThreadingTool()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
 }
 
 int millingThreadingTool::isA(int aType)
@@ -15260,25 +17719,25 @@ void millingThreadingTool::printSelf()
 {
   printf("MILLINGTHREADINGTOOL");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(")");
@@ -15321,10 +17780,10 @@ openPocket::openPocket(
 
 openPocket::~openPocket()
 {
-  delete itsId;
-  delete itsOperations;
-  delete itsBoss;
-  delete slope;
+  delete get_itsId();
+  delete get_itsOperations();
+  delete get_itsBoss();
+  delete get_slope();
 }
 
 int openPocket::isA(int aType)
@@ -15340,43 +17799,52 @@ void openPocket::printSelf()
 {
   printf("OPEN_POCKET");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(depth))->iId->printSelf();
+  (dynamic_cast<instance *>(get_depth()))->get_iId()->printSelf();
   printf(",");
-  itsBoss->printSelf();
+  get_itsBoss()->printSelf();
   printf(",");
-  if (slope)
-    slope->printSelf();
+  if (get_slope())
+    get_slope()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(bottomCondition))->iId->printSelf();
+  (dynamic_cast<instance *>(get_bottomCondition()))->get_iId()->printSelf();
   printf(",");
-  if (planarRadius)
-    planarRadius->iId->printSelf();
+  if (get_planarRadius())
+    get_planarRadius()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (orthogonalRadius)
-    orthogonalRadius->iId->printSelf();
+  if (get_orthogonalRadius())
+    get_orthogonalRadius()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(openBoundary))->iId->printSelf();
+  (dynamic_cast<instance *>(openBoundary))->get_iId()->printSelf();
   printf(",");
   if (wallBoundary)
-    (dynamic_cast<instance *>(wallBoundary))->iId->printSelf();
+    (dynamic_cast<instance *>(wallBoundary))->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
 }
+
+openProfile * openPocket::get_openBoundary()
+  {return openBoundary;}
+void openPocket::set_openBoundary(openProfile * openBoundaryIn)
+  {openBoundary = openBoundaryIn;}
+openProfile * openPocket::get_wallBoundary()
+  {return wallBoundary;}
+void openPocket::set_wallBoundary(openProfile * wallBoundaryIn)
+  {wallBoundary = wallBoundaryIn;}
 
 /********************************************************************/
 
@@ -15409,8 +17877,8 @@ partialCircularShapeProfile::partialCircularShapeProfile(
 
 partialCircularShapeProfile::~partialCircularShapeProfile()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
 }
 
 int partialCircularShapeProfile::isA(int aType)
@@ -15427,25 +17895,30 @@ void partialCircularShapeProfile::printSelf()
 {
   printf("PARTIAL_CIRCULAR_SHAPE_PROFILE");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(depth))->iId->printSelf();
+  (dynamic_cast<instance *>(get_depth()))->get_iId()->printSelf();
   printf(",");
-  profileSweptShape->iId->printSelf();
+  get_profileSweptShape()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(floorCondition))->iId->printSelf();
+  (dynamic_cast<instance *>(get_floorCondition()))->get_iId()->printSelf();
   printf(",");
-  removalDirection->iId->printSelf();
+  get_removalDirection()->get_iId()->printSelf();
   printf(",");
-  openBoundary->iId->printSelf();
+  openBoundary->get_iId()->printSelf();
   printf(")");
 }
+
+partialCircularProfile * partialCircularShapeProfile::get_openBoundary()
+  {return openBoundary;}
+void partialCircularShapeProfile::set_openBoundary(partialCircularProfile * openBoundaryIn)
+  {openBoundary = openBoundaryIn;}
 
 /********************************************************************/
 
@@ -15473,6 +17946,15 @@ int pcurveParent::isA(int aType)
 	      (aType == representationItem_E));
     }
 
+surface * pcurveParent::get_basisSurface()
+  {return basisSurface;}
+void pcurveParent::set_basisSurface(surface * basisSurfaceIn)
+  {basisSurface = basisSurfaceIn;}
+definitionalRepresentation * pcurveParent::get_referenceToCurve()
+  {return referenceToCurve;}
+void pcurveParent::set_referenceToCurve(definitionalRepresentation * referenceToCurveIn)
+  {referenceToCurve = referenceToCurveIn;}
+
 /********************************************************************/
 
 /* planarProfileFloor */
@@ -15492,8 +17974,8 @@ planarProfileFloor::planarProfileFloor(
 
 planarProfileFloor::~planarProfileFloor()
 {
-  delete floorRadius;
-  delete startOrEnd;
+  delete get_floorRadius();
+  delete get_startOrEnd();
 }
 
 int planarProfileFloor::isA(int aType)
@@ -15506,16 +17988,21 @@ void planarProfileFloor::printSelf()
 {
   printf("PLANAR_PROFILE_FLOOR");
   printf("(");
-  if (floorRadius)
-    floorRadius->printSelf();
+  if (get_floorRadius())
+    get_floorRadius()->printSelf();
   else
     printf("$");
   printf(",");
-  startOrEnd->printSelf();
+  get_startOrEnd()->printSelf();
   printf(",");
-  floor->iId->printSelf();
+  floor->get_iId()->printSelf();
   printf(")");
 }
+
+plane * planarProfileFloor::get_floor()
+  {return floor;}
+void planarProfileFloor::set_floor(plane * floorIn)
+  {floor = floorIn;}
 
 /********************************************************************/
 
@@ -15533,7 +18020,7 @@ plane::plane(
 
 plane::~plane()
 {
-  delete name;
+  delete get_name();
 }
 
 int plane::isA(int aType)
@@ -15548,9 +18035,9 @@ void plane::printSelf()
 {
   printf("PLANE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  position->iId->printSelf();
+  get_position()->get_iId()->printSelf();
   printf(")");
 }
 
@@ -15604,6 +18091,15 @@ int planeMilling::isA(int aType)
 	      (aType == operation_E));
     }
 
+real * planeMilling::get_axialCuttingDepth()
+  {return axialCuttingDepth;}
+void planeMilling::set_axialCuttingDepth(real * axialCuttingDepthIn)
+  {axialCuttingDepth = axialCuttingDepthIn;}
+real * planeMilling::get_allowanceBottom()
+  {return allowanceBottom;}
+void planeMilling::set_allowanceBottom(real * allowanceBottomIn)
+  {allowanceBottom = allowanceBottomIn;}
+
 /********************************************************************/
 
 /* planeRoughMilling */
@@ -15644,11 +18140,11 @@ planeRoughMilling::planeRoughMilling(
 
 planeRoughMilling::~planeRoughMilling()
 {
-  delete itsId;
-  delete retractPlane;
-  delete overcutLength;
-  delete axialCuttingDepth;
-  delete allowanceBottom;
+  delete get_itsId();
+  delete get_retractPlane();
+  delete get_overcutLength();
+  delete get_axialCuttingDepth();
+  delete get_allowanceBottom();
 }
 
 int planeRoughMilling::isA(int aType)
@@ -15665,61 +18161,61 @@ void planeRoughMilling::printSelf()
 {
   printf("PLANE_ROUGH_MILLING");
   printf("(");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  if (retractPlane)
-    retractPlane->printSelf();
+  if (get_retractPlane())
+    get_retractPlane()->printSelf();
   else
     printf("$");
   printf(",");
-  if (startPoint)
-    startPoint->iId->printSelf();
+  if (get_startPoint())
+    get_startPoint()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTool()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   printf(",");
-  if (overcutLength)
-    overcutLength->printSelf();
+  if (get_overcutLength())
+    get_overcutLength()->printSelf();
   else
     printf("$");
   printf(",");
-  if (approach)
-    (dynamic_cast<instance *>(approach))->iId->printSelf();
+  if (get_approach())
+    (dynamic_cast<instance *>(get_approach()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (retract)
-    (dynamic_cast<instance *>(retract))->iId->printSelf();
+  if (get_retract())
+    (dynamic_cast<instance *>(get_retract()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachiningStrategy)
-    (dynamic_cast<instance *>(itsMachiningStrategy))->iId->printSelf();
+  if (get_itsMachiningStrategy())
+    (dynamic_cast<instance *>(get_itsMachiningStrategy()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (axialCuttingDepth)
-    axialCuttingDepth->printSelf();
+  if (get_axialCuttingDepth())
+    get_axialCuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (allowanceBottom)
-    allowanceBottom->printSelf();
+  if (get_allowanceBottom())
+    get_allowanceBottom()->printSelf();
   else
     printf("$");
   printf(")");
@@ -15753,14 +18249,14 @@ quasiUniformSurface::quasiUniformSurface(
 
 quasiUniformSurface::~quasiUniformSurface()
 {
-  delete name;
-  delete uDegree;
-  delete vDegree;
-  delete controlPointsList;
-  delete surfaceForm;
-  delete uClosed;
-  delete vClosed;
-  delete selfIntersect;
+  delete get_name();
+  delete get_uDegree();
+  delete get_vDegree();
+  delete get_controlPointsList();
+  delete get_surfaceForm();
+  delete get_uClosed();
+  delete get_vClosed();
+  delete get_selfIntersect();
 }
 
 int quasiUniformSurface::isA(int aType)
@@ -15776,21 +18272,21 @@ void quasiUniformSurface::printSelf()
 {
   printf("QUASI_UNIFORM_SURFACE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  uDegree->printSelf();
+  get_uDegree()->printSelf();
   printf(",");
-  vDegree->printSelf();
+  get_vDegree()->printSelf();
   printf(",");
-  controlPointsList->printSelf();
+  get_controlPointsList()->printSelf();
   printf(",");
-  surfaceForm->printSelf();
+  get_surfaceForm()->printSelf();
   printf(",");
-  uClosed->printSelf();
+  get_uClosed()->printSelf();
   printf(",");
-  vClosed->printSelf();
+  get_vClosed()->printSelf();
   printf(",");
-  selfIntersect->printSelf();
+  get_selfIntersect()->printSelf();
   printf(")");
 }
 
@@ -15825,14 +18321,14 @@ rationalBSplineSurface::rationalBSplineSurface(
 
 rationalBSplineSurface::~rationalBSplineSurface()
 {
-  delete name;
-  delete uDegree;
-  delete vDegree;
-  delete controlPointsList;
-  delete surfaceForm;
-  delete uClosed;
-  delete vClosed;
-  delete selfIntersect;
+  delete get_name();
+  delete get_uDegree();
+  delete get_vDegree();
+  delete get_controlPointsList();
+  delete get_surfaceForm();
+  delete get_uClosed();
+  delete get_vClosed();
+  delete get_selfIntersect();
   delete weightsData;
 }
 
@@ -15849,24 +18345,29 @@ void rationalBSplineSurface::printSelf()
 {
   printf("RATIONAL_B_SPLINE_SURFACE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  uDegree->printSelf();
+  get_uDegree()->printSelf();
   printf(",");
-  vDegree->printSelf();
+  get_vDegree()->printSelf();
   printf(",");
-  controlPointsList->printSelf();
+  get_controlPointsList()->printSelf();
   printf(",");
-  surfaceForm->printSelf();
+  get_surfaceForm()->printSelf();
   printf(",");
-  uClosed->printSelf();
+  get_uClosed()->printSelf();
   printf(",");
-  vClosed->printSelf();
+  get_vClosed()->printSelf();
   printf(",");
-  selfIntersect->printSelf();
+  get_selfIntersect()->printSelf();
   weightsData->printSelf();
   printf(")");
 }
+
+parenParenRealListFullListFull * rationalBSplineSurface::get_weightsData()
+  {return weightsData;}
+void rationalBSplineSurface::set_weightsData(parenParenRealListFullListFull * weightsDataIn)
+  {weightsData = weightsDataIn;}
 
 /********************************************************************/
 
@@ -15899,8 +18400,8 @@ rectangularClosedShapeProfile::rectangularClosedShapeProfile(
 
 rectangularClosedShapeProfile::~rectangularClosedShapeProfile()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
 }
 
 int rectangularClosedShapeProfile::isA(int aType)
@@ -15917,25 +18418,30 @@ void rectangularClosedShapeProfile::printSelf()
 {
   printf("RECTANGULAR_CLOSED_SHAPE_PROFILE");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(depth))->iId->printSelf();
+  (dynamic_cast<instance *>(get_depth()))->get_iId()->printSelf();
   printf(",");
-  profileSweptShape->iId->printSelf();
+  get_profileSweptShape()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(floorCondition))->iId->printSelf();
+  (dynamic_cast<instance *>(get_floorCondition()))->get_iId()->printSelf();
   printf(",");
-  removalDirection->iId->printSelf();
+  get_removalDirection()->get_iId()->printSelf();
   printf(",");
-  closedBoundary->iId->printSelf();
+  closedBoundary->get_iId()->printSelf();
   printf(")");
 }
+
+rectangularClosedProfile * rectangularClosedShapeProfile::get_closedBoundary()
+  {return closedBoundary;}
+void rectangularClosedShapeProfile::set_closedBoundary(rectangularClosedProfile * closedBoundaryIn)
+  {closedBoundary = closedBoundaryIn;}
 
 /********************************************************************/
 
@@ -15968,8 +18474,8 @@ rectangularOpenShapeProfile::rectangularOpenShapeProfile(
 
 rectangularOpenShapeProfile::~rectangularOpenShapeProfile()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
 }
 
 int rectangularOpenShapeProfile::isA(int aType)
@@ -15986,25 +18492,30 @@ void rectangularOpenShapeProfile::printSelf()
 {
   printf("RECTANGULAR_OPEN_SHAPE_PROFILE");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(depth))->iId->printSelf();
+  (dynamic_cast<instance *>(get_depth()))->get_iId()->printSelf();
   printf(",");
-  profileSweptShape->iId->printSelf();
+  get_profileSweptShape()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(floorCondition))->iId->printSelf();
+  (dynamic_cast<instance *>(get_floorCondition()))->get_iId()->printSelf();
   printf(",");
-  removalDirection->iId->printSelf();
+  get_removalDirection()->get_iId()->printSelf();
   printf(",");
-  openBoundary->iId->printSelf();
+  openBoundary->get_iId()->printSelf();
   printf(")");
 }
+
+squareUProfile * rectangularOpenShapeProfile::get_openBoundary()
+  {return openBoundary;}
+void rectangularOpenShapeProfile::set_openBoundary(squareUProfile * openBoundaryIn)
+  {openBoundary = openBoundaryIn;}
 
 /********************************************************************/
 
@@ -16045,8 +18556,8 @@ rectangularPattern::rectangularPattern(
 
 rectangularPattern::~rectangularPattern()
 {
-  delete itsId;
-  delete itsOperations;
+  delete get_itsId();
+  delete get_itsOperations();
   delete numberOfRows;
   delete relocatedBaseFeature;
   delete missingBaseFeature;
@@ -16063,18 +18574,18 @@ void rectangularPattern::printSelf()
 {
   printf("RECTANGULAR_PATTERN");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  itsWorkpiece->iId->printSelf();
+  get_itsWorkpiece()->get_iId()->printSelf();
   printf(",");
-  itsOperations->printSelf();
+  get_itsOperations()->printSelf();
   printf(",");
-  featurePlacement->iId->printSelf();
+  get_featurePlacement()->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(replicateBaseFeature))->iId->printSelf();
-  spacing->iId->printSelf();
+  (dynamic_cast<instance *>(get_replicateBaseFeature()))->get_iId()->printSelf();
+  spacing->get_iId()->printSelf();
   printf(",");
-  itsDirection->iId->printSelf();
+  itsDirection->get_iId()->printSelf();
   printf(",");
   if (numberOfRows)
     numberOfRows->printSelf();
@@ -16084,12 +18595,12 @@ void rectangularPattern::printSelf()
   printf("%d", numberOfColumns);
   printf(",");
   if (rowSpacing)
-    rowSpacing->iId->printSelf();
+    rowSpacing->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   if (rowLayoutDirection)
-    rowLayoutDirection->iId->printSelf();
+    rowLayoutDirection->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
@@ -16098,6 +18609,39 @@ void rectangularPattern::printSelf()
   missingBaseFeature->printSelf();
   printf(")");
 }
+
+tolerancedLengthMeasure * rectangularPattern::get_spacing()
+  {return spacing;}
+void rectangularPattern::set_spacing(tolerancedLengthMeasure * spacingIn)
+  {spacing = spacingIn;}
+direction * rectangularPattern::get_itsDirection()
+  {return itsDirection;}
+void rectangularPattern::set_itsDirection(direction * itsDirectionIn)
+  {itsDirection = itsDirectionIn;}
+integer * rectangularPattern::get_numberOfRows()
+  {return numberOfRows;}
+void rectangularPattern::set_numberOfRows(integer * numberOfRowsIn)
+  {numberOfRows = numberOfRowsIn;}
+int rectangularPattern::get_numberOfColumns()
+  {return numberOfColumns;}
+void rectangularPattern::set_numberOfColumns(int numberOfColumnsIn)
+  {numberOfColumns = numberOfColumnsIn;}
+tolerancedLengthMeasure * rectangularPattern::get_rowSpacing()
+  {return rowSpacing;}
+void rectangularPattern::set_rowSpacing(tolerancedLengthMeasure * rowSpacingIn)
+  {rowSpacing = rowSpacingIn;}
+direction * rectangularPattern::get_rowLayoutDirection()
+  {return rowLayoutDirection;}
+void rectangularPattern::set_rowLayoutDirection(direction * rowLayoutDirectionIn)
+  {rowLayoutDirection = rowLayoutDirectionIn;}
+parenRectangularOffsetList * rectangularPattern::get_relocatedBaseFeature()
+  {return relocatedBaseFeature;}
+void rectangularPattern::set_relocatedBaseFeature(parenRectangularOffsetList * relocatedBaseFeatureIn)
+  {relocatedBaseFeature = relocatedBaseFeatureIn;}
+parenRectangularOmitList * rectangularPattern::get_missingBaseFeature()
+  {return missingBaseFeature;}
+void rectangularPattern::set_missingBaseFeature(parenRectangularOmitList * missingBaseFeatureIn)
+  {missingBaseFeature = missingBaseFeatureIn;}
 
 /********************************************************************/
 
@@ -16124,10 +18668,10 @@ sideMill::sideMill(
 
 sideMill::~sideMill()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
   delete lengthMeasure;
 }
 
@@ -16142,25 +18686,25 @@ void sideMill::printSelf()
 {
   printf("SIDE_MILL");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(",");
@@ -16170,6 +18714,11 @@ void sideMill::printSelf()
     printf("$");
   printf(")");
 }
+
+real * sideMill::get_lengthMeasure()
+  {return lengthMeasure;}
+void sideMill::set_lengthMeasure(real * lengthMeasureIn)
+  {lengthMeasure = lengthMeasureIn;}
 
 /********************************************************************/
 
@@ -16223,6 +18772,19 @@ int sideMilling::isA(int aType)
 	      (aType == operation_E));
     }
 
+real * sideMilling::get_axialCuttingDepth()
+  {return axialCuttingDepth;}
+void sideMilling::set_axialCuttingDepth(real * axialCuttingDepthIn)
+  {axialCuttingDepth = axialCuttingDepthIn;}
+real * sideMilling::get_radialCuttingDepth()
+  {return radialCuttingDepth;}
+void sideMilling::set_radialCuttingDepth(real * radialCuttingDepthIn)
+  {radialCuttingDepth = radialCuttingDepthIn;}
+real * sideMilling::get_allowanceSide()
+  {return allowanceSide;}
+void sideMilling::set_allowanceSide(real * allowanceSideIn)
+  {allowanceSide = allowanceSideIn;}
+
 /********************************************************************/
 
 /* sideFinishMilling */
@@ -16265,12 +18827,12 @@ sideFinishMilling::sideFinishMilling(
 
 sideFinishMilling::~sideFinishMilling()
 {
-  delete itsId;
-  delete retractPlane;
-  delete overcutLength;
-  delete axialCuttingDepth;
-  delete radialCuttingDepth;
-  delete allowanceSide;
+  delete get_itsId();
+  delete get_retractPlane();
+  delete get_overcutLength();
+  delete get_axialCuttingDepth();
+  delete get_radialCuttingDepth();
+  delete get_allowanceSide();
 }
 
 int sideFinishMilling::isA(int aType)
@@ -16287,66 +18849,66 @@ void sideFinishMilling::printSelf()
 {
   printf("SIDE_FINISH_MILLING");
   printf("(");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  if (retractPlane)
-    retractPlane->printSelf();
+  if (get_retractPlane())
+    get_retractPlane()->printSelf();
   else
     printf("$");
   printf(",");
-  if (startPoint)
-    startPoint->iId->printSelf();
+  if (get_startPoint())
+    get_startPoint()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTool()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   printf(",");
-  if (overcutLength)
-    overcutLength->printSelf();
+  if (get_overcutLength())
+    get_overcutLength()->printSelf();
   else
     printf("$");
   printf(",");
-  if (approach)
-    (dynamic_cast<instance *>(approach))->iId->printSelf();
+  if (get_approach())
+    (dynamic_cast<instance *>(get_approach()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (retract)
-    (dynamic_cast<instance *>(retract))->iId->printSelf();
+  if (get_retract())
+    (dynamic_cast<instance *>(get_retract()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachiningStrategy)
-    (dynamic_cast<instance *>(itsMachiningStrategy))->iId->printSelf();
+  if (get_itsMachiningStrategy())
+    (dynamic_cast<instance *>(get_itsMachiningStrategy()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (axialCuttingDepth)
-    axialCuttingDepth->printSelf();
+  if (get_axialCuttingDepth())
+    get_axialCuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (radialCuttingDepth)
-    radialCuttingDepth->printSelf();
+  if (get_radialCuttingDepth())
+    get_radialCuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (allowanceSide)
-    allowanceSide->printSelf();
+  if (get_allowanceSide())
+    get_allowanceSide()->printSelf();
   else
     printf("$");
   printf(")");
@@ -16394,12 +18956,12 @@ sideRoughMilling::sideRoughMilling(
 
 sideRoughMilling::~sideRoughMilling()
 {
-  delete itsId;
-  delete retractPlane;
-  delete overcutLength;
-  delete axialCuttingDepth;
-  delete radialCuttingDepth;
-  delete allowanceSide;
+  delete get_itsId();
+  delete get_retractPlane();
+  delete get_overcutLength();
+  delete get_axialCuttingDepth();
+  delete get_radialCuttingDepth();
+  delete get_allowanceSide();
 }
 
 int sideRoughMilling::isA(int aType)
@@ -16416,66 +18978,66 @@ void sideRoughMilling::printSelf()
 {
   printf("SIDE_ROUGH_MILLING");
   printf("(");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  if (retractPlane)
-    retractPlane->printSelf();
+  if (get_retractPlane())
+    get_retractPlane()->printSelf();
   else
     printf("$");
   printf(",");
-  if (startPoint)
-    startPoint->iId->printSelf();
+  if (get_startPoint())
+    get_startPoint()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTool()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   printf(",");
-  if (overcutLength)
-    overcutLength->printSelf();
+  if (get_overcutLength())
+    get_overcutLength()->printSelf();
   else
     printf("$");
   printf(",");
-  if (approach)
-    (dynamic_cast<instance *>(approach))->iId->printSelf();
+  if (get_approach())
+    (dynamic_cast<instance *>(get_approach()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (retract)
-    (dynamic_cast<instance *>(retract))->iId->printSelf();
+  if (get_retract())
+    (dynamic_cast<instance *>(get_retract()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachiningStrategy)
-    (dynamic_cast<instance *>(itsMachiningStrategy))->iId->printSelf();
+  if (get_itsMachiningStrategy())
+    (dynamic_cast<instance *>(get_itsMachiningStrategy()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (axialCuttingDepth)
-    axialCuttingDepth->printSelf();
+  if (get_axialCuttingDepth())
+    get_axialCuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (radialCuttingDepth)
-    radialCuttingDepth->printSelf();
+  if (get_radialCuttingDepth())
+    get_radialCuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (allowanceSide)
-    allowanceSide->printSelf();
+  if (get_allowanceSide())
+    get_allowanceSide()->printSelf();
   else
     printf("$");
   printf(")");
@@ -16503,10 +19065,10 @@ spadeDrill::spadeDrill(
 
 spadeDrill::~spadeDrill()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
 }
 
 int spadeDrill::isA(int aType)
@@ -16520,25 +19082,25 @@ void spadeDrill::printSelf()
 {
   printf("SPADE_DRILL");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(")");
@@ -16563,7 +19125,7 @@ sphericalSurface::sphericalSurface(
 
 sphericalSurface::~sphericalSurface()
 {
-  delete name;
+  delete get_name();
 }
 
 int sphericalSurface::isA(int aType)
@@ -16578,13 +19140,18 @@ void sphericalSurface::printSelf()
 {
   printf("SPHERICAL_SURFACE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  position->iId->printSelf();
+  get_position()->get_iId()->printSelf();
   printf(",");
   printDouble(radius);
   printf(")");
 }
+
+double sphericalSurface::get_radius()
+  {return radius;}
+void sphericalSurface::set_radius(double radiusIn)
+  {radius = radiusIn;}
 
 /********************************************************************/
 
@@ -16605,7 +19172,7 @@ surfaceOfLinearExtrusion::surfaceOfLinearExtrusion(
 
 surfaceOfLinearExtrusion::~surfaceOfLinearExtrusion()
 {
-  delete name;
+  delete get_name();
 }
 
 int surfaceOfLinearExtrusion::isA(int aType)
@@ -16620,13 +19187,18 @@ void surfaceOfLinearExtrusion::printSelf()
 {
   printf("SURFACE_OF_LINEAR_EXTRUSION");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  (dynamic_cast<instance *>(sweptCurve))->iId->printSelf();
+  (dynamic_cast<instance *>(get_sweptCurve()))->get_iId()->printSelf();
   printf(",");
-  extrusionAxis->iId->printSelf();
+  extrusionAxis->get_iId()->printSelf();
   printf(")");
 }
+
+vector * surfaceOfLinearExtrusion::get_extrusionAxis()
+  {return extrusionAxis;}
+void surfaceOfLinearExtrusion::set_extrusionAxis(vector * extrusionAxisIn)
+  {extrusionAxis = extrusionAxisIn;}
 
 /********************************************************************/
 
@@ -16647,7 +19219,7 @@ surfaceOfRevolution::surfaceOfRevolution(
 
 surfaceOfRevolution::~surfaceOfRevolution()
 {
-  delete name;
+  delete get_name();
 }
 
 int surfaceOfRevolution::isA(int aType)
@@ -16662,13 +19234,18 @@ void surfaceOfRevolution::printSelf()
 {
   printf("SURFACE_OF_REVOLUTION");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  (dynamic_cast<instance *>(sweptCurve))->iId->printSelf();
+  (dynamic_cast<instance *>(get_sweptCurve()))->get_iId()->printSelf();
   printf(",");
-  axisPosition->iId->printSelf();
+  axisPosition->get_iId()->printSelf();
   printf(")");
 }
+
+axis1placement * surfaceOfRevolution::get_axisPosition()
+  {return axisPosition;}
+void surfaceOfRevolution::set_axisPosition(axis1placement * axisPositionIn)
+  {axisPosition = axisPositionIn;}
 
 /********************************************************************/
 
@@ -16692,10 +19269,10 @@ tap::tap(
 
 tap::~tap()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
 }
 
 int tap::isA(int aType)
@@ -16709,25 +19286,25 @@ void tap::printSelf()
 {
   printf("TAP");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(")");
@@ -16758,10 +19335,10 @@ taperedTap::taperedTap(
 
 taperedTap::~taperedTap()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
   delete taperAngle;
 }
 
@@ -16776,25 +19353,25 @@ void taperedTap::printSelf()
 {
   printf("TAPERED_TAP");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(",");
@@ -16804,6 +19381,11 @@ void taperedTap::printSelf()
     printf("$");
   printf(")");
 }
+
+real * taperedTap::get_taperAngle()
+  {return taperAngle;}
+void taperedTap::set_taperAngle(real * taperAngleIn)
+  {taperAngle = taperAngleIn;}
 
 /********************************************************************/
 
@@ -16848,13 +19430,13 @@ tapping::tapping(
 
 tapping::~tapping()
 {
-  delete itsId;
-  delete retractPlane;
-  delete overcutLength;
-  delete cuttingDepth;
-  delete previousDiameter;
-  delete dwellTimeBottom;
-  delete feedOnRetract;
+  delete get_itsId();
+  delete get_retractPlane();
+  delete get_overcutLength();
+  delete get_cuttingDepth();
+  delete get_previousDiameter();
+  delete get_dwellTimeBottom();
+  delete get_feedOnRetract();
   delete compensationChuck;
 }
 
@@ -16870,66 +19452,71 @@ void tapping::printSelf()
 {
   printf("TAPPING");
   printf("(");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  if (retractPlane)
-    retractPlane->printSelf();
+  if (get_retractPlane())
+    get_retractPlane()->printSelf();
   else
     printf("$");
   printf(",");
-  if (startPoint)
-    startPoint->iId->printSelf();
+  if (get_startPoint())
+    get_startPoint()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTool()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   printf(",");
-  if (overcutLength)
-    overcutLength->printSelf();
+  if (get_overcutLength())
+    get_overcutLength()->printSelf();
   else
     printf("$");
   printf(",");
-  if (cuttingDepth)
-    cuttingDepth->printSelf();
+  if (get_cuttingDepth())
+    get_cuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (previousDiameter)
-    previousDiameter->printSelf();
+  if (get_previousDiameter())
+    get_previousDiameter()->printSelf();
   else
     printf("$");
   printf(",");
-  if (dwellTimeBottom)
-    dwellTimeBottom->printSelf();
+  if (get_dwellTimeBottom())
+    get_dwellTimeBottom()->printSelf();
   else
     printf("$");
   printf(",");
-  if (feedOnRetract)
-    feedOnRetract->printSelf();
+  if (get_feedOnRetract())
+    get_feedOnRetract()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachiningStrategy)
-    itsMachiningStrategy->iId->printSelf();
+  if (get_itsMachiningStrategy())
+    get_itsMachiningStrategy()->get_iId()->printSelf();
   else
     printf("$");
   compensationChuck->printSelf();
   printf(")");
 }
+
+boolean * tapping::get_compensationChuck()
+  {return compensationChuck;}
+void tapping::set_compensationChuck(boolean * compensationChuckIn)
+  {compensationChuck = compensationChuckIn;}
 
 /********************************************************************/
 
@@ -16974,13 +19561,13 @@ threadDrilling::threadDrilling(
 
 threadDrilling::~threadDrilling()
 {
-  delete itsId;
-  delete retractPlane;
-  delete overcutLength;
-  delete cuttingDepth;
-  delete previousDiameter;
-  delete dwellTimeBottom;
-  delete feedOnRetract;
+  delete get_itsId();
+  delete get_retractPlane();
+  delete get_overcutLength();
+  delete get_cuttingDepth();
+  delete get_previousDiameter();
+  delete get_dwellTimeBottom();
+  delete get_feedOnRetract();
   delete helicalMovementOnForward;
 }
 
@@ -16996,66 +19583,71 @@ void threadDrilling::printSelf()
 {
   printf("THREAD_DRILLING");
   printf("(");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  if (retractPlane)
-    retractPlane->printSelf();
+  if (get_retractPlane())
+    get_retractPlane()->printSelf();
   else
     printf("$");
   printf(",");
-  if (startPoint)
-    startPoint->iId->printSelf();
+  if (get_startPoint())
+    get_startPoint()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTool()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   printf(",");
-  if (overcutLength)
-    overcutLength->printSelf();
+  if (get_overcutLength())
+    get_overcutLength()->printSelf();
   else
     printf("$");
   printf(",");
-  if (cuttingDepth)
-    cuttingDepth->printSelf();
+  if (get_cuttingDepth())
+    get_cuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (previousDiameter)
-    previousDiameter->printSelf();
+  if (get_previousDiameter())
+    get_previousDiameter()->printSelf();
   else
     printf("$");
   printf(",");
-  if (dwellTimeBottom)
-    dwellTimeBottom->printSelf();
+  if (get_dwellTimeBottom())
+    get_dwellTimeBottom()->printSelf();
   else
     printf("$");
   printf(",");
-  if (feedOnRetract)
-    feedOnRetract->printSelf();
+  if (get_feedOnRetract())
+    get_feedOnRetract()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachiningStrategy)
-    itsMachiningStrategy->iId->printSelf();
+  if (get_itsMachiningStrategy())
+    get_itsMachiningStrategy()->get_iId()->printSelf();
   else
     printf("$");
   helicalMovementOnForward->printSelf();
   printf(")");
 }
+
+boolean * threadDrilling::get_helicalMovementOnForward()
+  {return helicalMovementOnForward;}
+void threadDrilling::set_helicalMovementOnForward(boolean * helicalMovementOnForwardIn)
+  {helicalMovementOnForward = helicalMovementOnForwardIn;}
 
 /********************************************************************/
 
@@ -17079,10 +19671,10 @@ threadMill::threadMill(
 
 threadMill::~threadMill()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
 }
 
 int threadMill::isA(int aType)
@@ -17096,25 +19688,25 @@ void threadMill::printSelf()
 {
   printf("THREAD_MILL");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(")");
@@ -17157,6 +19749,19 @@ int toolProbing::isA(int aType)
 	      (aType == executable_E));
     }
 
+cartesianPoint * toolProbing::get_offset()
+  {return offset;}
+void toolProbing::set_offset(cartesianPoint * offsetIn)
+  {offset = offsetIn;}
+double toolProbing::get_maxWear()
+  {return maxWear;}
+void toolProbing::set_maxWear(double maxWearIn)
+  {maxWear = maxWearIn;}
+machiningTool * toolProbing::get_itsTool()
+  {return itsTool;}
+void toolProbing::set_itsTool(machiningTool * itsToolIn)
+  {itsTool = itsToolIn;}
+
 /********************************************************************/
 
 /* toolRadiusProbing */
@@ -17185,7 +19790,7 @@ toolRadiusProbing::toolRadiusProbing(
 
 toolRadiusProbing::~toolRadiusProbing()
 {
-  delete itsId;
+  delete get_itsId();
 }
 
 int toolRadiusProbing::isA(int aType)
@@ -17201,27 +19806,27 @@ void toolRadiusProbing::printSelf()
 {
   printf("TOOL_RADIUS_PROBING");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  (dynamic_cast<instance *>(itsSecplane))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsSecplane()))->get_iId()->printSelf();
   printf(",");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  measuredOffset->iId->printSelf();
+  get_measuredOffset()->get_iId()->printSelf();
   printf(",");
-  offset->iId->printSelf();
+  get_offset()->get_iId()->printSelf();
   printf(",");
-  printDouble(maxWear);
+  printDouble(get_maxWear());
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTool()))->get_iId()->printSelf();
   printf(")");
 }
 
@@ -17250,10 +19855,10 @@ tSlotMill::tSlotMill(
 
 tSlotMill::~tSlotMill()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
   delete cuttingThickness;
 }
 
@@ -17268,25 +19873,25 @@ void tSlotMill::printSelf()
 {
   printf("T_SLOT_MILL");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(",");
@@ -17296,6 +19901,11 @@ void tSlotMill::printSelf()
     printf("$");
   printf(")");
 }
+
+real * tSlotMill::get_cuttingThickness()
+  {return cuttingThickness;}
+void tSlotMill::set_cuttingThickness(real * cuttingThicknessIn)
+  {cuttingThickness = cuttingThicknessIn;}
 
 /********************************************************************/
 
@@ -17348,10 +19958,10 @@ twistDrill::twistDrill(
 
 twistDrill::~twistDrill()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
 }
 
 int twistDrill::isA(int aType)
@@ -17366,25 +19976,25 @@ void twistDrill::printSelf()
 {
   printf("TWIST_DRILL");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(")");
@@ -17418,14 +20028,14 @@ uniformSurface::uniformSurface(
 
 uniformSurface::~uniformSurface()
 {
-  delete name;
-  delete uDegree;
-  delete vDegree;
-  delete controlPointsList;
-  delete surfaceForm;
-  delete uClosed;
-  delete vClosed;
-  delete selfIntersect;
+  delete get_name();
+  delete get_uDegree();
+  delete get_vDegree();
+  delete get_controlPointsList();
+  delete get_surfaceForm();
+  delete get_uClosed();
+  delete get_vClosed();
+  delete get_selfIntersect();
 }
 
 int uniformSurface::isA(int aType)
@@ -17441,21 +20051,21 @@ void uniformSurface::printSelf()
 {
   printf("UNIFORM_SURFACE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  uDegree->printSelf();
+  get_uDegree()->printSelf();
   printf(",");
-  vDegree->printSelf();
+  get_vDegree()->printSelf();
   printf(",");
-  controlPointsList->printSelf();
+  get_controlPointsList()->printSelf();
   printf(",");
-  surfaceForm->printSelf();
+  get_surfaceForm()->printSelf();
   printf(",");
-  uClosed->printSelf();
+  get_uClosed()->printSelf();
   printf(",");
-  vClosed->printSelf();
+  get_vClosed()->printSelf();
   printf(",");
-  selfIntersect->printSelf();
+  get_selfIntersect()->printSelf();
   printf(")");
 }
 
@@ -17484,10 +20094,10 @@ woodruffKeyseatMill::woodruffKeyseatMill(
 
 woodruffKeyseatMill::~woodruffKeyseatMill()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
   delete cutterWidth;
 }
 
@@ -17502,25 +20112,25 @@ void woodruffKeyseatMill::printSelf()
 {
   printf("WOORDRUFF_KEYSEAT_MILL");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(",");
@@ -17530,6 +20140,11 @@ void woodruffKeyseatMill::printSelf()
     printf("$");
   printf(")");
 }
+
+real * woodruffKeyseatMill::get_cutterWidth()
+  {return cutterWidth;}
+void woodruffKeyseatMill::set_cutterWidth(real * cutterWidthIn)
+  {cutterWidth = cutterWidthIn;}
 
 /********************************************************************/
 
@@ -17562,8 +20177,8 @@ apLiftPathAngle::apLiftPathAngle(
 
 apLiftPathAngle::~apLiftPathAngle()
 {
-  delete itsPriority;
-  delete itsType;
+  delete get_itsPriority();
+  delete get_itsType();
 }
 
 int apLiftPathAngle::isA(int aType)
@@ -17577,29 +20192,29 @@ void apLiftPathAngle::printSelf()
 {
   printf("AP_LIFT_PATH_ANGLE");
   printf("(");
-  itsPriority->printSelf();
+  get_itsPriority()->printSelf();
   printf(",");
-  itsType->printSelf();
+  get_itsType()->printSelf();
   printf(",");
-  if (itsSpeed)
-    itsSpeed->printSelf();
+  if (get_itsSpeed())
+    get_itsSpeed()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsTechnology)
-    (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  if (get_itsTechnology())
+    (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachineFunctions)
-    (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  if (get_itsMachineFunctions())
+    (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  fixPoint->iId->printSelf();
+  get_fixPoint()->get_iId()->printSelf();
   printf(",");
-  if (fixPointDir)
-    fixPointDir->iId->printSelf();
+  if (get_fixPointDir())
+    get_fixPointDir()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
@@ -17608,6 +20223,15 @@ void apLiftPathAngle::printSelf()
   printDouble(benddist);
   printf(")");
 }
+
+double apLiftPathAngle::get_angle()
+  {return angle;}
+void apLiftPathAngle::set_angle(double angleIn)
+  {angle = angleIn;}
+double apLiftPathAngle::get_benddist()
+  {return benddist;}
+void apLiftPathAngle::set_benddist(double benddistIn)
+  {benddist = benddistIn;}
 
 /********************************************************************/
 
@@ -17638,8 +20262,8 @@ apLiftPathTangent::apLiftPathTangent(
 
 apLiftPathTangent::~apLiftPathTangent()
 {
-  delete itsPriority;
-  delete itsType;
+  delete get_itsPriority();
+  delete get_itsType();
 }
 
 int apLiftPathTangent::isA(int aType)
@@ -17653,35 +20277,40 @@ void apLiftPathTangent::printSelf()
 {
   printf("AP_LIFT_PATH_TANGENT");
   printf("(");
-  itsPriority->printSelf();
+  get_itsPriority()->printSelf();
   printf(",");
-  itsType->printSelf();
+  get_itsType()->printSelf();
   printf(",");
-  if (itsSpeed)
-    itsSpeed->printSelf();
+  if (get_itsSpeed())
+    get_itsSpeed()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsTechnology)
-    (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  if (get_itsTechnology())
+    (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachineFunctions)
-    (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  if (get_itsMachineFunctions())
+    (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  fixPoint->iId->printSelf();
+  get_fixPoint()->get_iId()->printSelf();
   printf(",");
-  if (fixPointDir)
-    fixPointDir->iId->printSelf();
+  if (get_fixPointDir())
+    get_fixPointDir()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
   printDouble(radius);
   printf(")");
 }
+
+double apLiftPathTangent::get_radius()
+  {return radius;}
+void apLiftPathTangent::set_radius(double radiusIn)
+  {radius = radiusIn;}
 
 /********************************************************************/
 
@@ -17723,13 +20352,13 @@ backBoring::backBoring(
 
 backBoring::~backBoring()
 {
-  delete itsId;
-  delete retractPlane;
-  delete overcutLength;
-  delete cuttingDepth;
-  delete previousDiameter;
-  delete dwellTimeBottom;
-  delete feedOnRetract;
+  delete get_itsId();
+  delete get_retractPlane();
+  delete get_overcutLength();
+  delete get_cuttingDepth();
+  delete get_previousDiameter();
+  delete get_dwellTimeBottom();
+  delete get_feedOnRetract();
 }
 
 int backBoring::isA(int aType)
@@ -17744,61 +20373,61 @@ void backBoring::printSelf()
 {
   printf("BACK_BORING");
   printf("(");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  if (retractPlane)
-    retractPlane->printSelf();
+  if (get_retractPlane())
+    get_retractPlane()->printSelf();
   else
     printf("$");
   printf(",");
-  if (startPoint)
-    startPoint->iId->printSelf();
+  if (get_startPoint())
+    get_startPoint()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTool()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   printf(",");
-  if (overcutLength)
-    overcutLength->printSelf();
+  if (get_overcutLength())
+    get_overcutLength()->printSelf();
   else
     printf("$");
   printf(",");
-  if (cuttingDepth)
-    cuttingDepth->printSelf();
+  if (get_cuttingDepth())
+    get_cuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (previousDiameter)
-    previousDiameter->printSelf();
+  if (get_previousDiameter())
+    get_previousDiameter()->printSelf();
   else
     printf("$");
   printf(",");
-  if (dwellTimeBottom)
-    dwellTimeBottom->printSelf();
+  if (get_dwellTimeBottom())
+    get_dwellTimeBottom()->printSelf();
   else
     printf("$");
   printf(",");
-  if (feedOnRetract)
-    feedOnRetract->printSelf();
+  if (get_feedOnRetract())
+    get_feedOnRetract()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachiningStrategy)
-    itsMachiningStrategy->iId->printSelf();
+  if (get_itsMachiningStrategy())
+    get_itsMachiningStrategy()->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
@@ -17826,10 +20455,10 @@ backsideCounterbore::backsideCounterbore(
 
 backsideCounterbore::~backsideCounterbore()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
 }
 
 int backsideCounterbore::isA(int aType)
@@ -17843,25 +20472,25 @@ void backsideCounterbore::printSelf()
 {
   printf("BACKSIDE_COUNTERBORE");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(")");
@@ -17892,10 +20521,10 @@ backsideCountersink::backsideCountersink(
 
 backsideCountersink::~backsideCountersink()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
   delete countersinkRadius;
 }
 
@@ -17910,25 +20539,25 @@ void backsideCountersink::printSelf()
 {
   printf("BACKSIDE_COUNTERSINK");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(",");
@@ -17938,6 +20567,11 @@ void backsideCountersink::printSelf()
     printf("$");
   printf(")");
 }
+
+real * backsideCountersink::get_countersinkRadius()
+  {return countersinkRadius;}
+void backsideCountersink::set_countersinkRadius(real * countersinkRadiusIn)
+  {countersinkRadius = countersinkRadiusIn;}
 
 /********************************************************************/
 
@@ -17967,14 +20601,14 @@ bezierSurface::bezierSurface(
 
 bezierSurface::~bezierSurface()
 {
-  delete name;
-  delete uDegree;
-  delete vDegree;
-  delete controlPointsList;
-  delete surfaceForm;
-  delete uClosed;
-  delete vClosed;
-  delete selfIntersect;
+  delete get_name();
+  delete get_uDegree();
+  delete get_vDegree();
+  delete get_controlPointsList();
+  delete get_surfaceForm();
+  delete get_uClosed();
+  delete get_vClosed();
+  delete get_selfIntersect();
 }
 
 int bezierSurface::isA(int aType)
@@ -17990,21 +20624,21 @@ void bezierSurface::printSelf()
 {
   printf("BEZIER_SURFACE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  uDegree->printSelf();
+  get_uDegree()->printSelf();
   printf(",");
-  vDegree->printSelf();
+  get_vDegree()->printSelf();
   printf(",");
-  controlPointsList->printSelf();
+  get_controlPointsList()->printSelf();
   printf(",");
-  surfaceForm->printSelf();
+  get_surfaceForm()->printSelf();
   printf(",");
-  uClosed->printSelf();
+  get_uClosed()->printSelf();
   printf(",");
-  vClosed->printSelf();
+  get_vClosed()->printSelf();
   printf(",");
-  selfIntersect->printSelf();
+  get_selfIntersect()->printSelf();
   printf(")");
 }
 
@@ -18063,6 +20697,19 @@ int boringOperation::isA(int aType)
 	      (aType == operation_E));
     }
 
+boolean * boringOperation::get_spindleStopAtBottom()
+  {return spindleStopAtBottom;}
+void boringOperation::set_spindleStopAtBottom(boolean * spindleStopAtBottomIn)
+  {spindleStopAtBottom = spindleStopAtBottomIn;}
+real * boringOperation::get_depthOfTestcut()
+  {return depthOfTestcut;}
+void boringOperation::set_depthOfTestcut(real * depthOfTestcutIn)
+  {depthOfTestcut = depthOfTestcutIn;}
+cartesianPoint * boringOperation::get_waitingPosition()
+  {return waitingPosition;}
+void boringOperation::set_waitingPosition(cartesianPoint * waitingPositionIn)
+  {waitingPosition = waitingPositionIn;}
+
 /********************************************************************/
 
 /* bottomAndSideFinishMilling */
@@ -18107,13 +20754,13 @@ bottomAndSideFinishMilling::bottomAndSideFinishMilling(
 
 bottomAndSideFinishMilling::~bottomAndSideFinishMilling()
 {
-  delete itsId;
-  delete retractPlane;
-  delete overcutLength;
-  delete axialCuttingDepth;
-  delete radialCuttingDepth;
-  delete allowanceSide;
-  delete allowanceBottom;
+  delete get_itsId();
+  delete get_retractPlane();
+  delete get_overcutLength();
+  delete get_axialCuttingDepth();
+  delete get_radialCuttingDepth();
+  delete get_allowanceSide();
+  delete get_allowanceBottom();
 }
 
 int bottomAndSideFinishMilling::isA(int aType)
@@ -18130,71 +20777,71 @@ void bottomAndSideFinishMilling::printSelf()
 {
   printf("BOTTOM_AND_SIDE_FINISH_MILLING");
   printf("(");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  if (retractPlane)
-    retractPlane->printSelf();
+  if (get_retractPlane())
+    get_retractPlane()->printSelf();
   else
     printf("$");
   printf(",");
-  if (startPoint)
-    startPoint->iId->printSelf();
+  if (get_startPoint())
+    get_startPoint()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTool()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   printf(",");
-  if (overcutLength)
-    overcutLength->printSelf();
+  if (get_overcutLength())
+    get_overcutLength()->printSelf();
   else
     printf("$");
   printf(",");
-  if (approach)
-    (dynamic_cast<instance *>(approach))->iId->printSelf();
+  if (get_approach())
+    (dynamic_cast<instance *>(get_approach()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (retract)
-    (dynamic_cast<instance *>(retract))->iId->printSelf();
+  if (get_retract())
+    (dynamic_cast<instance *>(get_retract()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachiningStrategy)
-    (dynamic_cast<instance *>(itsMachiningStrategy))->iId->printSelf();
+  if (get_itsMachiningStrategy())
+    (dynamic_cast<instance *>(get_itsMachiningStrategy()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (axialCuttingDepth)
-    axialCuttingDepth->printSelf();
+  if (get_axialCuttingDepth())
+    get_axialCuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (radialCuttingDepth)
-    radialCuttingDepth->printSelf();
+  if (get_radialCuttingDepth())
+    get_radialCuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (allowanceSide)
-    allowanceSide->printSelf();
+  if (get_allowanceSide())
+    get_allowanceSide()->printSelf();
   else
     printf("$");
   printf(",");
-  if (allowanceBottom)
-    allowanceBottom->printSelf();
+  if (get_allowanceBottom())
+    get_allowanceBottom()->printSelf();
   else
     printf("$");
   printf(")");
@@ -18239,7 +20886,7 @@ boundedPCurve::boundedPCurve(
 
 boundedPCurve::~boundedPCurve()
 {
-  delete name;
+  delete get_name();
 }
 
 int boundedPCurve::isA(int aType)
@@ -18255,11 +20902,11 @@ void boundedPCurve::printSelf()
 {
   printf("BOUNDED_PCURVE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  (dynamic_cast<instance *>(basisSurface))->iId->printSelf();
+  (dynamic_cast<instance *>(get_basisSurface()))->get_iId()->printSelf();
   printf(",");
-  referenceToCurve->iId->printSelf();
+  get_referenceToCurve()->get_iId()->printSelf();
   printf(")");
 }
 
@@ -18296,6 +20943,27 @@ int bSplineCurve::isA(int aType)
 	      (aType == representationItem_E));
     }
 
+int bSplineCurve::get_degree()
+  {return degree;}
+void bSplineCurve::set_degree(int degreeIn)
+  {degree = degreeIn;}
+parenCartesianPointList * bSplineCurve::get_controlPointsList()
+  {return controlPointsList;}
+void bSplineCurve::set_controlPointsList(parenCartesianPointList * controlPointsListIn)
+  {controlPointsList = controlPointsListIn;}
+bSplineCurveForm * bSplineCurve::get_curveForm()
+  {return curveForm;}
+void bSplineCurve::set_curveForm(bSplineCurveForm * curveFormIn)
+  {curveForm = curveFormIn;}
+logical * bSplineCurve::get_closedCurve()
+  {return closedCurve;}
+void bSplineCurve::set_closedCurve(logical * closedCurveIn)
+  {closedCurve = closedCurveIn;}
+logical * bSplineCurve::get_selfIntersect()
+  {return selfIntersect;}
+void bSplineCurve::set_selfIntersect(logical * selfIntersectIn)
+  {selfIntersect = selfIntersectIn;}
+
 /********************************************************************/
 
 /* bSplineCurveWithKnots */
@@ -18327,11 +20995,11 @@ bSplineCurveWithKnots::bSplineCurveWithKnots(
 
 bSplineCurveWithKnots::~bSplineCurveWithKnots()
 {
-  delete name;
-  delete controlPointsList;
-  delete curveForm;
-  delete closedCurve;
-  delete selfIntersect;
+  delete get_name();
+  delete get_controlPointsList();
+  delete get_curveForm();
+  delete get_closedCurve();
+  delete get_selfIntersect();
   delete knotMultiplicites;
   delete knots;
   delete knotSpec;
@@ -18350,17 +21018,17 @@ void bSplineCurveWithKnots::printSelf()
 {
   printf("B_SPLINE_CURVE_WITH_KNOTS");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  printf("%d", degree);
+  printf("%d", get_degree());
   printf(",");
-  controlPointsList->printSelf();
+  get_controlPointsList()->printSelf();
   printf(",");
-  curveForm->printSelf();
+  get_curveForm()->printSelf();
   printf(",");
-  closedCurve->printSelf();
+  get_closedCurve()->printSelf();
   printf(",");
-  selfIntersect->printSelf();
+  get_selfIntersect()->printSelf();
   knotMultiplicites->printSelf();
   printf(",");
   knots->printSelf();
@@ -18368,6 +21036,19 @@ void bSplineCurveWithKnots::printSelf()
   knotSpec->printSelf();
   printf(")");
 }
+
+parenIntegerListFull * bSplineCurveWithKnots::get_knotMultiplicites()
+  {return knotMultiplicites;}
+void bSplineCurveWithKnots::set_knotMultiplicites(parenIntegerListFull * knotMultiplicitesIn)
+  {knotMultiplicites = knotMultiplicitesIn;}
+parenRealListFull * bSplineCurveWithKnots::get_knots()
+  {return knots;}
+void bSplineCurveWithKnots::set_knots(parenRealListFull * knotsIn)
+  {knots = knotsIn;}
+knotType * bSplineCurveWithKnots::get_knotSpec()
+  {return knotSpec;}
+void bSplineCurveWithKnots::set_knotSpec(knotType * knotSpecIn)
+  {knotSpec = knotSpecIn;}
 
 /********************************************************************/
 
@@ -18388,7 +21069,7 @@ compositeCurve::compositeCurve(
 
 compositeCurve::~compositeCurve()
 {
-  delete name;
+  delete get_name();
   delete segments;
   delete selfIntersect;
 }
@@ -18405,13 +21086,22 @@ void compositeCurve::printSelf()
 {
   printf("COMPOSITE_CURVE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
   segments->printSelf();
   printf(",");
   selfIntersect->printSelf();
   printf(")");
 }
+
+parenCompositeCurveSegmentListFull * compositeCurve::get_segments()
+  {return segments;}
+void compositeCurve::set_segments(parenCompositeCurveSegmentListFull * segmentsIn)
+  {segments = segmentsIn;}
+logical * compositeCurve::get_selfIntersect()
+  {return selfIntersect;}
+void compositeCurve::set_selfIntersect(logical * selfIntersectIn)
+  {selfIntersect = selfIntersectIn;}
 
 /********************************************************************/
 
@@ -18437,6 +21127,11 @@ int conic::isA(int aType)
 	      (aType == representationItem_E));
     }
 
+axis2placement3d * conic::get_position()
+  {return position;}
+void conic::set_position(axis2placement3d * positionIn)
+  {position = positionIn;}
+
 /********************************************************************/
 
 /* connectDirect */
@@ -18459,8 +21154,8 @@ connectDirect::connectDirect(
 
 connectDirect::~connectDirect()
 {
-  delete itsPriority;
-  delete itsType;
+  delete get_itsPriority();
+  delete get_itsType();
 }
 
 int connectDirect::isA(int aType)
@@ -18474,22 +21169,22 @@ void connectDirect::printSelf()
 {
   printf("CONNECT_DIRECT");
   printf("(");
-  itsPriority->printSelf();
+  get_itsPriority()->printSelf();
   printf(",");
-  itsType->printSelf();
+  get_itsType()->printSelf();
   printf(",");
-  if (itsSpeed)
-    itsSpeed->printSelf();
+  if (get_itsSpeed())
+    get_itsSpeed()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsTechnology)
-    (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  if (get_itsTechnology())
+    (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachineFunctions)
-    (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  if (get_itsMachineFunctions())
+    (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
@@ -18517,10 +21212,10 @@ counterbore::counterbore(
 
 counterbore::~counterbore()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
 }
 
 int counterbore::isA(int aType)
@@ -18534,25 +21229,25 @@ void counterbore::printSelf()
 {
   printf("COUNTERBORE");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(")");
@@ -18583,10 +21278,10 @@ countersink::countersink(
 
 countersink::~countersink()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
   delete countersinkRadius;
 }
 
@@ -18601,25 +21296,25 @@ void countersink::printSelf()
 {
   printf("COUNTERSINK");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(",");
@@ -18629,6 +21324,11 @@ void countersink::printSelf()
     printf("$");
   printf(")");
 }
+
+real * countersink::get_countersinkRadius()
+  {return countersinkRadius;}
+void countersink::set_countersinkRadius(real * countersinkRadiusIn)
+  {countersinkRadius = countersinkRadiusIn;}
 
 /********************************************************************/
 
@@ -18655,10 +21355,10 @@ dovetailMill::dovetailMill(
 
 dovetailMill::~dovetailMill()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
   delete includedAngle;
 }
 
@@ -18673,25 +21373,25 @@ void dovetailMill::printSelf()
 {
   printf("DOVETAIL_MILL");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(",");
@@ -18701,6 +21401,11 @@ void dovetailMill::printSelf()
     printf("$");
   printf(")");
 }
+
+real * dovetailMill::get_includedAngle()
+  {return includedAngle;}
+void dovetailMill::set_includedAngle(real * includedAngleIn)
+  {includedAngle = includedAngleIn;}
 
 /********************************************************************/
 
@@ -18771,7 +21476,7 @@ ellipse::ellipse(
 
 ellipse::~ellipse()
 {
-  delete name;
+  delete get_name();
 }
 
 int ellipse::isA(int aType)
@@ -18786,15 +21491,24 @@ void ellipse::printSelf()
 {
   printf("ELLIPSE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  position->iId->printSelf();
+  get_position()->get_iId()->printSelf();
   printf(",");
   printDouble(semiAxis1);
   printf(",");
   printDouble(semiAxis2);
   printf(")");
 }
+
+double ellipse::get_semiAxis1()
+  {return semiAxis1;}
+void ellipse::set_semiAxis1(double semiAxis1In)
+  {semiAxis1 = semiAxis1In;}
+double ellipse::get_semiAxis2()
+  {return semiAxis2;}
+void ellipse::set_semiAxis2(double semiAxis2In)
+  {semiAxis2 = semiAxis2In;}
 
 /********************************************************************/
 
@@ -18847,10 +21561,10 @@ facemill::facemill(
 
 facemill::~facemill()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
 }
 
 int facemill::isA(int aType)
@@ -18864,25 +21578,25 @@ void facemill::printSelf()
 {
   printf("FACEMILL");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(")");
@@ -18909,7 +21623,7 @@ hyperbola::hyperbola(
 
 hyperbola::~hyperbola()
 {
-  delete name;
+  delete get_name();
 }
 
 int hyperbola::isA(int aType)
@@ -18924,15 +21638,24 @@ void hyperbola::printSelf()
 {
   printf("HYPERBOLA");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  position->iId->printSelf();
+  get_position()->get_iId()->printSelf();
   printf(",");
   printDouble(semiAxis);
   printf(",");
   printDouble(semiImagAxis);
   printf(")");
 }
+
+double hyperbola::get_semiAxis()
+  {return semiAxis;}
+void hyperbola::set_semiAxis(double semiAxisIn)
+  {semiAxis = semiAxisIn;}
+double hyperbola::get_semiImagAxis()
+  {return semiImagAxis;}
+void hyperbola::set_semiImagAxis(double semiImagAxisIn)
+  {semiImagAxis = semiImagAxisIn;}
 
 /********************************************************************/
 
@@ -18983,13 +21706,13 @@ multistepDrilling::multistepDrilling(
 
 multistepDrilling::~multistepDrilling()
 {
-  delete itsId;
-  delete retractPlane;
-  delete overcutLength;
-  delete cuttingDepth;
-  delete previousDiameter;
-  delete dwellTimeBottom;
-  delete feedOnRetract;
+  delete get_itsId();
+  delete get_retractPlane();
+  delete get_overcutLength();
+  delete get_cuttingDepth();
+  delete get_previousDiameter();
+  delete get_dwellTimeBottom();
+  delete get_feedOnRetract();
   delete dwellTimeStep;
 }
 
@@ -19006,61 +21729,61 @@ void multistepDrilling::printSelf()
 {
   printf("MULTISTEP_DRILLING");
   printf("(");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  if (retractPlane)
-    retractPlane->printSelf();
+  if (get_retractPlane())
+    get_retractPlane()->printSelf();
   else
     printf("$");
   printf(",");
-  if (startPoint)
-    startPoint->iId->printSelf();
+  if (get_startPoint())
+    get_startPoint()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTool()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   printf(",");
-  if (overcutLength)
-    overcutLength->printSelf();
+  if (get_overcutLength())
+    get_overcutLength()->printSelf();
   else
     printf("$");
   printf(",");
-  if (cuttingDepth)
-    cuttingDepth->printSelf();
+  if (get_cuttingDepth())
+    get_cuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (previousDiameter)
-    previousDiameter->printSelf();
+  if (get_previousDiameter())
+    get_previousDiameter()->printSelf();
   else
     printf("$");
   printf(",");
-  if (dwellTimeBottom)
-    dwellTimeBottom->printSelf();
+  if (get_dwellTimeBottom())
+    get_dwellTimeBottom()->printSelf();
   else
     printf("$");
   printf(",");
-  if (feedOnRetract)
-    feedOnRetract->printSelf();
+  if (get_feedOnRetract())
+    get_feedOnRetract()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachiningStrategy)
-    itsMachiningStrategy->iId->printSelf();
+  if (get_itsMachiningStrategy())
+    get_itsMachiningStrategy()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
@@ -19076,6 +21799,23 @@ void multistepDrilling::printSelf()
     printf("$");
   printf(")");
 }
+
+double multistepDrilling::get_retractDistance()
+  {return retractDistance;}
+void multistepDrilling::set_retractDistance(double retractDistanceIn)
+  {retractDistance = retractDistanceIn;}
+double multistepDrilling::get_firstDepth()
+  {return firstDepth;}
+void multistepDrilling::set_firstDepth(double firstDepthIn)
+  {firstDepth = firstDepthIn;}
+double multistepDrilling::get_depthOfStep()
+  {return depthOfStep;}
+void multistepDrilling::set_depthOfStep(double depthOfStepIn)
+  {depthOfStep = depthOfStepIn;}
+real * multistepDrilling::get_dwellTimeStep()
+  {return dwellTimeStep;}
+void multistepDrilling::set_dwellTimeStep(real * dwellTimeStepIn)
+  {dwellTimeStep = dwellTimeStepIn;}
 
 /********************************************************************/
 
@@ -19096,7 +21836,7 @@ parabola::parabola(
 
 parabola::~parabola()
 {
-  delete name;
+  delete get_name();
 }
 
 int parabola::isA(int aType)
@@ -19111,13 +21851,18 @@ void parabola::printSelf()
 {
   printf("PARABOLA");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  position->iId->printSelf();
+  get_position()->get_iId()->printSelf();
   printf(",");
   printDouble(focalDist);
   printf(")");
 }
+
+double parabola::get_focalDist()
+  {return focalDist;}
+void parabola::set_focalDist(double focalDistIn)
+  {focalDist = focalDistIn;}
 
 /********************************************************************/
 
@@ -19137,7 +21882,7 @@ pcurve::pcurve(
 
 pcurve::~pcurve()
 {
-  delete name;
+  delete get_name();
 }
 
 int pcurve::isA(int aType)
@@ -19152,11 +21897,11 @@ void pcurve::printSelf()
 {
   printf("PCURVE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  (dynamic_cast<instance *>(basisSurface))->iId->printSelf();
+  (dynamic_cast<instance *>(get_basisSurface()))->get_iId()->printSelf();
   printf(",");
-  referenceToCurve->iId->printSelf();
+  get_referenceToCurve()->get_iId()->printSelf();
   printf(")");
 }
 
@@ -19200,11 +21945,11 @@ planeFinishMilling::planeFinishMilling(
 
 planeFinishMilling::~planeFinishMilling()
 {
-  delete itsId;
-  delete retractPlane;
-  delete overcutLength;
-  delete axialCuttingDepth;
-  delete allowanceBottom;
+  delete get_itsId();
+  delete get_retractPlane();
+  delete get_overcutLength();
+  delete get_axialCuttingDepth();
+  delete get_allowanceBottom();
 }
 
 int planeFinishMilling::isA(int aType)
@@ -19221,61 +21966,61 @@ void planeFinishMilling::printSelf()
 {
   printf("PLANE_FINISH_MILLING");
   printf("(");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  if (retractPlane)
-    retractPlane->printSelf();
+  if (get_retractPlane())
+    get_retractPlane()->printSelf();
   else
     printf("$");
   printf(",");
-  if (startPoint)
-    startPoint->iId->printSelf();
+  if (get_startPoint())
+    get_startPoint()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTool()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   printf(",");
-  if (overcutLength)
-    overcutLength->printSelf();
+  if (get_overcutLength())
+    get_overcutLength()->printSelf();
   else
     printf("$");
   printf(",");
-  if (approach)
-    (dynamic_cast<instance *>(approach))->iId->printSelf();
+  if (get_approach())
+    (dynamic_cast<instance *>(get_approach()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (retract)
-    (dynamic_cast<instance *>(retract))->iId->printSelf();
+  if (get_retract())
+    (dynamic_cast<instance *>(get_retract()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachiningStrategy)
-    (dynamic_cast<instance *>(itsMachiningStrategy))->iId->printSelf();
+  if (get_itsMachiningStrategy())
+    (dynamic_cast<instance *>(get_itsMachiningStrategy()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (axialCuttingDepth)
-    axialCuttingDepth->printSelf();
+  if (get_axialCuttingDepth())
+    get_axialCuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (allowanceBottom)
-    allowanceBottom->printSelf();
+  if (get_allowanceBottom())
+    get_allowanceBottom()->printSelf();
   else
     printf("$");
   printf(")");
@@ -19298,7 +22043,7 @@ polyline::polyline(
 
 polyline::~polyline()
 {
-  delete name;
+  delete get_name();
   delete points;
 }
 
@@ -19314,11 +22059,16 @@ void polyline::printSelf()
 {
   printf("POLYLINE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
   points->printSelf();
   printf(")");
 }
+
+parenCartesianPointListFull * polyline::get_points()
+  {return points;}
+void polyline::set_points(parenCartesianPointListFull * pointsIn)
+  {points = pointsIn;}
 
 /********************************************************************/
 
@@ -19344,11 +22094,11 @@ quasiUniformCurve::quasiUniformCurve(
 
 quasiUniformCurve::~quasiUniformCurve()
 {
-  delete name;
-  delete controlPointsList;
-  delete curveForm;
-  delete closedCurve;
-  delete selfIntersect;
+  delete get_name();
+  delete get_controlPointsList();
+  delete get_curveForm();
+  delete get_closedCurve();
+  delete get_selfIntersect();
 }
 
 int quasiUniformCurve::isA(int aType)
@@ -19364,17 +22114,17 @@ void quasiUniformCurve::printSelf()
 {
   printf("QUASI_UNIFORM_CURVE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  printf("%d", degree);
+  printf("%d", get_degree());
   printf(",");
-  controlPointsList->printSelf();
+  get_controlPointsList()->printSelf();
   printf(",");
-  curveForm->printSelf();
+  get_curveForm()->printSelf();
   printf(",");
-  closedCurve->printSelf();
+  get_closedCurve()->printSelf();
   printf(",");
-  selfIntersect->printSelf();
+  get_selfIntersect()->printSelf();
   printf(")");
 }
 
@@ -19405,11 +22155,11 @@ rationalBSplineCurve::rationalBSplineCurve(
 
 rationalBSplineCurve::~rationalBSplineCurve()
 {
-  delete name;
-  delete controlPointsList;
-  delete curveForm;
-  delete closedCurve;
-  delete selfIntersect;
+  delete get_name();
+  delete get_controlPointsList();
+  delete get_curveForm();
+  delete get_closedCurve();
+  delete get_selfIntersect();
   delete weightsData;
 }
 
@@ -19426,21 +22176,26 @@ void rationalBSplineCurve::printSelf()
 {
   printf("RATIONAL_B_SPLINE_CURVE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  printf("%d", degree);
+  printf("%d", get_degree());
   printf(",");
-  controlPointsList->printSelf();
+  get_controlPointsList()->printSelf();
   printf(",");
-  curveForm->printSelf();
+  get_curveForm()->printSelf();
   printf(",");
-  closedCurve->printSelf();
+  get_closedCurve()->printSelf();
   printf(",");
-  selfIntersect->printSelf();
+  get_selfIntersect()->printSelf();
   printf(",");
   weightsData->printSelf();
   printf(")");
 }
+
+parenRealListFull * rationalBSplineCurve::get_weightsData()
+  {return weightsData;}
+void rationalBSplineCurve::set_weightsData(parenRealListFull * weightsDataIn)
+  {weightsData = weightsDataIn;}
 
 /********************************************************************/
 
@@ -19488,15 +22243,15 @@ reaming::reaming(
 
 reaming::~reaming()
 {
-  delete itsId;
-  delete retractPlane;
-  delete overcutLength;
-  delete cuttingDepth;
-  delete previousDiameter;
-  delete dwellTimeBottom;
-  delete feedOnRetract;
-  delete spindleStopAtBottom;
-  delete depthOfTestcut;
+  delete get_itsId();
+  delete get_retractPlane();
+  delete get_overcutLength();
+  delete get_cuttingDepth();
+  delete get_previousDiameter();
+  delete get_dwellTimeBottom();
+  delete get_feedOnRetract();
+  delete get_spindleStopAtBottom();
+  delete get_depthOfTestcut();
 }
 
 int reaming::isA(int aType)
@@ -19512,73 +22267,73 @@ void reaming::printSelf()
 {
   printf("REAMING");
   printf("(");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  if (retractPlane)
-    retractPlane->printSelf();
+  if (get_retractPlane())
+    get_retractPlane()->printSelf();
   else
     printf("$");
   printf(",");
-  if (startPoint)
-    startPoint->iId->printSelf();
+  if (get_startPoint())
+    get_startPoint()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTool()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   printf(",");
-  if (overcutLength)
-    overcutLength->printSelf();
+  if (get_overcutLength())
+    get_overcutLength()->printSelf();
   else
     printf("$");
   printf(",");
-  if (cuttingDepth)
-    cuttingDepth->printSelf();
+  if (get_cuttingDepth())
+    get_cuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (previousDiameter)
-    previousDiameter->printSelf();
+  if (get_previousDiameter())
+    get_previousDiameter()->printSelf();
   else
     printf("$");
   printf(",");
-  if (dwellTimeBottom)
-    dwellTimeBottom->printSelf();
+  if (get_dwellTimeBottom())
+    get_dwellTimeBottom()->printSelf();
   else
     printf("$");
   printf(",");
-  if (feedOnRetract)
-    feedOnRetract->printSelf();
+  if (get_feedOnRetract())
+    get_feedOnRetract()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachiningStrategy)
-    itsMachiningStrategy->iId->printSelf();
+  if (get_itsMachiningStrategy())
+    get_itsMachiningStrategy()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  spindleStopAtBottom->printSelf();
+  get_spindleStopAtBottom()->printSelf();
   printf(",");
-  if (depthOfTestcut)
-    depthOfTestcut->printSelf();
+  if (get_depthOfTestcut())
+    get_depthOfTestcut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (waitingPosition)
-    waitingPosition->iId->printSelf();
+  if (get_waitingPosition())
+    get_waitingPosition()->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
@@ -19609,10 +22364,10 @@ taperedDrill::taperedDrill(
 
 taperedDrill::~taperedDrill()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
   delete taperAngle;
 }
 
@@ -19628,25 +22383,25 @@ void taperedDrill::printSelf()
 {
   printf("TAPERED_DRILL");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(",");
@@ -19656,6 +22411,11 @@ void taperedDrill::printSelf()
     printf("$");
   printf(")");
 }
+
+real * taperedDrill::get_taperAngle()
+  {return taperAngle;}
+void taperedDrill::set_taperAngle(real * taperAngleIn)
+  {taperAngle = taperAngleIn;}
 
 /********************************************************************/
 
@@ -19682,10 +22442,10 @@ taperedEndmill::taperedEndmill(
 
 taperedEndmill::~taperedEndmill()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
   delete taperAngle;
 }
 
@@ -19701,25 +22461,25 @@ void taperedEndmill::printSelf()
 {
   printf("TAPERED_ENDMILL");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(",");
@@ -19729,6 +22489,11 @@ void taperedEndmill::printSelf()
     printf("$");
   printf(")");
 }
+
+real * taperedEndmill::get_taperAngle()
+  {return taperAngle;}
+void taperedEndmill::set_taperAngle(real * taperAngleIn)
+  {taperAngle = taperAngleIn;}
 
 /********************************************************************/
 
@@ -19758,7 +22523,7 @@ toolLengthProbing::toolLengthProbing(
 
 toolLengthProbing::~toolLengthProbing()
 {
-  delete itsId;
+  delete get_itsId();
 }
 
 int toolLengthProbing::isA(int aType)
@@ -19774,27 +22539,27 @@ void toolLengthProbing::printSelf()
 {
   printf("TOOL_LENGTH_PROBING");
   printf("(");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  (dynamic_cast<instance *>(itsSecplane))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsSecplane()))->get_iId()->printSelf();
   printf(",");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  measuredOffset->iId->printSelf();
+  get_measuredOffset()->get_iId()->printSelf();
   printf(",");
-  offset->iId->printSelf();
+  get_offset()->get_iId()->printSelf();
   printf(",");
-  printDouble(maxWear);
+  printDouble(get_maxWear());
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTool()))->get_iId()->printSelf();
   printf(")");
 }
 
@@ -19823,7 +22588,7 @@ trimmedCurve::trimmedCurve(
 
 trimmedCurve::~trimmedCurve()
 {
-  delete name;
+  delete get_name();
   delete trim1;
   delete trim2;
   delete senseAgreement;
@@ -19842,9 +22607,9 @@ void trimmedCurve::printSelf()
 {
   printf("TRIMMED_CURVE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  (dynamic_cast<instance *>(basisCurve))->iId->printSelf();
+  (dynamic_cast<instance *>(basisCurve))->get_iId()->printSelf();
   printf(",");
   trim1->printSelf();
   printf(",");
@@ -19855,6 +22620,27 @@ void trimmedCurve::printSelf()
   masterRepresentation->printSelf();
   printf(")");
 }
+
+curve * trimmedCurve::get_basisCurve()
+  {return basisCurve;}
+void trimmedCurve::set_basisCurve(curve * basisCurveIn)
+  {basisCurve = basisCurveIn;}
+parenTrimmingSelectListFull * trimmedCurve::get_trim1()
+  {return trim1;}
+void trimmedCurve::set_trim1(parenTrimmingSelectListFull * trim1In)
+  {trim1 = trim1In;}
+parenTrimmingSelectListFull * trimmedCurve::get_trim2()
+  {return trim2;}
+void trimmedCurve::set_trim2(parenTrimmingSelectListFull * trim2In)
+  {trim2 = trim2In;}
+boolean * trimmedCurve::get_senseAgreement()
+  {return senseAgreement;}
+void trimmedCurve::set_senseAgreement(boolean * senseAgreementIn)
+  {senseAgreement = senseAgreementIn;}
+trimmingPreference * trimmedCurve::get_masterRepresentation()
+  {return masterRepresentation;}
+void trimmedCurve::set_masterRepresentation(trimmingPreference * masterRepresentationIn)
+  {masterRepresentation = masterRepresentationIn;}
 
 /********************************************************************/
 
@@ -19880,11 +22666,11 @@ uniformCurve::uniformCurve(
 
 uniformCurve::~uniformCurve()
 {
-  delete name;
-  delete controlPointsList;
-  delete curveForm;
-  delete closedCurve;
-  delete selfIntersect;
+  delete get_name();
+  delete get_controlPointsList();
+  delete get_curveForm();
+  delete get_closedCurve();
+  delete get_selfIntersect();
 }
 
 int uniformCurve::isA(int aType)
@@ -19900,17 +22686,17 @@ void uniformCurve::printSelf()
 {
   printf("UNIFORM_CURVE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  printf("%d", degree);
+  printf("%d", get_degree());
   printf(",");
-  controlPointsList->printSelf();
+  get_controlPointsList()->printSelf();
   printf(",");
-  curveForm->printSelf();
+  get_curveForm()->printSelf();
   printf(",");
-  closedCurve->printSelf();
+  get_closedCurve()->printSelf();
   printf(",");
-  selfIntersect->printSelf();
+  get_selfIntersect()->printSelf();
   printf(")");
 }
 
@@ -19936,10 +22722,10 @@ ballEndmill::ballEndmill(
 
 ballEndmill::~ballEndmill()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
 }
 
 int ballEndmill::isA(int aType)
@@ -19954,25 +22740,25 @@ void ballEndmill::printSelf()
 {
   printf("BALL_ENDMILL");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(")");
@@ -20002,11 +22788,11 @@ bezierCurve::bezierCurve(
 
 bezierCurve::~bezierCurve()
 {
-  delete name;
-  delete controlPointsList;
-  delete curveForm;
-  delete closedCurve;
-  delete selfIntersect;
+  delete get_name();
+  delete get_controlPointsList();
+  delete get_curveForm();
+  delete get_closedCurve();
+  delete get_selfIntersect();
 }
 
 int bezierCurve::isA(int aType)
@@ -20022,17 +22808,17 @@ void bezierCurve::printSelf()
 {
   printf("BEZIER_CURVE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  printf("%d", degree);
+  printf("%d", get_degree());
   printf(",");
-  controlPointsList->printSelf();
+  get_controlPointsList()->printSelf();
   printf(",");
-  curveForm->printSelf();
+  get_curveForm()->printSelf();
   printf(",");
-  closedCurve->printSelf();
+  get_closedCurve()->printSelf();
   printf(",");
-  selfIntersect->printSelf();
+  get_selfIntersect()->printSelf();
   printf(")");
 }
 
@@ -20082,15 +22868,15 @@ boring::boring(
 
 boring::~boring()
 {
-  delete itsId;
-  delete retractPlane;
-  delete overcutLength;
-  delete cuttingDepth;
-  delete previousDiameter;
-  delete dwellTimeBottom;
-  delete feedOnRetract;
-  delete spindleStopAtBottom;
-  delete depthOfTestcut;
+  delete get_itsId();
+  delete get_retractPlane();
+  delete get_overcutLength();
+  delete get_cuttingDepth();
+  delete get_previousDiameter();
+  delete get_dwellTimeBottom();
+  delete get_feedOnRetract();
+  delete get_spindleStopAtBottom();
+  delete get_depthOfTestcut();
 }
 
 int boring::isA(int aType)
@@ -20106,73 +22892,73 @@ void boring::printSelf()
 {
   printf("BORING");
   printf("(");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  if (retractPlane)
-    retractPlane->printSelf();
+  if (get_retractPlane())
+    get_retractPlane()->printSelf();
   else
     printf("$");
   printf(",");
-  if (startPoint)
-    startPoint->iId->printSelf();
+  if (get_startPoint())
+    get_startPoint()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTool()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   printf(",");
-  if (overcutLength)
-    overcutLength->printSelf();
+  if (get_overcutLength())
+    get_overcutLength()->printSelf();
   else
     printf("$");
   printf(",");
-  if (cuttingDepth)
-    cuttingDepth->printSelf();
+  if (get_cuttingDepth())
+    get_cuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (previousDiameter)
-    previousDiameter->printSelf();
+  if (get_previousDiameter())
+    get_previousDiameter()->printSelf();
   else
     printf("$");
   printf(",");
-  if (dwellTimeBottom)
-    dwellTimeBottom->printSelf();
+  if (get_dwellTimeBottom())
+    get_dwellTimeBottom()->printSelf();
   else
     printf("$");
   printf(",");
-  if (feedOnRetract)
-    feedOnRetract->printSelf();
+  if (get_feedOnRetract())
+    get_feedOnRetract()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachiningStrategy)
-    itsMachiningStrategy->iId->printSelf();
+  if (get_itsMachiningStrategy())
+    get_itsMachiningStrategy()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  spindleStopAtBottom->printSelf();
+  get_spindleStopAtBottom()->printSelf();
   printf(",");
-  if (depthOfTestcut)
-    depthOfTestcut->printSelf();
+  if (get_depthOfTestcut())
+    get_depthOfTestcut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (waitingPosition)
-    waitingPosition->iId->printSelf();
+  if (get_waitingPosition())
+    get_waitingPosition()->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
@@ -20200,10 +22986,10 @@ bullnoseEndmill::bullnoseEndmill(
 
 bullnoseEndmill::~bullnoseEndmill()
 {
-  delete numberOfTeeth;
-  delete handOfCut;
-  delete coolantThroughTool;
-  delete pilotLength;
+  delete get_numberOfTeeth();
+  delete get_handOfCut();
+  delete get_coolantThroughTool();
+  delete get_pilotLength();
 }
 
 int bullnoseEndmill::isA(int aType)
@@ -20218,25 +23004,25 @@ void bullnoseEndmill::printSelf()
 {
   printf("BULLNOSE_ENDMILL");
   printf("(");
-  dimension->iId->printSelf();
+  get_dimension()->get_iId()->printSelf();
   printf(",");
-  if (numberOfTeeth)
-    numberOfTeeth->printSelf();
+  if (get_numberOfTeeth())
+    get_numberOfTeeth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (handOfCut)
-    handOfCut->printSelf();
+  if (get_handOfCut())
+    get_handOfCut()->printSelf();
   else
     printf("$");
   printf(",");
-  if (coolantThroughTool)
-    coolantThroughTool->printSelf();
+  if (get_coolantThroughTool())
+    get_coolantThroughTool()->printSelf();
   else
     printf("$");
   printf(",");
-  if (pilotLength)
-    pilotLength->printSelf();
+  if (get_pilotLength())
+    get_pilotLength()->printSelf();
   else
     printf("$");
   printf(")");
@@ -20282,13 +23068,13 @@ centerDrilling::centerDrilling(
 
 centerDrilling::~centerDrilling()
 {
-  delete itsId;
-  delete retractPlane;
-  delete overcutLength;
-  delete cuttingDepth;
-  delete previousDiameter;
-  delete dwellTimeBottom;
-  delete feedOnRetract;
+  delete get_itsId();
+  delete get_retractPlane();
+  delete get_overcutLength();
+  delete get_cuttingDepth();
+  delete get_previousDiameter();
+  delete get_dwellTimeBottom();
+  delete get_feedOnRetract();
 }
 
 int centerDrilling::isA(int aType)
@@ -20304,61 +23090,61 @@ void centerDrilling::printSelf()
 {
   printf("CENTER_DRILLING");
   printf("(");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  if (retractPlane)
-    retractPlane->printSelf();
+  if (get_retractPlane())
+    get_retractPlane()->printSelf();
   else
     printf("$");
   printf(",");
-  if (startPoint)
-    startPoint->iId->printSelf();
+  if (get_startPoint())
+    get_startPoint()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTool()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   printf(",");
-  if (overcutLength)
-    overcutLength->printSelf();
+  if (get_overcutLength())
+    get_overcutLength()->printSelf();
   else
     printf("$");
   printf(",");
-  if (cuttingDepth)
-    cuttingDepth->printSelf();
+  if (get_cuttingDepth())
+    get_cuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (previousDiameter)
-    previousDiameter->printSelf();
+  if (get_previousDiameter())
+    get_previousDiameter()->printSelf();
   else
     printf("$");
   printf(",");
-  if (dwellTimeBottom)
-    dwellTimeBottom->printSelf();
+  if (get_dwellTimeBottom())
+    get_dwellTimeBottom()->printSelf();
   else
     printf("$");
   printf(",");
-  if (feedOnRetract)
-    feedOnRetract->printSelf();
+  if (get_feedOnRetract())
+    get_feedOnRetract()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachiningStrategy)
-    itsMachiningStrategy->iId->printSelf();
+  if (get_itsMachiningStrategy())
+    get_itsMachiningStrategy()->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
@@ -20383,7 +23169,7 @@ circle::circle(
 
 circle::~circle()
 {
-  delete name;
+  delete get_name();
 }
 
 int circle::isA(int aType)
@@ -20398,13 +23184,18 @@ void circle::printSelf()
 {
   printf("CIRCLE");
   printf("(");
-  printString(name);
+  printString(get_name());
   printf(",");
-  position->iId->printSelf();
+  get_position()->get_iId()->printSelf();
   printf(",");
   printDouble(radius);
   printf(")");
 }
+
+double circle::get_radius()
+  {return radius;}
+void circle::set_radius(double radiusIn)
+  {radius = radiusIn;}
 
 /********************************************************************/
 
@@ -20446,13 +23237,13 @@ counterSinking::counterSinking(
 
 counterSinking::~counterSinking()
 {
-  delete itsId;
-  delete retractPlane;
-  delete overcutLength;
-  delete cuttingDepth;
-  delete previousDiameter;
-  delete dwellTimeBottom;
-  delete feedOnRetract;
+  delete get_itsId();
+  delete get_retractPlane();
+  delete get_overcutLength();
+  delete get_cuttingDepth();
+  delete get_previousDiameter();
+  delete get_dwellTimeBottom();
+  delete get_feedOnRetract();
 }
 
 int counterSinking::isA(int aType)
@@ -20468,61 +23259,61 @@ void counterSinking::printSelf()
 {
   printf("COUNTER_SINKING");
   printf("(");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  if (retractPlane)
-    retractPlane->printSelf();
+  if (get_retractPlane())
+    get_retractPlane()->printSelf();
   else
     printf("$");
   printf(",");
-  if (startPoint)
-    startPoint->iId->printSelf();
+  if (get_startPoint())
+    get_startPoint()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTool()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   printf(",");
-  if (overcutLength)
-    overcutLength->printSelf();
+  if (get_overcutLength())
+    get_overcutLength()->printSelf();
   else
     printf("$");
   printf(",");
-  if (cuttingDepth)
-    cuttingDepth->printSelf();
+  if (get_cuttingDepth())
+    get_cuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (previousDiameter)
-    previousDiameter->printSelf();
+  if (get_previousDiameter())
+    get_previousDiameter()->printSelf();
   else
     printf("$");
   printf(",");
-  if (dwellTimeBottom)
-    dwellTimeBottom->printSelf();
+  if (get_dwellTimeBottom())
+    get_dwellTimeBottom()->printSelf();
   else
     printf("$");
   printf(",");
-  if (feedOnRetract)
-    feedOnRetract->printSelf();
+  if (get_feedOnRetract())
+    get_feedOnRetract()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachiningStrategy)
-    itsMachiningStrategy->iId->printSelf();
+  if (get_itsMachiningStrategy())
+    get_itsMachiningStrategy()->get_iId()->printSelf();
   else
     printf("$");
   printf(")");
@@ -20568,13 +23359,13 @@ drilling::drilling(
 
 drilling::~drilling()
 {
-  delete itsId;
-  delete retractPlane;
-  delete overcutLength;
-  delete cuttingDepth;
-  delete previousDiameter;
-  delete dwellTimeBottom;
-  delete feedOnRetract;
+  delete get_itsId();
+  delete get_retractPlane();
+  delete get_overcutLength();
+  delete get_cuttingDepth();
+  delete get_previousDiameter();
+  delete get_dwellTimeBottom();
+  delete get_feedOnRetract();
 }
 
 int drilling::isA(int aType)
@@ -20590,61 +23381,61 @@ void drilling::printSelf()
 {
   printf("DRILLING");
   printf("(");
-  if (itsToolpath)
-    itsToolpath->iId->printSelf();
+  if (get_itsToolpath())
+    get_itsToolpath()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsToolDirection)
-    (dynamic_cast<instance *>(itsToolDirection))->iId->printSelf();
+  if (get_itsToolDirection())
+    (dynamic_cast<instance *>(get_itsToolDirection()))->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  printString(itsId);
+  printString(get_itsId());
   printf(",");
-  if (retractPlane)
-    retractPlane->printSelf();
+  if (get_retractPlane())
+    get_retractPlane()->printSelf();
   else
     printf("$");
   printf(",");
-  if (startPoint)
-    startPoint->iId->printSelf();
+  if (get_startPoint())
+    get_startPoint()->get_iId()->printSelf();
   else
     printf("$");
   printf(",");
-  (dynamic_cast<instance *>(itsTool))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTool()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsTechnology))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsTechnology()))->get_iId()->printSelf();
   printf(",");
-  (dynamic_cast<instance *>(itsMachineFunctions))->iId->printSelf();
+  (dynamic_cast<instance *>(get_itsMachineFunctions()))->get_iId()->printSelf();
   printf(",");
-  if (overcutLength)
-    overcutLength->printSelf();
+  if (get_overcutLength())
+    get_overcutLength()->printSelf();
   else
     printf("$");
   printf(",");
-  if (cuttingDepth)
-    cuttingDepth->printSelf();
+  if (get_cuttingDepth())
+    get_cuttingDepth()->printSelf();
   else
     printf("$");
   printf(",");
-  if (previousDiameter)
-    previousDiameter->printSelf();
+  if (get_previousDiameter())
+    get_previousDiameter()->printSelf();
   else
     printf("$");
   printf(",");
-  if (dwellTimeBottom)
-    dwellTimeBottom->printSelf();
+  if (get_dwellTimeBottom())
+    get_dwellTimeBottom()->printSelf();
   else
     printf("$");
   printf(",");
-  if (feedOnRetract)
-    feedOnRetract->printSelf();
+  if (get_feedOnRetract())
+    get_feedOnRetract()->printSelf();
   else
     printf("$");
   printf(",");
-  if (itsMachiningStrategy)
-    itsMachiningStrategy->iId->printSelf();
+  if (get_itsMachiningStrategy())
+    get_itsMachiningStrategy()->get_iId()->printSelf();
   else
     printf("$");
   printf(")");

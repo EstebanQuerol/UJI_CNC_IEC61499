@@ -10,6 +10,9 @@ Subphase::Subphase(const Subphase &pa_subphase) : m_nMTypeID(pa_subphase.m_nMTyp
 	m_poWorkplan = pa_subphase.m_poWorkplan;
 }
 
+Subphase::Subphase(){
+
+}
 Subphase::~Subphase()
 {
 }

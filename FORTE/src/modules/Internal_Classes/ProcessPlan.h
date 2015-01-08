@@ -9,7 +9,7 @@
 #include <vector>
 #include "forte_uint.h"
 #include "Subphase.h"
-#include "iso14649classes.hh"
+#include "iso14649classes.h"
 class ProcessPlan
 {
 private :

@@ -17,11 +17,14 @@
       <Event Comment="Completed operation request" Name="CompletedOP" Type="Event">
         <With Var="ENDOPID"/>
       </Event>
+      <Event Comment="Current setup is done" Name="CompletedSetup" Type="Event">
+        <With Var="ENDSetupID"/>
+      </Event>
     </EventInputs>
     <EventOutputs>
       <Event Comment="Renew Machine buffer" Name="RENEW" Type="Event"/>
       <Event Comment="Send request to execute next operation" Name="NEXT" Type="Event">
-        <With Var="NextOP"/>
+        <With Var="NextCode"/>
       </Event>
       <Event Comment="Assignement reception confirmation" Name="CNF" Type="Event">
         <With Var="PartInfoOut"/>
@@ -43,9 +46,10 @@
       <VarDeclaration Comment="Machine service state" Name="ServiceState" Type="USINT"/>
       <VarDeclaration ArraySize="4" Comment="Part identifier, family and type" Name="PartInfoIn" Type="UINT"/>
       <VarDeclaration Comment="Operation termination code" InitialValue="0" Name="ENDOPID" Type="USINT"/>
+      <VarDeclaration Name="ENDSetupID" Type="USINT"/>
     </InputVars>
     <OutputVars>
-      <VarDeclaration Comment="Next operation position in the buffer" Name="NextOP" Type="USINT"/>
+      <VarDeclaration Comment="Variable to indicate whixh OP must be executed next" Name="NextCode" Type="USINT"/>
       <VarDeclaration ArraySize="3" Comment="Part identifier, family and type" Name="PartInfoOut" Type="UINT"/>
       <VarDeclaration Comment="Setup termination code" Name="ENDID" Type="USINT"/>
       <VarDeclaration Comment="Machine state" Name="MachineState" Type="BOOL"/>
@@ -59,9 +63,6 @@
       <VarDeclaration Comment="Family of the current part" InitialValue="0" Name="CurrentFamily" Type="UINT"/>
       <VarDeclaration Comment="Type of the current part" InitialValue="0" Name="CurrentType" Type="UINT"/>
       <VarDeclaration Comment="flag indicating if a trasmision error courred" InitialValue="FALSE" Name="LostCNF" Type="BOOL"/>
-      <VarDeclaration Comment="Flag to indicate if the setup is completed(TRUE) or more OP remaining(FALSE)" InitialValue="TRUE" Name="isCompleted" Type="BOOL"/>
-      <VarDeclaration Comment="Current operation position within the buffer" InitialValue="0" Name="CurrentOP" Type="USINT"/>
-      <VarDeclaration Comment="Number of operations to be executed in the current setup" InitialValue="0" Name="MaxOP" Type="USINT"/>
       <VarDeclaration Comment="Flag to indicate if the machine recived an error while waiting RSP" InitialValue="FALSE" Name="inError" Type="BOOL"/>
     </InternalVars>
     <ECC>
@@ -78,14 +79,11 @@
         <ECAction Algorithm="CNF" Output="CNF"/>
       </ECState>
       <ECState Name="Executing" x="2375.0" y="2660.0"/>
-      <ECState Name="NextOP" x="3040.0" y="2090.0">
-        <ECAction Algorithm="NEXT"/>
-      </ECState>
       <ECState Name="Completed" x="3705.0" y="2375.0">
         <ECAction Algorithm="IND" Output="IND"/>
         <ECAction Algorithm="DT" Output="start"/>
       </ECState>
-      <ECState Name="SendNext" x="3755.0" y="1725.0">
+      <ECState Name="SendNext" x="3135.0" y="1900.0">
         <ECAction Algorithm="SENDOP" Output="NEXT"/>
       </ECState>
       <ECState Name="NewREQ" x="2375.0" y="3040.0">
@@ -110,15 +108,11 @@
       <ECTransition Comment="" Condition="1" Destination="NotReady" Source="toError" x="1560.0" y="305.0"/>
       <ECTransition Comment="" Condition="UPDT&amp;ServiceState = 0" Destination="toError" Source="Ready" x="870.0" y="805.0"/>
       <ECTransition Comment="" Condition="REQ" Destination="REQ" Source="Ready" x="1090.0" y="1945.0"/>
-      <ECTransition Comment="" Condition="isCompleted = TRUE" Destination="Completed" Source="NextOP" x="3280.0" y="2455.0"/>
-      <ECTransition Comment="" Condition="isCompleted = FALSE" Destination="SendNext" Source="NextOP" x="3195.0" y="1870.0"/>
-      <ECTransition Comment="" Condition="CompletedOP" Destination="NextOP" Source="Executing" x="2850.0" y="2380.0"/>
-      <ECTransition Comment="" Condition="1" Destination="Executing" Source="SendNext" x="2840.0" y="1655.0"/>
+      <ECTransition Comment="" Condition="1" Destination="Executing" Source="SendNext" x="2885.0" y="2085.0"/>
       <ECTransition Comment="" Condition="REQ" Destination="NewREQ" Source="Executing" x="2505.0" y="2915.0"/>
       <ECTransition Comment="" Condition="LostCNF = TRUE" Destination="LostCNF" Source="NewREQ" x="1455.0" y="3220.0"/>
       <ECTransition Comment="" Condition="1" Destination="Executing" Source="LostCNF" x="1345.0" y="2640.0"/>
       <ECTransition Comment="" Condition="LostCNF = FALSE" Destination="Executing" Source="NewREQ" x="1895.0" y="2950.0"/>
-      <ECTransition Comment="" Condition="1" Destination="NextOP" Source="REQ" x="1855.0" y="2050.0"/>
       <ECTransition Comment="" Condition="1" Destination="WAIT" Source="Completed" x="3945.0" y="2680.0"/>
       <ECTransition Comment="" Condition="timeout" Destination="Completed" Source="WAIT" x="3705.0" y="2665.0"/>
       <ECTransition Comment="" Condition="RSP" Destination="RSP" Source="WAIT" x="3795.0" y="3155.0"/>
@@ -127,18 +121,18 @@
       <ECTransition Comment="" Condition="1" Destination="toError" Source="ErroInExecution" x="1790.0" y="810.0"/>
       <ECTransition Comment="" Condition="UPDT" Destination="WAIT" Source="WAIT" x="3265.0" y="2850.0"/>
       <ECTransition Comment="" Condition="inError = TRUE" Destination="toError" Source="RSP" x="4810.0" y="1680.0"/>
+      <ECTransition Comment="" Condition="CompletedSetup" Destination="Completed" Source="Executing" x="3145.0" y="2575.0"/>
+      <ECTransition Comment="" Condition="CompletedOP" Destination="SendNext" Source="Executing" x="3160.0" y="2250.0"/>
+      <ECTransition Comment="" Condition="1" Destination="SendNext" Source="REQ" x="2785.0" y="1875.0"/>
     </ECC>
     <Algorithm Comment="Normally executed algorithm" Name="REQ">
-      <ST Text="(*A new assignation request arrived*)&#10;(*The machine is free, confirm the assignation and modify the state*)&#10;CurrentPart := PartInfoIn[0];&#10;CurrentFamily := PartInfoIn[1];&#10;CurrentType := PartInfoIn[2];&#10;MaxOP := PartInfoIn[3];&#10;CurrentOP := 0; //Reset operation counter index&#9;&#10;ENDOPID := 0;"/>
+      <ST Text="(*A new assignation request arrived*)&#10;(*The machine is free, confirm the assignation and modify the state*)&#10;CurrentPart := PartInfoIn[0];&#10;CurrentFamily := PartInfoIn[1];&#10;CurrentType := PartInfoIn[2];&#10;ENDOPID := 0;"/>
     </Algorithm>
     <Algorithm Comment="Update machine state" Name="UPDT">
       <ST Text="IF ServiceState = 1 THEN&#10;&#9;MachineState := TRUE;&#10;&#9;State := 2;&#10;ELSIF ServiceState = 0 THEN&#10;&#9;MachineState := FALSE;&#10;&#9;State := 1;&#10;END_IF;&#10;(*Reset inError flag every time this algo is called, It is only used in EIW*)&#10;inError := FALSE; "/>
     </Algorithm>
-    <Algorithm Comment="Algorithm executed when there are remaining operations in the setup" Name="NEXT">
-      <ST Text="(*Verify if last operation succed*)&#10;IF ENDOPID = 1 THEN&#10;&#9;(*Last operation didn't success but it can be redone*)&#10;&#9;CurrentOP := CurrentOP - 1;&#10;ELSIF ENDOPID = 2 THEN&#10;&#9;(*Last operation didn't success and it can't be redone*)&#10;&#9;isCompleted := TRUE;&#10;&#9;ENDID := 2;&#10;&#9;RETURN;&#10;END_IF;&#10;&#10;IF CurrentOP &lt;= MaxOP  THEN&#10;&#9;(*More operations to be executed*)&#10;&#9;isCompleted := FALSE;&#10;ELSE&#10;&#9;(*The setup is completed, release the part*)&#10;&#9;isCompleted := TRUE;&#10;&#9;ENDID  := 0;&#10;END_IF;"/>
-    </Algorithm>
     <Algorithm Comment="Send next operation algo" Name="SENDOP">
-      <ST Text="(*Post-incremented index*)&#10;CurrentOP := CurrentOP + 1;&#10;NextOP := CurrentOP - 1;"/>
+      <ST Text="(*Post-incremented index*)&#10;ENDOPID := NextCode;"/>
     </Algorithm>
     <Algorithm Comment="new algorithm" Name="CNF">
       <ST Text="PartInfoOut[0] := CurrentPart;&#10;PartInfoOut[1] := CurrentFamily;&#10;PartInfoOut[2] := CurrentType;"/>
@@ -150,7 +144,7 @@
       <ST Text="Delay := TIME#300ms;"/>
     </Algorithm>
     <Algorithm Comment="Completed setup indication algo" Name="IND">
-      <ST Text="PartInfoOut[0] := CurrentPart;&#10;PartInfoOut[1] := CurrentFamily;&#10;PartInfoOut[2] := CurrentType;"/>
+      <ST Text="PartInfoOut[0] := CurrentPart;&#10;PartInfoOut[1] := CurrentFamily;&#10;PartInfoOut[2] := CurrentType;&#10;ENDOPID := ENDSetupID;"/>
     </Algorithm>
     <Algorithm Comment="Error in execution algo" Name="EIE">
       <ST Text="(*An error occurred while executing a setup*)&#10;(*We assume that the error is not related with the setup and that it can be redone*)&#10;ENDID := 1;"/>

@@ -7,6 +7,7 @@
  *** Description: Composite Function Block Type
  *** Version: 
  ***     0.0: 2014-10-13/EQUEROL - UJI - 
+ ***     1.0: 2015-01-08/EQUEROL - UJI - modified setup adapter
  *************************************************************************/
 
 #ifndef _L3_PROCESSPLAN_H_
@@ -14,11 +15,11 @@
 
 #include <cfb.h>
 #include <typelib.h>
-#include <forte_uint.h>
 #include <forte_bool.h>
-#include "L3_ASetup.h"
+#include <forte_uint.h>
 #include "L3_APart.h"
 #include "L3_AAssignMachine.h"
+#include "L3_ASetup.h"
 
 class FORTE_L3_ProcessPlan: public CCompositeFB{
   DECLARE_FIRMWARE_FB(FORTE_L3_ProcessPlan)
