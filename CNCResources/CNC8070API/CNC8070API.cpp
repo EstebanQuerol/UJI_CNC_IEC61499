@@ -102,7 +102,6 @@ BOOL CCNC8070APILib::ConnectCNC(CCNC8070CommunicationHandler * a_oHandler)
 		l_hR = CreateRemoteInstance(__uuidof(CNC8070_Kernel), __uuidof(IFCDualKernel8070), l_sHostName, l_pItf);
 		if (SUCCEEDED(l_hR)) {
 			m_oKernel.Attach((IFCDualKernel8070 *)l_pItf);
-
 			l_hR = CreateRemoteInstance(__uuidof(CNC8070_Variables), __uuidof(IFCDualVar8070), l_sHostName, l_pItf);
 			if (SUCCEEDED(l_hR)) {
 				m_oVars.Attach((IFCDualVar8070 *)l_pItf);
@@ -135,6 +134,17 @@ BOOL CCNC8070APILib::ConnectCNC(CCNC8070CommunicationHandler * a_oHandler)
 				}
 				l_hR = m_oVars->OpenReport(m_hVarStatus, &l_lRetVal);
 
+				//Añadimos el servidor MagazineTable
+				l_hR = CreateRemoteInstance(__uuidof(CNC8070_MagazineTable), __uuidof(IFCDualTMagazine), l_sHostName, l_pItf);
+				if (SUCCEEDED(l_hR)){
+					m_oMagazine.Attach((IFCDualTMagazine *)l_pItf);
+					l_pUnkSink = m_oCMTableChangeSink.GetIDispatch(FALSE);
+					l_bRetVal = AfxConnectionAdvise(m_oMagazine, DIID_IMagazineReport, l_pUnkSink, FALSE, &m_dwCMTableChangeSinkCookie);
+					//Start reporting magazine changes
+					l_hR = m_oMagazine->OpenReport(&l_lRetVal);
+				}
+
+				//Añadimos el servidor PLC
 				l_hR = CreateRemoteInstance(__uuidof(CNC8070_Plc), __uuidof(IFCDualPlc), l_sHostName, l_pItf);
 				if (SUCCEEDED(l_hR)) {
 					m_oPlc.Attach((IFCDualPlc *)l_pItf);
@@ -174,10 +184,14 @@ BOOL CCNC8070APILib::DisconnectCNC()
 		l_pUnkSink = m_oVariableChangeSink.GetInterface(&iid);
 		l_bRetVal = AfxConnectionUnadvise(m_oVars, DIID_IEventReport, l_pUnkSink, FALSE, m_dwVariableChangeSinkCookie);
 
+		l_pUnkSink = m_oCMTableChangeSink.GetInterface(&iid);
+		l_bRetVal = AfxConnectionUnadvise(m_oMagazine, DIID_IMagazineReport, l_pUnkSink, FALSE, m_dwCMTableChangeSinkCookie);
+
 		l_pUnkSink = m_oCYStartSink.GetInterface(&iid);
 		l_bRetVal = AfxConnectionUnadvise(m_oPlc, DIID_ICYStartReport, l_pUnkSink, FALSE, m_dwCYStartSinkCookie);
 
 		m_oPlc.Release();
+		m_oMagazine.Release();
 		m_oVars.Release();
 		m_oKernel.Release();
 
@@ -282,4 +296,8 @@ BOOL CCNC8070APILib::ChkRV(LONG a_lRetVal)
 	} else {
 		return TRUE;
 	}
+}
+
+VOID CCNC8070APILib::OnMagazineUpdate(long pa_lITool){
+	m_oHandler->OnMagazineUpdate(pa_lITool);
 }

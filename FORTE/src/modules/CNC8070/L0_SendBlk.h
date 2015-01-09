@@ -110,6 +110,8 @@ public:
   virtual void OnInterruptedByError();
   /*!\brief Enable this event source
   */
+  virtual void OnMagazineUpdate(long pa_lITool);
+
   virtual void enableHandler(void);
   /*!\brief Disable this event source
   */

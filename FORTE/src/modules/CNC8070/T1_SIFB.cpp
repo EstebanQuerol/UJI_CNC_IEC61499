@@ -133,4 +133,7 @@ void FORTE_T1_SIFB::OnInterruptedByError()
 
 }
 
-
+void FORTE_T1_SIFB::OnMagazineUpdate(long pa_lITool){
+	long l = pa_lITool;
+	DEVLOG_INFO("Tool Test\n");
+}

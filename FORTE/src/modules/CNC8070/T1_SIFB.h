@@ -88,6 +88,7 @@ public:
   virtual void OnExecuting();
   virtual void OnInterrupted();
   virtual void OnInterruptedByError();
+  virtual void OnMagazineUpdate(long pa_lITool);
 
 };
 

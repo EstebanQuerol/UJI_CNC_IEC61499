@@ -177,6 +177,11 @@ void FORTE_L0_SendBlk::OnInterruptedByError()
 	}
 }
 
+void FORTE_L0_SendBlk::OnMagazineUpdate(long pa_lITool){
+	long l = pa_lITool;
+	DEVLOG_INFO("Tool Test\n");
+}
+
 //CExternalEventsHandler methods implementation
 void FORTE_L0_SendBlk::enableHandler(void){
 

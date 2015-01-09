@@ -115,4 +115,7 @@ void FORTE_test1::OnInterruptedByError()
 
 }
 
-
+void FORTE_test1::OnMagazineUpdate(long pa_lITool){
+	long l = pa_lITool;
+	DEVLOG_INFO("Tool Test\n");
+}
