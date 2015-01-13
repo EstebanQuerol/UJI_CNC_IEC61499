@@ -21,7 +21,6 @@ void  Tool_Table::initilizate(){
 }
 
 void Tool_Table::addTool(Tool pa_oTool){
-	//TODO: check if the already exist an PP with the same TypeID
 
 	try{
 		sm_umapToolTable.emplace(pa_oTool.getToolID(), pa_oTool);
@@ -41,4 +40,8 @@ void Tool_Table::deleteTool(Tool pa_oTool){
 
 void Tool_Table::deleteTool(std::string pa_sID){
 
+}
+
+void Tool_Table::deleteTable(){
+	sm_umapToolTable.clear();
 }

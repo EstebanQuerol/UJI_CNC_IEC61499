@@ -20,7 +20,9 @@ public:
 	virtual void OnExecuting() = 0;
 	virtual void OnInterrupted() = 0;
 	virtual void OnInterruptedByError() = 0;
-	virtual void OnMagazineUpdate(long pa_lITool) = 0;
+	virtual void OnMagazineUpdateAdd(const char * pa_sID,int pa_nPos, int pa_nState, long pa_nLocalID) = 0;
+	virtual void OnMagazineUpdateDelete(const char * pa_sID, int pa_nPos, int pa_nState, long pa_lITool) = 0;
+	virtual void OnMagazineUpdateDelete() = 0;
 };
 
 extern void CNC8070Connect(CCNC8070CommunicationHandler * a_oHandler);

@@ -37,6 +37,9 @@ public:
 	*/
 	static void deleteTool(std::string pa_sID);
 
+	/*!\ Delete the tool table
+	*/
+	static void deleteTable();
 };
 
 #endif

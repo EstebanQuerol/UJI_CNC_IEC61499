@@ -134,7 +134,7 @@ BOOL CCNC8070APILib::ConnectCNC(CCNC8070CommunicationHandler * a_oHandler)
 				}
 				l_hR = m_oVars->OpenReport(m_hVarStatus, &l_lRetVal);
 
-				//Añadimos el servidor MagazineTable
+				//Add Magazine table server
 				l_hR = CreateRemoteInstance(__uuidof(CNC8070_MagazineTable), __uuidof(IFCDualTMagazine), l_sHostName, l_pItf);
 				if (SUCCEEDED(l_hR)){
 					m_oMagazine.Attach((IFCDualTMagazine *)l_pItf);
@@ -144,7 +144,17 @@ BOOL CCNC8070APILib::ConnectCNC(CCNC8070CommunicationHandler * a_oHandler)
 					l_hR = m_oMagazine->OpenReport(&l_lRetVal);
 				}
 
-				//Añadimos el servidor PLC
+				//Add Tool table server
+				l_hR = CreateRemoteInstance(__uuidof(CNC8070_TTable), __uuidof(IFCDualTTable), l_sHostName, l_pItf);
+				if (SUCCEEDED(l_hR)){
+					m_oTTable.Attach((IFCDualTTable *)l_pItf);
+					l_pUnkSink = m_oCTTableChangeSink.GetIDispatch(FALSE);
+					l_bRetVal = AfxConnectionAdvise(m_oTTable, DIID_IToolReport, l_pUnkSink, FALSE, &m_dwCTTableChangeSinkCookie);
+					//Start reporting magazine changes
+					l_hR = m_oTTable->OpenReport(&l_lRetVal);
+				}
+
+				//Add PLC server
 				l_hR = CreateRemoteInstance(__uuidof(CNC8070_Plc), __uuidof(IFCDualPlc), l_sHostName, l_pItf);
 				if (SUCCEEDED(l_hR)) {
 					m_oPlc.Attach((IFCDualPlc *)l_pItf);
@@ -187,11 +197,15 @@ BOOL CCNC8070APILib::DisconnectCNC()
 		l_pUnkSink = m_oCMTableChangeSink.GetInterface(&iid);
 		l_bRetVal = AfxConnectionUnadvise(m_oMagazine, DIID_IMagazineReport, l_pUnkSink, FALSE, m_dwCMTableChangeSinkCookie);
 
+		l_pUnkSink = m_oCTTableChangeSink.GetInterface(&iid);
+		l_bRetVal = AfxConnectionUnadvise(m_oTTable, DIID_IToolReport, l_pUnkSink, FALSE, m_dwCTTableChangeSinkCookie);
+
 		l_pUnkSink = m_oCYStartSink.GetInterface(&iid);
 		l_bRetVal = AfxConnectionUnadvise(m_oPlc, DIID_ICYStartReport, l_pUnkSink, FALSE, m_dwCYStartSinkCookie);
 
 		m_oPlc.Release();
 		m_oMagazine.Release();
+		m_oTTable.Release();
 		m_oVars.Release();
 		m_oKernel.Release();
 
@@ -298,6 +312,9 @@ BOOL CCNC8070APILib::ChkRV(LONG a_lRetVal)
 	}
 }
 
-VOID CCNC8070APILib::OnMagazineUpdate(long pa_lITool){
-	m_oHandler->OnMagazineUpdate(pa_lITool);
+VOID CCNC8070APILib::OnMagazineUpdateAdd(const char * pa_sID, int pa_nPos, int pa_nState, long pa_nLocalID){
+	m_oHandler->OnMagazineUpdateAdd(pa_sID,pa_nPos, pa_nState, pa_nLocalID);
+}
+VOID CCNC8070APILib::OnMagazineUpdateDelete(){
+	m_oHandler->OnMagazineUpdateDelete();
 }
