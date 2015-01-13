@@ -31,7 +31,7 @@ public:
 
 private:
 	std::string m_sIdentifier; //Tool identifier
-	int m_nPosition; //Position in the CNC table
+	int m_nPosition; //Position in the CNC magazine table
 	Tool_State m_nToolState;//Current state of the tool
 	long  m_nLocalIdentifier; //Identifier of the tool in the machine
 

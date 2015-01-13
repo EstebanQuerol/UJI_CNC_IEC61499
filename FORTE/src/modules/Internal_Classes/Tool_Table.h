@@ -1,6 +1,6 @@
 /*************************************************************************
 *** Name: Tool_Table
-*** Description: Class containing all the tools used by the
+*** Description: Class containing all the tools used by a machine of the
 ***				 manufacturing system
 *** Version: 0
 *************************************************************************/
@@ -10,6 +10,7 @@
 #include <string>
 #include "Tool.h"
 #include "devlog.h"
+#include "forte_dint.h"
 
 class Tool_Table
 {
@@ -40,6 +41,13 @@ public:
 	/*!\ Delete the tool table
 	*/
 	static void deleteTable();
+	/*!\ Check if a tool is available or not
+	* return positive 32bit int with the position of the tool in the cnc magazine if available
+	* return 0 if the tool is available and currently in the cnc spindle
+	* return -1  if the tool exist but its not loaded in the cnc magazine
+	* return -2  if the tool is not available at all
+	*/
+	static TForteInt32 isAvailable(std::string pa_sToolID);
 };
 
 #endif

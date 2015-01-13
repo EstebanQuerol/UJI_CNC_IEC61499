@@ -45,3 +45,18 @@ void Tool_Table::deleteTool(std::string pa_sID){
 void Tool_Table::deleteTable(){
 	sm_umapToolTable.clear();
 }
+
+TForteInt32 Tool_Table::isAvailable(std::string pa_sToolID){
+	TForteInt32 nRValue;
+	if (!sm_bInitialized){
+		Tool_Table::initilizate();
+	}
+	try{
+		nRValue = sm_umapToolTable.at(pa_sToolID).getToolPosition();
+	}
+	catch (std::out_of_range e){
+		//the requested tool is not available
+		nRValue = -2;
+	}
+	return nRValue;
+}
