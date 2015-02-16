@@ -1301,7 +1301,7 @@
           <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.47"/>
         </inputVars>
         <inputVars name="Period" comment="MMCore execution period" isInput="true" arraySize="-1" typeName="TIME" withs="//@fbNetwork/@fBs.11/@interface/@eventInputs.0/@with.2">
-          <value value="T#1s"/>
+          <value value="T#5s"/>
           <varInitialization initialValue="T#1000ms"/>
         </inputVars>
         <inputVars name="MType" comment="Machine type vector" isInput="true" arraySize="15" typeName="USINT" withs="//@fbNetwork/@fBs.11/@interface/@eventInputs.0/@with.1" array="true">
@@ -1732,6 +1732,7 @@
         </inputVars>
         <inputVars name="ENDID" comment="Setup execution returned code" isInput="true" arraySize="-1" typeName="USINT" withs="//@fbNetwork/@fBs.28/@interface/@eventInputs.1/@with.1">
           <value/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.66"/>
         </inputVars>
         <inputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_ASetup" isInput="true" typeName="L3_ASetup">
           <value/>

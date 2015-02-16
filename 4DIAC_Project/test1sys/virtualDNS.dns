@@ -4,8 +4,16 @@
     <virtualDNSEntries name="localhost" value="127.0.0.1"/>
     <virtualDNSEntries name="IP_L3" value="127.0.0.1"/>
     <virtualDNSEntries name="IP_GUI" value="127.0.0.1"/>
-    <virtualDNSEntries name="MUL_IP_MACHINES" value="235.0.0.1"/>
+    <virtualDNSEntries name="MUL_IP_MACHINES" value="127.0.0.1"/>
     <virtualDNSEntries name="IP_CNC8070_A" value="127.0.01"/>
     <virtualDNSEntries name="localhost" value="127.0.0.1"/>
+  </availableDNSCollections>
+  <availableDNSCollections name="Multi_PC">
+    <virtualDNSEntries name="localhost" value="Value not set"/>
+    <virtualDNSEntries name="IP_L3" value="Value not set"/>
+    <virtualDNSEntries name="IP_GUI" value="Value not set"/>
+    <virtualDNSEntries name="MUL_IP_MACHINES" value="235.0.0.1"/>
+    <virtualDNSEntries name="IP_CNC8070_A" value="Value not set"/>
+    <virtualDNSEntries name="localhost" value="Value not set"/>
   </availableDNSCollections>
 </virtualDNS:VirtualDNSManagement>

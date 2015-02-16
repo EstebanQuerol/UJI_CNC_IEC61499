@@ -17060,6 +17060,10 @@ axis2placement3d * elementarySurface::get_position()
 void elementarySurface::set_position(axis2placement3d * positionIn)
   {position = positionIn;}
 
+void elementarySurface::printSelf(){
+
+}
+
 /********************************************************************/
 
 /* freeformOperation */
@@ -23441,5 +23445,11 @@ void drilling::printSelf()
   printf(")");
 }
 
+
+//BOOST_CLASS_EXPORT_IMPLEMENT(channel);
+//
+//template void channel::serialize(boost::archive::text_iarchive& arch, const unsigned int version);
+//
+//template void channel::serialize(boost::archive::text_oarchive& arch, const unsigned int version);
 /********************************************************************/
 

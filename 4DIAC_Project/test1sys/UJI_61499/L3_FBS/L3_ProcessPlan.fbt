@@ -101,7 +101,7 @@
       <Connection Destination="L3_PPTable.REQ" Source="L3_MachineChecker.IND" dx1="515.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L3_MachineChecker.RSP" Source="L3_PPTable.CNF" dx1="395.0" dx2="-175.0" dy="140.0"/>
       <Connection Destination="L3_AAssignMachine_P.CHK" Source="L3_MachineChecker.CNF" dx1="755.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="L3_MachineAllocator.REQ" Source="L3_AAssignMachine_S.ASG" dx1="800.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_MachineAllocator.REQ" Source="L3_AAssignMachine_S.ASG" dx1="1245.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="E_DELAY.START" Source="L3_MachineAllocator.Start" dx1="245.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="E_DELAY.STOP" Source="L3_MachineAllocator.Stop" dx1="145.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L3_MachineAllocator.Timeout" Source="E_DELAY.EO" dx1="155.0" dx2="-205.0" dy="1130.0"/>

@@ -105,7 +105,7 @@
       <ECTransition Comment="" Condition="1" Destination="REQ" Source="RSP2" x="2710.0" y="1245.0"/>
     </ECC>
     <Algorithm Comment="Normally executed algorithm" Name="REQ">
-      <ST Text="AssignRemaining := FALSE;&#10;WHILE ( i &lt;15 AND NOT AssignRemaining ) DO&#10;&#9;(*Check if any part can be assigned to a machine*)&#10;&#9;IF IFinalAssign[i] = PartIDIn[i] THEN&#10;&#9;&#9;(*This part can be assigned*)&#10;&#9;&#9;CurrentPartID := PartIDIn[i];&#10;&#9;&#9;CurrentSetupID := SetupIDIn[i];&#10;&#9;&#9;AssignRemaining := TRUE;&#10;&#9;END_IF;&#10;&#9;i := i +1;&#10;END_WHILE;"/>
+      <ST Text="AssignRemaining := FALSE;&#10;WHILE ( i &lt;15 AND NOT AssignRemaining ) DO&#10;&#9;(*Check if any part can be assigned to a machine*)&#10;&#9;IF (IFinalAssign[i] &lt;&gt; 0 ) AND (IFinalAssign[i] = PartIDIn[i]) THEN&#10;&#9;&#9;(*This part can be assigned*)&#10;&#9;&#9;CurrentPartID := PartIDIn[i];&#10;&#9;&#9;CurrentSetupID := SetupIDIn[i];&#10;&#9;&#9;AssignRemaining := TRUE;&#10;&#9;END_IF;&#10;&#9;i := i +1;&#10;END_WHILE;"/>
     </Algorithm>
     <Algorithm Comment="Timeout algorithm" Name="SETTO">
       <ST Text="Delay := TIME#1000ms;"/>

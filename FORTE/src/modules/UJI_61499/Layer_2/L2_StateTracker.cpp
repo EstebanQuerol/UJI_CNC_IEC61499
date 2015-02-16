@@ -16,16 +16,16 @@
 
 DEFINE_FIRMWARE_FB(FORTE_L2_StateTracker, g_nStringIdL2_StateTracker)
 
-const CStringDictionary::TStringId FORTE_L2_StateTracker::scm_anDataInputNames[] = {g_nStringIdQI, g_nStringIdServiceStateIn};
+const CStringDictionary::TStringId FORTE_L2_StateTracker::scm_anDataInputNames[] = {g_nStringIdQI, g_nStringIdQI2, g_nStringIdServiceStateIn};
 
-const CStringDictionary::TStringId FORTE_L2_StateTracker::scm_anDataInputTypeIds[] = {g_nStringIdBOOL, g_nStringIdUSINT};
+const CStringDictionary::TStringId FORTE_L2_StateTracker::scm_anDataInputTypeIds[] = {g_nStringIdBOOL, g_nStringIdBOOL, g_nStringIdUSINT};
 
 const CStringDictionary::TStringId FORTE_L2_StateTracker::scm_anDataOutputNames[] = {g_nStringIdServiceStateOut, g_nStringIdQO, g_nStringIdDelay};
 
 const CStringDictionary::TStringId FORTE_L2_StateTracker::scm_anDataOutputTypeIds[] = {g_nStringIdUSINT, g_nStringIdBOOL, g_nStringIdTIME};
 
 const TForteInt16 FORTE_L2_StateTracker::scm_anEIWithIndexes[] = {0, 2, 4, -1};
-const TDataIOID FORTE_L2_StateTracker::scm_anEIWith[] = {0, 255, 0, 255, 1, 255};
+const TDataIOID FORTE_L2_StateTracker::scm_anEIWith[] = {0, 255, 1, 255, 2, 255};
 const CStringDictionary::TStringId FORTE_L2_StateTracker::scm_anEventInputNames[] = {g_nStringIdINIT, g_nStringIdRSP1, g_nStringIdRSP2, g_nStringIdTimeout};
 
 const TDataIOID FORTE_L2_StateTracker::scm_anEOWith[] = {0, 255, 1, 255, 1, 255, 2, 255};
@@ -38,7 +38,7 @@ const CStringDictionary::TStringId FORTE_L2_StateTracker::scm_anInternalsTypeIds
 
 const SFBInterfaceSpec FORTE_L2_StateTracker::scm_stFBInterfaceSpec = {
   4,  scm_anEventInputNames,  scm_anEIWith,  scm_anEIWithIndexes,
-  5,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  2,  scm_anDataInputNames, scm_anDataInputTypeIds,
+  5,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  3,  scm_anDataInputNames, scm_anDataInputTypeIds,
   3,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
   0, 0
 };
@@ -70,7 +70,7 @@ TOCounter() = 0;
 
 void FORTE_L2_StateTracker::alg_INITO(void){
 /* This algo is called once the machine initialization is completed*/
-if((QI() == true)){
+if((QI2() == true)){
 	/* Initialization succed*/
 	ServiceStateOut() = 1;
 	ServiceWorking() = true;
@@ -83,12 +83,12 @@ else{
 
 void FORTE_L2_StateTracker::alg_DT1(void){
 /* Periodic machine check*/
-Delay() = CIEC_TIME("60000ms");
+Delay() = CIEC_TIME("TIME#60000ms");
 }
 
 void FORTE_L2_StateTracker::alg_DT2(void){
 /* A Machine is expected to answer within a second to a request state event*/
-Delay() = CIEC_TIME("1000ms");
+Delay() = CIEC_TIME("TIME#1000ms");
 }
 
 void FORTE_L2_StateTracker::alg_TO2(void){

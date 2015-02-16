@@ -1,7 +1,11 @@
 #include "PP_Family.h"
 
 
-PP_Family::PP_Family()
+PP_Family::PP_Family() : m_nFamilyID()
+{
+}
+
+PP_Family::PP_Family(TForteUInt16 nFamilyID) : m_nFamilyID(nFamilyID)
 {
 }
 
@@ -32,7 +36,7 @@ bool PP_Family::delProcessPlan(TForteUInt16 pa_nTypeID){
 ProcessPlan * PP_Family::getProcesPlanByType(TForteUInt16 pa_nType_ID){
 	ProcessPlan * poRValue;
 	try{
-		*poRValue = m_umapFamilyMap.at(pa_nType_ID);
+		poRValue = &m_umapFamilyMap.at(pa_nType_ID);
 
 	}
 	catch (std::out_of_range e){

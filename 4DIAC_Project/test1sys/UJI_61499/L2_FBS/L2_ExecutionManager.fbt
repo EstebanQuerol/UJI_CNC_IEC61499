@@ -8,7 +8,6 @@
     <EventInputs>
       <Event Comment="Service Initialization" Name="INIT" Type="Event">
         <With Var="QI"/>
-        <With Var="Setup"/>
       </Event>
       <Event Comment="Start a new setup" Name="RENEW" Type="Event">
         <With Var="Setup"/>
@@ -24,8 +23,8 @@
       <Event Comment="Execute next operation" Name="ExecuteOP" Type="Event">
         <With Var="Operation"/>
       </Event>
-      <Event Comment="Indication from Resource" Name="IND" Type="Event">
-        <With Var="QO"/>
+      <Event Comment="Indication indicating completed setup" Name="Completed" Type="Event">
+        <With Var="SetupENDID"/>
       </Event>
     </EventOutputs>
     <InputVars>
@@ -36,6 +35,7 @@
     <OutputVars>
       <VarDeclaration Comment="Event Output Qualifier" Name="QO" Type="BOOL"/>
       <VarDeclaration Comment="Next operation information" Name="Operation" Type="STRING"/>
+      <VarDeclaration Comment="Completed setup ID" Name="SetupENDID" Type="USINT"/>
     </OutputVars>
   </InterfaceList>
   <Service Comment="Service Interface Function Block Type" LeftInterface="APPLICATION" RightInterface="RESOURCE">

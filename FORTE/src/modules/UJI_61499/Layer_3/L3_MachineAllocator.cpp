@@ -60,7 +60,7 @@ AssignRemaining() = false;
 while((((i() < 15) && (!AssignRemaining())))){
 
 	/* Check if any part can be assigned to a machine*/
-	if((IFinalAssign()[i()] == PartIDIn()[i()])){
+	if((((IFinalAssign()[i()] != 0))) && (((IFinalAssign()[i()] == PartIDIn()[i()])))){
 		/* This part can be assigned*/
 		CurrentPartID() = PartIDIn()[i()];
 		CurrentSetupID() = SetupIDIn()[i()];
@@ -71,7 +71,7 @@ while((((i() < 15) && (!AssignRemaining())))){
 }
 
 void FORTE_L3_MachineAllocator::alg_SETTO(void){
-Delay() = CIEC_TIME("1000ms");
+Delay() = CIEC_TIME("TIME#1000ms");
 }
 
 void FORTE_L3_MachineAllocator::alg_PREREQ(void){

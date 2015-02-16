@@ -46,7 +46,7 @@
       <VarDeclaration Comment="Machine service state" Name="ServiceState" Type="USINT"/>
       <VarDeclaration ArraySize="4" Comment="Part identifier, family and type" Name="PartInfoIn" Type="UINT"/>
       <VarDeclaration Comment="Operation termination code" InitialValue="0" Name="ENDOPID" Type="USINT"/>
-      <VarDeclaration Name="ENDSetupID" Type="USINT"/>
+      <VarDeclaration Comment="completed setup ID" Name="ENDSetupID" Type="USINT"/>
     </InputVars>
     <OutputVars>
       <VarDeclaration Comment="Variable to indicate whixh OP must be executed next" Name="NextCode" Type="USINT"/>

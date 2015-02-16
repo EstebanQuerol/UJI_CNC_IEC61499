@@ -16,19 +16,19 @@
 
 DEFINE_FIRMWARE_FB(FORTE_L2_ASetupREQHDLR, g_nStringIdL2_ASetupREQHDLR)
 
-const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anDataInputNames[] = {g_nStringIdQI, g_nStringIdMID, g_nStringIdPartInfoIn, g_nStringIdMIDIn, g_nStringIdOPIDIn, g_nStringIdOPParamsIn, g_nStringIdFixtureIn};
+const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anDataInputNames[] = {g_nStringIdQI, g_nStringIdMID, g_nStringIdPartInfoIn, g_nStringIdMIDIn, g_nStringIdSetupIn};
 
-const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anDataInputTypeIds[] = {g_nStringIdBOOL, g_nStringIdUSINT, g_nStringIdARRAY, 3, g_nStringIdUINT, g_nStringIdUSINT, g_nStringIdARRAY, 20, g_nStringIdUINT, g_nStringIdARRAY, 20, g_nStringIdSTRING, g_nStringIdSTRING};
+const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anDataInputTypeIds[] = {g_nStringIdBOOL, g_nStringIdUSINT, g_nStringIdARRAY, 3, g_nStringIdUINT, g_nStringIdUSINT, g_nStringIdSTRING};
 
-const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anDataOutputNames[] = {g_nStringIdQO, g_nStringIdMIDOut, g_nStringIdPartInfoOut, g_nStringIdOPIDOut, g_nStringIdOPParamsOut, g_nStringIdFixtureOut};
+const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anDataOutputNames[] = {g_nStringIdQO, g_nStringIdMIDOut, g_nStringIdPartInfoOut, g_nStringIdSetupOut};
 
-const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anDataOutputTypeIds[] = {g_nStringIdBOOL, g_nStringIdUSINT, g_nStringIdARRAY, 4, g_nStringIdUINT, g_nStringIdARRAY, 20, g_nStringIdUINT, g_nStringIdARRAY, 20, g_nStringIdSTRING, g_nStringIdSTRING};
+const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anDataOutputTypeIds[] = {g_nStringIdBOOL, g_nStringIdUSINT, g_nStringIdARRAY, 3, g_nStringIdUINT, g_nStringIdSTRING};
 
 const TForteInt16 FORTE_L2_ASetupREQHDLR::scm_anEIWithIndexes[] = {0, 3};
-const TDataIOID FORTE_L2_ASetupREQHDLR::scm_anEIWith[] = {1, 0, 255, 2, 6, 5, 4, 3, 255};
+const TDataIOID FORTE_L2_ASetupREQHDLR::scm_anEIWith[] = {1, 0, 255, 2, 4, 3, 255};
 const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anEventInputNames[] = {g_nStringIdINIT, g_nStringIdREQ};
 
-const TDataIOID FORTE_L2_ASetupREQHDLR::scm_anEOWith[] = {0, 255, 2, 1, 3, 5, 4, 255};
+const TDataIOID FORTE_L2_ASetupREQHDLR::scm_anEOWith[] = {0, 255, 2, 1, 3, 255};
 const TForteInt16 FORTE_L2_ASetupREQHDLR::scm_anEOWithIndexes[] = {0, 2, -1};
 const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anEventOutputNames[] = {g_nStringIdINITO, g_nStringIdCNF};
 
@@ -38,8 +38,8 @@ const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anInternalsTypeId
 
 const SFBInterfaceSpec FORTE_L2_ASetupREQHDLR::scm_stFBInterfaceSpec = {
   2,  scm_anEventInputNames,  scm_anEIWith,  scm_anEIWithIndexes,
-  2,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  7,  scm_anDataInputNames, scm_anDataInputTypeIds,
-  6,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
+  2,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  5,  scm_anDataInputNames, scm_anDataInputTypeIds,
+  4,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
   0, 0
 };
 
@@ -61,33 +61,10 @@ void FORTE_L2_ASetupREQHDLR::alg_REQ(void){
 if((MIDIn() == MID())){
 	/* The received packet is for this machine, map outputs*/
 	Accepted() = true;
-	PartInfoOut()[3] = 0;
 	PartInfoOut()[0] = PartInfoIn()[0];
 	PartInfoOut()[1] = PartInfoIn()[1];
 	PartInfoOut()[2] = PartInfoIn()[2];
-	  {
-    bool isi_Up = ((1) > 0);
-    i() = 0;
-    while(!(((isi_Up) && (i() > (19))) ||
-            ((!isi_Up) && (i() < (19))))){
-
-		OPIDOut()[i()] = OPIDIn()[i()];
-		OPParamsOut()[i()] = OPParamsIn()[i()];
-		if((OPIDOut()[i()] != 0)){
-			// Count the number of operations in the setup			PartInfoOut()[3] = PartInfoOut()[3]+1;
-		};
-	
-      if(((isi_Up) && ((1) > 0)) || 
-         ((!isi_Up) && ((1) < 0))){
-        i() = i() + (1);
-      }
-      else{
-        i() = i() - (1);
-      }
-    }
-  }
-;
-	FixtureOut() = FixtureIn();
+	SetupOut() = SetupIn();
 }
 else{
 	Accepted() = false;

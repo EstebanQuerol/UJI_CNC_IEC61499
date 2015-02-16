@@ -147,7 +147,7 @@ MachineCounter() = 0;
             ((!isi_Up) && (i() < (14))))){
 
 	MFinalAssignP()[i()] = MAssignS()[i()];
-	if((MFinalAssignS()[i()] != 0)){
+	if((MFinalAssignP()[i()] != 0)){
 		MState()[i()] = 3;
 		MachineCounter() = MachineCounter()+1;
 	};
@@ -197,6 +197,29 @@ void FORTE_L3_MMCore::alg_UINIT(void){
 QO() = false;
 }
 
+void FORTE_L3_MMCore::alg_IND3(void){
+  {
+    bool isi_Up = ((1) > 0);
+    i() = 0;
+    while(!(((isi_Up) && (i() > (14))) ||
+            ((!isi_Up) && (i() < (14))))){
+
+	MStateP()[i()] = MState()[i()];
+	MAssignP()[i()] = 0;
+	MPriority()[i()] = 32766;
+
+      if(((isi_Up) && ((1) > 0)) || 
+         ((!isi_Up) && ((1) < 0))){
+        i() = i() + (1);
+      }
+      else{
+        i() = i() - (1);
+      }
+    }
+  }
+;
+}
+
 
 void FORTE_L3_MMCore::enterStateSTART(void){
   m_nECCState = scm_nStateSTART;
@@ -230,6 +253,7 @@ void FORTE_L3_MMCore::enterStateRSP2(void){
 
 void FORTE_L3_MMCore::enterStateFREEMACHINE(void){
   m_nECCState = scm_nStateFREEMACHINE;
+  alg_IND3();
   sendOutputEvent( scm_nEventIND3ID);
 }
 

@@ -105,7 +105,7 @@ void FORTE_L3_PPTable::RequestNeededMachines(){
 	for (i = 0; i < 15; i++){
 		vPartIDOut()[i] = 0;
 		vSetup()[i] = 0;
-		vPriority()[i] = 0;
+		vPriority()[i] = 32766;
 	}
 	for (std::unordered_map<TForteUInt16, ManPart>::iterator it = m_Partmap.begin(); it != m_Partmap.end(); ++it){
 		if (!it->second.IsAssigned()){
@@ -136,8 +136,9 @@ void FORTE_L3_PPTable::CalculatePriority(){
 	}
 	else{
 		nAuxUint64 = -1 * ((((TForteUInt64)m_dtCurrentDeadline - (TForteUInt64)dtCurrentTime) / 1000) / 60);
-		if (nAuxUint64 > 32766){
-			m_nCurrentPriority = 32766;
+		if (nAuxUint64 >= 32766){
+			//32765 to avoid system deadlock when only long enough delivery parts are in the system
+			m_nCurrentPriority = 32765;
 		}
 		else{
 			m_nCurrentPriority = nAuxUint64;

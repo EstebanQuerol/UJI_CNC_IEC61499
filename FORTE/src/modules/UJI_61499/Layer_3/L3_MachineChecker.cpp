@@ -62,6 +62,7 @@ void FORTE_L3_MachineChecker::alg_RSP(void){
 	MStateOut()[i()] = MStateIn()[i()];
 	if((Priority()[i()] < MPriorityIn()[i()])){
 		/* 1st to get into the vector has preference when prios are equal*/
+		
 		MPriorityOut()[i()] = Priority()[i()];
 		MAssignOut()[i()] = PartID()[i()];
 	}

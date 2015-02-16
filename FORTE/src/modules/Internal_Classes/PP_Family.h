@@ -16,6 +16,7 @@ private:
 	TForteUInt16 m_nFamilyID; // Identifier of the family of process plans
 public:
 	PP_Family();
+	PP_Family(TForteUInt16 nFamilyID);
 	~PP_Family();
 	/*!\Add a process plan into the family
 	* \param	Process plan to be added

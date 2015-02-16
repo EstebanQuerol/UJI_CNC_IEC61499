@@ -13,8 +13,8 @@
 #define _L2_ASETUPRSPHDLR_H_
 
 #include <basicfb.h>
-#include <forte_usint.h>
 #include <forte_bool.h>
+#include <forte_usint.h>
 
 class FORTE_L2_ASetupRSPHDLR: public CBasicFB{
   DECLARE_FIRMWARE_FB(FORTE_L2_ASetupRSPHDLR)

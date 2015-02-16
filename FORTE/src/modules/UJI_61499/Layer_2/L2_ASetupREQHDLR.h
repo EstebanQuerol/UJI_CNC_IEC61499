@@ -13,10 +13,10 @@
 #define _L2_ASETUPREQHDLR_H_
 
 #include <basicfb.h>
-#include <forte_usint.h>
-#include <forte_uint.h>
-#include <forte_string.h>
 #include <forte_bool.h>
+#include <forte_usint.h>
+#include <forte_string.h>
+#include <forte_uint.h>
 #include <forte_array.h>
 
 class FORTE_L2_ASetupREQHDLR: public CBasicFB{
@@ -45,24 +45,8 @@ private:
     return *static_cast<CIEC_USINT*>(getDI(3));
   };
 
-  CIEC_UINT *OPIDIn() {
-    return (CIEC_UINT*)(*static_cast<CIEC_ARRAY *>(getDI(4)))[0]; //the first element marks the start of the array
-  };
-
-  CIEC_ARRAY &OPIDIn_Array() {
-    return *static_cast<CIEC_ARRAY*>(getDI(4));
-  };
-
-  CIEC_STRING *OPParamsIn() {
-    return (CIEC_STRING*)(*static_cast<CIEC_ARRAY *>(getDI(5)))[0]; //the first element marks the start of the array
-  };
-
-  CIEC_ARRAY &OPParamsIn_Array() {
-    return *static_cast<CIEC_ARRAY*>(getDI(5));
-  };
-
-  CIEC_STRING &FixtureIn() {
-    return *static_cast<CIEC_STRING*>(getDI(6));
+  CIEC_STRING &SetupIn() {
+    return *static_cast<CIEC_STRING*>(getDI(4));
   };
 
   static const CStringDictionary::TStringId scm_anDataOutputNames[];
@@ -83,24 +67,8 @@ private:
     return *static_cast<CIEC_ARRAY*>(getDO(2));
   };
 
-  CIEC_UINT *OPIDOut() {
-    return (CIEC_UINT*)(*static_cast<CIEC_ARRAY *>(getDO(3)))[0]; //the first element marks the start of the array
-  };
-
-  CIEC_ARRAY &OPIDOut_Array() {
-    return *static_cast<CIEC_ARRAY*>(getDO(3));
-  };
-
-  CIEC_STRING *OPParamsOut() {
-    return (CIEC_STRING*)(*static_cast<CIEC_ARRAY *>(getDO(4)))[0]; //the first element marks the start of the array
-  };
-
-  CIEC_ARRAY &OPParamsOut_Array() {
-    return *static_cast<CIEC_ARRAY*>(getDO(4));
-  };
-
-  CIEC_STRING &FixtureOut() {
-    return *static_cast<CIEC_STRING*>(getDO(5));
+  CIEC_STRING &SetupOut() {
+    return *static_cast<CIEC_STRING*>(getDO(3));
   };
 
   static const TEventID scm_nEventINITID = 0;
@@ -130,7 +98,7 @@ private:
 
   static const SInternalVarsInformation scm_stInternalVars;
 
-   FORTE_BASIC_FB_DATA_ARRAY(2, 7, 6, 2, 0);
+   FORTE_BASIC_FB_DATA_ARRAY(2, 5, 4, 2, 0);
 
 virtual void setInitialValues();
   void alg_INIT(void);

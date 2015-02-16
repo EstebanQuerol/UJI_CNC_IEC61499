@@ -13,9 +13,9 @@
 #define _L2_STATETRACKER_H_
 
 #include <basicfb.h>
-#include <forte_time.h>
-#include <forte_usint.h>
 #include <forte_bool.h>
+#include <forte_usint.h>
+#include <forte_time.h>
 
 class FORTE_L2_StateTracker: public CBasicFB{
   DECLARE_FIRMWARE_FB(FORTE_L2_StateTracker)
@@ -27,8 +27,12 @@ private:
     return *static_cast<CIEC_BOOL*>(getDI(0));
   };
 
+  CIEC_BOOL &QI2() {
+    return *static_cast<CIEC_BOOL*>(getDI(1));
+  };
+
   CIEC_USINT &ServiceStateIn() {
-    return *static_cast<CIEC_USINT*>(getDI(1));
+    return *static_cast<CIEC_USINT*>(getDI(2));
   };
 
   static const CStringDictionary::TStringId scm_anDataOutputNames[];
@@ -81,7 +85,7 @@ private:
 
   static const SInternalVarsInformation scm_stInternalVars;
 
-   FORTE_BASIC_FB_DATA_ARRAY(5, 2, 3, 3, 0);
+   FORTE_BASIC_FB_DATA_ARRAY(5, 3, 3, 3, 0);
 
 virtual void setInitialValues();
   void alg_INIT(void);

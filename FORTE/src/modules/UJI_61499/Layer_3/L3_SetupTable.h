@@ -1,14 +1,14 @@
 /*************************************************************************
-*** FORTE Library Element
-***
-*** This file was generated using the 4DIAC FORTE Export Filter V1.0.x!
-***
-*** Name: L3_SetupTable
-*** Description: Service Interface Function Block Type
-*** Version:
-***     0.0: 2014-10-28/EQUEROL - UJI -
-***     1.0: 2015-01-08/EQUEROL - UJI - modified data outputs
-*************************************************************************/
+ *** FORTE Library Element
+ ***
+ *** This file was generated using the 4DIAC FORTE Export Filter V1.0.x!
+ ***
+ *** Name: L3_SetupTable
+ *** Description: Service Interface Function Block Type
+ *** Version: 
+ ***     0.0: 2014-10-28/EQUEROL - UJI - 
+ ***     1.0: 2015-01-08/EQUEROL - UJI - modified data outputs
+ *************************************************************************/
 
 #ifndef _L3_SETUPTABLE_H_
 #define _L3_SETUPTABLE_H_
@@ -22,76 +22,78 @@
 #include "ProcessPlan.h"
 #include "PP_DDBB.h"
 #include "Subphase.h"
+#include <sstream>
+#include "boost/archive/text_oarchive.hpp"
 
 class FORTE_L3_SetupTable : public CFunctionBlock{
 	DECLARE_FIRMWARE_FB(FORTE_L3_SetupTable)
 
 private:
-	static const CStringDictionary::TStringId scm_anDataInputNames[];
-	static const CStringDictionary::TStringId scm_anDataInputTypeIds[];
-	CIEC_BOOL &QI() {
-		return *static_cast<CIEC_BOOL*>(getDI(0));
-	};
+  static const CStringDictionary::TStringId scm_anDataInputNames[];
+  static const CStringDictionary::TStringId scm_anDataInputTypeIds[];
+  CIEC_BOOL &QI() {
+    return *static_cast<CIEC_BOOL*>(getDI(0));
+  };
 
-	CIEC_UINT &Family() {
-		return *static_cast<CIEC_UINT*>(getDI(1));
-	};
+  CIEC_UINT &Family() {
+    return *static_cast<CIEC_UINT*>(getDI(1));
+  };
 
-	CIEC_UINT &Type() {
-		return *static_cast<CIEC_UINT*>(getDI(2));
-	};
+  CIEC_UINT &Type() {
+    return *static_cast<CIEC_UINT*>(getDI(2));
+  };
 
-	CIEC_UINT &PartID() {
-		return *static_cast<CIEC_UINT*>(getDI(3));
-	};
+  CIEC_UINT &PartID() {
+    return *static_cast<CIEC_UINT*>(getDI(3));
+  };
 
-	CIEC_USINT &SetupID() {
-		return *static_cast<CIEC_USINT*>(getDI(4));
-	};
+  CIEC_USINT &SetupID() {
+    return *static_cast<CIEC_USINT*>(getDI(4));
+  };
 
-	CIEC_USINT &MID() {
-		return *static_cast<CIEC_USINT*>(getDI(5));
-	};
+  CIEC_USINT &MID() {
+    return *static_cast<CIEC_USINT*>(getDI(5));
+  };
 
-	static const CStringDictionary::TStringId scm_anDataOutputNames[];
-	static const CStringDictionary::TStringId scm_anDataOutputTypeIds[];
-	CIEC_BOOL &QO() {
-		return *static_cast<CIEC_BOOL*>(getDO(0));
-	};
+  static const CStringDictionary::TStringId scm_anDataOutputNames[];
+  static const CStringDictionary::TStringId scm_anDataOutputTypeIds[];
+  CIEC_BOOL &QO() {
+    return *static_cast<CIEC_BOOL*>(getDO(0));
+  };
 
-	CIEC_UINT *PartInfo() {
-		return (CIEC_UINT*)(*static_cast<CIEC_ARRAY *>(getDO(1)))[0]; //the first element marks the start of the array
-	};
+  CIEC_UINT *PartInfo() {
+    return (CIEC_UINT*)(*static_cast<CIEC_ARRAY *>(getDO(1)))[0]; //the first element marks the start of the array
+  };
 
-	CIEC_ARRAY &PartInfo_Array() {
-		return *static_cast<CIEC_ARRAY*>(getDO(1));
-	};
+  CIEC_ARRAY &PartInfo_Array() {
+    return *static_cast<CIEC_ARRAY*>(getDO(1));
+  };
 
-	CIEC_USINT &MID2() {
-		return *static_cast<CIEC_USINT*>(getDO(2));
-	};
+  CIEC_USINT &MID2() {
+    return *static_cast<CIEC_USINT*>(getDO(2));
+  };
 
-	CIEC_STRING &Subphase() {
-		return *static_cast<CIEC_STRING*>(getDO(3));
-	};
+  CIEC_STRING &Setup() {
+    return *static_cast<CIEC_STRING*>(getDO(3));
+  };
 
-	static const TEventID scm_nEventINITID = 0;
-	static const TEventID scm_nEventREQID = 1;
-	static const TForteInt16 scm_anEIWithIndexes[];
-	static const TDataIOID scm_anEIWith[];
-	static const CStringDictionary::TStringId scm_anEventInputNames[];
+  static const TEventID scm_nEventINITID = 0;
+  static const TEventID scm_nEventREQID = 1;
+  static const TForteInt16 scm_anEIWithIndexes[];
+  static const TDataIOID scm_anEIWith[];
+  static const CStringDictionary::TStringId scm_anEventInputNames[];
 
-	static const TEventID scm_nEventINITOID = 0;
-	static const TEventID scm_nEventCNFID = 1;
-	static const TForteInt16 scm_anEOWithIndexes[];
-	static const TDataIOID scm_anEOWith[];
-	static const CStringDictionary::TStringId scm_anEventOutputNames[];
+  static const TEventID scm_nEventINITOID = 0;
+  static const TEventID scm_nEventCNFID = 1;
+  static const TForteInt16 scm_anEOWithIndexes[];
+  static const TDataIOID scm_anEOWith[];
+  static const CStringDictionary::TStringId scm_anEventOutputNames[];
 
-	static const SFBInterfaceSpec scm_stFBInterfaceSpec;
+  static const SFBInterfaceSpec scm_stFBInterfaceSpec;
 
-	FORTE_FB_DATA_ARRAY(2, 6, 4, 0);
+  FORTE_FB_DATA_ARRAY(2, 6, 4, 0);
 
-	void executeEvent(int pa_nEIID);
+  void executeEvent(int pa_nEIID);
 
 	TForteUInt16 m_nFamily; //Process plan family
 	TForteUInt16 m_nType; //Process plan type
