@@ -165,6 +165,7 @@ void FORTE_L3_SetupRouterT::enterStateRSP2(void){
 
 void FORTE_L3_SetupRouterT::enterStateCNF(void){
   m_nECCState = scm_nStateCNF;
+  alg_CNF();
 }
 
 void FORTE_L3_SetupRouterT::enterStateCNF1(void){
