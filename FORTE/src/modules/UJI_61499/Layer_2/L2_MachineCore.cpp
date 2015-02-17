@@ -64,6 +64,9 @@ CurrentPart() = PartInfoIn()[0];
 CurrentFamily() = PartInfoIn()[1];
 CurrentType() = PartInfoIn()[2];
 ENDOPID() = 0;
+PartInfoOut()[0] = CurrentPart();
+PartInfoOut()[1] = CurrentFamily();
+PartInfoOut()[2] = CurrentType();
 }
 
 void FORTE_L2_MachineCore::alg_UPDT(void){
@@ -151,9 +154,8 @@ void FORTE_L2_MachineCore::enterStatetoError(void){
 void FORTE_L2_MachineCore::enterStateREQ(void){
   m_nECCState = scm_nStateREQ;
   alg_REQ();
-  sendOutputEvent( scm_nEventRENEWID);
-  alg_CNF();
   sendOutputEvent( scm_nEventCNFID);
+  sendOutputEvent( scm_nEventRENEWID);
 }
 
 void FORTE_L2_MachineCore::enterStateExecuting(void){

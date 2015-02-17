@@ -131,7 +131,7 @@
       <ST Text="(*MAssignS[i] contains 0 if the machine wasn't requested, otherwise the ID of the PP that requested the machine*)&#10;MachineCounter := 0;&#10;FOR i := 0 TO 14 DO&#10;&#9;MFinalAssignP[i] := MAssignS[i];&#10;&#9;IF MFinalAssignP[i] &lt;&gt; 0 THEN&#10;&#9;&#9;MState[i] := 3;&#10;&#9;&#9;MachineCounter := MachineCounter +1;&#10;&#9;END_IF;&#10;END_FOR;"/>
     </Algorithm>
     <Algorithm Comment="Updates MSate if any machine was correctly assigned" Name="RSP4">
-      <ST Text="(*MFinalAssignS[i] is 0 if the machine assignation succeed, otherwise the assignation failed*)&#10;FOR i := 0 TO 14 DO&#10;&#9;IF MFinalAssignS[i] = 0 THEN&#10;&#9;&#9;(*Assignation succeed*)&#10;&#9;&#9;MState[i] := 4;&#10;&#9;ELSE&#10;&#9;&#9;(*Assignation failed, mark machine as free, will handle its real state in next cycle*)&#10;&#9;&#9;MState[i] := 2;&#10;&#9;END_IF;&#10;END_FOR;"/>
+      <ST Text="(*MFinalAssignS[i] is 0 if the machine assignation succeed, otherwise the assignation failed*)&#10;FOR i := 0 TO 14 DO&#10;&#9;IF  MState[i] = 3  THEN&#10;&#9;&#9;(*modify only machines that were being assigned*)&#10;&#9;&#9;IF MFinalAssignS[i] =0 THEN&#10;&#9;&#9;&#9;(*Assignation succeed*)&#10;&#9;&#9;&#9;MState[i] := 4;&#10;&#9;&#9;ELSE&#10;&#9;&#9;&#9;(*Assignation failed, mark machine as free, will handle its real state in next cycle*)&#10;&#9;&#9;&#9;MState[i] := 2;&#10;&#9;&#9;END_IF;&#10;&#9;END_IF;&#10;END_FOR;"/>
     </Algorithm>
     <Algorithm Comment="Uninitalisation algo" Name="UINIT">
       <ST Text="QO := FALSE;"/>

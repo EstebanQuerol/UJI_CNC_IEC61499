@@ -75,8 +75,8 @@
         <ECAction Algorithm="UPDT" Output="ERROR"/>
       </ECState>
       <ECState Name="REQ" x="1520.0" y="2185.0">
-        <ECAction Algorithm="REQ" Output="RENEW"/>
-        <ECAction Algorithm="CNF" Output="CNF"/>
+        <ECAction Algorithm="REQ" Output="CNF"/>
+        <ECAction Output="RENEW"/>
       </ECState>
       <ECState Name="Executing" x="2375.0" y="2660.0"/>
       <ECState Name="Completed" x="3705.0" y="2375.0">
@@ -126,7 +126,7 @@
       <ECTransition Comment="" Condition="1" Destination="SendNext" Source="REQ" x="2785.0" y="1875.0"/>
     </ECC>
     <Algorithm Comment="Normally executed algorithm" Name="REQ">
-      <ST Text="(*A new assignation request arrived*)&#10;(*The machine is free, confirm the assignation and modify the state*)&#10;CurrentPart := PartInfoIn[0];&#10;CurrentFamily := PartInfoIn[1];&#10;CurrentType := PartInfoIn[2];&#10;ENDOPID := 0;"/>
+      <ST Text="(*A new assignation request arrived*)&#10;(*The machine is free, confirm the assignation and modify the state*)&#10;CurrentPart := PartInfoIn[0];&#10;CurrentFamily := PartInfoIn[1];&#10;CurrentType := PartInfoIn[2];&#10;ENDOPID := 0;&#10;PartInfoOut[0] := CurrentPart;&#10;PartInfoOut[1] := CurrentFamily;&#10;PartInfoOut[2] := CurrentType;"/>
     </Algorithm>
     <Algorithm Comment="Update machine state" Name="UPDT">
       <ST Text="IF ServiceState = 1 THEN&#10;&#9;MachineState := TRUE;&#10;&#9;State := 2;&#10;ELSIF ServiceState = 0 THEN&#10;&#9;MachineState := FALSE;&#10;&#9;State := 1;&#10;END_IF;&#10;(*Reset inError flag every time this algo is called, It is only used in EIW*)&#10;inError := FALSE; "/>

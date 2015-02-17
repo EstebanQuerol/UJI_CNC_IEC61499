@@ -75,13 +75,16 @@ void FORTE_L3_FaultyMHDLR::alg_REQ1(void){
 }
 
 void FORTE_L3_FaultyMHDLR::alg_REQ2(void){
-if((State() == true)){
-	/* Machine repaired*/
-	FaultyMachines()[MID()] = 2;
-}
+if((MID() > 0) && (MID() < 15)){
+/* Verify that MID is within correct boundaries*/
+	if((State() == true)){
+		/* Machine repaired*/
+		FaultyMachines()[MID()-1] = 2;
+	}
 else{
-	/* Machine breakdown*/
-	FaultyMachines()[MID()] = 1;
+		/* Machine breakdown*/
+		FaultyMachines()[MID()-1] = 1;
+	};
 };
 }
 

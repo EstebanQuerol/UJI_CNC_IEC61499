@@ -172,13 +172,16 @@ void FORTE_L3_MMCore::alg_RSP4(void){
     while(!(((isi_Up) && (i() > (14))) ||
             ((!isi_Up) && (i() < (14))))){
 
-	if((MFinalAssignS()[i()] == 0)){
-		/* Assignation succeed*/
-		MState()[i()] = 4;
-	}
+	if((MState()[i()] == 3)){
+		/* modify only machines that were being assigned*/
+		if((MFinalAssignS()[i()] == 0)){
+			/* Assignation succeed*/
+			MState()[i()] = 4;
+		}
 else{
-		/* Assignation failed, mark machine as free, will handle its real state in next cycle*/
-		MState()[i()] = 2;
+			/* Assignation failed, mark machine as free, will handle its real state in next cycle*/
+			MState()[i()] = 2;
+		};
 	};
 
       if(((isi_Up) && ((1) > 0)) || 

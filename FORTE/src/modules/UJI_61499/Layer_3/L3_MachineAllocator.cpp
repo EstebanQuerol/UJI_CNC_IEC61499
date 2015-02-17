@@ -121,6 +121,7 @@ void FORTE_L3_MachineAllocator::alg_SEND(void){
 /* A setup needs to be assigned*/
 PartIDOut() = CurrentPartID();
 SetupID() = CurrentSetupID();
+/* MID is one based index, i is current machine +1*/
 MID() = i();
 }
 
@@ -140,7 +141,9 @@ TOCounter() = 0;
 
 void FORTE_L3_MachineAllocator::alg_RSP2(void){
 /* Setup was succesfully assigned*/
-IFinalAssign()[i()] = 0;
+if((i() != 0)){
+	IFinalAssign()[i()-1] = 0;
+};
 }
 
 
@@ -268,10 +271,10 @@ void FORTE_L3_MachineAllocator::executeEvent(int pa_nEIID){
           bTransitionCleared  = false; //no transition cleared
         break;
       case scm_nStateTIMEOUT:
-        if(TOCounter() <= 3)
+        if(TOCounter() < 3)
           enterStateSEND();
         else
-        if(TOCounter() > 4)
+        if(TOCounter() >= 3)
           enterStateFAILED();
         else
           bTransitionCleared  = false; //no transition cleared
