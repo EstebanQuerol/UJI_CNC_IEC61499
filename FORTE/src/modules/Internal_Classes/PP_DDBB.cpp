@@ -30,21 +30,22 @@ void  PP_DDBB::Initilizate(){
 		strcpy(l_itsID, "WorkPlan 1");
 
 		//parenExecutableList
-		workplan * l_Ex_1 = new workplan();
+		executable * l_Ex_1 = new workplan(NULL, NULL, NULL, NULL, NULL);
 		pacTempID = (char *)forte_malloc(sizeof(char)* 13);
 		strcpy(pacTempID, "WorkPlan 1_1");
 		l_Ex_1->set_itsId(pacTempID);
-		l_Ex_1->set_itsElements(NULL);
 
-		workplan * l_Ex_2 = new workplan();
+
+		executable * l_Ex_2 = new workplan(NULL, NULL, NULL, NULL, NULL);
 		pacTempID = (char *)forte_malloc(sizeof(char)* 13);
 		strcpy(pacTempID, "WorkPlan 1_2");
 		l_Ex_2->set_itsId(pacTempID);
-		l_Ex_2->set_itsElements(NULL);
+
 
 		std::list<executable *> * l_theListIn_ex = new std::list<executable *>;
-		l_theListIn_ex->push_back(l_Ex_2);
+		//polimorfismo executable-workplan
 		l_theListIn_ex->push_back(l_Ex_1);
+		l_theListIn_ex->push_back(l_Ex_2);
 
 		parenExecutableList * l_itsElementsIn = new parenExecutableList(l_theListIn_ex);
 
@@ -52,7 +53,7 @@ void  PP_DDBB::Initilizate(){
 		pacTempID = (char *)forte_malloc(sizeof(char)* 10);
 		strcpy(pacTempID, "channel_1");
 		channel * l_channel = new channel(pacTempID);
-		//channel * l_channel = new channel();
+
 		//setup
 			//itsorigin
 		std::list<real *> * l_theListIn = new std::list<real *>;
@@ -68,18 +69,18 @@ void  PP_DDBB::Initilizate(){
 		real * l_dx = new real(0.0);
 		real * l_dy = new real(0.0);
 		real * l_dz = new real(1.0);
-		(*l_theListIn_d).emplace_back(l_dz);
-		(*l_theListIn_d).emplace_back(l_dy);
 		(*l_theListIn_d).emplace_back(l_dx);
+		(*l_theListIn_d).emplace_back(l_dy);
+		(*l_theListIn_d).emplace_back(l_dz);
 		parenRealListFull * l_coordinates_d = new parenRealListFull(l_theListIn_d);
 		direction * l_axisIn = new direction(NULL, l_coordinates_d);
 		std::list<real *> * l_theListIn_ref = new std::list<real *>;
 		real * l_refx = new real(0.0);
 		real * l_refy = new real(0.0);
 		real * l_refz = new real(1.0);
-		(*l_theListIn_ref).emplace_back(l_refz);
-		(*l_theListIn_ref).emplace_back(l_refy);
 		(*l_theListIn_ref).emplace_back(l_refx);
+		(*l_theListIn_ref).emplace_back(l_refy);
+		(*l_theListIn_ref).emplace_back(l_refz);
 		parenRealListFull * l_coordinates_ref = new parenRealListFull(l_theListIn_ref);
 		direction * l_refDirectionIn = new direction(NULL, l_coordinates_ref);
 		axis2placement3d * l_itsOrigin = new axis2placement3d(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
@@ -88,27 +89,27 @@ void  PP_DDBB::Initilizate(){
 		real * l_x_2 = new real(0.0);
 		real * l_y_2 = new real(1.0);
 		real * l_z_2 = new real(1.0);
-		(*l_theListIn_2).emplace_back(l_z_2);
-		(*l_theListIn_2).emplace_back(l_y_2);
 		(*l_theListIn_2).emplace_back(l_x_2);
+		(*l_theListIn_2).emplace_back(l_y_2);
+		(*l_theListIn_2).emplace_back(l_z_2);
 		parenRealListFull * l_coordinates_2 = new parenRealListFull(l_theListIn_2);
 		cartesianPoint * l_locationIn_2 = new cartesianPoint(NULL, l_coordinates_2);
 		std::list<real *> * l_theListIn_d_2 = new std::list<real *>;
 		real * l_dx_2 = new real(0.0);
 		real * l_dy_2 = new real(0.0);
 		real * l_dz_2 = new real(1.0);
-		(*l_theListIn_d_2).emplace_back(l_dz_2);
-		(*l_theListIn_d_2).emplace_back(l_dy_2);
 		(*l_theListIn_d_2).emplace_back(l_dx_2);
+		(*l_theListIn_d_2).emplace_back(l_dy_2);
+		(*l_theListIn_d_2).emplace_back(l_dz_2);
 		parenRealListFull * l_coordinates_d_2 = new parenRealListFull(l_theListIn_d_2);
 		direction * l_axisIn_2 = new direction(NULL, l_coordinates_d_2);
 		std::list<real *> * l_theListIn_ref_2 = new std::list<real *>;
 		real * l_refx_2 = new real(0.0);
 		real * l_refy_2 = new real(0.0);
 		real * l_refz_2 = new real(1.0);
-		(*l_theListIn_ref_2).emplace_back(l_refz_2);
-		(*l_theListIn_ref_2).emplace_back(l_refy_2);
 		(*l_theListIn_ref_2).emplace_back(l_refx_2);
+		(*l_theListIn_ref_2).emplace_back(l_refy_2);
+		(*l_theListIn_ref_2).emplace_back(l_refz_2);
 		parenRealListFull * l_coordinates_ref_2 = new parenRealListFull(l_theListIn_ref_2);
 		direction * l_refDirectionIn_2 = new direction(NULL, l_coordinates_ref_2);
 		axis2placement3d * l_positionIn = new axis2placement3d(NULL, l_locationIn_2, l_axisIn_2, l_refDirectionIn_2);
@@ -120,18 +121,16 @@ void  PP_DDBB::Initilizate(){
 		workplan * WP1 = new workplan(l_itsID, l_itsElementsIn, l_channel, l_itsSetupIn, NULL);
 		newPP.addSubphase(1, 1, WP1);
 
-		workplan * newWP2 = new workplan();
+		workplan * newWP2 = new workplan(NULL, NULL, NULL, NULL, NULL);
 		pacTempID = (char *)forte_malloc(sizeof(char)* 11);
 		strcpy(pacTempID, "WorkPlan 2");
 		newWP2->set_itsId(pacTempID);
-		newWP2->set_itsElements(NULL);
 		newPP.addSubphase(2, 1, newWP2);
 
-		workplan * newWP3 = new workplan();
+		workplan * newWP3 = new workplan(NULL, NULL, NULL, NULL, NULL);
 		pacTempID = (char *)forte_malloc(sizeof(char)* 11);
 		strcpy(pacTempID, "WorkPlan 3");
 		newWP3->set_itsId(pacTempID);
-		newWP3->set_itsElements(NULL);
 		newPP.addSubphase(3, 1, newWP3);
 
 		newFamiliy.addProcessPlan(newPP, 1);

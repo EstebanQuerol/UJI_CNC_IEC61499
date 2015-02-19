@@ -58,9 +58,6 @@ void FORTE_L2_ExecutionManager::RetreiveWP(){
 	if (pacTempString != NULL){
 		if (-1 != Setup().toString(pacTempString, static_cast<unsigned int>(Setup().length() + 1), 1)){
 			iss.str(std::string(pacTempString));
-			DEVLOG_INFO("\n\n");
-			DEVLOG_INFO(iss.str().c_str());
-			DEVLOG_INFO("\n\n");
 			m_poIArchive = new boost::archive::text_iarchive(iss);
 			(*m_poIArchive) >> m_poCurrentWP;
 			m_bSetupLoaded = TRUE;
@@ -71,8 +68,6 @@ void FORTE_L2_ExecutionManager::RetreiveWP(){
 	else{
 		DEVLOG_ERROR("Allocation error while desirealizing in L3_ExecutionManager\n");
 	}
-
-
 }
 
 void FORTE_L2_ExecutionManager::executeEvent(int pa_nEIID){
@@ -84,7 +79,6 @@ setup * st;
 		break;
     case scm_nEventRENEWID:
 		RetreiveWP();
-		 st = m_poCurrentWP->get_itsSetup();
 		//No putput event is generated
 		break;
     case scm_nEventNEXTID:

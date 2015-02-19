@@ -56,6 +56,7 @@ data members and sets all the data members.
 
 #include <list>
 #include "GlobalUtils.h"
+#include "devlog.h"
 #include "boost\serialization\base_object.hpp"
 #include "boost\serialization\split_member.hpp"
 #include "boost\serialization\list.hpp"
@@ -1475,6 +1476,13 @@ public:
   ~boolean();
   int isA(int aType);
   void printSelf() = 0;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+  }
 };
 
 /********************************************************************/
@@ -2049,7 +2057,7 @@ private:
 	  ar << BOOST_SERIALIZATION_BASE_OBJECT_NVP(instance);
 	  std::string istr;
 	  if (itsId == NULL){
-		  istr = "NULL";
+		  istr = "";
 	  }
 	  else{
 		  istr = std::string(itsId);
@@ -2066,8 +2074,13 @@ private:
 	  ar >> BOOST_SERIALIZATION_BASE_OBJECT_NVP(instance);
 	  std::string istr;
 	  ar >> istr;
-	  itsId = (char*)GlobalUtils::utils_SerMalloc(istr.length() + 1);
-	  strcpy(itsId, istr.c_str());
+	  if (!istr.empty()){
+		  itsId = (char*)GlobalUtils::utils_SerMalloc(istr.length() + 1);
+		  strcpy(itsId, istr.c_str());
+	  }
+	  else{
+		  itsId = NULL;
+	  }
   }
 
   template<class Archive>
@@ -2221,6 +2234,13 @@ public:
   ~compoundFeatureSelect();
   int isA(int aType);
   void printSelf() = 0;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+  }
 };
 
 /********************************************************************/
@@ -2752,7 +2772,7 @@ private:
 	  ar << boost::serialization::base_object<iso14649CppBase>(*this);
 	  std::string istr;
 	  if (itsId == NULL){
-		  istr = "NULL";
+		  istr = "";
 	  }
 	  else{
 		  istr = std::string(itsId);
@@ -2767,8 +2787,13 @@ private:
 	  ar >> boost::serialization::base_object<iso14649CppBase>(*this);
 	  std::string istr;
 	  ar >> istr;
-	  itsId = (char*)GlobalUtils::utils_SerMalloc(istr.length() + 1);
-	  strcpy(itsId, istr.c_str());
+	  if (!istr.empty()){
+		  itsId = (char*)GlobalUtils::utils_SerMalloc(istr.length() + 1);
+		  strcpy(itsId, istr.c_str());
+	  }
+	  else{
+		  itsId = NULL;
+	  }
   }
 
   template<class Archive>
@@ -3226,6 +3251,13 @@ private:
   advancedBrepShapeRepresentation * asIs;
   advancedBrepShapeRepresentation * toBe;
   advancedBrepShapeRepresentation * removal;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+  }
 };
 
 /********************************************************************/
@@ -3647,6 +3679,13 @@ public:
   ~machineFunctions();
   int isA(int aType);
   void printSelf() = 0;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+  }
 };
 
 /********************************************************************/
@@ -3672,6 +3711,46 @@ public:
   void set_itsId(char * itsIdIn);
 private:
   char * itsId;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive & ar, const unsigned int version) const
+  {
+	  // invoke serialization of the base class 
+	  ar << boost::serialization::base_object<iso14649CppBase>(*this);
+	  std::string istr;
+	  if (itsId == NULL){
+		  istr = "";
+	  }
+	  else{
+		  istr = std::string(itsId);
+	  }
+	  ar << istr;
+  }
+
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version)
+  {
+	  // invoke serialization of the base class 
+	  ar >> boost::serialization::base_object<iso14649CppBase>(*this);
+	  std::string istr;
+	  ar >> istr;
+	  if (!istr.empty()){
+		  itsId = (char*)GlobalUtils::utils_SerMalloc(istr.length() + 1);
+		  strcpy(itsId, istr.c_str());
+	  }
+	  else{
+		  itsId = NULL;
+	  }
+  }
+
+  template<class Archive>
+  void serialize(
+	  Archive & ar,
+	  const unsigned int file_version
+	  ){
+	  boost::serialization::split_member(ar, *this, file_version);
+  }
 };
 
 /********************************************************************/
@@ -3705,6 +3784,46 @@ private:
   char * itsId;
   workpiece * itsWorkpiece;
   parenMachiningOperationList * itsOperations;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive & ar, const unsigned int version) const
+  {
+	  // invoke serialization of the base class 
+	  ar << boost::serialization::base_object<iso14649CppBase>(*this);
+	  std::string istr;
+	  if (itsId == NULL){
+		  istr = "";
+	  }
+	  else{
+		  istr = std::string(itsId);
+	  }
+	  ar << istr;
+  }
+
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version)
+  {
+	  // invoke serialization of the base class 
+	  ar >> boost::serialization::base_object<iso14649CppBase>(*this);
+	  std::string istr;
+	  ar >> istr;
+	  if (!istr.empty()){
+		  itsId = (char*)GlobalUtils::utils_SerMalloc(istr.length() + 1);
+		  strcpy(itsId, istr.c_str());
+	  }
+	  else{
+		  itsId = NULL;
+	  }
+  }
+
+  template<class Archive>
+  void serialize(
+	  Archive & ar,
+	  const unsigned int file_version
+	  ){
+	  boost::serialization::split_member(ar, *this, file_version);
+  }
 };
 
 /********************************************************************/
@@ -3964,6 +4083,13 @@ public:
 private:
   toolpathList * itsToolpath;
   toolDirection * itsToolDirection;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+  }
 };
 
 /********************************************************************/
@@ -5555,6 +5681,13 @@ public:
   ~pocketBottomCondition();
   int isA(int aType);
   void printSelf() = 0;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+  }
 };
 
 /********************************************************************/
@@ -5640,6 +5773,14 @@ public:
   void set_placement(axis2placement3d * placementIn);
 private:
   axis2placement3d * placement;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+	  ar & placement;
+  }
 };
 
 /********************************************************************/
@@ -5682,6 +5823,7 @@ public:
   void printSelf() = 0;
 private:
 
+	BOOST_SERIALIZATION_ASSUME_ABSTRACT(programStructure)
 	friend class boost::serialization::access;
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int version)
@@ -5786,6 +5928,13 @@ public:
   void set_parameterName(char * parameterNameIn);
 private:
   char * parameterName;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+  }
 };
 
 /********************************************************************/
@@ -5819,6 +5968,16 @@ public:
 private:
   cartesianPoint * floorRadiusCenter;
   tolerancedLengthMeasure * floorRadius;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<pocketBottomCondition>(*this);
+	  ar & floorRadiusCenter;
+	  ar & floorRadius;
+  }
 };
 
 /********************************************************************/
@@ -6118,7 +6277,7 @@ private:
 	  ar << boost::serialization::base_object<iso14649CppBase>(*this);
 	  std::string istr;
 	  if (name == NULL){
-		  istr = "NULL";
+		  istr = "";
 	  }
 	  else{
 		  istr = std::string(name);
@@ -6133,8 +6292,14 @@ private:
 	  ar >> boost::serialization::base_object<iso14649CppBase>(*this);
 	  std::string istr;
 	  ar >> istr;
-	  name = (char*)GlobalUtils::utils_SerMalloc(istr.length() + 1);
-	  strcpy(name, istr.c_str());
+	  if (!istr.empty()){
+		  name = (char*)GlobalUtils::utils_SerMalloc(istr.length() + 1);
+		  strcpy(name, istr.c_str());
+	  }
+	  else{
+		  name = NULL;
+	  }
+
   }
 
   template<class Archive>
@@ -6346,7 +6511,7 @@ private:
 	  ar << boost::serialization::base_object<instance>(*this);
 	  std::string istr;
 	  if (itsId == NULL){
-		  istr = "NULL";
+		  istr = "";
 	  }
 	  else{
 		  istr = std::string(itsId);
@@ -6365,8 +6530,13 @@ private:
 	  ar >> boost::serialization::base_object<instance>(*this);
 	  std::string istr;
 	  ar >> istr;
-	  itsId = (char*)GlobalUtils::utils_SerMalloc(istr.length() + 1);
-	  strcpy(itsId, istr.c_str());
+	  if (!istr.empty()){
+		  itsId = (char*)GlobalUtils::utils_SerMalloc(istr.length() + 1);
+		  strcpy(itsId, istr.c_str());
+	  }
+	  else{
+		  itsId = NULL;
+	  }
 	  ar >> itsOrigin;
 	  ar >> itsSecplane;
 	  ar >> itsWorkpieceSetup;
@@ -6746,6 +6916,15 @@ public:
 private:
   real * feedrate;
   toolReferencePoint * feedrateReference;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+	  ar & feedrate;
+	  ar & feedrateReference;
+  }
 };
 
 /********************************************************************/
@@ -6792,6 +6971,14 @@ public:
   ~throughPocketBottomCondition();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<pocketBottomCondition>(*this);
+  }
 };
 
 /********************************************************************/
@@ -6847,6 +7034,14 @@ public:
 private:
   double theoreticalSize;
   plusMinusValue * implicitTolerance;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & theoreticalSize;
+  }
 };
 
 /********************************************************************/
@@ -7213,6 +7408,13 @@ public:
   ~toolReferencePoint();
   int isA(int aType);
   void printSelf() = 0;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+  }
 };
 
 /********************************************************************/
@@ -7494,6 +7696,14 @@ public:
   void set_placement(axis2placement3d * placementIn);
 private:
   axis2placement3d * placement;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+	  ar & placement;
+  }
 };
 
 /********************************************************************/
@@ -7653,6 +7863,14 @@ public:
   void set_featurePlacement(axis2placement3d * featurePlacementIn);
 private:
   axis2placement3d * featurePlacement;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<manufacturingFeature>(*this);
+	  ar & featurePlacement;
+  }
 };
 
 /********************************************************************/
@@ -7682,6 +7900,15 @@ public:
 private:
   real * overlap;
   boolean * allowMultiplePasses;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+	  ar & overlap;
+	  ar & allowMultiplePasses;
+  }
 };
 
 /********************************************************************/
@@ -8013,6 +8240,14 @@ public:
   void set_itsSecplane(elementarySurface * itsSecplaneIn);
 private:
   elementarySurface * itsSecplane;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<executable>(*this);
+	  ar & itsSecplane;
+  }
 };
 
 /********************************************************************/
@@ -8158,9 +8393,10 @@ private:
   {
 	  ar & boost::serialization::base_object<instance>(*this);
 	  ar & boost::serialization::base_object<programStructure>(*this);
-	  //ar & itsElements;
+	  ar & itsElements;
 	  ar & itsChannel;
 	  ar & itsSetup;
+	  ar & itsEffect;
   }
 };
 
@@ -8698,6 +8934,13 @@ public:
   ~closedProfile();
   int isA(int aType);
   void printSelf() = 0;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<profile>(*this);
+  }
 };
 
 /********************************************************************/
@@ -9929,6 +10172,14 @@ public:
   void set_shape(region * shapeIn);
 private:
   region * shape;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<pocketBottomCondition>(*this);
+  }
 };
 
 /********************************************************************/
@@ -10126,6 +10377,16 @@ public:
 private:
   tolerancedLengthMeasure * distance;
   direction * itsDirection;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<travelPath>(*this);
+	  ar & distance;
+	  ar & itsDirection;
+  }
 };
 
 /********************************************************************/
@@ -10230,6 +10491,15 @@ public:
   void set_depth(elementarySurface * depthIn);
 private:
   elementarySurface * depth;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<compoundFeatureSelect>(*this);
+	  ar & boost::serialization::base_object<two5DmanufacturingFeature>(*this);
+	  ar & depth;
+  }
 };
 
 /********************************************************************/
@@ -10277,6 +10547,51 @@ private:
   machiningTool * itsTool;
   technology * itsTechnology;
   machineFunctions * itsMachineFunctions;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive & ar, const unsigned int version) const
+  {
+	  // invoke serialization of the base class 
+	  ar << boost::serialization::base_object<operation>(*this);
+	  std::string istr;
+	  if (itsId == NULL){
+		  istr = "";
+	  }
+	  else{
+		  istr = std::string(itsId);
+	  }
+	  ar << istr;
+	  ar << retractPlane;
+	  ar << startPoint;
+	  ar << itsTool;
+	  ar << itsTechnology;
+	  ar << itsMachineFunctions;
+  }
+
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version)
+  {
+	  // invoke serialization of the base class 
+	  ar >> boost::serialization::base_object<operation>(*this);
+	  std::string istr;
+	  ar >> istr;
+	  if (!istr.empty()){
+		  itsId = (char*)GlobalUtils::utils_SerMalloc(istr.length() + 1);
+		  strcpy(itsId, istr.c_str());
+	  }
+	  else{
+		  itsId = NULL;
+	  }
+  }
+
+  template<class Archive>
+  void serialize(
+	  Archive & ar,
+	  const unsigned int file_version
+	  ){
+	  boost::serialization::split_member(ar, *this, file_version);
+  }
 };
 
 /********************************************************************/
@@ -10316,6 +10631,16 @@ private:
   manufacturingFeature * itsFeature;
   machiningOperation * itsOperation;
   inProcessGeometry * itsEffect;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<workingstep>(*this);
+	  ar & itsFeature;
+	  ar & itsOperation;
+  }
 };
 
 /********************************************************************/
@@ -10386,6 +10711,14 @@ public:
   void set_overcutLength(real * overcutLengthIn);
 private:
   real * overcutLength;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<machiningOperation>(*this);
+	  ar & overcutLength;
+  }
 };
 
 /********************************************************************/
@@ -10520,6 +10853,13 @@ public:
 private:
   approachRetractStrategy * approach;
   approachRetractStrategy * retract;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<millingMachiningOperation>(*this);
+  }
 };
 
 /********************************************************************/
@@ -10713,6 +11053,15 @@ public:
 private:
   double itsParameterValue;
   char * itsParameterUnit;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<propertyParameter>(*this);
+	  ar & itsParameterValue;
+  }
 };
 
 /********************************************************************/
@@ -10734,6 +11083,13 @@ public:
   ~openProfile();
   int isA(int aType);
   void printSelf() = 0;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<profile>(*this);
+  }
 };
 
 /********************************************************************/
@@ -11041,6 +11397,17 @@ private:
   linearProfile * removalBoundary;
   closedProfile * faceBoundary;
   parenBossList * itsBoss;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<machiningFeature>(*this);
+	  ar & courseOfTravel;
+	  ar & removalBoundary;
+	  ar & faceBoundary;
+  }
 };
 
 /********************************************************************/
@@ -11064,6 +11431,14 @@ public:
   ~planarPocketBottomCondition();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<pocketBottomCondition>(*this);
+  }
 };
 
 /********************************************************************/
@@ -11147,6 +11522,17 @@ private:
   pocketBottomCondition * bottomCondition;
   tolerancedLengthMeasure * planarRadius;
   tolerancedLengthMeasure * orthogonalRadius;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<machiningFeature>(*this);
+	  ar & slope;
+	  ar & bottomCondition;
+	  ar & planarRadius;
+	  ar & orthogonalRadius;
+  }
 };
 
 /********************************************************************/
@@ -12274,6 +12660,14 @@ public:
   void set_itsMachiningStrategy(two5DmillingStrategy * itsMachiningStrategyIn);
 private:
   two5DmillingStrategy * itsMachiningStrategy;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<millingTypeOperation>(*this);
+	  ar & itsMachiningStrategy;
+  }
 };
 
 /********************************************************************/
@@ -12857,6 +13251,17 @@ private:
   real * radialCuttingDepth;
   real * allowanceSide;
   real * allowanceBottom;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<two5DmillingOperation>(*this);
+	  ar & axialCuttingDepth;
+	  ar & radialCuttingDepth;
+	  ar & allowanceSide;
+	  ar & allowanceBottom;
+  }
 };
 
 /********************************************************************/
@@ -12897,6 +13302,14 @@ public:
   ~bottomAndSideRoughMilling();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<bottomAndSideMilling>(*this);
+  }
 };
 
 /********************************************************************/
@@ -13295,6 +13708,15 @@ public:
   void set_featureBoundary(closedProfile * featureBoundaryIn);
 private:
   closedProfile * featureBoundary;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<pocket>(*this);
+	  ar & featureBoundary;
+  }
 };
 
 /********************************************************************/
@@ -14062,6 +14484,15 @@ public:
   void set_profileLength(numericParameter * profileLengthIn);
 private:
   numericParameter * profileLength;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<openProfile>(*this);
+	  ar & profileLength;
+  }
 };
 
 /********************************************************************/
@@ -14189,6 +14620,16 @@ public:
 private:
   openProfile * openBoundary;
   openProfile * wallBoundary;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<pocket>(*this);
+	  ar & openBoundary;
+	  ar & wallBoundary;
+  }
 };
 
 /********************************************************************/
@@ -14354,6 +14795,15 @@ public:
 private:
   real * axialCuttingDepth;
   real * allowanceBottom;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<two5DmillingOperation>(*this);
+	  ar & axialCuttingDepth;
+	  ar & allowanceBottom;
+  }
 };
 
 /********************************************************************/
@@ -14392,6 +14842,14 @@ public:
   ~planeRoughMilling();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<planeMilling>(*this);
+  }
 };
 
 /********************************************************************/
@@ -14676,6 +15134,16 @@ private:
   real * axialCuttingDepth;
   real * radialCuttingDepth;
   real * allowanceSide;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<two5DmillingOperation>(*this);
+	  ar & axialCuttingDepth;
+	  ar & radialCuttingDepth;
+	  ar & allowanceSide;
+  }
 };
 
 /********************************************************************/
@@ -14715,6 +15183,14 @@ public:
   ~sideFinishMilling();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<sideMilling>(*this);
+  }
 };
 
 /********************************************************************/
@@ -14754,6 +15230,14 @@ public:
   ~sideRoughMilling();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<sideMilling>(*this);
+  }
 };
 
 /********************************************************************/
@@ -15574,6 +16058,14 @@ public:
   ~bottomAndSideFinishMilling();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<bottomAndSideMilling>(*this);
+  }
 };
 
 /********************************************************************/
@@ -16203,6 +16695,14 @@ public:
   ~planeFinishMilling();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<planeMilling>(*this);
+  }
 };
 
 /********************************************************************/
@@ -16790,8 +17290,20 @@ public:
   int isA(int aType);
   void printSelf();
 };
+BOOST_CLASS_EXPORT_KEY(workplan)
+BOOST_CLASS_EXPORT_KEY(planarFace)
+BOOST_CLASS_EXPORT_KEY(closedPocket)
+BOOST_CLASS_EXPORT_KEY(openPocket)
+BOOST_CLASS_EXPORT_KEY(radiusedPocketBottomCondition)
+BOOST_CLASS_EXPORT_KEY(throughPocketBottomCondition)
+BOOST_CLASS_EXPORT_KEY(planarPocketBottomCondition)
+BOOST_CLASS_EXPORT_KEY(generalPocketBottomCondition)
+BOOST_CLASS_EXPORT_KEY(planeRoughMilling)
+BOOST_CLASS_EXPORT_KEY(planeFinishMilling)
+BOOST_CLASS_EXPORT_KEY(sideRoughMilling)
+BOOST_CLASS_EXPORT_KEY(sideFinishMilling)
+BOOST_CLASS_EXPORT_KEY(bottomAndSideRoughMilling)
+BOOST_CLASS_EXPORT_KEY(bottomAndSideFinishMilling)
 
-
-//BOOST_CLASS_EXPORT_KEY(channel);
 /********************************************************************/
 #endif

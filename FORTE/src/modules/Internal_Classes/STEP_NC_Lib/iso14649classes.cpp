@@ -23445,11 +23445,19 @@ void drilling::printSelf()
   printf(")");
 }
 
-
-//BOOST_CLASS_EXPORT_IMPLEMENT(channel);
-//
-//template void channel::serialize(boost::archive::text_iarchive& arch, const unsigned int version);
-//
-//template void channel::serialize(boost::archive::text_oarchive& arch, const unsigned int version);
+BOOST_CLASS_EXPORT_IMPLEMENT(workplan)
+BOOST_CLASS_EXPORT_IMPLEMENT(planarFace)
+BOOST_CLASS_EXPORT_IMPLEMENT(closedPocket)
+BOOST_CLASS_EXPORT_IMPLEMENT(openPocket)
+BOOST_CLASS_EXPORT_IMPLEMENT(radiusedPocketBottomCondition)
+BOOST_CLASS_EXPORT_IMPLEMENT(throughPocketBottomCondition)
+BOOST_CLASS_EXPORT_IMPLEMENT(planarPocketBottomCondition)
+BOOST_CLASS_EXPORT_IMPLEMENT(generalPocketBottomCondition)
+BOOST_CLASS_EXPORT_IMPLEMENT(planeRoughMilling)
+BOOST_CLASS_EXPORT_IMPLEMENT(planeFinishMilling)
+BOOST_CLASS_EXPORT_IMPLEMENT(sideRoughMilling)
+BOOST_CLASS_EXPORT_IMPLEMENT(sideFinishMilling)
+BOOST_CLASS_EXPORT_IMPLEMENT(bottomAndSideRoughMilling)
+BOOST_CLASS_EXPORT_IMPLEMENT(bottomAndSideFinishMilling)
 /********************************************************************/
 

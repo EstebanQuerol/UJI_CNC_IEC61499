@@ -14,7 +14,6 @@
 #ifdef FORTE_ENABLE_GENERATED_SOURCE_CPP
 #include "L3_SetupTable_gen.cpp"
 #endif
-
 DEFINE_FIRMWARE_FB(FORTE_L3_SetupTable, g_nStringIdL3_SetupTable)
 
 const CStringDictionary::TStringId FORTE_L3_SetupTable::scm_anDataInputNames[] = {g_nStringIdQI, g_nStringIdFamily, g_nStringIdType, g_nStringIdPartID, g_nStringIdSetupID, g_nStringIdMID};
@@ -75,10 +74,8 @@ void FORTE_L3_SetupTable::executeEvent(int pa_nEIID){
 				//Boost Serialization
 				std::ostringstream oss;
 				boost::archive::text_oarchive oa(oss);
-				//oa.template register_type< channel >();
 				oa << m_poCurrentSetup;
 				Setup() = oss.str().c_str();
-				
 			}
 			else{
 				//Invalid setup requested, mark setup as invalid

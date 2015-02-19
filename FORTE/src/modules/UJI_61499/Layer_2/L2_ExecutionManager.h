@@ -19,6 +19,7 @@
 #include "iso14649classes.h"
 #include <sstream>
 #include <string>
+#include <typeinfo>
 #include "boost\serialization\access.hpp"
 #include "boost\archive\text_iarchive.hpp"
 #include "boost\serialization\string.hpp"
