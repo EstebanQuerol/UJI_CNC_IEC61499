@@ -21,7 +21,8 @@
 #include <extevhan.h>
 #include <resource.h>
 #include <devexec.h>
-
+#include "Tool.h"
+#include "Tool_Table.h"
 class FORTE_L0_SendBlk : public CEventSourceFB, public CCNC8070CommunicationHandler, public CExternalEventHandler {
   DECLARE_FIRMWARE_FB(FORTE_L0_SendBlk)
 
@@ -110,6 +111,11 @@ public:
   virtual void OnInterruptedByError();
   /*!\brief Enable this event source
   */
+  virtual void OnMagazineUpdateAdd(const char * pa_sID, int pa_nPos, int pa_nState, long pa_nLocalID);
+  virtual void OnMagazineUpdateDelete();
+  virtual void OnMagazineUpdateDelete(const char * pa_sID, int pa_nPos, int pa_nState, long pa_lITool);
+
+
   virtual void enableHandler(void);
   /*!\brief Disable this event source
   */

@@ -3,6 +3,7 @@
 <FBType Comment="Service Interface Function Block Type" Name="L3_SetupTable">
   <Identification Standard="61499-2"/>
   <VersionInfo Author="EQUEROL" Date="2014-10-28" Organization="UJI" Version="0.0"/>
+  <VersionInfo Author="EQUEROL" Date="2015-01-08" Organization="UJI" Remarks="modified data outputs" Version="1.0"/>
   <CompilerInfo/>
   <InterfaceList>
     <EventInputs>
@@ -23,10 +24,8 @@
       </Event>
       <Event Comment="Confirmation of Requested Service" Name="CNF" Type="Event">
         <With Var="PartInfo"/>
-        <With Var="OPIDS"/>
-        <With Var="OPParams"/>
-        <With Var="Fixture"/>
         <With Var="MID2"/>
+        <With Var="Setup"/>
       </Event>
     </EventOutputs>
     <InputVars>
@@ -41,9 +40,7 @@
       <VarDeclaration Comment="Event Output Qualifier" Name="QO" Type="BOOL"/>
       <VarDeclaration ArraySize="3" Comment="Part ID, Part family, Part type" Name="PartInfo" Type="UINT"/>
       <VarDeclaration Comment="Destination machine identifier" Name="MID2" Type="USINT"/>
-      <VarDeclaration ArraySize="20" Comment="Operation identifiers" Name="OPIDS" Type="UINT"/>
-      <VarDeclaration ArraySize="20" Comment="Operations parameters" Name="OPParams" Type="STRING"/>
-      <VarDeclaration Comment="Setup fixture" Name="Fixture" Type="STRING"/>
+      <VarDeclaration Comment="Subphase of the process plan to be executed " Name="Setup" Type="STRING"/>
     </OutputVars>
   </InterfaceList>
   <Service Comment="Service Interface Function Block Type" LeftInterface="APPLICATION" RightInterface="RESOURCE">

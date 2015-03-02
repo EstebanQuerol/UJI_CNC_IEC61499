@@ -13,10 +13,10 @@
 #define _L3_MACHINEALLOCATOR_H_
 
 #include <basicfb.h>
-#include <forte_time.h>
 #include <forte_usint.h>
-#include <forte_uint.h>
 #include <forte_bool.h>
+#include <forte_time.h>
+#include <forte_uint.h>
 #include <forte_array.h>
 
 class FORTE_L3_MachineAllocator: public CBasicFB{

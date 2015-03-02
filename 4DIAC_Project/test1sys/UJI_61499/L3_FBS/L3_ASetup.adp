@@ -3,6 +3,7 @@
 <AdapterType Name="L3_ASetup">
   <Identification Standard="61499-1"/>
   <VersionInfo Author="EQUEROL" Date="2008-04-22" Organization="UJI" Version="0.0"/>
+  <VersionInfo Author="EQUEROL" Date="2015-01-08" Organization="UJI" Remarks="modified output data" Version="1.0"/>
   <CompilerInfo/>
   <InterfaceList>
     <EventInputs>
@@ -16,11 +17,9 @@
     </EventInputs>
     <EventOutputs>
       <Event Comment="Plugin request to assign a setup" Name="REQ" Type="Event">
-        <With Var="OPIDS"/>
         <With Var="PartInfoP"/>
         <With Var="MID"/>
-        <With Var="OPParams"/>
-        <With Var="Fixture"/>
+        <With Var="Setup"/>
       </Event>
       <Event Comment="Completed setup indication treatement resposne" Name="RSP" Type="Event">
         <With Var="MID"/>
@@ -33,9 +32,7 @@
     <OutputVars>
       <VarDeclaration ArraySize="3" Comment="PartID, Part Family, Part Type" Name="PartInfoP" Type="UINT"/>
       <VarDeclaration Comment="Destination machine identifier" Name="MID" Type="USINT"/>
-      <VarDeclaration ArraySize="20" Comment="Operations Identifiers" Name="OPIDS" Type="UINT"/>
-      <VarDeclaration ArraySize="20" Comment="Operation parameters" Name="OPParams" Type="STRING"/>
-      <VarDeclaration Comment="Fixture to be used with the setup" Name="Fixture" Type="STRING"/>
+      <VarDeclaration Comment="Subphase to be transmitted" Name="Setup" Type="STRING"/>
     </OutputVars>
   </InterfaceList>
   <Service LeftInterface="SOCKET" RightInterface="PLUG">

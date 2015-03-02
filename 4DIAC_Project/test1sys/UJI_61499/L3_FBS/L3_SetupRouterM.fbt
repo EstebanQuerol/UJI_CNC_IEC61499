@@ -88,7 +88,7 @@
       <ECTransition Comment="" Condition="1" Destination="START" Source="CNF1" x="2385.0" y="1265.0"/>
     </ECC>
     <Algorithm Comment="Normally executed algorithm" Name="REQ">
-      <ST Text="IF ASetup.MID = SelMachine THEN&#10;&#9;Select := TRUE;&#10;&#9;FOR i:=0 TO 2 DO&#10;&#9;&#9;ASetup1.PartInfoP[i] :=ASetup.PartInfoP[i];&#10;&#9;END_FOR;&#10;&#9;ASetup1.MID := ASetup.MID;&#10;&#9;FOR i:=0 TO 19 DO&#10;&#9;&#9;ASetup1.OPIDS[i] := ASetup.OPIDS[i];&#10;&#9;&#9;ASetup1.OPParams[i] := ASetup.OPParams[i];&#10;&#9;END_FOR;&#10;&#9;ASetup1.Fixture := ASetup.Fixture;&#10;ELSE&#10;&#9;Select := FALSE;&#10;&#9;FOR i:=0 TO 2 DO&#10;&#9;&#9;ASetup2.PartInfoP[i] :=ASetup.PartInfoP[i];&#10;&#9;END_FOR;&#10;&#9;ASetup2.MID := ASetup.MID;&#10;&#9;FOR i:=0 TO 19 DO&#10;&#9;&#9;ASetup2.OPIDS[i] := ASetup.OPIDS[i];&#10;&#9;&#9;ASetup2.OPParams[i] := ASetup.OPParams[i];&#10;&#9;END_FOR;&#10;&#9;ASetup2.Fixture := ASetup.Fixture;&#10;END_IF;"/>
+      <ST Text="IF ASetup.MID = SelMachine THEN&#10;&#9;Select := TRUE;&#10;&#9;FOR i:=0 TO 2 DO&#10;&#9;&#9;ASetup1.PartInfoP[i] :=ASetup.PartInfoP[i];&#10;&#9;END_FOR;&#10;&#9;ASetup1.MID := ASetup.MID;&#10;&#9;ASetup1.Setup := ASetup.Setup;&#10;ELSE&#10;&#9;Select := FALSE;&#10;&#9;FOR i:=0 TO 2 DO&#10;&#9;&#9;ASetup2.PartInfoP[i] :=ASetup.PartInfoP[i];&#10;&#9;END_FOR;&#10;&#9;ASetup2.MID := ASetup.MID;&#10;    ASetup2.Setup := ASetup.Setup;&#10;END_IF;"/>
     </Algorithm>
     <Algorithm Comment="new algorithm" Name="RSP">
       <ST Text="IF ASetup.MID = SelMachine THEN&#10;&#9;Select := TRUE;&#10;&#9;ASetup1.MID := ASetup.MID;&#10;ELSE&#10;&#9;Select := FALSE;&#10;&#9;ASetup2.MID := ASetup.MID;&#10;END_IF;"/>

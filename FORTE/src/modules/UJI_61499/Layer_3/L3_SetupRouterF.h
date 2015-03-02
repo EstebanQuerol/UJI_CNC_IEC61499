@@ -14,8 +14,8 @@
 
 #include <basicfb.h>
 #include <forte_usint.h>
-#include <forte_uint.h>
 #include <forte_bool.h>
+#include <forte_uint.h>
 #include "L3_ASetup.h"
 
 class FORTE_L3_SetupRouterF: public CBasicFB{

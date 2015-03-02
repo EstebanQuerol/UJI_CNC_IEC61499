@@ -14,8 +14,8 @@
 #include <adapter.h>
 #include <typelib.h>
 #include <forte_usint.h>
-#include <forte_uint.h>
 #include <forte_string.h>
+#include <forte_uint.h>
 #include <forte_array.h>
 
 class FORTE_L3_ASetup: public CAdapter{
@@ -54,24 +54,8 @@ private:
     return *static_cast<CIEC_USINT*>((isSocket()) ? getDO(1) : getDI(1));
   };
 
-  CIEC_UINT *OPIDS() {
-    return (CIEC_UINT*)(*static_cast<CIEC_ARRAY *>((isSocket()) ? getDO(2) : getDI(2)))[0]; //the first element marks the start of the array
-  };
-
-  CIEC_ARRAY &OPIDS_Array() {
-    return *static_cast<CIEC_ARRAY*>((isSocket()) ? getDO(2) : getDI(2));
-  };
-
-  CIEC_STRING *OPParams() {
-    return (CIEC_STRING*)(*static_cast<CIEC_ARRAY *>((isSocket()) ? getDO(3) : getDI(3)))[0]; //the first element marks the start of the array
-  };
-
-  CIEC_ARRAY &OPParams_Array() {
-    return *static_cast<CIEC_ARRAY*>((isSocket()) ? getDO(3) : getDI(3));
-  };
-
-  CIEC_STRING &Fixture() {
-    return *static_cast<CIEC_STRING*>((isSocket()) ? getDO(4) : getDI(4));
+  CIEC_STRING &Setup() {
+    return *static_cast<CIEC_STRING*>((isSocket()) ? getDO(2) : getDI(2));
   };
 
  public:
@@ -106,7 +90,7 @@ private:
 
   static const SFBInterfaceSpec scm_stFBInterfaceSpecPlug;
 
-   FORTE_ADAPTER_DATA_ARRAY(2, 2, 2, 5, 0);
+   FORTE_ADAPTER_DATA_ARRAY(2, 2, 2, 3, 0);
 
 public:
   ADAPTER_CTOR(FORTE_L3_ASetup){

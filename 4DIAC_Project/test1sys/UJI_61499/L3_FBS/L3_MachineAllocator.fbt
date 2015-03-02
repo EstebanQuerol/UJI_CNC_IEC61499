@@ -98,14 +98,14 @@
       <ECTransition Comment="" Condition="1" Destination="WAIT" Source="RSP1" x="3395.0" y="1740.0"/>
       <ECTransition Comment="" Condition="RSP1" Destination="RSP1" Source="WAIT" x="3135.0" y="1615.0"/>
       <ECTransition Comment="" Condition="Timeout" Destination="TIMEOUT" Source="WAIT" x="3855.0" y="1295.0"/>
-      <ECTransition Comment="" Condition="TOCounter &lt;= 3" Destination="SEND" Source="TIMEOUT" x="4425.0" y="605.0"/>
-      <ECTransition Comment="" Condition="TOCounter &gt; 4" Destination="FAILED" Source="TIMEOUT" x="4220.0" y="1740.0"/>
+      <ECTransition Comment="" Condition="TOCounter &lt; 3" Destination="SEND" Source="TIMEOUT" x="4425.0" y="605.0"/>
+      <ECTransition Comment="" Condition="TOCounter &gt;= 3" Destination="FAILED" Source="TIMEOUT" x="4220.0" y="1740.0"/>
       <ECTransition Comment="" Condition="1" Destination="REQ" Source="FAILED" x="4765.0" y="465.0"/>
       <ECTransition Comment="" Condition="RSP2" Destination="RSP2" Source="WAIT" x="2840.0" y="1550.0"/>
       <ECTransition Comment="" Condition="1" Destination="REQ" Source="RSP2" x="2710.0" y="1245.0"/>
     </ECC>
     <Algorithm Comment="Normally executed algorithm" Name="REQ">
-      <ST Text="AssignRemaining := FALSE;&#10;WHILE ( i &lt;15 AND NOT AssignRemaining ) DO&#10;&#9;(*Check if any part can be assigned to a machine*)&#10;&#9;IF IFinalAssign[i] = PartIDIn[i] THEN&#10;&#9;&#9;(*This part can be assigned*)&#10;&#9;&#9;CurrentPartID := PartIDIn[i];&#10;&#9;&#9;CurrentSetupID := SetupIDIn[i];&#10;&#9;&#9;AssignRemaining := TRUE;&#10;&#9;END_IF;&#10;&#9;i := i +1;&#10;END_WHILE;"/>
+      <ST Text="AssignRemaining := FALSE;&#10;WHILE ( i &lt;15 AND NOT AssignRemaining ) DO&#10;&#9;(*Check if any part can be assigned to a machine*)&#10;&#9;IF (IFinalAssign[i] &lt;&gt; 0 ) AND (IFinalAssign[i] = PartIDIn[i]) THEN&#10;&#9;&#9;(*This part can be assigned*)&#10;&#9;&#9;CurrentPartID := PartIDIn[i];&#10;&#9;&#9;CurrentSetupID := SetupIDIn[i];&#10;&#9;&#9;AssignRemaining := TRUE;&#10;&#9;END_IF;&#10;&#9;i := i +1;&#10;END_WHILE;"/>
     </Algorithm>
     <Algorithm Comment="Timeout algorithm" Name="SETTO">
       <ST Text="Delay := TIME#1000ms;"/>
@@ -117,7 +117,7 @@
       <ST Text="FOR i:=0 TO 14 DO&#10;&#9; MFinalAssignOut[i] := IFinalAssign[i];&#10;END_FOR;"/>
     </Algorithm>
     <Algorithm Comment="Assign setup algo" Name="SEND">
-      <ST Text="(*A setup needs to be assigned*)&#10;PartIDOut:= CurrentPartID;&#10;SetupID := CurrentSetupID;&#10;MID := i;"/>
+      <ST Text="(*A setup needs to be assigned*)&#10;PartIDOut:= CurrentPartID;&#10;SetupID := CurrentSetupID;&#10;(*MID is one based index, i is current machine +1*)&#10;MID := i;"/>
     </Algorithm>
     <Algorithm Comment="Response from the machine algo" Name="RSP1">
       <ST Text="TOCounter := 0;&#10;PartIDOut := CurrentPartID;&#10;MID := i;"/>
@@ -129,7 +129,7 @@
       <ST Text="TOCounter := 0;"/>
     </Algorithm>
     <Algorithm Comment="Response from PPTable algo" Name="RSP2">
-      <ST Text="(*Setup was succesfully assigned*)&#10;IFinalAssign[i] := 0;"/>
+      <ST Text="(*Setup was succesfully assigned*)&#10;IF i &lt;&gt; 0 THEN&#10;&#9;IFinalAssign[i-1] := 0;&#10;END_IF;"/>
     </Algorithm>
   </BasicFB>
 </FBType>

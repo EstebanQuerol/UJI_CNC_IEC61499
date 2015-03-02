@@ -105,12 +105,12 @@ void FORTE_L3_PPTable::RequestNeededMachines(){
 	for (i = 0; i < 15; i++){
 		vPartIDOut()[i] = 0;
 		vSetup()[i] = 0;
-		vPriority()[i] = 0;
+		vPriority()[i] = 32766;
 	}
 	for (std::unordered_map<TForteUInt16, ManPart>::iterator it = m_Partmap.begin(); it != m_Partmap.end(); ++it){
 		if (!it->second.IsAssigned()){
 			for (i = 0; i < 15; i++){
-				if (MType()[i] > 0 && m_poThisPP->getSetupTypeByIndex(it->second.GetSetup()) == MType()[i]){
+				if (MType()[i] > 0 && m_poThisPP->getSubphaseTypeByIndex(it->second.GetSetup()) == MType()[i]){
 					//Machine i is needed
 					vPartIDOut()[i] = it->second.GetPartID();
 					vSetup()[i] = it->second.GetSetup();
@@ -136,8 +136,9 @@ void FORTE_L3_PPTable::CalculatePriority(){
 	}
 	else{
 		nAuxUint64 = -1 * ((((TForteUInt64)m_dtCurrentDeadline - (TForteUInt64)dtCurrentTime) / 1000) / 60);
-		if (nAuxUint64 > 32766){
-			m_nCurrentPriority = 32766;
+		if (nAuxUint64 >= 32766){
+			//32765 to avoid system deadlock when only long enough delivery parts are in the system
+			m_nCurrentPriority = 32765;
 		}
 		else{
 			m_nCurrentPriority = nAuxUint64;
@@ -154,10 +155,10 @@ void FORTE_L3_PPTable::executeEvent(int pa_nEIID){
 			m_Partmap.clear();
 		}
 		if (QI()){
-			PPArray::Initilizate();
-			m_poThisPP = PPArray::getProcessPlan(Family(), Type());
+			PP_DDBB::Initilizate();
+			m_poThisPP = PP_DDBB::getProcessPlan(Family(), Type());
 			if (m_poThisPP != NULL){
-				m_nNOS = m_poThisPP->getNumberOfSetups();
+				m_nNOS = m_poThisPP->getNumberOfSubphases();
 				QO() = TRUE;
 			}
 			else{

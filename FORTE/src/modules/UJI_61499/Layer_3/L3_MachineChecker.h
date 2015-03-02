@@ -14,8 +14,8 @@
 
 #include <basicfb.h>
 #include <forte_usint.h>
-#include <forte_int.h>
 #include <forte_uint.h>
+#include <forte_int.h>
 #include <forte_array.h>
 
 class FORTE_L3_MachineChecker: public CBasicFB{

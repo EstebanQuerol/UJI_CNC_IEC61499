@@ -47,7 +47,9 @@
       <ECState Name="RSP2" x="1995.0" y="1520.0">
         <ECAction Output="ASetupC.RSP"/>
       </ECState>
-      <ECState Name="CNF" x="1170.0" y="1570.0"/>
+      <ECState Name="CNF" x="1170.0" y="1570.0">
+        <ECAction Algorithm="CNF"/>
+      </ECState>
       <ECState Name="CNF1" x="885.0" y="1995.0">
         <ECAction Output="ASetup1.CNF"/>
       </ECState>
@@ -86,10 +88,10 @@
       <ECTransition Comment="" Condition="1" Destination="IND" Source="IND2" x="965.0" y="855.0"/>
     </ECC>
     <Algorithm Comment="Normally executed algorithm" Name="REQ1">
-      <ST Text="FOR i:=0 TO 2 DO&#10;&#9;ASetupC.PartInfoP[i] :=ASetup1.PartInfoP[i];&#10;END_FOR;&#10;ASetupC.MID := ASetup1.MID;&#10;FOR i:=0 TO 19 DO&#10;&#9;ASetupC.OPIDS[i] := ASetup1.OPIDS[i];&#10;&#9;ASetupC.OPParams[i] := ASetup1.OPParams[i];&#10;END_FOR;&#10;ASetupC.Fixture := ASetup1.Fixture;"/>
+      <ST Text="FOR i:=0 TO 2 DO&#10;&#9;ASetupC.PartInfoP[i] :=ASetup1.PartInfoP[i];&#10;END_FOR;&#10;ASetupC.MID := ASetup1.MID;&#10;ASetupC.Setup := ASetup1.Setup;"/>
     </Algorithm>
     <Algorithm Comment="new algorithm" Name="REQ2">
-      <ST Text="FOR i:=0 TO 2 DO&#10;&#9;ASetupC.PartInfoP[i] :=ASetup2.PartInfoP[i];&#10;END_FOR;&#10;ASetupC.MID := ASetup2.MID;&#10;FOR i:=0 TO 19 DO&#10;&#9;ASetupC.OPIDS[i] := ASetup2.OPIDS[i];&#10;&#9;ASetupC.OPParams[i] := ASetup2.OPParams[i];&#10;END_FOR;&#10;ASetupC.Fixture := ASetup2.Fixture;"/>
+      <ST Text="FOR i:=0 TO 2 DO&#10;&#9;ASetupC.PartInfoP[i] :=ASetup2.PartInfoP[i];&#10;END_FOR;&#10;ASetupC.MID := ASetup2.MID;&#10;ASetupC.Setup := ASetup2.Setup;"/>
     </Algorithm>
     <Algorithm Comment="new algorithm" Name="RSP1">
       <ST Text="ASetupC.MID := ASetup1.MID;"/>

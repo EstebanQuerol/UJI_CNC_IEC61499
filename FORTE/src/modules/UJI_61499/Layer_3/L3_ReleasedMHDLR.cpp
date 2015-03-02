@@ -75,8 +75,8 @@ void FORTE_L3_ReleasedMHDLR::alg_REQ2(void){
 }
 
 void FORTE_L3_ReleasedMHDLR::alg_REQ1(void){
-if((MID() >= 0) && (MID() < 15)){
-	ReleasedMachines()[MID()] = 2;
+if((MID() > 0) && (MID() < 15)){
+	ReleasedMachines()[MID()-1] = 2;
 };
 }
 

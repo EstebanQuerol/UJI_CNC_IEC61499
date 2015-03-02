@@ -13,10 +13,10 @@
 #define _L3_MMCORE_H_
 
 #include <basicfb.h>
-#include <forte_usint.h>
-#include <forte_int.h>
-#include <forte_uint.h>
 #include <forte_bool.h>
+#include <forte_usint.h>
+#include <forte_uint.h>
+#include <forte_int.h>
 #include <forte_array.h>
 
 class FORTE_L3_MMCore: public CBasicFB{
@@ -152,6 +152,7 @@ virtual void setInitialValues();
   void alg_RSP3(void);
   void alg_RSP4(void);
   void alg_UINIT(void);
+  void alg_IND3(void);
   static const TForteInt16 scm_nStateSTART = 0;
   static const TForteInt16 scm_nStateINIT = 1;
   static const TForteInt16 scm_nStateSTEP1 = 2;

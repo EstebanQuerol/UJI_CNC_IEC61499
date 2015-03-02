@@ -107,10 +107,12 @@
     <ClCompile Include="CNC8070.cpp" />
     <ClCompile Include="CNC8070API.cpp" />
     <ClCompile Include="CYStartSink.cpp" />
+    <ClCompile Include="MTableChangeSink.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TTableChangeSink.cpp" />
     <ClCompile Include="VariableChangeSink.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -118,12 +120,15 @@
     <ClInclude Include="CNC8070.h" />
     <ClInclude Include="CNC8070API.h" />
     <ClInclude Include="CYStartSink.h" />
+    <ClInclude Include="MTableChangeSink.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TTableChangeSink.h" />
     <ClInclude Include="VariableChangeSink.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="CNC8070API.def" />
     <None Include="res\CNC8070API.rc2" />
   </ItemGroup>
@@ -133,4 +138,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="CNC8070API.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

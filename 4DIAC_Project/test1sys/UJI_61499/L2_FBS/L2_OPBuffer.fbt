@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L2_OPBuffer">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-11-28" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Initialization Request" Name="RENEW" Type="Event">
+        <With Var="OPIDIn"/>
+        <With Var="OPParamsIn"/>
+        <With Var="FixtureIn"/>
+      </Event>
+      <Event Comment="Normal Execution Request" Name="NEXT" Type="Event">
+        <With Var="NextOP"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Renew confirmation" Name="CNF0" Type="Event"/>
+      <Event Comment="Initialization Confirm" Name="CNF1" Type="Event">
+        <With Var="FixtureOut"/>
+      </Event>
+      <Event Comment="Execution Confirmation" Name="CNF2" Type="Event">
+        <With Var="OPIDOut"/>
+        <With Var="OPParamsOut"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration ArraySize="20" Comment="Operation identifiers" InitialValue="[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]" Name="OPIDIn" Type="UINT"/>
+      <VarDeclaration ArraySize="20" Comment="Operation parameters" Name="OPParamsIn" Type="STRING"/>
+      <VarDeclaration Comment="Setup fixture" Name="FixtureIn" Type="STRING"/>
+      <VarDeclaration Comment="Next operation position within the buffer" Name="NextOP" Type="USINT"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Operation to be executed identifier" InitialValue="0" Name="OPIDOut" Type="UINT"/>
+      <VarDeclaration Comment="Operation to be executed parameters" Name="OPParamsOut" Type="STRING"/>
+      <VarDeclaration Comment="Fixture to be used in this setup" Name="FixtureOut" Type="STRING"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="550.0" y="425.0"/>
+      <ECState Comment="Normal execution" Name="RENEW" x="1520.0" y="475.0">
+        <ECAction Output="CNF0"/>
+      </ECState>
+      <ECState Name="SetFixture" x="1710.0" y="1045.0">
+        <ECAction Algorithm="SetFixture" Output="CNF1"/>
+      </ECState>
+      <ECState Name="SetOP" x="660.0" y="1465.0">
+        <ECAction Algorithm="SetOP" Output="CNF2"/>
+      </ECState>
+      <ECTransition Comment="" Condition="RENEW" Destination="RENEW" Source="START" x="1150.0" y="595.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="RENEW" x="1225.0" y="375.0"/>
+      <ECTransition Comment="" Condition="NEXT&amp;NextOP = 0" Destination="SetFixture" Source="START" x="1290.0" y="855.0"/>
+      <ECTransition Comment="" Condition="NEXT&amp;NextOP &lt;&gt; 0" Destination="SetOP" Source="START" x="905.0" y="1245.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="SetOP" x="420.0" y="1055.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="SetFixture" x="1095.0" y="965.0"/>
+    </ECC>
+    <Algorithm Comment="new algorithm" Name="SetFixture">
+      <ST Text="FixtureOut := FixtureIn;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="SetOP">
+      <ST Text="OPIDOut := OPIDIn[NextOP -1];&#10;OPParamsOut := OPParamsIn[NextOP - 1];"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

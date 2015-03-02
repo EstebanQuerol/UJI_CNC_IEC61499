@@ -65,26 +65,7 @@ void FORTE_L3_SetupRouterF::alg_REQ1(void){
   }
 ;
 ASetupC().MID() = ASetup1().MID();
-  {
-    bool isi_Up = ((1) > 0);
-    i() = 0;
-    while(!(((isi_Up) && (i() > (19))) ||
-            ((!isi_Up) && (i() < (19))))){
-
-	ASetupC().OPIDS()[i()] = ASetup1().OPIDS()[i()];
-	ASetupC().OPParams()[i()] = ASetup1().OPParams()[i()];
-
-      if(((isi_Up) && ((1) > 0)) || 
-         ((!isi_Up) && ((1) < 0))){
-        i() = i() + (1);
-      }
-      else{
-        i() = i() - (1);
-      }
-    }
-  }
-;
-ASetupC().Fixture() = ASetup1().Fixture();
+ASetupC().Setup() = ASetup1().Setup();
 }
 
 void FORTE_L3_SetupRouterF::alg_REQ2(void){
@@ -107,26 +88,7 @@ void FORTE_L3_SetupRouterF::alg_REQ2(void){
   }
 ;
 ASetupC().MID() = ASetup2().MID();
-  {
-    bool isi_Up = ((1) > 0);
-    i() = 0;
-    while(!(((isi_Up) && (i() > (19))) ||
-            ((!isi_Up) && (i() < (19))))){
-
-	ASetupC().OPIDS()[i()] = ASetup2().OPIDS()[i()];
-	ASetupC().OPParams()[i()] = ASetup2().OPParams()[i()];
-
-      if(((isi_Up) && ((1) > 0)) || 
-         ((!isi_Up) && ((1) < 0))){
-        i() = i() + (1);
-      }
-      else{
-        i() = i() - (1);
-      }
-    }
-  }
-;
-ASetupC().Fixture() = ASetup2().Fixture();
+ASetupC().Setup() = ASetup2().Setup();
 }
 
 void FORTE_L3_SetupRouterF::alg_RSP1(void){
@@ -203,6 +165,7 @@ void FORTE_L3_SetupRouterF::enterStateRSP2(void){
 
 void FORTE_L3_SetupRouterF::enterStateCNF(void){
   m_nECCState = scm_nStateCNF;
+  alg_CNF();
 }
 
 void FORTE_L3_SetupRouterF::enterStateCNF1(void){

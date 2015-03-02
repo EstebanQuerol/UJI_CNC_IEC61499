@@ -60,14 +60,16 @@ void FORTE_L3_MachineChecker::alg_RSP(void){
 
 	MTypeOut()[i()] = MTypeIn()[i()];
 	MStateOut()[i()] = MStateIn()[i()];
-	if((Priority()[i()] < MPriorityIn()[i()])){
-		/* 1st to get into the vector has preference when prios are equal*/
-		MPriorityOut()[i()] = Priority()[i()];
-		MAssignOut()[i()] = PartID()[i()];
-	}
-else{
-		MPriorityOut()[i()] = MPriorityIn()[i()];
-		MAssignOut()[i()] = MAssignIn()[i()];		
+	MPriorityOut()[i()] = MPriorityIn()[i()];
+	MAssignOut()[i()] = MAssignIn()[i()];		
+		
+	if((MStateIn()[i()] == 2)){
+	/* Temp fix #, only take machines that are free and ready*/
+		if((Priority()[i()] < MPriorityIn()[i()])){
+			/* 1st to get into the vector has preference when prios are equal*/
+			MPriorityOut()[i()] = Priority()[i()];
+			MAssignOut()[i()] = PartID()[i()];
+		};
 	};
 
       if(((isi_Up) && ((1) > 0)) || 

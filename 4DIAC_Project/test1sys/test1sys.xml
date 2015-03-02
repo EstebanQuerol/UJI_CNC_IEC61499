@@ -2,23 +2,17 @@
 <libraryElement:AutomationSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:libraryElement="org.fordiac.ide.model.libraryElement" name="test1sys" id="_58HE4AW2EeSiM4Z8Q7JyDw">
   <versionInfo author="Author" organization="4DIAC-Consortium" version="1.0"/>
   <identification/>
-  <application comment="" name="test1app">
-    <fBNetwork href="test1app.xml#//@fbNetwork"/>
-  </application>
-  <application comment="" name="test2app">
-    <fBNetwork href="test2app.xml#//@fbNetwork"/>
-  </application>
-  <application comment="" name="Debug_APP">
-    <fBNetwork href="Debug_APP.xml#//@fbNetwork"/>
-  </application>
-  <application comment="" name="Debug_APP2">
-    <fBNetwork href="Debug_APP2.xml#//@fbNetwork"/>
-  </application>
   <application comment="" name="L3_APP">
     <fBNetwork href="L3_APP.xml#//@fbNetwork"/>
   </application>
   <application comment="" name="Control_GUI">
     <fBNetwork href="Control_GUI.xml#//@fbNetwork"/>
+  </application>
+  <application comment="" name="App_8070_A">
+    <fBNetwork href="App_8070_A.xml#//@fbNetwork"/>
+  </application>
+  <application comment="" name="CNC8070Service">
+    <fBNetwork href="CNC8070Service.xml#//@fbNetwork"/>
   </application>
   <systemConfiguration>
     <systemConfigurationNetwork href="SysConf.xml#//@systemConfigNetwork"/>

@@ -13,6 +13,8 @@
 #include "api8070_i.h"
 #include "CYStartSink.h"
 #include "VariableChangeSink.h"
+#include "MTableChangeSink.h"
+#include "TTableChangeSink.h"
 #include "CNC8070.h"
 
 // CCNC8070APIApp
@@ -26,6 +28,8 @@ public:
 	CComPtr<IFCDualKernel8070> m_oKernel;
 	CComPtr<IFCDualVar8070> m_oVars;
 	CComPtr<IFCDualPlc> m_oPlc;
+	CComPtr<IFCDualTMagazine> m_oMagazine;
+	CComPtr<IFCDualTTable> m_oTTable;
 	CCYStartSink m_oCYStartSink;
 	DWORD m_dwCYStartSinkCookie;
 	CVariableChangeSink m_oVariableChangeSink;
@@ -34,6 +38,10 @@ public:
 	LONG m_lStatus;
 	BOOL m_bConnected;
 	CStringA m_sCurrentBlock;
+	CMTableChangeSink m_oCMTableChangeSink;
+	DWORD m_dwCMTableChangeSinkCookie;
+	CTTableChangeSink m_oCTTableChangeSink;
+	DWORD m_dwCTTableChangeSinkCookie;
 
 public:
 	CCNC8070APILib();
@@ -57,6 +65,9 @@ public:
 	VOID OnExecuting();
 	VOID OnInterrupted();
 	VOID OnInterruptedByError();
+	VOID OnMagazineUpdateAdd(const char * pa_sID, int pa_nPos, int pa_nState, long pa_nLocalID);
+	VOID OnMagazineUpdateDelete(const char * pa_sID, int pa_nPos, int pa_nState, long pa_lITool);
+	VOID OnMagazineUpdateDelete();
 
 	DECLARE_MESSAGE_MAP()
 };

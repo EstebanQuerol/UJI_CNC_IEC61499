@@ -147,7 +147,7 @@ MachineCounter() = 0;
             ((!isi_Up) && (i() < (14))))){
 
 	MFinalAssignP()[i()] = MAssignS()[i()];
-	if((MFinalAssignS()[i()] != 0)){
+	if((MFinalAssignP()[i()] != 0)){
 		MState()[i()] = 3;
 		MachineCounter() = MachineCounter()+1;
 	};
@@ -172,13 +172,16 @@ void FORTE_L3_MMCore::alg_RSP4(void){
     while(!(((isi_Up) && (i() > (14))) ||
             ((!isi_Up) && (i() < (14))))){
 
-	if((MFinalAssignS()[i()] == 0)){
-		/* Assignation succeed*/
-		MState()[i()] = 4;
-	}
+	if((MState()[i()] == 3)){
+		/* modify only machines that were being assigned*/
+		if((MFinalAssignS()[i()] == 0)){
+			/* Assignation succeed*/
+			MState()[i()] = 4;
+		}
 else{
-		/* Assignation failed, mark machine as free, will handle its real state in next cycle*/
-		MState()[i()] = 2;
+			/* Assignation failed, mark machine as free, will handle its real state in next cycle*/
+			MState()[i()] = 2;
+		};
 	};
 
       if(((isi_Up) && ((1) > 0)) || 
@@ -195,6 +198,29 @@ else{
 
 void FORTE_L3_MMCore::alg_UINIT(void){
 QO() = false;
+}
+
+void FORTE_L3_MMCore::alg_IND3(void){
+  {
+    bool isi_Up = ((1) > 0);
+    i() = 0;
+    while(!(((isi_Up) && (i() > (14))) ||
+            ((!isi_Up) && (i() < (14))))){
+
+	MStateP()[i()] = MState()[i()];
+	MAssignP()[i()] = 0;
+	MPriority()[i()] = 32766;
+
+      if(((isi_Up) && ((1) > 0)) || 
+         ((!isi_Up) && ((1) < 0))){
+        i() = i() + (1);
+      }
+      else{
+        i() = i() - (1);
+      }
+    }
+  }
+;
 }
 
 
@@ -230,6 +256,7 @@ void FORTE_L3_MMCore::enterStateRSP2(void){
 
 void FORTE_L3_MMCore::enterStateFREEMACHINE(void){
   m_nECCState = scm_nStateFREEMACHINE;
+  alg_IND3();
   sendOutputEvent( scm_nEventIND3ID);
 }
 

@@ -3,25 +3,25 @@
   <children xsi:type="org.fordiac.ide.model.ui:FBView" fb="//@fbNetwork/@fBs.0">
     <position x="133" y="95"/>
     <backgroundColor red="255" green="255" blue="255"/>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.0/@interface/@eventInputs.0" inConnections="//@connections.58" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.0/@interface/@eventInputs.0" inConnections="//@connections.55" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.4/@interfaceElements.0"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.0/@interface/@eventInputs.1" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.4/@interfaceElements.1"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.0/@interface/@inputVars.0" inConnections="//@connections.59" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.0/@interface/@inputVars.0" inConnections="//@connections.56" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.4/@interfaceElements.2"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.0/@interface/@inputVars.1" inConnections="//@connections.36" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.0/@interface/@inputVars.1" inConnections="//@connections.33" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.4/@interfaceElements.3"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.0/@interface/@inputVars.2" inConnections="//@connections.37" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.0/@interface/@inputVars.2" inConnections="//@connections.34" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.4/@interfaceElements.4"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.0/@interface/@inputVars.3" inConnections="//@connections.38" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.0/@interface/@inputVars.3" inConnections="//@connections.35" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.4/@interfaceElements.5"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.0/@interface/@inputVars.4" inConnections="//@connections.39" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.0/@interface/@inputVars.4" inConnections="//@connections.36" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.4/@interfaceElements.6"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.0/@interface/@eventOutputs.0" outConnections="//@connections.0" fbNetwork="//@fbNetwork">
@@ -30,7 +30,7 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.0/@interface/@eventOutputs.1" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.4/@interfaceElements.8"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.0/@interface/@outputVars.0" outConnections="//@connections.50" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.0/@interface/@outputVars.0" outConnections="//@connections.47" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.4/@interfaceElements.9"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.0/@interface/@outputVars.1" outConnections="//@connections.1" fbNetwork="//@fbNetwork">
@@ -96,7 +96,7 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.3/@interface/@inputVars.1" inConnections="//@connections.5" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.2/@interfaceElements.2"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.3/@interface/@eventOutputs.0" outConnections="//@connections.6 //@connections.55" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.3/@interface/@eventOutputs.0" outConnections="//@connections.6 //@connections.52" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.2/@interfaceElements.3"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.3/@interface/@outputVars.0" outConnections="//@connections.12" fbNetwork="//@fbNetwork">
@@ -179,10 +179,10 @@
   <children xsi:type="org.fordiac.ide.model.ui:FBView" fb="//@fbNetwork/@fBs.7">
     <position x="1159" y="-76"/>
     <backgroundColor red="255" green="255" blue="255"/>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.7/@interface/@eventInputs.0" inConnections="//@connections.51" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.7/@interface/@eventInputs.0" inConnections="//@connections.48" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.15/@interfaceElements.0"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.7/@interface/@inputVars.0" inConnections="//@connections.49" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.7/@interface/@inputVars.0" inConnections="//@connections.46" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.15/@interfaceElements.1"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.7/@interface/@inputVars.1" fbNetwork="//@fbNetwork">
@@ -194,19 +194,19 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.7/@interface/@inputVars.3" inConnections="//@connections.12" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.15/@interfaceElements.4"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.7/@interface/@inputVars.4" inConnections="//@connections.31" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.7/@interface/@inputVars.4" inConnections="//@connections.28" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.15/@interfaceElements.5"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.7/@interface/@eventOutputs.0" outConnections="//@connections.17 //@connections.52" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.7/@interface/@eventOutputs.0" outConnections="//@connections.17 //@connections.49" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.15/@interfaceElements.6"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.7/@interface/@outputVars.0" outConnections="//@connections.46" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.7/@interface/@outputVars.0" outConnections="//@connections.43" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.15/@interfaceElements.7"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.7/@interface/@outputVars.1" outConnections="//@connections.32" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.7/@interface/@outputVars.1" outConnections="//@connections.29" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.15/@interfaceElements.8"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.7/@interface/@outputVars.2" outConnections="//@connections.21" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.7/@interface/@outputVars.2" outConnections="//@connections.61" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.15/@interfaceElements.9"/>
     </interfaceElements>
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.15"/>
@@ -214,10 +214,10 @@
   <children xsi:type="org.fordiac.ide.model.ui:FBView" fb="//@fbNetwork/@fBs.8">
     <position x="1159" y="133"/>
     <backgroundColor red="255" green="255" blue="255"/>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.8/@interface/@eventInputs.0" inConnections="//@connections.52" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.8/@interface/@eventInputs.0" inConnections="//@connections.49" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.9/@interfaceElements.0"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.8/@interface/@inputVars.0" inConnections="//@connections.46" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.8/@interface/@inputVars.0" inConnections="//@connections.43" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.9/@interfaceElements.1"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.8/@interface/@inputVars.1" fbNetwork="//@fbNetwork">
@@ -229,16 +229,16 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.8/@interface/@inputVars.3" inConnections="//@connections.13" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.9/@interfaceElements.4"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.8/@interface/@inputVars.4" inConnections="//@connections.32" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.8/@interface/@inputVars.4" inConnections="//@connections.29" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.9/@interfaceElements.5"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.8/@interface/@eventOutputs.0" outConnections="//@connections.53" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.8/@interface/@eventOutputs.0" outConnections="//@connections.50" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.9/@interfaceElements.6"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.8/@interface/@outputVars.0" outConnections="//@connections.47" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.8/@interface/@outputVars.0" outConnections="//@connections.44" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.9/@interfaceElements.7"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.8/@interface/@outputVars.1" outConnections="//@connections.33" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.8/@interface/@outputVars.1" outConnections="//@connections.30" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.9/@interfaceElements.8"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.8/@interface/@outputVars.2" outConnections="//@connections.20" fbNetwork="//@fbNetwork">
@@ -249,10 +249,10 @@
   <children xsi:type="org.fordiac.ide.model.ui:FBView" fb="//@fbNetwork/@fBs.9">
     <position x="1159" y="342"/>
     <backgroundColor red="255" green="255" blue="255"/>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.9/@interface/@eventInputs.0" inConnections="//@connections.53" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.9/@interface/@eventInputs.0" inConnections="//@connections.50" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.8/@interfaceElements.0"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.9/@interface/@inputVars.0" inConnections="//@connections.47" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.9/@interface/@inputVars.0" inConnections="//@connections.44" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.8/@interfaceElements.1"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.9/@interface/@inputVars.1" fbNetwork="//@fbNetwork">
@@ -264,19 +264,19 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.9/@interface/@inputVars.3" inConnections="//@connections.14" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.8/@interfaceElements.4"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.9/@interface/@inputVars.4" inConnections="//@connections.33" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.9/@interface/@inputVars.4" inConnections="//@connections.30" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.8/@interfaceElements.5"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.9/@interface/@eventOutputs.0" outConnections="//@connections.16 //@connections.54" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.9/@interface/@eventOutputs.0" outConnections="//@connections.16 //@connections.51" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.8/@interfaceElements.6"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.9/@interface/@outputVars.0" outConnections="//@connections.48" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.9/@interface/@outputVars.0" outConnections="//@connections.45" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.8/@interfaceElements.7"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.9/@interface/@outputVars.1" outConnections="//@connections.34" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.9/@interface/@outputVars.1" outConnections="//@connections.31" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.8/@interfaceElements.8"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.9/@interface/@outputVars.2" outConnections="//@connections.22" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.9/@interface/@outputVars.2" outConnections="//@connections.62" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.8/@interfaceElements.9"/>
     </interfaceElements>
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.8"/>
@@ -284,10 +284,10 @@
   <children xsi:type="org.fordiac.ide.model.ui:FBView" fb="//@fbNetwork/@fBs.10">
     <position x="1159" y="551"/>
     <backgroundColor red="255" green="255" blue="255"/>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.10/@interface/@eventInputs.0" inConnections="//@connections.54" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.10/@interface/@eventInputs.0" inConnections="//@connections.51" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.11/@interfaceElements.0"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.10/@interface/@inputVars.0" inConnections="//@connections.48" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.10/@interface/@inputVars.0" inConnections="//@connections.45" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.11/@interfaceElements.1"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.10/@interface/@inputVars.1" fbNetwork="//@fbNetwork">
@@ -299,19 +299,19 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.10/@interface/@inputVars.3" inConnections="//@connections.15" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.11/@interfaceElements.4"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.10/@interface/@inputVars.4" inConnections="//@connections.34" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.10/@interface/@inputVars.4" inConnections="//@connections.31" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.11/@interfaceElements.5"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.10/@interface/@eventOutputs.0" outConnections="//@connections.56" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.10/@interface/@eventOutputs.0" outConnections="//@connections.53" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.11/@interfaceElements.6"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.10/@interface/@outputVars.0" outConnections="//@connections.57" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.10/@interface/@outputVars.0" outConnections="//@connections.54" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.11/@interfaceElements.7"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.10/@interface/@outputVars.1" outConnections="//@connections.35" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.10/@interface/@outputVars.1" outConnections="//@connections.32" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.11/@interfaceElements.8"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.10/@interface/@outputVars.2" outConnections="//@connections.25" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.10/@interface/@outputVars.2" outConnections="//@connections.23" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.11/@interfaceElements.9"/>
     </interfaceElements>
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.11"/>
@@ -319,16 +319,16 @@
   <children xsi:type="org.fordiac.ide.model.ui:FBView" fb="//@fbNetwork/@fBs.11">
     <position x="1159" y="-361"/>
     <backgroundColor red="255" green="255" blue="255"/>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@eventInputs.0" inConnections="//@connections.55" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@eventInputs.0" inConnections="//@connections.52" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.18/@interfaceElements.0"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@eventInputs.1" inConnections="//@connections.43" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@eventInputs.1" inConnections="//@connections.40" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.18/@interfaceElements.1"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@eventInputs.2" inConnections="//@connections.45" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@eventInputs.2" inConnections="//@connections.42" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.18/@interfaceElements.2"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@inputVars.0" inConnections="//@connections.50" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@inputVars.0" inConnections="//@connections.47" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.18/@interfaceElements.3"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@inputVars.1" fbNetwork="//@fbNetwork">
@@ -337,25 +337,25 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@inputVars.2" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.18/@interfaceElements.5"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@inputVars.3" inConnections="//@connections.40" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@inputVars.3" inConnections="//@connections.37" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.18/@interfaceElements.6"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@inputVars.4" inConnections="//@connections.41" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@inputVars.4" inConnections="//@connections.38" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.18/@interfaceElements.7"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@inputVars.5" inConnections="//@connections.42" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@inputVars.5" inConnections="//@connections.39" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.18/@interfaceElements.8"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@inputVars.6" inConnections="//@connections.35" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@inputVars.6" inConnections="//@connections.32" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.18/@interfaceElements.9"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@eventOutputs.0" outConnections="//@connections.51" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@eventOutputs.0" outConnections="//@connections.48" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.18/@interfaceElements.10"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@outputVars.0" outConnections="//@connections.49" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@outputVars.0" outConnections="//@connections.46" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.18/@interfaceElements.11"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@outputVars.1" outConnections="//@connections.31" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.11/@interface/@outputVars.1" outConnections="//@connections.28" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.18/@interfaceElements.12"/>
     </interfaceElements>
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.18"/>
@@ -372,7 +372,7 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.12/@interface/@inputVars.1" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.14/@interfaceElements.2"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.12/@interface/@inputVars.2" inConnections="//@connections.21" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.12/@interface/@inputVars.2" inConnections="//@connections.61" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.14/@interfaceElements.3"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.12/@interface/@eventOutputs.0" outConnections="//@connections.18" fbNetwork="//@fbNetwork">
@@ -398,10 +398,10 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.13/@interface/@inputVars.2" inConnections="//@connections.20" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.13/@interfaceElements.3"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.13/@interface/@eventOutputs.0" outConnections="//@connections.26" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.13/@interface/@eventOutputs.0" outConnections="//@connections.24" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.13/@interfaceElements.4"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.13/@interface/@outputVars.0" outConnections="//@connections.27" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.13/@interface/@outputVars.0" outConnections="//@connections.63" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.13/@interfaceElements.5"/>
     </interfaceElements>
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.13"/>
@@ -418,13 +418,13 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.14/@interface/@inputVars.1" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.10/@interfaceElements.2"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.14/@interface/@inputVars.2" inConnections="//@connections.22" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.14/@interface/@inputVars.2" inConnections="//@connections.62" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.10/@interfaceElements.3"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.14/@interface/@eventOutputs.0" outConnections="//@connections.23" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.14/@interface/@eventOutputs.0" outConnections="//@connections.21" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.10/@interfaceElements.4"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.14/@interface/@outputVars.0" outConnections="//@connections.24" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.14/@interface/@outputVars.0" outConnections="//@connections.22" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.10/@interfaceElements.5"/>
     </interfaceElements>
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.10"/>
@@ -432,22 +432,22 @@
   <children xsi:type="org.fordiac.ide.model.ui:FBView" fb="//@fbNetwork/@fBs.15">
     <position x="1748" y="494"/>
     <backgroundColor red="255" green="255" blue="255"/>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.15/@interface/@eventInputs.0" inConnections="//@connections.23" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.15/@interface/@eventInputs.0" inConnections="//@connections.21" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.12/@interfaceElements.0"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.15/@interface/@inputVars.0" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.12/@interfaceElements.1"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.15/@interface/@inputVars.1" inConnections="//@connections.24" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.15/@interface/@inputVars.1" inConnections="//@connections.22" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.12/@interfaceElements.2"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.15/@interface/@inputVars.2" inConnections="//@connections.25" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.15/@interface/@inputVars.2" inConnections="//@connections.23" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.12/@interfaceElements.3"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.15/@interface/@eventOutputs.0" outConnections="//@connections.30" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.15/@interface/@eventOutputs.0" outConnections="//@connections.27" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.12/@interfaceElements.4"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.15/@interface/@outputVars.0" outConnections="//@connections.29" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.15/@interface/@outputVars.0" outConnections="//@connections.26" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.12/@interfaceElements.5"/>
     </interfaceElements>
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.12"/>
@@ -455,7 +455,7 @@
   <children xsi:type="org.fordiac.ide.model.ui:FBView" fb="//@fbNetwork/@fBs.16">
     <position x="1957" y="152"/>
     <backgroundColor red="255" green="255" blue="255"/>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.16/@interface/@eventInputs.0" inConnections="//@connections.26" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.16/@interface/@eventInputs.0" inConnections="//@connections.24" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.17/@interfaceElements.0"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.16/@interface/@inputVars.0" fbNetwork="//@fbNetwork">
@@ -464,13 +464,13 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.16/@interface/@inputVars.1" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.17/@interfaceElements.2"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.16/@interface/@inputVars.2" inConnections="//@connections.27" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.16/@interface/@inputVars.2" inConnections="//@connections.63" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.17/@interfaceElements.3"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.16/@interface/@eventOutputs.0" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.17/@interfaceElements.4"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.16/@interface/@outputVars.0" outConnections="//@connections.28" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.16/@interface/@outputVars.0" outConnections="//@connections.25" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.17/@interfaceElements.5"/>
     </interfaceElements>
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.17"/>
@@ -478,16 +478,16 @@
   <children xsi:type="org.fordiac.ide.model.ui:FBView" fb="//@fbNetwork/@fBs.17">
     <position x="2147" y="475"/>
     <backgroundColor red="255" green="255" blue="255"/>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.17/@interface/@eventInputs.0" inConnections="//@connections.30" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.17/@interface/@eventInputs.0" inConnections="//@connections.27" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.16/@interfaceElements.0"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.17/@interface/@inputVars.0" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.16/@interfaceElements.1"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.17/@interface/@inputVars.1" inConnections="//@connections.28" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.17/@interface/@inputVars.1" inConnections="//@connections.25" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.16/@interfaceElements.2"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.17/@interface/@inputVars.2" inConnections="//@connections.29" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.17/@interface/@inputVars.2" inConnections="//@connections.26" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.16/@interfaceElements.3"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.17/@interface/@eventOutputs.0" fbNetwork="//@fbNetwork">
@@ -510,7 +510,7 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.18/@interface/@eventOutputs.0" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.24/@interfaceElements.2"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.18/@interface/@outputVars.0" outConnections="//@connections.36" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.18/@interface/@outputVars.0" outConnections="//@connections.33" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.24/@interfaceElements.3"/>
     </interfaceElements>
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.24"/>
@@ -527,7 +527,7 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.19/@interface/@eventOutputs.0" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.25/@interfaceElements.2"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.19/@interface/@outputVars.0" outConnections="//@connections.37" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.19/@interface/@outputVars.0" outConnections="//@connections.34" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.25/@interfaceElements.3"/>
     </interfaceElements>
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.25"/>
@@ -544,7 +544,7 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.20/@interface/@eventOutputs.0" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.26/@interfaceElements.2"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.20/@interface/@outputVars.0" outConnections="//@connections.38" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.20/@interface/@outputVars.0" outConnections="//@connections.35" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.26/@interfaceElements.3"/>
     </interfaceElements>
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.26"/>
@@ -561,7 +561,7 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.21/@interface/@eventOutputs.0" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.28/@interfaceElements.2"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.21/@interface/@outputVars.0" outConnections="//@connections.39" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.21/@interface/@outputVars.0" outConnections="//@connections.36" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.28/@interfaceElements.3"/>
     </interfaceElements>
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.28"/>
@@ -569,16 +569,16 @@
   <children xsi:type="org.fordiac.ide.model.ui:FBView" fb="//@fbNetwork/@fBs.22">
     <position x="855" y="-171"/>
     <backgroundColor red="255" green="255" blue="255"/>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.22/@interface/@eventInputs.0" inConnections="//@connections.44" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.22/@interface/@eventInputs.0" inConnections="//@connections.41" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.33/@interfaceElements.0"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.22/@interface/@inputVars.0" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.33/@interfaceElements.1"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.22/@interface/@eventOutputs.0" outConnections="//@connections.45" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.22/@interface/@eventOutputs.0" outConnections="//@connections.42" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.33/@interfaceElements.2"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.22/@interface/@outputVars.0" outConnections="//@connections.42" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.22/@interface/@outputVars.0" outConnections="//@connections.39" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.33/@interfaceElements.3"/>
     </interfaceElements>
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.33"/>
@@ -592,10 +592,10 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.23/@interface/@inputVars.0" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.32/@interfaceElements.1"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.23/@interface/@eventOutputs.0" outConnections="//@connections.44" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.23/@interface/@eventOutputs.0" outConnections="//@connections.41" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.32/@interfaceElements.2"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.23/@interface/@outputVars.0" outConnections="//@connections.41" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.23/@interface/@outputVars.0" outConnections="//@connections.38" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.32/@interfaceElements.3"/>
     </interfaceElements>
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.32"/>
@@ -609,10 +609,10 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.24/@interface/@inputVars.0" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.31/@interfaceElements.1"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.24/@interface/@eventOutputs.0" outConnections="//@connections.43" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.24/@interface/@eventOutputs.0" outConnections="//@connections.40" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.31/@interfaceElements.2"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.24/@interface/@outputVars.0" outConnections="//@connections.40" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.24/@interface/@outputVars.0" outConnections="//@connections.37" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.31/@interfaceElements.3"/>
     </interfaceElements>
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.31"/>
@@ -620,10 +620,10 @@
   <children xsi:type="org.fordiac.ide.model.ui:FBView" fb="//@fbNetwork/@fBs.25">
     <position x="1558" y="722"/>
     <backgroundColor red="255" green="255" blue="255"/>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.25/@interface/@eventInputs.0" inConnections="//@connections.56" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.25/@interface/@eventInputs.0" inConnections="//@connections.53" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.35/@interfaceElements.0"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.25/@interface/@inputVars.0" inConnections="//@connections.57" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.25/@interface/@inputVars.0" inConnections="//@connections.54" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.35/@interfaceElements.1"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.25/@interface/@eventOutputs.0" fbNetwork="//@fbNetwork">
@@ -643,80 +643,74 @@
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.26/@interface/@eventInputs.1" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.37/@interfaceElements.1"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.26/@interface/@eventOutputs.0" outConnections="//@connections.58" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.26/@interface/@eventOutputs.0" outConnections="//@connections.55" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.37/@interfaceElements.2"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.26/@interface/@outputVars.0" outConnections="//@connections.59" fbNetwork="//@fbNetwork">
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.26/@interface/@outputVars.0" outConnections="//@connections.56" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.37/@interfaceElements.3"/>
     </interfaceElements>
     <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.37"/>
   </children>
   <children xsi:type="org.fordiac.ide.model.ui:FBView" fb="//@fbNetwork/@fBs.27">
-    <position x="2451" y="430"/>
-    <backgroundColor red="255" green="255" blue="255"/>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@eventInputs.0" inConnections="//@connections.61" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.38/@interfaceElements.0"/>
-    </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@eventInputs.1" inConnections="//@connections.63" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.38/@interfaceElements.1"/>
-    </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@inputVars.0" inConnections="//@connections.62" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.38/@interfaceElements.2"/>
-    </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@inputVars.1" inConnections="//@connections.60" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.38/@interfaceElements.3"/>
-    </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@inputVars.2" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.38/@interfaceElements.4"/>
-    </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@eventOutputs.0" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.38/@interfaceElements.5"/>
-    </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@eventOutputs.1" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.38/@interfaceElements.6"/>
-    </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@outputVars.0" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.38/@interfaceElements.7"/>
-    </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@outputVars.1" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.38/@interfaceElements.8"/>
-    </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@outputVars.2" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.38/@interfaceElements.9"/>
-    </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@outputVars.3" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.38/@interfaceElements.10"/>
-    </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@outputVars.4" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.38/@interfaceElements.11"/>
-    </interfaceElements>
-    <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.38"/>
-  </children>
-  <children xsi:type="org.fordiac.ide.model.ui:FBView" fb="//@fbNetwork/@fBs.28">
     <position x="2147" y="684"/>
     <backgroundColor red="255" green="255" blue="255"/>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.28/@interface/@eventInputs.0" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.43/@interfaceElements.0"/>
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@eventInputs.0" fbNetwork="//@fbNetwork">
+      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.41/@interfaceElements.0"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.28/@interface/@eventInputs.1" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.43/@interfaceElements.1"/>
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@eventInputs.1" fbNetwork="//@fbNetwork">
+      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.41/@interfaceElements.1"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.28/@interface/@inputVars.0" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.43/@interfaceElements.2"/>
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@inputVars.0" fbNetwork="//@fbNetwork">
+      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.41/@interfaceElements.2"/>
+    </interfaceElements>
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@inputVars.1" fbNetwork="//@fbNetwork">
+      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.41/@interfaceElements.3"/>
+    </interfaceElements>
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@eventOutputs.0" outConnections="//@connections.57" fbNetwork="//@fbNetwork">
+      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.41/@interfaceElements.4"/>
+    </interfaceElements>
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@eventOutputs.1" outConnections="//@connections.58" fbNetwork="//@fbNetwork">
+      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.41/@interfaceElements.5"/>
+    </interfaceElements>
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.27/@interface/@outputVars.0" outConnections="//@connections.59" fbNetwork="//@fbNetwork">
+      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.41/@interfaceElements.6"/>
+    </interfaceElements>
+    <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.41"/>
+  </children>
+  <children xsi:type="org.fordiac.ide.model.ui:FBView" fb="//@fbNetwork/@fBs.28">
+    <position x="2451" y="430"/>
+    <backgroundColor red="255" green="255" blue="255"/>
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.28/@interface/@eventInputs.0" inConnections="//@connections.57" fbNetwork="//@fbNetwork">
+      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.42/@interfaceElements.0"/>
+    </interfaceElements>
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.28/@interface/@eventInputs.1" inConnections="//@connections.58" fbNetwork="//@fbNetwork">
+      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.42/@interfaceElements.1"/>
+    </interfaceElements>
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.28/@interface/@inputVars.0" inConnections="//@connections.59" fbNetwork="//@fbNetwork">
+      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.42/@interfaceElements.2"/>
     </interfaceElements>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.28/@interface/@inputVars.1" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.43/@interfaceElements.3"/>
+      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.42/@interfaceElements.3"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.28/@interface/@eventOutputs.0" outConnections="//@connections.61" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.43/@interfaceElements.4"/>
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.28/@interface/@inputVars.2" inConnections="//@connections.60" fbNetwork="//@fbNetwork">
+      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.42/@interfaceElements.4"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.28/@interface/@eventOutputs.1" outConnections="//@connections.63" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.43/@interfaceElements.5"/>
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.28/@interface/@eventOutputs.0" fbNetwork="//@fbNetwork">
+      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.42/@interfaceElements.5"/>
     </interfaceElements>
-    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.28/@interface/@outputVars.0" outConnections="//@connections.62" fbNetwork="//@fbNetwork">
-      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.43/@interfaceElements.6"/>
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.28/@interface/@eventOutputs.1" fbNetwork="//@fbNetwork">
+      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.42/@interfaceElements.6"/>
     </interfaceElements>
-    <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.43"/>
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.28/@interface/@outputVars.0" fbNetwork="//@fbNetwork">
+      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.42/@interfaceElements.7"/>
+    </interfaceElements>
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.28/@interface/@outputVars.1" fbNetwork="//@fbNetwork">
+      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.42/@interfaceElements.8"/>
+    </interfaceElements>
+    <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.28/@interface/@outputVars.2" fbNetwork="//@fbNetwork">
+      <mappedInterfaceElement href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.42/@interfaceElements.9"/>
+    </interfaceElements>
+    <mappedFB href="SysConf.xml#//@children.0/@resourceContainerView/@resources.4/@uIResourceDiagram/@children.42"/>
   </children>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.0/@interfaceElements.7" destination="//@children.1/@interfaceElements.0">
     <connectionElement xsi:type="libraryElement:EventConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.1"/>
@@ -755,7 +749,7 @@
     <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.5"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.3/@interfaceElements.4" destination="//@children.7/@interfaceElements.4">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.16"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.15"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.4/@interfaceElements.4" destination="//@children.8/@interfaceElements.4">
     <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.7"/>
@@ -764,7 +758,7 @@
     <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.6"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.6/@interfaceElements.4" destination="//@children.10/@interfaceElements.4">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.10"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.9"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.9/@interfaceElements.6" destination="//@children.14/@interfaceElements.0">
     <connectionElement xsi:type="libraryElement:EventConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.6"/>
@@ -776,76 +770,67 @@
     <connectionElement xsi:type="libraryElement:EventConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.8"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.12/@interfaceElements.5" destination="//@children.13/@interfaceElements.2">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.15"/>
-  </connections>
-  <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.8/@interfaceElements.9" destination="//@children.13/@interfaceElements.3">
     <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.14"/>
   </connections>
-  <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.7/@interfaceElements.9" destination="//@children.12/@interfaceElements.3">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.18"/>
-  </connections>
-  <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.9/@interfaceElements.9" destination="//@children.14/@interfaceElements.3">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.9"/>
+  <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.8/@interfaceElements.9" destination="//@children.13/@interfaceElements.3">
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.13"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.14/@interfaceElements.4" destination="//@children.15/@interfaceElements.0">
     <connectionElement xsi:type="libraryElement:EventConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.7"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.14/@interfaceElements.5" destination="//@children.15/@interfaceElements.2">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.12"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.11"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.10/@interfaceElements.9" destination="//@children.15/@interfaceElements.3">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.13"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.12"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.13/@interfaceElements.4" destination="//@children.16/@interfaceElements.0">
     <connectionElement xsi:type="libraryElement:EventConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.11"/>
   </connections>
-  <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.13/@interfaceElements.5" destination="//@children.16/@interfaceElements.3">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.20"/>
-  </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.16/@interfaceElements.5" destination="//@children.17/@interfaceElements.2">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.21"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.18"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.15/@interfaceElements.5" destination="//@children.17/@interfaceElements.3">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.19"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.17"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.15/@interfaceElements.4" destination="//@children.17/@interfaceElements.0">
     <connectionElement xsi:type="libraryElement:EventConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.10"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.11/@interfaceElements.12" destination="//@children.7/@interfaceElements.5">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.23"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.20"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.7/@interfaceElements.8" destination="//@children.8/@interfaceElements.5">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.17"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.16"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.8/@interfaceElements.8" destination="//@children.9/@interfaceElements.5">
     <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.8"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.9/@interfaceElements.8" destination="//@children.10/@interfaceElements.5">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.11"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.10"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.10/@interfaceElements.8" destination="//@children.11/@interfaceElements.9">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.22"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.19"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.18/@interfaceElements.3" destination="//@children.0/@interfaceElements.3">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.27"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.24"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.19/@interfaceElements.3" destination="//@children.0/@interfaceElements.4">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.28"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.25"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.20/@interfaceElements.3" destination="//@children.0/@interfaceElements.5">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.29"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.26"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.21/@interfaceElements.3" destination="//@children.0/@interfaceElements.6">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.34"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.31"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.24/@interfaceElements.3" destination="//@children.11/@interfaceElements.6">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.36"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.33"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.23/@interfaceElements.3" destination="//@children.11/@interfaceElements.7">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.37"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.34"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.22/@interfaceElements.3" destination="//@children.11/@interfaceElements.8">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.38"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.35"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.24/@interfaceElements.2" destination="//@children.11/@interfaceElements.1">
     <connectionElement xsi:type="libraryElement:EventConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.24"/>
@@ -857,19 +842,19 @@
     <connectionElement xsi:type="libraryElement:EventConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.27"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.7/@interfaceElements.7" destination="//@children.8/@interfaceElements.1">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.43"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.40"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.8/@interfaceElements.7" destination="//@children.9/@interfaceElements.1">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.44"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.41"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.9/@interfaceElements.7" destination="//@children.10/@interfaceElements.1">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.45"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.42"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.11/@interfaceElements.11" destination="//@children.7/@interfaceElements.1">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.46"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.43"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.0/@interfaceElements.9" destination="//@children.11/@interfaceElements.3">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.47"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.44"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.11/@interfaceElements.10" destination="//@children.7/@interfaceElements.0">
     <connectionElement xsi:type="libraryElement:EventConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.30"/>
@@ -890,25 +875,34 @@
     <connectionElement xsi:type="libraryElement:EventConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.35"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.10/@interfaceElements.7" destination="//@children.25/@interfaceElements.1">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.48"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.45"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.26/@interfaceElements.2" destination="//@children.0/@interfaceElements.0">
     <connectionElement xsi:type="libraryElement:EventConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.40"/>
   </connections>
   <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.26/@interfaceElements.3" destination="//@children.0/@interfaceElements.2">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.52"/>
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.49"/>
   </connections>
-  <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.17/@interfaceElements.5" destination="//@children.27/@interfaceElements.3">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.54"/>
-  </connections>
-  <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.28/@interfaceElements.4" destination="//@children.27/@interfaceElements.0">
-    <connectionElement xsi:type="libraryElement:EventConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.46"/>
-  </connections>
-  <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.28/@interfaceElements.6" destination="//@children.27/@interfaceElements.2">
-    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.62"/>
-  </connections>
-  <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.28/@interfaceElements.5" destination="//@children.27/@interfaceElements.1">
+  <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.27/@interfaceElements.4" destination="//@children.28/@interfaceElements.0">
     <connectionElement xsi:type="libraryElement:EventConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.47"/>
+  </connections>
+  <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.27/@interfaceElements.5" destination="//@children.28/@interfaceElements.1">
+    <connectionElement xsi:type="libraryElement:EventConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.48"/>
+  </connections>
+  <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.27/@interfaceElements.6" destination="//@children.28/@interfaceElements.2">
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.55"/>
+  </connections>
+  <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.17/@interfaceElements.5" destination="//@children.28/@interfaceElements.4">
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.56"/>
+  </connections>
+  <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.7/@interfaceElements.9" destination="//@children.12/@interfaceElements.3">
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.64"/>
+  </connections>
+  <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.9/@interfaceElements.9" destination="//@children.14/@interfaceElements.3">
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.65"/>
+  </connections>
+  <connections xsi:type="org.fordiac.ide.model.ui:ConnectionView" source="//@children.13/@interfaceElements.5" destination="//@children.16/@interfaceElements.3">
+    <connectionElement xsi:type="libraryElement:DataConnection" href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.66"/>
   </connections>
   <fbNetwork>
     <fBs name="L3_OrderManager_0" identifier="true" id="_f-NxcHAPEeSxx6aPFe01gA" fbtPath="UJI_61499\L3_FBS\L3_OrderManager.fbt">
@@ -931,26 +925,26 @@
         <eventOutputs name="CNF" comment="Execution Confirmation"/>
         <inputVars name="QI" comment="Input event qualifier" isInput="true" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.0/@interface/@eventInputs.0/@with.0">
           <value value="1"/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.52"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.49"/>
         </inputVars>
         <inputVars name="Family" comment="Family od the parts to be manufactured" isInput="true" arraySize="-1" typeName="UINT" withs="//@fbNetwork/@fBs.0/@interface/@eventInputs.1/@with.0">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.27"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.24"/>
         </inputVars>
         <inputVars name="Type" comment="Type of the parts to be manufactured" isInput="true" arraySize="-1" typeName="UINT" withs="//@fbNetwork/@fBs.0/@interface/@eventInputs.1/@with.1">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.28"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.25"/>
         </inputVars>
         <inputVars name="Lotsize" comment="Number of part to be manufactured" isInput="true" arraySize="-1" typeName="UINT" withs="//@fbNetwork/@fBs.0/@interface/@eventInputs.1/@with.2">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.29"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.26"/>
         </inputVars>
         <inputVars name="Deadline" comment="Order delivery date and time" isInput="true" arraySize="-1" typeName="DATE_AND_TIME" withs="//@fbNetwork/@fBs.0/@interface/@eventInputs.1/@with.3">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.34"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.31"/>
         </inputVars>
         <outputVars name="QO" comment="Output event qualifier" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.0/@interface/@eventOutputs.0/@with.0">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.47"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.44"/>
         </outputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_APart" typeName="L3_APart">
           <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.1"/>
@@ -1028,7 +1022,7 @@
           <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.2"/>
         </inputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_APart1" comment="Output Part 1" typeName="L3_APart">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.16"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.15"/>
         </outputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_APart2" comment="Output part 2" typeName="L3_APart">
           <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.0"/>
@@ -1100,7 +1094,7 @@
           <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.5"/>
         </inputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_APart1" comment="Output Part 1" typeName="L3_APart">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.10"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.9"/>
         </outputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_APart2" comment="Output part 2" typeName="L3_APart"/>
       </interface>
@@ -1122,7 +1116,7 @@
         </eventOutputs>
         <inputVars name="QI" comment="Input event qualifier" isInput="true" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.7/@interface/@eventInputs.0/@with.0">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.46"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.43"/>
         </inputVars>
         <inputVars name="Family" comment="Process plan family" isInput="true" arraySize="-1" typeName="UINT" withs="//@fbNetwork/@fBs.7/@interface/@eventInputs.0/@with.1">
           <value value="1"/>
@@ -1132,20 +1126,20 @@
         </inputVars>
         <inputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_APart" isInput="true" typeName="L3_APart">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.16"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.15"/>
         </inputVars>
         <inputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_AAssignMachine_S" isInput="true" typeName="L3_AAssignMachine">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.23"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.20"/>
         </inputVars>
         <outputVars name="QO" comment="Output event qualifier" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.7/@interface/@eventOutputs.0/@with.0">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.43"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.40"/>
         </outputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_AAssignMachine_P" typeName="L3_AAssignMachine">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.17"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.16"/>
         </outputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_ASetup" typeName="L3_ASetup">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.18"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.64"/>
         </outputVars>
       </interface>
       <position x="1204" y="27"/>
@@ -1165,7 +1159,7 @@
         </eventOutputs>
         <inputVars name="QI" comment="Input event qualifier" isInput="true" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.8/@interface/@eventInputs.0/@with.0">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.43"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.40"/>
         </inputVars>
         <inputVars name="Family" comment="Process plan family" isInput="true" arraySize="-1" typeName="UINT" withs="//@fbNetwork/@fBs.8/@interface/@eventInputs.0/@with.1">
           <value value="1"/>
@@ -1179,16 +1173,16 @@
         </inputVars>
         <inputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_AAssignMachine_S" isInput="true" typeName="L3_AAssignMachine">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.17"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.16"/>
         </inputVars>
         <outputVars name="QO" comment="Output event qualifier" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.8/@interface/@eventOutputs.0/@with.0">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.44"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.41"/>
         </outputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_AAssignMachine_P" typeName="L3_AAssignMachine">
           <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.8"/>
         </outputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_ASetup" typeName="L3_ASetup">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.14"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.13"/>
         </outputVars>
       </interface>
       <position x="1103" y="296"/>
@@ -1209,7 +1203,7 @@
         </eventOutputs>
         <inputVars name="QI" comment="Input event qualifier" isInput="true" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.9/@interface/@eventInputs.0/@with.0">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.44"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.41"/>
         </inputVars>
         <inputVars name="Family" comment="Process plan family" isInput="true" arraySize="-1" typeName="UINT" withs="//@fbNetwork/@fBs.9/@interface/@eventInputs.0/@with.1">
           <value value="2"/>
@@ -1226,13 +1220,13 @@
           <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.8"/>
         </inputVars>
         <outputVars name="QO" comment="Output event qualifier" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.9/@interface/@eventOutputs.0/@with.0">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.45"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.42"/>
         </outputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_AAssignMachine_P" typeName="L3_AAssignMachine">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.11"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.10"/>
         </outputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_ASetup" typeName="L3_ASetup">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.9"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.65"/>
         </outputVars>
       </interface>
       <position x="1370" y="423"/>
@@ -1252,7 +1246,7 @@
         </eventOutputs>
         <inputVars name="QI" comment="Input event qualifier" isInput="true" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.10/@interface/@eventInputs.0/@with.0">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.45"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.42"/>
         </inputVars>
         <inputVars name="Family" comment="Process plan family" isInput="true" arraySize="-1" typeName="UINT" withs="//@fbNetwork/@fBs.10/@interface/@eventInputs.0/@with.1">
           <value value="2"/>
@@ -1262,20 +1256,20 @@
         </inputVars>
         <inputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_APart" isInput="true" typeName="L3_APart">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.10"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.9"/>
         </inputVars>
         <inputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_AAssignMachine_S" isInput="true" typeName="L3_AAssignMachine">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.11"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.10"/>
         </inputVars>
         <outputVars name="QO" comment="Output event qualifier" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.10/@interface/@eventOutputs.0/@with.0">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.48"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.45"/>
         </outputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_AAssignMachine_P" typeName="L3_AAssignMachine">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.22"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.19"/>
         </outputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_ASetup" typeName="L3_ASetup">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.13"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.12"/>
         </outputVars>
       </interface>
       <position x="1370" y="622"/>
@@ -1304,10 +1298,10 @@
         </eventOutputs>
         <inputVars name="QI" comment="Input event qualifier" isInput="true" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.11/@interface/@eventInputs.0/@with.0">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.47"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.44"/>
         </inputVars>
         <inputVars name="Period" comment="MMCore execution period" isInput="true" arraySize="-1" typeName="TIME" withs="//@fbNetwork/@fBs.11/@interface/@eventInputs.0/@with.2">
-          <value value="T#1s"/>
+          <value value="T#5s"/>
           <varInitialization initialValue="T#1000ms"/>
         </inputVars>
         <inputVars name="MType" comment="Machine type vector" isInput="true" arraySize="15" typeName="USINT" withs="//@fbNetwork/@fBs.11/@interface/@eventInputs.0/@with.1" array="true">
@@ -1316,25 +1310,25 @@
         </inputVars>
         <inputVars name="MID1" comment="Machine identifier" isInput="true" arraySize="-1" typeName="USINT" withs="//@fbNetwork/@fBs.11/@interface/@eventInputs.1/@with.0">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.36"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.33"/>
         </inputVars>
         <inputVars name="MID2" comment="Machine identifier" isInput="true" arraySize="-1" typeName="USINT" withs="//@fbNetwork/@fBs.11/@interface/@eventInputs.2/@with.0">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.37"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.34"/>
         </inputVars>
         <inputVars name="State" comment="Machine state, true =OK, FALSE=KO" isInput="true" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.11/@interface/@eventInputs.2/@with.1">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.38"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.35"/>
         </inputVars>
         <inputVars xsi:type="libraryElement:AdapterDeclaration" name="AMachine_Socket" isInput="true" typeName="L3_AAssignMachine">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.22"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.19"/>
         </inputVars>
         <outputVars name="QO" comment="Output event qualifier" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.11/@interface/@eventOutputs.0/@with.0">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.46"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.43"/>
         </outputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="AMachine_Plug" typeName="L3_AAssignMachine">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.23"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.20"/>
         </outputVars>
       </interface>
       <position x="1004" y="656"/>
@@ -1357,10 +1351,10 @@
         </inputVars>
         <inputVars xsi:type="libraryElement:AdapterDeclaration" name="ASetup2" isInput="true" typeName="L3_ASetup">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.18"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.64"/>
         </inputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="ASetupC" typeName="L3_ASetup">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.15"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.14"/>
         </outputVars>
       </interface>
       <position x="1546" y="-47"/>
@@ -1380,14 +1374,14 @@
         </inputVars>
         <inputVars xsi:type="libraryElement:AdapterDeclaration" name="ASetup1" isInput="true" typeName="L3_ASetup">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.15"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.14"/>
         </inputVars>
         <inputVars xsi:type="libraryElement:AdapterDeclaration" name="ASetup2" isInput="true" typeName="L3_ASetup">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.14"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.13"/>
         </inputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="ASetupC" typeName="L3_ASetup">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.20"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.66"/>
         </outputVars>
       </interface>
       <position x="1556" y="120"/>
@@ -1410,10 +1404,10 @@
         </inputVars>
         <inputVars xsi:type="libraryElement:AdapterDeclaration" name="ASetup2" isInput="true" typeName="L3_ASetup">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.9"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.65"/>
         </inputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="ASetupC" typeName="L3_ASetup">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.12"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.11"/>
         </outputVars>
       </interface>
       <position x="1705" y="406"/>
@@ -1433,14 +1427,14 @@
         </inputVars>
         <inputVars xsi:type="libraryElement:AdapterDeclaration" name="ASetup1" isInput="true" typeName="L3_ASetup">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.12"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.11"/>
         </inputVars>
         <inputVars xsi:type="libraryElement:AdapterDeclaration" name="ASetup2" isInput="true" typeName="L3_ASetup">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.13"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.12"/>
         </inputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="ASetupC" typeName="L3_ASetup">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.19"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.17"/>
         </outputVars>
       </interface>
       <position x="1761" y="588"/>
@@ -1461,10 +1455,10 @@
         </inputVars>
         <inputVars xsi:type="libraryElement:AdapterDeclaration" name="ASetup2" isInput="true" typeName="L3_ASetup">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.20"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.66"/>
         </inputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="ASetupC" typeName="L3_ASetup">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.21"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.18"/>
         </outputVars>
       </interface>
       <position x="1913" y="321"/>
@@ -1482,14 +1476,14 @@
         </inputVars>
         <inputVars xsi:type="libraryElement:AdapterDeclaration" name="ASetup1" isInput="true" typeName="L3_ASetup">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.21"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.18"/>
         </inputVars>
         <inputVars xsi:type="libraryElement:AdapterDeclaration" name="ASetup2" isInput="true" typeName="L3_ASetup">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.19"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.17"/>
         </inputVars>
         <outputVars xsi:type="libraryElement:AdapterDeclaration" name="ASetupC" typeName="L3_ASetup">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.54"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.56"/>
         </outputVars>
       </interface>
       <position x="2009" y="494"/>
@@ -1506,10 +1500,10 @@
         </eventOutputs>
         <inputVars name="IN" comment="Input event qualifier" isInput="true" arraySize="-1" typeName="UINT" withs="//@fbNetwork/@fBs.18/@interface/@eventInputs.0/@with.0">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.30"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.27"/>
         </inputVars>
         <outputVars name="OUT" comment="Output event qualifier" arraySize="-1" typeName="UINT" withs="//@fbNetwork/@fBs.18/@interface/@eventOutputs.0/@with.0">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.27"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.24"/>
         </outputVars>
       </interface>
       <position x="18" y="34"/>
@@ -1526,10 +1520,10 @@
         </eventOutputs>
         <inputVars name="IN" comment="Input event qualifier" isInput="true" arraySize="-1" typeName="UINT" withs="//@fbNetwork/@fBs.19/@interface/@eventInputs.0/@with.0">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.31"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.28"/>
         </inputVars>
         <outputVars name="OUT" comment="Output event qualifier" arraySize="-1" typeName="UINT" withs="//@fbNetwork/@fBs.19/@interface/@eventOutputs.0/@with.0">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.28"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.25"/>
         </outputVars>
       </interface>
       <position x="20" y="305"/>
@@ -1546,10 +1540,10 @@
         </eventOutputs>
         <inputVars name="IN" comment="Input event qualifier" isInput="true" arraySize="-1" typeName="UINT" withs="//@fbNetwork/@fBs.20/@interface/@eventInputs.0/@with.0">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.32"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.29"/>
         </inputVars>
         <outputVars name="OUT" comment="Output event qualifier" arraySize="-1" typeName="UINT" withs="//@fbNetwork/@fBs.20/@interface/@eventOutputs.0/@with.0">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.29"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.26"/>
         </outputVars>
       </interface>
       <position x="20" y="305"/>
@@ -1566,10 +1560,10 @@
         </eventOutputs>
         <inputVars name="IN" comment="Output data to resource" isInput="true" arraySize="-1" typeName="STRING" withs="//@fbNetwork/@fBs.21/@interface/@eventInputs.0/@with.0">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.35"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.32"/>
         </inputVars>
         <outputVars name="OUT" comment="Input data from resource" arraySize="-1" typeName="DATE_AND_TIME" withs="//@fbNetwork/@fBs.21/@interface/@eventOutputs.0/@with.0">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.34"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.31"/>
         </outputVars>
       </interface>
       <position x="43" y="677"/>
@@ -1587,10 +1581,10 @@
         </eventOutputs>
         <inputVars name="IN" comment="Input event qualifier" isInput="true" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.22/@interface/@eventInputs.0/@with.0">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.41"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.38"/>
         </inputVars>
         <outputVars name="OUT" comment="Output event qualifier" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.22/@interface/@eventOutputs.0/@with.0">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.38"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.35"/>
         </outputVars>
       </interface>
       <position x="874" y="-172"/>
@@ -1608,10 +1602,10 @@
         </eventOutputs>
         <inputVars name="IN" comment="Input event qualifier" isInput="true" arraySize="-1" typeName="USINT" withs="//@fbNetwork/@fBs.23/@interface/@eventInputs.0/@with.0">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.40"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.37"/>
         </inputVars>
         <outputVars name="OUT" comment="Output event qualifier" arraySize="-1" typeName="USINT" withs="//@fbNetwork/@fBs.23/@interface/@eventOutputs.0/@with.0">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.37"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.34"/>
         </outputVars>
       </interface>
       <position x="863" y="-246"/>
@@ -1629,10 +1623,10 @@
         </eventOutputs>
         <inputVars name="IN" comment="Input event qualifier" isInput="true" arraySize="-1" typeName="USINT" withs="//@fbNetwork/@fBs.24/@interface/@eventInputs.0/@with.0">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.39"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.36"/>
         </inputVars>
         <outputVars name="OUT" comment="Output event qualifier" arraySize="-1" typeName="USINT" withs="//@fbNetwork/@fBs.24/@interface/@eventOutputs.0/@with.0">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.36"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.33"/>
         </outputVars>
       </interface>
       <position x="894" y="-352"/>
@@ -1650,10 +1644,10 @@
         </eventOutputs>
         <inputVars name="IN" comment="Input event qualifier" isInput="true" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.25/@interface/@eventInputs.0/@with.0">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.48"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.45"/>
         </inputVars>
         <outputVars name="OUT" comment="Output event qualifier" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.25/@interface/@eventOutputs.0/@with.0">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.49"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.46"/>
         </outputVars>
       </interface>
       <position x="1617" y="741"/>
@@ -1672,100 +1666,92 @@
           <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.40"/>
         </eventOutputs>
         <outputVars name="Q" comment="Current Output State" arraySize="-1" typeName="BOOL" withs="//@fbNetwork/@fBs.26/@interface/@eventOutputs.0/@with.0">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.52"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.49"/>
         </outputVars>
       </interface>
       <position x="-18" y="115"/>
       <resource href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork"/>
     </fBs>
-    <fBs name="L3_L2CommPlug" identifier="true" id="_9W6XUHTREeSJuZnm7Jzfgg" fbtPath="UJI_61499\L3_FBS\L3_L2CommPlug.fbt">
-      <interface sockets="//@fbNetwork/@fBs.27/@interface/@inputVars.1">
-        <eventInputs name="CNF" comment="Initialization Request" isInput="true">
-          <with variables="//@fbNetwork/@fBs.27/@interface/@inputVars.0"/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.46"/>
-        </eventInputs>
-        <eventInputs name="IND" comment="Normal Execution Request" isInput="true">
-          <with variables="//@fbNetwork/@fBs.27/@interface/@inputVars.0"/>
-          <with variables="//@fbNetwork/@fBs.27/@interface/@inputVars.2"/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.47"/>
-        </eventInputs>
-        <eventOutputs name="REQ" comment="Initialization Confirm">
-          <with variables="//@fbNetwork/@fBs.27/@interface/@outputVars.0"/>
-          <with variables="//@fbNetwork/@fBs.27/@interface/@outputVars.1"/>
-          <with variables="//@fbNetwork/@fBs.27/@interface/@outputVars.2"/>
-          <with variables="//@fbNetwork/@fBs.27/@interface/@outputVars.3"/>
-          <with variables="//@fbNetwork/@fBs.27/@interface/@outputVars.4"/>
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.43"/>
-        </eventOutputs>
-        <eventOutputs name="RSP" comment="Execution Confirmation">
-          <with variables="//@fbNetwork/@fBs.27/@interface/@outputVars.1"/>
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.44"/>
-        </eventOutputs>
-        <inputVars name="PartInfoS" comment="Part ID, family, type" isInput="true" arraySize="3" typeName="UINT" withs="//@fbNetwork/@fBs.27/@interface/@eventInputs.0/@with.0 //@fbNetwork/@fBs.27/@interface/@eventInputs.1/@with.0" array="true">
-          <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.62"/>
-        </inputVars>
-        <inputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_ASetup" isInput="true" typeName="L3_ASetup">
-          <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.54"/>
-        </inputVars>
-        <inputVars name="ENDID" comment="Setup execution returned code" isInput="true" typeName="USINT" withs="//@fbNetwork/@fBs.27/@interface/@eventInputs.1/@with.1">
-          <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.65"/>
-        </inputVars>
-        <outputVars name="PartInfoP" comment="Part ID, Family, Type" arraySize="3" typeName="UINT" withs="//@fbNetwork/@fBs.27/@interface/@eventOutputs.0/@with.0" array="true">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.55"/>
-        </outputVars>
-        <outputVars name="MID" comment="Destination machine identifier" typeName="USINT" withs="//@fbNetwork/@fBs.27/@interface/@eventOutputs.0/@with.1 //@fbNetwork/@fBs.27/@interface/@eventOutputs.1/@with.0">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.56"/>
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.60"/>
-        </outputVars>
-        <outputVars name="OPIDS" comment="Operations Identifiers" arraySize="20" typeName="UINT" withs="//@fbNetwork/@fBs.27/@interface/@eventOutputs.0/@with.2" array="true">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.57"/>
-        </outputVars>
-        <outputVars name="OPParams" comment="Operation parameters" arraySize="20" typeName="STRING" withs="//@fbNetwork/@fBs.27/@interface/@eventOutputs.0/@with.3" array="true">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.58"/>
-        </outputVars>
-        <outputVars name="Fixture" comment="Fixture to be used with the setup" typeName="STRING" withs="//@fbNetwork/@fBs.27/@interface/@eventOutputs.0/@with.4">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.59"/>
-        </outputVars>
-      </interface>
-      <position x="2184" y="367"/>
-      <resource href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork"/>
-    </fBs>
     <fBs name="CM_Merge2PartInfo" identifier="true" id="_CSotoHTWEeSJuZnm7Jzfgg" fbtPath="UJI_61499\CM_Merge2PartInfo.fbt">
       <interface>
         <eventInputs name="REQ1" comment="Normal Execution Request" isInput="true">
-          <with variables="//@fbNetwork/@fBs.28/@interface/@inputVars.0"/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.48"/>
+          <with variables="//@fbNetwork/@fBs.27/@interface/@inputVars.0"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.43"/>
         </eventInputs>
         <eventInputs name="REQ2" isInput="true">
-          <with variables="//@fbNetwork/@fBs.28/@interface/@inputVars.1"/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.49"/>
+          <with variables="//@fbNetwork/@fBs.27/@interface/@inputVars.1"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.44"/>
         </eventInputs>
         <eventOutputs name="CNF1" comment="Execution Confirmation">
-          <with variables="//@fbNetwork/@fBs.28/@interface/@outputVars.0"/>
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.46"/>
-        </eventOutputs>
-        <eventOutputs name="CNF2">
-          <with variables="//@fbNetwork/@fBs.28/@interface/@outputVars.0"/>
+          <with variables="//@fbNetwork/@fBs.27/@interface/@outputVars.0"/>
           <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.47"/>
         </eventOutputs>
-        <inputVars name="PartInfo1" comment="" isInput="true" arraySize="3" typeName="UINT" withs="//@fbNetwork/@fBs.28/@interface/@eventInputs.0/@with.0" array="true">
+        <eventOutputs name="CNF2">
+          <with variables="//@fbNetwork/@fBs.27/@interface/@outputVars.0"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.48"/>
+        </eventOutputs>
+        <inputVars name="PartInfo1" comment="" isInput="true" arraySize="3" typeName="UINT" withs="//@fbNetwork/@fBs.27/@interface/@eventInputs.0/@with.0" array="true">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.63"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.51"/>
         </inputVars>
-        <inputVars name="PartInfo2" isInput="true" arraySize="3" typeName="UINT" withs="//@fbNetwork/@fBs.28/@interface/@eventInputs.1/@with.0" array="true">
+        <inputVars name="PartInfo2" isInput="true" arraySize="3" typeName="UINT" withs="//@fbNetwork/@fBs.27/@interface/@eventInputs.1/@with.0" array="true">
           <value/>
-          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.64"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.52"/>
         </inputVars>
-        <outputVars name="PartInfoOut" comment="" arraySize="-1" typeName="UINT" withs="//@fbNetwork/@fBs.28/@interface/@eventOutputs.0/@with.0 //@fbNetwork/@fBs.28/@interface/@eventOutputs.1/@with.0">
-          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.62"/>
+        <outputVars name="PartInfoOut" comment="" arraySize="-1" typeName="UINT" withs="//@fbNetwork/@fBs.27/@interface/@eventOutputs.0/@with.0 //@fbNetwork/@fBs.27/@interface/@eventOutputs.1/@with.0">
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.55"/>
         </outputVars>
       </interface>
       <position x="2197" y="706"/>
       <resource href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork"/>
     </fBs>
-    <application href="test1sys.xml#//@application.4"/>
+    <fBs name="L3_L2CommPlug" identifier="true" id="_9W6XUHTREeSJuZnm7Jzfgg" fbtPath="UJI_61499\L3_FBS\L3_L2CommPlug.fbt">
+      <interface sockets="//@fbNetwork/@fBs.28/@interface/@inputVars.2">
+        <eventInputs name="CNF" comment="Initialization Request" isInput="true">
+          <with variables="//@fbNetwork/@fBs.28/@interface/@inputVars.0"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.47"/>
+        </eventInputs>
+        <eventInputs name="IND" comment="Normal Execution Request" isInput="true">
+          <with variables="//@fbNetwork/@fBs.28/@interface/@inputVars.0"/>
+          <with variables="//@fbNetwork/@fBs.28/@interface/@inputVars.1"/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.48"/>
+        </eventInputs>
+        <eventOutputs name="REQ" comment="Initialization Confirm">
+          <with variables="//@fbNetwork/@fBs.28/@interface/@outputVars.0"/>
+          <with variables="//@fbNetwork/@fBs.28/@interface/@outputVars.1"/>
+          <with variables="//@fbNetwork/@fBs.28/@interface/@outputVars.2"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.52"/>
+        </eventOutputs>
+        <eventOutputs name="RSP" comment="Execution Confirmation">
+          <with variables="//@fbNetwork/@fBs.28/@interface/@outputVars.1"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@eventConnections.49"/>
+        </eventOutputs>
+        <inputVars name="PartInfoS" comment="Part ID, family, type" isInput="true" arraySize="3" typeName="UINT" withs="//@fbNetwork/@fBs.28/@interface/@eventInputs.0/@with.0 //@fbNetwork/@fBs.28/@interface/@eventInputs.1/@with.0" array="true">
+          <value/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.55"/>
+        </inputVars>
+        <inputVars name="ENDID" comment="Setup execution returned code" isInput="true" arraySize="-1" typeName="USINT" withs="//@fbNetwork/@fBs.28/@interface/@eventInputs.1/@with.1">
+          <value/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.63"/>
+        </inputVars>
+        <inputVars xsi:type="libraryElement:AdapterDeclaration" name="L3_ASetup" isInput="true" typeName="L3_ASetup">
+          <value/>
+          <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.56"/>
+        </inputVars>
+        <outputVars name="PartInfoP" comment="Part ID, Family, Type" arraySize="3" typeName="UINT" withs="//@fbNetwork/@fBs.28/@interface/@eventOutputs.0/@with.0" array="true">
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.60"/>
+        </outputVars>
+        <outputVars name="MID" comment="Destination machine identifier" arraySize="-1" typeName="USINT" withs="//@fbNetwork/@fBs.28/@interface/@eventOutputs.0/@with.1 //@fbNetwork/@fBs.28/@interface/@eventOutputs.1/@with.0">
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.57"/>
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.61"/>
+        </outputVars>
+        <outputVars name="Setup" comment="Subphase to be trasmitted" arraySize="-1" typeName="STRING" withs="//@fbNetwork/@fBs.28/@interface/@eventOutputs.0/@with.2">
+          <outputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork/@dataConnections.62"/>
+        </outputVars>
+      </interface>
+      <position x="2451" y="430"/>
+      <resource href="SysConf.xml#//@systemConfigNetwork/@devices.0/@resource.4/@fBNetwork"/>
+    </fBs>
+    <application href="test1sys.xml#//@application.0"/>
   </fbNetwork>
 </org.fordiac.ide.model.ui:UIFBNetwork>

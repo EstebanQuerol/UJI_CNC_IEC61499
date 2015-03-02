@@ -19,28 +19,28 @@ const CStringDictionary::TStringId FORTE_L3_ASetup::scm_anDataInputNames[] = {g_
 
 const CStringDictionary::TStringId FORTE_L3_ASetup::scm_anDataInputTypeIds[] = {g_nStringIdARRAY, 3, g_nStringIdUINT, g_nStringIdUSINT};
 
-const CStringDictionary::TStringId FORTE_L3_ASetup::scm_anDataOutputNames[] = {g_nStringIdPartInfoP, g_nStringIdMID, g_nStringIdOPIDS, g_nStringIdOPParams, g_nStringIdFixture};
+const CStringDictionary::TStringId FORTE_L3_ASetup::scm_anDataOutputNames[] = {g_nStringIdPartInfoP, g_nStringIdMID, g_nStringIdSetup};
 
-const CStringDictionary::TStringId FORTE_L3_ASetup::scm_anDataOutputTypeIds[] = {g_nStringIdARRAY, 3, g_nStringIdUINT, g_nStringIdUSINT, g_nStringIdARRAY, 20, g_nStringIdUINT, g_nStringIdARRAY, 20, g_nStringIdSTRING, g_nStringIdSTRING};
+const CStringDictionary::TStringId FORTE_L3_ASetup::scm_anDataOutputTypeIds[] = {g_nStringIdARRAY, 3, g_nStringIdUINT, g_nStringIdUSINT, g_nStringIdSTRING};
 
 const TDataIOID FORTE_L3_ASetup::scm_anEIWith[] = {0, 255, 0, 1, 255};
 const TForteInt16 FORTE_L3_ASetup::scm_anEIWithIndexes[] = {0, 2, -1};
 const CStringDictionary::TStringId FORTE_L3_ASetup::scm_anEventInputNames[] = {g_nStringIdCNF, g_nStringIdIND};
 
-const TDataIOID FORTE_L3_ASetup::scm_anEOWith[] = {2, 0, 1, 3, 4, 255, 1, 255};
-const TForteInt16 FORTE_L3_ASetup::scm_anEOWithIndexes[] = {0, 6, -1};
+const TDataIOID FORTE_L3_ASetup::scm_anEOWith[] = {0, 1, 2, 255, 1, 255};
+const TForteInt16 FORTE_L3_ASetup::scm_anEOWithIndexes[] = {0, 4, -1};
 const CStringDictionary::TStringId FORTE_L3_ASetup::scm_anEventOutputNames[] = {g_nStringIdREQ, g_nStringIdRSP};
 
 const SFBInterfaceSpec FORTE_L3_ASetup::scm_stFBInterfaceSpecSocket = {
   2,  scm_anEventInputNames,  scm_anEIWith,  scm_anEIWithIndexes,
   2,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  2,  scm_anDataInputNames, scm_anDataInputTypeIds,
-  5,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
+  3,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
   0, 0
 };
 
 const SFBInterfaceSpec FORTE_L3_ASetup::scm_stFBInterfaceSpecPlug = {
   2,  scm_anEventOutputNames,  scm_anEOWith,  scm_anEOWithIndexes,
-  2,  scm_anEventInputNames,  scm_anEIWith, scm_anEIWithIndexes,  5,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
+  2,  scm_anEventInputNames,  scm_anEIWith, scm_anEIWithIndexes,  3,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
   2,  scm_anDataInputNames, scm_anDataInputTypeIds,
   0, 0
 };

@@ -61,7 +61,7 @@
       <ECTransition Comment="" Condition="1" Destination="START" Source="RSP" x="415.0" y="730.0"/>
     </ECC>
     <Algorithm Comment="Response from PPTable algorithm" Name="RSP">
-      <ST Text="FOR i := 0 TO 14 DO&#10;&#9;MTypeOut[i] := MTypeIn[i];&#10;&#9;MStateOut[i] := MStateIn[i];&#10;&#9;IF Priority[i] &lt; MPriorityIn[i] THEN&#10;&#9;&#9;(*1st to get into the vector has preference when prios are equal*)&#10;&#9;&#9;MPriorityOut[i] := Priority[i];&#10;&#9;&#9;MAssignOut[i] := PartID[i];&#10;&#9;ELSE&#10;&#9;&#9;MPriorityOut[i] := MPriorityIn[i];&#10;&#9;&#9;MAssignOut[i] := MAssignIn[i];&#9;&#9;&#10;&#9;END_IF;&#10;END_FOR;"/>
+      <ST Text="FOR i := 0 TO 14 DO&#10;&#9;MTypeOut[i] := MTypeIn[i];&#10;&#9;MStateOut[i] := MStateIn[i];&#10;&#9;MPriorityOut[i] := MPriorityIn[i];&#10;&#9;MAssignOut[i] := MAssignIn[i];&#9;&#9;&#10;&#9;&#9;&#10;&#9;IF MStateIn[i] = 2 THEN&#10;&#9;(*Temp fix #, only take machines that are free and ready*)&#10;&#9;&#9;IF Priority[i] &lt; MPriorityIn[i] THEN&#10;&#9;&#9;&#9;(*1st to get into the vector has preference when prios are equal*)&#10;&#9;&#9;&#9;MPriorityOut[i] := Priority[i];&#10;&#9;&#9;&#9;MAssignOut[i] := PartID[i];&#10;&#9;&#9;END_IF;&#10;&#9;END_IF;&#10;END_FOR;"/>
     </Algorithm>
   </BasicFB>
 </FBType>

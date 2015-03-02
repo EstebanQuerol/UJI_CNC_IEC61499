@@ -177,6 +177,17 @@ void FORTE_L0_SendBlk::OnInterruptedByError()
 	}
 }
 
+void FORTE_L0_SendBlk::OnMagazineUpdateAdd(const char * pa_sID, int pa_nPos, int pa_nState, long pa_nLocalID){
+	Tool_Table::addTool(Tool(std::string(pa_sID), pa_nPos, (Tool_State) pa_nState, pa_nLocalID));
+}
+
+void FORTE_L0_SendBlk::OnMagazineUpdateDelete(){
+	Tool_Table::deleteTable();
+}
+
+void FORTE_L0_SendBlk::OnMagazineUpdateDelete(const char * pa_sID, int pa_nPos, int pa_nState, long pa_lITool){
+
+}
 //CExternalEventsHandler methods implementation
 void FORTE_L0_SendBlk::enableHandler(void){
 

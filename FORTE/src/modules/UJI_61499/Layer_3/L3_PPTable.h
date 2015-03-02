@@ -22,7 +22,7 @@
 #include <unordered_map>
 #include "ManPart.h"
 #include "ProcessPlan.h"
-#include "PPArray.h"
+#include "PP_DDBB.h"
 
 class FORTE_L3_PPTable: public CFunctionBlock{
   DECLARE_FIRMWARE_FB(FORTE_L3_PPTable)
