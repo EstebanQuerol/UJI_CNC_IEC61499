@@ -6,7 +6,7 @@
     <virtualDNSEntries name="IP_GUI" value="127.0.0.1"/>
     <virtualDNSEntries name="MUL_IP_MACHINES" value="127.0.0.1"/>
     <virtualDNSEntries name="IP_CNC8070_A" value="127.0.01"/>
-    <virtualDNSEntries name="localhost" value="127.0.0.1"/>
+    <virtualDNSEntries name="IP_LAYER_1_A" value="127.0.0.1"/>
   </availableDNSCollections>
   <availableDNSCollections name="Multi_PC">
     <virtualDNSEntries name="localhost" value="Value not set"/>

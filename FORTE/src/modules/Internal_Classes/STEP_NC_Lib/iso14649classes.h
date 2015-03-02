@@ -17290,6 +17290,7 @@ public:
   int isA(int aType);
   void printSelf();
 };
+//Bost Serialization exports
 BOOST_CLASS_EXPORT_KEY(workplan)
 BOOST_CLASS_EXPORT_KEY(planarFace)
 BOOST_CLASS_EXPORT_KEY(closedPocket)
