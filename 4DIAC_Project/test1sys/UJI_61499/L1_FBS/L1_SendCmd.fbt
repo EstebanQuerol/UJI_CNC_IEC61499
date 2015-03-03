@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L1_SendCmd">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2015-03-03" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Normal Execution Request" Name="REQ" Type="Event">
+        <With Var="CmdIn"/>
+        <With Var="L1MID"/>
+      </Event>
+      <Event Comment="Cmd reception confirmation" Name="RSP" Type="Event"/>
+      <Event Comment="L0 comm timeout" Name="Timeout" Type="Event"/>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Execution Confirmation" Name="CNF" Type="Event">
+        <With Var="CmdOut"/>
+      </Event>
+      <Event Comment="Communication Failure indication" Name="IND" Type="Event">
+        <With Var="ENDOPID"/>
+      </Event>
+      <Event Comment="Start comm timeout" Name="Start" Type="Event">
+        <With Var="Delay"/>
+      </Event>
+      <Event Comment="Stop comm timeout" Name="Stop" Type="Event"/>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Command string to be sent to the machine" Name="CmdIn" Type="STRING"/>
+      <VarDeclaration Comment="Layer 1 multcast identifier" Name="L1MID" Type="USINT"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Command to be sent to the machine" Name="CmdOut" Type="STRING"/>
+      <VarDeclaration Comment="comm timeout delay" Name="Delay" Type="TIME"/>
+      <VarDeclaration Comment="Indicate upper layer that operation failed" Name="ENDOPID" Type="USINT"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration Comment="Timeout counter" InitialValue="0" Name="TOCounter" Type="USINT"/>
+    </InternalVars>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="550.0" y="425.0"/>
+      <ECState Comment="Normal execution" Name="REQ" x="1330.0" y="475.0">
+        <ECAction Algorithm="REQ" Output="CNF"/>
+        <ECAction Algorithm="START" Output="Start"/>
+      </ECState>
+      <ECState Name="WAIT" x="1330.0" y="760.0"/>
+      <ECState Name="RSP" x="1025.0" y="1040.0">
+        <ECAction Output="Stop"/>
+      </ECState>
+      <ECState Name="TIMEOUT" x="1805.0" y="1045.0">
+        <ECAction Algorithm="TO"/>
+      </ECState>
+      <ECState Name="RETRY" x="2640.0" y="790.0"/>
+      <ECState Name="FAIL" x="2710.0" y="1240.0">
+        <ECAction Algorithm="FAIL" Output="IND"/>
+      </ECState>
+      <ECTransition Comment="" Condition="REQ&amp;L1MID = 150" Destination="REQ" Source="START" x="1085.0" y="375.0"/>
+      <ECTransition Comment="" Condition="1" Destination="WAIT" Source="REQ" x="1450.0" y="665.0"/>
+      <ECTransition Comment="" Condition="RSP" Destination="RSP" Source="WAIT" x="1265.0" y="930.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="RSP" x="890.0" y="790.0"/>
+      <ECTransition Comment="" Condition="Timeout" Destination="TIMEOUT" Source="WAIT" x="1620.0" y="950.0"/>
+      <ECTransition Comment="" Condition="TOCounter &lt;= 3" Destination="RETRY" Source="TIMEOUT" x="2285.0" y="915.0"/>
+      <ECTransition Comment="" Condition="TOCounter &gt;3" Destination="FAIL" Source="TIMEOUT" x="2320.0" y="1345.0"/>
+      <ECTransition Comment="" Condition="1" Destination="REQ" Source="RETRY" x="1825.0" y="285.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="FAIL" x="1440.0" y="1825.0"/>
+    </ECC>
+    <Algorithm Comment="Normally executed algorithm" Name="REQ">
+      <ST Text="CmdOut := CmdIn;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="START">
+      <ST Text="Delay := TIME#1500ms;"/>
+    </Algorithm>
+    <Algorithm Comment="Timeout algo" Name="TO">
+      <ST Text="TOCounter := TOCounter + 1;"/>
+    </Algorithm>
+    <Algorithm Comment="RSP algo" Name="RSP">
+      <ST Text="TOCounter := 0;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="FAIL">
+      <ST Text="TOCounter := 0;&#10;ENDOPID := 1;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

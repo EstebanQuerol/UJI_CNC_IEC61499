@@ -21,6 +21,7 @@
 #define L1MID_PLANAR_FACE 5
 #define L1MID_CLOSED_POCKET 7
 #define L1MID_OPEN_POCKET 8
+#define L1MID_SENDCMD 150
 
 #include <funcbloc.h>
 #include <forte_bool.h>

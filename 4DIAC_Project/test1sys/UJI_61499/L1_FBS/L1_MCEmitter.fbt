@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Layer 1 multicast emitter" Name="L1_MCEmitter">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2015-03-03" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Request multicast send to all blocks in layer 1" Name="REQ" Type="Event">
+        <With Var="OperationIn"/>
+        <With Var="L1MIDIn"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Multicast emission" Name="CNF" Type="Event">
+        <With Var="OperationOut"/>
+        <With Var="L1MIDOut"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Serialized operation" Name="OperationIn" Type="STRING"/>
+      <VarDeclaration Comment="Layer 1 multicast identifier" Name="L1MIDIn" Type="USINT"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Serialized operation" Name="OperationOut" Type="STRING"/>
+      <VarDeclaration Comment="Layer 1 multicast identifier" Name="L1MIDOut" Type="USINT"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="550.0" y="425.0"/>
+      <ECState Comment="Normal execution" Name="REQ" x="215.0" y="750.0">
+        <ECAction Algorithm="REQ" Output="CNF"/>
+      </ECState>
+      <ECTransition Comment="" Condition="REQ" Destination="REQ" Source="START" x="550.0" y="600.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="REQ" x="215.0" y="425.0"/>
+    </ECC>
+    <Algorithm Comment="Normally executed algorithm" Name="REQ">
+      <ST Text="OperationIn := OperationOut;&#10;L1MIDIn := L1MIDOut;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>
