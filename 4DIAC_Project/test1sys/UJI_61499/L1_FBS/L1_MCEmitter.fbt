@@ -36,7 +36,7 @@
       <ECTransition Comment="" Condition="1" Destination="START" Source="REQ" x="215.0" y="425.0"/>
     </ECC>
     <Algorithm Comment="Normally executed algorithm" Name="REQ">
-      <ST Text="OperationIn := OperationOut;&#10;L1MIDIn := L1MIDOut;"/>
+      <ST Text="OperationOut := OperationIn;&#10;L1MIDOut := L1MIDIn;"/>
     </Algorithm>
   </BasicFB>
 </FBType>

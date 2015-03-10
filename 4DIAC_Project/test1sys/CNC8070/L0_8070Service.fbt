@@ -62,6 +62,7 @@
       <Connection Destination="QO" Source="L0_ReqManager.QO" dx1="3815.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="ENDOPID" Source="L0_ReqManager.ENDOPID" dx1="3730.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L0_ReqManager.ServiceState" Source="L0_State_0.ServiceState" dx1="355.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L0_SendBlk.sBlock" Source="Cmd" dx1="0.0" dx2="0.0" dy="0.0"/>
     </DataConnections>
     <EventConnections>
       <Connection Comment="" Destination="L0_CompletedEx.OnReady" Source="L0_StateHandler.OnReady" dx1="0.0" dx2="0.0" dy="0.0"/>

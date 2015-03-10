@@ -11,17 +11,12 @@
 
 #ifndef _L2_EXECUTIONMANAGER_H_
 #define _L2_EXECUTIONMANAGER_H_
+
 #define PART_NOT_FIXED 0
 #define PART_BEING_FIXED 1
 #define PART_FIXED 2
 #define MAX_EXECUTION_RETRY 3
-//L1 multicast identifiers defines
-#define L1MID_NOT_VALID 0
-#define L1MID_SETUP 1
-#define L1MID_PLANAR_FACE 5
-#define L1MID_CLOSED_POCKET 7
-#define L1MID_OPEN_POCKET 8
-#define L1MID_SENDCMD 150
+
 
 #include <funcbloc.h>
 #include <forte_bool.h>
@@ -33,6 +28,7 @@
 #include <typeinfo>
 #include "boost\serialization\access.hpp"
 #include "boost\archive\text_iarchive.hpp"
+#include "boost\archive\text_oarchive.hpp"
 #include "boost\serialization\string.hpp"
 #include "GlobalUtils.h"
 

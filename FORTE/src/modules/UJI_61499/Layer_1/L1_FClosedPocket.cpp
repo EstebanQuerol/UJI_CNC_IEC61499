@@ -43,21 +43,21 @@ const SFBInterfaceSpec FORTE_L1_FClosedPocket::scm_stFBInterfaceSpec = {
 void FORTE_L1_FClosedPocket::executeEvent(int pa_nEIID){
   switch(pa_nEIID){
     case scm_nEventINITID:
-#error add code for INIT event!
+//#error add code for INIT event!
 /*
   do not forget to send output event, calling e.g.
       sendOutputEvent(scm_nEventCNFID);
 */
       break;
     case scm_nEventREQID:
-#error add code for REQ event!
+//#error add code for REQ event!
 /*
   do not forget to send output event, calling e.g.
       sendOutputEvent(scm_nEventCNFID);
 */
       break;
     case scm_nEventRSPID:
-#error add code for RSP event!
+//#error add code for RSP event!
 /*
   do not forget to send output event, calling e.g.
       sendOutputEvent(scm_nEventCNFID);

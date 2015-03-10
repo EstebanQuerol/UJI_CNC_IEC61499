@@ -40,8 +40,8 @@ const SFBInterfaceSpec FORTE_L1_MCEmitter::scm_stFBInterfaceSpec = {
 };
 
 void FORTE_L1_MCEmitter::alg_REQ(void){
-OperationIn() = OperationOut();
-L1MIDIn() = L1MIDOut();
+OperationOut() = OperationIn();
+L1MIDOut() = L1MIDIn();
 }
 
 

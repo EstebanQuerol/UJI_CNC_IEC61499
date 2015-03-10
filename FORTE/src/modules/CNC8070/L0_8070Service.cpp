@@ -90,6 +90,7 @@ const SCFB_FBConnectionData FORTE_L0_8070Service::scm_astDataConnections[] = {
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdCM_Merge2E2USINT, g_nStringIdOut), 3, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL0_ReqManager, g_nStringIdRIDIn), 6},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL0_ReqManager, g_nStringIdQO), 6, GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdQO), -1},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL0_ReqManager, g_nStringIdENDOPID), 6, GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdENDOPID), -1},
+  {GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdCmd), -1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL0_SendBlk, g_nStringIdsBlock), 0},
 };
 
 const SCFB_FBFannedOutConnectionData FORTE_L0_8070Service::scm_astFannedOutDataConnections[] = {
@@ -100,7 +101,7 @@ const SCFB_FBNData FORTE_L0_8070Service::scm_stFBNData = {
   7, scm_astInternalFBs,
   20, scm_astEventConnections,
   0, 0,
-  10, scm_astDataConnections,
+  11, scm_astDataConnections,
   1, scm_astFannedOutDataConnections,
   2, scm_astParamters
 };

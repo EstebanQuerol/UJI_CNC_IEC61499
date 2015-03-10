@@ -51,7 +51,7 @@
       </ECState>
       <ECState Comment="" Name="ExecutionRequested" x="2185.0" y="1235.0"/>
       <ECState Comment="" Name="ExecutionDone" x="2280.0" y="1615.0">
-        <ECAction Algorithm="UPDT" Output="IND"/>
+        <ECAction Algorithm="UPDT" Output="Completed"/>
       </ECState>
       <ECState Name="ServiceDown" x="3420.0" y="475.0">
         <ECAction Output="Completed"/>
@@ -79,7 +79,7 @@
       <ST Text="IF(ExecutionRequested = TRUE) THEN&#10;&#9;ExecutionRequested := FALSE;&#10;&#9;(*TODO: Complete this algorithm to enable service recovery*)&#10;&#9;(*In process action will be lost*)&#10;END_IF;&#10;QO := QI;"/>
     </Algorithm>
     <Algorithm Comment="Normally executed algorithm" Name="REQ">
-      <ST Text="//Verify if service is up&#10;IF ServiceState =1 THEN&#10;&#9;ExecutionRequested := TRUE;&#10;ELSE&#10;&#9;//Service is not up or busy, reject execution request&#10;&#9;//Mark operation as failed but repeatable; TODO: HANDLE the service down case in upper layers&#10;&#9;ExecutionRequested := FALSE;&#10;&#9;ENDOPID := 1;&#10;END_IF;&#10;"/>
+      <ST Text="(*Verify if service is up*)&#10;IF ServiceState =1 THEN&#10;&#9;ExecutionRequested := TRUE;&#10;ELSE&#10;&#9;(*ervice is not up or busy, reject execution request*)&#10;&#9;(*Mark operation as failed but repeatable; TODO: HANDLE the service down case in upper layers*)&#10;&#9;ExecutionRequested := FALSE;&#10;&#9;ENDOPID := 1;&#10;END_IF;&#10;"/>
     </Algorithm>
     <Algorithm Comment="Requested action completed" Name="UPDT">
       <ST Text="(*TODO: improve error handling, add other states*)&#10;IF RIDIn = 0  THEN&#10;&#9;(*Execution success*)&#10;&#9;ENDOPID := 0;&#10;ELSIF RIDIn= 1 THEN&#10;&#9;(*Execution interrupted*)&#10;&#9;ENDOPID := 1;&#10;ELSE&#10;&#9;(*Execution failed*)&#10;&#9;ENDOPID := 2;&#10;END_IF;&#10;ExecutionRequested := FALSE;"/>

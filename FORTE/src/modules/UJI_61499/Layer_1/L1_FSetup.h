@@ -13,10 +13,14 @@
 #define _L1_FSETUP_H_
 
 #include <funcbloc.h>
+#include "L1_GENFeature.h"
 #include <forte_usint.h>
 #include <forte_string.h>
-
-class FORTE_L1_FSetup: public CFunctionBlock{
+#include "GlobalUtils.h"
+#include <list>
+#include <string>
+#include <sstream>
+class FORTE_L1_FSetup : public CFunctionBlock, public L1_GENFeature{
   DECLARE_FIRMWARE_FB(FORTE_L1_FSetup)
 
 private:

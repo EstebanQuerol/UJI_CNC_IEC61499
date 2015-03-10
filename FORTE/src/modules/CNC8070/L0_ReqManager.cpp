@@ -62,11 +62,14 @@ QO() = QI();
 }
 
 void FORTE_L0_ReqManager::alg_REQ(void){
-// Verify if service is upif((ServiceState() == 1)){
+/* Verify if service is up*/
+if((ServiceState() == 1)){
 	ExecutionRequested() = true;
 }
 else{
-	// Service is not up or busy, reject execution request	// Mark operation as failed but repeatable; TODO: HANDLE the service down case in upper layers	ExecutionRequested() = false;
+	/* ervice is not up or busy, reject execution request*/
+	/* Mark operation as failed but repeatable; TODO: HANDLE the service down case in upper layers*/
+	ExecutionRequested() = false;
 	ENDOPID() = 1;
 };
 
@@ -114,7 +117,7 @@ void FORTE_L0_ReqManager::enterStateExecutionRequested(void){
 void FORTE_L0_ReqManager::enterStateExecutionDone(void){
   m_nECCState = scm_nStateExecutionDone;
   alg_UPDT();
-  sendOutputEvent( scm_nEventINDID);
+  sendOutputEvent( scm_nEventCompletedID);
 }
 
 void FORTE_L0_ReqManager::enterStateServiceDown(void){

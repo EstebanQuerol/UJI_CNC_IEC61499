@@ -6467,7 +6467,7 @@
                 <value/>
               </inputVars>
               <inputVars name="ID" comment="Connection Identifier" isInput="true" arraySize="-1" typeName="WSTRING" withs="//@systemConfigNetwork/@devices.2/@resource.3/@fBNetwork/@fBs.6/@interface/@eventInputs.0/@with.1">
-                <value value="%IP_LAYER_1_A%:63006"/>
+                <value value="%IP_LAYER_2_A%:64102"/>
               </inputVars>
               <inputVars name="SD_1" comment="Data to Send" isInput="true" arraySize="-1" inputConnections="//@systemConfigNetwork/@devices.2/@resource.3/@fBNetwork/@dataConnections.4" typeName="ANY" withs="//@systemConfigNetwork/@devices.2/@resource.3/@fBNetwork/@fBs.6/@interface/@eventInputs.1/@with.1">
                 <value/>

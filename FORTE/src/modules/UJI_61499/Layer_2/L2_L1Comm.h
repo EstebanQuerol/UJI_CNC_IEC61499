@@ -83,7 +83,6 @@ private:
    FORTE_BASIC_FB_DATA_ARRAY(4, 3, 4, 1, 0);
 
 virtual void setInitialValues();
-  void alg_INIT(void);
   void alg_SEND(void);
   void alg_DT(void);
   void alg_RESET(void);

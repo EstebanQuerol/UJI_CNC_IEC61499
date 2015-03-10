@@ -62,15 +62,17 @@ void FORTE_L2_ExecutionManager::RetreiveWP(){
 		if (-1 != Setup().toString(pacTempString, static_cast<unsigned int>(Setup().length() + 1), 1)){
 			iss.str(std::string(pacTempString));
 			m_poIArchive = new boost::archive::text_iarchive(iss);
-			(*m_poIArchive) >> m_poCurrentWP;
-			m_itCurrentElement = m_poCurrentWP->get_itsElements()->get_theList()->begin();
-			m_bSetupLoaded = TRUE;
+			if (m_poIArchive != NULL){
+				(*m_poIArchive) >> m_poCurrentWP;
+				m_itCurrentElement = m_poCurrentWP->get_itsElements()->get_theList()->begin();
+				m_bSetupLoaded = TRUE;
+			}
 		}
 		forte_free(pacTempString);
 		pacTempString = NULL;
 	}
 	else{
-		DEVLOG_ERROR("Allocation error while desirealizing in L3_ExecutionManager\n");
+		DEVLOG_ERROR("Allocation error while deserializing in L3_ExecutionManager\n");
 	}
 }
 
@@ -99,7 +101,7 @@ std::string FORTE_L2_ExecutionManager::stringSerialize(const iso14649CppBase * o
 	std::ostringstream oss;
 	boost::archive::text_oarchive oa(oss);
 	oa << obj;
-	return oss.str().c_str();
+	return oss.str();
 }
 
 void FORTE_L2_ExecutionManager::executeEvent(int pa_nEIID){
@@ -132,6 +134,7 @@ void FORTE_L2_ExecutionManager::executeEvent(int pa_nEIID){
 					Operation() = "";
 					L1MID() = L1MID_NOT_VALID;
 				}
+				sendOutputEvent(scm_nEventExecuteOPID);
 				break;
 			case PART_BEING_FIXED:
 				//Part fixing succeed, start machining it
@@ -149,6 +152,7 @@ void FORTE_L2_ExecutionManager::executeEvent(int pa_nEIID){
 						Operation() = "";
 						L1MID() = L1MID_NOT_VALID;
 					}
+					sendOutputEvent(scm_nEventExecuteOPID);
 				}
 				else{
 					// Current setup is completed

@@ -16,7 +16,7 @@
 #include <forte_bool.h>
 #include <forte_any.h>
 
-#ERROR type contains variables of type ANY. Please check the usage of these variables as we can not gurantee correct usage on export!
+//#ERROR type contains variables of type ANY. Please check the usage of these variables as we can not gurantee correct usage on export!
 
 #include <forte_wstring.h>
 

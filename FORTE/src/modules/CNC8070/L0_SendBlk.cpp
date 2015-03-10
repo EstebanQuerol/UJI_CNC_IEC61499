@@ -44,7 +44,24 @@ void FORTE_L0_SendBlk::setInitialValues(){
   CNCState() = 0;
 }
 
-
+void FORTE_L0_SendBlk::RetreiveCmd(){
+	m_CmdList.clear();
+	std::istringstream iss;
+	char * pacTempString = (char*)forte_malloc(sizeof(char)* (sBlock().length() + 1));
+	if (pacTempString != NULL){
+		if (-1 != sBlock().toString(pacTempString, static_cast<unsigned int>(sBlock().length() + 1), 1)){
+			iss.str(std::string(pacTempString));
+			boost::archive::text_iarchive ia(iss);
+			ia >> m_CmdList;
+			ia.delete_created_pointers();
+		}
+		forte_free(pacTempString);
+		pacTempString = NULL;
+	}
+	else{
+		DEVLOG_ERROR("Allocation error while desirealizing in L0_SendBlk\n");
+	}
+}
 void FORTE_L0_SendBlk::executeEvent(int pa_nEIID){
   switch(pa_nEIID){
     case scm_nEventINITID:
@@ -59,15 +76,14 @@ void FORTE_L0_SendBlk::executeEvent(int pa_nEIID){
 		sendOutputEvent(scm_nEventINITOID);
       break;
     case scm_nEventREQID:
-		if (QI()){
+		RetreiveCmd();
+		if (!m_CmdList.empty()){
 			CNC8070Start();
-			QO() = TRUE;
 		}
 		else{
-			//Encapsulation error
-			//TODO Handle this case
-			QO() = FALSE;
-			DEVLOG_DEBUG("NOT supported");
+			DEVLOG_INFO("Empty command vector\n");
+			//Check operation as completed, CNC state will remain the same
+			sendOutputEvent(scm_nEventINDID);
 		}
 		sendOutputEvent(scm_nEventCNFID);
       break;
@@ -119,25 +135,27 @@ void FORTE_L0_SendBlk::OnReady()
 {
 	DEVLOG_INFO("CNC Ready\n");
 	CNCState() = 1;
-	if (getDeviceExecution()->extEvHandlerIsAllowed(m_nExtEvHandID_inh)){ 
-		getDeviceExecution()->startNewEventChain(this);
+	if (!m_CmdList.empty()){
+		//Keep sending commands until the list is empty
+		CNC8070Start();
 	}
 	else{
-		DEVLOG_DEBUG("External Event Not allowed\n");
+		//Operation execution completed
+		if (getDeviceExecution()->extEvHandlerIsAllowed(m_nExtEvHandID_inh)){
+			getDeviceExecution()->startNewEventChain(this);
+		}
+		else{
+			DEVLOG_DEBUG("External Event Not allowed\n");
+		}
 	}
 }
 
 void FORTE_L0_SendBlk::OnStarted()
 {
 	DEVLOG_INFO("CNC Started\n");
-	char * pacTempString = (char*)forte_malloc(sizeof(char)* (sBlock().length() + 1));
-	if (pacTempString != NULL){
-		if (-1 != sBlock().toString(pacTempString, static_cast<unsigned int>(sBlock().length() + 1), 1)){
-			CNC8070ExecuteBlock(pacTempString);
-		}
-		forte_free(pacTempString);
-		pacTempString = NULL;
-	}
+	//Execute 1st command in the list and delete it after
+	CNC8070ExecuteBlock(m_CmdList.front().c_str());
+	m_CmdList.pop_front();
 }
 
 void FORTE_L0_SendBlk::OnExecuting()

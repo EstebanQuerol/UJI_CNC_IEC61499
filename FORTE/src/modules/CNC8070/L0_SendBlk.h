@@ -23,6 +23,15 @@
 #include <devexec.h>
 #include "Tool.h"
 #include "Tool_Table.h"
+#include <list>
+#include <string>
+#include <sstream>
+#include "boost\serialization\access.hpp"
+#include "boost\archive\text_iarchive.hpp"
+#include "boost\archive\text_oarchive.hpp"
+#include "boost\serialization\list.hpp"
+#include "boost\serialization\string.hpp"
+
 class FORTE_L0_SendBlk : public CEventSourceFB, public CCNC8070CommunicationHandler, public CExternalEventHandler {
   DECLARE_FIRMWARE_FB(FORTE_L0_SendBlk)
 
@@ -72,16 +81,22 @@ virtual void setInitialValues();
 
   void executeEvent(int pa_nEIID);
   int m_nExtEvHandID_inh;
+  std::list<std::string> m_CmdList;
 
 public:
 	EVENT_SOURCE_FUNCTION_BLOCK_CTOR(FORTE_L0_SendBlk){
+		m_CmdList.clear();
 		m_stEventSourceEventEntry.m_poFB = this; 
 		setEventChainExecutor(pa_poSrcRes->getResourceEventExecution());
-		
 		m_nExtEvHandID_inh = getDeviceExecution()->registerExternalEventHandler(this);
   };
 
   virtual ~FORTE_L0_SendBlk(){};
+
+  /*!\brief deserializes the command vector
+  *
+  */
+  void RetreiveCmd();
 
   //CNC8070COmmunicationHandler methods
 

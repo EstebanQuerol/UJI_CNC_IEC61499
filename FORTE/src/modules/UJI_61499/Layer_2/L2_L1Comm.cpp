@@ -51,13 +51,9 @@ void FORTE_L2_L1Comm::setInitialValues(){
   TOCounter() = 0;
 }
 
-void FORTE_L2_L1Comm::alg_INIT(void){
-
-}
-
 void FORTE_L2_L1Comm::alg_SEND(void){
-OperationIn() = OperationOut();
-L1MIDIn() = L1MIDOut();
+OperationOut() = OperationIn();
+L1MIDOut() = L1MIDIn();
 }
 
 void FORTE_L2_L1Comm::alg_DT(void){
@@ -74,7 +70,8 @@ TOCounter() = TOCounter()+1;
 
 void FORTE_L2_L1Comm::alg_FAIL(void){
 TOCounter() = 0;
-// Mark operation as failed but repeatableENDOPIDOut() = 1;
+/* Mark operation as failed but repeatable*/
+ENDOPIDOut() = 1;
 }
 
 void FORTE_L2_L1Comm::alg_IND(void){
@@ -131,7 +128,7 @@ void FORTE_L2_L1Comm::executeEvent(int pa_nEIID){
     bTransitionCleared = true;
     switch(m_nECCState){
       case scm_nStateSTART:
-        if(scm_nEventINDID == pa_nEIID)
+        if(scm_nEventREQID == pa_nEIID)
           enterStateREQ();
         else
         if(scm_nEventINDID == pa_nEIID)

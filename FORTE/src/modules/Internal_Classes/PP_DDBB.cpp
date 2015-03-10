@@ -50,72 +50,34 @@ void  PP_DDBB::Initilizate(){
 		parenExecutableList * l_itsElementsIn = new parenExecutableList(l_theListIn_ex);
 
 		//channel
-		pacTempID = (char *)forte_malloc(sizeof(char)* 10);
-		strcpy(pacTempID, "channel_1");
-		channel * l_channel = new channel(pacTempID);
+		channel * l_channel = CHANNEL("Channel 1");
 
-		//setup
-			//itsorigin
-		std::list<real *> * l_theListIn = new std::list<real *>;
-		real * l_x = new real(0.0);
-		real * l_y = new real(1.0);
-		real * l_z = new real(1.0);
-		(*l_theListIn).emplace_back(l_z);
-		(*l_theListIn).emplace_back(l_y);
-		(*l_theListIn).emplace_back(l_x);
-		parenRealListFull * l_coordinates = new parenRealListFull(l_theListIn);
-		cartesianPoint * l_locationIn = new cartesianPoint(NULL, l_coordinates);
-		std::list<real *> * l_theListIn_d = new std::list<real *>;
-		real * l_dx = new real(0.0);
-		real * l_dy = new real(0.0);
-		real * l_dz = new real(1.0);
-		(*l_theListIn_d).emplace_back(l_dx);
-		(*l_theListIn_d).emplace_back(l_dy);
-		(*l_theListIn_d).emplace_back(l_dz);
-		parenRealListFull * l_coordinates_d = new parenRealListFull(l_theListIn_d);
-		direction * l_axisIn = new direction(NULL, l_coordinates_d);
-		std::list<real *> * l_theListIn_ref = new std::list<real *>;
-		real * l_refx = new real(0.0);
-		real * l_refy = new real(0.0);
-		real * l_refz = new real(1.0);
-		(*l_theListIn_ref).emplace_back(l_refx);
-		(*l_theListIn_ref).emplace_back(l_refy);
-		(*l_theListIn_ref).emplace_back(l_refz);
-		parenRealListFull * l_coordinates_ref = new parenRealListFull(l_theListIn_ref);
-		direction * l_refDirectionIn = new direction(NULL, l_coordinates_ref);
-		axis2placement3d * l_itsOrigin = new axis2placement3d(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
-
-		std::list<real *> * l_theListIn_2 = new std::list<real *>;
-		real * l_x_2 = new real(0.0);
-		real * l_y_2 = new real(1.0);
-		real * l_z_2 = new real(1.0);
-		(*l_theListIn_2).emplace_back(l_x_2);
-		(*l_theListIn_2).emplace_back(l_y_2);
-		(*l_theListIn_2).emplace_back(l_z_2);
-		parenRealListFull * l_coordinates_2 = new parenRealListFull(l_theListIn_2);
-		cartesianPoint * l_locationIn_2 = new cartesianPoint(NULL, l_coordinates_2);
-		std::list<real *> * l_theListIn_d_2 = new std::list<real *>;
-		real * l_dx_2 = new real(0.0);
-		real * l_dy_2 = new real(0.0);
-		real * l_dz_2 = new real(1.0);
-		(*l_theListIn_d_2).emplace_back(l_dx_2);
-		(*l_theListIn_d_2).emplace_back(l_dy_2);
-		(*l_theListIn_d_2).emplace_back(l_dz_2);
-		parenRealListFull * l_coordinates_d_2 = new parenRealListFull(l_theListIn_d_2);
-		direction * l_axisIn_2 = new direction(NULL, l_coordinates_d_2);
-		std::list<real *> * l_theListIn_ref_2 = new std::list<real *>;
-		real * l_refx_2 = new real(0.0);
-		real * l_refy_2 = new real(0.0);
-		real * l_refz_2 = new real(1.0);
-		(*l_theListIn_ref_2).emplace_back(l_refx_2);
-		(*l_theListIn_ref_2).emplace_back(l_refy_2);
-		(*l_theListIn_ref_2).emplace_back(l_refz_2);
-		parenRealListFull * l_coordinates_ref_2 = new parenRealListFull(l_theListIn_ref_2);
-		direction * l_refDirectionIn_2 = new direction(NULL, l_coordinates_ref_2);
-		axis2placement3d * l_positionIn = new axis2placement3d(NULL, l_locationIn_2, l_axisIn_2, l_refDirectionIn_2);
-
-		elementarySurface * l_itssecplane = new elementarySurface(NULL, l_positionIn);
-		setup * l_itsSetupIn = new setup(NULL, l_itsOrigin, l_itssecplane, NULL);
+		//Setup
+		//Its sec plane
+		cartesianPoint * l_locationIn = CARTESIAN_POINT("Point", 0.0, 0.0, 30.0);
+		direction * l_axisIn = DIRECTION("Axis", 0.0, 0.0, 1.0);
+		direction * l_refDirectionIn = DIRECTION("Ref_Axis", 1.0, 0.0, 0.0);
+		axis2placement3d * l_positionIn = AXIS2_PLACEMENT_3D("Position", l_locationIn, l_axisIn, l_refDirectionIn);
+		elementarySurface * l_itssecplane = ELEMENTARY_SURFACE("Sec Plane", l_positionIn);
+		//itsorigin
+		l_locationIn = CARTESIAN_POINT("Point", 55.0, 66.0, 0.0);
+		l_axisIn = DIRECTION("Axis", 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION("Ref_Axis", 0.0, 0.0, 1.0);
+		axis2placement3d * l_itsOrigin = AXIS2_PLACEMENT_3D("Origin", l_locationIn, l_axisIn, l_refDirectionIn);
+		//The workpiece
+		l_locationIn = CARTESIAN_POINT("Point", 0.0, 0.0, 0.0);
+		l_axisIn = DIRECTION("Axis", 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION("Ref_Axis", 1.0, 0.0, 0.0);
+		axis2placement3d * l_blockOrigin = AXIS2_PLACEMENT_3D("WP Origin", l_locationIn, l_axisIn, l_refDirectionIn);
+		block * itsblock = BLOCK("Block", l_blockOrigin, 100.0, 100.0, 100.0);
+		workpiece * l_theworkpiece = WORKPIECE("Bruto", NULL, NULL, NULL, NULL, itsblock, NULL);
+		//The workpiece setup
+		l_locationIn = CARTESIAN_POINT("Point", 0.0, 0.0, 0.0);
+		l_axisIn = DIRECTION("Axis", 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION("Ref_Axis", 1.0, 0.0, 0.0);
+		axis2placement3d * l_workpieceSetupOrigin = AXIS2_PLACEMENT_3D("WP Origin", l_locationIn, l_axisIn, l_refDirectionIn);
+		parenWorkpieceSetupList * itsWorkpieceSetupIn = SINGLE_WORKPIECE_SETUP(l_theworkpiece, l_workpieceSetupOrigin, NULL, NULL, NULL);
+		setup * l_itsSetupIn = SETUP("Setup 1", l_itsOrigin, l_itssecplane, itsWorkpieceSetupIn);
 
 		//Build the Workplan
 		workplan * WP1 = new workplan(l_itsID, l_itsElementsIn, l_channel, l_itsSetupIn, NULL);

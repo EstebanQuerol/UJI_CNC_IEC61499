@@ -41,14 +41,45 @@ const SFBInterfaceSpec FORTE_L1_FSetup::scm_stFBInterfaceSpec = {
 
 
 void FORTE_L1_FSetup::executeEvent(int pa_nEIID){
-  switch(pa_nEIID){
+	switch(pa_nEIID){
     case scm_nEventREQID:
-#error add code for REQ event!
-/*
-  do not forget to send output event, calling e.g.
-      sendOutputEvent(scm_nEventCNFID);
-*/
-      break;
+		if (L1MIDIn() == L1MID_SETUP){
+			char * acBuffer = (char *)forte_malloc(sizeof(char)* 100);
+			double nX, nY, nZ;
+			std::list<std::string> CmdList;
+			setup * TheSetup = (setup *) Deserialize(Operation());
+			//Set the fixture offset
+			//In our case this is calculaed like the fixture origin + the workpiece offset respect to the fixture 
+			//Get the fixture origin
+			std::list<real *>::const_iterator listIter = TheSetup->get_itsOrigin()->get_location()->get_coordinates()->get_theList()->begin();
+			nX = (*listIter++)->get_val();
+			nY = (*listIter++)->get_val();
+			nZ = (*listIter)->get_val();
+			//Get the workpiece origin
+			listIter = TheSetup->get_itsWorkpieceSetup()->get_theList()->front()->get_itsOrigin()->get_location()->get_coordinates()->get_theList()->begin();
+			nX += (*listIter++)->get_val();
+			nY += (*listIter++)->get_val();
+			nZ += (*listIter)->get_val();
+
+			sprintf(acBuffer, "V.A.FIXT[1].X=%f V.A.FIXT[1].Y=%f V.A.FIXT[1].Z=%f V.G.FIX = 1", nX, nY, nZ);
+			CmdList.push_back(std::string(acBuffer));
+
+#ifdef SIMULATED_8070
+			block * theblock = (block *) TheSetup->get_itsWorkpieceSetup()->get_theList()->front()->get_itsWorkpiece()->get_itsBoundingGeometry();
+			sprintf(acBuffer, "#DGWZ[0,%f,0,%f,0,%f]", theblock->get_x(), theblock->get_y(), theblock->get_z());
+			CmdList.push_back(std::string(acBuffer));
+#endif
+			Cmd() = SerializeCmdList(CmdList);
+			L1MIDOut() = L1MID_SENDCMD;
+
+			//Clean memory
+			forte_free(acBuffer);
+			acBuffer = NULL;
+			//TODO: Clean up not working
+			//CleanIArchive();
+			sendOutputEvent(scm_nEventCNFID);
+		}
+		break;
   }
 }
 

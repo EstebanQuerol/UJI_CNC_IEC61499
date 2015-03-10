@@ -4054,6 +4054,13 @@ public:
 private:
   parenNcVariableListFull * translate;
   parenNcVariableListFull * rotate;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+  }
 };
 
 /********************************************************************/
@@ -5043,6 +5050,13 @@ public:
   void set_theList(std::list<setupInstruction *> * theListIn);
 private:
   std::list<setupInstruction *> * theList;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+  }
 };
 
 /********************************************************************/
@@ -5275,6 +5289,7 @@ private:
   void serialize(Archive & ar, const unsigned int version)
   {
 	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+	  ar & theList;
   }
 };
 
@@ -6328,6 +6343,14 @@ public:
   ~restrictedAreaSelect();
   int isA(int aType);
   void printSelf() = 0;
+
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+  }
 };
 
 /********************************************************************/
@@ -8300,6 +8323,14 @@ private:
   advancedBrepShapeRepresentation * itsGeometry;
   boundingGeometrySelect * itsBoundingGeometry;
   parenCartesianPointList * clampingPositions;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & itsBoundingGeometry;
+  }
 };
 
 /********************************************************************/
@@ -8344,6 +8375,18 @@ private:
   offsetVector * itsOffset;
   restrictedAreaSelect * itsRestrictedArea;
   parenSetupInstructionList * itsInstructions;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & itsWorkpiece;
+	  ar & itsOrigin;
+	  ar & itsOffset;
+	  ar & itsRestrictedArea;
+	  ar & itsInstructions;
+  }
 };
 
 /********************************************************************/
@@ -8789,6 +8832,13 @@ public:
   ~boundingGeometrySelect();
   int isA(int aType);
   void printSelf() = 0;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<restrictedAreaSelect>(*this);
+  }
 };
 
 /********************************************************************/
@@ -13135,6 +13185,19 @@ private:
   double x;
   double y;
   double z;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<boundingGeometrySelect>(*this);
+	  ar & boost::serialization::base_object<geometricRepresentationItem>(*this);
+	  ar & position;
+	  ar & x;
+	  ar & y;
+	  ar & z;
+  }
 };
 
 /********************************************************************/
@@ -17292,6 +17355,9 @@ public:
 };
 //Bost Serialization exports
 BOOST_CLASS_EXPORT_KEY(workplan)
+BOOST_CLASS_EXPORT_KEY(setup)
+BOOST_CLASS_EXPORT_KEY(block)
+BOOST_CLASS_EXPORT_KEY(workingstep)
 BOOST_CLASS_EXPORT_KEY(planarFace)
 BOOST_CLASS_EXPORT_KEY(closedPocket)
 BOOST_CLASS_EXPORT_KEY(openPocket)
