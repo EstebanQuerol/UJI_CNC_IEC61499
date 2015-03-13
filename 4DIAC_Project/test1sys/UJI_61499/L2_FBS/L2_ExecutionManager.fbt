@@ -25,7 +25,7 @@
         <With Var="L1MID"/>
       </Event>
       <Event Comment="Indication indicating completed setup" Name="Completed" Type="Event">
-        <With Var="SetupENDID"/>
+        <With Var="ENDSetupID"/>
       </Event>
     </EventOutputs>
     <InputVars>
@@ -37,7 +37,7 @@
       <VarDeclaration Comment="Event Output Qualifier" Name="QO" Type="BOOL"/>
       <VarDeclaration Comment="Next operation information" Name="Operation" Type="STRING"/>
       <VarDeclaration Comment="Layer 1 multicast ID" Name="L1MID" Type="USINT"/>
-      <VarDeclaration Comment="Completed setup ID" Name="SetupENDID" Type="USINT"/>
+      <VarDeclaration Comment="Completed setup ID" Name="ENDSetupID" Type="USINT"/>
     </OutputVars>
   </InterfaceList>
   <Service Comment="Service Interface Function Block Type" LeftInterface="APPLICATION" RightInterface="RESOURCE">

@@ -60,3 +60,17 @@ TForteInt32 Tool_Table::isAvailable(std::string pa_sToolID){
 	}
 	return nRValue;
 }
+
+long Tool_Table::getToolID(std::string pa_sToolID){
+	long nRValue;
+	if (!sm_bInitialized){
+		Tool_Table::initilizate();
+	}
+	try{
+		nRValue = sm_umapToolTable.at(pa_sToolID).getLocalID();
+	}
+	catch (std::out_of_range e){
+		DEVLOG_ERROR("Error while retriving tool local ID \n");
+	}
+	return nRValue;
+}

@@ -107,7 +107,7 @@ else{
 }
 
 void FORTE_L2_MachineCore::alg_DT(void){
-Delay() = CIEC_TIME("TIME#300ms");
+Delay() = CIEC_TIME("TIME#3000ms");
 }
 
 void FORTE_L2_MachineCore::alg_IND(void){

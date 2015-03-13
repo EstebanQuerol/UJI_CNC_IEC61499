@@ -22,15 +22,16 @@
 #include <forte_bool.h>
 #include <forte_usint.h>
 #include <forte_string.h>
-#include "iso14649classes.h"
 #include <sstream>
 #include <string>
 #include <typeinfo>
-#include "boost\serialization\access.hpp"
+#include "GlobalUtils.h"
+#include "iso14649classes.h"
+//#include "boost\serialization\access.hpp"
 #include "boost\archive\text_iarchive.hpp"
 #include "boost\archive\text_oarchive.hpp"
-#include "boost\serialization\string.hpp"
-#include "GlobalUtils.h"
+//#include "boost\serialization\string.hpp"
+
 
 class FORTE_L2_ExecutionManager: public CFunctionBlock{
   DECLARE_FIRMWARE_FB(FORTE_L2_ExecutionManager)
@@ -64,7 +65,7 @@ private:
     return *static_cast<CIEC_USINT*>(getDO(2));
   };
 
-  CIEC_USINT &SetupENDID() {
+  CIEC_USINT &ENDSetupID() {
     return *static_cast<CIEC_USINT*>(getDO(3));
   };
 
@@ -121,14 +122,15 @@ private:
 	  }
 	  return FALSE;
   }
-  /*!\Get the L1MID of a workingstep
+  /*!\Get the L1MID of a machining workingstep
   *	\return USINT with the ID
   */
-  TForteUInt8 GetWSL1MID(const iso14649CppBase * obj);
+  TForteUInt8 GetWSL1MID(workingstep * obj);
   /*!\serialize an iso14649 object into a string using boost serialization
   *	\return serialized string
   */
-  std::string stringSerialize(const iso14649CppBase * obj);
+  std::string stringSerialize(const setup * obj);
+  std::string stringSerialize(const workingstep * obj);
 public:
   FUNCTION_BLOCK_CTOR(FORTE_L2_ExecutionManager){
 	  m_poCurrentWP = NULL;

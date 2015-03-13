@@ -20,7 +20,7 @@ const CStringDictionary::TStringId FORTE_L2_ExecutionManager::scm_anDataInputNam
 
 const CStringDictionary::TStringId FORTE_L2_ExecutionManager::scm_anDataInputTypeIds[] = {g_nStringIdBOOL, g_nStringIdSTRING, g_nStringIdUSINT};
 
-const CStringDictionary::TStringId FORTE_L2_ExecutionManager::scm_anDataOutputNames[] = {g_nStringIdQO, g_nStringIdOperation, g_nStringIdL1MID, g_nStringIdSetupENDID};
+const CStringDictionary::TStringId FORTE_L2_ExecutionManager::scm_anDataOutputNames[] = {g_nStringIdQO, g_nStringIdOperation, g_nStringIdL1MID, g_nStringIdENDSetupID};
 
 const CStringDictionary::TStringId FORTE_L2_ExecutionManager::scm_anDataOutputTypeIds[] = {g_nStringIdBOOL, g_nStringIdSTRING, g_nStringIdUSINT, g_nStringIdUSINT};
 
@@ -35,15 +35,15 @@ const CStringDictionary::TStringId FORTE_L2_ExecutionManager::scm_anEventOutputN
 const SFBInterfaceSpec FORTE_L2_ExecutionManager::scm_stFBInterfaceSpec = {
   3,  scm_anEventInputNames,  scm_anEIWith,  scm_anEIWithIndexes,
   3,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  3,  scm_anDataInputNames, scm_anDataInputTypeIds,
-  3,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
+  4,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
   0, 0
 };
 
 void FORTE_L2_ExecutionManager::DeleteCurrentWP(){
 	//After deserialization new objects are created once they are used they must be deleted
-	GlobalUtils::utils_SerFree();
+	//GlobalUtils::utils_SerFree();
 	m_poIArchive->delete_created_pointers();
-	delete m_poIArchive;
+	//delete m_poIArchive;
 	m_poIArchive = NULL;
 	//Reset internal variables
 	m_nPartState = PART_NOT_FIXED;
@@ -77,26 +77,35 @@ void FORTE_L2_ExecutionManager::RetreiveWP(){
 }
 
 workingstep * FORTE_L2_ExecutionManager::GetWorkingStep(){
-	const std::type_info &type = typeid((*m_itCurrentElement));
-	if (type == typeid(workingstep))
-		return (workingstep *)(*m_itCurrentElement);
-	//Default return
+	const std::type_info &type = typeid((**m_itCurrentElement));
+	if (type == typeid(machiningWorkingstep))
+		return (machiningWorkingstep *)(*m_itCurrentElement);
+	if (type == typeid(workplan)){
+		//TODO
+	}
 	return NULL;
 }
 
-TForteUInt8 FORTE_L2_ExecutionManager::GetWSL1MID(const iso14649CppBase * obj){
-	const std::type_info &type = typeid((*obj));
-	if (type == typeid(planarFace))
-		return L1MID_PLANAR_FACE;
-	if (type == typeid(closedPocket))
-		return L1MID_CLOSED_POCKET;
-	if (type == typeid(openPocket))
-		return L1MID_OPEN_POCKET;
+TForteUInt8 FORTE_L2_ExecutionManager::GetWSL1MID(workingstep * obj){
+	machiningWorkingstep * l_machinigWS;
+	rapidMovement * l_rapidmovWS;
+	l_machinigWS = dynamic_cast<machiningWorkingstep *>(obj);
+	if (l_machinigWS != NULL){
+		if (l_machinigWS->get_itsFeature()->isA(planarFace_E))
+			return L1MID_PLANAR_FACE;
+		if (l_machinigWS->get_itsFeature()->isA(openPocket_E))
+			return L1MID_OPEN_POCKET;
+		if (l_machinigWS->get_itsFeature()->isA(closedPocket_E))
+			return L1MID_CLOSED_POCKET;
+	}
+	l_rapidmovWS = dynamic_cast<rapidMovement *>(obj);
+	if (l_rapidmovWS != NULL){
+		//TODO
+	}
 	//Send not valid as default if the type is not supported
 	return L1MID_NOT_VALID;
 }
-
-std::string FORTE_L2_ExecutionManager::stringSerialize(const iso14649CppBase * obj){
+std::string FORTE_L2_ExecutionManager::stringSerialize(const setup * obj){
 	//Boost Serialization
 	std::ostringstream oss;
 	boost::archive::text_oarchive oa(oss);
@@ -104,8 +113,16 @@ std::string FORTE_L2_ExecutionManager::stringSerialize(const iso14649CppBase * o
 	return oss.str();
 }
 
+std::string FORTE_L2_ExecutionManager::stringSerialize(const workingstep * obj){
+	//Boost Serialization
+	std::ostringstream oss;
+	boost::archive::text_oarchive oa(oss);
+	oa << obj;
+	return oss.str();
+}
 void FORTE_L2_ExecutionManager::executeEvent(int pa_nEIID){
-  iso14649CppBase * tempobj = NULL;
+  setup * l_setup = NULL;
+  workingstep * l_workingstep = NULL;
   switch(pa_nEIID){
     case scm_nEventINITID:
 		QO() = QI();
@@ -124,9 +141,9 @@ void FORTE_L2_ExecutionManager::executeEvent(int pa_nEIID){
 			case PART_NOT_FIXED:
 				//1st action is to fix the part
 				m_nPartState = PART_BEING_FIXED;
-				tempobj = GetSetup();
-				if (tempobj != NULL){
-					Operation() = stringSerialize(tempobj).c_str();
+				l_setup = GetSetup();
+				if (l_setup != NULL){
+					Operation() = stringSerialize(l_setup).c_str();
 					L1MID() = L1MID_SETUP;
 				}
 				else{
@@ -142,10 +159,10 @@ void FORTE_L2_ExecutionManager::executeEvent(int pa_nEIID){
 				//Don't break and do next case
 			case PART_FIXED:
 				if (ElementsToDo()){
-					tempobj = GetWorkingStep();
-					if (tempobj != NULL){
-						Operation() = stringSerialize(tempobj).c_str();
-						L1MID() = GetWSL1MID(tempobj);
+					l_workingstep = GetWorkingStep();
+					if (l_workingstep != NULL){
+						Operation() = stringSerialize(l_workingstep).c_str();
+						L1MID() = GetWSL1MID(l_workingstep);
 						m_itCurrentElement++; //Advance fordward in the elements list
 					}else{
 						DEVLOG_ERROR("L2_ExecutionManager can't retrieve the workingstep\n");
@@ -157,7 +174,7 @@ void FORTE_L2_ExecutionManager::executeEvent(int pa_nEIID){
 				else{
 					// Current setup is completed
 					DeleteCurrentWP();
-					SetupENDID() = 0;
+					ENDSetupID() = 0;
 					sendOutputEvent(scm_nEventCompletedID);
 				}
 				break;
@@ -182,7 +199,7 @@ void FORTE_L2_ExecutionManager::executeEvent(int pa_nEIID){
 			//Delete the current WP
 			DeleteCurrentWP();
 			//TODO: ENDID codes should be reviewed, but for now this feature is not supported so..
-			SetupENDID() = 2;
+			ENDSetupID() = 2;
 			sendOutputEvent(scm_nEventCompletedID);
 			break;
 

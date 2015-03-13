@@ -7,6 +7,14 @@
 *************************************************************************/
 #ifndef L1_GENFEATURE_H
 #define L1_GENFEATURE_H
+//Macros
+#define PARAM_ERROR_EXIT Cmd() = "";\
+						 L1MIDOut() = L1MID_PARAM_ERROR;\
+						 forte_free(acBuffer);\
+						 acBuffer = NULL;\
+						 CleanIArchive();\
+						 sendOutputEvent(scm_nEventCNFID);\
+						 break;\
 
 #include "boost\serialization\access.hpp"
 #include "boost\archive\text_iarchive.hpp"
@@ -36,7 +44,8 @@ public:
 	* \param CIEC_STRING containing the serialized information
 	* \return Pointer to the deserialized pointer
 	*/
-	iso14649CppBase * Deserialize(const CIEC_STRING & pa_theString);
+	setup * DeserializeSetup(const CIEC_STRING & pa_theString);
+	workingstep * DeserializeWorkingstep(const CIEC_STRING & pa_theString);
 	/*!\brief destroys the objects created by the IArchive when deserializing
 	*
 	*/

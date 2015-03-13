@@ -3,46 +3,27 @@
 <FBType Comment="Service Interface Function Block Type" Name="L1_FClosedPocket">
   <Identification Standard="61499-2"/>
   <VersionInfo Author="4DIAC-IDE" Date="2015-03-03" Organization="4DIAC-Consortium" Version="0.0"/>
+  <CompilerInfo/>
   <InterfaceList>
     <EventInputs>
-      <Event Comment="Service Initialization" Name="INIT" Type="Event">
-        <With Var="QI"/>
-        <With Var="PARAMS"/>
-      </Event>
       <Event Comment="Service Request" Name="REQ" Type="Event">
-        <With Var="QI"/>
-        <With Var="SD"/>
-      </Event>
-      <Event Comment="Application Response to IND" Name="RSP" Type="Event">
-        <With Var="QI"/>
-        <With Var="SD"/>
+        <With Var="Operation"/>
+        <With Var="L1MIDIn"/>
       </Event>
     </EventInputs>
     <EventOutputs>
-      <Event Comment="Initialization Confirm" Name="INITO" Type="Event">
-        <With Var="QO"/>
-        <With Var="STATUS"/>
-      </Event>
       <Event Comment="Confirmation of Requested Service" Name="CNF" Type="Event">
-        <With Var="QO"/>
-        <With Var="STATUS"/>
-        <With Var="RD"/>
-      </Event>
-      <Event Comment="Indication from Resource" Name="IND" Type="Event">
-        <With Var="QO"/>
-        <With Var="STATUS"/>
-        <With Var="RD"/>
+        <With Var="Cmd"/>
+        <With Var="L1MIDOut"/>
       </Event>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration Comment="Event Input Qualifier" Name="QI" Type="BOOL"/>
-      <VarDeclaration Comment="Service Parameters" Name="PARAMS" Type="WSTRING"/>
-      <VarDeclaration Comment="Output data to resource" Name="SD" Type="ANY"/>
+      <VarDeclaration Comment="Serialized operation" Name="Operation" Type="STRING"/>
+      <VarDeclaration Comment="Layer 1 multicast identifier" Name="L1MIDIn" Type="USINT"/>
     </InputVars>
     <OutputVars>
-      <VarDeclaration Comment="Event Output Qualifier" Name="QO" Type="BOOL"/>
-      <VarDeclaration Comment="Service Status" Name="STATUS" Type="WSTRING"/>
-      <VarDeclaration Comment="Input data from resource" Name="RD" Type="ANY"/>
+      <VarDeclaration Comment="Serialized command" Name="Cmd" Type="STRING"/>
+      <VarDeclaration Comment="Layer 1 multicast identifier" Name="L1MIDOut" Type="USINT"/>
     </OutputVars>
   </InterfaceList>
   <Service Comment="Service Interface Function Block Type" LeftInterface="APPLICATION" RightInterface="RESOURCE">

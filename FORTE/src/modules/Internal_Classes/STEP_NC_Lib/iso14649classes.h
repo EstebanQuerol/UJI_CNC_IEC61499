@@ -1371,6 +1371,14 @@ public:
   void set_toolOrientation(direction * toolOrientationIn);
 private:
   direction * toolOrientation;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+	  ar & toolOrientation;
+  }
 };
 
 /********************************************************************/
@@ -1523,6 +1531,13 @@ public:
   ~booleanFalse();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<boolean>(*this);
+  }
 };
 
 /********************************************************************/
@@ -1544,6 +1559,13 @@ public:
   ~booleanTrue();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<boolean>(*this);
+  }
 };
 
 /********************************************************************/
@@ -2075,7 +2097,7 @@ private:
 	  std::string istr;
 	  ar >> istr;
 	  if (!istr.empty()){
-		  itsId = (char*)GlobalUtils::utils_SerMalloc(istr.length() + 1);
+		  itsId = new char[istr.length() + 1];
 		  strcpy(itsId, istr.c_str());
 	  }
 	  else{
@@ -2788,7 +2810,7 @@ private:
 	  std::string istr;
 	  ar >> istr;
 	  if (!istr.empty()){
-		  itsId = (char*)GlobalUtils::utils_SerMalloc(istr.length() + 1);
+		  itsId = new char[istr.length() + 1];
 		  strcpy(itsId, istr.c_str());
 	  }
 	  else{
@@ -3736,7 +3758,7 @@ private:
 	  std::string istr;
 	  ar >> istr;
 	  if (!istr.empty()){
-		  itsId = (char*)GlobalUtils::utils_SerMalloc(istr.length() + 1);
+		  itsId = new char[istr.length() + 1];
 		  strcpy(itsId, istr.c_str());
 	  }
 	  else{
@@ -3809,7 +3831,7 @@ private:
 	  std::string istr;
 	  ar >> istr;
 	  if (!istr.empty()){
-		  itsId = (char*)GlobalUtils::utils_SerMalloc(istr.length() + 1);
+		  itsId = new char[istr.length() + 1];
 		  strcpy(itsId, istr.c_str());
 	  }
 	  else{
@@ -6308,7 +6330,7 @@ private:
 	  std::string istr;
 	  ar >> istr;
 	  if (!istr.empty()){
-		  name = (char*)GlobalUtils::utils_SerMalloc(istr.length() + 1);
+		  name = new char[(istr.length() + 1)];
 		  strcpy(name, istr.c_str());
 	  }
 	  else{
@@ -6554,7 +6576,7 @@ private:
 	  std::string istr;
 	  ar >> istr;
 	  if (!istr.empty()){
-		  itsId = (char*)GlobalUtils::utils_SerMalloc(istr.length() + 1);
+		  itsId = new char[istr.length() + 1];
 		  strcpy(itsId, istr.c_str());
 	  }
 	  else{
@@ -7459,6 +7481,13 @@ public:
   ~toolReferencePointCcp();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<toolReferencePoint>(*this);
+  }
 };
 
 /********************************************************************/
@@ -7480,6 +7509,13 @@ public:
   ~toolReferencePointTcp();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<toolReferencePoint>(*this);
+  }
 };
 
 /********************************************************************/
@@ -9542,6 +9578,13 @@ private:
   toolBody * itsToolBody;
   parenCuttingComponentListFull * itsCuttingEdge;
   real * overallAssemblyLength;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<machiningTool>(*this);
+  }
 };
 
 /********************************************************************/
@@ -10627,12 +10670,17 @@ private:
 	  std::string istr;
 	  ar >> istr;
 	  if (!istr.empty()){
-		  itsId = (char*)GlobalUtils::utils_SerMalloc(istr.length() + 1);
+		  itsId = new char[istr.length() + 1];
 		  strcpy(itsId, istr.c_str());
 	  }
 	  else{
 		  itsId = NULL;
 	  }
+	  ar >> retractPlane;
+	  ar >> startPoint;
+	  ar >> itsTool;
+	  ar >> itsTechnology;
+	  ar >> itsMachineFunctions;
   }
 
   template<class Archive>
@@ -10728,6 +10776,14 @@ public:
 private:
   direction * directionForSpindleOrientation;
   real * toolHolderDiameterForSpindleOrientation;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<cuttingTool>(*this);
+  }
 };
 
 /********************************************************************/
@@ -10824,6 +10880,21 @@ private:
   boolean * inhibitFeedrateOverride;
   boolean * inhibitSpindleOverride;
   boolean * itsAdaptiveControl;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<technology>(*this);
+	  ar & cutspeed;
+	  ar & spindle;
+	  ar & feedratePerTooth;
+	  ar & synchronizeSpindleWithFeed;
+	  ar & inhibitFeedrateOverride;
+	  ar & inhibitSpindleOverride;
+	  ar & itsAdaptiveControl;
+  }
 };
 
 /********************************************************************/
@@ -10909,6 +10980,8 @@ private:
   void serialize(Archive & ar, const unsigned int version)
   {
 	  ar & boost::serialization::base_object<millingMachiningOperation>(*this);
+	  ar & approach;
+	  ar & retract;
   }
 };
 
@@ -11818,6 +11891,16 @@ public:
 private:
   tolerancedLengthMeasure * profileWidth;
   tolerancedLengthMeasure * profileLength;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<closedProfile>(*this);
+	  ar & profileWidth;
+	  ar & profileLength;
+  }
 };
 
 /********************************************************************/
@@ -17357,7 +17440,9 @@ public:
 BOOST_CLASS_EXPORT_KEY(workplan)
 BOOST_CLASS_EXPORT_KEY(setup)
 BOOST_CLASS_EXPORT_KEY(block)
-BOOST_CLASS_EXPORT_KEY(workingstep)
+BOOST_CLASS_EXPORT_KEY(machiningWorkingstep)
+BOOST_CLASS_EXPORT_KEY(closedProfile)
+BOOST_CLASS_EXPORT_KEY(rectangularClosedProfile)
 BOOST_CLASS_EXPORT_KEY(planarFace)
 BOOST_CLASS_EXPORT_KEY(closedPocket)
 BOOST_CLASS_EXPORT_KEY(openPocket)
@@ -17371,6 +17456,13 @@ BOOST_CLASS_EXPORT_KEY(sideRoughMilling)
 BOOST_CLASS_EXPORT_KEY(sideFinishMilling)
 BOOST_CLASS_EXPORT_KEY(bottomAndSideRoughMilling)
 BOOST_CLASS_EXPORT_KEY(bottomAndSideFinishMilling)
-
+BOOST_CLASS_EXPORT_KEY(millingCuttingTool)
+BOOST_CLASS_EXPORT_KEY(two5DmillingStrategy)
+BOOST_CLASS_EXPORT_KEY(approachRetractStrategy)
+BOOST_CLASS_EXPORT_KEY(millingTechnology)
+BOOST_CLASS_EXPORT_KEY(booleanTrue)
+BOOST_CLASS_EXPORT_KEY(booleanFalse)
+BOOST_CLASS_EXPORT_KEY(toolReferencePointCcp)
+BOOST_CLASS_EXPORT_KEY(toolReferencePointTcp)
 /********************************************************************/
 #endif

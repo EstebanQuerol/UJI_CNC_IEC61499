@@ -10,6 +10,7 @@
 #include "PP_Family.h"
 #include "ProcessPlan.h"
 #include "forte_uint.h"
+#include <cstdarg>
 
 class PP_DDBB
 {
@@ -30,6 +31,10 @@ public:
 	* \return pointer to the target PP
 	*/
 	static ProcessPlan * getProcessPlan(TForteUInt16 pa_nFamilyID, TForteUInt16 pa_nTypeID);
+
+	/*! INLINED functions to ease creating process plans
+	***
+	*/
 	static char * SET_NAME(const char * name){
 		char * l_name = NULL;
 		if (name != NULL){
@@ -38,25 +43,27 @@ public:
 		}
 		return l_name;
 	}
+	static boolean * SET_BOOL(bool value){
+		if (value)
+			return new booleanTrue();
+		return new booleanFalse();
+	}
+	static real * SET_REAL(double value){
+		return new real(value);
+	}
 	static cartesianPoint * CARTESIAN_POINT(const char * name, const double &x, const double &y, const double &z){
 		std::list<real *> * l_theListIn = new std::list<real *>;
-		real * l_x = new real(x);
-		real * l_y = new real(y);
-		real * l_z = new real(z);
-		l_theListIn->push_back(l_x);
-		l_theListIn->push_back(l_y);
-		l_theListIn->push_back(l_z);
+		l_theListIn->push_back(SET_REAL(x));
+		l_theListIn->push_back(SET_REAL(y));
+		l_theListIn->push_back(SET_REAL(z));
 		parenRealListFull * l_coordinates = new parenRealListFull(l_theListIn);
 		return new cartesianPoint(SET_NAME(name), l_coordinates);
 	}
 	static direction * DIRECTION(const char * name, const double &x, const double &y, const double &z){
 		std::list<real *> * l_theListIn = new std::list<real *>;
-		real * l_x = new real(0.0);
-		real * l_y = new real(0.0);
-		real * l_z = new real(1.0);
-		l_theListIn->push_back(l_x);
-		l_theListIn->push_back(l_y);
-		l_theListIn->push_back(l_z);
+		l_theListIn->push_back(SET_REAL(x));
+		l_theListIn->push_back(SET_REAL(y));
+		l_theListIn->push_back(SET_REAL(z));
 		parenRealListFull * l_coordinates = new parenRealListFull(l_theListIn);
 		return new direction(SET_NAME(name), l_coordinates);
 	}
@@ -69,7 +76,7 @@ public:
 	static block * BLOCK(const char * name, axis2placement3d * itsposition, const double &x, const double &y, const double &z){
 		return new block(SET_NAME(name), itsposition, x, y, z);
 	}
-	static workpiece * WORKPIECE(const char * name, material * itsMaterialIn, real * globalToleranceIn, workpiece * itsRawpieceIn, 
+	static workpiece * WORKPIECE(const char * name, material * itsMaterialIn, real * globalToleranceIn, workpiece * itsRawpieceIn,
 		advancedBrepShapeRepresentation * itsGeometryIn, boundingGeometrySelect * itsBoundingGeometryIn, parenCartesianPointList * clampingPositionsIn){
 		return new workpiece(SET_NAME(name), itsMaterialIn, globalToleranceIn, itsRawpieceIn, itsGeometryIn, itsBoundingGeometryIn, clampingPositionsIn);
 	}
@@ -89,6 +96,62 @@ public:
 	static channel * CHANNEL(const char * name){
 		return new channel(SET_NAME(name));
 	}
-};
+	static closedPocket * CLOSED_POCKET(const char * itsIdIn, workpiece * itsWorkpieceIn, parenMachiningOperationList * itsOperationsIn,
+		axis2placement3d * featurePlacementIn, elementarySurface * depthIn, parenBossList * itsBossIn, double slopeIn, pocketBottomCondition * bottomConditionIn,
+		double planarRadiusIn, double orthogonalRadiusIn, closedProfile * featureBoundaryIn){
 
+		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(planarRadiusIn, NULL);
+		tolerancedLengthMeasure * l_TL2 = new tolerancedLengthMeasure(orthogonalRadiusIn, NULL);
+		return new closedPocket(SET_NAME(itsIdIn), itsWorkpieceIn, itsOperationsIn, featurePlacementIn, depthIn, itsBossIn, SET_REAL(slopeIn), bottomConditionIn,
+			l_TL1, l_TL2, featureBoundaryIn);
+	}
+	static rectangularClosedProfile * RECTANGURAL_CLOSED_PROFILE(double profileWidthIn, double profileLengthIn)
+	{
+		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(profileWidthIn, NULL);
+		tolerancedLengthMeasure * l_TL2 = new tolerancedLengthMeasure(profileLengthIn, NULL);
+		return new rectangularClosedProfile(NULL, l_TL1, l_TL2);
+	}
+	static machiningWorkingstep * MACHINING_WORKINGSTEP(const char * itsIdIn, elementarySurface * itsSecplaneIn, manufacturingFeature * itsFeatureIn,
+		machiningOperation * itsOperationIn, inProcessGeometry * itsEffectIn){
+		return new machiningWorkingstep(SET_NAME(itsIdIn), itsSecplaneIn, itsFeatureIn, itsOperationIn, itsEffectIn);
+	}
+	static bottomAndSideRoughMilling * BOTTOM_AND_SIDE_ROUGH_MILLING(char * itsIdIn, double retractPlaneIn, cartesianPoint * startPointIn, machiningTool * itsToolIn,
+		technology * itsTechnologyIn, machineFunctions * itsMachineFunctionsIn, double overcutLengthIn, approachRetractStrategy * approachIn,
+		approachRetractStrategy * retractIn, two5DmillingStrategy * itsMachiningStrategyIn, double axialCuttingDepthIn, double radialCuttingDepthIn,
+		double allowanceSideIn, double allowanceBottomIn){
+
+		return new bottomAndSideRoughMilling(NULL, NULL, SET_NAME(itsIdIn), SET_REAL(retractPlaneIn), startPointIn, itsToolIn, itsTechnologyIn, itsMachineFunctionsIn,
+			SET_REAL(overcutLengthIn), approachIn, retractIn, itsMachiningStrategyIn, SET_REAL(axialCuttingDepthIn), SET_REAL(radialCuttingDepthIn),
+			SET_REAL(allowanceSideIn), SET_REAL(allowanceBottomIn));
+	}
+	static millingCuttingTool * MILLING_CUTTING_TOOL(const char * name){
+		return new millingCuttingTool(SET_NAME(name), NULL, NULL, NULL, NULL, NULL);
+	}
+	static workplan * WORKPLAN(const char * name, parenExecutableList * itsElementsIn, channel * itsChannelIn, setup * itsSetupIn, inProcessGeometry * itsEffectIn){
+		return new workplan(SET_NAME(name), itsElementsIn, itsChannelIn, itsSetupIn, itsEffectIn);
+	}
+	static parenExecutableList * PAREN_EXECUTABLE_LIST(int nArgs, ...){
+		va_list ap;
+		va_start(ap, nArgs);
+		std::list<executable *> * l_theListIn_ex = new std::list<executable *>;
+		executable * current;
+		for (int i = 0; i < nArgs; i++) {
+			current = va_arg(ap, executable *);
+			l_theListIn_ex->push_back(current);
+		}
+		va_end(ap);
+		return new parenExecutableList(l_theListIn_ex);
+	}
+	static millingTechnology * MILLING_TECHNOLOGY(double feedrateIn, const char * feedrateReferenceIn, double cutspeedIn,
+		double spindleIn, double feedratePerToothIn, bool synchronizeSpindleWithFeedIn, bool inhibitFeedrateOverrideIn,
+		bool inhibitSpindleOverrideIn, bool itsAdaptiveControlIn){
+		toolReferencePoint * referencepoint = NULL;
+		if (strncmp(feedrateReferenceIn, "CCP", 3) == 0 || strncmp(feedrateReferenceIn, "ccp", 3) == 0)
+			referencepoint = new toolReferencePointCcp();
+		if (strncmp(feedrateReferenceIn, "TCP", 3) == 0 || strncmp(feedrateReferenceIn, "tcp", 3) == 0)
+			referencepoint = new toolReferencePointTcp;
+		return new millingTechnology(SET_REAL(feedrateIn), referencepoint, SET_REAL(cutspeedIn), SET_REAL(spindleIn), SET_REAL(feedratePerToothIn),
+			SET_BOOL(synchronizeSpindleWithFeedIn), SET_BOOL(inhibitFeedrateOverrideIn), SET_BOOL(inhibitSpindleOverrideIn), SET_BOOL(itsAdaptiveControlIn));
+	}
+};
 #endif

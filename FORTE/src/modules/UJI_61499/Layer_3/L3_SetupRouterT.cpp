@@ -274,9 +274,6 @@ void FORTE_L3_SetupRouterT::executeEvent(int pa_nEIID){
           bTransitionCleared  = false; //no transition cleared
         break;
       case scm_nStateIND:
-        if(1)
-          enterStateSTART();
-        else
         if(Select() == false)
           enterStateIND1();
         else
@@ -287,13 +284,13 @@ void FORTE_L3_SetupRouterT::executeEvent(int pa_nEIID){
         break;
       case scm_nStateIND1:
         if(1)
-          enterStateIND();
+          enterStateSTART();
         else
           bTransitionCleared  = false; //no transition cleared
         break;
       case scm_nStateIND2:
         if(1)
-          enterStateIND();
+          enterStateSTART();
         else
           bTransitionCleared  = false; //no transition cleared
         break;

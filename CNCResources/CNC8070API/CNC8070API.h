@@ -58,7 +58,8 @@ public:
 
 	VOID Start();
 	BOOL ExecuteBlock(LPCSTR a_sBlock);
-	
+	VOID MagazineInitialize();
+
 	VOID OnNotReady();
 	VOID OnReady();
 	VOID OnStarted();

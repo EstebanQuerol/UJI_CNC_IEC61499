@@ -47,22 +47,26 @@ void FORTE_L1_FSetup::executeEvent(int pa_nEIID){
 			char * acBuffer = (char *)forte_malloc(sizeof(char)* 100);
 			double nX, nY, nZ;
 			std::list<std::string> CmdList;
-			setup * TheSetup = (setup *) Deserialize(Operation());
-			//Set the fixture offset
-			//In our case this is calculaed like the fixture origin + the workpiece offset respect to the fixture 
-			//Get the fixture origin
+			setup * TheSetup = DeserializeSetup(Operation());
+			//Set the fixture origin
 			std::list<real *>::const_iterator listIter = TheSetup->get_itsOrigin()->get_location()->get_coordinates()->get_theList()->begin();
 			nX = (*listIter++)->get_val();
 			nY = (*listIter++)->get_val();
 			nZ = (*listIter)->get_val();
-			//Get the workpiece origin
-			listIter = TheSetup->get_itsWorkpieceSetup()->get_theList()->front()->get_itsOrigin()->get_location()->get_coordinates()->get_theList()->begin();
-			nX += (*listIter++)->get_val();
-			nY += (*listIter++)->get_val();
-			nZ += (*listIter)->get_val();
-
 			sprintf(acBuffer, "V.A.FIXT[1].X=%f V.A.FIXT[1].Y=%f V.A.FIXT[1].Z=%f V.G.FIX = 1", nX, nY, nZ);
 			CmdList.push_back(std::string(acBuffer));
+			//Move spindle above security plane
+			nZ = TheSetup->get_itsSecplane()->get_position()->get_location()->get_coordinates()->get_theList()->back()->get_val();
+			sprintf(acBuffer, "G00 X0 Y0 Z%f", nZ);
+			CmdList.push_back(std::string(acBuffer));
+			//Set the workpiece origin
+			listIter = TheSetup->get_itsWorkpieceSetup()->get_theList()->front()->get_itsOrigin()->get_location()->get_coordinates()->get_theList()->begin();
+			nX = (*listIter++)->get_val();
+			nY = (*listIter++)->get_val();
+			nZ = (*listIter)->get_val();
+			sprintf(acBuffer, "V.A.ORGT[1].X=%f V.A.ORGT[1].Y=%f V.A.ORGT[1].Z=%f G159=1", nX, nY, nZ);
+			CmdList.push_back(std::string(acBuffer));
+
 
 #ifdef SIMULATED_8070
 			block * theblock = (block *) TheSetup->get_itsWorkpieceSetup()->get_theList()->front()->get_itsWorkpiece()->get_itsBoundingGeometry();
@@ -75,8 +79,7 @@ void FORTE_L1_FSetup::executeEvent(int pa_nEIID){
 			//Clean memory
 			forte_free(acBuffer);
 			acBuffer = NULL;
-			//TODO: Clean up not working
-			//CleanIArchive();
+			CleanIArchive();
 			sendOutputEvent(scm_nEventCNFID);
 		}
 		break;

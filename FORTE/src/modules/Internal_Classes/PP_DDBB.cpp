@@ -15,52 +15,79 @@ PP_DDBB::~PP_DDBB()
 void  PP_DDBB::Initilizate(){
 	if (!sm_bInitialized){
 		sm_bInitialized = true;
-		//TODO: Add code to initialize the data base
-	
-		char * pacTempID;
 
 		//Test code
 		//Ceate Family "1"
-		PP_Family newFamiliy = PP_Family(1);
-		ProcessPlan newPP = ProcessPlan(3, 1, 1);
+		PP_Family Family_1 = PP_Family(1);
 
-		//Build a new Workplan
-		// itsID
-		char * l_itsID = (char *)forte_malloc(sizeof(char)* 11);
-		strcpy(l_itsID, "WorkPlan 1");
+		/******************Feature 1****************************/
+		//Placement
+		cartesianPoint *  l_locationIn = CARTESIAN_POINT(NULL, 150.0, 50.0, 50.0);
+		direction * l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		direction *  l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		axis2placement3d * l_itsplacement = AXIS2_PLACEMENT_3D("Feature placement", l_locationIn, l_axisIn, l_refDirectionIn);
+		//Depth
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 15.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		axis2placement3d *  l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		elementarySurface * l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
+		//Profile
+		closedProfile * l_itsprofile = RECTANGURAL_CLOSED_PROFILE(30.0, 20.0);
+		//Pocket
+		closedPocket * l_CPFeature = CLOSED_POCKET("Cajera 1", NULL, NULL, l_itsplacement, l_itsdepth, NULL, NULL, NULL, NULL, 1.0, l_itsprofile);
 
-		//parenExecutableList
-		executable * l_Ex_1 = new workplan(NULL, NULL, NULL, NULL, NULL);
-		pacTempID = (char *)forte_malloc(sizeof(char)* 13);
-		strcpy(pacTempID, "WorkPlan 1_1");
-		l_Ex_1->set_itsId(pacTempID);
+		/******************Feature 2****************************/
+		//Placement
+		l_locationIn = CARTESIAN_POINT(NULL, 50.0, 25.0, 50.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D("Feature placement", l_locationIn, l_axisIn, l_refDirectionIn);
+		//Depth
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 15.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
+		//Profile
+		l_itsprofile = RECTANGURAL_CLOSED_PROFILE(15.0, 30.0);
+		//Pocket
+		closedPocket * l_CPFeature_2 = CLOSED_POCKET("Cajera 1", NULL, NULL, l_itsplacement, l_itsdepth, NULL, NULL, NULL, NULL, 1.0, l_itsprofile);
 
+		/*****************machining operation***************************/
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 0.0);
+		millingCuttingTool * itstool = MILLING_CUTTING_TOOL("1337");
+		millingTechnology * itstechnology = MILLING_TECHNOLOGY(80.0, "TCP", 0.0, 1000.0, 0.0, false, false, false, false);
+		bottomAndSideRoughMilling * l_itsMoperation = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 59.0, l_locationIn, itstool, itstechnology, NULL, 0.0, NULL, NULL, NULL, 5.0, 2.0, 0.0, 0.0);
 
-		executable * l_Ex_2 = new workplan(NULL, NULL, NULL, NULL, NULL);
-		pacTempID = (char *)forte_malloc(sizeof(char)* 13);
-		strcpy(pacTempID, "WorkPlan 1_2");
-		l_Ex_2->set_itsId(pacTempID);
-
-
+		/**************machning workingstep****************************/
+		//Security plance
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 10.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		elementarySurface * l_itsSecPlane = ELEMENTARY_SURFACE("SP", l_positionIn);
+		machiningWorkingstep * l_itsMWStep_1 = MACHINING_WORKINGSTEP("MWS 1", l_itsSecPlane, l_CPFeature, l_itsMoperation, NULL);
+		machiningWorkingstep * l_itsMWStep_2 = MACHINING_WORKINGSTEP("MWS 2", l_itsSecPlane, l_CPFeature_2, l_itsMoperation, NULL);
+		//executable * l_itsMWStep_3 = MACHINING_WORKINGSTEP("MWS 3", l_itsSecPlane, l_CPFeature, l_itsMperation, NULL);
+		/***************************Executable list*****************/
 		std::list<executable *> * l_theListIn_ex = new std::list<executable *>;
-		//polimorfismo executable-workplan
-		l_theListIn_ex->push_back(l_Ex_1);
-		l_theListIn_ex->push_back(l_Ex_2);
-
+		l_theListIn_ex->push_back(l_itsMWStep_1);
+		l_theListIn_ex->push_back(l_itsMWStep_2);
 		parenExecutableList * l_itsElementsIn = new parenExecutableList(l_theListIn_ex);
-
-		//channel
+		//parenExecutableList * l_itsElementsIn = PAREN_EXECUTABLE_LIST(1, l_itsMWStep_1);
+		/************************Channel****************************/
 		channel * l_channel = CHANNEL("Channel 1");
 
-		//Setup
+		/******************Setup****************************/
 		//Its sec plane
-		cartesianPoint * l_locationIn = CARTESIAN_POINT("Point", 0.0, 0.0, 30.0);
-		direction * l_axisIn = DIRECTION("Axis", 0.0, 0.0, 1.0);
-		direction * l_refDirectionIn = DIRECTION("Ref_Axis", 1.0, 0.0, 0.0);
-		axis2placement3d * l_positionIn = AXIS2_PLACEMENT_3D("Position", l_locationIn, l_axisIn, l_refDirectionIn);
+		l_locationIn = CARTESIAN_POINT("Point", 0.0, 0.0, 70.0);
+		l_axisIn = DIRECTION("Axis", 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION("Ref_Axis", 1.0, 0.0, 0.0);
+		l_positionIn = AXIS2_PLACEMENT_3D("Position", l_locationIn, l_axisIn, l_refDirectionIn);
 		elementarySurface * l_itssecplane = ELEMENTARY_SURFACE("Sec Plane", l_positionIn);
 		//itsorigin
-		l_locationIn = CARTESIAN_POINT("Point", 55.0, 66.0, 0.0);
+		l_locationIn = CARTESIAN_POINT("Point", 20.0, 50.0, 0.0);
 		l_axisIn = DIRECTION("Axis", 0.0, 0.0, 1.0);
 		l_refDirectionIn = DIRECTION("Ref_Axis", 0.0, 0.0, 1.0);
 		axis2placement3d * l_itsOrigin = AXIS2_PLACEMENT_3D("Origin", l_locationIn, l_axisIn, l_refDirectionIn);
@@ -69,37 +96,26 @@ void  PP_DDBB::Initilizate(){
 		l_axisIn = DIRECTION("Axis", 0.0, 0.0, 1.0);
 		l_refDirectionIn = DIRECTION("Ref_Axis", 1.0, 0.0, 0.0);
 		axis2placement3d * l_blockOrigin = AXIS2_PLACEMENT_3D("WP Origin", l_locationIn, l_axisIn, l_refDirectionIn);
-		block * itsblock = BLOCK("Block", l_blockOrigin, 100.0, 100.0, 100.0);
+		block * itsblock = BLOCK("Block", l_blockOrigin, 200.0, 100.0, 50.0);
 		workpiece * l_theworkpiece = WORKPIECE("Bruto", NULL, NULL, NULL, NULL, itsblock, NULL);
 		//The workpiece setup
-		l_locationIn = CARTESIAN_POINT("Point", 0.0, 0.0, 0.0);
+		l_locationIn = CARTESIAN_POINT("Point", 10.0, 10.0, 0.0);
 		l_axisIn = DIRECTION("Axis", 0.0, 0.0, 1.0);
 		l_refDirectionIn = DIRECTION("Ref_Axis", 1.0, 0.0, 0.0);
 		axis2placement3d * l_workpieceSetupOrigin = AXIS2_PLACEMENT_3D("WP Origin", l_locationIn, l_axisIn, l_refDirectionIn);
 		parenWorkpieceSetupList * itsWorkpieceSetupIn = SINGLE_WORKPIECE_SETUP(l_theworkpiece, l_workpieceSetupOrigin, NULL, NULL, NULL);
 		setup * l_itsSetupIn = SETUP("Setup 1", l_itsOrigin, l_itssecplane, itsWorkpieceSetupIn);
 
-		//Build the Workplan
-		workplan * WP1 = new workplan(l_itsID, l_itsElementsIn, l_channel, l_itsSetupIn, NULL);
-		newPP.addSubphase(1, 1, WP1);
+		/********************Workplan*****************/
+		workplan * WP1 = WORKPLAN("Workplan 1", l_itsElementsIn, l_channel, l_itsSetupIn, NULL);
 
-		workplan * newWP2 = new workplan(NULL, NULL, NULL, NULL, NULL);
-		pacTempID = (char *)forte_malloc(sizeof(char)* 11);
-		strcpy(pacTempID, "WorkPlan 2");
-		newWP2->set_itsId(pacTempID);
-		newPP.addSubphase(2, 1, newWP2);
-
-		workplan * newWP3 = new workplan(NULL, NULL, NULL, NULL, NULL);
-		pacTempID = (char *)forte_malloc(sizeof(char)* 11);
-		strcpy(pacTempID, "WorkPlan 3");
-		newWP3->set_itsId(pacTempID);
-		newPP.addSubphase(3, 1, newWP3);
-
-		newFamiliy.addProcessPlan(newPP, 1);
+		ProcessPlan PP_1_1 = ProcessPlan(1, 1, 1);
+		PP_1_1.addSubphase(1, 1, WP1);
+		Family_1.addProcessPlan(PP_1_1, 1);
 
 
 
-		std::pair<TForteUInt16, PP_Family> newpair(1, newFamiliy);
+		std::pair<TForteUInt16, PP_Family> newpair(1, Family_1);
 		try{
 			sm_umapFamilyMap.insert(newpair);
 		}

@@ -154,6 +154,9 @@ void FORTE_L0_SendBlk::OnStarted()
 {
 	DEVLOG_INFO("CNC Started\n");
 	//Execute 1st command in the list and delete it after
+	DEVLOG_DEBUG("\n\n");
+	DEVLOG_DEBUG(m_CmdList.front().c_str());
+	DEVLOG_DEBUG("\n\n");
 	CNC8070ExecuteBlock(m_CmdList.front().c_str());
 	m_CmdList.pop_front();
 }

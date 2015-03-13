@@ -48,6 +48,7 @@ public:
 	* return -2  if the tool is not available at all
 	*/
 	static TForteInt32 isAvailable(std::string pa_sToolID);
+	static long getToolID(std::string pa_sToolID);
 };
 
 #endif

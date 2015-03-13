@@ -69,10 +69,10 @@ inputFile::inputFile(
 
 inputFile::~inputFile()
 {
-  delete inputStart;
-  delete inputHeader;
-  delete inputData;
-  delete inputEnd;
+  //delete inputStart;
+  //delete inputHeader;
+  //delete inputData;
+  //delete inputEnd;
 }
 
 int inputFile::isA(int aType)
@@ -155,18 +155,18 @@ address::address(
 
 address::~address()
 {
-  delete internalLocation;
-  delete streetNumber;
-  delete street;
-  delete postalBox;
-  delete town;
-  delete region;
-  delete postalCode;
-  delete country;
-  delete facsimileNumber;
-  delete telephoneNumber;
-  delete electronicMailAddress;
-  delete telexNumber;
+  //delete internalLocation;
+  //delete streetNumber;
+  //delete street;
+  //delete postalBox;
+  //delete town;
+  //delete region;
+  //delete postalCode;
+  //delete country;
+  //delete facsimileNumber;
+  //delete telephoneNumber;
+  //delete electronicMailAddress;
+  //delete telexNumber;
 }
 
 int address::isA(int aType)
@@ -401,7 +401,7 @@ approval::approval(
 
 approval::~approval()
 {
-  delete level;
+  //delete level;
 }
 
 int approval::isA(int aType)
@@ -440,7 +440,7 @@ approvalStatus::approvalStatus(
 
 approvalStatus::~approvalStatus()
 {
-  delete name;
+  //delete name;
 }
 
 int approvalStatus::isA(int aType)
@@ -473,7 +473,7 @@ aString::aString(
 
 aString::~aString()
 {
-  delete theString;
+  //delete theString;
 }
 
 int aString::isA(int aType)
@@ -1025,7 +1025,7 @@ channel::channel(
 
 channel::~channel()
 {
-  delete itsId;
+  //delete itsId;
 }
 
 int channel::isA(int aType)
@@ -1164,8 +1164,8 @@ compositeCurveSegment::compositeCurveSegment(
 
 compositeCurveSegment::~compositeCurveSegment()
 {
-  delete transition;
-  delete sameSense;
+  //delete transition;
+  //delete sameSense;
 }
 
 int compositeCurveSegment::isA(int aType)
@@ -1280,8 +1280,8 @@ coordinatedUniversalTimeOffset::coordinatedUniversalTimeOffset(
 
 coordinatedUniversalTimeOffset::~coordinatedUniversalTimeOffset()
 {
-  delete minuteOffset;
-  delete sense;
+  //delete minuteOffset;
+  //delete sense;
 }
 
 int coordinatedUniversalTimeOffset::isA(int aType)
@@ -1409,10 +1409,10 @@ cutterContactTrajectory::cutterContactTrajectory(
 
 cutterContactTrajectory::~cutterContactTrajectory()
 {
-  delete itsPriority;
-  delete itsType;
-  delete itsDirection;
-  delete itsContactType;
+  //delete itsPriority;
+  //delete itsType;
+  //delete itsDirection;
+  //delete itsContactType;
 }
 
 int cutterContactTrajectory::isA(int aType)
@@ -1519,7 +1519,7 @@ cuttingComponent::cuttingComponent(
 
 cuttingComponent::~cuttingComponent()
 {
-  delete expectedToolLife;
+  //delete expectedToolLife;
 }
 
 int cuttingComponent::isA(int aType)
@@ -1592,9 +1592,9 @@ cuttingEdgeTechnologicalData::cuttingEdgeTechnologicalData(
 
 cuttingEdgeTechnologicalData::~cuttingEdgeTechnologicalData()
 {
-  delete cuttingAngle;
-  delete freeAngle;
-  delete auxAngle;
+  //delete cuttingAngle;
+  //delete freeAngle;
+  //delete auxAngle;
 }
 
 int cuttingEdgeTechnologicalData::isA(int aType)
@@ -1652,16 +1652,16 @@ dataSection::dataSection(
 
 dataSection::~dataSection()
 {
-  delete dataStart;
+  //delete dataStart;
   {
     std::list<instance *>::iterator iter;
     for (iter = items->begin(); iter != items->end(); ++iter)
       {
-        delete *iter;
+        //delete *iter;
       }
   }
-  delete items;
-  delete sectionEnd;
+  //delete items;
+  //delete sectionEnd;
 }
 
 int dataSection::isA(int aType)
@@ -1805,12 +1805,12 @@ drillingTypeStrategy::drillingTypeStrategy(
 
 drillingTypeStrategy::~drillingTypeStrategy()
 {
-  delete reducedCutAtStart;
-  delete reducedFeedAtStart;
-  delete depthOfStart;
-  delete reducedCutAtEnd;
-  delete reducedFeedAtEnd;
-  delete depthOfEnd;
+  //delete reducedCutAtStart;
+  //delete reducedFeedAtStart;
+  //delete depthOfStart;
+  //delete reducedCutAtEnd;
+  //delete reducedFeedAtEnd;
+  //delete depthOfEnd;
 }
 
 int drillingTypeStrategy::isA(int aType)
@@ -1935,8 +1935,8 @@ fileDescription::fileDescription(
 
 fileDescription::~fileDescription()
 {
-  delete description;
-  delete implementationLevel;
+  //delete description;
+  //delete implementationLevel;
 }
 
 int fileDescription::isA(int aType)
@@ -2008,13 +2008,13 @@ fileName::fileName(
 
 fileName::~fileName()
 {
-  delete name;
-  delete timeStamp;
-  delete author;
-  delete organization;
-  delete preprocessorVersion;
-  delete originatingSystem;
-  delete authorization;
+  //delete name;
+  //delete timeStamp;
+  //delete author;
+  //delete organization;
+  //delete preprocessorVersion;
+  //delete originatingSystem;
+  //delete authorization;
 }
 
 int fileName::isA(int aType)
@@ -2084,7 +2084,7 @@ fileSchema::fileSchema(
 
 fileSchema::~fileSchema()
 {
-  delete schemaIdentifiers;
+  //delete schemaIdentifiers;
 }
 
 int fileSchema::isA(int aType)
@@ -2315,11 +2315,11 @@ headerSection::headerSection(
 
 headerSection::~headerSection()
 {
-  delete headerStart;
-  delete headerDescription;
-  delete headerName;
-  delete headerSchema;
-  delete sectionEnd;
+  //delete headerStart;
+  //delete headerDescription;
+  //delete headerName;
+  //delete headerSchema;
+  //delete sectionEnd;
 }
 
 int headerSection::isA(int aType)
@@ -2622,9 +2622,9 @@ leadingLineStrategy::leadingLineStrategy(
 
 leadingLineStrategy::~leadingLineStrategy()
 {
-  delete get_pathmode();
-  delete get_cutmode();
-  delete get_stepover();
+  //delete get_pathmode();
+  //delete get_cutmode();
+  //delete get_stepover();
 }
 
 int leadingLineStrategy::isA(int aType)
@@ -2730,8 +2730,8 @@ localTime::localTime(
 
 localTime::~localTime()
 {
-  delete minuteComponent;
-  delete secondComponent;
+  //delete minuteComponent;
+  //delete secondComponent;
 }
 
 int localTime::isA(int aType)
@@ -2862,7 +2862,7 @@ machinedSurface::machinedSurface(
 
 machinedSurface::~machinedSurface()
 {
-  delete surfaceElement;
+  //delete surfaceElement;
 }
 
 int machinedSurface::isA(int aType)
@@ -2973,9 +2973,9 @@ material::material(
 
 material::~material()
 {
-  delete standardIdentifier;
-  delete materialIdentifier;
-  delete materialProperty;
+  //delete standardIdentifier;
+  //delete materialIdentifier;
+  //delete materialProperty;
 }
 
 int material::isA(int aType)
@@ -3038,14 +3038,14 @@ millingMachineFunctions::millingMachineFunctions(
 
 millingMachineFunctions::~millingMachineFunctions()
 {
-  delete coolant;
-  delete coolantPressure;
-  delete mist;
-  delete throughSpindleCoolant;
-  delete throughPressure;
-  delete axisClamping;
-  delete chipRemoval;
-  delete otherFunctions;
+  //delete coolant;
+  //delete coolantPressure;
+  //delete mist;
+  //delete throughSpindleCoolant;
+  //delete throughPressure;
+  //delete axisClamping;
+  //delete chipRemoval;
+  //delete otherFunctions;
 }
 
 int millingMachineFunctions::isA(int aType)
@@ -3161,12 +3161,12 @@ millingToolDimension::millingToolDimension(
 
 millingToolDimension::~millingToolDimension()
 {
-  delete toolTopAngle;
-  delete toolCircumferenceAngle;
-  delete cuttingEdgeLength;
-  delete edgeRadius;
-  delete edgeCenterVertical;
-  delete edgeCenterHorizontal;
+  //delete toolTopAngle;
+  //delete toolCircumferenceAngle;
+  //delete cuttingEdgeLength;
+  //delete edgeRadius;
+  //delete edgeCenterVertical;
+  //delete edgeCenterHorizontal;
 }
 
 int millingToolDimension::isA(int aType)
@@ -3298,8 +3298,8 @@ offsetVector::offsetVector(
 
 offsetVector::~offsetVector()
 {
-  delete translate;
-  delete rotate;
+  //delete translate;
+  //delete rotate;
 }
 
 int offsetVector::isA(int aType)
@@ -3369,7 +3369,7 @@ optionalStop::optionalStop(
 
 optionalStop::~optionalStop()
 {
-  delete get_itsId();
+  delete[] get_itsId();
 }
 
 int optionalStop::isA(int aType)
@@ -3400,7 +3400,7 @@ orExpression::orExpression(
 
 orExpression::~orExpression()
 {
-  delete get_operands();
+  //delete get_operands();
 }
 
 int orExpression::isA(int aType)
@@ -3470,7 +3470,7 @@ parenAxis2placement3dListFull::parenAxis2placement3dListFull(
 
 parenAxis2placement3dListFull::~parenAxis2placement3dListFull()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenAxis2placement3dListFull::isA(int aType)
@@ -3512,7 +3512,7 @@ parenBooleanExpressionListFull::parenBooleanExpressionListFull(
 
 parenBooleanExpressionListFull::~parenBooleanExpressionListFull()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenBooleanExpressionListFull::isA(int aType)
@@ -3574,7 +3574,7 @@ void parenBossList::printSelf()
 
 parenBossList::~parenBossList()
 {
-  delete theList;
+  //delete theList;
 }
 
 std::list<boss *> * parenBossList::get_theList()
@@ -3596,7 +3596,7 @@ parenBoundedCurveListFull::parenBoundedCurveListFull(
 
 parenBoundedCurveListFull::~parenBoundedCurveListFull()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenBoundedCurveListFull::isA(int aType)
@@ -3638,7 +3638,7 @@ parenBoundedSurfaceListFull::parenBoundedSurfaceListFull(
 
 parenBoundedSurfaceListFull::~parenBoundedSurfaceListFull()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenBoundedSurfaceListFull::isA(int aType)
@@ -3700,7 +3700,7 @@ void parenCartesianPointList::printSelf()
 
 parenCartesianPointList::~parenCartesianPointList()
 {
-  delete theList;
+  //delete theList;
 }
 
 std::list<cartesianPoint *> * parenCartesianPointList::get_theList()
@@ -3722,7 +3722,7 @@ parenCartesianPointListFull::parenCartesianPointListFull(
 
 parenCartesianPointListFull::~parenCartesianPointListFull()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenCartesianPointListFull::isA(int aType)
@@ -3784,7 +3784,7 @@ void parenCircularOffsetList::printSelf()
 
 parenCircularOffsetList::~parenCircularOffsetList()
 {
-  delete theList;
+  //delete theList;
 }
 
 std::list<circularOffset *> * parenCircularOffsetList::get_theList()
@@ -3826,7 +3826,7 @@ void parenCircularOmitList::printSelf()
 
 parenCircularOmitList::~parenCircularOmitList()
 {
-  delete theList;
+  //delete theList;
 }
 
 std::list<circularOmit *> * parenCircularOmitList::get_theList()
@@ -3848,7 +3848,7 @@ parenCompositeCurveSegmentListFull::parenCompositeCurveSegmentListFull(
 
 parenCompositeCurveSegmentListFull::~parenCompositeCurveSegmentListFull()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenCompositeCurveSegmentListFull::isA(int aType)
@@ -3890,7 +3890,7 @@ parenCompoundFeatureSelectListFull::parenCompoundFeatureSelectListFull(
 
 parenCompoundFeatureSelectListFull::~parenCompoundFeatureSelectListFull()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenCompoundFeatureSelectListFull::isA(int aType)
@@ -3932,7 +3932,7 @@ parenCuttingComponentListFull::parenCuttingComponentListFull(
 
 parenCuttingComponentListFull::~parenCuttingComponentListFull()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenCuttingComponentListFull::isA(int aType)
@@ -3994,7 +3994,7 @@ void parenExecutableList::printSelf()
 
 parenExecutableList::~parenExecutableList()
 {
-  delete theList;
+  //delete theList;
 }
 
 std::list<executable *> * parenExecutableList::get_theList()
@@ -4016,7 +4016,7 @@ parenExecutableListFull::parenExecutableListFull(
 
 parenExecutableListFull::~parenExecutableListFull()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenExecutableListFull::isA(int aType)
@@ -4058,7 +4058,7 @@ parenFaceBoundListFull::parenFaceBoundListFull(
 
 parenFaceBoundListFull::~parenFaceBoundListFull()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenFaceBoundListFull::isA(int aType)
@@ -4100,7 +4100,7 @@ parenFaceListFull::parenFaceListFull(
 
 parenFaceListFull::~parenFaceListFull()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenFaceListFull::isA(int aType)
@@ -4148,10 +4148,10 @@ parenIntegerListFull::~parenIntegerListFull()
          iter != theList->end();
          ++iter)
       {
-        delete *iter;
+        //delete *iter;
       }
   }
-  delete theList;
+  //delete theList;
 }
 
 int parenIntegerListFull::isA(int aType)
@@ -4193,7 +4193,7 @@ parenMachinedSurfaceListFull::parenMachinedSurfaceListFull(
 
 parenMachinedSurfaceListFull::~parenMachinedSurfaceListFull()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenMachinedSurfaceListFull::isA(int aType)
@@ -4235,7 +4235,7 @@ parenMachiningFeatureListFull::parenMachiningFeatureListFull(
 
 parenMachiningFeatureListFull::~parenMachiningFeatureListFull()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenMachiningFeatureListFull::isA(int aType)
@@ -4297,7 +4297,7 @@ void parenMachiningOperationList::printSelf()
 
 parenMachiningOperationList::~parenMachiningOperationList()
 {
-  delete theList;
+  //delete theList;
 }
 
 std::list<machiningOperation *> * parenMachiningOperationList::get_theList()
@@ -4319,7 +4319,7 @@ parenNcVariableListFull::parenNcVariableListFull(
 
 parenNcVariableListFull::~parenNcVariableListFull()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenNcVariableListFull::isA(int aType)
@@ -4361,7 +4361,7 @@ parenOrientedEdgeListFull::parenOrientedEdgeListFull(
 
 parenOrientedEdgeListFull::~parenOrientedEdgeListFull()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenOrientedEdgeListFull::isA(int aType)
@@ -4409,10 +4409,10 @@ parenParenCartesianPointListFullListFull::~parenParenCartesianPointListFullListF
          iter != theList->end();
          ++iter)
       {
-        delete *iter;
+        //delete *iter;
       }
   }
-  delete theList;
+  //delete theList;
 }
 
 int parenParenCartesianPointListFullListFull::isA(int aType)
@@ -4460,10 +4460,10 @@ parenParenRealListFullListFull::~parenParenRealListFullListFull()
          iter != theList->end();
          ++iter)
       {
-        delete *iter;
+        //delete *iter;
       }
   }
-  delete theList;
+  //delete theList;
 }
 
 int parenParenRealListFullListFull::isA(int aType)
@@ -4505,7 +4505,7 @@ parenProcessModelLiszt::parenProcessModelLiszt(
 
 parenProcessModelLiszt::~parenProcessModelLiszt()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenProcessModelLiszt::isA(int aType)
@@ -4567,7 +4567,7 @@ void parenPropertyParameterList::printSelf()
 
 parenPropertyParameterList::~parenPropertyParameterList()
 {
-  delete theList;
+  //delete theList;
 }
 
 std::list<propertyParameter *> * parenPropertyParameterList::get_theList()
@@ -4595,10 +4595,10 @@ parenRealListFull::~parenRealListFull()
          iter != theList->end();
          ++iter)
       {
-        delete *iter;
+        //delete *iter;
       }
   }
-  delete theList;
+  //delete theList;
 }
 
 int parenRealListFull::isA(int aType)
@@ -4660,7 +4660,7 @@ void parenRectangularOffsetList::printSelf()
 
 parenRectangularOffsetList::~parenRectangularOffsetList()
 {
-  delete theList;
+  //delete theList;
 }
 
 std::list<rectangularOffset *> * parenRectangularOffsetList::get_theList()
@@ -4702,7 +4702,7 @@ void parenRectangularOmitList::printSelf()
 
 parenRectangularOmitList::~parenRectangularOmitList()
 {
-  delete theList;
+  //delete theList;
 }
 
 std::list<rectangularOmit *> * parenRectangularOmitList::get_theList()
@@ -4724,7 +4724,7 @@ parenRepresentationItemListFull::parenRepresentationItemListFull(
 
 parenRepresentationItemListFull::~parenRepresentationItemListFull()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenRepresentationItemListFull::isA(int aType)
@@ -4786,7 +4786,7 @@ void parenSetupInstructionList::printSelf()
 
 parenSetupInstructionList::~parenSetupInstructionList()
 {
-  delete theList;
+  //delete theList;
 }
 
 std::list<setupInstruction *> * parenSetupInstructionList::get_theList()
@@ -4828,7 +4828,7 @@ void parenSlotEndTypeList::printSelf()
 
 parenSlotEndTypeList::~parenSlotEndTypeList()
 {
-  delete theList;
+  //delete theList;
 }
 
 std::list<slotEndType *> * parenSlotEndTypeList::get_theList()
@@ -4870,7 +4870,7 @@ void parenSpecificationUsageConstraintList::printSelf()
 
 parenSpecificationUsageConstraintList::~parenSpecificationUsageConstraintList()
 {
-  delete theList;
+  //delete theList;
 }
 
 std::list<specificationUsageConstraint *> * parenSpecificationUsageConstraintList::get_theList()
@@ -4918,10 +4918,10 @@ parenStringList::~parenStringList()
          iter != theList->end();
          ++iter)
       {
-        delete *iter;
+        //delete *iter;
       }
   }
-  delete theList;
+  //delete theList;
 }
 
 std::list<char *> * parenStringList::get_theList()
@@ -4949,10 +4949,10 @@ parenStringListFull::~parenStringListFull()
          iter != theList->end();
          ++iter)
       {
-        delete *iter;
+        //delete *iter;
       }
   }
-  delete theList;
+  //delete theList;
 }
 
 int parenStringListFull::isA(int aType)
@@ -4994,7 +4994,7 @@ parenToolpathLisztFull::parenToolpathLisztFull(
 
 parenToolpathLisztFull::~parenToolpathLisztFull()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenToolpathLisztFull::isA(int aType)
@@ -5036,7 +5036,7 @@ parenTrimmingSelectListFull::parenTrimmingSelectListFull(
 
 parenTrimmingSelectListFull::~parenTrimmingSelectListFull()
 {
-  delete theList;
+  //delete theList;
 }
 
 int parenTrimmingSelectListFull::isA(int aType)
@@ -5098,7 +5098,7 @@ void parenWorkpieceList::printSelf()
 
 parenWorkpieceList::~parenWorkpieceList()
 {
-  delete theList;
+  //delete theList;
 }
 
 std::list<workpiece *> * parenWorkpieceList::get_theList()
@@ -5140,7 +5140,7 @@ void parenWorkpieceSetupList::printSelf()
 
 parenWorkpieceSetupList::~parenWorkpieceSetupList()
 {
-  delete theList;
+  //delete theList;
 }
 
 std::list<workpieceSetup *> * parenWorkpieceSetupList::get_theList()
@@ -5166,7 +5166,7 @@ partialAreaDefinition::partialAreaDefinition(
 
 partialAreaDefinition::~partialAreaDefinition()
 {
-  delete maximumLength;
+  //delete maximumLength;
 }
 
 int partialAreaDefinition::isA(int aType)
@@ -5278,12 +5278,12 @@ person::person(
 
 person::~person()
 {
-  delete id;
-  delete lastName;
-  delete firstName;
-  delete middleNames;
-  delete prefixTitles;
-  delete suffixTitles;
+  //delete id;
+  //delete lastName;
+  //delete firstName;
+  //delete middleNames;
+  //delete prefixTitles;
+  //delete suffixTitles;
 }
 
 int person::isA(int aType)
@@ -5414,9 +5414,9 @@ planeCcStrategy::planeCcStrategy(
 
 planeCcStrategy::~planeCcStrategy()
 {
-  delete get_pathmode();
-  delete get_cutmode();
-  delete get_stepover();
+  //delete get_pathmode();
+  //delete get_cutmode();
+  //delete get_stepover();
 }
 
 int planeCcStrategy::isA(int aType)
@@ -5471,9 +5471,9 @@ planeClStrategy::planeClStrategy(
 
 planeClStrategy::~planeClStrategy()
 {
-  delete get_pathmode();
-  delete get_cutmode();
-  delete get_stepover();
+  //delete get_pathmode();
+  //delete get_cutmode();
+  //delete get_stepover();
 }
 
 int planeClStrategy::isA(int aType)
@@ -5730,8 +5730,8 @@ processModel::processModel(
 
 processModel::~processModel()
 {
-  delete iniDataFile;
-  delete itsType;
+  //delete iniDataFile;
+  //delete itsType;
 }
 
 int processModel::isA(int aType)
@@ -5770,7 +5770,7 @@ processModelList::processModelList(
 
 processModelList::~processModelList()
 {
-  delete itsList;
+  //delete itsList;
 }
 
 int processModelList::isA(int aType)
@@ -5856,7 +5856,7 @@ programStop::programStop(
 
 programStop::~programStop()
 {
-  delete get_itsId();
+  delete[] get_itsId();
 }
 
 int programStop::isA(int aType)
@@ -5897,8 +5897,8 @@ project::project(
 
 project::~project()
 {
-  delete itsId;
-  delete itsWorkpieces;
+  //delete itsId;
+  //delete itsWorkpieces;
 }
 
 int project::isA(int aType)
@@ -6174,8 +6174,8 @@ regionProjection::regionProjection(
 
 regionProjection::~regionProjection()
 {
-  delete get_itsId();
-  delete get_itsOperations();
+  delete[] get_itsId();
+  //delete get_itsOperations();
 }
 
 int regionProjection::isA(int aType)
@@ -6243,9 +6243,9 @@ regionSurfaceList::regionSurfaceList(
 
 regionSurfaceList::~regionSurfaceList()
 {
-  delete get_itsId();
-  delete get_itsOperations();
-  delete surfaceList;
+  delete[] get_itsId();
+  //delete get_itsOperations();
+  //delete surfaceList;
 }
 
 int regionSurfaceList::isA(int aType)
@@ -6330,9 +6330,9 @@ representation::representation(
 
 representation::~representation()
 {
-  delete get_name();
-  delete get_items();
-  delete get_contextOfItems();
+  delete[] get_name();
+  //delete get_items();
+  //delete get_contextOfItems();
 }
 
 int representation::isA(int aType)
@@ -6368,8 +6368,8 @@ representationContext::representationContext(
 
 representationContext::~representationContext()
 {
-  delete contextIdentifier;
-  delete contextType;
+  //delete contextIdentifier;
+  //delete contextType;
 }
 
 int representationContext::isA(int aType)
@@ -6511,8 +6511,8 @@ selective::selective(
 
 selective::~selective()
 {
-  delete get_itsId();
-  delete itsElements;
+  delete[] get_itsId();
+  //delete itsElements;
 }
 
 int selective::isA(int aType)
@@ -6550,7 +6550,7 @@ setMark::setMark(
 
 setMark::~setMark()
 {
-  delete get_itsId();
+  delete[] get_itsId();
 }
 
 int setMark::isA(int aType)
@@ -6587,8 +6587,8 @@ setup::setup(
 
 setup::~setup()
 {
-  delete itsId;
-  delete itsWorkpieceSetup;
+  //delete itsId;
+  //delete itsWorkpieceSetup;
 }
 
 int setup::isA(int aType)
@@ -6644,8 +6644,8 @@ setupInstruction::setupInstruction(
 
 setupInstruction::~setupInstruction()
 {
-  delete description;
-  delete externalDocument;
+  //delete description;
+  //delete externalDocument;
 }
 
 int setupInstruction::isA(int aType)
@@ -6717,9 +6717,9 @@ shapeRepresentation::shapeRepresentation(
 
 shapeRepresentation::~shapeRepresentation()
 {
-  delete get_name();
-  delete get_items();
-  delete get_contextOfItems();
+  delete[] get_name();
+  //delete get_items();
+  //delete get_contextOfItems();
 }
 
 int shapeRepresentation::isA(int aType)
@@ -6772,10 +6772,10 @@ specification::specification(
 
 specification::~specification()
 {
-  delete constraint;
-  delete specificationId;
-  delete specificationDescription;
-  delete specificationClass;
+  //delete constraint;
+  //delete specificationId;
+  //delete specificationDescription;
+  //delete specificationClass;
 }
 
 int specification::isA(int aType)
@@ -6834,8 +6834,8 @@ specificationUsageConstraint::specificationUsageConstraint(
 
 specificationUsageConstraint::~specificationUsageConstraint()
 {
-  delete element;
-  delete classId;
+  //delete element;
+  //delete classId;
 }
 
 int specificationUsageConstraint::isA(int aType)
@@ -6979,10 +6979,10 @@ surfaceTextureParameter::surfaceTextureParameter(
 
 surfaceTextureParameter::~surfaceTextureParameter()
 {
-  delete parameterName;
-  delete measuringMethod;
-  delete parameterIndex;
-  delete appliedSurfaces;
+  //delete parameterName;
+  //delete measuringMethod;
+  //delete parameterIndex;
+  //delete appliedSurfaces;
 }
 
 int surfaceTextureParameter::isA(int aType)
@@ -7325,7 +7325,7 @@ toolpathList::toolpathList(
 
 toolpathList::~toolpathList()
 {
-  delete itsList;
+  //delete itsList;
 }
 
 int toolpathList::isA(int aType)
@@ -7591,7 +7591,7 @@ touchProbe::touchProbe(
 
 touchProbe::~touchProbe()
 {
-  delete itsId;
+  //delete itsId;
 }
 
 int touchProbe::isA(int aType)
@@ -8023,9 +8023,9 @@ unidirectionalMilling::unidirectionalMilling(
 
 unidirectionalMilling::~unidirectionalMilling()
 {
-  delete get_overlap();
-  delete get_allowMultiplePasses();
-  delete cutmode;
+  //delete get_overlap();
+  //delete get_allowMultiplePasses();
+  //delete cutmode;
 }
 
 int unidirectionalMilling::isA(int aType)
@@ -8085,7 +8085,7 @@ unloadTool::unloadTool(
 
 unloadTool::~unloadTool()
 {
-  delete get_itsId();
+  delete[] get_itsId();
 }
 
 int unloadTool::isA(int aType)
@@ -8137,9 +8137,9 @@ uvStrategy::uvStrategy(
 
 uvStrategy::~uvStrategy()
 {
-  delete get_pathmode();
-  delete get_cutmode();
-  delete get_stepover();
+  //delete get_pathmode();
+  //delete get_cutmode();
+  //delete get_stepover();
 }
 
 int uvStrategy::isA(int aType)
@@ -8214,7 +8214,7 @@ vertexPoint::vertexPoint(
 
 vertexPoint::~vertexPoint()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int vertexPoint::isA(int aType)
@@ -8256,7 +8256,7 @@ waitForMark::waitForMark(
 
 waitForMark::~waitForMark()
 {
-  delete get_itsId();
+  delete[] get_itsId();
 }
 
 int waitForMark::isA(int aType)
@@ -8299,7 +8299,7 @@ weekOfYearAndDayDate::weekOfYearAndDayDate(
 
 weekOfYearAndDayDate::~weekOfYearAndDayDate()
 {
-  delete dayComponent;
+  //delete dayComponent;
 }
 
 int weekOfYearAndDayDate::isA(int aType)
@@ -8350,7 +8350,7 @@ whileStatement::whileStatement(
 
 whileStatement::~whileStatement()
 {
-  delete get_itsId();
+  delete[] get_itsId();
 }
 
 int whileStatement::isA(int aType)
@@ -8467,9 +8467,9 @@ workpiece::workpiece(
 
 workpiece::~workpiece()
 {
-  delete itsId;
-  delete globalTolerance;
-  delete clampingPositions;
+  //delete itsId;
+  //delete globalTolerance;
+  //delete clampingPositions;
 }
 
 int workpiece::isA(int aType)
@@ -8561,8 +8561,8 @@ workpieceSetup::workpieceSetup(
 
 workpieceSetup::~workpieceSetup()
 {
-  delete itsOffset;
-  delete itsInstructions;
+  //delete itsOffset;
+  //delete itsInstructions;
 }
 
 int workpieceSetup::isA(int aType)
@@ -8634,8 +8634,8 @@ workplan::workplan(
 
 workplan::~workplan()
 {
-  delete get_itsId();
-  delete itsElements;
+  delete[] get_itsId();
+  //delete itsElements;
 }
 
 int workplan::isA(int aType)
@@ -8761,7 +8761,7 @@ andExpression::andExpression(
 
 andExpression::~andExpression()
 {
-  delete get_operands();
+  //delete get_operands();
 }
 
 int andExpression::isA(int aType)
@@ -8792,7 +8792,7 @@ angleTaper::angleTaper(
 
 angleTaper::~angleTaper()
 {
-  delete angle;
+  //delete angle;
 }
 
 int angleTaper::isA(int aType)
@@ -8926,7 +8926,7 @@ assignment::assignment(
 
 assignment::~assignment()
 {
-  delete get_itsId();
+  delete[] get_itsId();
 }
 
 int assignment::isA(int aType)
@@ -8985,11 +8985,11 @@ axisTrajectory::axisTrajectory(
 
 axisTrajectory::~axisTrajectory()
 {
-  delete get_itsPriority();
-  delete get_itsType();
-  delete get_itsDirection();
-  delete axisList;
-  delete commands;
+  //delete get_itsPriority();
+  //delete get_itsType();
+  //delete get_itsDirection();
+  //delete axisList;
+  //delete commands;
 }
 
 int axisTrajectory::isA(int aType)
@@ -9066,11 +9066,11 @@ bidirectionalContour::bidirectionalContour(
 
 bidirectionalContour::~bidirectionalContour()
 {
-  delete get_overlap();
-  delete get_allowMultiplePasses();
-  delete stepoverDirection;
-  delete rotationDirection;
-  delete spiralCutmode;
+  //delete get_overlap();
+  //delete get_allowMultiplePasses();
+  //delete stepoverDirection;
+  //delete rotationDirection;
+  //delete spiralCutmode;
 }
 
 int bidirectionalContour::isA(int aType)
@@ -9152,10 +9152,10 @@ bidirectionalMilling::bidirectionalMilling(
 
 bidirectionalMilling::~bidirectionalMilling()
 {
-  delete get_overlap();
-  delete get_allowMultiplePasses();
-  delete stepoverDirection;
-  delete itsStrokeConnectionStrategy;
+  //delete get_overlap();
+  //delete get_allowMultiplePasses();
+  //delete stepoverDirection;
+  //delete itsStrokeConnectionStrategy;
 }
 
 int bidirectionalMilling::isA(int aType)
@@ -9328,8 +9328,8 @@ centerMilling::centerMilling(
 
 centerMilling::~centerMilling()
 {
-  delete get_overlap();
-  delete get_allowMultiplePasses();
+  //delete get_overlap();
+  //delete get_allowMultiplePasses();
 }
 
 int centerMilling::isA(int aType)
@@ -9380,8 +9380,8 @@ chamfer::chamfer(
 
 chamfer::~chamfer()
 {
-  delete get_itsId();
-  delete get_itsOperations();
+  delete[] get_itsId();
+  //delete get_itsOperations();
 }
 
 int chamfer::isA(int aType)
@@ -9757,7 +9757,7 @@ conicalHoleBottom::conicalHoleBottom(
 
 conicalHoleBottom::~conicalHoleBottom()
 {
-  delete tipAngle;
+  //delete tipAngle;
 }
 
 int conicalHoleBottom::isA(int aType)
@@ -9841,11 +9841,11 @@ contourBidirectional::contourBidirectional(
 
 contourBidirectional::~contourBidirectional()
 {
-  delete get_overlap();
-  delete get_allowMultiplePasses();
-  delete stepoverDirection;
-  delete rotationDirection;
-  delete spiralCutmode;
+  //delete get_overlap();
+  //delete get_allowMultiplePasses();
+  //delete stepoverDirection;
+  //delete rotationDirection;
+  //delete spiralCutmode;
 }
 
 int contourBidirectional::isA(int aType)
@@ -9925,10 +9925,10 @@ contourParallel::contourParallel(
 
 contourParallel::~contourParallel()
 {
-  delete get_overlap();
-  delete get_allowMultiplePasses();
-  delete rotationDirection;
-  delete cutmode;
+  //delete get_overlap();
+  //delete get_allowMultiplePasses();
+  //delete rotationDirection;
+  //delete cutmode;
 }
 
 int contourParallel::isA(int aType)
@@ -9989,10 +9989,10 @@ contourSpiral::contourSpiral(
 
 contourSpiral::~contourSpiral()
 {
-  delete get_overlap();
-  delete get_allowMultiplePasses();
-  delete rotationDirection;
-  delete cutmode;
+  //delete get_overlap();
+  //delete get_allowMultiplePasses();
+  //delete rotationDirection;
+  //delete cutmode;
 }
 
 int contourSpiral::isA(int aType)
@@ -10054,9 +10054,9 @@ counterboreHole::counterboreHole(
 
 counterboreHole::~counterboreHole()
 {
-  delete get_itsId();
-  delete get_itsOperations();
-  delete get_elements();
+  delete[] get_itsId();
+  //delete get_itsOperations();
+  //delete get_elements();
 }
 
 int counterboreHole::isA(int aType)
@@ -10104,9 +10104,9 @@ countersunkHole::countersunkHole(
 
 countersunkHole::~countersunkHole()
 {
-  delete get_itsId();
-  delete get_itsOperations();
-  delete get_elements();
+  delete[] get_itsId();
+  //delete get_itsOperations();
+  //delete get_elements();
 }
 
 int countersunkHole::isA(int aType)
@@ -10205,9 +10205,9 @@ cutterLocationTrajectory::cutterLocationTrajectory(
 
 cutterLocationTrajectory::~cutterLocationTrajectory()
 {
-  delete get_itsPriority();
-  delete get_itsType();
-  delete get_itsDirection();
+  //delete get_itsPriority();
+  //delete get_itsType();
+  //delete get_itsDirection();
 }
 
 int cutterLocationTrajectory::isA(int aType)
@@ -10328,9 +10328,9 @@ definitionalRepresentation::definitionalRepresentation(
 
 definitionalRepresentation::~definitionalRepresentation()
 {
-  delete get_name();
-  delete get_items();
-  delete get_contextOfItems();
+  delete[] get_name();
+  //delete get_items();
+  //delete get_contextOfItems();
 }
 
 int definitionalRepresentation::isA(int aType)
@@ -10367,8 +10367,8 @@ descriptiveParameter::descriptiveParameter(
 
 descriptiveParameter::~descriptiveParameter()
 {
-  delete get_parameterName();
-  delete descriptiveString;
+  //delete get_parameterName();
+  //delete descriptiveString;
 }
 
 int descriptiveParameter::isA(int aType)
@@ -10442,8 +10442,8 @@ displayMessage::displayMessage(
 
 displayMessage::~displayMessage()
 {
-  delete get_itsId();
-  delete itsText;
+  delete[] get_itsId();
+  //delete itsText;
 }
 
 int displayMessage::isA(int aType)
@@ -10524,8 +10524,8 @@ edgeCurve::edgeCurve(
 
 edgeCurve::~edgeCurve()
 {
-  delete get_name();
-  delete sameSense;
+  delete[] get_name();
+  //delete sameSense;
 }
 
 int edgeCurve::isA(int aType)
@@ -10589,8 +10589,8 @@ edgeRound::edgeRound(
 
 edgeRound::~edgeRound()
 {
-  delete get_itsId();
-  delete get_itsOperations();
+  delete[] get_itsId();
+  //delete get_itsOperations();
 }
 
 int edgeRound::isA(int aType)
@@ -10655,7 +10655,7 @@ exchangePallet::exchangePallet(
 
 exchangePallet::~exchangePallet()
 {
-  delete get_itsId();
+  delete[] get_itsId();
 }
 
 int exchangePallet::isA(int aType)
@@ -10688,8 +10688,8 @@ explicitStrategy::explicitStrategy(
 
 explicitStrategy::~explicitStrategy()
 {
-  delete get_overlap();
-  delete get_allowMultiplePasses();
+  //delete get_overlap();
+  //delete get_allowMultiplePasses();
 }
 
 int explicitStrategy::isA(int aType)
@@ -10793,8 +10793,8 @@ faceBound::faceBound(
 
 faceBound::~faceBound()
 {
-  delete get_name();
-  delete get_orientation();
+  delete[] get_name();
+  //delete get_orientation();
 }
 
 int faceBound::isA(int aType)
@@ -10834,8 +10834,8 @@ faceOuterBound::faceOuterBound(
 
 faceOuterBound::~faceOuterBound()
 {
-  delete get_name();
-  delete get_orientation();
+  delete[] get_name();
+  //delete get_orientation();
 }
 
 int faceOuterBound::isA(int aType)
@@ -10919,8 +10919,8 @@ feedstop::feedstop(
 
 feedstop::~feedstop()
 {
-  delete get_itsPriority();
-  delete get_itsType();
+  //delete get_itsPriority();
+  //delete get_itsType();
 }
 
 int feedstop::isA(int aType)
@@ -11285,7 +11285,7 @@ ifStatement::ifStatement(
 
 ifStatement::~ifStatement()
 {
-  delete get_itsId();
+  delete[] get_itsId();
 }
 
 int ifStatement::isA(int aType)
@@ -11341,7 +11341,7 @@ indexPallet::indexPallet(
 
 indexPallet::~indexPallet()
 {
-  delete get_itsId();
+  delete[] get_itsId();
 }
 
 int indexPallet::isA(int aType)
@@ -11382,7 +11382,7 @@ indexTable::indexTable(
 
 indexTable::~indexTable()
 {
-  delete get_itsId();
+  delete[] get_itsId();
 }
 
 int indexTable::isA(int aType)
@@ -11424,7 +11424,7 @@ limitsAndFits::limitsAndFits(
 
 limitsAndFits::~limitsAndFits()
 {
-  delete itsFittingType;
+  //delete itsFittingType;
 }
 
 int limitsAndFits::isA(int aType)
@@ -11527,7 +11527,7 @@ loadTool::loadTool(
 
 loadTool::~loadTool()
 {
-  delete get_itsId();
+  delete[] get_itsId();
 }
 
 int loadTool::isA(int aType)
@@ -11711,7 +11711,7 @@ machiningWorkingstep::machiningWorkingstep(
 
 machiningWorkingstep::~machiningWorkingstep()
 {
-  delete get_itsId();
+  delete[] get_itsId();
 }
 
 int machiningWorkingstep::isA(int aType)
@@ -11777,10 +11777,10 @@ millingCuttingTool::millingCuttingTool(
 
 millingCuttingTool::~millingCuttingTool()
 {
-  delete get_itsId();
-  delete get_itsCuttingEdge();
-  delete get_overallAssemblyLength();
-  delete toolHolderDiameterForSpindleOrientation;
+  delete[] get_itsId();
+  //delete get_itsCuttingEdge();
+  //delete get_overallAssemblyLength();
+  //delete toolHolderDiameterForSpindleOrientation;
 }
 
 int millingCuttingTool::isA(int aType)
@@ -11898,15 +11898,15 @@ millingTechnology::millingTechnology(
 
 millingTechnology::~millingTechnology()
 {
-  delete get_feedrate();
-  delete get_feedrateReference();
-  delete cutspeed;
-  delete spindle;
-  delete feedratePerTooth;
-  delete synchronizeSpindleWithFeed;
-  delete inhibitFeedrateOverride;
-  delete inhibitSpindleOverride;
-  delete itsAdaptiveControl;
+  //delete get_feedrate();
+  //delete get_feedrateReference();
+  //delete cutspeed;
+  //delete spindle;
+  //delete feedratePerTooth;
+  //delete synchronizeSpindleWithFeed;
+  //delete inhibitFeedrateOverride;
+  //delete inhibitSpindleOverride;
+  //delete itsAdaptiveControl;
 }
 
 int millingTechnology::isA(int aType)
@@ -12097,8 +12097,8 @@ ncConstant::ncConstant(
 
 ncConstant::~ncConstant()
 {
-  delete itsName;
-  delete initialValue;
+  //delete itsName;
+  //delete initialValue;
 }
 
 int ncConstant::isA(int aType)
@@ -12144,8 +12144,8 @@ ncVariable::ncVariable(
 
 ncVariable::~ncVariable()
 {
-  delete itsName;
-  delete initialValue;
+  //delete itsName;
+  //delete initialValue;
 }
 
 int ncVariable::isA(int aType)
@@ -12196,7 +12196,7 @@ ngonClosedProfile::ngonClosedProfile(
 
 ngonClosedProfile::~ngonClosedProfile()
 {
-  delete circumscribedOrAcrossFlats;
+  //delete circumscribedOrAcrossFlats;
 }
 
 int ngonClosedProfile::isA(int aType)
@@ -12252,8 +12252,8 @@ nonSequential::nonSequential(
 
 nonSequential::~nonSequential()
 {
-  delete get_itsId();
-  delete itsElements;
+  delete[] get_itsId();
+  //delete itsElements;
 }
 
 int nonSequential::isA(int aType)
@@ -12326,8 +12326,8 @@ numericParameter::numericParameter(
 
 numericParameter::~numericParameter()
 {
-  delete get_parameterName();
-  delete itsParameterUnit;
+  //delete get_parameterName();
+  //delete itsParameterUnit;
 }
 
 int numericParameter::isA(int aType)
@@ -12414,8 +12414,8 @@ openShell::openShell(
 
 openShell::~openShell()
 {
-  delete get_name();
-  delete get_cfsFaces();
+  delete[] get_name();
+  //delete get_cfsFaces();
 }
 
 int openShell::isA(int aType)
@@ -12482,8 +12482,8 @@ orientedEdge::orientedEdge(
 
 orientedEdge::~orientedEdge()
 {
-  delete get_name();
-  delete orientation;
+  delete[] get_name();
+  //delete orientation;
 }
 
 int orientedEdge::isA(int aType)
@@ -12535,8 +12535,8 @@ parallel::parallel(
 
 parallel::~parallel()
 {
-  delete get_itsId();
-  delete branches;
+  delete[] get_itsId();
+  //delete branches;
 }
 
 int parallel::isA(int aType)
@@ -12744,9 +12744,9 @@ planarFace::planarFace(
 
 planarFace::~planarFace()
 {
-  delete get_itsId();
-  delete get_itsOperations();
-  delete itsBoss;
+  delete[] get_itsId();
+  //delete get_itsOperations();
+  //delete itsBoss;
 }
 
 int planarFace::isA(int aType)
@@ -13068,7 +13068,7 @@ rapidMovement::rapidMovement(
 
 rapidMovement::~rapidMovement()
 {
-  delete get_itsId();
+  delete[] get_itsId();
 }
 
 int rapidMovement::isA(int aType)
@@ -13264,7 +13264,7 @@ rightCircularCylinder::rightCircularCylinder(
 
 rightCircularCylinder::~rightCircularCylinder()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int rightCircularCylinder::isA(int aType)
@@ -13329,8 +13329,8 @@ roundedEnd::roundedEnd(
 
 roundedEnd::~roundedEnd()
 {
-  delete get_itsId();
-  delete get_itsOperations();
+  delete[] get_itsId();
+  //delete get_itsOperations();
 }
 
 int roundedEnd::isA(int aType)
@@ -13442,8 +13442,8 @@ roundHole::roundHole(
 
 roundHole::~roundHole()
 {
-  delete get_itsId();
-  delete get_itsOperations();
+  delete[] get_itsId();
+  //delete get_itsOperations();
 }
 
 int roundHole::isA(int aType)
@@ -13568,9 +13568,9 @@ slot::slot(
 
 slot::~slot()
 {
-  delete get_itsId();
-  delete get_itsOperations();
-  delete endConditions;
+  delete[] get_itsId();
+  //delete get_itsOperations();
+  //delete endConditions;
 }
 
 int slot::isA(int aType)
@@ -13684,8 +13684,8 @@ sphericalCap::sphericalCap(
 
 sphericalCap::~sphericalCap()
 {
-  delete get_itsId();
-  delete get_itsOperations();
+  delete[] get_itsId();
+  //delete get_itsOperations();
 }
 
 int sphericalCap::isA(int aType)
@@ -13864,9 +13864,9 @@ step::step(
 
 step::~step()
 {
-  delete get_itsId();
-  delete get_itsOperations();
-  delete itsBoss;
+  delete[] get_itsId();
+  //delete get_itsOperations();
+  //delete itsBoss;
 }
 
 int step::isA(int aType)
@@ -14017,11 +14017,11 @@ taperedReamer::taperedReamer(
 
 taperedReamer::~taperedReamer()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
-  delete taperAngle;
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
+  //delete taperAngle;
 }
 
 int taperedReamer::isA(int aType)
@@ -14325,8 +14325,8 @@ toolpathFeature::toolpathFeature(
 
 toolpathFeature::~toolpathFeature()
 {
-  delete get_itsId();
-  delete get_itsOperations();
+  delete[] get_itsId();
+  //delete get_itsOperations();
 }
 
 int toolpathFeature::isA(int aType)
@@ -14412,10 +14412,10 @@ topologicalRegion::topologicalRegion(
 
 topologicalRegion::~topologicalRegion()
 {
-  delete get_itsId();
-  delete get_itsOperations();
-  delete get_name();
-  delete get_cfsFaces();
+  delete[] get_itsId();
+  //delete get_itsOperations();
+  delete[] get_name();
+  //delete get_cfsFaces();
 }
 
 int topologicalRegion::isA(int aType)
@@ -14560,11 +14560,11 @@ userDefinedTool::userDefinedTool(
 
 userDefinedTool::~userDefinedTool()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
-  delete identifier;
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
+  //delete identifier;
 }
 
 int userDefinedTool::isA(int aType)
@@ -14627,7 +14627,7 @@ vector::vector(
 
 vector::~vector()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int vector::isA(int aType)
@@ -14733,7 +14733,7 @@ vertexLoop::vertexLoop(
 
 vertexLoop::~vertexLoop()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int vertexLoop::isA(int aType)
@@ -14789,8 +14789,8 @@ workpieceCompleteProbing::workpieceCompleteProbing(
 
 workpieceCompleteProbing::~workpieceCompleteProbing()
 {
-  delete get_itsId();
-  delete computedOffset;
+  delete[] get_itsId();
+  //delete computedOffset;
 }
 
 int workpieceCompleteProbing::isA(int aType)
@@ -14881,7 +14881,7 @@ workpieceProbing::workpieceProbing(
 
 workpieceProbing::~workpieceProbing()
 {
-  delete get_itsId();
+  delete[] get_itsId();
 }
 
 int workpieceProbing::isA(int aType)
@@ -14997,9 +14997,9 @@ advancedBrepShapeRepresentation::advancedBrepShapeRepresentation(
 
 advancedBrepShapeRepresentation::~advancedBrepShapeRepresentation()
 {
-  delete get_name();
-  delete get_items();
-  delete get_contextOfItems();
+  delete[] get_name();
+  //delete get_items();
+  //delete get_contextOfItems();
 }
 
 int advancedBrepShapeRepresentation::isA(int aType)
@@ -15042,9 +15042,9 @@ advancedFace::advancedFace(
 
 advancedFace::~advancedFace()
 {
-  delete get_name();
-  delete get_bounds();
-  delete get_sameSense();
+  delete[] get_name();
+  //delete get_bounds();
+  //delete get_sameSense();
 }
 
 int advancedFace::isA(int aType)
@@ -15130,7 +15130,7 @@ axis1placement::axis1placement(
 
 axis1placement::~axis1placement()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int axis1placement::isA(int aType)
@@ -15178,7 +15178,7 @@ axis2placement3d::axis2placement3d(
 
 axis2placement3d::~axis2placement3d()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int axis2placement3d::isA(int aType)
@@ -15237,7 +15237,7 @@ block::block(
 
 block::~block()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int block::isA(int aType)
@@ -15303,10 +15303,10 @@ boringTool::boringTool(
 
 boringTool::~boringTool()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
 }
 
 int boringTool::isA(int aType)
@@ -15370,9 +15370,9 @@ boss::boss(
 
 boss::~boss()
 {
-  delete get_itsId();
-  delete get_itsOperations();
-  delete slope;
+  delete[] get_itsId();
+  //delete get_itsOperations();
+  //delete slope;
 }
 
 int boss::isA(int aType)
@@ -15530,13 +15530,13 @@ bottomAndSideRoughMilling::bottomAndSideRoughMilling(
 
 bottomAndSideRoughMilling::~bottomAndSideRoughMilling()
 {
-  delete get_itsId();
-  delete get_retractPlane();
-  delete get_overcutLength();
-  delete get_axialCuttingDepth();
-  delete get_radialCuttingDepth();
-  delete get_allowanceSide();
-  delete get_allowanceBottom();
+  delete[] get_itsId();
+  //delete get_retractPlane();
+  //delete get_overcutLength();
+  //delete get_axialCuttingDepth();
+  //delete get_radialCuttingDepth();
+  //delete get_allowanceSide();
+  //delete get_allowanceBottom();
 }
 
 int bottomAndSideRoughMilling::isA(int aType)
@@ -15749,19 +15749,19 @@ bSplineSurfaceWithKnots::bSplineSurfaceWithKnots(
 
 bSplineSurfaceWithKnots::~bSplineSurfaceWithKnots()
 {
-  delete get_name();
-  delete get_uDegree();
-  delete get_vDegree();
-  delete get_controlPointsList();
-  delete get_surfaceForm();
-  delete get_uClosed();
-  delete get_vClosed();
-  delete get_selfIntersect();
-  delete uMultiplicities;
-  delete vMultiplicities;
-  delete uKnots;
-  delete vKnots;
-  delete knotSpec;
+  delete[] get_name();
+  //delete get_uDegree();
+  //delete get_vDegree();
+  //delete get_controlPointsList();
+  //delete get_surfaceForm();
+  //delete get_uClosed();
+  //delete get_vClosed();
+  //delete get_selfIntersect();
+  //delete uMultiplicities;
+  //delete vMultiplicities;
+  //delete uKnots;
+  //delete vKnots;
+  //delete knotSpec;
 }
 
 int bSplineSurfaceWithKnots::isA(int aType)
@@ -15843,8 +15843,8 @@ cartesianPoint::cartesianPoint(
 
 cartesianPoint::~cartesianPoint()
 {
-  delete get_name();
-  delete coordinates;
+  delete[] get_name();
+  //delete coordinates;
 }
 
 int cartesianPoint::isA(int aType)
@@ -15913,10 +15913,10 @@ catalogueThread::catalogueThread(
 
 catalogueThread::~catalogueThread()
 {
-  delete get_itsId();
-  delete get_itsOperations();
-  delete get_appliedShape();
-  delete get_innerOrOuterThread();
+  delete[] get_itsId();
+  //delete get_itsOperations();
+  //delete get_appliedShape();
+  //delete get_innerOrOuterThread();
 }
 
 int catalogueThread::isA(int aType)
@@ -15994,10 +15994,10 @@ centerDrill::centerDrill(
 
 centerDrill::~centerDrill()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
 }
 
 int centerDrill::isA(int aType)
@@ -16108,8 +16108,8 @@ circularClosedShapeProfile::circularClosedShapeProfile(
 
 circularClosedShapeProfile::~circularClosedShapeProfile()
 {
-  delete get_itsId();
-  delete get_itsOperations();
+  delete[] get_itsId();
+  //delete get_itsOperations();
 }
 
 int circularClosedShapeProfile::isA(int aType)
@@ -16186,10 +16186,10 @@ circularPattern::circularPattern(
 
 circularPattern::~circularPattern()
 {
-  delete get_itsId();
-  delete get_itsOperations();
-  delete relocatedBaseFeature;
-  delete missingBaseFeature;
+  delete[] get_itsId();
+  //delete get_itsOperations();
+  //delete relocatedBaseFeature;
+  //delete missingBaseFeature;
 }
 
 int circularPattern::isA(int aType)
@@ -16290,10 +16290,10 @@ closedPocket::closedPocket(
 
 closedPocket::~closedPocket()
 {
-  delete get_itsId();
-  delete get_itsOperations();
-  delete get_itsBoss();
-  delete get_slope();
+  delete[] get_itsId();
+  //delete get_itsOperations();
+  //delete get_itsBoss();
+  //delete get_slope();
 }
 
 int closedPocket::isA(int aType)
@@ -16363,8 +16363,8 @@ closedShell::closedShell(
 
 closedShell::~closedShell()
 {
-  delete get_name();
-  delete get_cfsFaces();
+  delete[] get_name();
+  //delete get_cfsFaces();
 }
 
 int closedShell::isA(int aType)
@@ -16409,11 +16409,11 @@ combinedDrillAndReamer::combinedDrillAndReamer(
 
 combinedDrillAndReamer::~combinedDrillAndReamer()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
-  delete drillLength;
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
+  //delete drillLength;
 }
 
 int combinedDrillAndReamer::isA(int aType)
@@ -16486,11 +16486,11 @@ combinedDrillAndTap::combinedDrillAndTap(
 
 combinedDrillAndTap::~combinedDrillAndTap()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
-  delete drillLength;
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
+  //delete drillLength;
 }
 
 int combinedDrillAndTap::isA(int aType)
@@ -16592,8 +16592,8 @@ connectSecplane::connectSecplane(
 
 connectSecplane::~connectSecplane()
 {
-  delete get_itsPriority();
-  delete get_itsType();
+  //delete get_itsPriority();
+  //delete get_itsType();
 }
 
 int connectSecplane::isA(int aType)
@@ -16770,12 +16770,12 @@ definedThread::definedThread(
 
 definedThread::~definedThread()
 {
-  delete get_itsId();
-  delete get_itsOperations();
-  delete get_appliedShape();
-  delete get_innerOrOuterThread();
-  delete minorDiameter;
-  delete crest;
+  delete[] get_itsId();
+  //delete get_itsOperations();
+  //delete get_appliedShape();
+  //delete get_innerOrOuterThread();
+  //delete minorDiameter;
+  //delete crest;
 }
 
 int definedThread::isA(int aType)
@@ -16866,8 +16866,8 @@ direction::direction(
 
 direction::~direction()
 {
-  delete get_name();
-  delete directionRatios;
+  delete[] get_name();
+  //delete directionRatios;
 }
 
 int direction::isA(int aType)
@@ -17005,8 +17005,8 @@ edgeLoop::edgeLoop(
 
 edgeLoop::~edgeLoop()
 {
-  delete get_name();
-  delete edgeList;
+  delete[] get_name();
+  //delete edgeList;
 }
 
 int edgeLoop::isA(int aType)
@@ -17101,9 +17101,9 @@ freeformOperation::freeformOperation(
 
 freeformOperation::~freeformOperation()
 {
-  delete get_itsId();
-  delete get_retractPlane();
-  delete get_overcutLength();
+  delete[] get_itsId();
+  //delete get_retractPlane();
+  //delete get_overcutLength();
 }
 
 int freeformOperation::isA(int aType)
@@ -17200,8 +17200,8 @@ generalOutsideProfile::generalOutsideProfile(
 
 generalOutsideProfile::~generalOutsideProfile()
 {
-  delete get_itsId();
-  delete get_itsOperations();
+  delete[] get_itsId();
+  //delete get_itsOperations();
 }
 
 int generalOutsideProfile::isA(int aType)
@@ -17263,9 +17263,9 @@ generalPattern::generalPattern(
 
 generalPattern::~generalPattern()
 {
-  delete get_itsId();
-  delete get_itsOperations();
-  delete replicateLocations;
+  delete[] get_itsId();
+  //delete get_itsOperations();
+  //delete replicateLocations;
 }
 
 int generalPattern::isA(int aType)
@@ -17360,8 +17360,8 @@ generalProfileFloor::generalProfileFloor(
 
 generalProfileFloor::~generalProfileFloor()
 {
-  delete get_floorRadius();
-  delete get_startOrEnd();
+  //delete get_floorRadius();
+  //delete get_startOrEnd();
 }
 
 int generalProfileFloor::isA(int aType)
@@ -17421,8 +17421,8 @@ generalShapeProfile::generalShapeProfile(
 
 generalShapeProfile::~generalShapeProfile()
 {
-  delete get_itsId();
-  delete get_itsOperations();
+  delete[] get_itsId();
+  //delete get_itsOperations();
 }
 
 int generalShapeProfile::isA(int aType)
@@ -17485,7 +17485,7 @@ helix::helix(
 
 helix::~helix()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int helix::isA(int aType)
@@ -17541,7 +17541,7 @@ line::line(
 
 line::~line()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int line::isA(int aType)
@@ -17632,7 +17632,7 @@ manifoldSolidBrep::manifoldSolidBrep(
 
 manifoldSolidBrep::~manifoldSolidBrep()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int manifoldSolidBrep::isA(int aType)
@@ -17707,10 +17707,10 @@ millingThreadingTool::millingThreadingTool(
 
 millingThreadingTool::~millingThreadingTool()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
 }
 
 int millingThreadingTool::isA(int aType)
@@ -17784,10 +17784,10 @@ openPocket::openPocket(
 
 openPocket::~openPocket()
 {
-  delete get_itsId();
-  delete get_itsOperations();
-  delete get_itsBoss();
-  delete get_slope();
+  delete[] get_itsId();
+  //delete get_itsOperations();
+  //delete get_itsBoss();
+  //delete get_slope();
 }
 
 int openPocket::isA(int aType)
@@ -17881,8 +17881,8 @@ partialCircularShapeProfile::partialCircularShapeProfile(
 
 partialCircularShapeProfile::~partialCircularShapeProfile()
 {
-  delete get_itsId();
-  delete get_itsOperations();
+  delete[] get_itsId();
+  //delete get_itsOperations();
 }
 
 int partialCircularShapeProfile::isA(int aType)
@@ -17978,8 +17978,8 @@ planarProfileFloor::planarProfileFloor(
 
 planarProfileFloor::~planarProfileFloor()
 {
-  delete get_floorRadius();
-  delete get_startOrEnd();
+  //delete get_floorRadius();
+  //delete get_startOrEnd();
 }
 
 int planarProfileFloor::isA(int aType)
@@ -18024,7 +18024,7 @@ plane::plane(
 
 plane::~plane()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int plane::isA(int aType)
@@ -18144,11 +18144,11 @@ planeRoughMilling::planeRoughMilling(
 
 planeRoughMilling::~planeRoughMilling()
 {
-  delete get_itsId();
-  delete get_retractPlane();
-  delete get_overcutLength();
-  delete get_axialCuttingDepth();
-  delete get_allowanceBottom();
+  delete[] get_itsId();
+  //delete get_retractPlane();
+  //delete get_overcutLength();
+  //delete get_axialCuttingDepth();
+  //delete get_allowanceBottom();
 }
 
 int planeRoughMilling::isA(int aType)
@@ -18253,14 +18253,14 @@ quasiUniformSurface::quasiUniformSurface(
 
 quasiUniformSurface::~quasiUniformSurface()
 {
-  delete get_name();
-  delete get_uDegree();
-  delete get_vDegree();
-  delete get_controlPointsList();
-  delete get_surfaceForm();
-  delete get_uClosed();
-  delete get_vClosed();
-  delete get_selfIntersect();
+  delete[] get_name();
+  //delete get_uDegree();
+  //delete get_vDegree();
+  //delete get_controlPointsList();
+  //delete get_surfaceForm();
+  //delete get_uClosed();
+  //delete get_vClosed();
+  //delete get_selfIntersect();
 }
 
 int quasiUniformSurface::isA(int aType)
@@ -18325,15 +18325,15 @@ rationalBSplineSurface::rationalBSplineSurface(
 
 rationalBSplineSurface::~rationalBSplineSurface()
 {
-  delete get_name();
-  delete get_uDegree();
-  delete get_vDegree();
-  delete get_controlPointsList();
-  delete get_surfaceForm();
-  delete get_uClosed();
-  delete get_vClosed();
-  delete get_selfIntersect();
-  delete weightsData;
+  delete[] get_name();
+  //delete get_uDegree();
+  //delete get_vDegree();
+  //delete get_controlPointsList();
+  //delete get_surfaceForm();
+  //delete get_uClosed();
+  //delete get_vClosed();
+  //delete get_selfIntersect();
+  //delete weightsData;
 }
 
 int rationalBSplineSurface::isA(int aType)
@@ -18404,8 +18404,8 @@ rectangularClosedShapeProfile::rectangularClosedShapeProfile(
 
 rectangularClosedShapeProfile::~rectangularClosedShapeProfile()
 {
-  delete get_itsId();
-  delete get_itsOperations();
+  delete[] get_itsId();
+  //delete get_itsOperations();
 }
 
 int rectangularClosedShapeProfile::isA(int aType)
@@ -18478,8 +18478,8 @@ rectangularOpenShapeProfile::rectangularOpenShapeProfile(
 
 rectangularOpenShapeProfile::~rectangularOpenShapeProfile()
 {
-  delete get_itsId();
-  delete get_itsOperations();
+  delete[] get_itsId();
+  //delete get_itsOperations();
 }
 
 int rectangularOpenShapeProfile::isA(int aType)
@@ -18560,11 +18560,11 @@ rectangularPattern::rectangularPattern(
 
 rectangularPattern::~rectangularPattern()
 {
-  delete get_itsId();
-  delete get_itsOperations();
-  delete numberOfRows;
-  delete relocatedBaseFeature;
-  delete missingBaseFeature;
+  delete[] get_itsId();
+  //delete get_itsOperations();
+  //delete numberOfRows;
+  //delete relocatedBaseFeature;
+  //delete missingBaseFeature;
 }
 
 int rectangularPattern::isA(int aType)
@@ -18672,11 +18672,11 @@ sideMill::sideMill(
 
 sideMill::~sideMill()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
-  delete lengthMeasure;
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
+  //delete lengthMeasure;
 }
 
 int sideMill::isA(int aType)
@@ -18831,12 +18831,12 @@ sideFinishMilling::sideFinishMilling(
 
 sideFinishMilling::~sideFinishMilling()
 {
-  delete get_itsId();
-  delete get_retractPlane();
-  delete get_overcutLength();
-  delete get_axialCuttingDepth();
-  delete get_radialCuttingDepth();
-  delete get_allowanceSide();
+  delete[] get_itsId();
+  //delete get_retractPlane();
+  //delete get_overcutLength();
+  //delete get_axialCuttingDepth();
+  //delete get_radialCuttingDepth();
+  //delete get_allowanceSide();
 }
 
 int sideFinishMilling::isA(int aType)
@@ -18960,12 +18960,12 @@ sideRoughMilling::sideRoughMilling(
 
 sideRoughMilling::~sideRoughMilling()
 {
-  delete get_itsId();
-  delete get_retractPlane();
-  delete get_overcutLength();
-  delete get_axialCuttingDepth();
-  delete get_radialCuttingDepth();
-  delete get_allowanceSide();
+  delete[] get_itsId();
+  //delete get_retractPlane();
+  //delete get_overcutLength();
+  //delete get_axialCuttingDepth();
+  //delete get_radialCuttingDepth();
+  //delete get_allowanceSide();
 }
 
 int sideRoughMilling::isA(int aType)
@@ -19069,10 +19069,10 @@ spadeDrill::spadeDrill(
 
 spadeDrill::~spadeDrill()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
 }
 
 int spadeDrill::isA(int aType)
@@ -19129,7 +19129,7 @@ sphericalSurface::sphericalSurface(
 
 sphericalSurface::~sphericalSurface()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int sphericalSurface::isA(int aType)
@@ -19176,7 +19176,7 @@ surfaceOfLinearExtrusion::surfaceOfLinearExtrusion(
 
 surfaceOfLinearExtrusion::~surfaceOfLinearExtrusion()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int surfaceOfLinearExtrusion::isA(int aType)
@@ -19223,7 +19223,7 @@ surfaceOfRevolution::surfaceOfRevolution(
 
 surfaceOfRevolution::~surfaceOfRevolution()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int surfaceOfRevolution::isA(int aType)
@@ -19273,10 +19273,10 @@ tap::tap(
 
 tap::~tap()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
 }
 
 int tap::isA(int aType)
@@ -19339,11 +19339,11 @@ taperedTap::taperedTap(
 
 taperedTap::~taperedTap()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
-  delete taperAngle;
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
+  //delete taperAngle;
 }
 
 int taperedTap::isA(int aType)
@@ -19434,14 +19434,14 @@ tapping::tapping(
 
 tapping::~tapping()
 {
-  delete get_itsId();
-  delete get_retractPlane();
-  delete get_overcutLength();
-  delete get_cuttingDepth();
-  delete get_previousDiameter();
-  delete get_dwellTimeBottom();
-  delete get_feedOnRetract();
-  delete compensationChuck;
+  delete[] get_itsId();
+  //delete get_retractPlane();
+  //delete get_overcutLength();
+  //delete get_cuttingDepth();
+  //delete get_previousDiameter();
+  //delete get_dwellTimeBottom();
+  //delete get_feedOnRetract();
+  //delete compensationChuck;
 }
 
 int tapping::isA(int aType)
@@ -19565,14 +19565,14 @@ threadDrilling::threadDrilling(
 
 threadDrilling::~threadDrilling()
 {
-  delete get_itsId();
-  delete get_retractPlane();
-  delete get_overcutLength();
-  delete get_cuttingDepth();
-  delete get_previousDiameter();
-  delete get_dwellTimeBottom();
-  delete get_feedOnRetract();
-  delete helicalMovementOnForward;
+  delete[] get_itsId();
+  //delete get_retractPlane();
+  //delete get_overcutLength();
+  //delete get_cuttingDepth();
+  //delete get_previousDiameter();
+  //delete get_dwellTimeBottom();
+  //delete get_feedOnRetract();
+  //delete helicalMovementOnForward;
 }
 
 int threadDrilling::isA(int aType)
@@ -19675,10 +19675,10 @@ threadMill::threadMill(
 
 threadMill::~threadMill()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
 }
 
 int threadMill::isA(int aType)
@@ -19794,7 +19794,7 @@ toolRadiusProbing::toolRadiusProbing(
 
 toolRadiusProbing::~toolRadiusProbing()
 {
-  delete get_itsId();
+  delete[] get_itsId();
 }
 
 int toolRadiusProbing::isA(int aType)
@@ -19859,11 +19859,11 @@ tSlotMill::tSlotMill(
 
 tSlotMill::~tSlotMill()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
-  delete cuttingThickness;
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
+  //delete cuttingThickness;
 }
 
 int tSlotMill::isA(int aType)
@@ -19962,10 +19962,10 @@ twistDrill::twistDrill(
 
 twistDrill::~twistDrill()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
 }
 
 int twistDrill::isA(int aType)
@@ -20032,14 +20032,14 @@ uniformSurface::uniformSurface(
 
 uniformSurface::~uniformSurface()
 {
-  delete get_name();
-  delete get_uDegree();
-  delete get_vDegree();
-  delete get_controlPointsList();
-  delete get_surfaceForm();
-  delete get_uClosed();
-  delete get_vClosed();
-  delete get_selfIntersect();
+  delete[] get_name();
+  //delete get_uDegree();
+  //delete get_vDegree();
+  //delete get_controlPointsList();
+  //delete get_surfaceForm();
+  //delete get_uClosed();
+  //delete get_vClosed();
+  //delete get_selfIntersect();
 }
 
 int uniformSurface::isA(int aType)
@@ -20098,11 +20098,11 @@ woodruffKeyseatMill::woodruffKeyseatMill(
 
 woodruffKeyseatMill::~woodruffKeyseatMill()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
-  delete cutterWidth;
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
+  //delete cutterWidth;
 }
 
 int woodruffKeyseatMill::isA(int aType)
@@ -20181,8 +20181,8 @@ apLiftPathAngle::apLiftPathAngle(
 
 apLiftPathAngle::~apLiftPathAngle()
 {
-  delete get_itsPriority();
-  delete get_itsType();
+  //delete get_itsPriority();
+  //delete get_itsType();
 }
 
 int apLiftPathAngle::isA(int aType)
@@ -20266,8 +20266,8 @@ apLiftPathTangent::apLiftPathTangent(
 
 apLiftPathTangent::~apLiftPathTangent()
 {
-  delete get_itsPriority();
-  delete get_itsType();
+  //delete get_itsPriority();
+  //delete get_itsType();
 }
 
 int apLiftPathTangent::isA(int aType)
@@ -20356,13 +20356,13 @@ backBoring::backBoring(
 
 backBoring::~backBoring()
 {
-  delete get_itsId();
-  delete get_retractPlane();
-  delete get_overcutLength();
-  delete get_cuttingDepth();
-  delete get_previousDiameter();
-  delete get_dwellTimeBottom();
-  delete get_feedOnRetract();
+  delete[] get_itsId();
+  //delete get_retractPlane();
+  //delete get_overcutLength();
+  //delete get_cuttingDepth();
+  //delete get_previousDiameter();
+  //delete get_dwellTimeBottom();
+  //delete get_feedOnRetract();
 }
 
 int backBoring::isA(int aType)
@@ -20459,10 +20459,10 @@ backsideCounterbore::backsideCounterbore(
 
 backsideCounterbore::~backsideCounterbore()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
 }
 
 int backsideCounterbore::isA(int aType)
@@ -20525,11 +20525,11 @@ backsideCountersink::backsideCountersink(
 
 backsideCountersink::~backsideCountersink()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
-  delete countersinkRadius;
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
+  //delete countersinkRadius;
 }
 
 int backsideCountersink::isA(int aType)
@@ -20605,14 +20605,14 @@ bezierSurface::bezierSurface(
 
 bezierSurface::~bezierSurface()
 {
-  delete get_name();
-  delete get_uDegree();
-  delete get_vDegree();
-  delete get_controlPointsList();
-  delete get_surfaceForm();
-  delete get_uClosed();
-  delete get_vClosed();
-  delete get_selfIntersect();
+  delete[] get_name();
+  //delete get_uDegree();
+  //delete get_vDegree();
+  //delete get_controlPointsList();
+  //delete get_surfaceForm();
+  //delete get_uClosed();
+  //delete get_vClosed();
+  //delete get_selfIntersect();
 }
 
 int bezierSurface::isA(int aType)
@@ -20758,13 +20758,13 @@ bottomAndSideFinishMilling::bottomAndSideFinishMilling(
 
 bottomAndSideFinishMilling::~bottomAndSideFinishMilling()
 {
-  delete get_itsId();
-  delete get_retractPlane();
-  delete get_overcutLength();
-  delete get_axialCuttingDepth();
-  delete get_radialCuttingDepth();
-  delete get_allowanceSide();
-  delete get_allowanceBottom();
+  delete[] get_itsId();
+  //delete get_retractPlane();
+  //delete get_overcutLength();
+  //delete get_axialCuttingDepth();
+  //delete get_radialCuttingDepth();
+  //delete get_allowanceSide();
+  //delete get_allowanceBottom();
 }
 
 int bottomAndSideFinishMilling::isA(int aType)
@@ -20890,7 +20890,7 @@ boundedPCurve::boundedPCurve(
 
 boundedPCurve::~boundedPCurve()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int boundedPCurve::isA(int aType)
@@ -20999,14 +20999,14 @@ bSplineCurveWithKnots::bSplineCurveWithKnots(
 
 bSplineCurveWithKnots::~bSplineCurveWithKnots()
 {
-  delete get_name();
-  delete get_controlPointsList();
-  delete get_curveForm();
-  delete get_closedCurve();
-  delete get_selfIntersect();
-  delete knotMultiplicites;
-  delete knots;
-  delete knotSpec;
+  delete[] get_name();
+  //delete get_controlPointsList();
+  //delete get_curveForm();
+  //delete get_closedCurve();
+  //delete get_selfIntersect();
+  //delete knotMultiplicites;
+  //delete knots;
+  //delete knotSpec;
 }
 
 int bSplineCurveWithKnots::isA(int aType)
@@ -21073,9 +21073,9 @@ compositeCurve::compositeCurve(
 
 compositeCurve::~compositeCurve()
 {
-  delete get_name();
-  delete segments;
-  delete selfIntersect;
+  delete[] get_name();
+  //delete segments;
+  //delete selfIntersect;
 }
 
 int compositeCurve::isA(int aType)
@@ -21158,8 +21158,8 @@ connectDirect::connectDirect(
 
 connectDirect::~connectDirect()
 {
-  delete get_itsPriority();
-  delete get_itsType();
+  //delete get_itsPriority();
+  //delete get_itsType();
 }
 
 int connectDirect::isA(int aType)
@@ -21216,10 +21216,10 @@ counterbore::counterbore(
 
 counterbore::~counterbore()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
 }
 
 int counterbore::isA(int aType)
@@ -21282,11 +21282,11 @@ countersink::countersink(
 
 countersink::~countersink()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
-  delete countersinkRadius;
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
+  //delete countersinkRadius;
 }
 
 int countersink::isA(int aType)
@@ -21359,11 +21359,11 @@ dovetailMill::dovetailMill(
 
 dovetailMill::~dovetailMill()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
-  delete includedAngle;
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
+  //delete includedAngle;
 }
 
 int dovetailMill::isA(int aType)
@@ -21480,7 +21480,7 @@ ellipse::ellipse(
 
 ellipse::~ellipse()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int ellipse::isA(int aType)
@@ -21565,10 +21565,10 @@ facemill::facemill(
 
 facemill::~facemill()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
 }
 
 int facemill::isA(int aType)
@@ -21627,7 +21627,7 @@ hyperbola::hyperbola(
 
 hyperbola::~hyperbola()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int hyperbola::isA(int aType)
@@ -21710,14 +21710,14 @@ multistepDrilling::multistepDrilling(
 
 multistepDrilling::~multistepDrilling()
 {
-  delete get_itsId();
-  delete get_retractPlane();
-  delete get_overcutLength();
-  delete get_cuttingDepth();
-  delete get_previousDiameter();
-  delete get_dwellTimeBottom();
-  delete get_feedOnRetract();
-  delete dwellTimeStep;
+  delete[] get_itsId();
+  //delete get_retractPlane();
+  //delete get_overcutLength();
+  //delete get_cuttingDepth();
+  //delete get_previousDiameter();
+  //delete get_dwellTimeBottom();
+  //delete get_feedOnRetract();
+  //delete dwellTimeStep;
 }
 
 int multistepDrilling::isA(int aType)
@@ -21840,7 +21840,7 @@ parabola::parabola(
 
 parabola::~parabola()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int parabola::isA(int aType)
@@ -21886,7 +21886,7 @@ pcurve::pcurve(
 
 pcurve::~pcurve()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int pcurve::isA(int aType)
@@ -21949,11 +21949,11 @@ planeFinishMilling::planeFinishMilling(
 
 planeFinishMilling::~planeFinishMilling()
 {
-  delete get_itsId();
-  delete get_retractPlane();
-  delete get_overcutLength();
-  delete get_axialCuttingDepth();
-  delete get_allowanceBottom();
+  delete[] get_itsId();
+  //delete get_retractPlane();
+  //delete get_overcutLength();
+  //delete get_axialCuttingDepth();
+  //delete get_allowanceBottom();
 }
 
 int planeFinishMilling::isA(int aType)
@@ -22047,8 +22047,8 @@ polyline::polyline(
 
 polyline::~polyline()
 {
-  delete get_name();
-  delete points;
+  delete[] get_name();
+  //delete points;
 }
 
 int polyline::isA(int aType)
@@ -22098,11 +22098,11 @@ quasiUniformCurve::quasiUniformCurve(
 
 quasiUniformCurve::~quasiUniformCurve()
 {
-  delete get_name();
-  delete get_controlPointsList();
-  delete get_curveForm();
-  delete get_closedCurve();
-  delete get_selfIntersect();
+  delete[] get_name();
+  //delete get_controlPointsList();
+  //delete get_curveForm();
+  //delete get_closedCurve();
+  //delete get_selfIntersect();
 }
 
 int quasiUniformCurve::isA(int aType)
@@ -22159,12 +22159,12 @@ rationalBSplineCurve::rationalBSplineCurve(
 
 rationalBSplineCurve::~rationalBSplineCurve()
 {
-  delete get_name();
-  delete get_controlPointsList();
-  delete get_curveForm();
-  delete get_closedCurve();
-  delete get_selfIntersect();
-  delete weightsData;
+  delete[] get_name();
+  //delete get_controlPointsList();
+  //delete get_curveForm();
+  //delete get_closedCurve();
+  //delete get_selfIntersect();
+  //delete weightsData;
 }
 
 int rationalBSplineCurve::isA(int aType)
@@ -22247,15 +22247,15 @@ reaming::reaming(
 
 reaming::~reaming()
 {
-  delete get_itsId();
-  delete get_retractPlane();
-  delete get_overcutLength();
-  delete get_cuttingDepth();
-  delete get_previousDiameter();
-  delete get_dwellTimeBottom();
-  delete get_feedOnRetract();
-  delete get_spindleStopAtBottom();
-  delete get_depthOfTestcut();
+  delete[] get_itsId();
+  //delete get_retractPlane();
+  //delete get_overcutLength();
+  //delete get_cuttingDepth();
+  //delete get_previousDiameter();
+  //delete get_dwellTimeBottom();
+  //delete get_feedOnRetract();
+  //delete get_spindleStopAtBottom();
+  //delete get_depthOfTestcut();
 }
 
 int reaming::isA(int aType)
@@ -22368,11 +22368,11 @@ taperedDrill::taperedDrill(
 
 taperedDrill::~taperedDrill()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
-  delete taperAngle;
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
+  //delete taperAngle;
 }
 
 int taperedDrill::isA(int aType)
@@ -22446,11 +22446,11 @@ taperedEndmill::taperedEndmill(
 
 taperedEndmill::~taperedEndmill()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
-  delete taperAngle;
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
+  //delete taperAngle;
 }
 
 int taperedEndmill::isA(int aType)
@@ -22527,7 +22527,7 @@ toolLengthProbing::toolLengthProbing(
 
 toolLengthProbing::~toolLengthProbing()
 {
-  delete get_itsId();
+  delete[] get_itsId();
 }
 
 int toolLengthProbing::isA(int aType)
@@ -22592,11 +22592,11 @@ trimmedCurve::trimmedCurve(
 
 trimmedCurve::~trimmedCurve()
 {
-  delete get_name();
-  delete trim1;
-  delete trim2;
-  delete senseAgreement;
-  delete masterRepresentation;
+  delete[] get_name();
+  //delete trim1;
+  //delete trim2;
+  //delete senseAgreement;
+  //delete masterRepresentation;
 }
 
 int trimmedCurve::isA(int aType)
@@ -22670,11 +22670,11 @@ uniformCurve::uniformCurve(
 
 uniformCurve::~uniformCurve()
 {
-  delete get_name();
-  delete get_controlPointsList();
-  delete get_curveForm();
-  delete get_closedCurve();
-  delete get_selfIntersect();
+  delete[] get_name();
+  //delete get_controlPointsList();
+  //delete get_curveForm();
+  //delete get_closedCurve();
+  //delete get_selfIntersect();
 }
 
 int uniformCurve::isA(int aType)
@@ -22726,10 +22726,10 @@ ballEndmill::ballEndmill(
 
 ballEndmill::~ballEndmill()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
 }
 
 int ballEndmill::isA(int aType)
@@ -22792,11 +22792,11 @@ bezierCurve::bezierCurve(
 
 bezierCurve::~bezierCurve()
 {
-  delete get_name();
-  delete get_controlPointsList();
-  delete get_curveForm();
-  delete get_closedCurve();
-  delete get_selfIntersect();
+  delete[] get_name();
+  //delete get_controlPointsList();
+  //delete get_curveForm();
+  //delete get_closedCurve();
+  //delete get_selfIntersect();
 }
 
 int bezierCurve::isA(int aType)
@@ -22872,15 +22872,15 @@ boring::boring(
 
 boring::~boring()
 {
-  delete get_itsId();
-  delete get_retractPlane();
-  delete get_overcutLength();
-  delete get_cuttingDepth();
-  delete get_previousDiameter();
-  delete get_dwellTimeBottom();
-  delete get_feedOnRetract();
-  delete get_spindleStopAtBottom();
-  delete get_depthOfTestcut();
+  delete[] get_itsId();
+  //delete get_retractPlane();
+  //delete get_overcutLength();
+  //delete get_cuttingDepth();
+  //delete get_previousDiameter();
+  //delete get_dwellTimeBottom();
+  //delete get_feedOnRetract();
+  //delete get_spindleStopAtBottom();
+  //delete get_depthOfTestcut();
 }
 
 int boring::isA(int aType)
@@ -22990,10 +22990,10 @@ bullnoseEndmill::bullnoseEndmill(
 
 bullnoseEndmill::~bullnoseEndmill()
 {
-  delete get_numberOfTeeth();
-  delete get_handOfCut();
-  delete get_coolantThroughTool();
-  delete get_pilotLength();
+  //delete get_numberOfTeeth();
+  //delete get_handOfCut();
+  //delete get_coolantThroughTool();
+  //delete get_pilotLength();
 }
 
 int bullnoseEndmill::isA(int aType)
@@ -23072,13 +23072,13 @@ centerDrilling::centerDrilling(
 
 centerDrilling::~centerDrilling()
 {
-  delete get_itsId();
-  delete get_retractPlane();
-  delete get_overcutLength();
-  delete get_cuttingDepth();
-  delete get_previousDiameter();
-  delete get_dwellTimeBottom();
-  delete get_feedOnRetract();
+  delete[] get_itsId();
+  //delete get_retractPlane();
+  //delete get_overcutLength();
+  //delete get_cuttingDepth();
+  //delete get_previousDiameter();
+  //delete get_dwellTimeBottom();
+  //delete get_feedOnRetract();
 }
 
 int centerDrilling::isA(int aType)
@@ -23173,7 +23173,7 @@ circle::circle(
 
 circle::~circle()
 {
-  delete get_name();
+  delete[] get_name();
 }
 
 int circle::isA(int aType)
@@ -23241,13 +23241,13 @@ counterSinking::counterSinking(
 
 counterSinking::~counterSinking()
 {
-  delete get_itsId();
-  delete get_retractPlane();
-  delete get_overcutLength();
-  delete get_cuttingDepth();
-  delete get_previousDiameter();
-  delete get_dwellTimeBottom();
-  delete get_feedOnRetract();
+  delete[] get_itsId();
+  //delete get_retractPlane();
+  //delete get_overcutLength();
+  //delete get_cuttingDepth();
+  //delete get_previousDiameter();
+  //delete get_dwellTimeBottom();
+  //delete get_feedOnRetract();
 }
 
 int counterSinking::isA(int aType)
@@ -23363,13 +23363,13 @@ drilling::drilling(
 
 drilling::~drilling()
 {
-  delete get_itsId();
-  delete get_retractPlane();
-  delete get_overcutLength();
-  delete get_cuttingDepth();
-  delete get_previousDiameter();
-  delete get_dwellTimeBottom();
-  delete get_feedOnRetract();
+  delete[] get_itsId();
+  //delete get_retractPlane();
+  //delete get_overcutLength();
+  //delete get_cuttingDepth();
+  //delete get_previousDiameter();
+  //delete get_dwellTimeBottom();
+  //delete get_feedOnRetract();
 }
 
 int drilling::isA(int aType)
@@ -23448,7 +23448,8 @@ void drilling::printSelf()
 BOOST_CLASS_EXPORT_IMPLEMENT(workplan)
 BOOST_CLASS_EXPORT_IMPLEMENT(setup)
 BOOST_CLASS_EXPORT_IMPLEMENT(block);
-BOOST_CLASS_EXPORT_IMPLEMENT(workingstep)
+BOOST_CLASS_EXPORT_IMPLEMENT(machiningWorkingstep)
+BOOST_CLASS_EXPORT_IMPLEMENT(rectangularClosedProfile)
 BOOST_CLASS_EXPORT_IMPLEMENT(planarFace)
 BOOST_CLASS_EXPORT_IMPLEMENT(closedPocket)
 BOOST_CLASS_EXPORT_IMPLEMENT(openPocket)
@@ -23462,5 +23463,13 @@ BOOST_CLASS_EXPORT_IMPLEMENT(sideRoughMilling)
 BOOST_CLASS_EXPORT_IMPLEMENT(sideFinishMilling)
 BOOST_CLASS_EXPORT_IMPLEMENT(bottomAndSideRoughMilling)
 BOOST_CLASS_EXPORT_IMPLEMENT(bottomAndSideFinishMilling)
+BOOST_CLASS_EXPORT_IMPLEMENT(millingCuttingTool)
+BOOST_CLASS_EXPORT_IMPLEMENT(two5DmillingStrategy)
+BOOST_CLASS_EXPORT_IMPLEMENT(approachRetractStrategy)
+BOOST_CLASS_EXPORT_IMPLEMENT(millingTechnology)
+BOOST_CLASS_EXPORT_IMPLEMENT(booleanTrue)
+BOOST_CLASS_EXPORT_IMPLEMENT(booleanFalse)
+BOOST_CLASS_EXPORT_IMPLEMENT(toolReferencePointCcp)
+BOOST_CLASS_EXPORT_IMPLEMENT(toolReferencePointTcp)
 /********************************************************************/
 

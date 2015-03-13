@@ -81,11 +81,10 @@
       <ECTransition Comment="" Condition="1" Destination="START" Source="CNF1" x="1110.0" y="985.0"/>
       <ECTransition Comment="" Condition="1" Destination="START" Source="CNF2" x="1600.0" y="1315.0"/>
       <ECTransition Comment="" Condition="ASetupC.IND" Destination="IND" Source="START" x="920.0" y="160.0"/>
-      <ECTransition Comment="" Condition="1" Destination="START" Source="IND" x="1315.0" y="620.0"/>
       <ECTransition Comment="" Condition="Select = FALSE" Destination="IND1" Source="IND" x="205.0" y="440.0"/>
-      <ECTransition Comment="" Condition="1" Destination="IND" Source="IND1" x="365.0" y="590.0"/>
       <ECTransition Comment="" Condition="Select = TRUE" Destination="IND2" Source="IND" x="640.0" y="625.0"/>
-      <ECTransition Comment="" Condition="1" Destination="IND" Source="IND2" x="965.0" y="855.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="IND1" x="860.0" y="70.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="IND2" x="915.0" y="910.0"/>
     </ECC>
     <Algorithm Comment="Normally executed algorithm" Name="REQ1">
       <ST Text="FOR i:=0 TO 2 DO&#10;&#9;ASetupC.PartInfoP[i] :=ASetup1.PartInfoP[i];&#10;END_FOR;&#10;ASetupC.MID := ASetup1.MID;&#10;ASetupC.Setup := ASetup1.Setup;"/>

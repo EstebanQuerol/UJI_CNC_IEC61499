@@ -13,62 +13,49 @@
 #define _L1_FCLOSEDPOCKET_H_
 
 #include <funcbloc.h>
-#include <forte_bool.h>
-#include <forte_any.h>
+#include <forte_usint.h>
+#include <forte_string.h>
+#include "L1_GENFeature.h"
+#include "Tool_Table.h"
 
-//#ERROR type contains variables of type ANY. Please check the usage of these variables as we can not gurantee correct usage on export!
 
-#include <forte_wstring.h>
-
-class FORTE_L1_FClosedPocket: public CFunctionBlock{
+class FORTE_L1_FClosedPocket: public CFunctionBlock, public L1_GENFeature{
   DECLARE_FIRMWARE_FB(FORTE_L1_FClosedPocket)
 
 private:
   static const CStringDictionary::TStringId scm_anDataInputNames[];
   static const CStringDictionary::TStringId scm_anDataInputTypeIds[];
-  CIEC_BOOL &QI() {
-    return *static_cast<CIEC_BOOL*>(getDI(0));
+  CIEC_STRING &Operation() {
+    return *static_cast<CIEC_STRING*>(getDI(0));
   };
 
-  CIEC_WSTRING &PARAMS() {
-    return *static_cast<CIEC_WSTRING*>(getDI(1));
-  };
-
-  CIEC_ANY &SD() {
-    return *static_cast<CIEC_ANY*>(getDI(2));
+  CIEC_USINT &L1MIDIn() {
+    return *static_cast<CIEC_USINT*>(getDI(1));
   };
 
   static const CStringDictionary::TStringId scm_anDataOutputNames[];
   static const CStringDictionary::TStringId scm_anDataOutputTypeIds[];
-  CIEC_BOOL &QO() {
-    return *static_cast<CIEC_BOOL*>(getDO(0));
+  CIEC_STRING &Cmd() {
+    return *static_cast<CIEC_STRING*>(getDO(0));
   };
 
-  CIEC_WSTRING &STATUS() {
-    return *static_cast<CIEC_WSTRING*>(getDO(1));
+  CIEC_USINT &L1MIDOut() {
+    return *static_cast<CIEC_USINT*>(getDO(1));
   };
 
-  CIEC_ANY &RD() {
-    return *static_cast<CIEC_ANY*>(getDO(2));
-  };
-
-  static const TEventID scm_nEventINITID = 0;
-  static const TEventID scm_nEventREQID = 1;
-  static const TEventID scm_nEventRSPID = 2;
+  static const TEventID scm_nEventREQID = 0;
   static const TForteInt16 scm_anEIWithIndexes[];
   static const TDataIOID scm_anEIWith[];
   static const CStringDictionary::TStringId scm_anEventInputNames[];
 
-  static const TEventID scm_nEventINITOID = 0;
-  static const TEventID scm_nEventCNFID = 1;
-  static const TEventID scm_nEventINDID = 2;
+  static const TEventID scm_nEventCNFID = 0;
   static const TForteInt16 scm_anEOWithIndexes[];
   static const TDataIOID scm_anEOWith[];
   static const CStringDictionary::TStringId scm_anEventOutputNames[];
 
   static const SFBInterfaceSpec scm_stFBInterfaceSpec;
 
-   FORTE_FB_DATA_ARRAY(3, 3, 3, 0);
+   FORTE_FB_DATA_ARRAY(1, 2, 2, 0);
 
   void executeEvent(int pa_nEIID);
 
