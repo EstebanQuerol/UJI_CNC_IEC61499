@@ -55,12 +55,12 @@ void FORTE_L3_PPTable::InsertPart(TForteUInt16 pa_nPartID, TForteUInt16 pa_nlots
 }
 
 void FORTE_L3_PPTable::AddSetup(TForteUInt16 pa_nPartID){
-	ManPart oauxPart;
 	TForteUInt8 CurrentSetup = 0;
 	try{
-		oauxPart = m_Partmap.at(pa_nPartID);
-		if (oauxPart.IsAssigned()){
-			CurrentSetup = oauxPart.GetSetup();
+		ManPart * oauxPart = &m_Partmap.at(pa_nPartID);
+		if (oauxPart->IsAssigned()){
+			oauxPart->UnAssignMachine();
+			CurrentSetup = oauxPart->GetSetup();
 			if (++CurrentSetup > m_nNOS){
 				//The part is completed
 				m_anSendBuffer[m_nPartsToSend++] = pa_nPartID;
@@ -68,9 +68,8 @@ void FORTE_L3_PPTable::AddSetup(TForteUInt16 pa_nPartID){
 				//TODO add protection for array access
 			}
 			else{
-				oauxPart.SetSetup(CurrentSetup);
+				oauxPart->SetSetup(CurrentSetup);
 			}
-			oauxPart.UnAssignMachine();
 		}
 		else{
 			DEVLOG_ERROR("Completed setup of non-assigned Part - ERROR\n");
@@ -82,14 +81,13 @@ void FORTE_L3_PPTable::AddSetup(TForteUInt16 pa_nPartID){
 }
 
 void FORTE_L3_PPTable::UpdatePartState(TForteUInt16 pa_nPartID, TForteUInt8 pa_nMID){
-	ManPart oauxPart = ManPart();
 	try{
-		oauxPart = m_Partmap.at(pa_nPartID);
-		if (oauxPart.IsAssigned()){
+		ManPart * oauxPart = &m_Partmap.at(pa_nPartID);
+		if (oauxPart->IsAssigned()){
 			DEVLOG_ERROR("The part is already assigned - ERROR\n");
 		}
 		else{
-			oauxPart.AssignMachine(pa_nMID);
+			oauxPart->AssignMachine(pa_nMID);
 		}
 	}
 	catch (std::out_of_range e){

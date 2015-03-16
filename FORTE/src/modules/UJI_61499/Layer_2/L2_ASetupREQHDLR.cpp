@@ -16,20 +16,20 @@
 
 DEFINE_FIRMWARE_FB(FORTE_L2_ASetupREQHDLR, g_nStringIdL2_ASetupREQHDLR)
 
-const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anDataInputNames[] = {g_nStringIdQI, g_nStringIdMID, g_nStringIdPartInfoIn, g_nStringIdMIDIn, g_nStringIdSetupIn};
+const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anDataInputNames[] = {g_nStringIdQI, g_nStringIdMID, g_nStringIdPartInfoIn, g_nStringIdSetupIn};
 
-const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anDataInputTypeIds[] = {g_nStringIdBOOL, g_nStringIdUSINT, g_nStringIdARRAY, 3, g_nStringIdUINT, g_nStringIdUSINT, g_nStringIdSTRING};
+const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anDataInputTypeIds[] = {g_nStringIdBOOL, g_nStringIdUSINT, g_nStringIdARRAY, 4, g_nStringIdUINT, g_nStringIdSTRING};
 
 const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anDataOutputNames[] = {g_nStringIdQO, g_nStringIdMIDOut, g_nStringIdPartInfoOut, g_nStringIdSetupOut};
 
 const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anDataOutputTypeIds[] = {g_nStringIdBOOL, g_nStringIdUSINT, g_nStringIdARRAY, 3, g_nStringIdUINT, g_nStringIdSTRING};
 
 const TForteInt16 FORTE_L2_ASetupREQHDLR::scm_anEIWithIndexes[] = {0, 3};
-const TDataIOID FORTE_L2_ASetupREQHDLR::scm_anEIWith[] = {1, 0, 255, 2, 4, 3, 255};
+const TDataIOID FORTE_L2_ASetupREQHDLR::scm_anEIWith[] = {1, 0, 255, 2, 3, 255};
 const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anEventInputNames[] = {g_nStringIdINIT, g_nStringIdREQ};
 
-const TDataIOID FORTE_L2_ASetupREQHDLR::scm_anEOWith[] = {0, 255, 2, 1, 3, 255};
-const TForteInt16 FORTE_L2_ASetupREQHDLR::scm_anEOWithIndexes[] = {0, 2, -1};
+const TDataIOID FORTE_L2_ASetupREQHDLR::scm_anEOWith[] = {0, 1, 255, 2, 1, 3, 255};
+const TForteInt16 FORTE_L2_ASetupREQHDLR::scm_anEOWithIndexes[] = {0, 3, -1};
 const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anEventOutputNames[] = {g_nStringIdINITO, g_nStringIdCNF};
 
 const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anInternalsNames[] = {g_nStringIdAccepted, g_nStringIdi};
@@ -38,7 +38,7 @@ const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anInternalsTypeId
 
 const SFBInterfaceSpec FORTE_L2_ASetupREQHDLR::scm_stFBInterfaceSpec = {
   2,  scm_anEventInputNames,  scm_anEIWith,  scm_anEIWithIndexes,
-  2,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  5,  scm_anDataInputNames, scm_anDataInputTypeIds,
+  2,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  4,  scm_anDataInputNames, scm_anDataInputTypeIds,
   4,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
   0, 0
 };
@@ -58,7 +58,7 @@ MIDOut() = MID();
 }
 
 void FORTE_L2_ASetupREQHDLR::alg_REQ(void){
-if((MIDIn() == MID())){
+if((PartInfoIn()[3] == MID())){
 	/* The received packet is for this machine, map outputs*/
 	Accepted() = true;
 	PartInfoOut()[0] = PartInfoIn()[0];

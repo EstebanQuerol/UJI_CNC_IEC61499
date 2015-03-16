@@ -48,6 +48,7 @@ void FORTE_L2_ExecutionManager::DeleteCurrentWP(){
 	//Reset internal variables
 	m_nPartState = PART_NOT_FIXED;
 	m_nExecutionErrors = 0;
+	m_bSetupLoaded = FALSE;
 }
 
 void FORTE_L2_ExecutionManager::RetreiveWP(){

@@ -46,89 +46,28 @@ const SFBInterfaceSpec FORTE_L3_SetupRouterM::scm_stFBInterfaceSpec = {
 const SInternalVarsInformation FORTE_L3_SetupRouterM::scm_stInternalVars = {2, scm_anInternalsNames, scm_anInternalsTypeIds};
 
 void FORTE_L3_SetupRouterM::alg_REQ(void){
-if((ASetup().MID() == SelMachine())){
-	Select() = true;
-	  {
-    bool isi_Up = ((1) > 0);
-    i() = 0;
-    while(!(((isi_Up) && (i() > (2))) ||
-            ((!isi_Up) && (i() < (2))))){
 
-		ASetup1().PartInfoP()[i()] = ASetup().PartInfoP()[i()];
-	
-      if(((isi_Up) && ((1) > 0)) || 
-         ((!isi_Up) && ((1) < 0))){
-        i() = i() + (1);
-      }
-      else{
-        i() = i() - (1);
-      }
-    }
-  }
-;
-	ASetup1().MID() = ASetup().MID();
-	ASetup1().Setup() = ASetup().Setup();
-}
-else{
-	Select() = false;
-	  {
-    bool isi_Up = ((1) > 0);
-    i() = 0;
-    while(!(((isi_Up) && (i() > (2))) ||
-            ((!isi_Up) && (i() < (2))))){
+ }
 
-		ASetup2().PartInfoP()[i()] = ASetup().PartInfoP()[i()];
-	
-      if(((isi_Up) && ((1) > 0)) || 
-         ((!isi_Up) && ((1) < 0))){
-        i() = i() + (1);
-      }
-      else{
-        i() = i() - (1);
-      }
-    }
-  }
-;
-	ASetup2().MID() = ASetup().MID();
-ASetup2().Setup() = ASetup().Setup();
-};
-}
 
 void FORTE_L3_SetupRouterM::alg_RSP(void){
-if((ASetup().MID() == SelMachine())){
-	Select() = true;
-	ASetup1().MID() = ASetup().MID();
-}
-else{
-	Select() = false;
-	ASetup2().MID() = ASetup().MID();
-};
+
 }
 
 void FORTE_L3_SetupRouterM::alg_CNF1(void){
-ASetup().PartInfoS()[0] = ASetup1().PartInfoS()[0];
-ASetup().PartInfoS()[1] = ASetup1().PartInfoS()[1];
-ASetup().PartInfoS()[2] = ASetup1().PartInfoS()[2];
+
 }
 
 void FORTE_L3_SetupRouterM::alg_CNF2(void){
-ASetup().PartInfoS()[0] = ASetup2().PartInfoS()[0];
-ASetup().PartInfoS()[1] = ASetup2().PartInfoS()[1];
-ASetup().PartInfoS()[2] = ASetup2().PartInfoS()[2];
+
 }
 
 void FORTE_L3_SetupRouterM::alg_IND1(void){
-ASetup().PartInfoS()[0] = ASetup1().PartInfoS()[0];
-ASetup().PartInfoS()[1] = ASetup1().PartInfoS()[1];
-ASetup().PartInfoS()[2] = ASetup1().PartInfoS()[2];
-ASetup().ENDID() = ASetup1().ENDID();
+
 }
 
 void FORTE_L3_SetupRouterM::alg_IND2(void){
-ASetup().PartInfoS()[0] = ASetup2().PartInfoS()[0];
-ASetup().PartInfoS()[1] = ASetup2().PartInfoS()[1];
-ASetup().PartInfoS()[2] = ASetup2().PartInfoS()[2];
-ASetup().ENDID() = ASetup2().ENDID();
+
 }
 
 

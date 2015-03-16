@@ -69,12 +69,8 @@ private:
     return *static_cast<CIEC_ARRAY*>(getDO(1));
   };
 
-  CIEC_USINT &MID2() {
-    return *static_cast<CIEC_USINT*>(getDO(2));
-  };
-
   CIEC_STRING &Setup() {
-    return *static_cast<CIEC_STRING*>(getDO(3));
+    return *static_cast<CIEC_STRING*>(getDO(2));
   };
 
   static const TEventID scm_nEventINITID = 0;
@@ -91,14 +87,14 @@ private:
 
   static const SFBInterfaceSpec scm_stFBInterfaceSpec;
 
-  FORTE_FB_DATA_ARRAY(2, 6, 4, 0);
+   FORTE_FB_DATA_ARRAY(2, 6, 3, 0);
 
   void executeEvent(int pa_nEIID);
 
-	TForteUInt16 m_nFamily; //Process plan family
-	TForteUInt16 m_nType; //Process plan type
-	ProcessPlan * m_poThisPP; // Pointer to the PP of each Setuptable instance
-	workplan * m_poCurrentSetup; //Pointer to the current subphase
+  TForteUInt16 m_nFamily; //Process plan family
+  TForteUInt16 m_nType; //Process plan type
+  ProcessPlan * m_poThisPP; // Pointer to the PP of each Setuptable instance
+  workplan * m_poCurrentSetup; //Pointer to the current subphase
 
 public:
 	FUNCTION_BLOCK_CTOR(FORTE_L3_SetupTable){
@@ -108,8 +104,9 @@ public:
 		m_poCurrentSetup = NULL;
 	};
 
-	virtual ~FORTE_L3_SetupTable(){};
+  virtual ~FORTE_L3_SetupTable(){};
 
 };
 
 #endif //close the ifdef sequence from the beginning of the file
+

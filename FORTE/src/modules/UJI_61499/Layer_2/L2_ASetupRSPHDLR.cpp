@@ -16,9 +16,9 @@
 
 DEFINE_FIRMWARE_FB(FORTE_L2_ASetupRSPHDLR, g_nStringIdL2_ASetupRSPHDLR)
 
-const CStringDictionary::TStringId FORTE_L2_ASetupRSPHDLR::scm_anDataInputNames[] = {g_nStringIdQI, g_nStringIdMID, g_nStringIdMIDIn};
+const CStringDictionary::TStringId FORTE_L2_ASetupRSPHDLR::scm_anDataInputNames[] = {g_nStringIdQI, g_nStringIdMID, g_nStringIdPartInfo};
 
-const CStringDictionary::TStringId FORTE_L2_ASetupRSPHDLR::scm_anDataInputTypeIds[] = {g_nStringIdBOOL, g_nStringIdUSINT, g_nStringIdUSINT};
+const CStringDictionary::TStringId FORTE_L2_ASetupRSPHDLR::scm_anDataInputTypeIds[] = {g_nStringIdBOOL, g_nStringIdUSINT, g_nStringIdARRAY, 4, g_nStringIdUINT};
 
 const CStringDictionary::TStringId FORTE_L2_ASetupRSPHDLR::scm_anDataOutputNames[] = {g_nStringIdQO};
 
@@ -56,7 +56,7 @@ QO() = QI();
 }
 
 void FORTE_L2_ASetupRSPHDLR::alg_RSP(void){
-if((MID() == MIDIn())){
+if((MID() == PartInfo()[3])){
 	Accepted() = true;
 }
 else{

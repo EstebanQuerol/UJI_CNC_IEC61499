@@ -32,7 +32,7 @@
     </Sockets>
     <Plugs>
       <AdapterDeclaration Name="L3_AAssignMachine_P" Type="L3_AAssignMachine" x="4940.0" y="-1045.0"/>
-      <AdapterDeclaration Name="L3_ASetup" Type="L3_ASetup" x="6935.0" y="2945.0"/>
+      <AdapterDeclaration Name="L3_ASetup" Type="L3_ASetup" x="7600.0" y="2945.0"/>
     </Plugs>
   </InterfaceList>
   <FBNetwork>
@@ -43,8 +43,9 @@
     <FB Name="L3_CompletedPartHDLR" Type="L3_CompletedPartHDLR" x="380.0" y="665.0"/>
     <FB Name="E_DELAY" Type="E_DELAY" x="4845.0" y="3895.0"/>
     <FB Name="E_DELAY_1" Type="E_DELAY" x="1740.0" y="1255.0"/>
-    <FB Name="L3_CompletedSetupHDLR_1" Type="L3_CompletedSetupHDLR" x="7125.0" y="1710.0"/>
     <FB Name="L3_SetupTable" Type="L3_SetupTable" x="5510.0" y="2755.0"/>
+    <FB Name="CM_Merge2PartInfo" Type="CM_Merge2PartInfo" x="6460.0" y="2755.0"/>
+    <FB Name="L3_CompletedSetupHDLR_1" Type="L3_CompletedSetupHDLR" x="7125.0" y="1710.0"/>
     <DataConnections>
       <Connection Destination="L3_MachineChecker.MTypeIn" Source="L3_AAssignMachine_S.MTypeP" dx1="1060.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L3_MachineChecker.MStateIn" Source="L3_AAssignMachine_S.MStateP" dx1="1000.0" dx2="0.0" dy="0.0"/>
@@ -83,18 +84,19 @@
       <Connection Destination="L3_CompletedPartHDLR.TypeIn" Source="Type" dx1="0.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L3_PPTable.Family" Source="Family" dx1="1825.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L3_PPTable.Type" Source="Type" dx1="1675.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="L3_PPTable.PartIDIn2" Source="L3_CompletedSetupHDLR_1.PartIDOut" dx1="0.0" dx2="0.0" dy="390.0"/>
       <Connection Destination="L3_SetupTable.QI" Source="L3_PPTable.QO" dx1="0.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L3_SetupTable.Family" Source="Family" dx1="0.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L3_SetupTable.Type" Source="Type" dx1="0.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="L3_SetupTable.PartID" Source="L3_MachineAllocator.PartIDOut" dx1="0.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="L3_SetupTable.SetupID" Source="L3_MachineAllocator.SetupID" dx1="0.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="L3_SetupTable.MID" Source="L3_MachineAllocator.MID" dx1="0.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="QO" Source="L3_SetupTable.QO" dx1="205.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="L3_CompletedSetupHDLR_1.PartInfo" Source="L3_ASetup.PartInfoS" dx1="310.0" dx2="0.0" dy="-320.0"/>
-      <Connection Destination="L3_ASetup.PartInfoP" Source="L3_SetupTable.PartInfo" dx1="0.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="L3_ASetup.MID" Source="L3_SetupTable.MID2" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_SetupTable.PartID" Source="L3_MachineAllocator.PartIDOut" dx1="845.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_SetupTable.SetupID" Source="L3_MachineAllocator.SetupID" dx1="780.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_SetupTable.MID" Source="L3_MachineAllocator.MID" dx1="730.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="QO" Source="L3_SetupTable.QO" dx1="0.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L3_ASetup.Setup" Source="L3_SetupTable.Setup" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_ASetup.PartInfoP" Source="CM_Merge2PartInfo.PartInfoOut" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="CM_Merge2PartInfo.PartInfo2" Source="L3_SetupTable.PartInfo" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_CompletedSetupHDLR_1.PartInfo" Source="L3_ASetup.PartInfoS" dx1="140.0" dx2="0.0" dy="-290.0"/>
+      <Connection Destination="L3_PPTable.PartIDIn2" Source="L3_CompletedSetupHDLR_1.PartIDOut" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="CM_Merge2PartInfo.PartInfo1" Source="L3_CompletedSetupHDLR_1.PartInfoOut" dx1="0.0" dx2="0.0" dy="-115.0"/>
     </DataConnections>
     <EventConnections>
       <Connection Destination="L3_MachineChecker.REQ" Source="L3_AAssignMachine_S.CHK" dx1="1375.0" dx2="0.0" dy="0.0"/>
@@ -122,15 +124,17 @@
       <Connection Destination="L3_CompletedPartHDLR.RSP" Source="L3_APart.RSP" dx1="0.0" dx2="-340.0" dy="265.0"/>
       <Connection Destination="L3_PPTable.INIT" Source="L3_CompletedPartHDLR.INITO" dx1="0.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L3_CompletedPartHDLR.INIT" Source="INIT" dx1="0.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="L3_PPTable.RSP2" Source="L3_CompletedSetupHDLR_1.CNF1" dx1="0.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="L3_CompletedSetupHDLR_1.REQ1" Source="L3_PPTable.IND2" dx1="0.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L3_SetupTable.INIT" Source="L3_PPTable.INITO" dx1="0.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L3_SetupTable.REQ" Source="L3_MachineAllocator.IND1" dx1="0.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="INITO" Source="L3_SetupTable.INITO" dx1="0.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="L3_CompletedSetupHDLR_1.REQ" Source="L3_ASetup.IND" dx1="245.0" dx2="-300.0" dy="0.0"/>
-      <Connection Destination="L3_MachineAllocator.RSP1" Source="L3_ASetup.CNF" dx1="0.0" dx2="0.0" dy="1520.0"/>
-      <Connection Destination="L3_ASetup.REQ" Source="L3_SetupTable.CNF" dx1="590.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="L3_ASetup.RSP" Source="L3_CompletedSetupHDLR_1.CNF" dx1="0.0" dx2="0.0" dy="225.0"/>
+      <Connection Destination="CM_Merge2PartInfo.REQ2" Source="L3_SetupTable.CNF" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_ASetup.REQ" Source="CM_Merge2PartInfo.CNF2" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_ASetup.RSP" Source="CM_Merge2PartInfo.CNF1" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_CompletedSetupHDLR_1.REQ1" Source="L3_PPTable.IND2" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_CompletedSetupHDLR_1.REQ" Source="L3_ASetup.IND" dx1="0.0" dx2="-195.0" dy="55.0"/>
+      <Connection Destination="L3_PPTable.RSP2" Source="L3_CompletedSetupHDLR_1.CNF1" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="CM_Merge2PartInfo.REQ1" Source="L3_CompletedSetupHDLR_1.CNF" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_MachineAllocator.RSP1" Source="L3_ASetup.CNF" dx1="0.0" dx2="0.0" dy="1475.0"/>
     </EventConnections>
   </FBNetwork>
 </FBType>

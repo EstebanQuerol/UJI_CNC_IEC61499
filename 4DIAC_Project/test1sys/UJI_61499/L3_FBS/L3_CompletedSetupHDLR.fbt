@@ -15,13 +15,16 @@
       <Event Comment="Conpleted setup request confirmation" Name="CNF1" Type="Event">
         <With Var="PartIDOut"/>
       </Event>
-      <Event Comment="Execution confirmation" Name="CNF" Type="Event"/>
+      <Event Comment="Execution confirmation" Name="CNF" Type="Event">
+        <With Var="PartInfoOut"/>
+      </Event>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration ArraySize="3" Comment="Part identifier, Family and type" Name="PartInfo" Type="UINT"/>
+      <VarDeclaration ArraySize="4" Comment="Part identifier, Family and type" Name="PartInfo" Type="UINT"/>
     </InputVars>
     <OutputVars>
       <VarDeclaration Comment="Part identifier" Name="PartIDOut" Type="UINT"/>
+      <VarDeclaration ArraySize="4" Name="PartInfoOut" Type="UINT"/>
     </OutputVars>
   </InterfaceList>
   <BasicFB>

@@ -49,12 +49,8 @@ private:
     return *static_cast<CIEC_ARRAY*>(getDO(0));
   };
 
-  CIEC_USINT &MID() {
-    return *static_cast<CIEC_USINT*>(getDO(1));
-  };
-
   CIEC_STRING &Setup() {
-    return *static_cast<CIEC_STRING*>(getDO(2));
+    return *static_cast<CIEC_STRING*>(getDO(1));
   };
 
   static const TEventID scm_nEventCNFID = 0;
@@ -77,7 +73,7 @@ private:
   static const int scm_nL3_ASetupAdpNum = 0;
   static const SFBInterfaceSpec scm_stFBInterfaceSpec;
 
-   FORTE_FB_DATA_ARRAY(2, 2, 3, 1);
+   FORTE_FB_DATA_ARRAY(2, 2, 2, 1);
 
   static const SCFB_FBConnectionData scm_astEventConnections[];
 

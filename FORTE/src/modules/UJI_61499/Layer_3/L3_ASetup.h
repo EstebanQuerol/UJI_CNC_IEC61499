@@ -50,12 +50,8 @@ private:
     return *static_cast<CIEC_ARRAY*>((isSocket()) ? getDO(0) : getDI(0));
   };
 
-  CIEC_USINT &MID() {
-    return *static_cast<CIEC_USINT*>((isSocket()) ? getDO(1) : getDI(1));
-  };
-
   CIEC_STRING &Setup() {
-    return *static_cast<CIEC_STRING*>((isSocket()) ? getDO(2) : getDI(2));
+    return *static_cast<CIEC_STRING*>((isSocket()) ? getDO(1) : getDI(1));
   };
 
  public:
@@ -90,7 +86,7 @@ private:
 
   static const SFBInterfaceSpec scm_stFBInterfaceSpecPlug;
 
-   FORTE_ADAPTER_DATA_ARRAY(2, 2, 2, 3, 0);
+   FORTE_ADAPTER_DATA_ARRAY(2, 2, 2, 2, 0);
 
 public:
   ADAPTER_CTOR(FORTE_L3_ASetup){

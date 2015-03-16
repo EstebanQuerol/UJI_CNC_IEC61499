@@ -18,11 +18,11 @@ DEFINE_FIRMWARE_FB(FORTE_CM_Merge2PartInfo, g_nStringIdCM_Merge2PartInfo)
 
 const CStringDictionary::TStringId FORTE_CM_Merge2PartInfo::scm_anDataInputNames[] = {g_nStringIdPartInfo1, g_nStringIdPartInfo2};
 
-const CStringDictionary::TStringId FORTE_CM_Merge2PartInfo::scm_anDataInputTypeIds[] = {g_nStringIdARRAY, 3, g_nStringIdUINT, g_nStringIdARRAY, 3, g_nStringIdUINT};
+const CStringDictionary::TStringId FORTE_CM_Merge2PartInfo::scm_anDataInputTypeIds[] = {g_nStringIdARRAY, 4, g_nStringIdUINT, g_nStringIdARRAY, 4, g_nStringIdUINT};
 
 const CStringDictionary::TStringId FORTE_CM_Merge2PartInfo::scm_anDataOutputNames[] = {g_nStringIdPartInfoOut};
 
-const CStringDictionary::TStringId FORTE_CM_Merge2PartInfo::scm_anDataOutputTypeIds[] = {g_nStringIdARRAY, 3, g_nStringIdUINT};
+const CStringDictionary::TStringId FORTE_CM_Merge2PartInfo::scm_anDataOutputTypeIds[] = {g_nStringIdARRAY, 4, g_nStringIdUINT};
 
 const TForteInt16 FORTE_CM_Merge2PartInfo::scm_anEIWithIndexes[] = {0, 2};
 const TDataIOID FORTE_CM_Merge2PartInfo::scm_anEIWith[] = {0, 255, 1, 255};
@@ -43,12 +43,14 @@ void FORTE_CM_Merge2PartInfo::alg_REQ1(void){
 PartInfoOut()[0] = PartInfo1()[0];
 PartInfoOut()[1] = PartInfo1()[1];
 PartInfoOut()[2] = PartInfo1()[2];
+PartInfoOut()[3] = PartInfo1()[3];
 }
 
 void FORTE_CM_Merge2PartInfo::alg_REQ2(void){
 PartInfoOut()[0] = PartInfo2()[0];
 PartInfoOut()[1] = PartInfo2()[1];
 PartInfoOut()[2] = PartInfo2()[2];
+PartInfoOut()[3] = PartInfo2()[3];
 }
 
 

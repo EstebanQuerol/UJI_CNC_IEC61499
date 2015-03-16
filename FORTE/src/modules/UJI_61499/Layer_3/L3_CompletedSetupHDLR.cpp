@@ -16,20 +16,20 @@
 
 DEFINE_FIRMWARE_FB(FORTE_L3_CompletedSetupHDLR, g_nStringIdL3_CompletedSetupHDLR)
 
-const CStringDictionary::TStringId FORTE_L3_CompletedSetupHDLR::scm_anDataInputNames[] = {g_nStringIdPartIDIn};
+const CStringDictionary::TStringId FORTE_L3_CompletedSetupHDLR::scm_anDataInputNames[] = {g_nStringIdPartInfo};
 
-const CStringDictionary::TStringId FORTE_L3_CompletedSetupHDLR::scm_anDataInputTypeIds[] = {g_nStringIdUINT};
+const CStringDictionary::TStringId FORTE_L3_CompletedSetupHDLR::scm_anDataInputTypeIds[] = {g_nStringIdARRAY, 4, g_nStringIdUINT};
 
-const CStringDictionary::TStringId FORTE_L3_CompletedSetupHDLR::scm_anDataOutputNames[] = {g_nStringIdPartIDOut};
+const CStringDictionary::TStringId FORTE_L3_CompletedSetupHDLR::scm_anDataOutputNames[] = {g_nStringIdPartIDOut, g_nStringIdPartInfoOut};
 
-const CStringDictionary::TStringId FORTE_L3_CompletedSetupHDLR::scm_anDataOutputTypeIds[] = {g_nStringIdUINT};
+const CStringDictionary::TStringId FORTE_L3_CompletedSetupHDLR::scm_anDataOutputTypeIds[] = {g_nStringIdUINT, g_nStringIdARRAY, 4, g_nStringIdUINT};
 
 const TForteInt16 FORTE_L3_CompletedSetupHDLR::scm_anEIWithIndexes[] = {-1, 0};
 const TDataIOID FORTE_L3_CompletedSetupHDLR::scm_anEIWith[] = {0, 255};
 const CStringDictionary::TStringId FORTE_L3_CompletedSetupHDLR::scm_anEventInputNames[] = {g_nStringIdREQ1, g_nStringIdREQ};
 
-const TDataIOID FORTE_L3_CompletedSetupHDLR::scm_anEOWith[] = {0, 255};
-const TForteInt16 FORTE_L3_CompletedSetupHDLR::scm_anEOWithIndexes[] = {0, -1, -1};
+const TDataIOID FORTE_L3_CompletedSetupHDLR::scm_anEOWith[] = {0, 255, 1, 255};
+const TForteInt16 FORTE_L3_CompletedSetupHDLR::scm_anEOWithIndexes[] = {0, 2, -1};
 const CStringDictionary::TStringId FORTE_L3_CompletedSetupHDLR::scm_anEventOutputNames[] = {g_nStringIdCNF1, g_nStringIdCNF};
 
 const CStringDictionary::TStringId FORTE_L3_CompletedSetupHDLR::scm_anInternalsNames[] = {g_nStringIdPartBuffer, g_nStringIdTailIndex, g_nStringIdHeadIndex, g_nStringIdBufferSize};
@@ -39,7 +39,7 @@ const CStringDictionary::TStringId FORTE_L3_CompletedSetupHDLR::scm_anInternalsT
 const SFBInterfaceSpec FORTE_L3_CompletedSetupHDLR::scm_stFBInterfaceSpec = {
   2,  scm_anEventInputNames,  scm_anEIWith,  scm_anEIWithIndexes,
   2,  scm_anEventOutputNames,  scm_anEOWith, scm_anEOWithIndexes,  1,  scm_anDataInputNames, scm_anDataInputTypeIds,
-  1,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
+  2,  scm_anDataOutputNames, scm_anDataOutputTypeIds,
   0, 0
 };
 
@@ -56,7 +56,7 @@ void FORTE_L3_CompletedSetupHDLR::setInitialValues(){
 
 void FORTE_L3_CompletedSetupHDLR::alg_REQ(void){
 /* Stack the received part*/
-PartBuffer()[HeadIndex()] = PartIDIn();
+PartBuffer()[HeadIndex()] = PartInfo()[0];
 
 /* PostIncrement HeadIndex*/
 HeadIndex() = HeadIndex()+1;

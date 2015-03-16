@@ -15,6 +15,8 @@
 #include <basicfb.h>
 #include <forte_bool.h>
 #include <forte_usint.h>
+#include <forte_uint.h>
+#include <forte_array.h>
 
 class FORTE_L2_ASetupRSPHDLR: public CBasicFB{
   DECLARE_FIRMWARE_FB(FORTE_L2_ASetupRSPHDLR)
@@ -30,8 +32,12 @@ private:
     return *static_cast<CIEC_USINT*>(getDI(1));
   };
 
-  CIEC_USINT &MIDIn() {
-    return *static_cast<CIEC_USINT*>(getDI(2));
+  CIEC_UINT *PartInfo() {
+    return (CIEC_UINT*)(*static_cast<CIEC_ARRAY *>(getDI(2)))[0]; //the first element marks the start of the array
+  };
+
+  CIEC_ARRAY &PartInfo_Array() {
+    return *static_cast<CIEC_ARRAY*>(getDI(2));
   };
 
   static const CStringDictionary::TStringId scm_anDataOutputNames[];

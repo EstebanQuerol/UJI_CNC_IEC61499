@@ -24,7 +24,6 @@
       </Event>
       <Event Comment="Confirmation of Requested Service" Name="CNF" Type="Event">
         <With Var="PartInfo"/>
-        <With Var="MID2"/>
         <With Var="Setup"/>
       </Event>
     </EventOutputs>
@@ -38,8 +37,7 @@
     </InputVars>
     <OutputVars>
       <VarDeclaration Comment="Event Output Qualifier" Name="QO" Type="BOOL"/>
-      <VarDeclaration ArraySize="3" Comment="Part ID, Part family, Part type" Name="PartInfo" Type="UINT"/>
-      <VarDeclaration Comment="Destination machine identifier" Name="MID2" Type="USINT"/>
+      <VarDeclaration ArraySize="4" Comment="Part ID, Part family, Part type, MID" Name="PartInfo" Type="UINT"/>
       <VarDeclaration Comment="Subphase of the process plan to be executed " Name="Setup" Type="STRING"/>
     </OutputVars>
   </InterfaceList>

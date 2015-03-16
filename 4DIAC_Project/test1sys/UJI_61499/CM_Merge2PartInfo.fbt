@@ -22,11 +22,11 @@
       </Event>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration ArraySize="3" Comment="" Name="PartInfo1" Type="UINT"/>
-      <VarDeclaration ArraySize="3" Name="PartInfo2" Type="UINT"/>
+      <VarDeclaration ArraySize="4" Comment="" Name="PartInfo1" Type="UINT"/>
+      <VarDeclaration ArraySize="4" Name="PartInfo2" Type="UINT"/>
     </InputVars>
     <OutputVars>
-      <VarDeclaration ArraySize="3" Comment="" Name="PartInfoOut" Type="UINT"/>
+      <VarDeclaration ArraySize="4" Comment="" Name="PartInfoOut" Type="UINT"/>
     </OutputVars>
   </InterfaceList>
   <BasicFB>
@@ -44,10 +44,10 @@
       <ECTransition Comment="" Condition="1" Destination="START" Source="REQ2" x="215.0" y="425.0"/>
     </ECC>
     <Algorithm Comment="" Name="REQ1">
-      <ST Text="PartInfoOut[0] := PartInfo1[0];&#10;PartInfoOut[1] := PartInfo1[1];&#10;PartInfoOut[2] := PartInfo1[2];"/>
+      <ST Text="PartInfoOut[0] := PartInfo1[0];&#10;PartInfoOut[1] := PartInfo1[1];&#10;PartInfoOut[2] := PartInfo1[2];&#10;PartInfoOut[3] := PartInfo1[3];"/>
     </Algorithm>
     <Algorithm Comment="Normally executed algorithm" Name="REQ2">
-      <ST Text="PartInfoOut[0] := PartInfo2[0];&#10;PartInfoOut[1] := PartInfo2[1];&#10;PartInfoOut[2] := PartInfo2[2];"/>
+      <ST Text="PartInfoOut[0] := PartInfo2[0];&#10;PartInfoOut[1] := PartInfo2[1];&#10;PartInfoOut[2] := PartInfo2[2];&#10;PartInfoOut[3] := PartInfo2[3];"/>
     </Algorithm>
   </BasicFB>
 </FBType>

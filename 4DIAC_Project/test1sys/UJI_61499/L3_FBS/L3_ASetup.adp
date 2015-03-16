@@ -4,6 +4,7 @@
   <Identification Standard="61499-1"/>
   <VersionInfo Author="EQUEROL" Date="2008-04-22" Organization="UJI" Version="0.0"/>
   <VersionInfo Author="EQUEROL" Date="2015-01-08" Organization="UJI" Remarks="modified output data" Version="1.0"/>
+  <VersionInfo Author="EQUEROL" Date="2015-03-13" Organization="UJI" Version="2.0"/>
   <CompilerInfo/>
   <InterfaceList>
     <EventInputs>
@@ -18,20 +19,18 @@
     <EventOutputs>
       <Event Comment="Plugin request to assign a setup" Name="REQ" Type="Event">
         <With Var="PartInfoP"/>
-        <With Var="MID"/>
         <With Var="Setup"/>
       </Event>
       <Event Comment="Completed setup indication treatement resposne" Name="RSP" Type="Event">
-        <With Var="MID"/>
+        <With Var="PartInfoP"/>
       </Event>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration ArraySize="3" Comment="Part ID, Part Family, Part Type" Name="PartInfoS" Type="UINT"/>
+      <VarDeclaration ArraySize="4" Comment="Part ID, Part Family, Part Type, MID" Name="PartInfoS" Type="UINT"/>
       <VarDeclaration Comment="Setup execution returned code" Name="ENDID" Type="USINT"/>
     </InputVars>
     <OutputVars>
-      <VarDeclaration ArraySize="3" Comment="PartID, Part Family, Part Type" Name="PartInfoP" Type="UINT"/>
-      <VarDeclaration Comment="Destination machine identifier" Name="MID" Type="USINT"/>
+      <VarDeclaration ArraySize="4" Comment="PartID, Part Family, Part Type, MID" Name="PartInfoP" Type="UINT"/>
       <VarDeclaration Comment="Subphase to be transmitted" Name="Setup" Type="STRING"/>
     </OutputVars>
   </InterfaceList>

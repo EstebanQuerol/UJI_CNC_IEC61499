@@ -49,8 +49,8 @@ void FORTE_L3_SetupRouterT::alg_REQ1(void){
   {
     bool isi_Up = ((1) > 0);
     i() = 0;
-    while(!(((isi_Up) && (i() > (2))) ||
-            ((!isi_Up) && (i() < (2))))){
+    while(!(((isi_Up) && (i() > (3))) ||
+            ((!isi_Up) && (i() < (3))))){
 
 	ASetupC().PartInfoP()[i()] = ASetup1().PartInfoP()[i()];
 
@@ -64,7 +64,6 @@ void FORTE_L3_SetupRouterT::alg_REQ1(void){
     }
   }
 ;
-ASetupC().MID() = ASetup1().MID();
 ASetupC().Setup() = ASetup1().Setup();
 }
 
@@ -72,8 +71,8 @@ void FORTE_L3_SetupRouterT::alg_REQ2(void){
   {
     bool isi_Up = ((1) > 0);
     i() = 0;
-    while(!(((isi_Up) && (i() > (2))) ||
-            ((!isi_Up) && (i() < (2))))){
+    while(!(((isi_Up) && (i() > (3))) ||
+            ((!isi_Up) && (i() < (3))))){
 
 	ASetupC().PartInfoP()[i()] = ASetup2().PartInfoP()[i()];
 
@@ -87,16 +86,49 @@ void FORTE_L3_SetupRouterT::alg_REQ2(void){
     }
   }
 ;
-ASetupC().MID() = ASetup2().MID();
 ASetupC().Setup() = ASetup2().Setup();
 }
 
 void FORTE_L3_SetupRouterT::alg_RSP1(void){
-ASetupC().MID() = ASetup1().MID();
+  {
+    bool isi_Up = ((1) > 0);
+    i() = 0;
+    while(!(((isi_Up) && (i() > (3))) ||
+            ((!isi_Up) && (i() < (3))))){
+
+	ASetupC().PartInfoP()[i()] = ASetup1().PartInfoP()[i()];
+
+      if(((isi_Up) && ((1) > 0)) || 
+         ((!isi_Up) && ((1) < 0))){
+        i() = i() + (1);
+      }
+      else{
+        i() = i() - (1);
+      }
+    }
+  }
+;
 }
 
 void FORTE_L3_SetupRouterT::alg_RSP2(void){
-ASetupC().MID() = ASetup2().MID();
+  {
+    bool isi_Up = ((1) > 0);
+    i() = 0;
+    while(!(((isi_Up) && (i() > (3))) ||
+            ((!isi_Up) && (i() < (3))))){
+
+	ASetupC().PartInfoP()[i()] = ASetup2().PartInfoP()[i()];
+
+      if(((isi_Up) && ((1) > 0)) || 
+         ((!isi_Up) && ((1) < 0))){
+        i() = i() + (1);
+      }
+      else{
+        i() = i() - (1);
+      }
+    }
+  }
+;
 }
 
 void FORTE_L3_SetupRouterT::alg_CNF(void){
@@ -105,12 +137,14 @@ if((ASetupC().PartInfoS()[2] == SelType())){
 	ASetup2().PartInfoS()[0] = ASetupC().PartInfoS()[0];
 	ASetup2().PartInfoS()[1] = ASetupC().PartInfoS()[1];
 	ASetup2().PartInfoS()[2] = ASetupC().PartInfoS()[2];
+	ASetup2().PartInfoS()[3] = ASetupC().PartInfoS()[3];
 }
 else{
 	Select() = false;
 	ASetup1().PartInfoS()[0] = ASetupC().PartInfoS()[0];
 	ASetup1().PartInfoS()[1] = ASetupC().PartInfoS()[1];
-	ASetup1().PartInfoS()[2] = ASetupC().PartInfoS()[2];	
+	ASetup1().PartInfoS()[2] = ASetupC().PartInfoS()[2];
+	ASetup1().PartInfoS()[3] = ASetupC().PartInfoS()[3];
 };
 }
 
@@ -120,6 +154,7 @@ if((ASetupC().PartInfoS()[2] == SelType())){
 	ASetup2().PartInfoS()[0] = ASetupC().PartInfoS()[0];
 	ASetup2().PartInfoS()[1] = ASetupC().PartInfoS()[1];
 	ASetup2().PartInfoS()[2] = ASetupC().PartInfoS()[2];
+	ASetup2().PartInfoS()[3] = ASetupC().PartInfoS()[3];
 	ASetup2().ENDID() = ASetupC().ENDID();
 }
 else{
@@ -127,7 +162,7 @@ else{
 	ASetup1().PartInfoS()[0] = ASetupC().PartInfoS()[0];
 	ASetup1().PartInfoS()[1] = ASetupC().PartInfoS()[1];
 	ASetup1().PartInfoS()[2] = ASetupC().PartInfoS()[2];
-	ASetup1().ENDID() = ASetupC().ENDID();	
+	ASetup1().PartInfoS()[3] = ASetupC().PartInfoS()[3];
 };
 }
 

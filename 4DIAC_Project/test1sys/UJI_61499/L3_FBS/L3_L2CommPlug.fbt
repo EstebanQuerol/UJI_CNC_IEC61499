@@ -18,20 +18,18 @@
     <EventOutputs>
       <Event Comment="Initialization Confirm" Name="REQ" Type="Event">
         <With Var="PartInfoP"/>
-        <With Var="MID"/>
         <With Var="Setup"/>
       </Event>
       <Event Comment="Execution Confirmation" Name="RSP" Type="Event">
-        <With Var="MID"/>
+        <With Var="PartInfoP"/>
       </Event>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration ArraySize="3" Comment="Part ID, family, type" Name="PartInfoS" Type="UINT"/>
+      <VarDeclaration ArraySize="4" Comment="Part ID, family, type, MID" Name="PartInfoS" Type="UINT"/>
       <VarDeclaration Comment="Setup execution returned code" Name="ENDID" Type="USINT"/>
     </InputVars>
     <OutputVars>
-      <VarDeclaration ArraySize="3" Comment="Part ID, Family, Type" Name="PartInfoP" Type="UINT"/>
-      <VarDeclaration Comment="Destination machine identifier" Name="MID" Type="USINT"/>
+      <VarDeclaration ArraySize="4" Comment="Part ID, Family, Type, MID" Name="PartInfoP" Type="UINT"/>
       <VarDeclaration Comment="Subphase to be trasmitted" Name="Setup" Type="STRING"/>
     </OutputVars>
     <Sockets>
@@ -40,17 +38,16 @@
   </InterfaceList>
   <FBNetwork>
     <DataConnections>
-      <Connection Destination="L3_ASetup.PartInfoS" Source="PartInfoS" dx1="835.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="L3_ASetup.ENDID" Source="ENDID" dx1="725.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="PartInfoP" Source="L3_ASetup.PartInfoP" dx1="1165.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="MID" Source="L3_ASetup.MID" dx1="1265.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="Setup" Source="L3_ASetup.Setup" dx1="1435.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_ASetup.PartInfoS" Source="PartInfoS" dx1="625.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_ASetup.ENDID" Source="ENDID" dx1="455.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="PartInfoP" Source="L3_ASetup.PartInfoP" dx1="1270.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="Setup" Source="L3_ASetup.Setup" dx1="1445.0" dx2="0.0" dy="0.0"/>
     </DataConnections>
     <EventConnections>
-      <Connection Destination="L3_ASetup.CNF" Source="CNF" dx1="1125.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="L3_ASetup.IND" Source="IND" dx1="980.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="REQ" Source="L3_ASetup.REQ" dx1="850.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="RSP" Source="L3_ASetup.RSP" dx1="1000.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_ASetup.CNF" Source="CNF" dx1="930.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_ASetup.IND" Source="IND" dx1="815.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="REQ" Source="L3_ASetup.REQ" dx1="980.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="RSP" Source="L3_ASetup.RSP" dx1="1120.0" dx2="0.0" dy="0.0"/>
     </EventConnections>
   </FBNetwork>
 </FBType>

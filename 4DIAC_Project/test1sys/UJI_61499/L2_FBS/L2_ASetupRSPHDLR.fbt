@@ -11,7 +11,7 @@
         <With Var="MID"/>
       </Event>
       <Event Comment="Normal Execution Request" Name="RSP" Type="Event">
-        <With Var="MIDIn"/>
+        <With Var="PartInfo"/>
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -23,7 +23,7 @@
     <InputVars>
       <VarDeclaration Comment="Input event qualifier" Name="QI" Type="BOOL"/>
       <VarDeclaration Comment="Machine identifier" Name="MID" Type="USINT"/>
-      <VarDeclaration Comment="Machine identifier input" Name="MIDIn" Type="USINT"/>
+      <VarDeclaration ArraySize="4" Comment="ID, Family, Type, MID" Name="PartInfo" Type="UINT"/>
     </InputVars>
     <OutputVars>
       <VarDeclaration Comment="Output event qualifier" Name="QO" Type="BOOL"/>
@@ -57,7 +57,7 @@
       <ST Text="QO := QI;"/>
     </Algorithm>
     <Algorithm Comment="Normally executed algorithm" Name="RSP">
-      <ST Text="IF MID = MIDIn THEN&#10;&#9;Accepted := TRUE;&#10;ELSE&#10;&#9;Accepted := FALSE;&#10;END_IF;"/>
+      <ST Text="IF MID = PartInfo[3] THEN&#10;&#9;Accepted := TRUE;&#10;ELSE&#10;&#9;Accepted := FALSE;&#10;END_IF;"/>
     </Algorithm>
   </BasicFB>
 </FBType>

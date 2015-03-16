@@ -41,12 +41,8 @@ private:
     return *static_cast<CIEC_ARRAY*>(getDI(2));
   };
 
-  CIEC_USINT &MIDIn() {
-    return *static_cast<CIEC_USINT*>(getDI(3));
-  };
-
   CIEC_STRING &SetupIn() {
-    return *static_cast<CIEC_STRING*>(getDI(4));
+    return *static_cast<CIEC_STRING*>(getDI(3));
   };
 
   static const CStringDictionary::TStringId scm_anDataOutputNames[];
@@ -98,7 +94,7 @@ private:
 
   static const SInternalVarsInformation scm_stInternalVars;
 
-   FORTE_BASIC_FB_DATA_ARRAY(2, 5, 4, 2, 0);
+   FORTE_BASIC_FB_DATA_ARRAY(2, 4, 4, 2, 0);
 
 virtual void setInitialValues();
   void alg_INIT(void);

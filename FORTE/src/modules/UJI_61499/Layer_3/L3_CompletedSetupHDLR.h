@@ -23,14 +23,26 @@ class FORTE_L3_CompletedSetupHDLR: public CBasicFB{
 private:
   static const CStringDictionary::TStringId scm_anDataInputNames[];
   static const CStringDictionary::TStringId scm_anDataInputTypeIds[];
-  CIEC_UINT &PartIDIn() {
-    return *static_cast<CIEC_UINT*>(getDI(0));
+  CIEC_UINT *PartInfo() {
+    return (CIEC_UINT*)(*static_cast<CIEC_ARRAY *>(getDI(0)))[0]; //the first element marks the start of the array
+  };
+
+  CIEC_ARRAY &PartInfo_Array() {
+    return *static_cast<CIEC_ARRAY*>(getDI(0));
   };
 
   static const CStringDictionary::TStringId scm_anDataOutputNames[];
   static const CStringDictionary::TStringId scm_anDataOutputTypeIds[];
   CIEC_UINT &PartIDOut() {
     return *static_cast<CIEC_UINT*>(getDO(0));
+  };
+
+  CIEC_UINT *PartInfoOut() {
+    return (CIEC_UINT*)(*static_cast<CIEC_ARRAY *>(getDO(1)))[0]; //the first element marks the start of the array
+  };
+
+  CIEC_ARRAY &PartInfoOut_Array() {
+    return *static_cast<CIEC_ARRAY*>(getDO(1));
   };
 
   static const TEventID scm_nEventREQ1ID = 0;
@@ -72,7 +84,7 @@ private:
 
   static const SInternalVarsInformation scm_stInternalVars;
 
-   FORTE_BASIC_FB_DATA_ARRAY(2, 1, 1, 4, 0);
+   FORTE_BASIC_FB_DATA_ARRAY(2, 1, 2, 4, 0);
 
 virtual void setInitialValues();
   void alg_REQ(void);
