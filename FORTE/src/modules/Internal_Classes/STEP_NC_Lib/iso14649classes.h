@@ -3237,6 +3237,13 @@ public:
   ~holeBottomCondition();
   int isA(int aType);
   void printSelf() = 0;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+  }
 };
 
 /********************************************************************/
@@ -6932,6 +6939,13 @@ public:
   ~taperSelect();
   int isA(int aType);
   void printSelf() = 0;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+  }
 };
 
 /********************************************************************/
@@ -6993,6 +7007,14 @@ public:
   ~throughBottomCondition();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<holeBottomCondition>(*this);
+  }
 };
 
 /********************************************************************/
@@ -8567,7 +8589,7 @@ ANGLETAPER '(' real ')'
 */
 
 class angleTaper :
-  public instance,
+  public instance,  
   public taperSelect
 {
   friend int yyparse();
@@ -8582,6 +8604,15 @@ public:
   void set_angle(real * angleIn);
 private:
   real * angle;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<taperSelect>(*this);
+	  ar & angle;
+  }
 };
 
 /********************************************************************/
@@ -8849,6 +8880,13 @@ public:
   ~blindBottomCondition();
   int isA(int aType);
   void printSelf() = 0;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<holeBottomCondition>(*this);
+  }
 };
 
 /********************************************************************/
@@ -9271,6 +9309,16 @@ public:
 private:
   real * tipAngle;
   tolerancedLengthMeasure * tipRadius;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<blindBottomCondition>(*this);
+	  ar & tipAngle;
+	  ar & tipRadius;
+  }
 };
 
 /********************************************************************/
@@ -9671,6 +9719,15 @@ public:
   void set_finalDiameter(tolerancedLengthMeasure * finalDiameterIn);
 private:
   tolerancedLengthMeasure * finalDiameter;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<taperSelect>(*this);
+	  ar & finalDiameter;
+  }
 };
 
 /********************************************************************/
@@ -10114,6 +10171,14 @@ public:
   ~flatHoleBottom();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<blindBottomCondition>(*this);
+  }
 };
 
 /********************************************************************/
@@ -10176,6 +10241,15 @@ public:
   void set_cornerRadius(tolerancedLengthMeasure * cornerRadiusIn);
 private:
   tolerancedLengthMeasure * cornerRadius;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<blindBottomCondition>(*this);
+	  ar & cornerRadius;
+  }
 };
 
 /********************************************************************/
@@ -12079,6 +12153,17 @@ private:
   tolerancedLengthMeasure * diameter;
   taperSelect * changeInDiameter;
   holeBottomCondition * bottomCondition;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<machiningFeature>(*this);
+	  ar & diameter;
+	  ar & changeInDiameter;
+	  ar & bottomCondition;
+  }
 };
 
 /********************************************************************/
@@ -12265,6 +12350,15 @@ public:
   void set_radius(tolerancedLengthMeasure * radiusIn);
 private:
   tolerancedLengthMeasure * radius;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<blindBottomCondition>(*this);
+	  ar & radius;
+  }
 };
 
 /********************************************************************/
@@ -13724,6 +13818,15 @@ public:
   void set_diameter(tolerancedLengthMeasure * diameterIn);
 private:
   tolerancedLengthMeasure * diameter;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<closedProfile>(*this);
+	  ar & diameter;
+  }
 };
 
 /********************************************************************/
@@ -14256,6 +14359,18 @@ private:
   real * dwellTimeBottom;
   real * feedOnRetract;
   drillingTypeStrategy * itsMachiningStrategy;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<millingMachiningOperation>(*this);
+	  ar & cuttingDepth;
+	  ar & previousDiameter;
+	  ar & dwellTimeBottom;
+	  ar & feedOnRetract;
+	  ar & itsMachiningStrategy;
+  }
 };
 
 /********************************************************************/
@@ -15612,6 +15727,15 @@ public:
   void set_compensationChuck(boolean * compensationChuckIn);
 private:
   boolean * compensationChuck;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<drillingTypeOperation>(*this);
+	  ar & compensationChuck;
+  }
 };
 
 /********************************************************************/
@@ -15655,6 +15779,15 @@ public:
   void set_helicalMovementOnForward(boolean * helicalMovementOnForwardIn);
 private:
   boolean * helicalMovementOnForward;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<drillingTypeOperation>(*this);
+	  ar & helicalMovementOnForward;
+  }
 };
 
 /********************************************************************/
@@ -16022,6 +16155,14 @@ public:
   ~backBoring();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<drillingTypeOperation>(*this);
+  }
 };
 
 /********************************************************************/
@@ -16164,6 +16305,16 @@ private:
   boolean * spindleStopAtBottom;
   real * depthOfTestcut;
   cartesianPoint * waitingPosition;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<drillingTypeOperation>(*this);
+	  ar & spindleStopAtBottom;
+	  ar & depthOfTestcut;
+	  ar & waitingPosition;
+  }
 };
 
 /********************************************************************/
@@ -16566,6 +16717,13 @@ public:
   ~drillingOperation();
   int isA(int aType);
   void printSelf() = 0;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<drillingTypeOperation>(*this);
+  }
 };
 
 /********************************************************************/
@@ -16745,6 +16903,18 @@ private:
   double firstDepth;
   double depthOfStep;
   real * dwellTimeStep;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<drillingOperation>(*this);
+	  ar & retractDistance;
+	  ar & firstDepth;
+	  ar & depthOfStep;
+	  ar & dwellTimeStep;
+  }
 };
 
 /********************************************************************/
@@ -16985,6 +17155,14 @@ public:
   ~reaming();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<boringOperation>(*this);
+  }
 };
 
 /********************************************************************/
@@ -17261,6 +17439,14 @@ public:
   ~boring();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<boringOperation>(*this);
+  }
 };
 
 /********************************************************************/
@@ -17328,6 +17514,14 @@ public:
   ~centerDrilling();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<drillingOperation>(*this);
+  }
 };
 
 /********************************************************************/
@@ -17397,6 +17591,14 @@ public:
   ~counterSinking();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<drillingOperation>(*this);
+  }
 };
 
 /********************************************************************/
@@ -17435,17 +17637,26 @@ public:
   ~drilling();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<drillingOperation>(*this);
+  }
 };
 //Bost Serialization exports
 BOOST_CLASS_EXPORT_KEY(workplan)
 BOOST_CLASS_EXPORT_KEY(setup)
 BOOST_CLASS_EXPORT_KEY(block)
 BOOST_CLASS_EXPORT_KEY(machiningWorkingstep)
-BOOST_CLASS_EXPORT_KEY(closedProfile)
 BOOST_CLASS_EXPORT_KEY(rectangularClosedProfile)
+BOOST_CLASS_EXPORT_KEY(circularClosedProfile)
 BOOST_CLASS_EXPORT_KEY(planarFace)
 BOOST_CLASS_EXPORT_KEY(closedPocket)
 BOOST_CLASS_EXPORT_KEY(openPocket)
+BOOST_CLASS_EXPORT_KEY(roundHole)
 BOOST_CLASS_EXPORT_KEY(radiusedPocketBottomCondition)
 BOOST_CLASS_EXPORT_KEY(throughPocketBottomCondition)
 BOOST_CLASS_EXPORT_KEY(planarPocketBottomCondition)
@@ -17464,5 +17675,21 @@ BOOST_CLASS_EXPORT_KEY(booleanTrue)
 BOOST_CLASS_EXPORT_KEY(booleanFalse)
 BOOST_CLASS_EXPORT_KEY(toolReferencePointCcp)
 BOOST_CLASS_EXPORT_KEY(toolReferencePointTcp)
+BOOST_CLASS_EXPORT_KEY(diameterTaper)
+BOOST_CLASS_EXPORT_KEY(angleTaper)
+BOOST_CLASS_EXPORT_KEY(throughBottomCondition)
+BOOST_CLASS_EXPORT_KEY(conicalHoleBottom)
+BOOST_CLASS_EXPORT_KEY(flatHoleBottom)
+BOOST_CLASS_EXPORT_KEY(flatWithRadiusHoleBottom)
+BOOST_CLASS_EXPORT_KEY(sphericalHoleBottom)
+BOOST_CLASS_EXPORT_KEY(backBoring)
+BOOST_CLASS_EXPORT_KEY(tapping)
+BOOST_CLASS_EXPORT_KEY(threadDrilling)
+BOOST_CLASS_EXPORT_KEY(drilling)
+BOOST_CLASS_EXPORT_KEY(centerDrilling)
+BOOST_CLASS_EXPORT_KEY(counterSinking)
+BOOST_CLASS_EXPORT_KEY(multistepDrilling)
+BOOST_CLASS_EXPORT_KEY(reaming)
+BOOST_CLASS_EXPORT_KEY(boring)
 /********************************************************************/
 #endif

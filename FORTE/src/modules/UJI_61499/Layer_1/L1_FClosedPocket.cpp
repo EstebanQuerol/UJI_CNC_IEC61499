@@ -46,14 +46,16 @@ void FORTE_L1_FClosedPocket::executeEvent(int pa_nEIID){
 		if (L1MIDIn() == L1MID_CLOSED_POCKET){
 			char * acBuffer = (char *)forte_malloc(sizeof(char)* 100);
 			std::string sTempString;
+			std::stringstream ss;
+			std::list<std::string> CmdList;
 			std::list<real *>::const_iterator reallistIter;
 			double nX, nY, nZ;
-			double nSecurityZ; //Above this Z-point the movenets are safe
+			double nSecurityZ; //Above this Z-point the movements are safe
 			int nToolPos;
-			std::list<std::string> CmdList;
+
 			machiningWorkingstep * TheWS = (machiningWorkingstep *) (DeserializeWorkingstep(Operation()));
-			closedPocket * TheFeature = (closedPocket *) TheWS->get_itsFeature();
 			if (TheWS != NULL){
+				closedPocket * TheFeature = (closedPocket *)TheWS->get_itsFeature();
 				//Change the tool
 				sTempString = std::string(TheWS->get_itsOperation()->get_itsTool()->get_itsId());
 				nToolPos = Tool_Table::isAvailable(sTempString);
@@ -104,15 +106,14 @@ void FORTE_L1_FClosedPocket::executeEvent(int pa_nEIID){
 				//Build the feature path
 				if (TheFeature->get_featureBoundary()->isA(rectangularClosedProfile_E)){
 					//Using FAGOR 8070 Rectangular pocket cycle
-					std::stringstream ss;
 					ss << "G87 G99";
 					ss << " Z" << nSecurityZ;
-					ss << " I-" << TheFeature->get_depth()->get_position()->get_location()->get_coordinates()->get_theList()->back()->get_val();
+					ss << " I" << (-1.0*TheFeature->get_depth()->get_position()->get_location()->get_coordinates()->get_theList()->back()->get_val());
 					ss << " D" << nSecurityZ;//Feature placement Z is at the highest plane of the piece
 					rectangularClosedProfile * Theprofile = (rectangularClosedProfile *) TheFeature->get_featureBoundary();
 					double nWidth = Theprofile->get_profileWidth()->get_theoreticalSize();
 					double nLength = Theprofile->get_profileLength()->get_theoreticalSize();
-					ss << " J" << (nLength / 2.0) << " K" << (nWidth / 2.0);
+					ss << " J+" << (nLength / 2.0) << " K" << (nWidth / 2.0);
 					double nORadius = TheFeature->get_orthogonalRadius()->get_theoreticalSize();
 					if (nORadius > 0.0){
 						ss << " M1" << " Q" << nORadius;
@@ -131,6 +132,27 @@ void FORTE_L1_FClosedPocket::executeEvent(int pa_nEIID){
 					CmdList.push_back("G80");
 				}
 				else if (TheFeature->get_featureBoundary()->isA(circularClosedProfile_E)){
+					//Using FAGOR 8070 circular pocket cycle
+					ss << "G88 G99";
+					ss << " Z" << nSecurityZ;
+					ss << " I" << (-1.0*TheFeature->get_depth()->get_position()->get_location()->get_coordinates()->get_theList()->back()->get_val());
+					ss << " D" << nSecurityZ;//Feature placement Z is at the highest plane of the piece
+					circularClosedProfile * Theprofile = (circularClosedProfile *)TheFeature->get_featureBoundary();
+					double nRadius = Theprofile->get_diameter()->get_theoreticalSize();
+					ss << " J+" << (nRadius/2.0);
+					double nORadius = TheFeature->get_orthogonalRadius()->get_theoreticalSize();
+					if (TheWS->get_itsOperation()->isA(bottomAndSideRoughMilling_E)){
+						bottomAndSideRoughMilling * TheOperation = (bottomAndSideRoughMilling *)TheWS->get_itsOperation();
+						ss << " B-" << TheOperation->get_axialCuttingDepth()->get_val();
+						ss << " C" << TheOperation->get_radialCuttingDepth()->get_val();
+					}
+					else{
+						//Cant do a pocket w/o bottom and side milling
+						PARAM_ERROR_EXIT
+					}
+					CmdList.push_back(ss.str());
+					//Cancel the cycle
+					CmdList.push_back("G80");
 
 				}
 				else if (TheFeature->get_featureBoundary()->isA(ngonClosedProfile_E)){
@@ -145,7 +167,7 @@ void FORTE_L1_FClosedPocket::executeEvent(int pa_nEIID){
 			//Stop the spindle
 			CmdList.push_back("M05");
 			//Cancel the feature origin
-			CmdList.push_back("G53");
+			CmdList.push_back("G159=1");
 			//Return home
 			CmdList.push_back("G00 X0 Y0");
 
