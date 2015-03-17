@@ -11,9 +11,6 @@
   <application comment="" name="App_8070_A">
     <fBNetwork href="App_8070_A.xml#//@fbNetwork"/>
   </application>
-  <application comment="" name="CNC8070Service">
-    <fBNetwork href="CNC8070Service.xml#//@fbNetwork"/>
-  </application>
   <systemConfiguration>
     <systemConfigurationNetwork href="SysConf.xml#//@systemConfigNetwork"/>
   </systemConfiguration>
