@@ -50,7 +50,7 @@
     </InputVars>
     <OutputVars>
       <VarDeclaration Comment="Variable to indicate whixh OP must be executed next" Name="NextCode" Type="USINT"/>
-      <VarDeclaration ArraySize="3" Comment="Part identifier, family and type" Name="PartInfoOut" Type="UINT"/>
+      <VarDeclaration ArraySize="4" Comment="Part identifier, family, type and MID" Name="PartInfoOut" Type="UINT"/>
       <VarDeclaration Comment="Setup termination code" Name="ENDID" Type="USINT"/>
       <VarDeclaration Comment="Machine state" Name="MachineState" Type="BOOL"/>
       <VarDeclaration Comment="Timeout delay" Name="Delay" Type="TIME"/>
@@ -126,7 +126,7 @@
       <ECTransition Comment="" Condition="1" Destination="SendNext" Source="REQ" x="2785.0" y="1875.0"/>
     </ECC>
     <Algorithm Comment="Normally executed algorithm" Name="REQ">
-      <ST Text="(*A new assignation request arrived*)&#10;(*The machine is free, confirm the assignation and modify the state*)&#10;CurrentPart := PartInfoIn[0];&#10;CurrentFamily := PartInfoIn[1];&#10;CurrentType := PartInfoIn[2];&#10;ENDOPID := 0;&#10;PartInfoOut[0] := CurrentPart;&#10;PartInfoOut[1] := CurrentFamily;&#10;PartInfoOut[2] := CurrentType;"/>
+      <ST Text="(*A new assignation request arrived*)&#10;(*The machine is free, confirm the assignation and modify the state*)&#10;CurrentPart := PartInfoIn[0];&#10;CurrentFamily := PartInfoIn[1];&#10;CurrentType := PartInfoIn[2];&#10;ENDOPID := 0;&#10;PartInfoOut[0] := CurrentPart;&#10;PartInfoOut[1] := CurrentFamily;&#10;PartInfoOut[2] := CurrentType;&#10;PartInfoOut[3] :=  PartInfoIn[3];"/>
     </Algorithm>
     <Algorithm Comment="Update machine state" Name="UPDT">
       <ST Text="IF ServiceState = 1 THEN&#10;&#9;MachineState := TRUE;&#10;&#9;State := 2;&#10;ELSIF ServiceState = 0 THEN&#10;&#9;MachineState := FALSE;&#10;&#9;State := 1;&#10;END_IF;&#10;(*Reset inError flag every time this algo is called, It is only used in EIW*)&#10;inError := FALSE; "/>
@@ -135,7 +135,7 @@
       <ST Text="(*Post-incremented index*)&#10;ENDOPID := NextCode;"/>
     </Algorithm>
     <Algorithm Comment="new algorithm" Name="CNF">
-      <ST Text="PartInfoOut[0] := CurrentPart;&#10;PartInfoOut[1] := CurrentFamily;&#10;PartInfoOut[2] := CurrentType;"/>
+      <ST Text="PartInfoOut[0] := CurrentPart;&#10;PartInfoOut[1] := CurrentFamily;&#10;PartInfoOut[2] := CurrentType;&#10;PartInfoOut[3] :=  PartInfoIn[3];"/>
     </Algorithm>
     <Algorithm Comment="new algorithm" Name="NEWREQ">
       <ST Text="(*A REQ event arrived while executing a setup*)&#10;(*Verify if its a transmision problem or something else*)&#10;IF CurrentPart = PartInfoIn[0] THEN&#10;&#9;(*Lost CNF event, retransmite it*)&#10;&#9;LostCNF := TRUE;&#10;ELSE&#10;&#9;LostCNF := FALSE;&#10;END_IF;"/>
@@ -144,7 +144,7 @@
       <ST Text="Delay := TIME#3000ms;"/>
     </Algorithm>
     <Algorithm Comment="Completed setup indication algo" Name="IND">
-      <ST Text="PartInfoOut[0] := CurrentPart;&#10;PartInfoOut[1] := CurrentFamily;&#10;PartInfoOut[2] := CurrentType;&#10;ENDOPID := ENDSetupID;"/>
+      <ST Text="PartInfoOut[0] := CurrentPart;&#10;PartInfoOut[1] := CurrentFamily;&#10;PartInfoOut[2] := CurrentType;&#10;PartInfoOut[3] :=  PartInfoIn[3];&#10;ENDOPID := ENDSetupID;"/>
     </Algorithm>
     <Algorithm Comment="Error in execution algo" Name="EIE">
       <ST Text="(*An error occurred while executing a setup*)&#10;(*We assume that the error is not related with the setup and that it can be redone*)&#10;ENDID := 1;"/>

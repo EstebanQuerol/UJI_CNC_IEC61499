@@ -22,7 +22,7 @@ const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anDataInputTypeIds[
 
 const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anDataOutputNames[] = {g_nStringIdNextCode, g_nStringIdPartInfoOut, g_nStringIdENDID, g_nStringIdMachineState, g_nStringIdDelay};
 
-const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anDataOutputTypeIds[] = {g_nStringIdUSINT, g_nStringIdARRAY, 3, g_nStringIdUINT, g_nStringIdUSINT, g_nStringIdBOOL, g_nStringIdTIME};
+const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anDataOutputTypeIds[] = {g_nStringIdUSINT, g_nStringIdARRAY, 4, g_nStringIdUINT, g_nStringIdUSINT, g_nStringIdBOOL, g_nStringIdTIME};
 
 const TForteInt16 FORTE_L2_MachineCore::scm_anEIWithIndexes[] = {0, 2, -1, -1, 4, 6};
 const TDataIOID FORTE_L2_MachineCore::scm_anEIWith[] = {0, 255, 1, 255, 2, 255, 3, 255};
@@ -67,6 +67,7 @@ ENDOPID() = 0;
 PartInfoOut()[0] = CurrentPart();
 PartInfoOut()[1] = CurrentFamily();
 PartInfoOut()[2] = CurrentType();
+PartInfoOut()[3] = PartInfoIn()[3];
 }
 
 void FORTE_L2_MachineCore::alg_UPDT(void){
@@ -92,6 +93,7 @@ void FORTE_L2_MachineCore::alg_CNF(void){
 PartInfoOut()[0] = CurrentPart();
 PartInfoOut()[1] = CurrentFamily();
 PartInfoOut()[2] = CurrentType();
+PartInfoOut()[3] = PartInfoIn()[3];
 }
 
 void FORTE_L2_MachineCore::alg_NEWREQ(void){
@@ -114,6 +116,7 @@ void FORTE_L2_MachineCore::alg_IND(void){
 PartInfoOut()[0] = CurrentPart();
 PartInfoOut()[1] = CurrentFamily();
 PartInfoOut()[2] = CurrentType();
+PartInfoOut()[3] = PartInfoIn()[3];
 ENDOPID() = ENDSetupID();
 }
 

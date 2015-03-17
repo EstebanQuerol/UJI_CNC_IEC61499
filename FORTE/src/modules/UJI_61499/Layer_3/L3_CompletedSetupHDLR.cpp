@@ -75,6 +75,12 @@ else{
 		HeadIndex() = HeadIndex()-1;
 	};	
 };
+
+/* Map the response to the right machine*/
+PartInfoOut()[0] = PartInfo()[0];
+PartInfoOut()[1] = PartInfo()[1];
+PartInfoOut()[2] = PartInfo()[2];
+PartInfoOut()[3] = PartInfo()[3];
 }
 
 void FORTE_L3_CompletedSetupHDLR::alg_REQ1(void){
