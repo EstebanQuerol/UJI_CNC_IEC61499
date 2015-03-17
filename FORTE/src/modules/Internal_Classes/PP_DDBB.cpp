@@ -17,7 +17,9 @@ void  PP_DDBB::Initilizate(){
 		sm_bInitialized = true;
 
 		//Test code
-		//Ceate Family "1"
+		/*************************************************************************************************************/
+		/************************************Family "1" process plans*************************************************/
+		/*************************************************************************************************************/
 		PP_Family Family_1 = PP_Family(1);
 
 		/******************Feature 1****************************/
@@ -27,19 +29,19 @@ void  PP_DDBB::Initilizate(){
 		direction *  l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
 		axis2placement3d * l_itsplacement = AXIS2_PLACEMENT_3D("Feature placement", l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 15.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 10.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
 		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
 		axis2placement3d *  l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		elementarySurface * l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
 		//Profile
-		closedProfile * l_itsprofile = RECTANGURAL_CLOSED_PROFILE(30.0, 20.0);
+		closedProfile * l_itsprofile = RECTANGURAL_CLOSED_PROFILE(40.0, 40.0);
 		//Pocket
-		closedPocket * l_CPFeature = CLOSED_POCKET("Cajera 1", NULL, NULL, l_itsplacement, l_itsdepth, NULL, NULL, NULL, NULL, 1.0, l_itsprofile);
+		closedPocket * l_CPFeature = CLOSED_POCKET("Cajera 1", NULL, NULL, l_itsplacement, l_itsdepth, NULL, NULL, NULL, NULL, 3.0, l_itsprofile);
 
 		/******************Feature 2****************************/
 		//Placement
-		l_locationIn = CARTESIAN_POINT(NULL, 50.0, 25.0, 50.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 50.0, 50.0, 50.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
 		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D("Feature placement", l_locationIn, l_axisIn, l_refDirectionIn);
@@ -50,38 +52,146 @@ void  PP_DDBB::Initilizate(){
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
 		//Profile
-		l_itsprofile = RECTANGURAL_CLOSED_PROFILE(15.0, 30.0);
+		l_itsprofile = RECTANGURAL_CLOSED_PROFILE(50.0, 40.0);
 		//Pocket
-		closedPocket * l_CPFeature_2 = CLOSED_POCKET("Cajera 1", NULL, NULL, l_itsplacement, l_itsdepth, NULL, NULL, NULL, NULL, 1.0, l_itsprofile);
+		closedPocket * l_CPFeature_2 = CLOSED_POCKET("Cajera 2", NULL, NULL, l_itsplacement, l_itsdepth, NULL, NULL, NULL, NULL, 5.0, l_itsprofile);
 
-		/*****************machining operation***************************/
+		/******************Feature 3****************************/
+		//Placement
+		l_locationIn = CARTESIAN_POINT(NULL, 15.0, 15.0, 50.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Taladro", l_locationIn, l_axisIn, l_refDirectionIn);
+		//Depth
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 25.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
+		//Hole
+		roundHole * l_HoleFeature_1 = ROUND_HOLE("Taladro 1", NULL, NULL, l_itsplacement, l_itsdepth, 10.0, NULL, NULL);
+
+		/******************Feature 4****************************/
+		//Placement
+		l_locationIn = CARTESIAN_POINT(NULL, 15.0, 85.0, 50.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Taladro", l_locationIn, l_axisIn, l_refDirectionIn);
+		//Depth
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 25.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
+		//Hole
+		roundHole * l_HoleFeature_2 = ROUND_HOLE("Taladro 2", NULL, NULL, l_itsplacement, l_itsdepth, 10.0, NULL, NULL);
+
+		/******************Feature 5****************************/
+		//Placement
+		l_locationIn = CARTESIAN_POINT(NULL, 185.0, 15.0, 50.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Taladro", l_locationIn, l_axisIn, l_refDirectionIn);
+		//Depth
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 25.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
+		//Hole
+		roundHole * l_HoleFeature_3 = ROUND_HOLE("Taladro 3", NULL, NULL, l_itsplacement, l_itsdepth, 10.0, NULL, NULL);
+
+		/******************Feature 6****************************/
+		//Placement
+		l_locationIn = CARTESIAN_POINT(NULL, 185.0, 85.0, 50.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Taladro", l_locationIn, l_axisIn, l_refDirectionIn);
+		//Depth
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 25.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
+		//Hole
+		roundHole * l_HoleFeature_4 = ROUND_HOLE("Taladro 4", NULL, NULL, l_itsplacement, l_itsdepth, 10.0, NULL, NULL);
+
+		/******************Feature 7****************************/
+		//Placement
+		l_locationIn = CARTESIAN_POINT(NULL, 50.0, 50.0, 50.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D("Feature placement", l_locationIn, l_axisIn, l_refDirectionIn);
+		//Depth
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 15.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
+		//Profile
+		l_itsprofile = CIRCULAR_CLOSED_PROFILE(60.0);
+		//Pocket
+		closedPocket * l_CPFeature_3 = CLOSED_POCKET("Cajera 3", NULL, NULL, l_itsplacement, l_itsdepth, NULL, NULL, NULL, NULL, 5.0, l_itsprofile);
+
+		/*****************machining operation 1***************************/
 		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 0.0);
 		millingCuttingTool * itstool = MILLING_CUTTING_TOOL("1337");
 		millingTechnology * itstechnology = MILLING_TECHNOLOGY(80.0, "TCP", 0.0, 1000.0, 0.0, false, false, false, false);
-		bottomAndSideRoughMilling * l_itsMoperation = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 59.0, l_locationIn, itstool, itstechnology, NULL, 0.0, NULL, NULL, NULL, 5.0, 2.0, 0.0, 0.0);
+		machiningOperation * l_itsMoperation_1 = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, NULL, NULL, NULL, 5.0, 2.0, 0.0, 0.0);
+
+		/*****************machining operation 2***************************/
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 0.0);
+		itstool = MILLING_CUTTING_TOOL("1400");
+		itstechnology = MILLING_TECHNOLOGY(50.0, "TCP", 0.0, 600.0, 0.0, false, false, false, false);
+		machiningOperation * l_itsMoperation_2 = DRILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, 0.0, 0.0, 1.0, 0.0, NULL);
+
+		/*****************machining operation 3***************************/
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 0.0);
+		itstool = MILLING_CUTTING_TOOL("1337");
+		itstechnology = MILLING_TECHNOLOGY(100.0, "TCP", 0.0, 1250.0, 0.0, false, false, false, false);
+		machiningOperation * l_itsMoperation_3 = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, NULL, NULL, NULL, 5.0, 3.0, 0.0, 0.0);
 
 		/**************machning workingstep****************************/
 		//Security plance
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 10.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 30.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
 		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		elementarySurface * l_itsSecPlane = ELEMENTARY_SURFACE("SP", l_positionIn);
-		machiningWorkingstep * l_itsMWStep_1 = MACHINING_WORKINGSTEP("MWS 1", l_itsSecPlane, l_CPFeature, l_itsMoperation, NULL);
-		machiningWorkingstep * l_itsMWStep_2 = MACHINING_WORKINGSTEP("MWS 2", l_itsSecPlane, l_CPFeature_2, l_itsMoperation, NULL);
-		//executable * l_itsMWStep_3 = MACHINING_WORKINGSTEP("MWS 3", l_itsSecPlane, l_CPFeature, l_itsMperation, NULL);
-		/***************************Executable list*****************/
+		machiningWorkingstep * l_itsMWStep_1 = MACHINING_WORKINGSTEP("MWS 1", l_itsSecPlane, l_CPFeature, l_itsMoperation_1, NULL);
+		machiningWorkingstep * l_itsMWStep_2 = MACHINING_WORKINGSTEP("MWS 2", l_itsSecPlane, l_CPFeature_2, l_itsMoperation_1, NULL);
+		machiningWorkingstep * l_itsMWStep_3 = MACHINING_WORKINGSTEP("MWS 3", l_itsSecPlane, l_HoleFeature_1, l_itsMoperation_2, NULL);
+		machiningWorkingstep * l_itsMWStep_4 = MACHINING_WORKINGSTEP("MWS 4", l_itsSecPlane, l_HoleFeature_2, l_itsMoperation_2, NULL);
+		machiningWorkingstep * l_itsMWStep_5 = MACHINING_WORKINGSTEP("MWS 5", l_itsSecPlane, l_HoleFeature_3, l_itsMoperation_2, NULL);
+		machiningWorkingstep * l_itsMWStep_6 = MACHINING_WORKINGSTEP("MWS 6", l_itsSecPlane, l_HoleFeature_4, l_itsMoperation_2, NULL);
+		machiningWorkingstep * l_itsMWStep_7 = MACHINING_WORKINGSTEP("MWS 7", l_itsSecPlane, l_CPFeature_3, l_itsMoperation_3, NULL);
+
+		/***************************Executable list for type 1*****************/
 		std::list<executable *> * l_theListIn_ex = new std::list<executable *>;
 		l_theListIn_ex->push_back(l_itsMWStep_1);
 		l_theListIn_ex->push_back(l_itsMWStep_2);
-		parenExecutableList * l_itsElementsIn = new parenExecutableList(l_theListIn_ex);
-		//parenExecutableList * l_itsElementsIn = PAREN_EXECUTABLE_LIST(1, l_itsMWStep_1);
+		l_theListIn_ex->push_back(l_itsMWStep_3);
+		l_theListIn_ex->push_back(l_itsMWStep_4);
+		l_theListIn_ex->push_back(l_itsMWStep_5);
+		l_theListIn_ex->push_back(l_itsMWStep_6);
+		parenExecutableList * l_itsElementsIn_1 = new parenExecutableList(l_theListIn_ex);
+		//parenExecutableList * l_itsElementsIn = PAREN_EXECUTABLE_LIST(2, l_itsMWStep_1, l_itsMWStep_2);
+		/***************************Executable list for type 2*****************/
+		l_theListIn_ex = new std::list<executable *>;
+		l_theListIn_ex->push_back(l_itsMWStep_1);
+		l_theListIn_ex->push_back(l_itsMWStep_7);
+		l_theListIn_ex->push_back(l_itsMWStep_3);
+		l_theListIn_ex->push_back(l_itsMWStep_4);
+		l_theListIn_ex->push_back(l_itsMWStep_5);
+		l_theListIn_ex->push_back(l_itsMWStep_6);
+		parenExecutableList * l_itsElementsIn_2 = new parenExecutableList(l_theListIn_ex);
+
 		/************************Channel****************************/
 		channel * l_channel = CHANNEL("Channel 1");
 
 		/******************Setup****************************/
 		//Its sec plane
-		l_locationIn = CARTESIAN_POINT("Point", 0.0, 0.0, 70.0);
+		l_locationIn = CARTESIAN_POINT("Point", 0.0, 0.0, 90.0);
 		l_axisIn = DIRECTION("Axis", 0.0, 0.0, 1.0);
 		l_refDirectionIn = DIRECTION("Ref_Axis", 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D("Position", l_locationIn, l_axisIn, l_refDirectionIn);
@@ -106,18 +216,178 @@ void  PP_DDBB::Initilizate(){
 		parenWorkpieceSetupList * itsWorkpieceSetupIn = SINGLE_WORKPIECE_SETUP(l_theworkpiece, l_workpieceSetupOrigin, NULL, NULL, NULL);
 		setup * l_itsSetupIn = SETUP("Setup 1", l_itsOrigin, l_itssecplane, itsWorkpieceSetupIn);
 
-		/********************Workplan*****************/
-		workplan * WP1 = WORKPLAN("Workplan 1", l_itsElementsIn, l_channel, l_itsSetupIn, NULL);
+		/********************Type 1 Process plan*****************/
+		workplan * WP = WORKPLAN("Workplan T1", l_itsElementsIn_1, l_channel, l_itsSetupIn, NULL);
 
 		ProcessPlan PP_1_1 = ProcessPlan(1, 1, 1);
-		PP_1_1.addSubphase(1, 1, WP1);
+		PP_1_1.addSubphase(1, 1, WP);
 		Family_1.addProcessPlan(PP_1_1, 1);
 
+		/********************Type 2 Process plan*****************/
+		WP = WORKPLAN("Workplan T2", l_itsElementsIn_2, l_channel, l_itsSetupIn, NULL);
 
+		ProcessPlan PP_1_2 = ProcessPlan(1, 1, 2);
+		PP_1_2.addSubphase(1, 1, WP);
+		Family_1.addProcessPlan(PP_1_2, 2);
 
-		std::pair<TForteUInt16, PP_Family> newpair(1, Family_1);
+		/*************************************************************************************************************/
+		/************************************Family "2" process plans*************************************************/
+		/*************************************************************************************************************/
+		PP_Family Family_2 = PP_Family(2);
+
+		/******************Feature 1****************************/
+		//Placement
+		l_locationIn = CARTESIAN_POINT(NULL, 70.0, 70.0, 50.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D("Feature placement", l_locationIn, l_axisIn, l_refDirectionIn);
+		//Depth
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 30.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
+		//Profile
+		l_itsprofile = RECTANGURAL_CLOSED_PROFILE(80.0, 50.0);
+		//Pocket
+		l_CPFeature = CLOSED_POCKET("Cajera 1", NULL, NULL, l_itsplacement, l_itsdepth, NULL, NULL, NULL, NULL, 10.0, l_itsprofile);
+
+		/******************Feature 2****************************/
+		//Placement
+		l_locationIn = CARTESIAN_POINT(NULL, 20.0, 60.0, 50.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Taladro", l_locationIn, l_axisIn, l_refDirectionIn);
+		//Depth
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 30.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
+		//Hole
+		l_HoleFeature_1 = ROUND_HOLE("Taladro 1", NULL, NULL, l_itsplacement, l_itsdepth, 22.0, NULL, NULL);
+
+		/******************Feature 3****************************/
+		//Placement
+		l_locationIn = CARTESIAN_POINT(NULL, 15.0, 15.0, 50.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Taladro", l_locationIn, l_axisIn, l_refDirectionIn);
+		//Depth
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 30.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
+		//Hole
+		l_HoleFeature_2 = ROUND_HOLE("Taladro 2", NULL, NULL, l_itsplacement, l_itsdepth, 22.0, NULL, NULL);
+
+		/******************Feature 4****************************/
+		//Placement
+		l_locationIn = CARTESIAN_POINT(NULL, 15.0, 105.0, 50.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Taladro", l_locationIn, l_axisIn, l_refDirectionIn);
+		//Depth
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 30.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
+		//Hole
+		l_HoleFeature_3 = ROUND_HOLE("Taladro 3", NULL, NULL, l_itsplacement, l_itsdepth, 22.0, NULL, NULL);
+
+		/*****************machining operation 1***************************/
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 0.0);
+		itstool = MILLING_CUTTING_TOOL("1338");
+		itstechnology = MILLING_TECHNOLOGY(80.0, "TCP", 0.0, 1000.0, 0.0, false, false, false, false);
+		l_itsMoperation_1 = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, NULL, NULL, NULL, 10.0, 15.0, 0.0, 0.0);
+
+		/*****************machining operation 2***************************/
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 0.0);
+		itstool = MILLING_CUTTING_TOOL("1401");
+		itstechnology = MILLING_TECHNOLOGY(50.0, "TCP", 0.0, 600.0, 0.0, false, false, false, false);
+		l_itsMoperation_2 = DRILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, 0.0, 0.0, 1.0, 0.0, NULL);
+
+		/*****************machining operation 3***************************/
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 0.0);
+		itstool = MILLING_CUTTING_TOOL("1400");
+		itstechnology = MILLING_TECHNOLOGY(50.0, "TCP", 0.0, 600.0, 0.0, false, false, false, false);
+		l_itsMoperation_3 = DRILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, 0.0, 0.0, 1.0, 0.0, NULL);
+
+		/**************machning workingstep****************************/
+		//Security plance
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 30.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_itsSecPlane = ELEMENTARY_SURFACE("SP", l_positionIn);
+		l_itsMWStep_1 = MACHINING_WORKINGSTEP("MWS 1", l_itsSecPlane, l_CPFeature, l_itsMoperation_1, NULL);
+		l_itsMWStep_2 = MACHINING_WORKINGSTEP("MWS 2", l_itsSecPlane, l_HoleFeature_1, l_itsMoperation_2, NULL);
+		l_itsMWStep_3 = MACHINING_WORKINGSTEP("MWS 3", l_itsSecPlane, l_HoleFeature_2, l_itsMoperation_3, NULL);
+		l_itsMWStep_4 = MACHINING_WORKINGSTEP("MWS 4", l_itsSecPlane, l_HoleFeature_3, l_itsMoperation_3, NULL);
+
+		/***************************Executable list for type 1*****************/
+		l_theListIn_ex = new std::list<executable *>;
+		l_theListIn_ex->push_back(l_itsMWStep_1);
+		l_theListIn_ex->push_back(l_itsMWStep_2);
+		l_itsElementsIn_1 = new parenExecutableList(l_theListIn_ex);
+		//parenExecutableList * l_itsElementsIn = PAREN_EXECUTABLE_LIST(2, l_itsMWStep_1, l_itsMWStep_2);
+		/***************************Executable list for type 2*****************/
+		l_theListIn_ex = new std::list<executable *>;
+		l_theListIn_ex->push_back(l_itsMWStep_1);
+		l_theListIn_ex->push_back(l_itsMWStep_2);
+		l_theListIn_ex->push_back(l_itsMWStep_3);
+		l_theListIn_ex->push_back(l_itsMWStep_4);
+		l_itsElementsIn_2 = new parenExecutableList(l_theListIn_ex);
+
+		/************************Channel****************************/
+		l_channel = CHANNEL("Channel 1");
+
+		/******************Setup****************************/
+		//Its sec plane
+		l_locationIn = CARTESIAN_POINT("Point", 0.0, 0.0, 120.0);
+		l_axisIn = DIRECTION("Axis", 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION("Ref_Axis", 1.0, 0.0, 0.0);
+		l_positionIn = AXIS2_PLACEMENT_3D("Position", l_locationIn, l_axisIn, l_refDirectionIn);
+		l_itssecplane = ELEMENTARY_SURFACE("Sec Plane", l_positionIn);
+		//itsorigin
+		l_locationIn = CARTESIAN_POINT("Point", 30.0, 30.0, 0.0);
+		l_axisIn = DIRECTION("Axis", 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION("Ref_Axis", 0.0, 0.0, 1.0);
+		l_itsOrigin = AXIS2_PLACEMENT_3D("Origin", l_locationIn, l_axisIn, l_refDirectionIn);
+		//The workpiece
+		l_locationIn = CARTESIAN_POINT("Point", 0.0, 0.0, 0.0);
+		l_axisIn = DIRECTION("Axis", 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION("Ref_Axis", 1.0, 0.0, 0.0);
+		l_blockOrigin = AXIS2_PLACEMENT_3D("WP Origin", l_locationIn, l_axisIn, l_refDirectionIn);
+		itsblock = BLOCK("Block", l_blockOrigin, 100.0, 120.0, 50.0);
+		l_theworkpiece = WORKPIECE("Bruto", NULL, NULL, NULL, NULL, itsblock, NULL);
+		//The workpiece setup
+		l_locationIn = CARTESIAN_POINT("Point", 10.0, 10.0, 0.0);
+		l_axisIn = DIRECTION("Axis", 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION("Ref_Axis", 1.0, 0.0, 0.0);
+		l_workpieceSetupOrigin = AXIS2_PLACEMENT_3D("WP Origin", l_locationIn, l_axisIn, l_refDirectionIn);
+		itsWorkpieceSetupIn = SINGLE_WORKPIECE_SETUP(l_theworkpiece, l_workpieceSetupOrigin, NULL, NULL, NULL);
+		l_itsSetupIn = SETUP("Setup 1", l_itsOrigin, l_itssecplane, itsWorkpieceSetupIn);
+
+		/********************Type 1 Process plan*****************/
+		WP = WORKPLAN("Workplan T1", l_itsElementsIn_1, l_channel, l_itsSetupIn, NULL);
+
+		ProcessPlan PP_2_1 = ProcessPlan(1, 2, 1);
+		PP_2_1.addSubphase(1, 1, WP);
+		Family_2.addProcessPlan(PP_2_1, 1);
+
+		/********************Type 2 Process plan*****************/
+		WP = WORKPLAN("Workplan T2", l_itsElementsIn_2, l_channel, l_itsSetupIn, NULL);
+
+		ProcessPlan PP_2_2 = ProcessPlan(1, 2, 2);
+		PP_2_2.addSubphase(1, 1, WP);
+		Family_2.addProcessPlan(PP_2_2, 2);
+
 		try{
-			sm_umapFamilyMap.insert(newpair);
+			sm_umapFamilyMap.insert(std::pair<TForteUInt16, PP_Family>(1, Family_1));
+			sm_umapFamilyMap.insert(std::pair<TForteUInt16, PP_Family>(2, Family_2));
 		}
 		catch (std::bad_alloc e){
 			DEVLOG_ERROR("Allocation failure, unable to insert a process plan in the DDBB \n");

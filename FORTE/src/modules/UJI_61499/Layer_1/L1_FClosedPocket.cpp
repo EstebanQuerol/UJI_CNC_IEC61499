@@ -73,10 +73,10 @@ void FORTE_L1_FClosedPocket::executeEvent(int pa_nEIID){
 
 				//Set the feature origin
 				reallistIter = TheFeature->get_featurePlacement()->get_location()->get_coordinates()->get_theList()->begin();
-				nSecurityZ = TheWS->get_itsSecplane()->get_position()->get_location()->get_coordinates()->get_theList()->back()->get_val();
 				nX = (*reallistIter++)->get_val();
 				nY = (*reallistIter++)->get_val();
 				nZ = (*reallistIter)->get_val();
+				nSecurityZ = TheWS->get_itsSecplane()->get_position()->get_location()->get_coordinates()->get_theList()->back()->get_val();
 				sprintf(acBuffer, "G00 X=%f Y=%f Z=%f", nX, nY, nZ + nSecurityZ);
 				CmdList.push_back(std::string(acBuffer));
 				sprintf(acBuffer, "G92 X0 Y0 Z%f", nSecurityZ);

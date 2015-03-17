@@ -105,11 +105,23 @@ public:
 		return new closedPocket(SET_NAME(itsIdIn), itsWorkpieceIn, itsOperationsIn, featurePlacementIn, depthIn, itsBossIn, SET_REAL(slopeIn), bottomConditionIn,
 			l_TL1, l_TL2, featureBoundaryIn);
 	}
+	static roundHole * ROUND_HOLE(const char * itsIdIn, workpiece * itsWorkpieceIn, parenMachiningOperationList * itsOperationsIn,
+		axis2placement3d * featurePlacementIn, elementarySurface * depthIn, double diameterIn, taperSelect * changeInDiameterIn,
+		holeBottomCondition * bottomConditionIn){
+
+		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(diameterIn, NULL);
+		return new roundHole(SET_NAME(itsIdIn), itsWorkpieceIn, itsOperationsIn, featurePlacementIn, depthIn, l_TL1, changeInDiameterIn, bottomConditionIn);
+	}
 	static rectangularClosedProfile * RECTANGURAL_CLOSED_PROFILE(double profileWidthIn, double profileLengthIn)
 	{
 		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(profileWidthIn, NULL);
 		tolerancedLengthMeasure * l_TL2 = new tolerancedLengthMeasure(profileLengthIn, NULL);
 		return new rectangularClosedProfile(NULL, l_TL1, l_TL2);
+	}
+	static circularClosedProfile * CIRCULAR_CLOSED_PROFILE(double diameter)
+	{
+		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(diameter, NULL);
+		return new circularClosedProfile(NULL, l_TL1);
 	}
 	static machiningWorkingstep * MACHINING_WORKINGSTEP(const char * itsIdIn, elementarySurface * itsSecplaneIn, manufacturingFeature * itsFeatureIn,
 		machiningOperation * itsOperationIn, inProcessGeometry * itsEffectIn){
@@ -123,6 +135,15 @@ public:
 		return new bottomAndSideRoughMilling(NULL, NULL, SET_NAME(itsIdIn), SET_REAL(retractPlaneIn), startPointIn, itsToolIn, itsTechnologyIn, itsMachineFunctionsIn,
 			SET_REAL(overcutLengthIn), approachIn, retractIn, itsMachiningStrategyIn, SET_REAL(axialCuttingDepthIn), SET_REAL(radialCuttingDepthIn),
 			SET_REAL(allowanceSideIn), SET_REAL(allowanceBottomIn));
+	}
+
+	static drilling * DRILLING(char * itsIdIn, double retractPlaneIn, cartesianPoint * startPointIn, machiningTool * itsToolIn,technology * itsTechnologyIn, 
+		machineFunctions * itsMachineFunctionsIn, double overcutLengthIn, double cuttingDepthIn, double previousDiameterIn, double dwellTimeBottomIn,
+		double feedOnRetractIn, drillingTypeStrategy * itsMachiningStrategyIn){
+
+		return new drilling(NULL, NULL, SET_NAME(itsIdIn), SET_REAL(retractPlaneIn), startPointIn, itsToolIn, itsTechnologyIn, itsMachineFunctionsIn,
+			SET_REAL(overcutLengthIn), SET_REAL(cuttingDepthIn), SET_REAL(previousDiameterIn), SET_REAL(dwellTimeBottomIn), SET_REAL(feedOnRetractIn), 
+			itsMachiningStrategyIn);
 	}
 	static millingCuttingTool * MILLING_CUTTING_TOOL(const char * name){
 		return new millingCuttingTool(SET_NAME(name), NULL, NULL, NULL, NULL, NULL);
@@ -152,6 +173,13 @@ public:
 			referencepoint = new toolReferencePointTcp;
 		return new millingTechnology(SET_REAL(feedrateIn), referencepoint, SET_REAL(cutspeedIn), SET_REAL(spindleIn), SET_REAL(feedratePerToothIn),
 			SET_BOOL(synchronizeSpindleWithFeedIn), SET_BOOL(inhibitFeedrateOverrideIn), SET_BOOL(inhibitSpindleOverrideIn), SET_BOOL(itsAdaptiveControlIn));
+	}
+	static diameterTaper * DIAMETER_TAPER(double finalDiameter){
+		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(finalDiameter, NULL);
+		return new diameterTaper(l_TL1);
+	}
+	static angleTaper * ANGLE_TAPER(double angle){
+		return new angleTaper(SET_REAL(angle));
 	}
 };
 #endif
