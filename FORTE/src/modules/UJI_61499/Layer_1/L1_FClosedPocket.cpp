@@ -68,6 +68,8 @@ void FORTE_L1_FClosedPocket::executeEvent(int pa_nEIID){
 				else if (nToolPos < 0){
 					//Tool not available
 					DEVLOG_DEBUG("Trying to use a not available tool \n");
+					forte_free(acBuffer);
+					acBuffer = NULL;
 					PARAM_ERROR_EXIT
 				}
 
@@ -125,6 +127,8 @@ void FORTE_L1_FClosedPocket::executeEvent(int pa_nEIID){
 					}
 					else{
 						//Cant do a pocket w/o bottom and side milling
+						forte_free(acBuffer);
+						acBuffer = NULL;
 						PARAM_ERROR_EXIT
 					}
 					CmdList.push_back(ss.str());
@@ -148,6 +152,8 @@ void FORTE_L1_FClosedPocket::executeEvent(int pa_nEIID){
 					}
 					else{
 						//Cant do a pocket w/o bottom and side milling
+						forte_free(acBuffer);
+						acBuffer = NULL;
 						PARAM_ERROR_EXIT
 					}
 					CmdList.push_back(ss.str());
@@ -160,6 +166,8 @@ void FORTE_L1_FClosedPocket::executeEvent(int pa_nEIID){
 				}
 				else{
 					DEVLOG_DEBUG("Not supported profile\n");
+					forte_free(acBuffer);
+					acBuffer = NULL;
 					PARAM_ERROR_EXIT
 				}
 			}

@@ -150,6 +150,8 @@ void FORTE_L1_FRoundHole::executeEvent(int pa_nEIID){
 				}
 				else{
 					//Wrong operation for drilling
+					forte_free(acBuffer);
+					acBuffer = NULL;
 					PARAM_ERROR_EXIT
 				}
 
