@@ -421,7 +421,7 @@
       <position x="879" y="633"/>
       <resource href="SysConf.xml#//@systemConfigNetwork/@devices.2/@resource.3/@fBNetwork"/>
     </fBs>
-    <fBs name="L2_GEN_Machine_0" identifier="true" id="_1tVMcMzZEeSnBYYuQKSR1Q" fbtPath="UJI_61499\L2_FBS\L2_GEN_Machine.fbt">
+    <fBs name="L2_GEN_Machine_0" identifier="true" id="_1tVMcMzZEeSnBYYuQKSR1Q" fbtPath="UJI_FMS_61499_FBS\L2_FBS\L2_GEN_Machine.fbt">
       <interface>
         <eventInputs name="INIT" comment="Initialization Request" isInput="true">
           <with variables="//@fbNetwork/@fBs.5/@interface/@inputVars.0"/>
@@ -539,7 +539,7 @@
       <position x="586" y="-11"/>
       <resource href="SysConf.xml#//@systemConfigNetwork/@devices.2/@resource.1/@fBNetwork"/>
     </fBs>
-    <fBs name="L1_L1CFB" identifier="true" id="_j_JO0M1aEeSQwOVwq8zscA" fbtPath="UJI_61499\L1_FBS\L1_L1CFB.fbt">
+    <fBs name="L1_L1CFB" identifier="true" id="_j_JO0M1aEeSQwOVwq8zscA" fbtPath="UJI_FMS_61499_FBS\L1_FBS\L1_L1CFB.fbt">
       <interface>
         <eventInputs name="L2REQ" comment="Request multicast send to all blocks in layer 1" isInput="true">
           <with variables="//@fbNetwork/@fBs.6/@interface/@inputVars.0"/>
