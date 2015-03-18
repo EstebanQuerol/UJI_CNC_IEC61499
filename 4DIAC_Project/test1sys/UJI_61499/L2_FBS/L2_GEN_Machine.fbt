@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Composite Function Block Type" Name="L2_GEN_Machine">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="4DIAC-IDE" Date="2015-03-17" Organization="4DIAC-Consortium" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Initialization Request" Name="INIT" Type="Event">
+        <With Var="QI"/>
+        <With Var="MID"/>
+      </Event>
+      <Event Comment="Setup execution request from layer 3" Name="L3REQ" Type="Event">
+        <With Var="PartInfoIn1"/>
+        <With Var="SetupIn"/>
+      </Event>
+      <Event Comment="Response from layer 3" Name="L3RSP" Type="Event">
+        <With Var="PartInfoIn2"/>
+      </Event>
+      <Event Comment="Layer 0 service response to initialization" Name="L0RSP1" Type="Event">
+        <With Var="QI2"/>
+      </Event>
+      <Event Comment="Layer 0 service state request response" Name="L0RSP2" Type="Event">
+        <With Var="ServiceStateIn"/>
+      </Event>
+      <Event Comment="Operation reception confirmation" Name="L1RSP" Type="Event"/>
+      <Event Comment="Completed OP indication" Name="L0IND" Type="Event">
+        <With Var="ENDOPIDIn"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Initialization Confirm" Name="INITO" Type="Event">
+        <With Var="QO"/>
+      </Event>
+      <Event Comment="Send operation to Layer 1" Name="Send" Type="Event">
+        <With Var="OperationOut"/>
+        <With Var="L1MIDOut"/>
+      </Event>
+      <Event Comment="Assignement reception confirmation" Name="CNF" Type="Event">
+        <With Var="PartInfoOut"/>
+      </Event>
+      <Event Comment="completed setup indication" Name="IND" Type="Event">
+        <With Var="PartInfoOut"/>
+        <With Var="ENDID"/>
+      </Event>
+      <Event Comment="Indicate that the machine is free" Name="FREE" Type="Event"/>
+      <Event Comment="Indicate a change in the machine state" Name="ERROR" Type="Event">
+        <With Var="MachineState"/>
+      </Event>
+      <Event Comment="Indicate Service to change state" Name="L0INITO" Type="Event">
+        <With Var="QO2"/>
+      </Event>
+      <Event Comment="Request machine service state" Name="L0IND1" Type="Event">
+        <With Var="QO2"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Input event qualifier" Name="QI" Type="BOOL"/>
+      <VarDeclaration Comment="Machine identifier" Name="MID" Type="USINT"/>
+      <VarDeclaration ArraySize="4" Comment="Part ID, family, type, MID" Name="PartInfoIn1" Type="UINT"/>
+      <VarDeclaration Comment="Subphase to execute" Name="SetupIn" Type="STRING"/>
+      <VarDeclaration ArraySize="4" Comment="ID, Family, Type, MID" Name="PartInfoIn2" Type="UINT"/>
+      <VarDeclaration Comment="Input event qualifier" Name="QI2" Type="BOOL"/>
+      <VarDeclaration Comment="Machine service state" Name="ServiceStateIn" Type="USINT"/>
+      <VarDeclaration Comment="Operation end code" Name="ENDOPIDIn" Type="USINT"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Output event qualifier" Name="QO" Type="BOOL"/>
+      <VarDeclaration Comment="String containing the serialized operation" Name="OperationOut" Type="STRING"/>
+      <VarDeclaration Comment="Layer 1 multicast ID" Name="L1MIDOut" Type="USINT"/>
+      <VarDeclaration ArraySize="4" Comment="Part identifier, family, type and MID" Name="PartInfoOut" Type="UINT"/>
+      <VarDeclaration Comment="Setup termination code" Name="ENDID" Type="USINT"/>
+      <VarDeclaration Comment="MachineState" Name="MachineState" Type="BOOL"/>
+      <VarDeclaration Comment="Output event qualifier" Name="QO2" Type="BOOL"/>
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB Name="L2_ASetupRSPHDLR_1" Type="L2_ASetupRSPHDLR" x="1615.0" y="1140.0"/>
+    <FB Name="L2_StateTracker_1" Type="L2_StateTracker" x="1330.0" y="2470.0"/>
+    <FB Name="L2_ExecutionManager_0" Type="L2_ExecutionManager" x="3750.0" y="-95.0"/>
+    <FB Name="L2_MachineCore_0" Type="L2_MachineCore" x="3705.0" y="950.0"/>
+    <FB Name="E_DELAY_1" Type="E_DELAY" x="5890.0" y="-1140.0"/>
+    <FB Name="L2_L1Comm_1" Type="L2_L1Comm" x="3705.0" y="-1235.0"/>
+    <FB Name="E_DELAY_3" Type="E_DELAY" x="2850.0" y="2660.0"/>
+    <FB Name="L2_ASetupREQHDLR_1" Type="L2_ASetupREQHDLR" x="1520.0" y="-380.0"/>
+    <FB Name="E_DELAY_2" Type="E_DELAY" x="5795.0" y="1425.0"/>
+    <DataConnections>
+      <Connection Destination="L2_ASetupRSPHDLR_1.MID" Source="L2_ASetupREQHDLR_1.MIDOut" dx1="160.0" dx2="-230.0" dy="-145.0"/>
+      <Connection Destination="L2_MachineCore_0.ENDOPID" Source="L2_L1Comm_1.ENDOPIDOut" dx1="520.0" dx2="-345.0" dy="1650.0"/>
+      <Connection Destination="L2_L1Comm_1.L1MIDIn" Source="L2_ExecutionManager_0.L1MID" dx1="250.0" dx2="-200.0" dy="-370.0"/>
+      <Connection Destination="L2_MachineCore_0.PartInfoIn" Source="L2_ASetupREQHDLR_1.PartInfoOut" dx1="630.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_MachineCore_0.ENDSetupID" Source="L2_ExecutionManager_0.ENDSetupID" dx1="360.0" dx2="-185.0" dy="925.0"/>
+      <Connection Destination="L2_ExecutionManager_0.QI" Source="L2_ASetupREQHDLR_1.QO" dx1="1055.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_ASetupRSPHDLR_1.QI" Source="L2_ASetupREQHDLR_1.QO" dx1="225.0" dx2="-160.0" dy="0.0"/>
+      <Connection Destination="L2_L1Comm_1.OperationIn" Source="L2_ExecutionManager_0.Operation" dx1="155.0" dx2="-285.0" dy="-190.0"/>
+      <Connection Destination="E_DELAY_1.DT" Source="L2_L1Comm_1.Delay" dx1="1390.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_ExecutionManager_0.Setup" Source="L2_ASetupREQHDLR_1.SetupOut" dx1="535.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_ExecutionManager_0.NextCode" Source="L2_MachineCore_0.NextCode" dx1="210.0" dx2="-740.0" dy="1025.0"/>
+      <Connection Destination="L2_MachineCore_0.ServiceState" Source="L2_StateTracker_1.ServiceStateOut" dx1="420.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_StateTracker_1.QI" Source="L2_ASetupRSPHDLR_1.QO" dx1="0.0" dx2="-165.0" dy="-300.0"/>
+      <Connection Destination="E_DELAY_2.DT" Source="L2_MachineCore_0.Delay" dx1="1015.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="OperationOut" Source="L2_L1Comm_1.OperationOut" dx1="840.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1MIDOut" Source="L2_L1Comm_1.L1MIDOut" dx1="775.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="PartInfoOut" Source="L2_MachineCore_0.PartInfoOut" dx1="1860.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="ENDID" Source="L2_MachineCore_0.ENDID" dx1="1965.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="MachineState" Source="L2_MachineCore_0.MachineState" dx1="2055.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="QO2" Source="L2_StateTracker_1.QO" dx1="4900.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="QO" Source="L2_ExecutionManager_0.QO" dx1="945.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_ASetupREQHDLR_1.QI" Source="QI" dx1="670.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_ASetupREQHDLR_1.MID" Source="MID" dx1="750.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_ASetupREQHDLR_1.PartInfoIn" Source="PartInfoIn1" dx1="835.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_ASetupREQHDLR_1.SetupIn" Source="SetupIn" dx1="915.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_ASetupRSPHDLR_1.PartInfo" Source="PartInfoIn2" dx1="180.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_StateTracker_1.QI2" Source="QI2" dx1="140.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_StateTracker_1.ServiceStateIn" Source="ServiceStateIn" dx1="50.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="E_DELAY_3.DT" Source="L2_StateTracker_1.Delay" dx1="530.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_L1Comm_1.ENDOPIDIn" Source="ENDOPIDIn" dx1="420.0" dx2="0.0" dy="0.0"/>
+    </DataConnections>
+    <EventConnections>
+      <Connection Destination="E_DELAY_1.START" Source="L2_L1Comm_1.Start" dx1="1475.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_MachineCore_0.REQ" Source="L2_ASetupREQHDLR_1.CNF" dx1="675.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_ASetupRSPHDLR_1.INIT" Source="L2_ASetupREQHDLR_1.INITO" dx1="285.0" dx2="0.0" dy="410.0"/>
+      <Connection Destination="L2_ExecutionManager_0.INIT" Source="L2_ASetupREQHDLR_1.INITO" dx1="945.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_MachineCore_0.UPDT" Source="L2_StateTracker_1.UPDT" dx1="330.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="E_DELAY_3.STOP" Source="L2_StateTracker_1.Stop" dx1="650.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_StateTracker_1.Timeout" Source="E_DELAY_3.EO" dx1="0.0" dx2="0.0" dy="675.0"/>
+      <Connection Destination="E_DELAY_3.START" Source="L2_StateTracker_1.Start" dx1="695.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="E_DELAY_2.STOP" Source="L2_MachineCore_0.stop" dx1="990.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_StateTracker_1.INIT" Source="L2_ASetupRSPHDLR_1.INITO" dx1="210.0" dx2="0.0" dy="240.0"/>
+      <Connection Destination="E_DELAY_1.STOP" Source="L2_L1Comm_1.Stop" dx1="1335.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_ExecutionManager_0.RENEW" Source="L2_MachineCore_0.RENEW" dx1="120.0" dx2="-430.0" dy="285.0"/>
+      <Connection Destination="L2_MachineCore_0.CompletedSetup" Source="L2_ExecutionManager_0.Completed" dx1="465.0" dx2="-490.0" dy="1540.0"/>
+      <Connection Destination="L2_L1Comm_1.Timeout" Source="E_DELAY_1.EO" dx1="0.0" dx2="-380.0" dy="790.0"/>
+      <Connection Destination="E_DELAY_2.START" Source="L2_MachineCore_0.start" dx1="1010.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_ExecutionManager_0.NEXT" Source="L2_MachineCore_0.NEXT" dx1="185.0" dx2="-330.0" dy="125.0"/>
+      <Connection Destination="L2_MachineCore_0.timeout" Source="E_DELAY_2.EO" dx1="0.0" dx2="-635.0" dy="1120.0"/>
+      <Connection Destination="L2_MachineCore_0.CompletedOP" Source="L2_L1Comm_1.CompletedOP" dx1="615.0" dx2="-560.0" dy="2275.0"/>
+      <Connection Destination="L2_MachineCore_0.RSP" Source="L2_ASetupRSPHDLR_1.CNF" dx1="395.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_L1Comm_1.REQ" Source="L2_ExecutionManager_0.ExecuteOP" dx1="90.0" dx2="-485.0" dy="370.0"/>
+      <Connection Destination="Send" Source="L2_L1Comm_1.Send" dx1="2365.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="CNF" Source="L2_MachineCore_0.CNF" dx1="1040.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="IND" Source="L2_MachineCore_0.IND" dx1="1145.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="FREE" Source="L2_MachineCore_0.FREE" dx1="1225.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="ERROR" Source="L2_MachineCore_0.ERROR" dx1="1320.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L0INITO" Source="L2_StateTracker_1.INITO" dx1="4725.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L0IND1" Source="L2_StateTracker_1.IND" dx1="4815.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="INITO" Source="L2_ExecutionManager_0.INITO" dx1="3160.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_ASetupREQHDLR_1.INIT" Source="INIT" dx1="525.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_ASetupREQHDLR_1.REQ" Source="L3REQ" dx1="625.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_ASetupRSPHDLR_1.RSP" Source="L3RSP" dx1="230.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_StateTracker_1.RSP1" Source="L0RSP1" dx1="510.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_StateTracker_1.RSP2" Source="L0RSP2" dx1="345.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_L1Comm_1.RSP" Source="L1RSP" dx1="165.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_L1Comm_1.IND" Source="L0IND" dx1="300.0" dx2="0.0" dy="0.0"/>
+    </EventConnections>
+  </FBNetwork>
+</FBType>
