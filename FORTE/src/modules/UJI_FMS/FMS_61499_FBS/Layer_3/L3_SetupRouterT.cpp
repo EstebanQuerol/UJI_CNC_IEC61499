@@ -163,6 +163,7 @@ else{
 	ASetup1().PartInfoS()[1] = ASetupC().PartInfoS()[1];
 	ASetup1().PartInfoS()[2] = ASetupC().PartInfoS()[2];
 	ASetup1().PartInfoS()[3] = ASetupC().PartInfoS()[3];
+	ASetup1().ENDID() = ASetupC().ENDID();
 };
 }
 
@@ -190,11 +191,13 @@ void FORTE_L3_SetupRouterT::enterStateREQ2(void){
 
 void FORTE_L3_SetupRouterT::enterStateRSP1(void){
   m_nECCState = scm_nStateRSP1;
+  alg_RSP1();
   sendAdapterEvent(scm_nASetupCAdpNum, FORTE_L3_ASetup::scm_nEventRSPID);
 }
 
 void FORTE_L3_SetupRouterT::enterStateRSP2(void){
   m_nECCState = scm_nStateRSP2;
+  alg_RSP2();
   sendAdapterEvent(scm_nASetupCAdpNum, FORTE_L3_ASetup::scm_nEventRSPID);
 }
 

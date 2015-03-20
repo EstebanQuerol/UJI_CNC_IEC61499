@@ -42,10 +42,10 @@
         <ECAction Algorithm="REQ2" Output="ASetupC.REQ"/>
       </ECState>
       <ECState Name="RSP1" x="2850.0" y="1140.0">
-        <ECAction Output="ASetupC.RSP"/>
+        <ECAction Algorithm="RSP1" Output="ASetupC.RSP"/>
       </ECState>
       <ECState Name="RSP2" x="1995.0" y="1520.0">
-        <ECAction Output="ASetupC.RSP"/>
+        <ECAction Algorithm="RSP2" Output="ASetupC.RSP"/>
       </ECState>
       <ECState Name="CNF" x="1170.0" y="1570.0">
         <ECAction Algorithm="CNF"/>
@@ -102,7 +102,7 @@
       <ST Text="IF ASetupC.PartInfoS[2] = SelType THEN&#10;&#9;Select := TRUE;&#10;&#9;ASetup2.PartInfoS[0] := ASetupC.PartInfoS[0];&#10;&#9;ASetup2.PartInfoS[1] := ASetupC.PartInfoS[1];&#10;&#9;ASetup2.PartInfoS[2] := ASetupC.PartInfoS[2];&#10;&#9;ASetup2.PartInfoS[3] := ASetupC.PartInfoS[3];&#10;ELSE&#10;&#9;Select := FALSE;&#10;&#9;ASetup1.PartInfoS[0] := ASetupC.PartInfoS[0];&#10;&#9;ASetup1.PartInfoS[1] := ASetupC.PartInfoS[1];&#10;&#9;ASetup1.PartInfoS[2] := ASetupC.PartInfoS[2];&#10;&#9;ASetup1.PartInfoS[3] := ASetupC.PartInfoS[3];&#10;END_IF;"/>
     </Algorithm>
     <Algorithm Comment="new algorithm" Name="IND">
-      <ST Text="IF ASetupC.PartInfoS[2] = SelType THEN&#10;&#9;Select := TRUE;&#10;&#9;ASetup2.PartInfoS[0] := ASetupC.PartInfoS[0];&#10;&#9;ASetup2.PartInfoS[1] := ASetupC.PartInfoS[1];&#10;&#9;ASetup2.PartInfoS[2] := ASetupC.PartInfoS[2];&#10;&#9;ASetup2.PartInfoS[3] := ASetupC.PartInfoS[3];&#10;&#9;ASetup2.ENDID := ASetupC.ENDID;&#10;ELSE&#10;&#9;Select := FALSE;&#10;&#9;ASetup1.PartInfoS[0] := ASetupC.PartInfoS[0];&#10;&#9;ASetup1.PartInfoS[1] := ASetupC.PartInfoS[1];&#10;&#9;ASetup1.PartInfoS[2] := ASetupC.PartInfoS[2];&#10;&#9;ASetup1.PartInfoS[3] := ASetupC.PartInfoS[3];&#10;END_IF;"/>
+      <ST Text="IF ASetupC.PartInfoS[2] = SelType THEN&#10;&#9;Select := TRUE;&#10;&#9;ASetup2.PartInfoS[0] := ASetupC.PartInfoS[0];&#10;&#9;ASetup2.PartInfoS[1] := ASetupC.PartInfoS[1];&#10;&#9;ASetup2.PartInfoS[2] := ASetupC.PartInfoS[2];&#10;&#9;ASetup2.PartInfoS[3] := ASetupC.PartInfoS[3];&#10;&#9;ASetup2.ENDID := ASetupC.ENDID;&#10;ELSE&#10;&#9;Select := FALSE;&#10;&#9;ASetup1.PartInfoS[0] := ASetupC.PartInfoS[0];&#10;&#9;ASetup1.PartInfoS[1] := ASetupC.PartInfoS[1];&#10;&#9;ASetup1.PartInfoS[2] := ASetupC.PartInfoS[2];&#10;&#9;ASetup1.PartInfoS[3] := ASetupC.PartInfoS[3];&#10;&#9;ASetup1.ENDID := ASetupC.ENDID;&#10;END_IF;"/>
     </Algorithm>
   </BasicFB>
 </FBType>
