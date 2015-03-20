@@ -8,8 +8,14 @@
   <application comment="" name="Control_GUI">
     <fBNetwork href="Control_GUI.xml#//@fbNetwork"/>
   </application>
-  <application comment="" name="App_8070_A">
-    <fBNetwork href="App_8070_A.xml#//@fbNetwork"/>
+  <application comment="" name="L2_APP">
+    <fBNetwork href="L2_APP.xml#//@fbNetwork"/>
+  </application>
+  <application comment="" name="L1_APP">
+    <fBNetwork href="L1_APP.xml#//@fbNetwork"/>
+  </application>
+  <application comment="" name="L0_APP">
+    <fBNetwork href="L0_APP.xml#//@fbNetwork"/>
   </application>
   <systemConfiguration>
     <systemConfigurationNetwork href="SysConf.xml#//@systemConfigNetwork"/>
