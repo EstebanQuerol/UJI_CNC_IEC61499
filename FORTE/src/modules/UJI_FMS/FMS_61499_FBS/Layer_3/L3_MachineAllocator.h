@@ -123,12 +123,28 @@ private:
     return *static_cast<CIEC_USINT*>(getVarInternal(5));
   };
 
+  CIEC_UINT *AssignedParts() {
+    return (CIEC_UINT*)(*static_cast<CIEC_ARRAY *>(getVarInternal(6)))[0]; //the first element marks the start of the array
+  };
+
+  CIEC_ARRAY &AssignedParts_Array() {
+    return *static_cast<CIEC_ARRAY*>(getVarInternal(6));
+  };
+
+  CIEC_USINT &j() {
+    return *static_cast<CIEC_USINT*>(getVarInternal(7));
+  };
+
+  CIEC_BOOL &AlreadyAssigned() {
+    return *static_cast<CIEC_BOOL*>(getVarInternal(8));
+  };
+
   static const SFBInterfaceSpec scm_stFBInterfaceSpec;
 
 
   static const SInternalVarsInformation scm_stInternalVars;
 
-   FORTE_BASIC_FB_DATA_ARRAY(5, 3, 5, 6, 0);
+   FORTE_BASIC_FB_DATA_ARRAY(5, 3, 5, 9, 0);
 
 virtual void setInitialValues();
   void alg_REQ(void);

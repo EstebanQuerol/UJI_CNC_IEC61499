@@ -68,7 +68,7 @@
       <ST Text="QO := QI;&#10;MIDOut := MID;"/>
     </Algorithm>
     <Algorithm Comment="Normally executed algorithm" Name="REQ">
-      <ST Text="IF PartInfoIn[3] = MID THEN&#10;&#9;(*The received packet is for this machine, map outputs*)&#10;&#9;Accepted := TRUE;&#10;&#9;PartInfoOut[0] := PartInfoIn[0];&#10;&#9;PartInfoOut[1] := PartInfoIn[1];&#10;&#9;PartInfoOut[2] := PartInfoIn[2];&#10;&#9;SetupOut :=SetupIn;&#10;ELSE&#10;&#9;Accepted := FALSE;&#10;END_IF;"/>
+      <ST Text="IF PartInfoIn[3] = MID THEN&#10;&#9;(*The received packet is for this machine, map outputs*)&#10;&#9;Accepted := TRUE;&#10;&#9;PartInfoOut[0] := PartInfoIn[0];&#10;&#9;PartInfoOut[1] := PartInfoIn[1];&#10;&#9;PartInfoOut[2] := PartInfoIn[2];&#10;&#9;PartInfoOut[3] := PartInfoIn[3];&#10;&#9;SetupOut :=SetupIn;&#10;ELSE&#10;&#9;Accepted := FALSE;&#10;END_IF;"/>
     </Algorithm>
   </BasicFB>
 </FBType>

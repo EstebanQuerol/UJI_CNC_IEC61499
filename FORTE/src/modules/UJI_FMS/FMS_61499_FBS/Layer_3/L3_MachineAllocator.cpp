@@ -32,9 +32,9 @@ const TDataIOID FORTE_L3_MachineAllocator::scm_anEOWith[] = {4, 255, 0, 2, 255, 
 const TForteInt16 FORTE_L3_MachineAllocator::scm_anEOWithIndexes[] = {0, 2, 5, 9, -1, -1};
 const CStringDictionary::TStringId FORTE_L3_MachineAllocator::scm_anEventOutputNames[] = {g_nStringIdCNF, g_nStringIdIND2, g_nStringIdIND1, g_nStringIdStart, g_nStringIdStop};
 
-const CStringDictionary::TStringId FORTE_L3_MachineAllocator::scm_anInternalsNames[] = {g_nStringIdAssignRemaining, g_nStringIdi, g_nStringIdIFinalAssign, g_nStringIdCurrentPartID, g_nStringIdCurrentSetupID, g_nStringIdTOCounter};
+const CStringDictionary::TStringId FORTE_L3_MachineAllocator::scm_anInternalsNames[] = {g_nStringIdAssignRemaining, g_nStringIdi, g_nStringIdIFinalAssign, g_nStringIdCurrentPartID, g_nStringIdCurrentSetupID, g_nStringIdTOCounter, g_nStringIdAssignedParts, g_nStringIdj, g_nStringIdAlreadyAssigned};
 
-const CStringDictionary::TStringId FORTE_L3_MachineAllocator::scm_anInternalsTypeIds[] = {g_nStringIdBOOL, g_nStringIdUSINT, g_nStringIdARRAY, 15, g_nStringIdUINT, g_nStringIdUINT, g_nStringIdUSINT, g_nStringIdUSINT};
+const CStringDictionary::TStringId FORTE_L3_MachineAllocator::scm_anInternalsTypeIds[] = {g_nStringIdBOOL, g_nStringIdUSINT, g_nStringIdARRAY, 15, g_nStringIdUINT, g_nStringIdUINT, g_nStringIdUSINT, g_nStringIdUSINT, g_nStringIdARRAY, 15, g_nStringIdUINT, g_nStringIdUSINT, g_nStringIdBOOL};
 
 const SFBInterfaceSpec FORTE_L3_MachineAllocator::scm_stFBInterfaceSpec = {
   5,  scm_anEventInputNames,  scm_anEIWith,  scm_anEIWithIndexes,
@@ -44,7 +44,7 @@ const SFBInterfaceSpec FORTE_L3_MachineAllocator::scm_stFBInterfaceSpec = {
 };
 
 
-const SInternalVarsInformation FORTE_L3_MachineAllocator::scm_stInternalVars = {6, scm_anInternalsNames, scm_anInternalsTypeIds};
+const SInternalVarsInformation FORTE_L3_MachineAllocator::scm_stInternalVars = {9, scm_anInternalsNames, scm_anInternalsTypeIds};
 
 
 void FORTE_L3_MachineAllocator::setInitialValues(){
@@ -53,6 +53,9 @@ void FORTE_L3_MachineAllocator::setInitialValues(){
   CurrentPartID() = 0;
   CurrentSetupID() = 0;
   TOCounter() = 0;
+  AssignedParts_Array().fromString("[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]");
+  j() = 0;
+  AlreadyAssigned() = false;
 }
 
 void FORTE_L3_MachineAllocator::alg_REQ(void){
@@ -61,10 +64,35 @@ while((((i() < 15) && (!AssignRemaining())))){
 
 	/* Check if any part can be assigned to a machine*/
 	if((((IFinalAssign()[i()] != 0))) && (((IFinalAssign()[i()] == PartIDIn()[i()])))){
-		/* This part can be assigned*/
-		CurrentPartID() = PartIDIn()[i()];
-		CurrentSetupID() = SetupIDIn()[i()];
-		AssignRemaining() = true;
+		/* Check if part was already assigned*/
+		AlreadyAssigned() = false;
+		  {
+    bool isj_Up = ((1) > 0);
+    j() = 0;
+    while(!(((isj_Up) && (j() > (i()))) ||
+            ((!isj_Up) && (j() < (i()))))){
+
+			if((PartIDIn()[i()] == AssignedParts()[j()])){
+			/* This parts is already assigned!*/
+			AlreadyAssigned() = true;
+			};
+		
+      if(((isj_Up) && ((1) > 0)) || 
+         ((!isj_Up) && ((1) < 0))){
+        j() = j() + (1);
+      }
+      else{
+        j() = j() - (1);
+      }
+    }
+  }
+;
+		if((AlreadyAssigned() == false)){
+			/* This part can be assigned*/
+			CurrentPartID() = PartIDIn()[i()];
+			CurrentSetupID() = SetupIDIn()[i()];
+			AssignRemaining() = true;
+		};
 	};
 	i() = i()+1;
 };
@@ -82,6 +110,7 @@ void FORTE_L3_MachineAllocator::alg_PREREQ(void){
             ((!isi_Up) && (i() < (14))))){
 
 	IFinalAssign()[i()] = MFinalAssignIn()[i()];
+	AssignedParts()[i()] = 0;
 
       if(((isi_Up) && ((1) > 0)) || 
          ((!isi_Up) && ((1) < 0))){
@@ -143,6 +172,7 @@ void FORTE_L3_MachineAllocator::alg_RSP2(void){
 /* Setup was succesfully assigned*/
 if((i() != 0)){
 	IFinalAssign()[i()-1] = 0;
+	AssignedParts()[i()-1] = CurrentPartID();
 };
 }
 

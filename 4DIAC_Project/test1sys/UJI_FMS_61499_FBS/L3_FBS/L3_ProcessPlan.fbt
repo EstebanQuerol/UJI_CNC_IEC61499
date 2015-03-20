@@ -95,8 +95,8 @@
       <Connection Destination="L3_ASetup.PartInfoP" Source="CM_Merge2PartInfo.PartInfoOut" dx1="0.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="CM_Merge2PartInfo.PartInfo2" Source="L3_SetupTable.PartInfo" dx1="0.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L3_CompletedSetupHDLR_1.PartInfo" Source="L3_ASetup.PartInfoS" dx1="140.0" dx2="0.0" dy="-290.0"/>
-      <Connection Destination="L3_PPTable.PartIDIn2" Source="L3_CompletedSetupHDLR_1.PartIDOut" dx1="0.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="CM_Merge2PartInfo.PartInfo1" Source="L3_CompletedSetupHDLR_1.PartInfoOut" dx1="0.0" dx2="0.0" dy="-115.0"/>
+      <Connection Destination="L3_PPTable.PartIDIn2" Source="L3_CompletedSetupHDLR_1.PartIDOut" dx1="0.0" dx2="0.0" dy="-705.0"/>
+      <Connection Destination="CM_Merge2PartInfo.PartInfo1" Source="L3_CompletedSetupHDLR_1.PartInfoOut" dx1="185.0" dx2="-150.0" dy="-110.0"/>
     </DataConnections>
     <EventConnections>
       <Connection Destination="L3_MachineChecker.REQ" Source="L3_AAssignMachine_S.CHK" dx1="1375.0" dx2="0.0" dy="0.0"/>
@@ -129,11 +129,11 @@
       <Connection Destination="INITO" Source="L3_SetupTable.INITO" dx1="0.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="CM_Merge2PartInfo.REQ2" Source="L3_SetupTable.CNF" dx1="0.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L3_ASetup.REQ" Source="CM_Merge2PartInfo.CNF2" dx1="0.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="L3_ASetup.RSP" Source="CM_Merge2PartInfo.CNF1" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L3_ASetup.RSP" Source="CM_Merge2PartInfo.CNF1" dx1="180.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L3_CompletedSetupHDLR_1.REQ1" Source="L3_PPTable.IND2" dx1="0.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L3_CompletedSetupHDLR_1.REQ" Source="L3_ASetup.IND" dx1="0.0" dx2="-195.0" dy="55.0"/>
       <Connection Destination="L3_PPTable.RSP2" Source="L3_CompletedSetupHDLR_1.CNF1" dx1="0.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="CM_Merge2PartInfo.REQ1" Source="L3_CompletedSetupHDLR_1.CNF" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="CM_Merge2PartInfo.REQ1" Source="L3_CompletedSetupHDLR_1.CNF" dx1="260.0" dx2="0.0" dy="320.0"/>
       <Connection Destination="L3_MachineAllocator.RSP1" Source="L3_ASetup.CNF" dx1="0.0" dx2="0.0" dy="1475.0"/>
     </EventConnections>
   </FBNetwork>

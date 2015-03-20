@@ -64,6 +64,7 @@ if((PartInfoIn()[3] == MID())){
 	PartInfoOut()[0] = PartInfoIn()[0];
 	PartInfoOut()[1] = PartInfoIn()[1];
 	PartInfoOut()[2] = PartInfoIn()[2];
+	PartInfoOut()[3] = PartInfoIn()[3];
 	SetupOut() = SetupIn();
 }
 else{
