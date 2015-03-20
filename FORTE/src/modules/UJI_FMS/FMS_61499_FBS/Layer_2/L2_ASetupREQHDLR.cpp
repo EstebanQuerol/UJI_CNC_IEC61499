@@ -22,7 +22,7 @@ const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anDataInputTypeId
 
 const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anDataOutputNames[] = {g_nStringIdQO, g_nStringIdMIDOut, g_nStringIdPartInfoOut, g_nStringIdSetupOut};
 
-const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anDataOutputTypeIds[] = {g_nStringIdBOOL, g_nStringIdUSINT, g_nStringIdARRAY, 3, g_nStringIdUINT, g_nStringIdSTRING};
+const CStringDictionary::TStringId FORTE_L2_ASetupREQHDLR::scm_anDataOutputTypeIds[] = {g_nStringIdBOOL, g_nStringIdUSINT, g_nStringIdARRAY, 4, g_nStringIdUINT, g_nStringIdSTRING};
 
 const TForteInt16 FORTE_L2_ASetupREQHDLR::scm_anEIWithIndexes[] = {0, 3};
 const TDataIOID FORTE_L2_ASetupREQHDLR::scm_anEIWith[] = {1, 0, 255, 2, 3, 255};

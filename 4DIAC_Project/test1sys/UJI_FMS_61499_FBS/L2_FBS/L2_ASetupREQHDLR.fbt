@@ -35,7 +35,7 @@
     <OutputVars>
       <VarDeclaration Name="QO" Type="BOOL"/>
       <VarDeclaration Comment="Machine identifier" Name="MIDOut" Type="USINT"/>
-      <VarDeclaration ArraySize="3" Comment="Part identifier, family and type" Name="PartInfoOut" Type="UINT"/>
+      <VarDeclaration ArraySize="4" Comment="Part identifier, family and type" Name="PartInfoOut" Type="UINT"/>
       <VarDeclaration Comment="Subphase to execute" Name="SetupOut" Type="STRING"/>
     </OutputVars>
   </InterfaceList>
