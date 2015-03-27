@@ -106,7 +106,7 @@ private:
   static const TEventID scm_nEventL0RSP1ID = 3;
   static const TEventID scm_nEventL0RSP2ID = 4;
   static const TEventID scm_nEventL1RSPID = 5;
-  static const TEventID scm_nEventL0INDID = 6;
+  static const TEventID scm_nEventL1INDID = 6;
   static const TForteInt16 scm_anEIWithIndexes[];
   static const TDataIOID scm_anEIWith[];
   static const CStringDictionary::TStringId scm_anEventInputNames[];

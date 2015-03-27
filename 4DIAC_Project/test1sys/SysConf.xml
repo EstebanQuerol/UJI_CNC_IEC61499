@@ -4763,7 +4763,7 @@
             <source href="L3_APP.xml#//@fbNetwork/@fBs.12/@interface/@outputVars.0"/>
             <destination href="L3_APP.xml#//@fbNetwork/@fBs.13/@interface/@inputVars.1"/>
           </dataConnections>
-          <dataConnections dx1="113">
+          <dataConnections dx1="280">
             <source href="L3_APP.xml#//@fbNetwork/@fBs.3/@interface/@outputVars.0"/>
             <destination href="L3_APP.xml#//@fbNetwork/@fBs.7/@interface/@inputVars.3"/>
           </dataConnections>
@@ -4897,7 +4897,7 @@
             <source href="L3_APP.xml#//@fbNetwork/@fBs.28/@interface/@outputVars.1"/>
           </dataConnections>
           <dataConnections dx1="303" resourceConnection="true" source="//@systemConfigNetwork/@devices.0/@resource.1/@fBNetwork/@fBs.13/@interface/@outputVars.0" destination="//@systemConfigNetwork/@devices.0/@resource.1/@fBNetwork/@fBs.14/@interface/@inputVars.0"/>
-          <dataConnections dx1="507">
+          <dataConnections dx1="17">
             <source href="L3_APP.xml#//@fbNetwork/@fBs.0/@interface/@outputVars.0"/>
             <destination href="L3_APP.xml#//@fbNetwork/@fBs.11/@interface/@inputVars.0"/>
           </dataConnections>
@@ -5431,15 +5431,15 @@
           <dataConnections dx1="41" resourceConnection="true" destination="//@systemConfigNetwork/@devices.1/@resource.1/@fBNetwork/@fBs.5/@interface/@inputVars.0">
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.5/@interface/@outputVars.0"/>
           </dataConnections>
-          <dataConnections>
+          <dataConnections dx1="60">
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.3/@interface/@outputVars.1"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.12/@interface/@inputVars.0"/>
           </dataConnections>
-          <dataConnections>
+          <dataConnections dx1="61">
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.4/@interface/@outputVars.1"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.13/@interface/@inputVars.0"/>
           </dataConnections>
-          <dataConnections>
+          <dataConnections dx1="65">
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.5/@interface/@outputVars.1"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.14/@interface/@inputVars.0"/>
           </dataConnections>
@@ -5470,31 +5470,31 @@
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.2/@interface/@outputVars.0"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.1/@interface/@inputVars.0"/>
           </dataConnections>
-          <dataConnections dy="34">
+          <dataConnections dx2="-37" dy="34">
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.1/@interface/@outputVars.0"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.7/@interface/@inputVars.0"/>
           </dataConnections>
-          <dataConnections>
+          <dataConnections dx2="-32" dy="-46">
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.0/@interface/@outputVars.0"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.2/@interface/@inputVars.0"/>
           </dataConnections>
-          <dataConnections>
+          <dataConnections dx1="21" dx2="-36" dy="-23">
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.3/@interface/@outputVars.0"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.8/@interface/@inputVars.0"/>
           </dataConnections>
-          <dataConnections>
+          <dataConnections dx2="-41" dy="-22">
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.4/@interface/@outputVars.0"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.9/@interface/@inputVars.0"/>
           </dataConnections>
-          <dataConnections>
+          <dataConnections dx2="-37" dy="-17">
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.5/@interface/@outputVars.0"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.10/@interface/@inputVars.0"/>
           </dataConnections>
-          <dataConnections>
+          <dataConnections dx2="-35" dy="-29">
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.6/@interface/@outputVars.0"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.11/@interface/@inputVars.0"/>
           </dataConnections>
-          <dataConnections>
+          <dataConnections dx1="35">
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.16/@interface/@outputVars.0"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.1/@interface/@inputVars.2"/>
           </dataConnections>
@@ -5528,15 +5528,15 @@
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.9/@interface/@eventOutputs.0"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.5/@interface/@eventInputs.0"/>
           </eventConnections>
-          <eventConnections dy="38">
+          <eventConnections dx1="36" dy="49">
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.3/@interface/@eventOutputs.0"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.8/@interface/@eventInputs.0"/>
           </eventConnections>
-          <eventConnections dy="41">
+          <eventConnections dx1="34" dy="50">
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.4/@interface/@eventOutputs.0"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.9/@interface/@eventInputs.0"/>
           </eventConnections>
-          <eventConnections dy="37">
+          <eventConnections dx1="30" dy="55">
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.5/@interface/@eventOutputs.0"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.10/@interface/@eventInputs.0"/>
           </eventConnections>
@@ -5544,7 +5544,7 @@
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.10/@interface/@eventOutputs.0"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.6/@interface/@eventInputs.0"/>
           </eventConnections>
-          <eventConnections dy="54">
+          <eventConnections dx1="38" dy="61">
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.6/@interface/@eventOutputs.0"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.11/@interface/@eventInputs.0"/>
           </eventConnections>
@@ -5561,11 +5561,11 @@
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.3/@interface/@eventOutputs.1"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.12/@interface/@eventInputs.0"/>
           </eventConnections>
-          <eventConnections>
+          <eventConnections dx1="70">
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.4/@interface/@eventOutputs.1"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.13/@interface/@eventInputs.0"/>
           </eventConnections>
-          <eventConnections>
+          <eventConnections dx1="70">
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.5/@interface/@eventOutputs.1"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.14/@interface/@eventInputs.0"/>
           </eventConnections>
@@ -5602,7 +5602,7 @@
           <eventConnections dx1="46" resourceConnection="true" source="//@systemConfigNetwork/@devices.1/@resource.1/@fBNetwork/@fBs.8/@interface/@eventOutputs.1">
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.16/@interface/@eventInputs.0"/>
           </eventConnections>
-          <eventConnections dy="34">
+          <eventConnections dx1="33" dy="38">
             <source href="Control_GUI.xml#//@fbNetwork/@fBs.0/@interface/@eventOutputs.0"/>
             <destination href="Control_GUI.xml#//@fbNetwork/@fBs.2/@interface/@eventInputs.0"/>
           </eventConnections>

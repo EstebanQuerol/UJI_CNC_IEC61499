@@ -26,7 +26,7 @@ const CStringDictionary::TStringId FORTE_L2_GEN_Machine::scm_anDataOutputTypeIds
 
 const TForteInt16 FORTE_L2_GEN_Machine::scm_anEIWithIndexes[] = {0, 3, 6, 8, 10, -1, 12};
 const TDataIOID FORTE_L2_GEN_Machine::scm_anEIWith[] = {0, 1, 255, 2, 3, 255, 4, 255, 5, 255, 6, 255, 7, 255};
-const CStringDictionary::TStringId FORTE_L2_GEN_Machine::scm_anEventInputNames[] = {g_nStringIdINIT, g_nStringIdL3REQ, g_nStringIdL3RSP, g_nStringIdL0RSP1, g_nStringIdL0RSP2, g_nStringIdL1RSP, g_nStringIdL0IND};
+const CStringDictionary::TStringId FORTE_L2_GEN_Machine::scm_anEventInputNames[] = {g_nStringIdINIT, g_nStringIdL3REQ, g_nStringIdL3RSP, g_nStringIdL0RSP1, g_nStringIdL0RSP2, g_nStringIdL1RSP, g_nStringIdL1IND};
 
 const TDataIOID FORTE_L2_GEN_Machine::scm_anEOWith[] = {0, 255, 1, 2, 255, 3, 255, 3, 4, 255, 5, 255, 6, 255, 6, 255};
 const TForteInt16 FORTE_L2_GEN_Machine::scm_anEOWithIndexes[] = {0, 2, 5, 7, -1, 10, 12, 14, -1};
@@ -86,7 +86,7 @@ const SCFB_FBConnectionData FORTE_L2_GEN_Machine::scm_astEventConnections[] = {
   {GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdL0RSP1), -1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL2_StateTracker_1, g_nStringIdRSP1), 1},
   {GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdL0RSP2), -1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL2_StateTracker_1, g_nStringIdRSP2), 1},
   {GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdL1RSP), -1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL2_L1Comm_1, g_nStringIdRSP), 5},
-  {GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdL0IND), -1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL2_L1Comm_1, g_nStringIdIND), 5},
+  {GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdL1IND), -1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL2_L1Comm_1, g_nStringIdIND), 5},
 };
 
 const SCFB_FBFannedOutConnectionData FORTE_L2_GEN_Machine::scm_astFannedOutEventConnections[] = {

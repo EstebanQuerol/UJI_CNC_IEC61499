@@ -24,7 +24,7 @@
         <With Var="ServiceStateIn"/>
       </Event>
       <Event Comment="Operation reception confirmation" Name="L1RSP" Type="Event"/>
-      <Event Comment="Completed OP indication" Name="L0IND" Type="Event">
+      <Event Comment="Completed OP indication" Name="L1IND" Type="Event">
         <With Var="ENDOPIDIn"/>
       </Event>
     </EventInputs>
@@ -137,7 +137,7 @@
       <Connection Destination="L2_MachineCore_0.CompletedOP" Source="L2_L1Comm_1.CompletedOP" dx1="615.0" dx2="-560.0" dy="2275.0"/>
       <Connection Destination="L2_MachineCore_0.RSP" Source="L2_ASetupRSPHDLR_1.CNF" dx1="395.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L2_L1Comm_1.REQ" Source="L2_ExecutionManager_0.ExecuteOP" dx1="90.0" dx2="-485.0" dy="370.0"/>
-      <Connection Destination="Send" Source="L2_L1Comm_1.Send" dx1="2365.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="Send" Source="L2_L1Comm_1.Send" dx1="925.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="CNF" Source="L2_MachineCore_0.CNF" dx1="1040.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="IND" Source="L2_MachineCore_0.IND" dx1="1145.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="FREE" Source="L2_MachineCore_0.FREE" dx1="1225.0" dx2="0.0" dy="0.0"/>
@@ -151,7 +151,7 @@
       <Connection Destination="L2_StateTracker_1.RSP1" Source="L0RSP1" dx1="510.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L2_StateTracker_1.RSP2" Source="L0RSP2" dx1="345.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L2_L1Comm_1.RSP" Source="L1RSP" dx1="165.0" dx2="0.0" dy="0.0"/>
-      <Connection Destination="L2_L1Comm_1.IND" Source="L0IND" dx1="300.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2_L1Comm_1.IND" Source="L1IND" dx1="300.0" dx2="0.0" dy="0.0"/>
     </EventConnections>
   </FBNetwork>
 </FBType>
