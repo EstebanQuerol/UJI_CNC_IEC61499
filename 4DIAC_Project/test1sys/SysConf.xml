@@ -2114,7 +2114,7 @@
   <children xsi:type="org.fordiac.ide.model.ui:SegmentView" segment="//@systemConfigNetwork/@segments.0" outConnections="//@connections.0 //@connections.1 //@connections.2 //@connections.3 //@connections.4 //@connections.5">
     <position x="152" y="38"/>
     <backgroundColor red="243" green="121" blue="193"/>
-    <size width="1122" height="-1"/>
+    <size width="989" height="-1"/>
   </children>
   <children xsi:type="org.fordiac.ide.model.ui:DeviceView" deviceElement="//@systemConfigNetwork/@devices.2" inConnections="//@connections.2">
     <position x="266" y="114"/>
