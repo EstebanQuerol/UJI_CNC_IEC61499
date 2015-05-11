@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L1_Merge2Cmd">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2015-03-18" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Event to merge 1" Name="E1" Type="Event">
+        <With Var="Cmd1"/>
+        <With Var="L1MID1"/>
+      </Event>
+      <Event Comment="Event to merge 2" Name="E2" Type="Event">
+        <With Var="Cmd2"/>
+        <With Var="L1MID2"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Initialization Confirm" Name="EO" Type="Event">
+        <With Var="CmdOut"/>
+        <With Var="L1MIDOut"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Command with event 1" Name="Cmd1" Type="STRING"/>
+      <VarDeclaration Comment="Layer 1 multicast ID with 1" Name="L1MID1" Type="USINT"/>
+      <VarDeclaration Comment="Command with event 2" Name="Cmd2" Type="STRING"/>
+      <VarDeclaration Comment="Layer 1 multicast ID with 2" Name="L1MID2" Type="USINT"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Command out" Name="CmdOut" Type="STRING"/>
+      <VarDeclaration Comment="Layer 1 multicast ID" Name="L1MIDOut" Type="USINT"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="550.0" y="425.0"/>
+      <ECState Comment="Initialization" Name="E1" x="920.0" y="140.0">
+        <ECAction Algorithm="E1" Output="EO"/>
+      </ECState>
+      <ECState Comment="Normal execution" Name="E2" x="855.0" y="760.0">
+        <ECAction Algorithm="E2" Output="EO"/>
+      </ECState>
+      <ECTransition Comment="" Condition="E1" Destination="E1" Source="START" x="920.0" y="400.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="E1" x="550.0" y="140.0"/>
+      <ECTransition Comment="" Condition="E2" Destination="E2" Source="START" x="900.0" y="630.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="E2" x="485.0" y="700.0"/>
+    </ECC>
+    <Algorithm Comment="Event 1 algo" Name="E1">
+      <ST Text="CmdOut := Cmd1;&#10;L1MIDOut := L1MID1;"/>
+    </Algorithm>
+    <Algorithm Comment="Event 2 algo" Name="E2">
+      <ST Text="CmdOut := Cmd2;&#10;L1MIDOut := L1MID2;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

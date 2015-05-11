@@ -393,7 +393,7 @@
     <mappedFB href="SysConf.xml#//@children.1/@resourceContainerView/@resources.1/@uIResourceDiagram/@children.23"/>
   </children>
   <children xsi:type="org.fordiac.ide.model.ui:FBView" fb="//@fbNetwork/@fBs.16">
-    <position x="722" y="76"/>
+    <position x="703" y="76"/>
     <backgroundColor red="255" green="255" blue="255"/>
     <interfaceElements iInterfaceElement="//@fbNetwork/@fBs.16/@interface/@eventInputs.0" fbNetwork="//@fbNetwork">
       <mappedInterfaceElement href="SysConf.xml#//@children.1/@resourceContainerView/@resources.1/@uIResourceDiagram/@children.25/@interfaceElements.0"/>

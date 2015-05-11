@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Composite Function Block Type" Name="L1_L1CFB">
+  <Identification Description="This block encapsulates all the step-nc feature-FB translating blocks. These translate a feature of the process plan into a set of consecutive orders that a CNC can understand and execute." Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2015-03-18" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Request multicast send to all blocks in layer 1" Name="L2REQ" Type="Event">
+        <With Var="OperationIn"/>
+        <With Var="L1MIDIn"/>
+      </Event>
+      <Event Comment="Cmd reception confirmation" Name="L0RSP" Type="Event"/>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Execution Confirmation" Name="L0Send" Type="Event">
+        <With Var="CmdOut"/>
+      </Event>
+      <Event Comment="Communication Failure indication" Name="L2IND" Type="Event">
+        <With Var="ENDOPID"/>
+      </Event>
+      <Event Comment="Confirmation of Requested Service" Name="L2CNF" Type="Event"/>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Serialized operation" Name="OperationIn" Type="STRING"/>
+      <VarDeclaration Comment="Layer 1 multicast identifier" Name="L1MIDIn" Type="USINT"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Command to be sent to the machine" Name="CmdOut" Type="STRING"/>
+      <VarDeclaration Comment="Indicate upper layer that operation failed" Name="ENDOPID" Type="USINT"/>
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB Name="E_DELAY_0" Type="E_DELAY" x="4180.0" y="190.0"/>
+    <FB Name="L1_MCEmitter_1" Type="L1_MCEmitter" x="1520.0" y="285.0"/>
+    <FB Name="L1_FSetup_1" Type="L1_FSetup" x="2850.0" y="1235.0"/>
+    <FB Name="L1_SendCmd_1" Type="L1_SendCmd" x="2900.0" y="95.0"/>
+    <FB Name="L1_FClosedPocket_1" Type="L1_FClosedPocket" x="2850.0" y="2280.0"/>
+    <FB Name="L1_FRoundHole_1" Type="L1_FRoundHole" x="2850.0" y="3420.0"/>
+    <FB Name="L1_Merge2Cmd" Type="L1_Merge2Cmd" x="4180.0" y="1235.0"/>
+    <FB Name="L1_Merge2Cmd_1" Type="L1_Merge2Cmd" x="4180.0" y="2280.0"/>
+    <FB Name="L1_Merge2Cmd_2" Type="L1_Merge2Cmd" x="4180.0" y="3420.0"/>
+    <FB Name="L1_Merge2Cmd_3" Type="L1_Merge2Cmd" x="760.0" y="285.0"/>
+    <DataConnections>
+      <Connection Destination="L1_FSetup_1.Operation" Source="L1_MCEmitter_1.OperationOut" dx1="70.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_SendCmd_1.CmdIn" Source="L1_MCEmitter_1.OperationOut" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_FRoundHole_1.L1MIDIn" Source="L1_MCEmitter_1.L1MIDOut" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_SendCmd_1.L1MID" Source="L1_MCEmitter_1.L1MIDOut" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_FRoundHole_1.Operation" Source="L1_MCEmitter_1.OperationOut" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="E_DELAY_0.DT" Source="L1_SendCmd_1.Delay" dx1="240.0" dx2="0.0" dy="505.0"/>
+      <Connection Destination="L1_FClosedPocket_1.L1MIDIn" Source="L1_MCEmitter_1.L1MIDOut" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_FSetup_1.L1MIDIn" Source="L1_MCEmitter_1.L1MIDOut" dx1="10.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_FClosedPocket_1.Operation" Source="L1_MCEmitter_1.OperationOut" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="CmdOut" Source="L1_SendCmd_1.CmdOut" dx1="1795.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="ENDOPID" Source="L1_SendCmd_1.ENDOPID" dx1="1905.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd.Cmd2" Source="L1_Merge2Cmd_1.CmdOut" dx1="220.0" dx2="-150.0" dy="-165.0"/>
+      <Connection Destination="L1_Merge2Cmd.L1MID2" Source="L1_Merge2Cmd_1.L1MIDOut" dx1="300.0" dx2="0.0" dy="-310.0"/>
+      <Connection Destination="L1_Merge2Cmd.Cmd1" Source="L1_FSetup_1.Cmd" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd.L1MID1" Source="L1_FSetup_1.L1MIDOut" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd_1.Cmd1" Source="L1_FClosedPocket_1.Cmd" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd_1.L1MID1" Source="L1_FClosedPocket_1.L1MIDOut" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd_1.Cmd2" Source="L1_Merge2Cmd_2.CmdOut" dx1="170.0" dx2="-165.0" dy="-90.0"/>
+      <Connection Destination="L1_Merge2Cmd_1.L1MID2" Source="L1_Merge2Cmd_2.L1MIDOut" dx1="280.0" dx2="0.0" dy="-265.0"/>
+      <Connection Destination="L1_Merge2Cmd_2.Cmd1" Source="L1_FRoundHole_1.Cmd" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd_2.L1MID1" Source="L1_FRoundHole_1.L1MIDOut" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd_3.Cmd1" Source="OperationIn" dx1="220.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd_3.L1MID1" Source="L1MIDIn" dx1="150.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd_3.Cmd2" Source="L1_Merge2Cmd.CmdOut" dx1="265.0" dx2="-250.0" dy="-135.0"/>
+      <Connection Destination="L1_Merge2Cmd_3.L1MID2" Source="L1_Merge2Cmd.L1MIDOut" dx1="310.0" dx2="-145.0" dy="-290.0"/>
+      <Connection Destination="L1_MCEmitter_1.OperationIn" Source="L1_Merge2Cmd_3.CmdOut" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_MCEmitter_1.L1MIDIn" Source="L1_Merge2Cmd_3.L1MIDOut" dx1="0.0" dx2="0.0" dy="0.0"/>
+    </DataConnections>
+    <EventConnections>
+      <Connection Destination="L1_FSetup_1.REQ" Source="L1_MCEmitter_1.CNF" dx1="-225.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_FRoundHole_1.REQ" Source="L1_MCEmitter_1.CNF" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_SendCmd_1.Timeout" Source="E_DELAY_0.EO" dx1="140.0" dx2="-195.0" dy="605.0"/>
+      <Connection Destination="L1_SendCmd_1.REQ" Source="L1_MCEmitter_1.CNF" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_FClosedPocket_1.REQ" Source="L1_MCEmitter_1.CNF" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="E_DELAY_0.STOP" Source="L1_SendCmd_1.Stop" dx1="540.0" dx2="-140.0" dy="875.0"/>
+      <Connection Destination="E_DELAY_0.START" Source="L1_SendCmd_1.Start" dx1="475.0" dx2="-210.0" dy="1000.0"/>
+      <Connection Destination="L1_SendCmd_1.RSP" Source="L0RSP" dx1="2315.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L0Send" Source="L1_SendCmd_1.CNF" dx1="255.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2IND" Source="L1_SendCmd_1.IND" dx1="365.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd.E1" Source="L1_FSetup_1.CNF" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd.E2" Source="L1_Merge2Cmd_1.EO" dx1="0.0" dx2="-230.0" dy="265.0"/>
+      <Connection Destination="L1_Merge2Cmd_1.E1" Source="L1_FClosedPocket_1.CNF" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd_1.E2" Source="L1_Merge2Cmd_2.EO" dx1="0.0" dx2="-255.0" dy="375.0"/>
+      <Connection Destination="L1_Merge2Cmd_2.E1" Source="L1_FRoundHole_1.CNF" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L2CNF" Source="L1_Merge2Cmd.EO" dx1="135.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd_3.E1" Source="L2REQ" dx1="260.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_MCEmitter_1.REQ" Source="L1_Merge2Cmd_3.EO" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd_3.E2" Source="L1_Merge2Cmd.EO" dx1="0.0" dx2="-395.0" dy="300.0"/>
+    </EventConnections>
+  </FBNetwork>
+</FBType>

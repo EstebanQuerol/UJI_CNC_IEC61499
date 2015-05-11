@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="FAGOR 8070 CNC service FB" Name="L0_8070Service">
+  <Identification Description="This FB is the entry point of the CNC service " Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2014-09-01" Organization="UJI" Version="0.0"/>
+  <VersionInfo Author="EQUEROL" Date="2015-03-03" Organization="UJI" Remarks="Service rework" Version="1.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Initialization Request" Name="INIT" Type="Event">
+        <With Var="QI"/>
+      </Event>
+      <Event Comment="Normal Execution Request" Name="REQ" Type="Event">
+        <With Var="QI"/>
+        <With Var="Cmd"/>
+      </Event>
+      <Event Comment="Request Service state" Name="REQS" Type="Event"/>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Initialization Confirm" Name="INITO" Type="Event">
+        <With Var="QO"/>
+      </Event>
+      <Event Comment="Operation reception confirmation" Name="IND" Type="Event"/>
+      <Event Comment="Completed operation event" Name="CompletedOP" Type="Event">
+        <With Var="ENDOPID"/>
+      </Event>
+      <Event Comment="Service State Confirmation" Name="CNFS" Type="Event">
+        <With Var="ServiceState"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Input event qualifier" Name="QI" Type="BOOL"/>
+      <VarDeclaration Comment="String containing the actions to be executed" Name="Cmd" Type="STRING"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="Output event qualifier" Name="QO" Type="BOOL"/>
+      <VarDeclaration Comment="Operation end code" Name="ENDOPID" Type="USINT"/>
+      <VarDeclaration Comment="Service feedback data" Name="RD" Type="STRING"/>
+      <VarDeclaration Comment="CNC Service state" Name="ServiceState" Type="USINT"/>
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB Name="L0_SendBlk" Type="L0_SendBlk" x="855.0" y="950.0"/>
+    <FB Name="L0_StateHandler" Type="L0_StateHandler" x="3610.0" y="1330.0"/>
+    <FB Name="L0_CompletedEx" Type="L0_CompletedEx" x="4560.0" y="1330.0"/>
+    <FB Name="CM_Merge2E2USINT" Type="CM_Merge2E2USINT" x="5510.0" y="1330.0"/>
+    <FB Name="CM_Merge2E2USINT_2" Type="CM_Merge2E2USINT" x="4560.0" y="1995.0">
+      <Parameter Name="E1In" Value="1"/>
+      <Parameter Name="E2In" Value="2"/>
+    </FB>
+    <FB Name="L0_State_0" Type="L0_State" x="2280.0" y="665.0"/>
+    <FB Name="L0_ReqManager" Type="L0_ReqManager" x="2280.0" y="-475.0"/>
+    <DataConnections>
+      <Connection Comment="" Destination="CM_Merge2E2USINT.E1In" Source="L0_CompletedEx.RID" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Comment="" Destination="CM_Merge2E2USINT.E2In" Source="CM_Merge2E2USINT_2.Out" dx1="290.0" dx2="0.0" dy="0.0"/>
+      <Connection Comment="" Destination="ServiceState" Source="L0_State_0.ServiceState" dx1="4090.0" dx2="0.0" dy="0.0"/>
+      <Connection Comment="" Destination="L0_StateHandler.CNCState" Source="L0_State_0.StateOut" dx1="165.0" dx2="0.0" dy="0.0"/>
+      <Connection Comment="" Destination="L0_State_0.StateIn" Source="L0_SendBlk.CNCState" dx1="500.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L0_SendBlk.QI" Source="QI" dx1="165.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L0_ReqManager.QI" Source="L0_SendBlk.QO" dx1="210.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L0_ReqManager.RIDIn" Source="CM_Merge2E2USINT.Out" dx1="195.0" dx2="-160.0" dy="-490.0"/>
+      <Connection Destination="QO" Source="L0_ReqManager.QO" dx1="2040.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="ENDOPID" Source="L0_ReqManager.ENDOPID" dx1="1890.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L0_ReqManager.ServiceState" Source="L0_State_0.ServiceState" dx1="355.0" dx2="0.0" dy="-350.0"/>
+      <Connection Destination="L0_SendBlk.sBlock" Source="Cmd" dx1="0.0" dx2="0.0" dy="0.0"/>
+    </DataConnections>
+    <EventConnections>
+      <Connection Comment="" Destination="L0_CompletedEx.OnReady" Source="L0_StateHandler.OnReady" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Comment="" Destination="L0_CompletedEx.OnExecuting" Source="L0_StateHandler.OnExecution" dx1="150.0" dx2="0.0" dy="0.0"/>
+      <Connection Comment="" Destination="L0_CompletedEx.OnNotReady" Source="L0_StateHandler.OnNotReady" dx1="310.0" dx2="0.0" dy="0.0"/>
+      <Connection Comment="" Destination="CM_Merge2E2USINT.E1" Source="L0_CompletedEx.Success" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Comment="" Destination="CM_Merge2E2USINT.E2" Source="CM_Merge2E2USINT_2.EO" dx1="130.0" dx2="0.0" dy="0.0"/>
+      <Connection Comment="" Destination="CM_Merge2E2USINT_2.E1" Source="L0_StateHandler.OnInterrupted" dx1="220.0" dx2="0.0" dy="0.0"/>
+      <Connection Comment="" Destination="CM_Merge2E2USINT_2.E2" Source="L0_StateHandler.OnIntError" dx1="150.0" dx2="0.0" dy="0.0"/>
+      <Connection Comment="" Destination="L0_State_0.REQ2" Source="REQS" dx1="295.0" dx2="0.0" dy="0.0"/>
+      <Connection Comment="" Destination="CNFS" Source="L0_State_0.CNF2" dx1="3980.0" dx2="0.0" dy="0.0"/>
+      <Connection Comment="" Destination="L0_StateHandler.REQ" Source="L0_State_0.UPDTO" dx1="560.0" dx2="0.0" dy="0.0"/>
+      <Connection Comment="" Destination="L0_State_0.UPDT" Source="L0_SendBlk.IND" dx1="330.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L0_SendBlk.INIT" Source="INIT" dx1="235.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L0_State_0.REQ1" Source="REQ" dx1="365.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L0_ReqManager.INIT" Source="L0_SendBlk.INITO" dx1="-135.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L0_ReqManager.REQ" Source="L0_State_0.CNF1" dx1="250.0" dx2="-310.0" dy="375.0"/>
+      <Connection Destination="L0_ReqManager.UPDT" Source="CM_Merge2E2USINT.EO" dx1="85.0" dx2="-220.0" dy="-55.0"/>
+      <Connection Destination="INITO" Source="L0_ReqManager.INITO" dx1="4125.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L0_SendBlk.REQ" Source="L0_ReqManager.CNF" dx1="325.0" dx2="0.0" dy="-130.0"/>
+      <Connection Destination="IND" Source="L0_ReqManager.IND" dx1="4020.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="CompletedOP" Source="L0_ReqManager.Completed" dx1="3940.0" dx2="0.0" dy="0.0"/>
+    </EventConnections>
+  </FBNetwork>
+</FBType>

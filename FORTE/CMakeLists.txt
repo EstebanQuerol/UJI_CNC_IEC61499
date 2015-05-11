@@ -54,7 +54,7 @@ endif(FORTE_SUPPORT_MONITORING)
 
 if (WIN32)
   if (MSVC)
-    set(FORTE_ADDITIONAL_CXX_FLAGS "/MP " CACHE STRING "Additional compile flags appended to CMAKE_CXX_FLAGS.")
+    set(FORTE_ADDITIONAL_CXX_FLAGS "/MP /bigobj" CACHE STRING "Additional compile flags appended to CMAKE_CXX_FLAGS.")
     mark_as_advanced(FORTE_ADDITIONAL_CXX_FLAGS)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${FORTE_ADDITIONAL_CXX_FLAGS}")
   endif(MSVC)
@@ -93,7 +93,7 @@ SET(FORTE_TimeBaseUnitsPerSecond "1000000000" CACHE STRING "Defines the time bas
 SET(FORTE_EventChainEventListSize "256" CACHE STRING "forte eventchain event list size")
 SET(FORTE_EventChainExternalEventListSize "10"  CACHE STRING "forte eventchain external event list size")
 SET(FORTE_CommunicationInterruptQueueSize "10" CACHE STRING "forte Communication interrupt queue size")
-SET(FORTE_IPLayerRecvBufferSize "1500" CACHE STRING "FORTE ip layer recv buffer size")
+SET(FORTE_IPLayerRecvBufferSize "10000" CACHE STRING "FORTE ip layer recv buffer size")
 
 SET(FORTE_MGMCOMMANDPROTOCOL "DEV_MGR" CACHE STRING "forte management command protocol")
 set_property(CACHE FORTE_MGMCOMMANDPROTOCOL PROPERTY STRINGS DEV_MGR WBXML_DEV_MGR)
