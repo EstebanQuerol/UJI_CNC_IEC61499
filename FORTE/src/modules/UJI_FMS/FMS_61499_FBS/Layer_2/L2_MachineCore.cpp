@@ -85,8 +85,7 @@ inError() = false;
 }
 
 void FORTE_L2_MachineCore::alg_SENDOP(void){
-/* Post-incremented index*/
-ENDOPID() = NextCode();
+NextCode() = ENDOPID();
 }
 
 void FORTE_L2_MachineCore::alg_CNF(void){

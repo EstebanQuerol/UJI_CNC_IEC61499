@@ -132,7 +132,7 @@
       <ST Text="IF ServiceState = 1 THEN&#10;&#9;MachineState := TRUE;&#10;&#9;State := 2;&#10;ELSIF ServiceState = 0 THEN&#10;&#9;MachineState := FALSE;&#10;&#9;State := 1;&#10;END_IF;&#10;(*Reset inError flag every time this algo is called, It is only used in EIW*)&#10;inError := FALSE; "/>
     </Algorithm>
     <Algorithm Comment="Send next operation algo" Name="SENDOP">
-      <ST Text="(*Post-incremented index*)&#10;ENDOPID := NextCode;"/>
+      <ST Text="NextCode := ENDOPID;"/>
     </Algorithm>
     <Algorithm Comment="new algorithm" Name="CNF">
       <ST Text="PartInfoOut[0] := CurrentPart;&#10;PartInfoOut[1] := CurrentFamily;&#10;PartInfoOut[2] := CurrentType;&#10;PartInfoOut[3] :=  PartInfoIn[3];"/>
