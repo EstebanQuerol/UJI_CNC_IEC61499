@@ -181,5 +181,27 @@ public:
 	static angleTaper * ANGLE_TAPER(double angle){
 		return new angleTaper(SET_REAL(angle));
 	}
+	static planarFace * PLANAR_FACE(char * itsIdIn, workpiece * itsWorkpieceIn, parenMachiningOperationList * itsOperationsIn, axis2placement3d * featurePlacementIn,
+		elementarySurface * depthIn, linearPath * courseOfTravelIn, linearProfile * removalBoundaryIn, closedProfile * faceBoundaryIn, parenBossList * itsBossIn){
+		return new planarFace(SET_NAME(itsIdIn), itsWorkpieceIn, itsOperationsIn, featurePlacementIn, depthIn, courseOfTravelIn, removalBoundaryIn, faceBoundaryIn,
+			itsBossIn);
+	}
+	static apRetractAngle * AP_RETRACT_ANLGE(const char * name, const double &x, const double &y, const double &z, const double &angleIn, const double &travelLengthIn){
+		return new apRetractAngle(DIRECTION(name, x, y, z), angleIn, travelLengthIn);
+	}
+	static linearPath * LINEAR_PATH(axis2placement3d * placementIn, const double &distanceIn, direction * itsDirectionIn){
+		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(distanceIn, NULL);
+		return new linearPath(placementIn, l_TL1, itsDirectionIn);
+	}
+	static linearProfile * LINEAR_PROFILE(axis2placement3d * placementIn, const double &profileLengthIn){
+			return new linearProfile(placementIn, NUMERIC_PERAMETER(profileLengthIn));
+	}
+	static numericParameter * NUMERIC_PERAMETER(const double &itsParameterValueIn){
+		return new numericParameter(NULL, itsParameterValueIn, NULL);
+	}
+	static unidirectionalMilling * UNIDIRECTIONAL_MILLING(const double  &overlapIn, const bool &allowMultiplePassesIn, direction * feedDirectionIn, cutmodeType * cutmodeIn){
+
+		return new unidirectionalMilling(SET_REAL(overlapIn), SET_BOOL(allowMultiplePassesIn), feedDirectionIn, cutmodeIn);
+	}
 };
 #endif

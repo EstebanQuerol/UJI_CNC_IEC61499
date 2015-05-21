@@ -25,7 +25,7 @@ static const char* cg_acLogLevel[] = {"INFO", "WARNING", "ERROR", "DEBUG", "TRAC
  */
 void printLogMessage(E_MsgLevel pa_eLevel, const char *pa_acMessage);
 
-static const int scm_nMsgBufSize = 300;
+static const int scm_nMsgBufSize = 3000;
 static char sm_acMsgBuf[scm_nMsgBufSize]; //!<Buffer for the messages created by the variable addMsg function
 
 

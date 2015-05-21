@@ -1,5 +1,7 @@
 #include "GlobalUtils.h"
 
+const double pi = acos(-1.0);
+
 //Static memebers initialization
 std::vector<void *>  GlobalUtils::sm_vSerallocLog;
 GlobalUtils::GlobalUtils()

@@ -51,6 +51,8 @@ const SCFB_FBInstanceData FORTE_L1_L1CFB::scm_astInternalFBs[] = {
   {g_nStringIdL1_Merge2Cmd_1, g_nStringIdL1_Merge2Cmd},
   {g_nStringIdL1_Merge2Cmd_2, g_nStringIdL1_Merge2Cmd},
   {g_nStringIdL1_Merge2Cmd_3, g_nStringIdL1_Merge2Cmd},
+  {g_nStringIdL1_Merge2Cmd_4, g_nStringIdL1_Merge2Cmd},
+  {g_nStringIdL1_FPlanarFace, g_nStringIdL1_FPlanarFace},
 };
 
 const SCFB_FBConnectionData FORTE_L1_L1CFB::scm_astEventConnections[] = {
@@ -69,12 +71,15 @@ const SCFB_FBConnectionData FORTE_L1_L1CFB::scm_astEventConnections[] = {
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd, g_nStringIdEO), 6, GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdL2CNF), -1},
   {GENERATE_CONNECTION_PORT_ID_1_ARG(g_nStringIdL2REQ), -1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_3, g_nStringIdE1), 9},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_3, g_nStringIdEO), 9, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_MCEmitter_1, g_nStringIdREQ), 1},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_4, g_nStringIdEO), 10, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_2, g_nStringIdE2), 8},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FPlanarFace, g_nStringIdCNF), 11, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_4, g_nStringIdE1), 10},
 };
 
 const SCFB_FBFannedOutConnectionData FORTE_L1_L1CFB::scm_astFannedOutEventConnections[] = {
   {0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FRoundHole_1, g_nStringIdREQ), 5},
   {0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_SendCmd_1, g_nStringIdREQ), 3},
   {0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FClosedPocket_1, g_nStringIdREQ), 4},
+  {0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FPlanarFace, g_nStringIdREQ), 11},
   {12, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_3, g_nStringIdE2), 9},
 };
 
@@ -100,23 +105,29 @@ const SCFB_FBConnectionData FORTE_L1_L1CFB::scm_astDataConnections[] = {
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd, g_nStringIdL1MIDOut), 6, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_3, g_nStringIdL1MID2), 9},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_3, g_nStringIdCmdOut), 9, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_MCEmitter_1, g_nStringIdOperationIn), 1},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_3, g_nStringIdL1MIDOut), 9, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_MCEmitter_1, g_nStringIdL1MIDIn), 1},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_4, g_nStringIdCmdOut), 10, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_2, g_nStringIdCmd2), 8},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_4, g_nStringIdL1MIDOut), 10, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_2, g_nStringIdL1MID2), 8},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FPlanarFace, g_nStringIdCmd), 11, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_4, g_nStringIdCmd1), 10},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FPlanarFace, g_nStringIdL1MIDOut), 11, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_4, g_nStringIdL1MID1), 10},
 };
 
 const SCFB_FBFannedOutConnectionData FORTE_L1_L1CFB::scm_astFannedOutDataConnections[] = {
   {0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_SendCmd_1, g_nStringIdCmdIn), 3},
   {0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FRoundHole_1, g_nStringIdOperation), 5},
   {0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FClosedPocket_1, g_nStringIdOperation), 4},
+  {0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FPlanarFace, g_nStringIdOperation), 11},
   {1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_SendCmd_1, g_nStringIdL1MID), 3},
   {1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FClosedPocket_1, g_nStringIdL1MIDIn), 4},
   {1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FSetup_1, g_nStringIdL1MIDIn), 2},
+  {1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FPlanarFace, g_nStringIdL1MIDIn), 11},
 };
 
 const SCFB_FBNData FORTE_L1_L1CFB::scm_stFBNData = {
-  10, scm_astInternalFBs,
-  15, scm_astEventConnections,
-  4, scm_astFannedOutEventConnections,
-  21, scm_astDataConnections,
-  6, scm_astFannedOutDataConnections,
+  12, scm_astInternalFBs,
+  17, scm_astEventConnections,
+  5, scm_astFannedOutEventConnections,
+  25, scm_astDataConnections,
+  8, scm_astFannedOutDataConnections,
   0, 0
 };
 

@@ -286,7 +286,7 @@ void  PP_DDBB::Initilizate(){
 		//Placement
 		l_locationIn = CARTESIAN_POINT(NULL, 15.0, 105.0, 50.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Taladro", l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
 		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 30.0);
@@ -296,6 +296,34 @@ void  PP_DDBB::Initilizate(){
 		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
 		//Hole
 		l_HoleFeature_3 = ROUND_HOLE("Taladro 3", NULL, NULL, l_itsplacement, l_itsdepth, 22.0, NULL, NULL);
+
+		/******************Feature 5****************************/
+		//Linear path
+		l_locationIn = CARTESIAN_POINT(NULL, 0, 0, 0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_axisIn = DIRECTION(NULL, 0.0, 1.0, 0.0);
+		linearPath * l_linearPath = LINEAR_PATH(l_itsplacement, 60.0, l_axisIn);
+		//linear profile
+		l_locationIn = CARTESIAN_POINT(NULL, 0, 0, 0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 1.0, 0.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		linearProfile * l_linearProfile = LINEAR_PROFILE(l_itsplacement, 35.0);
+		//Placement
+		l_locationIn = CARTESIAN_POINT(NULL, 5.0, 30.0, 50.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Planeado", l_locationIn, l_axisIn, l_refDirectionIn);
+		//Depth
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 7.25);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_itsdepth = ELEMENTARY_SURFACE(NULL, l_positionIn);
+		//Planar Face
+		planarFace * l_planarFace_1 = PLANAR_FACE("Planeado 1", NULL, NULL, l_itsplacement, l_itsdepth, l_linearPath, l_linearProfile, NULL, NULL);
 
 		/*****************machining operation 1***************************/
 		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 0.0);
@@ -315,6 +343,14 @@ void  PP_DDBB::Initilizate(){
 		itstechnology = MILLING_TECHNOLOGY(50.0, "TCP", 0.0, 600.0, 0.0, false, false, false, false);
 		l_itsMoperation_3 = DRILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, 0.0, 0.0, 1.0, 0.0, NULL);
 
+		/*****************machining operation 4***************************/
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -5.0);
+		itstool = MILLING_CUTTING_TOOL("1336");
+		itstechnology = MILLING_TECHNOLOGY(50.0, "TCP", 0.0, 600.0, 0.0, false, false, false, false);
+		approachRetractStrategy * l_apRetract = AP_RETRACT_ANLGE(NULL, 0.0, 0.0, 0.0, 65.0, 50.0);
+		two5DmillingStrategy * l_millingStrategy = UNIDIRECTIONAL_MILLING(0.0, false, NULL, NULL);
+		machiningOperation * l_itsMoperation_4 = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, l_apRetract, NULL, l_millingStrategy, 5.0, 7.5, 0.0, 0.0);
+
 		/**************machning workingstep****************************/
 		//Security plance
 		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 30.0);
@@ -326,6 +362,7 @@ void  PP_DDBB::Initilizate(){
 		l_itsMWStep_2 = MACHINING_WORKINGSTEP("MWS 2", l_itsSecPlane, l_HoleFeature_1, l_itsMoperation_2, NULL);
 		l_itsMWStep_3 = MACHINING_WORKINGSTEP("MWS 3", l_itsSecPlane, l_HoleFeature_2, l_itsMoperation_3, NULL);
 		l_itsMWStep_4 = MACHINING_WORKINGSTEP("MWS 4", l_itsSecPlane, l_HoleFeature_3, l_itsMoperation_3, NULL);
+		l_itsMWStep_5 = MACHINING_WORKINGSTEP("MWS 5", l_itsSecPlane, l_planarFace_1, l_itsMoperation_4, NULL);
 
 		/***************************Executable list for type 1*****************/
 		l_theListIn_ex = new std::list<executable *>;
@@ -340,6 +377,12 @@ void  PP_DDBB::Initilizate(){
 		l_theListIn_ex->push_back(l_itsMWStep_3);
 		l_theListIn_ex->push_back(l_itsMWStep_4);
 		l_itsElementsIn_2 = new parenExecutableList(l_theListIn_ex);
+		/***************************Executable list for type 3*****************/
+		l_theListIn_ex = new std::list<executable *>;
+		l_theListIn_ex->push_back(l_itsMWStep_5);
+		l_theListIn_ex->push_back(l_itsMWStep_1);
+		l_theListIn_ex->push_back(l_itsMWStep_2);
+		parenExecutableList * l_itsElementsIn_3 = new parenExecutableList(l_theListIn_ex);
 
 		/************************Channel****************************/
 		l_channel = CHANNEL("Channel 1");
@@ -385,6 +428,14 @@ void  PP_DDBB::Initilizate(){
 		PP_2_2.addSubphase(1, 1, WP);
 		Family_2.addProcessPlan(PP_2_2, 2);
 
+		/********************Type 3 Process plan*****************/
+		WP = WORKPLAN("Workplan T3", l_itsElementsIn_3, l_channel, l_itsSetupIn, NULL);
+
+		ProcessPlan PP_2_3 = ProcessPlan(1, 2, 3);
+		PP_2_3.addSubphase(1, 1, WP);
+		Family_2.addProcessPlan(PP_2_3, 3);
+
+		//Insert Families into the FamilyMap
 		try{
 			sm_umapFamilyMap.insert(std::pair<TForteUInt16, PP_Family>(1, Family_1));
 			sm_umapFamilyMap.insert(std::pair<TForteUInt16, PP_Family>(2, Family_2));

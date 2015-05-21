@@ -24,6 +24,7 @@
 #include <string>
 #include <forte_string.h>
 #include "iso14649classes.h"
+#include "GlobalUtils.h"
 class L1_GENFeature
 {
 private:

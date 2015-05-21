@@ -81,11 +81,11 @@ virtual void setInitialValues();
 
   void executeEvent(int pa_nEIID);
   int m_nExtEvHandID_inh;
-  std::list<std::string> m_CmdList;
+  std::string m_sNBlock;
 
 public:
 	EVENT_SOURCE_FUNCTION_BLOCK_CTOR(FORTE_L0_SendBlk){
-		m_CmdList.clear();
+		m_sNBlock = "";
 		m_stEventSourceEventEntry.m_poFB = this; 
 		setEventChainExecutor(pa_poSrcRes->getResourceEventExecution());
 		m_nExtEvHandID_inh = getDeviceExecution()->registerExternalEventHandler(this);

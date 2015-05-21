@@ -20,7 +20,7 @@
 #include <vector>
 #include "fortealloc.h"
 
-
+extern const double pi;
 class GlobalUtils
 {
 public:

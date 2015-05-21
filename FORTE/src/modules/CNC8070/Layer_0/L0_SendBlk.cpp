@@ -45,21 +45,26 @@ void FORTE_L0_SendBlk::setInitialValues(){
 }
 
 void FORTE_L0_SendBlk::RetreiveCmd(){
-	m_CmdList.clear();
 	std::istringstream iss;
+	std::list<std::string> CmdList;
 	char * pacTempString = (char*)forte_malloc(sizeof(char)* (sBlock().length() + 1));
 	if (pacTempString != NULL){
 		if (-1 != sBlock().toString(pacTempString, static_cast<unsigned int>(sBlock().length() + 1), 1)){
 			iss.str(std::string(pacTempString));
 			boost::archive::text_iarchive ia(iss);
-			ia >> m_CmdList;
+			ia >> CmdList;
 			ia.delete_created_pointers();
 		}
 		forte_free(pacTempString);
 		pacTempString = NULL;
+		//Convert the list with the commands in a single string
+		m_sNBlock = "";
+		for (std::list<std::string>::iterator it = CmdList.begin(); it != CmdList.end(); ++it){
+			m_sNBlock.append((*it) + "\r\n");
+		}
 	}
 	else{
-		DEVLOG_ERROR("Allocation error while desirealizing in L0_SendBlk\n");
+		DEVLOG_ERROR("Allocation error while deserializing in L0_SendBlk\n");
 	}
 }
 void FORTE_L0_SendBlk::executeEvent(int pa_nEIID){
@@ -77,7 +82,7 @@ void FORTE_L0_SendBlk::executeEvent(int pa_nEIID){
       break;
     case scm_nEventREQID:
 		RetreiveCmd();
-		if (!m_CmdList.empty()){
+		if (!m_sNBlock.empty()){
 			CNC8070Start();
 		}
 		else{
@@ -135,30 +140,19 @@ void FORTE_L0_SendBlk::OnReady()
 {
 	DEVLOG_INFO("CNC Ready\n");
 	CNCState() = 1;
-	if (!m_CmdList.empty()){
-		//Keep sending commands until the list is empty
-		CNC8070Start();
+	//Operation execution completed
+	if (getDeviceExecution()->extEvHandlerIsAllowed(m_nExtEvHandID_inh)){
+		getDeviceExecution()->startNewEventChain(this);
 	}
 	else{
-		//Operation execution completed
-		if (getDeviceExecution()->extEvHandlerIsAllowed(m_nExtEvHandID_inh)){
-			getDeviceExecution()->startNewEventChain(this);
-		}
-		else{
-			DEVLOG_DEBUG("External Event Not allowed\n");
-		}
+		DEVLOG_DEBUG("External Event Not allowed\n");
 	}
 }
 
 void FORTE_L0_SendBlk::OnStarted()
 {
 	DEVLOG_INFO("CNC Started\n");
-	//Execute 1st command in the list and delete it after
-	DEVLOG_DEBUG("\n\n");
-	DEVLOG_DEBUG(m_CmdList.front().c_str());
-	DEVLOG_DEBUG("\n\n");
-	CNC8070ExecuteBlock(m_CmdList.front().c_str());
-	m_CmdList.pop_front();
+	CNC8070ExecuteBlock(m_sNBlock.c_str());
 }
 
 void FORTE_L0_SendBlk::OnExecuting()

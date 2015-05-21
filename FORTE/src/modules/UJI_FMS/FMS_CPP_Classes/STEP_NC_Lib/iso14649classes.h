@@ -2396,6 +2396,14 @@ public:
   ~cutmodeType();
   int isA(int aType);
   void printSelf() = 0;
+
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+  }
 };
 
 /********************************************************************/
@@ -2417,6 +2425,14 @@ public:
   ~cutmodeTypeClimb();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<cutmodeType>(*this);
+	}
 };
 
 /********************************************************************/
@@ -2438,6 +2454,14 @@ public:
   ~cutmodeTypeConventional();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<cutmodeType>(*this);
+	}
 };
 
 /********************************************************************/
@@ -3494,6 +3518,14 @@ public:
   ~leftOrRight();
   int isA(int aType);
   void printSelf() = 0;
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<iso14649CppBase>(*this);
+	}
 };
 
 /********************************************************************/
@@ -3515,6 +3547,14 @@ public:
   ~leftOrRightLeft();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<leftOrRight>(*this);
+	}
 };
 
 /********************************************************************/
@@ -3536,6 +3576,14 @@ public:
   ~leftOrRightRight();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<leftOrRight>(*this);
+	}
 };
 
 /********************************************************************/
@@ -6398,6 +6446,14 @@ public:
   ~rotDirection();
   int isA(int aType);
   void printSelf() = 0;
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<iso14649CppBase>(*this);
+	}
 };
 
 /********************************************************************/
@@ -6419,6 +6475,14 @@ public:
   ~rotDirectionCw();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<rotDirection>(*this);
+	}
 };
 
 /********************************************************************/
@@ -6440,6 +6504,14 @@ public:
   ~rotDirectionCcw();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<rotDirection>(*this);
+	}
 };
 
 /********************************************************************/
@@ -6792,6 +6864,14 @@ public:
   ~strokeConnectionStrategy();
   int isA(int aType);
   void printSelf() = 0;
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<iso14649CppBase>(*this);
+	}
 };
 
 /********************************************************************/
@@ -6813,6 +6893,14 @@ public:
   ~strokeConnectionStrategyDegouge();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<strokeConnectionStrategy>(*this);
+	}
 };
 
 /********************************************************************/
@@ -6834,6 +6922,14 @@ public:
   ~strokeConnectionStrategyLiftShiftPlunge();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<strokeConnectionStrategy>(*this);
+	}
 };
 
 /********************************************************************/
@@ -6855,6 +6951,14 @@ public:
   ~strokeConnectionStrategyLoopBack();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<strokeConnectionStrategy>(*this);
+	}
 };
 
 /********************************************************************/
@@ -6876,6 +6980,14 @@ public:
   ~strokeConnectionStrategyStraightline();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<strokeConnectionStrategy>(*this);
+	}
 };
 
 /********************************************************************/
@@ -8050,6 +8162,16 @@ public:
 private:
   direction * feedDirection;
   cutmodeType * cutmode;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<two5DmillingStrategy>(*this);
+	  ar & feedDirection;
+	  ar & cutmode;
+  }
 };
 
 /********************************************************************/
@@ -8520,6 +8642,14 @@ public:
   ~airStrategy();
   int isA(int aType);
   void printSelf() = 0;
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<approachRetractStrategy>(*this);
+	}
 };
 
 /********************************************************************/
@@ -8647,6 +8777,16 @@ public:
 private:
   double angle;
   double travelLength;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<airStrategy>(*this);
+	  ar & angle;
+	  ar & travelLength;
+  }
 };
 
 /********************************************************************/
@@ -8793,6 +8933,18 @@ private:
   leftOrRight * stepoverDirection;
   rotDirection * rotationDirection;
   cutmodeType * spiralCutmode;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<two5DmillingStrategy>(*this);
+	  ar & feedDirection;
+	  ar & stepoverDirection;
+	  ar & rotationDirection;
+	  ar & spiralCutmode;
+  }
 };
 
 /********************************************************************/
@@ -8832,6 +8984,17 @@ private:
   direction * feedDirection;
   leftOrRight * stepoverDirection;
   strokeConnectionStrategy * itsStrokeConnectionStrategy;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<two5DmillingStrategy>(*this);
+	  ar & feedDirection;
+	  ar & stepoverDirection;
+	  ar & itsStrokeConnectionStrategy;
+  }
 };
 
 /********************************************************************/
@@ -8973,6 +9136,15 @@ public:
   ~centerMilling();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<instance>(*this);
+		ar & boost::serialization::base_object<two5DmillingStrategy>(*this);
+	}
 };
 
 /********************************************************************/
@@ -9388,6 +9560,18 @@ private:
   leftOrRight * stepoverDirection;
   rotDirection * rotationDirection;
   cutmodeType * spiralCutmode;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<two5DmillingStrategy>(*this);
+	  ar & feedDirection;
+	  ar & stepoverDirection;
+	  ar & rotationDirection;
+	  ar & spiralCutmode;
+  }
 };
 
 /********************************************************************/
@@ -9423,6 +9607,16 @@ public:
 private:
   rotDirection * rotationDirection;
   cutmodeType * cutmode;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<two5DmillingStrategy>(*this);
+	  ar & rotationDirection;
+	  ar & cutmode;
+  }
 };
 
 /********************************************************************/
@@ -9458,6 +9652,16 @@ public:
 private:
   rotDirection * rotationDirection;
   cutmodeType * cutmode;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<two5DmillingStrategy>(*this);
+	  ar & rotationDirection;
+	  ar & cutmode;
+  }
 };
 
 /********************************************************************/
@@ -17669,7 +17873,25 @@ BOOST_CLASS_EXPORT_KEY(bottomAndSideRoughMilling)
 BOOST_CLASS_EXPORT_KEY(bottomAndSideFinishMilling)
 BOOST_CLASS_EXPORT_KEY(millingCuttingTool)
 BOOST_CLASS_EXPORT_KEY(two5DmillingStrategy)
+BOOST_CLASS_EXPORT_KEY(unidirectionalMilling)
+BOOST_CLASS_EXPORT_KEY(bidirectionalContour)
+BOOST_CLASS_EXPORT_KEY(bidirectionalMilling)
+BOOST_CLASS_EXPORT_KEY(contourParallel)
+BOOST_CLASS_EXPORT_KEY(contourBidirectional)
+BOOST_CLASS_EXPORT_KEY(contourSpiral)
+BOOST_CLASS_EXPORT_KEY(centerMilling)
+BOOST_CLASS_EXPORT_KEY(cutmodeTypeClimb)
+BOOST_CLASS_EXPORT_KEY(cutmodeTypeConventional)
+BOOST_CLASS_EXPORT_KEY(leftOrRightRight)
+BOOST_CLASS_EXPORT_KEY(leftOrRightLeft)
+BOOST_CLASS_EXPORT_KEY(rotDirectionCw)
+BOOST_CLASS_EXPORT_KEY(rotDirectionCcw)
+BOOST_CLASS_EXPORT_KEY(strokeConnectionStrategyStraightline)
+BOOST_CLASS_EXPORT_KEY(strokeConnectionStrategyLoopBack)
+BOOST_CLASS_EXPORT_KEY(strokeConnectionStrategyLiftShiftPlunge)
+BOOST_CLASS_EXPORT_KEY(strokeConnectionStrategyDegouge)
 BOOST_CLASS_EXPORT_KEY(approachRetractStrategy)
+BOOST_CLASS_EXPORT_KEY(apRetractAngle)
 BOOST_CLASS_EXPORT_KEY(millingTechnology)
 BOOST_CLASS_EXPORT_KEY(booleanTrue)
 BOOST_CLASS_EXPORT_KEY(booleanFalse)
