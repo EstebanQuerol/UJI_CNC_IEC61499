@@ -147,7 +147,7 @@ void FORTE_L1_FPlanarFace::executeEvent(int pa_nEIID){
 					double nXRBInc = nXRBDir * nRadialStep / nRBDirMod;
 					double nYRBInc = nYRBDir * nRadialStep / nRBDirMod;
 					double nZRBInc = nZRBDir * nRadialStep / nRBDirMod;
-
+	
 					//Retreive approach strategy information
 					double nAPAngle = 0.0;
 					double nAPTravel = 0;
@@ -194,7 +194,7 @@ void FORTE_L1_FPlanarFace::executeEvent(int pa_nEIID){
 						double nCurrentX = nXStart;
 						double nCurrentY = nYStart;
 						double nCurrentZ = nZStart;
-						for (int i = 0; i <= nLayers; i++){
+						for (int i = 1; i <= nLayers; i++){
 							for (int j = 0; j < nSweeps - 1; j++){
 								sprintf(acBuffer, "X%f Y%f", nCurrentX + nXInc, nCurrentY + nYInc);
 								CmdList.push_back(std::string(acBuffer));
@@ -227,7 +227,55 @@ void FORTE_L1_FPlanarFace::executeEvent(int pa_nEIID){
 						}
 					}
 					else if (TheOperation->get_itsMachiningStrategy()->isA(bidirectionalMilling_E)){
-
+						bidirectionalMilling  * TheStrategy = (bidirectionalMilling *)TheOperation->get_itsMachiningStrategy();
+						double nCurrentX = nXStart;
+						double nCurrentY = nYStart;
+						double nCurrentZ = nZStart;
+						int j = 0;
+						int i = 1;
+						for (i = 1; i <= nLayers; i++){
+							for (j = 0; j < nSweeps - 1; j++){
+								if (j%2 == 0){
+									nCurrentX += nXInc;
+									nCurrentY += nYInc;
+								}
+								else{
+									nCurrentX -= nXInc;
+									nCurrentY -= nYInc;
+								}
+								sprintf(acBuffer, "X%f Y%f", nCurrentX, nCurrentY);
+								CmdList.push_back(std::string(acBuffer));
+								nCurrentX += nXRBInc;
+								nCurrentY += nYRBInc;
+								sprintf(acBuffer, "X%f Y%f", nCurrentX, nCurrentY);
+								CmdList.push_back(std::string(acBuffer));
+							}
+							if (j%2 == 0){
+								nCurrentX += nXInc;
+								nCurrentY += nYInc;
+							}
+							else{
+								nCurrentX -= nXInc;
+								nCurrentY -= nYInc;
+							}
+							sprintf(acBuffer, "X%f Y%f", nCurrentX, nCurrentY);
+							CmdList.push_back(std::string(acBuffer));
+							sprintf(acBuffer, "G00 Z%f", nSecurityZ);
+							CmdList.push_back(std::string(acBuffer));
+							nCurrentX = nXStart;
+							nCurrentY = nYStart;
+							if (i == nLayers){
+								//Last is different
+								CmdList.push_back("X0 Y0");
+							}
+							else{
+								sprintf(acBuffer, "X%f Y%f", nCurrentX, nCurrentY);
+								CmdList.push_back(std::string(acBuffer));
+								nCurrentZ = nZStart - (nAxialStep*(i + 1));
+								sprintf(acBuffer, "G01 Z%f", nCurrentZ);
+								CmdList.push_back(std::string(acBuffer));
+							}
+						}
 					}
 					else if (TheOperation->get_itsMachiningStrategy()->isA(contourParallel_E)){
 

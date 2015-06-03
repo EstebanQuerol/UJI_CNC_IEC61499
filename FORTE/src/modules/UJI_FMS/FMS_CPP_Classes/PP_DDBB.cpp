@@ -317,13 +317,41 @@ void  PP_DDBB::Initilizate(){
 		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Planeado", l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 7.25);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 2.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
 		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		l_itsdepth = ELEMENTARY_SURFACE(NULL, l_positionIn);
 		//Planar Face
 		planarFace * l_planarFace_1 = PLANAR_FACE("Planeado 1", NULL, NULL, l_itsplacement, l_itsdepth, l_linearPath, l_linearProfile, NULL, NULL);
+
+		/******************Feature 6****************************/
+		//Linear path
+		l_locationIn = CARTESIAN_POINT(NULL, 0, 0, 0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_axisIn = DIRECTION(NULL, 0.0, 1.0, 0.0);
+		l_linearPath = LINEAR_PATH(l_itsplacement, 200.0, l_axisIn);
+		//linear profile
+		l_locationIn = CARTESIAN_POINT(NULL, 0, 0, 0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_linearProfile = LINEAR_PROFILE(l_itsplacement, 100.0);
+		//Placement
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 50.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Planeado", l_locationIn, l_axisIn, l_refDirectionIn);
+		//Depth
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 2.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_itsdepth = ELEMENTARY_SURFACE(NULL, l_positionIn);
+		//Planar Face
+		planarFace * l_planarFace_2 = PLANAR_FACE("Planeado 2", NULL, NULL, l_itsplacement, l_itsdepth, l_linearPath, l_linearProfile, NULL, NULL);
 
 		/*****************machining operation 1***************************/
 		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 0.0);
@@ -344,12 +372,20 @@ void  PP_DDBB::Initilizate(){
 		l_itsMoperation_3 = DRILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, 0.0, 0.0, 1.0, 0.0, NULL);
 
 		/*****************machining operation 4***************************/
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -5.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0, 0, -2.0);
 		itstool = MILLING_CUTTING_TOOL("1336");
-		itstechnology = MILLING_TECHNOLOGY(50.0, "TCP", 0.0, 600.0, 0.0, false, false, false, false);
+		itstechnology = MILLING_TECHNOLOGY(50.0, "TCP", 0.0, 1200.0, 0.0, false, false, false, false);
 		approachRetractStrategy * l_apRetract = AP_RETRACT_ANLGE(NULL, 0.0, 0.0, 0.0, 65.0, 50.0);
-		two5DmillingStrategy * l_millingStrategy = UNIDIRECTIONAL_MILLING(0.0, false, NULL, NULL);
+		two5DmillingStrategy * l_millingStrategy = UNIDIRECTIONAL_MILLING(0.0, false, NULL, NULL);;
 		machiningOperation * l_itsMoperation_4 = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, l_apRetract, NULL, l_millingStrategy, 5.0, 7.5, 0.0, 0.0);
+
+		/*****************machining operation 5***************************/
+		l_locationIn = CARTESIAN_POINT(NULL, 50.0, -80.0, -2.0);
+		itstool = MILLING_CUTTING_TOOL("1336");
+		itstechnology = MILLING_TECHNOLOGY(50.0, "TCP", 0.0, 1200.0, 0.0, false, false, false, false);
+		l_apRetract = AP_RETRACT_ANLGE(NULL, 0.0, 0.0, 0.0, 65.0, 50.0);
+		l_millingStrategy = BIDIRECTIONAL_MILLING(0.0, false, NULL, NULL, NULL);
+		machiningOperation * l_itsMoperation_5 = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, l_apRetract, NULL, l_millingStrategy, 5.0, 140.0, 0.0, 0.0);
 
 		/**************machning workingstep****************************/
 		//Security plance

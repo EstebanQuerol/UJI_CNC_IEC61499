@@ -203,5 +203,10 @@ public:
 
 		return new unidirectionalMilling(SET_REAL(overlapIn), SET_BOOL(allowMultiplePassesIn), feedDirectionIn, cutmodeIn);
 	}
+	static bidirectionalMilling * BIDIRECTIONAL_MILLING(const double  &overlapIn, const bool &allowMultiplePassesIn, direction * feedDirectionIn,
+		leftOrRight * stepoverDirectionIn, strokeConnectionStrategy * itsStrokeConnectionStrategyIn){
+
+		return new bidirectionalMilling(SET_REAL(overlapIn), SET_BOOL(allowMultiplePassesIn), feedDirectionIn, stepoverDirectionIn, itsStrokeConnectionStrategyIn);
+	}
 };
 #endif
