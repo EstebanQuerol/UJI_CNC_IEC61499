@@ -773,7 +773,7 @@
           <inputConnections href="SysConf.xml#//@systemConfigNetwork/@devices.4/@resource.1/@fBNetwork/@dataConnections.15"/>
         </inputVars>
         <inputVars name="MID" comment="Machine identifier" isInput="true" arraySize="-1" typeName="USINT" withs="//@fbNetwork/@fBs.9/@interface/@eventInputs.0/@with.1">
-          <value value="1"/>
+          <value value="2"/>
         </inputVars>
         <inputVars name="PartInfoIn1" comment="Part ID, family, type, MID" isInput="true" arraySize="4" typeName="UINT" withs="//@fbNetwork/@fBs.9/@interface/@eventInputs.1/@with.0" array="true">
           <value/>
