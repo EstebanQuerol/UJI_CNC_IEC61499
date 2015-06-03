@@ -39,8 +39,8 @@ const SFBInterfaceSpec FORTE_L1_FPlanarFace::scm_stFBInterfaceSpec = {
   0, 0
 };
 
-
 void FORTE_L1_FPlanarFace::executeEvent(int pa_nEIID){
+	using namespace iso14649;
 	switch (pa_nEIID){
 	case scm_nEventREQID:
 		if (L1MIDIn() == L1MID_PLANAR_FACE){
@@ -110,6 +110,7 @@ void FORTE_L1_FPlanarFace::executeEvent(int pa_nEIID){
 					if (nRBLength > nRadialMax){
 						//Several sweeps  needed
 						//TODO: Add other splitting polices
+						//TODO: Number of sweeps depends on initial radial depth(from start machining start point). We need to retreive the tool size
 						nSweeps = ceil((nRBLength / nRadialMax));
 						nRadialStep = nRBLength / nSweeps;
 					}

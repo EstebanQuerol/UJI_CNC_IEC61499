@@ -18,7 +18,7 @@ ProcessPlan::ProcessPlan()
 ProcessPlan::~ProcessPlan()
 {
 }
-workplan * ProcessPlan::getWorkplaneByIndex(TForteUInt16 pa_nIndex)
+iso14649::workplan * ProcessPlan::getWorkplaneByIndex(TForteUInt16 pa_nIndex)
 {
 	if (pa_nIndex >= 1 && pa_nIndex <= m_nNumberOfSubphases){
 		return m_vSubphases[pa_nIndex - 1].getWorkplan();
@@ -31,7 +31,7 @@ TForteUInt8 ProcessPlan::getSubphaseTypeByIndex(TForteUInt16 pa_nIndex){
 	}
 	return  0;
 }
-bool ProcessPlan::addSubphase(int pa_nSetupIndex, TForteUInt8 pa_nMTypeID, workplan * pa_poWorkplan)
+bool ProcessPlan::addSubphase(int pa_nSetupIndex, TForteUInt8 pa_nMTypeID, iso14649::workplan * pa_poWorkplan)
 {
 	if (pa_nSetupIndex >= 1 && pa_nSetupIndex <= m_nNumberOfSubphases){
 		m_vSubphases[pa_nSetupIndex - 1] = Subphase(pa_nMTypeID, pa_poWorkplan);

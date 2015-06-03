@@ -16,9 +16,9 @@ CIEC_STRING L1_GENFeature::SerializeCmdList(const std::list<std::string> & pa_th
 	oa << pa_thelist;
 	return oss.str().c_str();
 }
-setup * L1_GENFeature::DeserializeSetup(const CIEC_STRING & pa_theString){
+iso14649::setup * L1_GENFeature::DeserializeSetup(const CIEC_STRING & pa_theString){
 	std::istringstream iss;
-	setup * rvalue = NULL;
+	iso14649::setup * rvalue = NULL;
 	char * pacTempString = (char*)forte_malloc(sizeof(char)* (pa_theString.length() + 1));
 	if (pacTempString != NULL){
 		if (-1 != pa_theString.toString(pacTempString, static_cast<unsigned int>(pa_theString.length() + 1), 1)){
@@ -37,9 +37,9 @@ setup * L1_GENFeature::DeserializeSetup(const CIEC_STRING & pa_theString){
 	return rvalue;
 }
 
-workingstep * L1_GENFeature::DeserializeWorkingstep(const CIEC_STRING & pa_theString){
+iso14649::workingstep * L1_GENFeature::DeserializeWorkingstep(const CIEC_STRING & pa_theString){
 	std::istringstream iss;
-	workingstep * rvalue = NULL;
+	iso14649::workingstep * rvalue = NULL;
 	char * pacTempString = (char*)forte_malloc(sizeof(char)* (pa_theString.length() + 1));
 	if (pacTempString != NULL){
 		if (-1 != pa_theString.toString(pacTempString, static_cast<unsigned int>(pa_theString.length() + 1), 1)){

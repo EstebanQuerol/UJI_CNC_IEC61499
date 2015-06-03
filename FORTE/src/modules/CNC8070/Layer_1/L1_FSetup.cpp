@@ -41,6 +41,7 @@ const SFBInterfaceSpec FORTE_L1_FSetup::scm_stFBInterfaceSpec = {
 
 
 void FORTE_L1_FSetup::executeEvent(int pa_nEIID){
+	using namespace iso14649;
 	switch(pa_nEIID){
     case scm_nEventREQID:
 		if (L1MIDIn() == L1MID_SETUP){

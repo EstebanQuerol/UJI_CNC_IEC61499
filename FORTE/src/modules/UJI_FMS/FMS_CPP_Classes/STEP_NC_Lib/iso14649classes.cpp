@@ -12,7 +12,7 @@
 
 #include "iso14649classes.h"
 #include <stdio.h>   // for printf, etc.
-
+using namespace iso14649;
 void printDouble(
  double num)
 {
