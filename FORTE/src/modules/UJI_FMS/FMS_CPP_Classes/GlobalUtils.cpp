@@ -21,3 +21,14 @@ void GlobalUtils::utils_SerFree(){
 		}
 	}
 }
+
+Eigen::Vector3d GlobalUtils::V3DFromRealIter(iso14649::parenRealListFull *pa_otheList){
+	if (pa_otheList != NULL){
+		std::list<iso14649::real *>::const_iterator reallistIter = pa_otheList->get_theList()->begin();
+		double x = (*reallistIter++)->get_val();
+		double y = (*reallistIter++)->get_val();
+		double z = (*reallistIter)->get_val();
+		return Eigen::Vector3d(x, y, z);
+	}
+	return Eigen::Vector3d(0.0, 0.0, 0.0);
+}

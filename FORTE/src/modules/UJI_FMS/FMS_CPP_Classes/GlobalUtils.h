@@ -19,6 +19,8 @@
 
 #include <vector>
 #include "fortealloc.h"
+#include "iso14649classes.h"
+#include <Eigen\Core>
 
 extern const double pi;
 class GlobalUtils
@@ -37,7 +39,12 @@ public:
 	}
 	static void utils_SerFree();
 #endif
-
+	/*!\ Create an Eigen 3 doubles vector from a RealList from iso14649 lib
+	* return a vector with x y z components on success
+	* rerurn a vector 0.0 0.0 0.0 on error
+	*/
+	static Eigen::Vector3d V3DFromRealIter(iso14649::parenRealListFull *pa_otheList){
+	}
 private:
 	static std::vector<void *> sm_vSerallocLog;
 };

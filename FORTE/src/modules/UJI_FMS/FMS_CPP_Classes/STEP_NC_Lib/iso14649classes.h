@@ -55,7 +55,6 @@ data members and sets all the data members.
 */
 
 #include <list>
-#include "GlobalUtils.h"
 #include "devlog.h"
 #include "boost\serialization\base_object.hpp"
 #include "boost\serialization\split_member.hpp"

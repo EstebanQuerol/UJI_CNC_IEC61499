@@ -317,7 +317,7 @@ void  PP_DDBB::Initilizate(){
 		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Planeado", l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 2.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 6.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
 		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
@@ -353,6 +353,34 @@ void  PP_DDBB::Initilizate(){
 		//Planar Face
 		planarFace * l_planarFace_2 = PLANAR_FACE("Planeado 2", NULL, NULL, l_itsplacement, l_itsdepth, l_linearPath, l_linearProfile, NULL, NULL);
 
+		/******************Feature 7****************************/
+		//Linear path
+		l_locationIn = CARTESIAN_POINT(NULL, 0, 0, 0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_axisIn = DIRECTION(NULL, 0.0, 1.0, 0.0);
+		l_linearPath = LINEAR_PATH(l_itsplacement, 200.0, l_axisIn);
+		//linear profile
+		l_locationIn = CARTESIAN_POINT(NULL, 0, 0, 0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_linearProfile = LINEAR_PROFILE(l_itsplacement, 100.0);
+		//Placement
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 50.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Planeado", l_locationIn, l_axisIn, l_refDirectionIn);
+		//Depth
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 7.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_itsdepth = ELEMENTARY_SURFACE(NULL, l_positionIn);
+		//Planar Face
+		planarFace * l_planarFace_3 = PLANAR_FACE("Planeado 3", NULL, NULL, l_itsplacement, l_itsdepth, l_linearPath, l_linearProfile, NULL, NULL);
+
 		/*****************machining operation 1***************************/
 		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 0.0);
 		itstool = MILLING_CUTTING_TOOL("1338");
@@ -377,15 +405,23 @@ void  PP_DDBB::Initilizate(){
 		itstechnology = MILLING_TECHNOLOGY(50.0, "TCP", 0.0, 1200.0, 0.0, false, false, false, false);
 		approachRetractStrategy * l_apRetract = AP_RETRACT_ANLGE(NULL, 0.0, 0.0, 0.0, 65.0, 50.0);
 		two5DmillingStrategy * l_millingStrategy = UNIDIRECTIONAL_MILLING(0.0, false, NULL, NULL);;
-		machiningOperation * l_itsMoperation_4 = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, l_apRetract, NULL, l_millingStrategy, 5.0, 7.5, 0.0, 0.0);
+		machiningOperation * l_itsMoperation_4 = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, l_apRetract, NULL, l_millingStrategy, 3.0, 7.5, 0.0, 0.0);
 
 		/*****************machining operation 5***************************/
 		l_locationIn = CARTESIAN_POINT(NULL, 50.0, -80.0, -2.0);
-		itstool = MILLING_CUTTING_TOOL("1336");
+		itstool = MILLING_CUTTING_TOOL("1335");
 		itstechnology = MILLING_TECHNOLOGY(50.0, "TCP", 0.0, 1200.0, 0.0, false, false, false, false);
 		l_apRetract = AP_RETRACT_ANLGE(NULL, 0.0, 0.0, 0.0, 65.0, 50.0);
 		l_millingStrategy = BIDIRECTIONAL_MILLING(0.0, false, NULL, NULL, NULL);
 		machiningOperation * l_itsMoperation_5 = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, l_apRetract, NULL, l_millingStrategy, 5.0, 140.0, 0.0, 0.0);
+
+		/*****************machining operation 6***************************/
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -2.0);
+		itstool = MILLING_CUTTING_TOOL("1336");
+		itstechnology = MILLING_TECHNOLOGY(50.0, "TCP", 0.0, 1200.0, 0.0, false, false, false, false);
+		l_apRetract = AP_RETRACT_ANLGE(NULL, 0.0, 0.0, 0.0, 65.0, 50.0);
+		l_millingStrategy = BIDIRECTIONAL_MILLING(0.0, false, NULL, NULL, NULL);
+		machiningOperation * l_itsMoperation_6 = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, l_apRetract, NULL, l_millingStrategy, 3.0, 7.5, 0.0, 0.0);
 
 		/**************machning workingstep****************************/
 		//Security plance
@@ -399,7 +435,7 @@ void  PP_DDBB::Initilizate(){
 		l_itsMWStep_3 = MACHINING_WORKINGSTEP("MWS 3", l_itsSecPlane, l_HoleFeature_2, l_itsMoperation_3, NULL);
 		l_itsMWStep_4 = MACHINING_WORKINGSTEP("MWS 4", l_itsSecPlane, l_HoleFeature_3, l_itsMoperation_3, NULL);
 		l_itsMWStep_5 = MACHINING_WORKINGSTEP("MWS 5", l_itsSecPlane, l_planarFace_1, l_itsMoperation_4, NULL);
-
+		l_itsMWStep_6 = MACHINING_WORKINGSTEP("MWS 6", l_itsSecPlane, l_planarFace_3, l_itsMoperation_6, NULL);
 		/***************************Executable list for type 1*****************/
 		l_theListIn_ex = new std::list<executable *>;
 		l_theListIn_ex->push_back(l_itsMWStep_1);

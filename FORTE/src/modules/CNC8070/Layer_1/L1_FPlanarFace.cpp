@@ -46,13 +46,14 @@ void FORTE_L1_FPlanarFace::executeEvent(int pa_nEIID){
 		if (L1MIDIn() == L1MID_PLANAR_FACE){
 			char * acBuffer = (char *)forte_malloc(sizeof(char)* 100);
 			std::string sTempString;
-			std::stringstream ss;
 			std::list<std::string> CmdList;
-			std::list<real *>::const_iterator reallistIter;
-			double nX, nY, nZ;
+			int j, i;//Loop variables
 			double nSecurityZ; //Above this Z-point the movements are safe
 			int nToolPos;
-
+			Eigen::Vector3d vFOrigin;//Feature origin
+			Eigen::Vector3d vOPStart;//Operation start point
+			Eigen::Vector3d vCTInc;//Course of travel displacement vector
+			Eigen::Vector3d vRBInc;//Removal boundary displacement vector
 			machiningWorkingstep * TheWS = (machiningWorkingstep *)(DeserializeWorkingstep(Operation()));
 			if (TheWS != NULL){
 				planarFace * TheFeature = (planarFace *)TheWS->get_itsFeature();
@@ -74,39 +75,41 @@ void FORTE_L1_FPlanarFace::executeEvent(int pa_nEIID){
 				}
 
 				//Set the feature origin
-				reallistIter = TheFeature->get_featurePlacement()->get_location()->get_coordinates()->get_theList()->begin();
-				nX = (*reallistIter++)->get_val();
-				nY = (*reallistIter++)->get_val();
-				nZ = (*reallistIter)->get_val();
+				vFOrigin = GlobalUtils::V3DFromRealIter(TheFeature->get_featurePlacement()->get_location()->get_coordinates());
 				nSecurityZ = TheWS->get_itsSecplane()->get_position()->get_location()->get_coordinates()->get_theList()->back()->get_val();
-				sprintf(acBuffer, "G00 X=%f Y=%f Z=%f", nX, nY, nZ + nSecurityZ);
+				sprintf(acBuffer, "G00 X=%f Y=%f Z=%f", vFOrigin.x(), vFOrigin.y(), vFOrigin.z() + nSecurityZ);
 				CmdList.push_back(std::string(acBuffer));
 				sprintf(acBuffer, "G92 X0 Y0 Z%f", nSecurityZ);
 				CmdList.push_back(std::string(acBuffer));
 
+				//Retrive feature dimmensions
+				double nDepth = TheFeature->get_depth()->get_position()->get_location()->get_coordinates()->get_theList()->back()->get_val();
+				double nCTLength = TheFeature->get_courseOfTravel()->get_distance()->get_theoreticalSize();
+				double nRBLength = TheFeature->get_removalBoundary()->get_profileLength()->get_itsParameterValue();
+				vCTInc = GlobalUtils::V3DFromRealIter(TheFeature->get_courseOfTravel()->get_itsDirection()->get_directionRatios());
+				vCTInc.normalize();
+				vRBInc = GlobalUtils::V3DFromRealIter(TheFeature->get_removalBoundary()->get_placement()->get_refDirection()->get_directionRatios());
+				vRBInc.normalize();
+
 				//Build the tool path
-				if (TheWS->get_itsOperation()->isA(bottomAndSideRoughMilling_E)){
-					bottomAndSideRoughMilling * TheOperation = (bottomAndSideRoughMilling *)TheWS->get_itsOperation();
-
+				if (TheWS->get_itsOperation()->isA(bottomAndSideMilling_E)){
+					//Finish and rough milling classes are equal from c++ perspective
+					bottomAndSideMilling * TheOperation = (bottomAndSideMilling *)TheWS->get_itsOperation();
 					//Retreive the start_point of the operation
-					reallistIter = TheWS->get_itsOperation()->get_startPoint()->get_coordinates()->get_theList()->begin();
-					double nXStart = (*reallistIter++)->get_val();
-					double nYStart = (*reallistIter++)->get_val();
-					double nZStart = (*reallistIter)->get_val();
+					vOPStart = GlobalUtils::V3DFromRealIter(TheWS->get_itsOperation()->get_startPoint()->get_coordinates());
 
-					//Retrive feature dimmensions and Calculate the number of layers to remove
-					double nDepth = TheFeature->get_depth()->get_position()->get_location()->get_coordinates()->get_theList()->back()->get_val();
-					double nCTLength = TheFeature->get_courseOfTravel()->get_distance()->get_theoreticalSize();
-					double nRBLength = TheFeature->get_removalBoundary()->get_profileLength()->get_itsParameterValue();
+					//Operation parameters
 					double nAxialMax = TheOperation->get_axialCuttingDepth()->get_val();
 					double nRadialMax = TheOperation->get_radialCuttingDepth()->get_val();
 					double nAxialAllowance = TheOperation->get_allowanceBottom()->get_val();
+					double nRadialAllowance = TheOperation->get_allowanceSide()->get_val();
 					double nRealDepth = nDepth - nAxialAllowance;
+
+					//Calculate the number of layers to remove
 					double nAxialStep = nRealDepth;
 					double nRadialStep = nRBLength;
 					int nLayers = 1;
-					double nSweeps = 1;
-
+					int nSweeps = 1;
 					if (nRBLength > nRadialMax){
 						//Several sweeps  needed
 						//TODO: Add other splitting polices
@@ -114,12 +117,9 @@ void FORTE_L1_FPlanarFace::executeEvent(int pa_nEIID){
 						nSweeps = ceil((nRBLength / nRadialMax));
 						nRadialStep = nRBLength / nSweeps;
 					}
-
-
 					//Verify that the start point is correct
-					if (abs(nZStart) > nAxialMax){
-						//CAM Error; start point is lower than max axial cut
-						//abort
+					if (abs(vOPStart.z()) > nAxialMax){
+						//CAM Error; start point is lower than max axial cut; Abort operation
 						DEVLOG_DEBUG("Operation start point error\n");
 						forte_free(acBuffer);
 						acBuffer = NULL;
@@ -128,27 +128,10 @@ void FORTE_L1_FPlanarFace::executeEvent(int pa_nEIID){
 					if (nRealDepth > nAxialMax){
 						//Several layers needed
 						//TODO: Add other splitting polices
-						nLayers = ceil(((nRealDepth - abs(nZStart)) / nAxialMax));
-						nAxialStep = (nRealDepth - abs(nZStart)) / nLayers;
+						nLayers = ceil(((nRealDepth - abs(vOPStart.z())) / nAxialMax));
+						nAxialStep = (nRealDepth - abs(vOPStart.z())) / nLayers++;
 					}
-					//
-					reallistIter = TheFeature->get_courseOfTravel()->get_itsDirection()->get_directionRatios()->get_theList()->begin();
-					double nXDir = (*reallistIter++)->get_val();
-					double nYDir = (*reallistIter++)->get_val();
-					double nZDir = (*reallistIter)->get_val();
-					double nDirMod = sqrt(nXDir*nXDir + nYDir*nYDir + nZDir*nZDir);
-					double nXInc = nXDir * nCTLength / nDirMod;
-					double nYInc = nYDir * nCTLength / nDirMod;
-					double nZInc = nZDir * nCTLength / nDirMod;
-					reallistIter = TheFeature->get_removalBoundary()->get_placement()->get_refDirection()->get_directionRatios()->get_theList()->begin();
-					double nXRBDir = (*reallistIter++)->get_val();
-					double nYRBDir = (*reallistIter++)->get_val();
-					double nZRBDir = (*reallistIter)->get_val();
-					double nRBDirMod = sqrt(nXRBDir*nXRBDir + nYRBDir*nYRBDir + nZRBDir*nZRBDir);
-					double nXRBInc = nXRBDir * nRadialStep / nRBDirMod;
-					double nYRBInc = nYRBDir * nRadialStep / nRBDirMod;
-					double nZRBInc = nZRBDir * nRadialStep / nRBDirMod;
-	
+
 					//Retreive approach strategy information
 					double nAPAngle = 0.0;
 					double nAPTravel = 0;
@@ -158,12 +141,11 @@ void FORTE_L1_FPlanarFace::executeEvent(int pa_nEIID){
 						nAPAngle = TheApproach->get_angle();
 						nAPTravel = TheApproach->get_travelLength();
 
-
 						//Fast movement to XY operation start point in the security plane
-						sprintf(acBuffer, "G00 X%f Y%f Z%f", nXStart, nYStart + cos(nAPAngle / 180.0 * pi)*nAPTravel, nSecurityZ);
+						sprintf(acBuffer, "G00 X%f Y%f Z%f", vOPStart.x(), vOPStart.y() + cos(nAPAngle / 180.0 * pi)*nAPTravel, nSecurityZ);
 						CmdList.push_back(std::string(acBuffer));
 						//Fast movement in Z to the point where approach movement starts
-						sprintf(acBuffer, "G00 Z%f", nZStart + sin(nAPAngle / 180.0 * pi)*nAPTravel);
+						sprintf(acBuffer, "G00 Z%f", vOPStart.z() + sin(nAPAngle / 180.0 * pi)*nAPTravel);
 						CmdList.push_back(std::string(acBuffer));
 						//Configure the feed and rot speed and start the spindle
 						millingTechnology * TheTechnology = (millingTechnology *)TheWS->get_itsOperation()->get_itsTechnology();
@@ -180,7 +162,7 @@ void FORTE_L1_FPlanarFace::executeEvent(int pa_nEIID){
 						CmdList.push_back(std::string(acBuffer));
 
 						//Move tool to the start point
-						sprintf(acBuffer, "G01 X%f Y%f Z%f", nXStart, nYStart, nZStart);
+						sprintf(acBuffer, "G01 X%f Y%f Z%f", vOPStart.x(), vOPStart.y(), vOPStart.z());
 						CmdList.push_back(std::string(acBuffer));
 					}
 					else{
@@ -190,90 +172,71 @@ void FORTE_L1_FPlanarFace::executeEvent(int pa_nEIID){
 						acBuffer = NULL;
 						PARAM_ERROR_EXIT
 					}
+					Eigen::Vector3d vCurrentXYZ;
 					if (TheOperation->get_itsMachiningStrategy()->isA(unidirectionalMilling_E)){
 						unidirectionalMilling  * TheStrategy = (unidirectionalMilling *)TheOperation->get_itsMachiningStrategy();
-						double nCurrentX = nXStart;
-						double nCurrentY = nYStart;
-						double nCurrentZ = nZStart;
-						for (int i = 1; i <= nLayers; i++){
-							for (int j = 0; j < nSweeps - 1; j++){
-								sprintf(acBuffer, "X%f Y%f", nCurrentX + nXInc, nCurrentY + nYInc);
+						vCTInc *= nCTLength;
+						vRBInc *= nRadialStep;
+						vCurrentXYZ = vOPStart;
+						for (i = 1; i <= nLayers; i++){
+							for (j = 0; j < nSweeps - 1; j++){
+								vCurrentXYZ += vCTInc;
+								sprintf(acBuffer, "X%f Y%f", vCurrentXYZ.x(), vCurrentXYZ.y());
 								CmdList.push_back(std::string(acBuffer));
 								sprintf(acBuffer, "G00 Z%f", nSecurityZ);
 								CmdList.push_back(std::string(acBuffer));
-								sprintf(acBuffer, "X%f Y%f", nCurrentX + nXRBInc, nCurrentY + nYRBInc);
+								vCurrentXYZ = vCurrentXYZ - vCTInc + vRBInc;
+								sprintf(acBuffer, "X%f Y%f", vCurrentXYZ.x(), vCurrentXYZ.y());
 								CmdList.push_back(std::string(acBuffer));
-								sprintf(acBuffer, "G01 Z%f", nCurrentZ);
+								sprintf(acBuffer, "G01 Z%f", vCurrentXYZ.z());
 								CmdList.push_back(std::string(acBuffer));
-								nCurrentX += nXRBInc;
-								nCurrentY += nYRBInc;
 							}
-							sprintf(acBuffer, "X%f Y%f", nCurrentX + nXInc, nCurrentY + nYInc);
+							vCurrentXYZ += vCTInc;
+							sprintf(acBuffer, "X%f Y%f", vCurrentXYZ.x(), vCurrentXYZ.y());
 							CmdList.push_back(std::string(acBuffer));
 							sprintf(acBuffer, "G00 Z%f", nSecurityZ);
 							CmdList.push_back(std::string(acBuffer));
-							nCurrentX = nXStart;
-							nCurrentY = nYStart;
 							if (i == nLayers){
 								//Last is different
 								CmdList.push_back("X0 Y0");
 							}
 							else{
-								sprintf(acBuffer, "X%f Y%f", nCurrentX, nCurrentY);
+								vCurrentXYZ = Eigen::Vector3d(vOPStart.x(), vOPStart.y(), vCurrentXYZ.z() - nAxialStep);
+								sprintf(acBuffer, "X%f Y%f", vCurrentXYZ.x(), vCurrentXYZ.y());
 								CmdList.push_back(std::string(acBuffer));
-								nCurrentZ = nZStart - (nAxialStep*(i + 1));
-								sprintf(acBuffer, "G01 Z%f", nCurrentZ);
+								sprintf(acBuffer, "G01 Z%f", vCurrentXYZ.z());
 								CmdList.push_back(std::string(acBuffer));
 							}
 						}
 					}
 					else if (TheOperation->get_itsMachiningStrategy()->isA(bidirectionalMilling_E)){
 						bidirectionalMilling  * TheStrategy = (bidirectionalMilling *)TheOperation->get_itsMachiningStrategy();
-						double nCurrentX = nXStart;
-						double nCurrentY = nYStart;
-						double nCurrentZ = nZStart;
-						int j = 0;
-						int i = 1;
+						vCurrentXYZ = vOPStart;
+						vCTInc *= nCTLength;
+						vRBInc *= nRadialStep;
 						for (i = 1; i <= nLayers; i++){
 							for (j = 0; j < nSweeps - 1; j++){
-								if (j%2 == 0){
-									nCurrentX += nXInc;
-									nCurrentY += nYInc;
-								}
-								else{
-									nCurrentX -= nXInc;
-									nCurrentY -= nYInc;
-								}
-								sprintf(acBuffer, "X%f Y%f", nCurrentX, nCurrentY);
+								(j & 1) ? vCurrentXYZ -= vCTInc : vCurrentXYZ += vCTInc;
+								sprintf(acBuffer, "X%f Y%f", vCurrentXYZ.x(), vCurrentXYZ.y());
 								CmdList.push_back(std::string(acBuffer));
-								nCurrentX += nXRBInc;
-								nCurrentY += nYRBInc;
-								sprintf(acBuffer, "X%f Y%f", nCurrentX, nCurrentY);
+								vCurrentXYZ = vCurrentXYZ + vRBInc;
+								sprintf(acBuffer, "X%f Y%f", vCurrentXYZ.x(), vCurrentXYZ.y());
 								CmdList.push_back(std::string(acBuffer));
 							}
-							if (j%2 == 0){
-								nCurrentX += nXInc;
-								nCurrentY += nYInc;
-							}
-							else{
-								nCurrentX -= nXInc;
-								nCurrentY -= nYInc;
-							}
-							sprintf(acBuffer, "X%f Y%f", nCurrentX, nCurrentY);
+							(j & 1) ? vCurrentXYZ -= vCTInc : vCurrentXYZ += vCTInc;
+							sprintf(acBuffer, "X%f Y%f", vCurrentXYZ.x(), vCurrentXYZ.y());
 							CmdList.push_back(std::string(acBuffer));
 							sprintf(acBuffer, "G00 Z%f", nSecurityZ);
 							CmdList.push_back(std::string(acBuffer));
-							nCurrentX = nXStart;
-							nCurrentY = nYStart;
 							if (i == nLayers){
 								//Last is different
 								CmdList.push_back("X0 Y0");
 							}
 							else{
-								sprintf(acBuffer, "X%f Y%f", nCurrentX, nCurrentY);
+								vCurrentXYZ = Eigen::Vector3d(vOPStart.x(), vOPStart.y(), vCurrentXYZ.z() - nAxialStep);
+								sprintf(acBuffer, "X%f Y%f", vCurrentXYZ.x(), vCurrentXYZ.y());
 								CmdList.push_back(std::string(acBuffer));
-								nCurrentZ = nZStart - (nAxialStep*(i + 1));
-								sprintf(acBuffer, "G01 Z%f", nCurrentZ);
+								sprintf(acBuffer, "G01 Z%f", vCurrentXYZ.z());
 								CmdList.push_back(std::string(acBuffer));
 							}
 						}
