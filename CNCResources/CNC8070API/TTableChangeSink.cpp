@@ -30,16 +30,14 @@ void CTTableChangeSink::OnFinalRelease(){
 }
 
 void CTTableChangeSink::OnReport(long pa_nITool){
-	//Same code that CMTableChangeSink::OnReport
 	BSTR l_sToolName;
 	long l_lRetVal;
-	long l_lToolState;
-	long l_lToolID;
-	long l_lToolPos;
+	tool8070 l_stTool;
 	HRESULT l_hr;
 	int l_ii;
 	long l_lMzNumber = 1;//Magazine number, using 1 by default
 	IFCDualITool * l_poTool = NULL;
+	IFCDualIEdge * l_poEdge = NULL;
 	BOOL l_bRet;
 	SAFEARRAY * l_paToolArray;
 	long l_lLBound;//Array lower bound
@@ -56,35 +54,48 @@ void CTTableChangeSink::OnReport(long pa_nITool){
 			l_hr = SafeArrayAccessData(l_paToolArray, (void HUGEP* FAR*)&l_plIDS);
 			if (SUCCEEDED(l_hr)){
 				for (l_ii = 0; l_ii < l_lElements; l_ii++){
-					l_lToolID = l_plIDS[l_ii];
-					theLib.m_oTTable->ReadTool(l_lToolID, &l_poTool, &l_bRet);
+					l_stTool = tool8070();
+					l_stTool.m_lToolID = l_plIDS[l_ii];
+					theLib.m_oTTable->ReadTool(l_stTool.m_lToolID, &l_poTool, &l_bRet);
 					if (l_bRet == true){
 						//Retreive tool info
 						l_poTool->get_Name(&l_sToolName);
-						l_poTool->GetStatus(&l_lToolState);
+						l_poTool->GetStatus(&l_stTool.m_lToolState);
+						l_poTool->get_NumberOfEdges(&l_stTool.m_lNumEdges);
 						l_poTool->Release();
+						//Retreive edge info; Multi edge tools not supported for now
+						if (l_stTool.m_lNumEdges == 1){
+							theLib.m_oTTable->ReadEdge(l_stTool.m_lToolID, 1, &l_poEdge, &l_bRet);
+							l_poEdge->get_Length(&l_stTool.m_lLength);
+							l_poEdge->get_LengthWear(&l_stTool.m_lLengthWear);
+							l_poEdge->get_CuttingLength(&l_stTool.m_lLengthCut);
+							l_poEdge->get_Radius(&l_stTool.m_lRadius);
+							l_poEdge->get_RadiusWear(&l_stTool.m_lRadiusWear);
+							l_poEdge->get_NoseRadius(&l_stTool.m_lNoseRadius);
+							l_poEdge->get_NoseRadiusWear(&l_stTool.m_lNoseRadiusWear);
+							l_poEdge->get_EntryAngle(&l_stTool.m_lEntryAngle);
+						}
 						//Retrive tool position into the Mz
-						theLib.m_oMagazine->GetToolInfo(l_lMzNumber, l_lToolID, &l_lRetVal);
+						theLib.m_oMagazine->GetToolInfo(l_lMzNumber, l_stTool.m_lToolID, &l_lRetVal);
 						if (l_lRetVal > 0){
 							//The tool is currently in the magazine
-							l_lToolPos = l_lRetVal;
+							l_stTool.m_lToolPos = l_lRetVal;
 						}
 						else if (l_lRetVal == POSACTIVE){
 							//the tool is in the spindle
-							l_lToolPos = 0;
+							l_stTool.m_lToolPos = 0;
 						}
 						else{
-							//The tool is not int the magazine
-							l_lToolPos = -1;
+							//The tool is not in the magazine
+							l_stTool.m_lToolPos = -1;
 						}
 						//Add an entry in the table
-						char * cstring = _com_util::ConvertBSTRToString(l_sToolName);
-						if (cstring != NULL){
-							theLib.m_oHandler->OnMagazineUpdateAdd(cstring, l_lToolPos, l_lToolState, l_lToolID);
-							delete[] cstring;
+						l_stTool.m_acToolName = _com_util::ConvertBSTRToString(l_sToolName);
+						if (l_stTool.m_acToolName != NULL){
+							theLib.m_oHandler->OnMagazineUpdateAdd(l_stTool);
+							delete[] l_stTool.m_acToolName;
 						}
 					}
-
 				}
 				SafeArrayUnaccessData(l_paToolArray);
 			}

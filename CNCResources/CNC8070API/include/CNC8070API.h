@@ -66,8 +66,8 @@ public:
 	VOID OnExecuting();
 	VOID OnInterrupted();
 	VOID OnInterruptedByError();
-	VOID OnMagazineUpdateAdd(const char * pa_sID, int pa_nPos, int pa_nState, long pa_nLocalID);
-	VOID OnMagazineUpdateDelete(const char * pa_sID, int pa_nPos, int pa_nState, long pa_lITool);
+	VOID OnMagazineUpdateAdd(const tool8070 &pa_stTool);
+	VOID OnMagazineUpdateDelete(const tool8070 &pa_stTool);
 	VOID OnMagazineUpdateDelete();
 
 	DECLARE_MESSAGE_MAP()

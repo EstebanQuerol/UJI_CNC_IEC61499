@@ -126,9 +126,9 @@ public:
   virtual void OnInterruptedByError();
   /*!\brief Enable this event source
   */
-  virtual void OnMagazineUpdateAdd(const char * pa_sID, int pa_nPos, int pa_nState, long pa_nLocalID);
+  virtual void OnMagazineUpdateAdd(const tool8070 &pa_stTool);
   virtual void OnMagazineUpdateDelete();
-  virtual void OnMagazineUpdateDelete(const char * pa_sID, int pa_nPos, int pa_nState, long pa_lITool);
+  virtual void OnMagazineUpdateDelete(const tool8070 &pa_stTool);
 
 
   virtual void enableHandler(void);

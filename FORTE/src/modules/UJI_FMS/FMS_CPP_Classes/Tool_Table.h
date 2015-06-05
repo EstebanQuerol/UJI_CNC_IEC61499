@@ -27,16 +27,16 @@ public:
 	static void initilizate();
 	/*!\Add a tool to the table
 	*/
-	static void addTool(Tool pa_oTool);
+	static void addTool(const Tool& pa_oTool);
 	/*!\ Update a tool in the table
 	*/
-	static void updateTool(Tool pa_oTool);
+	static void updateTool(const Tool& pa_oTool);
 	/*!\ Delete a tool from the table
 	*/
-	static void deleteTool(Tool pa_oTool);
+	static void deleteTool(const Tool& pa_oTool);
 	/*!\ Delete a tool from the table
 	*/
-	static void deleteTool(std::string pa_sID);
+	static void deleteTool(const std::string &pa_sID);
 
 	/*!\ Delete the tool table
 	*/
@@ -47,8 +47,17 @@ public:
 	* return -1  if the tool exist but its not loaded in the cnc magazine
 	* return -2  if the tool is not available at all
 	*/
-	static TForteInt32 isAvailable(std::string pa_sToolID);
-	static long getToolID(std::string pa_sToolID);
+	static TForteInt32 isAvailable(const std::string &pa_sToolID);
+	/*!\ Retreive the local identifier of a tool in the map
+	* return -1 If ID can not be retreived
+	* return Tool ID otherwise
+	*/
+	static long getToolLocalID(const std::string &pa_sToolID);
+	/*!\ Retreive a Tool from the map
+	* return null if the tool can not be retreived
+	* return requested tool object otherwise
+	*/
+	static const Tool * getTool(const std::string &pa_sToolID);
 };
 
 #endif

@@ -192,15 +192,33 @@ void FORTE_L0_SendBlk::OnInterruptedByError()
 	}
 }
 
-void FORTE_L0_SendBlk::OnMagazineUpdateAdd(const char * pa_sID, int pa_nPos, int pa_nState, long pa_nLocalID){
-	Tool_Table::addTool(Tool(std::string(pa_sID), pa_nPos, (Tool_State) pa_nState, pa_nLocalID));
+void FORTE_L0_SendBlk::OnMagazineUpdateAdd(const tool8070 &pa_stTool){
+	double dLength = pa_stTool.m_lLength;
+	dLength /= 10000.0;
+	double dLengthWear = pa_stTool.m_lLengthWear;
+	dLengthWear /= 10000.0;
+	double dLengthCut = pa_stTool.m_lLengthCut;
+	dLengthCut /= 10000.0;
+	double dRadius = pa_stTool.m_lRadius;
+	dRadius /= 10000.0;
+	double dRadiusWear = pa_stTool.m_lRadiusWear;
+	dRadiusWear /= 10000.0;
+	double dNoseRadius = pa_stTool.m_lNoseRadius;
+	dNoseRadius /= 10000.0;
+	double dNoseRadiusWear = pa_stTool.m_lNoseRadiusWear;
+	dNoseRadiusWear /= 10000.0;
+	double dEntryAngle = pa_stTool.m_lEntryAngle;
+	dEntryAngle /= 10000.0;
+	Tool theTool = Tool(std::string(pa_stTool.m_acToolName), (int) pa_stTool.m_lToolPos, (Tool_State)pa_stTool.m_lToolState, pa_stTool.m_lToolID);
+	theTool.writeEdge(dLength, dLengthWear, dLengthCut, dRadius, dRadiusWear, dNoseRadius, dNoseRadiusWear, dEntryAngle);
+	Tool_Table::addTool(theTool);
 }
 
 void FORTE_L0_SendBlk::OnMagazineUpdateDelete(){
 	Tool_Table::deleteTable();
 }
 
-void FORTE_L0_SendBlk::OnMagazineUpdateDelete(const char * pa_sID, int pa_nPos, int pa_nState, long pa_lITool){
+void FORTE_L0_SendBlk::OnMagazineUpdateDelete(const tool8070 &pa_stTool){
 
 }
 //CExternalEventsHandler methods implementation
