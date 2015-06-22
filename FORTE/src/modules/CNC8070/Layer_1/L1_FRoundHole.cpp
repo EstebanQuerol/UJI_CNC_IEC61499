@@ -61,7 +61,7 @@ void FORTE_L1_FRoundHole::executeEvent(int pa_nEIID){
 				nToolPos = Tool_Table::isAvailable(sTempString);
 				if (nToolPos > 0){
 					//If returned position is 0 the tool is already in the spindle
-					sprintf(acBuffer, "T%u D1", Tool_Table::getToolID(sTempString));
+					sprintf(acBuffer, "T%u D1", Tool_Table::getToolLocalID(sTempString));
 					CmdList.push_back(std::string(acBuffer));
 					CmdList.push_back(std::string("M6"));
 				}
