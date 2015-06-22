@@ -43,8 +43,17 @@ public:
 	* return a vector with x y z components on success
 	* rerurn a vector 0.0 0.0 0.0 on error
 	*/
-	static Eigen::Vector3d V3DFromRealIter(iso14649::parenRealListFull *pa_otheList){
-	}
+	static Eigen::Vector3d V3DFromRealIter(iso14649::parenRealListFull *pa_otheList);
+	/*!\ check if two cartesian points are equal
+	* return true if both points are equal
+	* rerurn false if points are not equal
+	*/
+	static bool isPlacementEqual(iso14649::cartesianPoint *pa_oA, iso14649::cartesianPoint *pa_oB);
+	/*!\ isPlacementEqual overload
+	* return true if both points are equal
+	* rerurn false if points are not equal
+	*/
+	static bool isPlacementEqual(iso14649::cartesianPoint *pa_oA, const double &x, const double &y, const double &z);
 private:
 	static std::vector<void *> sm_vSerallocLog;
 };

@@ -19,6 +19,7 @@
 #include "Tool_Table.h"
 #include <cmath>
 #include <Eigen\Core>
+#include <Eigen\Geometry>
 
 class FORTE_L1_FPlanarFace : public CFunctionBlock, public L1_GENFeature{
   DECLARE_FIRMWARE_FB(FORTE_L1_FPlanarFace)
