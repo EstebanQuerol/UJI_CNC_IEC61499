@@ -43,6 +43,8 @@
     <FB Name="L1_Merge2Cmd_3" Type="L1_Merge2Cmd" x="760.0" y="285.0"/>
     <FB Name="L1_Merge2Cmd_4" Type="L1_Merge2Cmd" x="4180.0" y="4560.0"/>
     <FB Name="L1_FPlanarFace" Type="L1_FPlanarFace" x="2850.0" y="4560.0"/>
+    <FB Name="L1_FSlot" Type="L1_FSlot" x="2850.0" y="5510.0"/>
+    <FB Name="L1_Merge2Cmd_5" Type="L1_Merge2Cmd" x="4180.0" y="5510.0"/>
     <DataConnections>
       <Connection Destination="L1_FSetup_1.Operation" Source="L1_MCEmitter_1.OperationOut" dx1="70.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L1_SendCmd_1.CmdIn" Source="L1_MCEmitter_1.OperationOut" dx1="0.0" dx2="0.0" dy="0.0"/>
@@ -77,6 +79,12 @@
       <Connection Destination="L1_Merge2Cmd_4.Cmd1" Source="L1_FPlanarFace.Cmd" dx1="0.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L1_Merge2Cmd_4.L1MID1" Source="L1_FPlanarFace.L1MIDOut" dx1="0.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L1_FPlanarFace.L1MIDIn" Source="L1_MCEmitter_1.L1MIDOut" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_FSlot.Operation" Source="L1_MCEmitter_1.OperationOut" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_FSlot.L1MIDIn" Source="L1_MCEmitter_1.L1MIDOut" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd_5.Cmd1" Source="L1_FSlot.Cmd" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd_5.L1MID1" Source="L1_FSlot.L1MIDOut" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd_4.Cmd2" Source="L1_Merge2Cmd_5.CmdOut" dx1="150.0" dx2="-150.0" dy="-145.0"/>
+      <Connection Destination="L1_Merge2Cmd_4.L1MID2" Source="L1_Merge2Cmd_5.L1MIDOut" dx1="225.0" dx2="0.0" dy="-270.0"/>
     </DataConnections>
     <EventConnections>
       <Connection Destination="L1_FSetup_1.REQ" Source="L1_MCEmitter_1.CNF" dx1="-225.0" dx2="0.0" dy="0.0"/>
@@ -101,6 +109,9 @@
       <Connection Destination="L1_Merge2Cmd_2.E2" Source="L1_Merge2Cmd_4.EO" dx1="0.0" dx2="-210.0" dy="365.0"/>
       <Connection Destination="L1_FPlanarFace.REQ" Source="L1_MCEmitter_1.CNF" dx1="0.0" dx2="0.0" dy="0.0"/>
       <Connection Destination="L1_Merge2Cmd_4.E1" Source="L1_FPlanarFace.CNF" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd_5.E1" Source="L1_FSlot.CNF" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_FSlot.REQ" Source="L1_MCEmitter_1.CNF" dx1="0.0" dx2="0.0" dy="0.0"/>
+      <Connection Destination="L1_Merge2Cmd_4.E2" Source="L1_Merge2Cmd_5.EO" dx1="0.0" dx2="-230.0" dy="285.0"/>
     </EventConnections>
   </FBNetwork>
 </FBType>

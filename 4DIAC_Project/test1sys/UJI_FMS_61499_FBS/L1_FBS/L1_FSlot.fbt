@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
-<FBType Comment="Service Interface Function Block Type" Name="L1_FPlanarFace">
+<FBType Comment="Service Interface Function Block Type" Name="L1_FSlot">
   <Identification Standard="61499-2"/>
-  <VersionInfo Author="EQUEROL" Date="2015-05-12" Organization="UJI" Version="0.0"/>
+  <VersionInfo Author="EQUEROL" Date="2015-06-22" Organization="UJI" Version="0.0"/>
   <InterfaceList>
     <EventInputs>
       <Event Comment="Service Request" Name="REQ" Type="Event">

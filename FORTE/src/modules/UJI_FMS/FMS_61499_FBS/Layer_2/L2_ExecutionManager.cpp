@@ -100,6 +100,8 @@ TForteUInt8 FORTE_L2_ExecutionManager::GetWSL1MID(iso14649::workingstep * obj){
 			return L1MID_CLOSED_POCKET;
 		if (l_machinigWS->get_itsFeature()->isA(iso14649::roundHole_E))
 			return L1MID_ROUND_HOLE;
+		if (l_machinigWS->get_itsFeature()->isA(iso14649::slot_E))
+			return L1MID_SLOT;
 	}
 	l_rapidmovWS = dynamic_cast<iso14649::rapidMovement *>(obj);
 	if (l_rapidmovWS != NULL){

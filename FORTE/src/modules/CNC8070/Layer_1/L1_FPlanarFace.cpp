@@ -40,10 +40,10 @@ const SFBInterfaceSpec FORTE_L1_FPlanarFace::scm_stFBInterfaceSpec = {
 };
 
 void FORTE_L1_FPlanarFace::executeEvent(int pa_nEIID){
-	using namespace iso14649;
 	switch (pa_nEIID){
 	case scm_nEventREQID:
 		if (L1MIDIn() == L1MID_PLANAR_FACE){
+			using namespace iso14649;
 			char * acBuffer = (char *)forte_malloc(sizeof(char)* 100);
 			std::string sTempString;
 			std::list<std::string> CmdList;
@@ -57,7 +57,7 @@ void FORTE_L1_FPlanarFace::executeEvent(int pa_nEIID){
 			Eigen::Vector3d vRBDir;//Removal boundary displacement unitary vector
 			Eigen::Vector3d vCTInc;//Course of travel displacement vector
 			Eigen::Vector3d vRBInc;//Removal boundary displacement vector
-			Eigen::Vector3d vCurrentXYZ;//This vector is sued to hold the XYZ where tool is heading
+			Eigen::Vector3d vCurrentXYZ;//This vector is used to hold the XYZ where tool is heading
 			machiningWorkingstep * TheWS = (machiningWorkingstep *)(DeserializeWorkingstep(Operation()));
 			if (TheWS != NULL){
 				//Retreive the feature

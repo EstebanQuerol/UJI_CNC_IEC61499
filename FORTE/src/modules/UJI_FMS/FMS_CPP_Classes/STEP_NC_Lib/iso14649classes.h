@@ -5163,6 +5163,14 @@ public:
   void set_theList(std::list<slotEndType *> * theListIn);
 private:
   std::list<slotEndType *> * theList;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+	  ar & theList;
+  }
 };
 
 /********************************************************************/
@@ -6774,6 +6782,13 @@ public:
   ~slotEndType();
   int isA(int aType);
   void printSelf() = 0;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+  }
 };
 
 /********************************************************************/
@@ -8417,6 +8432,15 @@ public:
   void set_radius(tolerancedLengthMeasure * radiusIn);
 private:
   tolerancedLengthMeasure * radius;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<slotEndType>(*this);
+	  ar & radius;
+  }
 };
 
 /********************************************************************/
@@ -9209,6 +9233,14 @@ public:
   void set_radius(tolerancedLengthMeasure * radiusIn);
 private:
   tolerancedLengthMeasure * radius;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<travelPath>(*this);
+	  ar & radius;
+  }
 };
 
 /********************************************************************/
@@ -9419,6 +9451,14 @@ public:
   ~completeCircularPath();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<circularPath>(*this);
+  }
 };
 
 /********************************************************************/
@@ -10416,6 +10456,16 @@ public:
 private:
   tolerancedLengthMeasure * cornerRadius1;
   tolerancedLengthMeasure * cornerRadius2;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<slotEndType>(*this);
+	  ar & cornerRadius1;
+	  ar & cornerRadius2;
+  }
 };
 
 /********************************************************************/
@@ -10514,6 +10564,14 @@ public:
   void set_sweptPath(boundedCurve * sweptPathIn);
 private:
   boundedCurve * sweptPath;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<travelPath>(*this);
+	  ar & sweptPath;
+  }
 };
 
 /********************************************************************/
@@ -10832,6 +10890,14 @@ public:
   ~loopSlotEndType();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<slotEndType>(*this);
+  }
 };
 
 /********************************************************************/
@@ -11562,6 +11628,14 @@ public:
   ~openSlotEndType();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<slotEndType>(*this);
+  }
 };
 
 /********************************************************************/
@@ -11684,6 +11758,15 @@ public:
   void set_sweepAngle(double sweepAngleIn);
 private:
   double sweepAngle;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<circularPath>(*this);
+	  ar & sweepAngle;
+  }
 };
 
 /********************************************************************/
@@ -11718,6 +11801,16 @@ public:
 private:
   tolerancedLengthMeasure * radius;
   double sweepAngle;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<openProfile>(*this);
+	  ar & radius;
+	  ar & sweepAngle;
+  }
 };
 
 /********************************************************************/
@@ -12044,6 +12137,14 @@ public:
   ~radiusedSlotEndType();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<slotEndType>(*this);
+  }
 };
 
 /********************************************************************/
@@ -12315,6 +12416,15 @@ public:
   void set_width(tolerancedLengthMeasure * widthIn);
 private:
   tolerancedLengthMeasure * width;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<openProfile>(*this);
+	  ar & width;
+  }
 };
 
 /********************************************************************/
@@ -12445,6 +12555,17 @@ private:
   travelPath * courseOfTravel;
   openProfile * sweptShape;
   parenSlotEndTypeList * endConditions;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<machiningFeature>(*this);
+	  ar & courseOfTravel;
+	  ar & sweptShape;
+	  ar & endConditions;
+  }
 };
 
 /********************************************************************/
@@ -12609,6 +12730,19 @@ private:
   double firstAngle;
   tolerancedLengthMeasure * secondRadius;
   double secondAngle;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<openProfile>(*this);
+	  ar & width;
+	  ar & firstRadius;
+	  ar & firstAngle;
+	  ar & secondRadius;
+	  ar & secondAngle;
+  }
 };
 
 /********************************************************************/
@@ -12822,6 +12956,22 @@ private:
   tolerancedLengthMeasure * width;
   tolerancedLengthMeasure * firstOffset;
   tolerancedLengthMeasure * secondOffset;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<openProfile>(*this);
+	  ar & firstAngle;
+	  ar & secondAngle;
+	  ar & crossBarWidth;
+	  ar & crossBarDepth;
+	  ar & radius;
+	  ar & width;
+	  ar & firstOffset;
+	  ar & secondOffset;
+  }
 };
 
 /********************************************************************/
@@ -13205,6 +13355,17 @@ private:
   tolerancedLengthMeasure * profileRadius;
   double profileAngle;
   double tiltAngle;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<openProfile>(*this);
+	  ar & profileRadius;
+	  ar & profileAngle;
+	  ar & tiltAngle;
+  }
 };
 
 /********************************************************************/
@@ -14398,6 +14559,13 @@ public:
   ~curve();
   int isA(int aType);
   void printSelf() = 0;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<geometricRepresentationItem>(*this);
+  }
 };
 
 /********************************************************************/
@@ -14779,6 +14947,15 @@ public:
   void set_itsProfile(boundedCurve * itsProfileIn);
 private:
   boundedCurve * itsProfile;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<openProfile>(*this);
+	  ar & itsProfile;
+  }
 };
 
 /********************************************************************/
@@ -16588,6 +16765,13 @@ public:
   ~boundedCurve();
   int isA(int aType);
   void printSelf() = 0;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<curve>(*this);
+  }
 };
 
 /********************************************************************/
@@ -17863,6 +18047,22 @@ BOOST_CLASS_EXPORT_KEY(iso14649::planarFace)
 BOOST_CLASS_EXPORT_KEY(iso14649::closedPocket)
 BOOST_CLASS_EXPORT_KEY(iso14649::openPocket)
 BOOST_CLASS_EXPORT_KEY(iso14649::roundHole)
+BOOST_CLASS_EXPORT_KEY(iso14649::slot)
+BOOST_CLASS_EXPORT_KEY(iso14649::generalPath)
+BOOST_CLASS_EXPORT_KEY(iso14649::linearPath)
+BOOST_CLASS_EXPORT_KEY(iso14649::partialCircularPath)
+BOOST_CLASS_EXPORT_KEY(iso14649::completeCircularPath)
+BOOST_CLASS_EXPORT_KEY(iso14649::roundedUProfile)
+BOOST_CLASS_EXPORT_KEY(iso14649::partialCircularProfile)
+BOOST_CLASS_EXPORT_KEY(iso14649::teeProfile)
+BOOST_CLASS_EXPORT_KEY(iso14649::squareUProfile)
+BOOST_CLASS_EXPORT_KEY(iso14649::veeProfile)
+BOOST_CLASS_EXPORT_KEY(iso14649::generalProfile)
+BOOST_CLASS_EXPORT_KEY(iso14649::woodruffSlotEndType)
+BOOST_CLASS_EXPORT_KEY(iso14649::flatSlotEndType)
+BOOST_CLASS_EXPORT_KEY(iso14649::loopSlotEndType)
+BOOST_CLASS_EXPORT_KEY(iso14649::openSlotEndType)
+BOOST_CLASS_EXPORT_KEY(iso14649::radiusedSlotEndType)
 BOOST_CLASS_EXPORT_KEY(iso14649::radiusedPocketBottomCondition)
 BOOST_CLASS_EXPORT_KEY(iso14649::throughPocketBottomCondition)
 BOOST_CLASS_EXPORT_KEY(iso14649::planarPocketBottomCondition)
