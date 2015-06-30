@@ -192,6 +192,9 @@ public:
 	static apRetractAngle * AP_RETRACT_ANLGE(const char * name, const double &x, const double &y, const double &z, const double &angleIn, const double &travelLengthIn){
 		return new apRetractAngle(DIRECTION(name, x, y, z), angleIn, travelLengthIn);
 	}
+	static generalPath * GENERAL_PATH(axis2placement3d * placementIn, boundedCurve * sweptPathIn){
+		return new generalPath(placementIn, sweptPathIn);
+	}
 	static linearPath * LINEAR_PATH(axis2placement3d * placementIn, const double &distanceIn, direction * itsDirectionIn){
 		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(distanceIn, NULL);
 		return new linearPath(placementIn, l_TL1, itsDirectionIn);
@@ -232,6 +235,9 @@ public:
 	}
 	static centerMilling * CENTER_MILLING(const double &overlapIn, const bool &allowMultiplePassesIn){
 		return new centerMilling(SET_REAL(overlapIn), SET_BOOL(allowMultiplePassesIn));
+	}
+	static polyline * POLYLINE(const char * name, std::list<cartesianPoint *> * ThePoints){
+		return new polyline(SET_NAME(name), new parenCartesianPointListFull(ThePoints));
 	}
 };
 #endif

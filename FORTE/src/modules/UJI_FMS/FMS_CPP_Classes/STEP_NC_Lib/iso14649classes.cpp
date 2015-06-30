@@ -23523,5 +23523,6 @@ BOOST_CLASS_EXPORT_IMPLEMENT(counterSinking)
 BOOST_CLASS_EXPORT_IMPLEMENT(multistepDrilling)
 BOOST_CLASS_EXPORT_IMPLEMENT(reaming)
 BOOST_CLASS_EXPORT_IMPLEMENT(boring)
+BOOST_CLASS_EXPORT_IMPLEMENT(polyline)
 /********************************************************************/
 

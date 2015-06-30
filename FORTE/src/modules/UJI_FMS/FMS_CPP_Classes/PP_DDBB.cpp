@@ -532,7 +532,7 @@ void  PP_DDBB::Initilizate(){
 		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 35.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -5.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
 		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
@@ -558,7 +558,7 @@ void  PP_DDBB::Initilizate(){
 		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		l_OProfile_1 = SQUARE_U_PROFILE(l_itsplacement, 10.0, 0.0, 0.0, 0.0, 0.0);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 32.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -6.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
 		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
@@ -583,7 +583,7 @@ void  PP_DDBB::Initilizate(){
 		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		l_OProfile_1 = SQUARE_U_PROFILE(l_itsplacement, 5.0, 0.0, 0.0, 0.0, 0.0);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 38.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -8.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
 		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
@@ -595,27 +595,69 @@ void  PP_DDBB::Initilizate(){
 		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		slot * l_Slot_3 = SLOT("Ranurado 3", NULL, NULL, l_itsplacement, l_itsdepth, l_travelPath_1, l_OProfile_1, NULL);
 
+		/******************Feature 4****************************/
+		//Travel path
+		//The Polyline
+		std::list<cartesianPoint *> * ThePoints = new std::list<cartesianPoint *>;
+		ThePoints->push_back(CARTESIAN_POINT(NULL, 0.0, 0.0, 0.0));
+		ThePoints->push_back(CARTESIAN_POINT(NULL, 20.0, -20.0, 0.0));
+		ThePoints->push_back(CARTESIAN_POINT(NULL, 40.0, 0.0, 0.0));
+		ThePoints->push_back(CARTESIAN_POINT(NULL, 60.0, -20.0, 0.0));
+		ThePoints->push_back(CARTESIAN_POINT(NULL, 80.0, 0.0, 0.0));
+		ThePoints->push_back(CARTESIAN_POINT(NULL, 100.0, -20.0, 0.0));
+		boundedCurve * TheCurve = POLYLINE(NULL, ThePoints);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 0.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, -1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_travelPath_1 = GENERAL_PATH(l_itsplacement, TheCurve);
+		//Swept profile
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 0.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_OProfile_1 = SQUARE_U_PROFILE(l_itsplacement, 5.0, 0.0, 0.0, 0.0, 0.0);
+		//Depth
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -8.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_itsdepth = ELEMENTARY_SURFACE(NULL, l_positionIn);
+		//Slot
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 140.0, 40.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		slot * l_Slot_4 = SLOT("Ranurado 4", NULL, NULL, l_itsplacement, l_itsdepth, l_travelPath_1, l_OProfile_1, NULL);
+
 		/*****************machining operation 1***************************/
 		l_locationIn = CARTESIAN_POINT(NULL, 0.0, -30.0, -5.0);
 		itstool = MILLING_CUTTING_TOOL("1337");
 		itstechnology = MILLING_TECHNOLOGY(80.0, "TCP", 0.0, 1000.0, 0.0, false, false, false, false);
-		l_apRetract = AP_RETRACT_ANLGE(NULL, 0.0, 0.0, 0.0, 0.0, 0.0);
+		l_apRetract = AP_RETRACT_ANLGE(NULL, 0.0, 0.0, 0.0, 60.0, 50.0);
 		l_millingStrategy = CENTER_MILLING(0.0, false);
 		l_itsMoperation_1 = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, l_apRetract, NULL, l_millingStrategy, 10.0, 15.0, 0.0, 0.0);
 		/*****************machining operation 2***************************/
 		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -8.0);
 		itstool = MILLING_CUTTING_TOOL("1337");
 		itstechnology = MILLING_TECHNOLOGY(80.0, "TCP", 0.0, 1000.0, 0.0, false, false, false, false);
-		l_apRetract = AP_RETRACT_ANLGE(NULL, 0.0, 0.0, 0.0, 0.0, 0.0);
+		l_apRetract = AP_RETRACT_ANLGE(NULL, 0.0, 0.0, 0.0, 30.0, 25.0);
 		l_millingStrategy = CENTER_MILLING(0.0, false);
 		l_itsMoperation_2 = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, l_apRetract, NULL, l_millingStrategy, 10.0, 15.0, 0.0, 0.0);
 		/*****************machining operation 3***************************/
 		l_locationIn = CARTESIAN_POINT(NULL, 0.0, -10.0, -2.0);
 		itstool = MILLING_CUTTING_TOOL("1334");
 		itstechnology = MILLING_TECHNOLOGY(30.0, "TCP", 0.0, 1200.0, 0.0, false, false, false, false);
-		l_apRetract = AP_RETRACT_ANLGE(NULL, 0.0, 0.0, 0.0, 0.0, 0.0);
+		l_apRetract = AP_RETRACT_ANLGE(NULL, 0.0, 0.0, 0.0, 45.0, 50.0);
 		l_millingStrategy = CENTER_MILLING(0.0, false);
 		l_itsMoperation_3 = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, l_apRetract, NULL, l_millingStrategy, 10.0, 15.0, 0.0, 0.0);
+		/*****************machining operation 4***************************/
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -2.0);
+		itstool = MILLING_CUTTING_TOOL("1334");
+		itstechnology = MILLING_TECHNOLOGY(30.0, "TCP", 0.0, 1200.0, 0.0, false, false, false, false);
+		l_apRetract = AP_RETRACT_ANLGE(NULL, 0.0, 0.0, 0.0, 65.0, 60.0);
+		l_millingStrategy = CENTER_MILLING(0.0, false);
+		l_itsMoperation_4 = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, l_apRetract, NULL, l_millingStrategy, 10.0, 15.0, 0.0, 0.0);
 
 		/**************machning workingstep****************************/
 		//Security plance
@@ -627,11 +669,13 @@ void  PP_DDBB::Initilizate(){
 		l_itsMWStep_1 = MACHINING_WORKINGSTEP("MWS 1", l_itsSecPlane, l_Slot_1, l_itsMoperation_1, NULL);
 		l_itsMWStep_2 = MACHINING_WORKINGSTEP("MWS 2", l_itsSecPlane, l_Slot_2, l_itsMoperation_2, NULL);
 		l_itsMWStep_3 = MACHINING_WORKINGSTEP("MWS 3", l_itsSecPlane, l_Slot_3, l_itsMoperation_3, NULL);
+		l_itsMWStep_4 = MACHINING_WORKINGSTEP("MWS 4", l_itsSecPlane, l_Slot_4, l_itsMoperation_4, NULL);
 		/***************************Executable list for type 1*****************/
 		l_theListIn_ex = new std::list<executable *>;
 		l_theListIn_ex->push_back(l_itsMWStep_1);
 		l_theListIn_ex->push_back(l_itsMWStep_3);
 		l_theListIn_ex->push_back(l_itsMWStep_2);
+		l_theListIn_ex->push_back(l_itsMWStep_4);
 		l_itsElementsIn_1 = new parenExecutableList(l_theListIn_ex);
 
 		/************************Channel****************************/

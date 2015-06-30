@@ -47,6 +47,7 @@ void FORTE_L1_FSlot::executeEvent(int pa_nEIID){
 			using namespace iso14649;
 			char * acBuffer = (char *)forte_malloc(sizeof(char)* 100);
 			std::list<std::string> CmdList;
+			std::string sTempString;
 			double nSecurityZ; //Above this Z-point the movements are safe
 			Eigen::Vector3d vFOrigin;//Feature origin
 			Eigen::Vector3d vOPStart;//Operation start point
@@ -91,12 +92,9 @@ void FORTE_L1_FSlot::executeEvent(int pa_nEIID){
 				CmdList.push_back(std::string(acBuffer));
 
 				//Retreive feature dimmensions
-				double nDepth = TheFeature->get_depth()->get_position()->get_location()->get_coordinates()->get_theList()->back()->get_val();
+				double nDepth = abs(TheFeature->get_depth()->get_position()->get_location()->get_coordinates()->get_theList()->back()->get_val());
 				vDepthNormal = GlobalUtils::V3DFromRealIter(TheFeature->get_depth()->get_position()->get_axis()->get_directionRatios());
-				travelPath * ThePath = TheFeature->get_courseOfTravel();
-				openProfile * TheProfile = TheFeature->get_sweptShape();
-				//TheFeature->get_endConditions()->get_theList()
-				if (ThePath == NULL || TheProfile == NULL){
+				if (TheFeature->get_courseOfTravel() == NULL || TheFeature->get_sweptShape() == NULL){
 					//Missing parameters
 					DEVLOG_DEBUG("Feature error; Missing parameters \n");
 					forte_free(acBuffer);
@@ -116,40 +114,14 @@ void FORTE_L1_FSlot::executeEvent(int pa_nEIID){
 				if (TheWS->get_itsOperation()->isA(bottomAndSideMilling_E)){
 					//Finish and rough milling classes are equal from c++ perspective
 					bottomAndSideMilling * TheOperation = (bottomAndSideMilling *)TheWS->get_itsOperation();
+
 					//Retreive the start_point of the operation
 					vOPStart = GlobalUtils::V3DFromRealIter(TheWS->get_itsOperation()->get_startPoint()->get_coordinates());
-					//Retreive approach strategy information
-					double nAPAngle = 0.0;
-					double nAPTravel = 0.0;
-					std::vector<std::string> approachSequence;//Vector to hold the approach sequence
-					if (TheOperation->get_approach()->isA(apRetractAngle_E)){
-						apRetractAngle * TheApproach = (apRetractAngle *)TheOperation->get_approach();
-						nAPAngle = TheApproach->get_angle();
-						nAPTravel = TheApproach->get_travelLength();
-						//vRealStart = vCTDir * nAPTravel;
-						//vRealStart.z() = -1.0 * sin(nAPAngle / 180.0 * pi)*nAPTravel;
-						vRealStart = vOPStart;// -vRealStart;
-						//Fast movement to XY operation start point in the security plane
-						sprintf(acBuffer, "G00 X%f Y%f Z%f", vRealStart.x(), vRealStart.y(), nSecurityZ);
-						approachSequence.push_back(std::string(acBuffer));
-						//Fast movement in Z to the point where approach movement starts
-						sprintf(acBuffer, "G00 Z%f", vRealStart.z());
-						approachSequence.push_back(std::string(acBuffer));
-						//Move tool to the start point
-						sprintf(acBuffer, "G01 X%f Y%f Z%f", vOPStart.x(), vOPStart.y(), vOPStart.z());
-						approachSequence.push_back(std::string(acBuffer));
-					}
-					else{
-						//Approach strategy not supported
-						DEVLOG_DEBUG("Trying to use a not supported approach strategy \n");
-						forte_free(acBuffer);
-						acBuffer = NULL;
-						PARAM_ERROR_EXIT
-					}
+
 					double nWidth = 0.0;
-					if (TheProfile->isA(squareUProfile_E)){
-						squareUProfile * TheProfileDer = (squareUProfile *)TheProfile;
-						nWidth = TheProfileDer->get_width()->get_theoreticalSize();
+					if (TheFeature->get_sweptShape()->isA(squareUProfile_E)){
+						squareUProfile * TheProfile = (squareUProfile *)TheFeature->get_sweptShape();
+						nWidth = TheProfile->get_width()->get_theoreticalSize();
 					}
 					else{
 						//Swept profile not supported
@@ -186,12 +158,16 @@ void FORTE_L1_FSlot::executeEvent(int pa_nEIID){
 
 					//Calculate the number of layers to remove
 					double nAxialStep = nRealDepth;
-					int nLayers = 1;
+					//int nLayers = 1;
 					if (nRealDepth > nAxialMax){
 						//Several layers needed
-						//TODO: Add other splitting polices
-						nLayers = ceil(((nRealDepth - abs(vOPStart.z())) / nAxialMax));
-						nAxialStep = (nRealDepth - abs(vOPStart.z())) / nLayers++;
+						//TODO: For now multiple layers are not supported for slots
+						//nLayers = ceil(((nRealDepth - abs(vOPStart.z())) / nAxialMax));
+						//nAxialStep = (nRealDepth - abs(vOPStart.z())) / nLayers++;
+						DEVLOG_DEBUG("Slots can not be machined in multiple layers\n");
+						forte_free(acBuffer);
+						acBuffer = NULL;
+						PARAM_ERROR_EXIT
 					}
 
 					//Configure the feed and rot speed and start the spindle
@@ -208,130 +184,339 @@ void FORTE_L1_FSlot::executeEvent(int pa_nEIID){
 					sprintf(acBuffer, "S%f M0%i", nRotSpeed, nRotSens);
 					CmdList.push_back(std::string(acBuffer));
 
-					CmdList.insert(CmdList.end(), approachSequence.begin(), approachSequence.end());
-
-					//Generate path's G code according to the strategy
-					//After approaching G01 is active and tool is at start point
 					vCurrentXYZ = vOPStart;
-					if (TheOperation->get_itsMachiningStrategy()->isA(unidirectionalMilling_E)){
-						//This strategy is not supported for this feature
-						DEVLOG_DEBUG("Not supported strategy \n");
-						forte_free(acBuffer);
-						acBuffer = NULL;
-						PARAM_ERROR_EXIT
-					}
-					else if (TheOperation->get_itsMachiningStrategy()->isA(bidirectionalMilling_E)){
-						//This strategy is not supported for this feature
-						DEVLOG_DEBUG("Not supported strategy \n");
-						forte_free(acBuffer);
-						acBuffer = NULL;
-						PARAM_ERROR_EXIT
-					}
-					else if (TheOperation->get_itsMachiningStrategy()->isA(contourParallel_E)){
-						//This strategy is not supported for this feature
-						DEVLOG_DEBUG("Not supported strategy \n");
-						forte_free(acBuffer);
-						acBuffer = NULL;
-						PARAM_ERROR_EXIT
-					}
-					else if (TheOperation->get_itsMachiningStrategy()->isA(bidirectionalContour_E)){
-						//This strategy is not supported for this feature
-						DEVLOG_DEBUG("Not supported strategy \n");
-						forte_free(acBuffer);
-						acBuffer = NULL;
-						PARAM_ERROR_EXIT
-					}
-					else if (TheOperation->get_itsMachiningStrategy()->isA(contourBidirectional_E)){
-						//This strategy is not supported for this feature
-						DEVLOG_DEBUG("Not supported strategy \n");
-						forte_free(acBuffer);
-						acBuffer = NULL;
-						PARAM_ERROR_EXIT
-					}
-					else if (TheOperation->get_itsMachiningStrategy()->isA(contourSpiral_E)){
-						//This strategy is not supported for this feature
-						DEVLOG_DEBUG("Not supported strategy \n");
-						forte_free(acBuffer);
-						acBuffer = NULL;
-						PARAM_ERROR_EXIT
-					}
-					else if (TheOperation->get_itsMachiningStrategy()->isA(centerMilling_E)){
-						if (ThePath->isA(generalPath_E)){
-							generalPath * ThePathDer = (generalPath *)ThePath;
-						}
-						else if (ThePath->isA(linearPath_E)){
-							linearPath * ThePathDer = (linearPath *)ThePath;
-							//Retreive the linear path direction
-							Eigen::Vector3d vPDir = GlobalUtils::V3DFromRealIter(ThePathDer->get_itsDirection()->get_directionRatios());
-							vPDir.normalize();
-							vCurrentXYZ = vCurrentXYZ + vPDir * ThePathDer->get_distance()->get_theoreticalSize();
-							sprintf(acBuffer, "X%f Y%f", vCurrentXYZ.x(), vCurrentXYZ.y());
-							CmdList.push_back(std::string(acBuffer));
-						}
-						else if (ThePath->isA(completeCircularPath_E)){
-							completeCircularPath * ThePathDer = (completeCircularPath *)ThePath;
-							//Retreive the path Z axis 
-							Eigen::Vector3d vPZAxis = GlobalUtils::V3DFromRealIter(ThePathDer->get_placement()->get_axis()->get_directionRatios());
-							Eigen::Vector3d vPOrigin = GlobalUtils::V3DFromRealIter(ThePathDer->get_placement()->get_location()->get_coordinates());
-							//If Z axis is positive conunter clockwise rotation; if negative clockwise rotation
-							(vPZAxis.z() >= 0.0) ? CmdList.push_back("G03") : CmdList.push_back("G02");
-							double nRealRadius = sqrt((vOPStart.x() - vPOrigin.x())*(vOPStart.x() - vPOrigin.x()) + (vOPStart.y() - vPOrigin.y())*(vOPStart.y() - vPOrigin.y()));
-							double nPathRadius = ThePathDer->get_radius()->get_theoreticalSize();
-							if (nRealRadius < nPathRadius * 0.99 || nRealRadius > nPathRadius*1.01){
-								//Start point error
-								DEVLOG_DEBUG("Start point error for the circular path \n");
+					if (TheFeature->get_courseOfTravel()->isA(generalPath_E)){
+						generalPath * ThePath = (generalPath *)TheFeature->get_courseOfTravel();
+
+						if (ThePath->get_sweptPath()->isA(polyline_E)){
+							polyline * ThePoly = (polyline *)ThePath->get_sweptPath();
+							std::list<cartesianPoint *>::const_iterator pointsIter = ThePoly->get_points()->get_theList()->begin();
+							//Check if the list is empty
+							if (pointsIter == ThePoly->get_points()->get_theList()->end() ){
+								//Invalid polyline
+								DEVLOG_DEBUG("Trying to use aan invalid polyline \n");
 								forte_free(acBuffer);
 								acBuffer = NULL;
 								PARAM_ERROR_EXIT
 							}
-							sprintf(acBuffer, "X%f Y%f I%f J%f", vCurrentXYZ.x(), vCurrentXYZ.y(), vPOrigin.x() - vCurrentXYZ.x(), vPOrigin.y() - vCurrentXYZ.y());
-							CmdList.push_back(std::string(acBuffer));
-						}
-						else if (ThePath->isA(partialCircularPath_E)){
-							partialCircularPath * ThePathDer = (partialCircularPath *)ThePath;
-							//Retreive the path Z axis 
-							Eigen::Vector3d vPDir = GlobalUtils::V3DFromRealIter(ThePathDer->get_placement()->get_axis()->get_directionRatios());
-							Eigen::Vector3d vPOrigin = GlobalUtils::V3DFromRealIter(ThePathDer->get_placement()->get_location()->get_coordinates());
-							//Calculate the start point absolute angle respecto to X-axis
-							double nSPangle = atan2(vOPStart.y() - vPOrigin.y(), vOPStart.x() - vPOrigin.x());
-							//If Z axis is positive conunter clockwise rotation; if negative clockwise rotation
-							if (vPDir.z() >= 0.0){
-								CmdList.push_back("G03");
-								nSPangle += ThePathDer->get_sweepAngle() * pi / 180.0;
-							}
-							else{
-								CmdList.push_back("G02");
-								nSPangle -= ThePathDer->get_sweepAngle() * pi / 180.0;
-							}
-							double nRealRadius = sqrt((vOPStart.x() - vPOrigin.x())*(vOPStart.x() - vPOrigin.x()) + (vOPStart.y() - vPOrigin.y())*(vOPStart.y() - vPOrigin.y()));
-							double nPathRadius = ThePathDer->get_radius()->get_theoreticalSize();
-							if (nRealRadius < nPathRadius * 0.99 || nRealRadius > nPathRadius*1.01){
-								//Start point error
-								DEVLOG_DEBUG("Start point error for the circular path \n");
+							//The 1st point of the polyline must be equal to operation start point
+							if (!GlobalUtils::isPlacementEqual((*pointsIter), vOPStart.x(), vOPStart.y())){
+								//Invalid polyline start point
+								DEVLOG_DEBUG("Operation and polyline start point must be equal \n");
 								forte_free(acBuffer);
 								acBuffer = NULL;
 								PARAM_ERROR_EXIT
 							}
-							sprintf(acBuffer, "X%f Y%f I%f J%f", vPOrigin.x() + nPathRadius * cos(nSPangle), vPOrigin.y() + nPathRadius * sin(nSPangle),
-								vPOrigin.x() - vOPStart.x(), vPOrigin.y() - vOPStart.y());
+							//Generate path's G code according to the strategy
+							if (TheOperation->get_itsMachiningStrategy()->isA(unidirectionalMilling_E)){
+								//This strategy is not supported for this feature
+								DEVLOG_DEBUG("Not supported strategy \n");
+								forte_free(acBuffer);
+								acBuffer = NULL;
+								PARAM_ERROR_EXIT
+							}
+							else if (TheOperation->get_itsMachiningStrategy()->isA(bidirectionalMilling_E)){
+								//This strategy is not supported for this feature
+								DEVLOG_DEBUG("Not supported strategy \n");
+								forte_free(acBuffer);
+								acBuffer = NULL;
+								PARAM_ERROR_EXIT
+							}
+							else if (TheOperation->get_itsMachiningStrategy()->isA(centerMilling_E)){
+								if (++pointsIter != ThePoly->get_points()->get_theList()->end()){
+									vCurrentXYZ = GlobalUtils::V3DFromRealIter((*pointsIter)->get_coordinates());
+									//Retreive approach strategy information
+									if (TheOperation->get_approach()->isA(apRetractAngle_E)){
+										apRetractAngle * TheApproach = (apRetractAngle *)TheOperation->get_approach();
+										double nAPAngle = TheApproach->get_angle();
+										double nAPTravel = TheApproach->get_travelLength();
+										Eigen::Vector2d vCTTangent;//Vector that goes from 1st to 2nd point of the polyline
+										vCTTangent = Eigen::Vector2d(vCurrentXYZ.x() - vOPStart.x(), vCurrentXYZ.y() - vOPStart.y());
+										vCTTangent.normalize();
+										vRealStart = Eigen::Vector3d(vCTTangent.x() * nAPTravel, vCTTangent.y() * nAPTravel, -1.0 * sin(nAPAngle / 180.0 * pi)*nAPTravel);
+										vRealStart = vOPStart - vRealStart;
+										//Fast movement to XY operation start point in the security plane
+										sprintf(acBuffer, "G00 X%f Y%f Z%f", vRealStart.x(), vRealStart.y(), nSecurityZ);
+										CmdList.push_back(std::string(acBuffer));
+										//Fast movement in Z to the point where approach movement starts
+										sprintf(acBuffer, "G00 Z%f", vRealStart.z());
+										CmdList.push_back(std::string(acBuffer));
+										//Move tool to the start point
+										sprintf(acBuffer, "G01 X%f Y%f Z%f", vOPStart.x(), vOPStart.y(), vOPStart.z());
+										CmdList.push_back(std::string(acBuffer));
+									}
+									else{
+										//Approach strategy not supported
+										DEVLOG_DEBUG("Trying to use a not supported approach strategy \n");
+										forte_free(acBuffer);
+										acBuffer = NULL;
+										PARAM_ERROR_EXIT
+									}
+								}
+								else{
+									//Invalid polyline; It must have 2 points at least
+									DEVLOG_DEBUG("Invalid polyline; It must have 2 points at least \n");
+									forte_free(acBuffer);
+									acBuffer = NULL;
+									PARAM_ERROR_EXIT
+								}
+								sprintf(acBuffer, "X%f Y%f", vCurrentXYZ.x(), vCurrentXYZ.y());
+								CmdList.push_back(std::string(acBuffer));
+								++pointsIter;
+								for (; pointsIter != ThePoly->get_points()->get_theList()->end(); ++pointsIter){
+									vCurrentXYZ = GlobalUtils::V3DFromRealIter((*pointsIter)->get_coordinates());
+									sprintf(acBuffer, "X%f Y%f", vCurrentXYZ.x(), vCurrentXYZ.y());
+									CmdList.push_back(std::string(acBuffer));
+								}
+							}
+							else {
+								//This strategy is not supported for this feature
+								DEVLOG_DEBUG("Not supported strategy \n");
+								forte_free(acBuffer);
+								acBuffer = NULL;
+								PARAM_ERROR_EXIT
+							}
+						}
+						else{
+							//Not supported travel path in SLOT feature
+							DEVLOG_DEBUG("Not supported travel path in SLOT feature\n");
+							forte_free(acBuffer);
+							acBuffer = NULL;
+							PARAM_ERROR_EXIT
+						}	
+					}
+					else if (TheFeature->get_courseOfTravel()->isA(linearPath_E)){
+						linearPath * ThePath = (linearPath *)TheFeature->get_courseOfTravel();
+						//Retreive the linear path direction
+						Eigen::Vector3d vPDir = GlobalUtils::V3DFromRealIter(ThePath->get_itsDirection()->get_directionRatios());
+						vPDir.normalize();
+
+						//Retreive approach strategy information
+						if (TheOperation->get_approach()->isA(apRetractAngle_E)){
+							apRetractAngle * TheApproach = (apRetractAngle *)TheOperation->get_approach();
+							double nAPAngle = TheApproach->get_angle();
+							double nAPTravel = TheApproach->get_travelLength();
+							vRealStart = vPDir * nAPTravel;
+							vRealStart.z() = -1.0 * sin(nAPAngle / 180.0 * pi)*nAPTravel;
+							vRealStart = vOPStart - vRealStart;
+							//Fast movement to XY operation start point in the security plane
+							sprintf(acBuffer, "G00 X%f Y%f Z%f", vRealStart.x(), vRealStart.y(), nSecurityZ);
+							CmdList.push_back(std::string(acBuffer));
+							//Fast movement in Z to the point where approach movement starts
+							sprintf(acBuffer, "G00 Z%f", vRealStart.z());
+							CmdList.push_back(std::string(acBuffer));
+							//Move tool to the start point
+							sprintf(acBuffer, "G01 X%f Y%f Z%f", vOPStart.x(), vOPStart.y(), vOPStart.z());
 							CmdList.push_back(std::string(acBuffer));
 						}
 						else{
-							//Unkonwn travel path
-							DEVLOG_DEBUG("Trying to use an unkown travel path\n");
+							//Approach strategy not supported
+							DEVLOG_DEBUG("Trying to use a not supported approach strategy \n");
+							forte_free(acBuffer);
+							acBuffer = NULL;
+							PARAM_ERROR_EXIT
+						}
+
+						//Generate path's G code according to the strategy
+						//After approaching G01 is active and tool is at start point
+						if (TheOperation->get_itsMachiningStrategy()->isA(unidirectionalMilling_E)){
+							//This strategy is not supported for this feature
+							DEVLOG_DEBUG("Not supported strategy \n");
+							forte_free(acBuffer);
+							acBuffer = NULL;
+							PARAM_ERROR_EXIT
+						}
+						else if (TheOperation->get_itsMachiningStrategy()->isA(bidirectionalMilling_E)){
+							//This strategy is not supported for this feature
+							DEVLOG_DEBUG("Not supported strategy \n");
+							forte_free(acBuffer);
+							acBuffer = NULL;
+							PARAM_ERROR_EXIT
+						}
+						else if (TheOperation->get_itsMachiningStrategy()->isA(centerMilling_E)){
+							vCurrentXYZ = vCurrentXYZ + vPDir * ThePath->get_distance()->get_theoreticalSize();
+							sprintf(acBuffer, "X%f Y%f", vCurrentXYZ.x(), vCurrentXYZ.y());
+							CmdList.push_back(std::string(acBuffer));
+						}
+						else {
+							//This strategy is not supported for this feature
+							DEVLOG_DEBUG("Not supported strategy \n");
 							forte_free(acBuffer);
 							acBuffer = NULL;
 							PARAM_ERROR_EXIT
 						}
 					}
-					else if (TheOperation->get_itsMachiningStrategy()->isA(explicitStrategy_E)){
-						//This strategy is not supported for this feature
-						DEVLOG_DEBUG("Not supported strategy \n");
+					else if (TheFeature->get_courseOfTravel()->isA(completeCircularPath_E)){
+						completeCircularPath * ThePath = (completeCircularPath *)TheFeature->get_courseOfTravel();
+						//Retreive the path Z axis 
+						Eigen::Vector3d vPZAxis = GlobalUtils::V3DFromRealIter(ThePath->get_placement()->get_axis()->get_directionRatios());
+						Eigen::Vector3d vPOrigin = GlobalUtils::V3DFromRealIter(ThePath->get_placement()->get_location()->get_coordinates());
+						Eigen::Vector2d vPRRadius;//Vector in XY plane from profile center to the start point
+						vPRRadius = Eigen::Vector2d(vOPStart.x() - vPOrigin.x(), vOPStart.y() - vPOrigin.y());
+						Eigen::Vector2d vPTangent;//Vector tangentto the path			
+						double nPathRadius = ThePath->get_radius()->get_theoreticalSize();
+
+						//Verify that the start point is correct; since we work with double leave a 1% margin for rounding errors
+						if (vPRRadius.norm() < nPathRadius * 0.99 || vPRRadius.norm() > nPathRadius*1.01){
+							//Start point error
+							DEVLOG_DEBUG("Start point error for the circular path \n");
+							forte_free(acBuffer);
+							acBuffer = NULL;
+							PARAM_ERROR_EXIT
+						}
+						//If Z axis is positive conunter clockwise rotation; if negative clockwise rotation
+						if (vPZAxis.z() >= 0.0){
+							sTempString = std::string("G03");
+							vPTangent = Eigen::Vector2d(-1.0 * vPRRadius.y(), vPRRadius.x());
+						}
+						else{
+							sTempString = std::string("G02");
+							vPTangent = Eigen::Vector2d(vPRRadius.y(), -1.0 * vPRRadius.x());
+						}
+						vPTangent.normalize();
+
+						//Retreive approach strategy information
+						if (TheOperation->get_approach()->isA(apRetractAngle_E)){
+							apRetractAngle * TheApproach = (apRetractAngle *)TheOperation->get_approach();
+							double nAPAngle = TheApproach->get_angle();
+							double nAPTravel = TheApproach->get_travelLength();
+							vRealStart = Eigen::Vector3d(vPTangent.x() * nAPTravel, vPTangent.y() * nAPTravel, -1.0 * sin(nAPAngle / 180.0 * pi)*nAPTravel);
+							vRealStart = vOPStart - vRealStart;
+							//Fast movement to XY operation start point in the security plane
+							sprintf(acBuffer, "G00 X%f Y%f Z%f", vRealStart.x(), vRealStart.y(), nSecurityZ);
+							CmdList.push_back(std::string(acBuffer));
+							//Fast movement in Z to the point where approach movement starts
+							sprintf(acBuffer, "G00 Z%f", vRealStart.z());
+							CmdList.push_back(std::string(acBuffer));
+							//Move tool to the start point
+							sprintf(acBuffer, "G01 X%f Y%f Z%f", vOPStart.x(), vOPStart.y(), vOPStart.z());
+							CmdList.push_back(std::string(acBuffer));
+						}
+						else{
+							//Approach strategy not supported
+							DEVLOG_DEBUG("Trying to use a not supported approach strategy \n");
+							forte_free(acBuffer);
+							acBuffer = NULL;
+							PARAM_ERROR_EXIT
+						}
+
+						if (TheOperation->get_itsMachiningStrategy()->isA(unidirectionalMilling_E)){
+							//This strategy is not supported for this feature
+							DEVLOG_DEBUG("Not supported strategy \n");
+							forte_free(acBuffer);
+							acBuffer = NULL;
+							PARAM_ERROR_EXIT
+						}
+						else if (TheOperation->get_itsMachiningStrategy()->isA(bidirectionalMilling_E)){
+							//This strategy is not supported for this feature
+							DEVLOG_DEBUG("Not supported strategy \n");
+							forte_free(acBuffer);
+							acBuffer = NULL;
+							PARAM_ERROR_EXIT
+						}
+						else if (TheOperation->get_itsMachiningStrategy()->isA(centerMilling_E)){
+							sprintf(acBuffer, "%s X%f Y%f I%f J%f", sTempString.c_str(),vCurrentXYZ.x(), vCurrentXYZ.y(), vPOrigin.x() - vCurrentXYZ.x(), vPOrigin.y() - vCurrentXYZ.y());
+							CmdList.push_back(std::string(acBuffer));
+						}
+						else {
+							//This strategy is not supported for this feature
+							DEVLOG_DEBUG("Not supported strategy \n");
+							forte_free(acBuffer);
+							acBuffer = NULL;
+							PARAM_ERROR_EXIT
+						}
+					}
+					else if (TheFeature->get_courseOfTravel()->isA(partialCircularPath_E)){
+						partialCircularPath * ThePath = (partialCircularPath *)TheFeature->get_courseOfTravel();
+						//Retreive the path Z axis 
+						Eigen::Vector3d vPDir = GlobalUtils::V3DFromRealIter(ThePath->get_placement()->get_axis()->get_directionRatios());
+						Eigen::Vector3d vPOrigin = GlobalUtils::V3DFromRealIter(ThePath->get_placement()->get_location()->get_coordinates());
+						Eigen::Vector2d vPRRadius;//Vector in XY plane from profile center to the start point
+						vPRRadius = Eigen::Vector2d(vOPStart.x() - vPOrigin.x(), vOPStart.y() - vPOrigin.y());
+						Eigen::Vector2d vPTangent;//Vector tangentto the path	
+						double nPathRadius = ThePath->get_radius()->get_theoreticalSize();
+						//Calculate the start point absolute angle respecto to X-axis
+						double nSPangle = atan2(vOPStart.y() - vPOrigin.y(), vOPStart.x() - vPOrigin.x());
+						//If Z axis is positive conunter clockwise rotation; if negative clockwise rotation
+						if (vPDir.z() >= 0.0){
+							sTempString = std::string("G03");
+							nSPangle += ThePath->get_sweepAngle() * pi / 180.0;
+							vPTangent = Eigen::Vector2d(-1.0 * vPRRadius.y(), vPRRadius.x());
+						}
+						else{
+							sTempString = std::string("G02");
+							nSPangle -= ThePath->get_sweepAngle() * pi / 180.0;
+							vPTangent = Eigen::Vector2d(vPRRadius.y(), -1.0 * vPRRadius.x());
+						}
+						vPTangent.normalize();
+
+						if (vPRRadius.norm() < nPathRadius * 0.99 || vPRRadius.norm() > nPathRadius*1.01){
+							//Start point error
+							DEVLOG_DEBUG("Start point error for the circular path \n");
+							forte_free(acBuffer);
+							acBuffer = NULL;
+							PARAM_ERROR_EXIT
+						}
+
+						//Retreive approach strategy information
+						if (TheOperation->get_approach()->isA(apRetractAngle_E)){
+							apRetractAngle * TheApproach = (apRetractAngle *)TheOperation->get_approach();
+							double nAPAngle = TheApproach->get_angle();
+							double nAPTravel = TheApproach->get_travelLength();
+							vRealStart = Eigen::Vector3d(vPTangent.x() * nAPTravel, vPTangent.y() * nAPTravel, -1.0 * sin(nAPAngle / 180.0 * pi)*nAPTravel);
+							vRealStart = vOPStart - vRealStart;
+							//Fast movement to XY operation start point in the security plane
+							sprintf(acBuffer, "G00 X%f Y%f Z%f", vRealStart.x(), vRealStart.y(), nSecurityZ);
+							CmdList.push_back(std::string(acBuffer));
+							//Fast movement in Z to the point where approach movement starts
+							sprintf(acBuffer, "G00 Z%f", vRealStart.z());
+							CmdList.push_back(std::string(acBuffer));
+							//Move tool to the start point
+							sprintf(acBuffer, "G01 X%f Y%f Z%f", vOPStart.x(), vOPStart.y(), vOPStart.z());
+							CmdList.push_back(std::string(acBuffer));
+						}
+						else{
+							//Approach strategy not supported
+							DEVLOG_DEBUG("Trying to use a not supported approach strategy \n");
+							forte_free(acBuffer);
+							acBuffer = NULL;
+							PARAM_ERROR_EXIT
+						}
+
+						if (TheOperation->get_itsMachiningStrategy()->isA(unidirectionalMilling_E)){
+							//This strategy is not supported for this feature
+							DEVLOG_DEBUG("Not supported strategy \n");
+							forte_free(acBuffer);
+							acBuffer = NULL;
+							PARAM_ERROR_EXIT
+						}
+						else if (TheOperation->get_itsMachiningStrategy()->isA(bidirectionalMilling_E)){
+							//This strategy is not supported for this feature
+							DEVLOG_DEBUG("Not supported strategy \n");
+							forte_free(acBuffer);
+							acBuffer = NULL;
+							PARAM_ERROR_EXIT
+						}
+						else if (TheOperation->get_itsMachiningStrategy()->isA(centerMilling_E)){
+							sprintf(acBuffer, "%s X%f Y%f I%f J%f", sTempString.c_str(),vPOrigin.x() + nPathRadius * cos(nSPangle), vPOrigin.y() + nPathRadius * sin(nSPangle),
+								vPOrigin.x() - vOPStart.x(), vPOrigin.y() - vOPStart.y());
+							CmdList.push_back(std::string(acBuffer));
+						}
+						else {
+							//This strategy is not supported for this feature
+							DEVLOG_DEBUG("Not supported strategy \n");
+							forte_free(acBuffer);
+							acBuffer = NULL;
+							PARAM_ERROR_EXIT
+						}
+					}
+					else{
+						//Unkonwn travel path
+						DEVLOG_DEBUG("Trying to use an unkown travel path\n");
 						forte_free(acBuffer);
 						acBuffer = NULL;
 						PARAM_ERROR_EXIT
 					}
-
 				}
 				else{
 					//Can not do a slot w/o bottom and side milling

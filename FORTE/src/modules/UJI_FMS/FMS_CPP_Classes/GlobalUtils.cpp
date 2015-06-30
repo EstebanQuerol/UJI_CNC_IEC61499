@@ -55,3 +55,13 @@ bool GlobalUtils::isPlacementEqual(iso14649::cartesianPoint *pa_oA, const double
 	}
 	return bRet;
 }
+
+bool GlobalUtils::isPlacementEqual(iso14649::cartesianPoint *pa_oA, const double &x, const double &y){
+	bool bRet = FALSE;
+	if (pa_oA != NULL){
+		std::list<iso14649::real *>::const_iterator iterA = pa_oA->get_coordinates()->get_theList()->begin();
+		bRet = (*iterA++)->get_val() == x;
+		bRet = bRet && ((*iterA++)->get_val() == y);
+	}
+	return bRet;
+}

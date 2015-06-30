@@ -55,6 +55,11 @@ public:
 	* rerurn false if points are not equal
 	*/
 	static bool isPlacementEqual(iso14649::cartesianPoint *pa_oA, const double &x, const double &y, const double &z);
+	/*!\ isPlacementEqual overload in XY plane
+	* return true if both points are equal
+	* rerurn false if points are not equal
+	*/
+	static bool isPlacementEqual(iso14649::cartesianPoint *pa_oA, const double &x, const double &y);
 private:
 	static std::vector<void *> sm_vSerallocLog;
 };

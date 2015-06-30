@@ -4447,6 +4447,14 @@ public:
   void set_theList(std::list<cartesianPoint *> * theListIn);
 private:
   std::list<cartesianPoint *> * theList;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+	  ar & theList;
+  }
 };
 
 /********************************************************************/
@@ -17437,6 +17445,15 @@ public:
   void set_points(parenCartesianPointListFull * pointsIn);
 private:
   parenCartesianPointListFull * points;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<boundedCurve>(*this);
+	  ar & points;
+  }
 };
 
 /********************************************************************/
@@ -18115,5 +18132,6 @@ BOOST_CLASS_EXPORT_KEY(iso14649::counterSinking)
 BOOST_CLASS_EXPORT_KEY(iso14649::multistepDrilling)
 BOOST_CLASS_EXPORT_KEY(iso14649::reaming)
 BOOST_CLASS_EXPORT_KEY(iso14649::boring)
+BOOST_CLASS_EXPORT_KEY(iso14649::polyline)
 /********************************************************************/
 #endif
