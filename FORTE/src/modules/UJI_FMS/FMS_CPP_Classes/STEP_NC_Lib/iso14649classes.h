@@ -12093,6 +12093,14 @@ public:
   void set_profileSweptShape(linearPath * profileSweptShapeIn);
 private:
   linearPath * profileSweptShape;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<machiningFeature>(*this);
+	  ar & profileSweptShape;
+  }
 };
 
 /********************************************************************/
@@ -12793,6 +12801,18 @@ private:
   linearPath * openBoundary;
   veeProfile * wallBoundary;
   parenBossList * itsBoss;
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<instance>(*this);
+		ar & boost::serialization::base_object<machiningFeature>(*this);
+		ar & openBoundary;
+		ar & wallBoundary;
+		ar & itsBoss;
+	}
 };
 
 /********************************************************************/
@@ -14891,6 +14911,15 @@ public:
   void set_featureBoundary(profile * featureBoundaryIn);
 private:
   profile * featureBoundary;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<profileFeature>(*this);
+	  ar & featureBoundary;
+  }
 };
 
 /********************************************************************/
@@ -18065,6 +18094,8 @@ BOOST_CLASS_EXPORT_KEY(iso14649::closedPocket)
 BOOST_CLASS_EXPORT_KEY(iso14649::openPocket)
 BOOST_CLASS_EXPORT_KEY(iso14649::roundHole)
 BOOST_CLASS_EXPORT_KEY(iso14649::slot)
+BOOST_CLASS_EXPORT_KEY(iso14649::step)
+BOOST_CLASS_EXPORT_KEY(iso14649::generalOutsideProfile)
 BOOST_CLASS_EXPORT_KEY(iso14649::generalPath)
 BOOST_CLASS_EXPORT_KEY(iso14649::linearPath)
 BOOST_CLASS_EXPORT_KEY(iso14649::partialCircularPath)

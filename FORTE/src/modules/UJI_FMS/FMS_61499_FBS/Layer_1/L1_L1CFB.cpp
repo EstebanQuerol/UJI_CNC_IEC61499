@@ -55,6 +55,10 @@ const SCFB_FBInstanceData FORTE_L1_L1CFB::scm_astInternalFBs[] = {
   {g_nStringIdL1_FPlanarFace, g_nStringIdL1_FPlanarFace},
   {g_nStringIdL1_FSlot, g_nStringIdL1_FSlot},
   {g_nStringIdL1_Merge2Cmd_5, g_nStringIdL1_Merge2Cmd},
+  {g_nStringIdL1_FStep, g_nStringIdL1_FStep},
+  {g_nStringIdL1_Merge2Cmd_6, g_nStringIdL1_Merge2Cmd},
+  {g_nStringIdL1_FGeneralOutProfile, g_nStringIdL1_FGeneralOutProfile},
+  {g_nStringIdL1_Merge2Cmd_7, g_nStringIdL1_Merge2Cmd},
 };
 
 const SCFB_FBConnectionData FORTE_L1_L1CFB::scm_astEventConnections[] = {
@@ -77,6 +81,10 @@ const SCFB_FBConnectionData FORTE_L1_L1CFB::scm_astEventConnections[] = {
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FPlanarFace, g_nStringIdCNF), 11, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_4, g_nStringIdE1), 10},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FSlot, g_nStringIdCNF), 12, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_5, g_nStringIdE1), 13},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_5, g_nStringIdEO), 13, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_4, g_nStringIdE2), 10},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FStep, g_nStringIdCNF), 14, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_6, g_nStringIdE1), 15},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_6, g_nStringIdEO), 15, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_5, g_nStringIdE2), 13},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FGeneralOutProfile, g_nStringIdCNF), 16, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_7, g_nStringIdE1), 17},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_7, g_nStringIdEO), 17, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_6, g_nStringIdE2), 15},
 };
 
 const SCFB_FBFannedOutConnectionData FORTE_L1_L1CFB::scm_astFannedOutEventConnections[] = {
@@ -85,6 +93,8 @@ const SCFB_FBFannedOutConnectionData FORTE_L1_L1CFB::scm_astFannedOutEventConnec
   {0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FClosedPocket_1, g_nStringIdREQ), 4},
   {0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FPlanarFace, g_nStringIdREQ), 11},
   {0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FSlot, g_nStringIdREQ), 12},
+  {0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FStep, g_nStringIdREQ), 14},
+  {0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FGeneralOutProfile, g_nStringIdREQ), 16},
   {12, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_3, g_nStringIdE2), 9},
 };
 
@@ -118,6 +128,14 @@ const SCFB_FBConnectionData FORTE_L1_L1CFB::scm_astDataConnections[] = {
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FSlot, g_nStringIdL1MIDOut), 12, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_5, g_nStringIdL1MID1), 13},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_5, g_nStringIdCmdOut), 13, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_4, g_nStringIdCmd2), 10},
   {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_5, g_nStringIdL1MIDOut), 13, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_4, g_nStringIdL1MID2), 10},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_6, g_nStringIdCmdOut), 15, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_5, g_nStringIdCmd2), 13},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_6, g_nStringIdL1MIDOut), 15, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_5, g_nStringIdL1MID2), 13},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FStep, g_nStringIdCmd), 14, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_6, g_nStringIdCmd1), 15},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FStep, g_nStringIdL1MIDOut), 14, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_6, g_nStringIdL1MID1), 15},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_7, g_nStringIdCmdOut), 17, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_6, g_nStringIdCmd2), 15},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_7, g_nStringIdL1MIDOut), 17, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_6, g_nStringIdL1MID2), 15},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FGeneralOutProfile, g_nStringIdCmd), 16, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_7, g_nStringIdCmd1), 17},
+  {GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FGeneralOutProfile, g_nStringIdL1MIDOut), 16, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_Merge2Cmd_7, g_nStringIdL1MID1), 17},
 };
 
 const SCFB_FBFannedOutConnectionData FORTE_L1_L1CFB::scm_astFannedOutDataConnections[] = {
@@ -126,19 +144,23 @@ const SCFB_FBFannedOutConnectionData FORTE_L1_L1CFB::scm_astFannedOutDataConnect
   {0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FClosedPocket_1, g_nStringIdOperation), 4},
   {0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FPlanarFace, g_nStringIdOperation), 11},
   {0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FSlot, g_nStringIdOperation), 12},
+  {0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FStep, g_nStringIdOperation), 14},
+  {0, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FGeneralOutProfile, g_nStringIdOperation), 16},
   {1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_SendCmd_1, g_nStringIdL1MID), 3},
   {1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FClosedPocket_1, g_nStringIdL1MIDIn), 4},
   {1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FSetup_1, g_nStringIdL1MIDIn), 2},
   {1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FPlanarFace, g_nStringIdL1MIDIn), 11},
   {1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FSlot, g_nStringIdL1MIDIn), 12},
+  {1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FStep, g_nStringIdL1MIDIn), 14},
+  {1, GENERATE_CONNECTION_PORT_ID_2_ARG(g_nStringIdL1_FGeneralOutProfile, g_nStringIdL1MIDIn), 16},
 };
 
 const SCFB_FBNData FORTE_L1_L1CFB::scm_stFBNData = {
-  14, scm_astInternalFBs,
-  19, scm_astEventConnections,
-  6, scm_astFannedOutEventConnections,
-  29, scm_astDataConnections,
-  10, scm_astFannedOutDataConnections,
+  18, scm_astInternalFBs,
+  23, scm_astEventConnections,
+  8, scm_astFannedOutEventConnections,
+  37, scm_astDataConnections,
+  14, scm_astFannedOutDataConnections,
   0, 0
 };
 

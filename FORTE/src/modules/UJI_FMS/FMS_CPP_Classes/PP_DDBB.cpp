@@ -35,7 +35,7 @@ void  PP_DDBB::Initilizate(){
 		axis2placement3d *  l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		elementarySurface * l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
 		//Profile
-		closedProfile * l_itsprofile = RECTANGURAL_CLOSED_PROFILE(40.0, 40.0);
+		closedProfile * l_itsprofile = RECTANGURAL_CLOSED_PROFILE(NULL, 40.0, 40.0);
 		//Pocket
 		closedPocket * l_CPFeature = CLOSED_POCKET("Cajera 1", NULL, NULL, l_itsplacement, l_itsdepth, NULL, NULL, NULL, NULL, 3.0, l_itsprofile);
 
@@ -52,7 +52,7 @@ void  PP_DDBB::Initilizate(){
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
 		//Profile
-		l_itsprofile = RECTANGURAL_CLOSED_PROFILE(50.0, 40.0);
+		l_itsprofile = RECTANGURAL_CLOSED_PROFILE(NULL, 50.0, 40.0);
 		//Pocket
 		closedPocket * l_CPFeature_2 = CLOSED_POCKET("Cajera 2", NULL, NULL, l_itsplacement, l_itsdepth, NULL, NULL, NULL, NULL, 5.0, l_itsprofile);
 
@@ -248,7 +248,7 @@ void  PP_DDBB::Initilizate(){
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
 		//Profile
-		l_itsprofile = RECTANGURAL_CLOSED_PROFILE(80.0, 50.0);
+		l_itsprofile = RECTANGURAL_CLOSED_PROFILE(NULL, 80.0, 50.0);
 		//Pocket
 		l_CPFeature = CLOSED_POCKET("Cajera 1", NULL, NULL, l_itsplacement, l_itsdepth, NULL, NULL, NULL, NULL, 10.0, l_itsprofile);
 
@@ -629,7 +629,58 @@ void  PP_DDBB::Initilizate(){
 		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		slot * l_Slot_4 = SLOT("Ranurado 4", NULL, NULL, l_itsplacement, l_itsdepth, l_travelPath_1, l_OProfile_1, NULL);
-
+		/******************Feature 5****************************/
+		//Travel path
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 0.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_axisIn = DIRECTION(NULL, 0.0, 1.0, 0.0);
+		l_linearPath = LINEAR_PATH(l_itsplacement, 140.0, l_axisIn);
+		//Swept profile
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 0.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		veeProfile * l_VProfile_1 = V_PROFILE(l_itsplacement, 0.0, 90.0, 90.0);
+		//Depth
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -15.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_itsdepth = ELEMENTARY_SURFACE(NULL, l_positionIn);
+		//step
+		l_locationIn = CARTESIAN_POINT(NULL, 80.0, 0.0, 40.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		step * l_Step_1 = STEP("Escalon 1", NULL, NULL, l_itsplacement, l_itsdepth, l_linearPath, l_VProfile_1, NULL);
+		/******************Feature 6****************************/
+		//Travel path
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 0.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_axisIn = DIRECTION(NULL, 0.0, 1.0, 0.0);
+		l_linearPath = LINEAR_PATH(l_itsplacement, 10.0, l_axisIn);
+		//Swept profile
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 0.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		profile * l_RCP_1 = RECTANGURAL_CLOSED_PROFILE(l_itsplacement, 116.0, 76.0);
+		//Depth
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -15.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		l_itsdepth = ELEMENTARY_SURFACE(NULL, l_positionIn);
+		//general outside profile
+		l_locationIn = CARTESIAN_POINT(NULL, 50.0, 70.0, 40.0);
+		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
+		l_itsplacement = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
+		generalOutsideProfile * l_GOP_1 = GENERAL_OUTSIDE_PROFILE("GOP 1", NULL, NULL, l_itsplacement, l_itsdepth, l_linearPath, l_RCP_1);
 		/*****************machining operation 1***************************/
 		l_locationIn = CARTESIAN_POINT(NULL, 0.0, -30.0, -5.0);
 		itstool = MILLING_CUTTING_TOOL("1337");
@@ -658,6 +709,20 @@ void  PP_DDBB::Initilizate(){
 		l_apRetract = AP_RETRACT_ANLGE(NULL, 0.0, 0.0, 0.0, 65.0, 60.0);
 		l_millingStrategy = CENTER_MILLING(0.0, false);
 		l_itsMoperation_4 = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, l_apRetract, NULL, l_millingStrategy, 10.0, 15.0, 0.0, 0.0);
+		/*****************machining operation 5***************************/
+		l_locationIn = CARTESIAN_POINT(NULL, 12.0, 0.0, -3.0);
+		itstool = MILLING_CUTTING_TOOL("1336");
+		itstechnology = MILLING_TECHNOLOGY(30.0, "TCP", 0.0, 1200.0, 0.0, false, false, false, false);
+		l_apRetract = AP_RETRACT_ANLGE(NULL, 0.0, 0.0, 0.0, 65.0, 60.0);
+		l_millingStrategy = CENTER_MILLING(0.0, false);
+		l_itsMoperation_5 = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, l_apRetract, NULL, l_millingStrategy, 10.0, 15.0, 0.0, 0.0);
+		/*****************machining operation 6***************************/
+		l_locationIn = CARTESIAN_POINT(NULL, 50.0, -70.0, -7.5);
+		itstool = MILLING_CUTTING_TOOL("1336");
+		itstechnology = MILLING_TECHNOLOGY(30.0, "TCP", 0.0, 1200.0, 0.0, false, false, false, false);
+		l_apRetract = AP_RETRACT_ANLGE(NULL, 0.0, 0.0, 0.0, 0.0, 60.0);
+		l_millingStrategy = CENTER_MILLING(0.0, false);
+		l_itsMoperation_6 = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, l_apRetract, NULL, l_millingStrategy, 5.0, 15.0, 6.0, 0.0);
 
 		/**************machning workingstep****************************/
 		//Security plance
@@ -670,12 +735,16 @@ void  PP_DDBB::Initilizate(){
 		l_itsMWStep_2 = MACHINING_WORKINGSTEP("MWS 2", l_itsSecPlane, l_Slot_2, l_itsMoperation_2, NULL);
 		l_itsMWStep_3 = MACHINING_WORKINGSTEP("MWS 3", l_itsSecPlane, l_Slot_3, l_itsMoperation_3, NULL);
 		l_itsMWStep_4 = MACHINING_WORKINGSTEP("MWS 4", l_itsSecPlane, l_Slot_4, l_itsMoperation_4, NULL);
+		l_itsMWStep_5 = MACHINING_WORKINGSTEP("MWS 5", l_itsSecPlane, l_Step_1, l_itsMoperation_5, NULL);
+		l_itsMWStep_6 = MACHINING_WORKINGSTEP("MWS 6", l_itsSecPlane, l_GOP_1, l_itsMoperation_6, NULL);
 		/***************************Executable list for type 1*****************/
 		l_theListIn_ex = new std::list<executable *>;
+		l_theListIn_ex->push_back(l_itsMWStep_6);
 		l_theListIn_ex->push_back(l_itsMWStep_1);
 		l_theListIn_ex->push_back(l_itsMWStep_3);
-		l_theListIn_ex->push_back(l_itsMWStep_2);
-		l_theListIn_ex->push_back(l_itsMWStep_4);
+		//l_theListIn_ex->push_back(l_itsMWStep_2);
+		//l_theListIn_ex->push_back(l_itsMWStep_4);
+		//l_theListIn_ex->push_back(l_itsMWStep_5);
 		l_itsElementsIn_1 = new parenExecutableList(l_theListIn_ex);
 
 		/************************Channel****************************/

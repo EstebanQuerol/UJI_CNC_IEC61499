@@ -121,16 +121,13 @@ public:
 		elementarySurface * depthIn, travelPath * courseOfTravelIn, openProfile * sweptShapeIn, parenSlotEndTypeList * endConditionsIn){
 		return new slot(SET_NAME(itsIdIn), itsWorkpieceIn, itsOperationsIn, featurePlacementIn, depthIn, courseOfTravelIn, sweptShapeIn, endConditionsIn);
 	}
-	static rectangularClosedProfile * RECTANGURAL_CLOSED_PROFILE(double profileWidthIn, double profileLengthIn)
-	{
-		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(profileWidthIn, NULL);
-		tolerancedLengthMeasure * l_TL2 = new tolerancedLengthMeasure(profileLengthIn, NULL);
-		return new rectangularClosedProfile(NULL, l_TL1, l_TL2);
+	static step * STEP(const char * itsIdIn, workpiece * itsWorkpieceIn, parenMachiningOperationList * itsOperationsIn, axis2placement3d * featurePlacementIn,
+		elementarySurface * depthIn, linearPath * openBoundaryIn, veeProfile * wallBoundaryIn, parenBossList * itsBossIn){
+		return new step(SET_NAME(itsIdIn), itsWorkpieceIn, itsOperationsIn, featurePlacementIn, depthIn, openBoundaryIn, wallBoundaryIn, itsBossIn);
 	}
-	static circularClosedProfile * CIRCULAR_CLOSED_PROFILE(double diameter)
-	{
-		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(diameter, NULL);
-		return new circularClosedProfile(NULL, l_TL1);
+	static generalOutsideProfile * GENERAL_OUTSIDE_PROFILE(const char * itsIdIn, workpiece * itsWorkpieceIn, parenMachiningOperationList * itsOperationsIn, axis2placement3d * featurePlacementIn,
+		elementarySurface * depthIn, linearPath * profileSweptShapeIn, profile * featureBoundaryIn){
+		return new generalOutsideProfile(SET_NAME(itsIdIn), itsWorkpieceIn, itsOperationsIn, featurePlacementIn, depthIn, profileSweptShapeIn, featureBoundaryIn);
 	}
 	static machiningWorkingstep * MACHINING_WORKINGSTEP(const char * itsIdIn, elementarySurface * itsSecplaneIn, manufacturingFeature * itsFeatureIn,
 		machiningOperation * itsOperationIn, inProcessGeometry * itsEffectIn){
@@ -220,6 +217,21 @@ public:
 	static roundedUProfile * ROUNDED_U_PROFILE(axis2placement3d * placementIn, const double &widthIn){
 		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(widthIn, NULL);
 		return new roundedUProfile(placementIn, l_TL1);
+	}
+	static veeProfile * V_PROFILE(axis2placement3d * placementIn, const double &profileRadiusIn, const double &profileAngleIn, const double &tiltAngleIn){
+		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(profileRadiusIn, NULL);
+		return new veeProfile(placementIn, l_TL1, profileAngleIn, tiltAngleIn);
+	}
+	static rectangularClosedProfile * RECTANGURAL_CLOSED_PROFILE(axis2placement3d * placementIn, double profileWidthIn, double profileLengthIn)
+	{
+		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(profileWidthIn, NULL);
+		tolerancedLengthMeasure * l_TL2 = new tolerancedLengthMeasure(profileLengthIn, NULL);
+		return new rectangularClosedProfile(placementIn, l_TL1, l_TL2);
+	}
+	static circularClosedProfile * CIRCULAR_CLOSED_PROFILE(double diameter)
+	{
+		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(diameter, NULL);
+		return new circularClosedProfile(NULL, l_TL1);
 	}
 	static numericParameter * NUMERIC_PERAMETER(const double &itsParameterValueIn){
 		return new numericParameter(NULL, itsParameterValueIn, NULL);
