@@ -26,12 +26,12 @@ void  PP_DDBB::Initilizate(){
 		//Placement
 		cartesianPoint *  l_locationIn = CARTESIAN_POINT(NULL, 150.0, 50.0, 50.0);
 		direction * l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		direction *  l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		direction *  l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		axis2placement3d * l_itsplacement = AXIS2_PLACEMENT_3D("Feature placement", l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 10.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -10.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		axis2placement3d *  l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		elementarySurface * l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
 		//Profile
@@ -43,12 +43,12 @@ void  PP_DDBB::Initilizate(){
 		//Placement
 		l_locationIn = CARTESIAN_POINT(NULL, 50.0, 50.0, 50.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D("Feature placement", l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 15.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -15.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
 		//Profile
@@ -60,12 +60,12 @@ void  PP_DDBB::Initilizate(){
 		//Placement
 		l_locationIn = CARTESIAN_POINT(NULL, 15.0, 15.0, 50.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Taladro", l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 25.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -25.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
 		//Hole
@@ -75,12 +75,12 @@ void  PP_DDBB::Initilizate(){
 		//Placement
 		l_locationIn = CARTESIAN_POINT(NULL, 15.0, 85.0, 50.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Taladro", l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 25.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -25.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
 		//Hole
@@ -90,12 +90,12 @@ void  PP_DDBB::Initilizate(){
 		//Placement
 		l_locationIn = CARTESIAN_POINT(NULL, 185.0, 15.0, 50.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Taladro", l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 25.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -25.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
 		//Hole
@@ -105,12 +105,12 @@ void  PP_DDBB::Initilizate(){
 		//Placement
 		l_locationIn = CARTESIAN_POINT(NULL, 185.0, 85.0, 50.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Taladro", l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 25.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -25.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
 		//Hole
@@ -120,12 +120,12 @@ void  PP_DDBB::Initilizate(){
 		//Placement
 		l_locationIn = CARTESIAN_POINT(NULL, 50.0, 50.0, 50.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D("Feature placement", l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 15.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -15.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
 		//Profile
@@ -199,7 +199,7 @@ void  PP_DDBB::Initilizate(){
 		//itsorigin
 		l_locationIn = CARTESIAN_POINT("Point", 20.0, 50.0, 0.0);
 		l_axisIn = DIRECTION("Axis", 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION("Ref_Axis", 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION("Ref_Axis", 1.0, 0.0, 0.0);
 		axis2placement3d * l_itsOrigin = AXIS2_PLACEMENT_3D("Origin", l_locationIn, l_axisIn, l_refDirectionIn);
 		//The workpiece
 		l_locationIn = CARTESIAN_POINT("Point", 0.0, 0.0, 0.0);
@@ -239,12 +239,12 @@ void  PP_DDBB::Initilizate(){
 		//Placement
 		l_locationIn = CARTESIAN_POINT(NULL, 70.0, 70.0, 50.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D("Feature placement", l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 30.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -30.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
 		//Profile
@@ -256,12 +256,12 @@ void  PP_DDBB::Initilizate(){
 		//Placement
 		l_locationIn = CARTESIAN_POINT(NULL, 20.0, 60.0, 50.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Taladro", l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 30.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -30.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
 		//Hole
@@ -271,12 +271,12 @@ void  PP_DDBB::Initilizate(){
 		//Placement
 		l_locationIn = CARTESIAN_POINT(NULL, 15.0, 15.0, 50.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Taladro", l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 30.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -30.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
 		//Hole
@@ -289,9 +289,9 @@ void  PP_DDBB::Initilizate(){
 		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Taladro", l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 30.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -30.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
-		l_refDirectionIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
+		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
 		l_itsdepth = ELEMENTARY_SURFACE("Depth", l_positionIn);
 		//Hole
@@ -317,7 +317,7 @@ void  PP_DDBB::Initilizate(){
 		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Planeado", l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 6.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -6.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
 		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
@@ -345,7 +345,7 @@ void  PP_DDBB::Initilizate(){
 		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Planeado", l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 2.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -2.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
 		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
@@ -373,7 +373,7 @@ void  PP_DDBB::Initilizate(){
 		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_itsplacement = AXIS2_PLACEMENT_3D("Pos Planeado", l_locationIn, l_axisIn, l_refDirectionIn);
 		//Depth
-		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, 7.0);
+		l_locationIn = CARTESIAN_POINT(NULL, 0.0, 0.0, -7.0);
 		l_axisIn = DIRECTION(NULL, 0.0, 0.0, 1.0);
 		l_refDirectionIn = DIRECTION(NULL, 1.0, 0.0, 0.0);
 		l_positionIn = AXIS2_PLACEMENT_3D(NULL, l_locationIn, l_axisIn, l_refDirectionIn);
@@ -717,7 +717,7 @@ void  PP_DDBB::Initilizate(){
 		l_millingStrategy = CENTER_MILLING(0.0, false);
 		l_itsMoperation_5 = BOTTOM_AND_SIDE_ROUGH_MILLING(NULL, 80.0, l_locationIn, itstool, itstechnology, NULL, 0.0, l_apRetract, NULL, l_millingStrategy, 10.0, 15.0, 0.0, 0.0);
 		/*****************machining operation 6***************************/
-		l_locationIn = CARTESIAN_POINT(NULL, 50.0, -70.0, -7.5);
+		l_locationIn = CARTESIAN_POINT(NULL, 50.0, -70.0, -5.0);
 		itstool = MILLING_CUTTING_TOOL("1336");
 		itstechnology = MILLING_TECHNOLOGY(30.0, "TCP", 0.0, 1200.0, 0.0, false, false, false, false);
 		l_apRetract = AP_RETRACT_ANLGE(NULL, 0.0, 0.0, 0.0, 0.0, 60.0);

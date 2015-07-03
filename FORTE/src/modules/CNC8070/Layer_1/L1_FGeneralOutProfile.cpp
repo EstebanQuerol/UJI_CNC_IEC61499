@@ -171,18 +171,18 @@ void FORTE_L1_FGeneralOutProfile::executeEvent(int pa_nEIID){
 				acBuffer = NULL;
 				PARAM_ERROR_EXIT
 			}
+			//Verify that the tool can be used to machine the feature
+			if (nAxialMax > nMaxAxialcut){
+				//AxialMax is greater than tool's maximal cutting lenght, adjust it
+				nAxialMax = nMaxAxialcut;
+			}
 			//Verify that the start point is correct
-			if (bOPStartExist && vOPStart.z() > 0.0){
-				//CAM Error; start point is higher than the surface to machine; Abort operation
+			if (bOPStartExist && (vOPStart.z() > 0.0 || abs(vOPStart.z()) > nAxialMax)){
+				//CAM Error; start point is higher than the surface to machine or depther than max axial length; Abort operation
 				DEVLOG_DEBUG("L1_GeneralOutProfile: Operation start point error\n");
 				forte_free(acBuffer);
 				acBuffer = NULL;
 				PARAM_ERROR_EXIT
-			}
-			//Verify that the tool can be used to machine the feature
-			if (nAxialMax > nMaxAxialcut){
-				//AxialMax is greater than tool's maximal cutting leght, adjust it
-				nAxialMax = nMaxAxialcut;
 			}
 			//Calculate the number of layers to remove
 			double nAxialStep = nRealDepth;

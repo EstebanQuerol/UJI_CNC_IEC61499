@@ -44,7 +44,7 @@ void FORTE_L0_SendBlk::setInitialValues(){
   CNCState() = 0;
 }
 
-void FORTE_L0_SendBlk::RetreiveCmd(){
+void FORTE_L0_SendBlk::RetrieveCmd(){
 	std::istringstream iss;
 	std::list<std::string> CmdList;
 	char * pacTempString = (char*)forte_malloc(sizeof(char)* (sBlock().length() + 1));
@@ -81,7 +81,7 @@ void FORTE_L0_SendBlk::executeEvent(int pa_nEIID){
 		sendOutputEvent(scm_nEventINITOID);
       break;
     case scm_nEventREQID:
-		RetreiveCmd();
+		RetrieveCmd();
 		if (!m_sNBlock.empty()){
 			CNC8070Start();
 		}

@@ -48,13 +48,13 @@ public:
 	* return -2  if the tool is not available at all
 	*/
 	static TForteInt32 isAvailable(const std::string &pa_sToolID);
-	/*!\ Retreive the local identifier of a tool in the map
-	* return -1 If ID can not be retreived
+	/*!\ Retrieve the local identifier of a tool in the map
+	* return -1 If ID can not be Retrieved
 	* return Tool ID otherwise
 	*/
 	static long getToolLocalID(const std::string &pa_sToolID);
-	/*!\ Retreive a Tool from the map
-	* return null if the tool can not be retreived
+	/*!\ Retrieve a Tool from the map
+	* return null if the tool can not be Retrieved
 	* return requested tool object otherwise
 	*/
 	static const Tool * getTool(const std::string &pa_sToolID);

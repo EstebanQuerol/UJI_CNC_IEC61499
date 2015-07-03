@@ -150,11 +150,11 @@ void FORTE_L1_FStep::executeEvent(int pa_nEIID){
 				PARAM_ERROR_EXIT
 			}
 
-			//Retreive the operation parameters
+			//Retrieve the operation parameters
 			if (TheWS->get_itsOperation()->isA(bottomAndSideMilling_E)){
 				//Finish and rough milling classes are equal from c++ perspective
 				bottomAndSideMilling * TheOperation = (bottomAndSideMilling *)TheWS->get_itsOperation();
-				//Retreive the start_point of the operation
+				//Retrieve the start_point of the operation
 				vOPStart = GlobalUtils::V3DFromRealIter(TheWS->get_itsOperation()->get_startPoint()->get_coordinates());
 
 				//Operation parameters
@@ -192,7 +192,7 @@ void FORTE_L1_FStep::executeEvent(int pa_nEIID){
 					nAxialStep = (nRealDepth - abs(vOPStart.z())) / nLayers++;
 				}
 
-				//Retreive approach strategy information
+				//Retrieve approach strategy information
 				double nAPAngle = 0.0;
 				double nAPTravel = 0.0;
 				std::vector<std::string> approachSequence;//Vector to hold the approach sequence

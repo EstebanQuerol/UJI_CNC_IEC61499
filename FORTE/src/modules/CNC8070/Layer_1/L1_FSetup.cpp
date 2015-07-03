@@ -49,6 +49,17 @@ void FORTE_L1_FSetup::executeEvent(int pa_nEIID){
 			double nX, nY, nZ;
 			std::list<std::string> CmdList;
 			setup * TheSetup = DeserializeSetup(Operation());
+			if (TheSetup == NULL){
+				//Null setup
+				DEVLOG_DEBUG("Null setup found\n");
+				forte_free(acBuffer);
+				acBuffer = NULL;
+				Cmd() = "";
+				L1MIDOut() = L1MID_PARAM_ERROR;
+				CleanIArchive();
+				sendOutputEvent(scm_nEventCNFID);
+				break;
+			}
 			//Set the fixture origin
 			std::list<real *>::const_iterator listIter = TheSetup->get_itsOrigin()->get_location()->get_coordinates()->get_theList()->begin();
 			nX = (*listIter++)->get_val();

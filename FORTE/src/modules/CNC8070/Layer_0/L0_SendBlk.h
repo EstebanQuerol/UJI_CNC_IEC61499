@@ -96,7 +96,7 @@ public:
   /*!\brief deserializes the command vector
   *
   */
-  void RetreiveCmd();
+  void RetrieveCmd();
 
   //CNC8070COmmunicationHandler methods
 

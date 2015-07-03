@@ -99,17 +99,17 @@ private:
   //Methods
   /*!\Retrieve the new workplan and map it to m_poCurrentWP
   */
-  void RetreiveWP();
+  void RetrieveWP();
   /*!\Delete the current workplan
   */
   void DeleteCurrentWP();
-  /*!\INLINED Retreive the setup of the current workplan
+  /*!\INLINED Retrieve the setup of the current workplan
   *	\return string to be sent to the machine to fix the part
   */
   iso14649::setup * GetSetup(){
 	  return m_poCurrentWP->get_itsSetup();
   }
-  /*!\Retreive the next workingstep to be exeuted
+  /*!\Retrieve the next workingstep to be exeuted
   *	\return string to be sent to the machine
   */
   iso14649::workingstep * GetWorkingStep();

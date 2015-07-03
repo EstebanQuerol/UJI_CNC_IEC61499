@@ -51,7 +51,7 @@ void FORTE_L2_ExecutionManager::DeleteCurrentWP(){
 	m_bSetupLoaded = FALSE;
 }
 
-void FORTE_L2_ExecutionManager::RetreiveWP(){
+void FORTE_L2_ExecutionManager::RetrieveWP(){
 	if (m_bSetupLoaded){
 		// A plan is currently loaded but a new renew event arrived
 		// Delete the old one before setting up the new
@@ -138,7 +138,7 @@ void FORTE_L2_ExecutionManager::executeEvent(int pa_nEIID){
 		sendOutputEvent(scm_nEventINITOID);
 		break;
     case scm_nEventRENEWID:
-		RetreiveWP();
+		RetrieveWP();
 		//No output event is generated
 		break;
     case scm_nEventNEXTID:
@@ -156,7 +156,7 @@ void FORTE_L2_ExecutionManager::executeEvent(int pa_nEIID){
 					L1MID() = L1MID_SETUP;
 				}
 				else{
-					DEVLOG_ERROR("L2_ExecutionManager can't retreive the setup\n");
+					DEVLOG_ERROR("L2_ExecutionManager can't retrieve the setup\n");
 					Operation() = "";
 					L1MID() = L1MID_NOT_VALID;
 				}
