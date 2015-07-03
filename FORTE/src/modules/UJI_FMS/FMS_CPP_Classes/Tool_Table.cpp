@@ -20,7 +20,7 @@ void  Tool_Table::initilizate(){
 	}
 }
 
-void Tool_Table::addTool(Tool pa_oTool){
+void Tool_Table::addTool(const Tool& pa_oTool){
 
 	try{
 		sm_umapToolTable.emplace(pa_oTool.getToolID(), pa_oTool);
@@ -30,15 +30,15 @@ void Tool_Table::addTool(Tool pa_oTool){
 	}
 }
 
-void Tool_Table::updateTool(Tool pa_oTool){
+void Tool_Table::updateTool(const Tool& pa_oTool){
 
 }
 
-void Tool_Table::deleteTool(Tool pa_oTool){
+void Tool_Table::deleteTool(const Tool& pa_oTool){
 
 }
 
-void Tool_Table::deleteTool(std::string pa_sID){
+void Tool_Table::deleteTool(const std::string& pa_sID){
 
 }
 
@@ -46,7 +46,7 @@ void Tool_Table::deleteTable(){
 	sm_umapToolTable.clear();
 }
 
-TForteInt32 Tool_Table::isAvailable(std::string pa_sToolID){
+TForteInt32 Tool_Table::isAvailable(const std::string &pa_sToolID){
 	TForteInt32 nRValue;
 	if (!sm_bInitialized){
 		Tool_Table::initilizate();
@@ -61,8 +61,8 @@ TForteInt32 Tool_Table::isAvailable(std::string pa_sToolID){
 	return nRValue;
 }
 
-long Tool_Table::getToolID(std::string pa_sToolID){
-	long nRValue;
+long Tool_Table::getToolLocalID(const std::string &pa_sToolID){
+	long nRValue = -1;
 	if (!sm_bInitialized){
 		Tool_Table::initilizate();
 	}
@@ -73,4 +73,18 @@ long Tool_Table::getToolID(std::string pa_sToolID){
 		DEVLOG_ERROR("Error while retriving tool local ID \n");
 	}
 	return nRValue;
+}
+
+const Tool * Tool_Table::getTool(const std::string &pa_sToolID){
+	Tool * oRValue = NULL;
+	if (!sm_bInitialized){
+		Tool_Table::initilizate();
+	}
+	try{
+		oRValue = &sm_umapToolTable.at(pa_sToolID);
+	}
+	catch (std::out_of_range e){
+		DEVLOG_ERROR("Error while retriving tool local ID \n");
+	}
+	return oRValue;
 }

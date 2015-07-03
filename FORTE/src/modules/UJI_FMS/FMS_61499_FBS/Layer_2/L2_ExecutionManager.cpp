@@ -51,7 +51,7 @@ void FORTE_L2_ExecutionManager::DeleteCurrentWP(){
 	m_bSetupLoaded = FALSE;
 }
 
-void FORTE_L2_ExecutionManager::RetreiveWP(){
+void FORTE_L2_ExecutionManager::RetrieveWP(){
 	if (m_bSetupLoaded){
 		// A plan is currently loaded but a new renew event arrived
 		// Delete the old one before setting up the new
@@ -77,38 +77,44 @@ void FORTE_L2_ExecutionManager::RetreiveWP(){
 	}
 }
 
-workingstep * FORTE_L2_ExecutionManager::GetWorkingStep(){
+iso14649::workingstep * FORTE_L2_ExecutionManager::GetWorkingStep(){
 	const std::type_info &type = typeid((**m_itCurrentElement));
-	if (type == typeid(machiningWorkingstep))
-		return (machiningWorkingstep *)(*m_itCurrentElement);
-	if (type == typeid(workplan)){
+	if (type == typeid(iso14649::machiningWorkingstep))
+		return (iso14649::machiningWorkingstep *)(*m_itCurrentElement);
+	if (type == typeid(iso14649::workplan)){
 		//TODO
 	}
 	return NULL;
 }
 
-TForteUInt8 FORTE_L2_ExecutionManager::GetWSL1MID(workingstep * obj){
-	machiningWorkingstep * l_machinigWS;
-	rapidMovement * l_rapidmovWS;
-	l_machinigWS = dynamic_cast<machiningWorkingstep *>(obj);
+TForteUInt8 FORTE_L2_ExecutionManager::GetWSL1MID(iso14649::workingstep * obj){
+	iso14649::machiningWorkingstep * l_machinigWS;
+	iso14649::rapidMovement * l_rapidmovWS;
+	l_machinigWS = dynamic_cast<iso14649::machiningWorkingstep *>(obj);
 	if (l_machinigWS != NULL){
-		if (l_machinigWS->get_itsFeature()->isA(planarFace_E))
+		if (l_machinigWS->get_itsFeature()->isA(iso14649::planarFace_E))
 			return L1MID_PLANAR_FACE;
-		if (l_machinigWS->get_itsFeature()->isA(openPocket_E))
+		if (l_machinigWS->get_itsFeature()->isA(iso14649::openPocket_E))
 			return L1MID_OPEN_POCKET;
-		if (l_machinigWS->get_itsFeature()->isA(closedPocket_E))
+		if (l_machinigWS->get_itsFeature()->isA(iso14649::closedPocket_E))
 			return L1MID_CLOSED_POCKET;
-		if (l_machinigWS->get_itsFeature()->isA(roundHole_E))
+		if (l_machinigWS->get_itsFeature()->isA(iso14649::roundHole_E))
 			return L1MID_ROUND_HOLE;
+		if (l_machinigWS->get_itsFeature()->isA(iso14649::slot_E))
+			return L1MID_SLOT;
+		if (l_machinigWS->get_itsFeature()->isA(iso14649::step_E))
+			return L1MID_STEP;
+		if (l_machinigWS->get_itsFeature()->isA(iso14649::generalOutsideProfile_E))
+			return L1MID_GENERAL_OUT_PROFILE;
 	}
-	l_rapidmovWS = dynamic_cast<rapidMovement *>(obj);
+	l_rapidmovWS = dynamic_cast<iso14649::rapidMovement *>(obj);
 	if (l_rapidmovWS != NULL){
 		//TODO
 	}
 	//Send not valid as default if the type is not supported
 	return L1MID_NOT_VALID;
 }
-std::string FORTE_L2_ExecutionManager::stringSerialize(const setup * obj){
+std::string FORTE_L2_ExecutionManager::stringSerialize(const iso14649::setup * obj){
 	//Boost Serialization
 	std::ostringstream oss;
 	boost::archive::text_oarchive oa(oss);
@@ -116,7 +122,7 @@ std::string FORTE_L2_ExecutionManager::stringSerialize(const setup * obj){
 	return oss.str();
 }
 
-std::string FORTE_L2_ExecutionManager::stringSerialize(const workingstep * obj){
+std::string FORTE_L2_ExecutionManager::stringSerialize(const iso14649::workingstep * obj){
 	//Boost Serialization
 	std::ostringstream oss;
 	boost::archive::text_oarchive oa(oss);
@@ -124,15 +130,15 @@ std::string FORTE_L2_ExecutionManager::stringSerialize(const workingstep * obj){
 	return oss.str();
 }
 void FORTE_L2_ExecutionManager::executeEvent(int pa_nEIID){
-  setup * l_setup = NULL;
-  workingstep * l_workingstep = NULL;
+	iso14649::setup * l_setup = NULL;
+	iso14649::workingstep * l_workingstep = NULL;
   switch(pa_nEIID){
     case scm_nEventINITID:
 		QO() = QI();
 		sendOutputEvent(scm_nEventINITOID);
 		break;
     case scm_nEventRENEWID:
-		RetreiveWP();
+		RetrieveWP();
 		//No output event is generated
 		break;
     case scm_nEventNEXTID:
@@ -150,7 +156,7 @@ void FORTE_L2_ExecutionManager::executeEvent(int pa_nEIID){
 					L1MID() = L1MID_SETUP;
 				}
 				else{
-					DEVLOG_ERROR("L2_ExecutionManager can't retreive the setup\n");
+					DEVLOG_ERROR("L2_ExecutionManager can't retrieve the setup\n");
 					Operation() = "";
 					L1MID() = L1MID_NOT_VALID;
 				}

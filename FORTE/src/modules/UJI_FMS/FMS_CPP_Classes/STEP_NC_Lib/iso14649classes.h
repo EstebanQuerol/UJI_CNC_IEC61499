@@ -55,7 +55,6 @@ data members and sets all the data members.
 */
 
 #include <list>
-#include "GlobalUtils.h"
 #include "devlog.h"
 #include "boost\serialization\base_object.hpp"
 #include "boost\serialization\split_member.hpp"
@@ -64,6 +63,7 @@ data members and sets all the data members.
 #include "boost\archive\text_iarchive.hpp"
 #include "boost\archive\text_oarchive.hpp"
 
+namespace iso14649{
 
 class aString;
 class address;
@@ -2396,6 +2396,14 @@ public:
   ~cutmodeType();
   int isA(int aType);
   void printSelf() = 0;
+
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+  }
 };
 
 /********************************************************************/
@@ -2417,6 +2425,14 @@ public:
   ~cutmodeTypeClimb();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<cutmodeType>(*this);
+	}
 };
 
 /********************************************************************/
@@ -2438,6 +2454,14 @@ public:
   ~cutmodeTypeConventional();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<cutmodeType>(*this);
+	}
 };
 
 /********************************************************************/
@@ -3494,6 +3518,14 @@ public:
   ~leftOrRight();
   int isA(int aType);
   void printSelf() = 0;
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<iso14649CppBase>(*this);
+	}
 };
 
 /********************************************************************/
@@ -3515,6 +3547,14 @@ public:
   ~leftOrRightLeft();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<leftOrRight>(*this);
+	}
 };
 
 /********************************************************************/
@@ -3536,6 +3576,14 @@ public:
   ~leftOrRightRight();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<leftOrRight>(*this);
+	}
 };
 
 /********************************************************************/
@@ -4399,6 +4447,14 @@ public:
   void set_theList(std::list<cartesianPoint *> * theListIn);
 private:
   std::list<cartesianPoint *> * theList;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+	  ar & theList;
+  }
 };
 
 /********************************************************************/
@@ -5115,6 +5171,14 @@ public:
   void set_theList(std::list<slotEndType *> * theListIn);
 private:
   std::list<slotEndType *> * theList;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+	  ar & theList;
+  }
 };
 
 /********************************************************************/
@@ -6398,6 +6462,14 @@ public:
   ~rotDirection();
   int isA(int aType);
   void printSelf() = 0;
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<iso14649CppBase>(*this);
+	}
 };
 
 /********************************************************************/
@@ -6419,6 +6491,14 @@ public:
   ~rotDirectionCw();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<rotDirection>(*this);
+	}
 };
 
 /********************************************************************/
@@ -6440,6 +6520,14 @@ public:
   ~rotDirectionCcw();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<rotDirection>(*this);
+	}
 };
 
 /********************************************************************/
@@ -6702,6 +6790,13 @@ public:
   ~slotEndType();
   int isA(int aType);
   void printSelf() = 0;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<iso14649CppBase>(*this);
+  }
 };
 
 /********************************************************************/
@@ -6792,6 +6887,14 @@ public:
   ~strokeConnectionStrategy();
   int isA(int aType);
   void printSelf() = 0;
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<iso14649CppBase>(*this);
+	}
 };
 
 /********************************************************************/
@@ -6813,6 +6916,14 @@ public:
   ~strokeConnectionStrategyDegouge();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<strokeConnectionStrategy>(*this);
+	}
 };
 
 /********************************************************************/
@@ -6834,6 +6945,14 @@ public:
   ~strokeConnectionStrategyLiftShiftPlunge();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<strokeConnectionStrategy>(*this);
+	}
 };
 
 /********************************************************************/
@@ -6855,6 +6974,14 @@ public:
   ~strokeConnectionStrategyLoopBack();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<strokeConnectionStrategy>(*this);
+	}
 };
 
 /********************************************************************/
@@ -6876,6 +7003,14 @@ public:
   ~strokeConnectionStrategyStraightline();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<strokeConnectionStrategy>(*this);
+	}
 };
 
 /********************************************************************/
@@ -8050,6 +8185,16 @@ public:
 private:
   direction * feedDirection;
   cutmodeType * cutmode;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<two5DmillingStrategy>(*this);
+	  ar & feedDirection;
+	  ar & cutmode;
+  }
 };
 
 /********************************************************************/
@@ -8295,6 +8440,15 @@ public:
   void set_radius(tolerancedLengthMeasure * radiusIn);
 private:
   tolerancedLengthMeasure * radius;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<slotEndType>(*this);
+	  ar & radius;
+  }
 };
 
 /********************************************************************/
@@ -8520,6 +8674,14 @@ public:
   ~airStrategy();
   int isA(int aType);
   void printSelf() = 0;
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<approachRetractStrategy>(*this);
+	}
 };
 
 /********************************************************************/
@@ -8647,6 +8809,16 @@ public:
 private:
   double angle;
   double travelLength;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<airStrategy>(*this);
+	  ar & angle;
+	  ar & travelLength;
+  }
 };
 
 /********************************************************************/
@@ -8793,6 +8965,18 @@ private:
   leftOrRight * stepoverDirection;
   rotDirection * rotationDirection;
   cutmodeType * spiralCutmode;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<two5DmillingStrategy>(*this);
+	  ar & feedDirection;
+	  ar & stepoverDirection;
+	  ar & rotationDirection;
+	  ar & spiralCutmode;
+  }
 };
 
 /********************************************************************/
@@ -8832,6 +9016,17 @@ private:
   direction * feedDirection;
   leftOrRight * stepoverDirection;
   strokeConnectionStrategy * itsStrokeConnectionStrategy;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<two5DmillingStrategy>(*this);
+	  ar & feedDirection;
+	  ar & stepoverDirection;
+	  ar & itsStrokeConnectionStrategy;
+  }
 };
 
 /********************************************************************/
@@ -8973,6 +9168,15 @@ public:
   ~centerMilling();
   int isA(int aType);
   void printSelf();
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<instance>(*this);
+		ar & boost::serialization::base_object<two5DmillingStrategy>(*this);
+	}
 };
 
 /********************************************************************/
@@ -9037,6 +9241,14 @@ public:
   void set_radius(tolerancedLengthMeasure * radiusIn);
 private:
   tolerancedLengthMeasure * radius;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<travelPath>(*this);
+	  ar & radius;
+  }
 };
 
 /********************************************************************/
@@ -9247,6 +9459,14 @@ public:
   ~completeCircularPath();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<circularPath>(*this);
+  }
 };
 
 /********************************************************************/
@@ -9388,6 +9608,18 @@ private:
   leftOrRight * stepoverDirection;
   rotDirection * rotationDirection;
   cutmodeType * spiralCutmode;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<two5DmillingStrategy>(*this);
+	  ar & feedDirection;
+	  ar & stepoverDirection;
+	  ar & rotationDirection;
+	  ar & spiralCutmode;
+  }
 };
 
 /********************************************************************/
@@ -9423,6 +9655,16 @@ public:
 private:
   rotDirection * rotationDirection;
   cutmodeType * cutmode;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<two5DmillingStrategy>(*this);
+	  ar & rotationDirection;
+	  ar & cutmode;
+  }
 };
 
 /********************************************************************/
@@ -9458,6 +9700,16 @@ public:
 private:
   rotDirection * rotationDirection;
   cutmodeType * cutmode;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<two5DmillingStrategy>(*this);
+	  ar & rotationDirection;
+	  ar & cutmode;
+  }
 };
 
 /********************************************************************/
@@ -10212,6 +10464,16 @@ public:
 private:
   tolerancedLengthMeasure * cornerRadius1;
   tolerancedLengthMeasure * cornerRadius2;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<slotEndType>(*this);
+	  ar & cornerRadius1;
+	  ar & cornerRadius2;
+  }
 };
 
 /********************************************************************/
@@ -10310,6 +10572,14 @@ public:
   void set_sweptPath(boundedCurve * sweptPathIn);
 private:
   boundedCurve * sweptPath;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<travelPath>(*this);
+	  ar & sweptPath;
+  }
 };
 
 /********************************************************************/
@@ -10628,6 +10898,14 @@ public:
   ~loopSlotEndType();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<slotEndType>(*this);
+  }
 };
 
 /********************************************************************/
@@ -11358,6 +11636,14 @@ public:
   ~openSlotEndType();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<slotEndType>(*this);
+  }
 };
 
 /********************************************************************/
@@ -11480,6 +11766,15 @@ public:
   void set_sweepAngle(double sweepAngleIn);
 private:
   double sweepAngle;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<circularPath>(*this);
+	  ar & sweepAngle;
+  }
 };
 
 /********************************************************************/
@@ -11514,6 +11809,16 @@ public:
 private:
   tolerancedLengthMeasure * radius;
   double sweepAngle;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<openProfile>(*this);
+	  ar & radius;
+	  ar & sweepAngle;
+  }
 };
 
 /********************************************************************/
@@ -11788,6 +12093,14 @@ public:
   void set_profileSweptShape(linearPath * profileSweptShapeIn);
 private:
   linearPath * profileSweptShape;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<machiningFeature>(*this);
+	  ar & profileSweptShape;
+  }
 };
 
 /********************************************************************/
@@ -11840,6 +12153,14 @@ public:
   ~radiusedSlotEndType();
   int isA(int aType);
   void printSelf();
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<slotEndType>(*this);
+  }
 };
 
 /********************************************************************/
@@ -12111,6 +12432,15 @@ public:
   void set_width(tolerancedLengthMeasure * widthIn);
 private:
   tolerancedLengthMeasure * width;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<openProfile>(*this);
+	  ar & width;
+  }
 };
 
 /********************************************************************/
@@ -12241,6 +12571,17 @@ private:
   travelPath * courseOfTravel;
   openProfile * sweptShape;
   parenSlotEndTypeList * endConditions;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<machiningFeature>(*this);
+	  ar & courseOfTravel;
+	  ar & sweptShape;
+	  ar & endConditions;
+  }
 };
 
 /********************************************************************/
@@ -12405,6 +12746,19 @@ private:
   double firstAngle;
   tolerancedLengthMeasure * secondRadius;
   double secondAngle;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<openProfile>(*this);
+	  ar & width;
+	  ar & firstRadius;
+	  ar & firstAngle;
+	  ar & secondRadius;
+	  ar & secondAngle;
+  }
 };
 
 /********************************************************************/
@@ -12447,6 +12801,18 @@ private:
   linearPath * openBoundary;
   veeProfile * wallBoundary;
   parenBossList * itsBoss;
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & boost::serialization::base_object<instance>(*this);
+		ar & boost::serialization::base_object<machiningFeature>(*this);
+		ar & openBoundary;
+		ar & wallBoundary;
+		ar & itsBoss;
+	}
 };
 
 /********************************************************************/
@@ -12618,6 +12984,22 @@ private:
   tolerancedLengthMeasure * width;
   tolerancedLengthMeasure * firstOffset;
   tolerancedLengthMeasure * secondOffset;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<openProfile>(*this);
+	  ar & firstAngle;
+	  ar & secondAngle;
+	  ar & crossBarWidth;
+	  ar & crossBarDepth;
+	  ar & radius;
+	  ar & width;
+	  ar & firstOffset;
+	  ar & secondOffset;
+  }
 };
 
 /********************************************************************/
@@ -13001,6 +13383,17 @@ private:
   tolerancedLengthMeasure * profileRadius;
   double profileAngle;
   double tiltAngle;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<openProfile>(*this);
+	  ar & profileRadius;
+	  ar & profileAngle;
+	  ar & tiltAngle;
+  }
 };
 
 /********************************************************************/
@@ -14194,6 +14587,13 @@ public:
   ~curve();
   int isA(int aType);
   void printSelf() = 0;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<geometricRepresentationItem>(*this);
+  }
 };
 
 /********************************************************************/
@@ -14511,6 +14911,15 @@ public:
   void set_featureBoundary(profile * featureBoundaryIn);
 private:
   profile * featureBoundary;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<profileFeature>(*this);
+	  ar & featureBoundary;
+  }
 };
 
 /********************************************************************/
@@ -14575,6 +14984,15 @@ public:
   void set_itsProfile(boundedCurve * itsProfileIn);
 private:
   boundedCurve * itsProfile;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<openProfile>(*this);
+	  ar & itsProfile;
+  }
 };
 
 /********************************************************************/
@@ -16384,6 +16802,13 @@ public:
   ~boundedCurve();
   int isA(int aType);
   void printSelf() = 0;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<curve>(*this);
+  }
 };
 
 /********************************************************************/
@@ -17049,6 +17474,15 @@ public:
   void set_points(parenCartesianPointListFull * pointsIn);
 private:
   parenCartesianPointListFull * points;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version)
+  {
+	  ar & boost::serialization::base_object<instance>(*this);
+	  ar & boost::serialization::base_object<boundedCurve>(*this);
+	  ar & points;
+  }
 };
 
 /********************************************************************/
@@ -17646,50 +18080,89 @@ public:
 	  ar & boost::serialization::base_object<drillingOperation>(*this);
   }
 };
+
+}//namespace iso14649
 //Bost Serialization exports
-BOOST_CLASS_EXPORT_KEY(workplan)
-BOOST_CLASS_EXPORT_KEY(setup)
-BOOST_CLASS_EXPORT_KEY(block)
-BOOST_CLASS_EXPORT_KEY(machiningWorkingstep)
-BOOST_CLASS_EXPORT_KEY(rectangularClosedProfile)
-BOOST_CLASS_EXPORT_KEY(circularClosedProfile)
-BOOST_CLASS_EXPORT_KEY(planarFace)
-BOOST_CLASS_EXPORT_KEY(closedPocket)
-BOOST_CLASS_EXPORT_KEY(openPocket)
-BOOST_CLASS_EXPORT_KEY(roundHole)
-BOOST_CLASS_EXPORT_KEY(radiusedPocketBottomCondition)
-BOOST_CLASS_EXPORT_KEY(throughPocketBottomCondition)
-BOOST_CLASS_EXPORT_KEY(planarPocketBottomCondition)
-BOOST_CLASS_EXPORT_KEY(generalPocketBottomCondition)
-BOOST_CLASS_EXPORT_KEY(planeRoughMilling)
-BOOST_CLASS_EXPORT_KEY(planeFinishMilling)
-BOOST_CLASS_EXPORT_KEY(sideRoughMilling)
-BOOST_CLASS_EXPORT_KEY(sideFinishMilling)
-BOOST_CLASS_EXPORT_KEY(bottomAndSideRoughMilling)
-BOOST_CLASS_EXPORT_KEY(bottomAndSideFinishMilling)
-BOOST_CLASS_EXPORT_KEY(millingCuttingTool)
-BOOST_CLASS_EXPORT_KEY(two5DmillingStrategy)
-BOOST_CLASS_EXPORT_KEY(approachRetractStrategy)
-BOOST_CLASS_EXPORT_KEY(millingTechnology)
-BOOST_CLASS_EXPORT_KEY(booleanTrue)
-BOOST_CLASS_EXPORT_KEY(booleanFalse)
-BOOST_CLASS_EXPORT_KEY(toolReferencePointCcp)
-BOOST_CLASS_EXPORT_KEY(toolReferencePointTcp)
-BOOST_CLASS_EXPORT_KEY(diameterTaper)
-BOOST_CLASS_EXPORT_KEY(angleTaper)
-BOOST_CLASS_EXPORT_KEY(throughBottomCondition)
-BOOST_CLASS_EXPORT_KEY(conicalHoleBottom)
-BOOST_CLASS_EXPORT_KEY(flatHoleBottom)
-BOOST_CLASS_EXPORT_KEY(flatWithRadiusHoleBottom)
-BOOST_CLASS_EXPORT_KEY(sphericalHoleBottom)
-BOOST_CLASS_EXPORT_KEY(backBoring)
-BOOST_CLASS_EXPORT_KEY(tapping)
-BOOST_CLASS_EXPORT_KEY(threadDrilling)
-BOOST_CLASS_EXPORT_KEY(drilling)
-BOOST_CLASS_EXPORT_KEY(centerDrilling)
-BOOST_CLASS_EXPORT_KEY(counterSinking)
-BOOST_CLASS_EXPORT_KEY(multistepDrilling)
-BOOST_CLASS_EXPORT_KEY(reaming)
-BOOST_CLASS_EXPORT_KEY(boring)
+BOOST_CLASS_EXPORT_KEY(iso14649::workplan)
+BOOST_CLASS_EXPORT_KEY(iso14649::setup)
+BOOST_CLASS_EXPORT_KEY(iso14649::block)
+BOOST_CLASS_EXPORT_KEY(iso14649::machiningWorkingstep)
+BOOST_CLASS_EXPORT_KEY(iso14649::rectangularClosedProfile)
+BOOST_CLASS_EXPORT_KEY(iso14649::circularClosedProfile)
+BOOST_CLASS_EXPORT_KEY(iso14649::planarFace)
+BOOST_CLASS_EXPORT_KEY(iso14649::closedPocket)
+BOOST_CLASS_EXPORT_KEY(iso14649::openPocket)
+BOOST_CLASS_EXPORT_KEY(iso14649::roundHole)
+BOOST_CLASS_EXPORT_KEY(iso14649::slot)
+BOOST_CLASS_EXPORT_KEY(iso14649::step)
+BOOST_CLASS_EXPORT_KEY(iso14649::generalOutsideProfile)
+BOOST_CLASS_EXPORT_KEY(iso14649::generalPath)
+BOOST_CLASS_EXPORT_KEY(iso14649::linearPath)
+BOOST_CLASS_EXPORT_KEY(iso14649::partialCircularPath)
+BOOST_CLASS_EXPORT_KEY(iso14649::completeCircularPath)
+BOOST_CLASS_EXPORT_KEY(iso14649::roundedUProfile)
+BOOST_CLASS_EXPORT_KEY(iso14649::partialCircularProfile)
+BOOST_CLASS_EXPORT_KEY(iso14649::teeProfile)
+BOOST_CLASS_EXPORT_KEY(iso14649::squareUProfile)
+BOOST_CLASS_EXPORT_KEY(iso14649::veeProfile)
+BOOST_CLASS_EXPORT_KEY(iso14649::generalProfile)
+BOOST_CLASS_EXPORT_KEY(iso14649::woodruffSlotEndType)
+BOOST_CLASS_EXPORT_KEY(iso14649::flatSlotEndType)
+BOOST_CLASS_EXPORT_KEY(iso14649::loopSlotEndType)
+BOOST_CLASS_EXPORT_KEY(iso14649::openSlotEndType)
+BOOST_CLASS_EXPORT_KEY(iso14649::radiusedSlotEndType)
+BOOST_CLASS_EXPORT_KEY(iso14649::radiusedPocketBottomCondition)
+BOOST_CLASS_EXPORT_KEY(iso14649::throughPocketBottomCondition)
+BOOST_CLASS_EXPORT_KEY(iso14649::planarPocketBottomCondition)
+BOOST_CLASS_EXPORT_KEY(iso14649::generalPocketBottomCondition)
+BOOST_CLASS_EXPORT_KEY(iso14649::planeRoughMilling)
+BOOST_CLASS_EXPORT_KEY(iso14649::planeFinishMilling)
+BOOST_CLASS_EXPORT_KEY(iso14649::sideRoughMilling)
+BOOST_CLASS_EXPORT_KEY(iso14649::sideFinishMilling)
+BOOST_CLASS_EXPORT_KEY(iso14649::bottomAndSideRoughMilling)
+BOOST_CLASS_EXPORT_KEY(iso14649::bottomAndSideFinishMilling)
+BOOST_CLASS_EXPORT_KEY(iso14649::millingCuttingTool)
+BOOST_CLASS_EXPORT_KEY(iso14649::two5DmillingStrategy)
+BOOST_CLASS_EXPORT_KEY(iso14649::unidirectionalMilling)
+BOOST_CLASS_EXPORT_KEY(iso14649::bidirectionalContour)
+BOOST_CLASS_EXPORT_KEY(iso14649::bidirectionalMilling)
+BOOST_CLASS_EXPORT_KEY(iso14649::contourParallel)
+BOOST_CLASS_EXPORT_KEY(iso14649::contourBidirectional)
+BOOST_CLASS_EXPORT_KEY(iso14649::contourSpiral)
+BOOST_CLASS_EXPORT_KEY(iso14649::centerMilling)
+BOOST_CLASS_EXPORT_KEY(iso14649::cutmodeTypeClimb)
+BOOST_CLASS_EXPORT_KEY(iso14649::cutmodeTypeConventional)
+BOOST_CLASS_EXPORT_KEY(iso14649::leftOrRightRight)
+BOOST_CLASS_EXPORT_KEY(iso14649::leftOrRightLeft)
+BOOST_CLASS_EXPORT_KEY(iso14649::rotDirectionCw)
+BOOST_CLASS_EXPORT_KEY(iso14649::rotDirectionCcw)
+BOOST_CLASS_EXPORT_KEY(iso14649::strokeConnectionStrategyStraightline)
+BOOST_CLASS_EXPORT_KEY(iso14649::strokeConnectionStrategyLoopBack)
+BOOST_CLASS_EXPORT_KEY(iso14649::strokeConnectionStrategyLiftShiftPlunge)
+BOOST_CLASS_EXPORT_KEY(iso14649::strokeConnectionStrategyDegouge)
+BOOST_CLASS_EXPORT_KEY(iso14649::approachRetractStrategy)
+BOOST_CLASS_EXPORT_KEY(iso14649::apRetractAngle)
+BOOST_CLASS_EXPORT_KEY(iso14649::millingTechnology)
+BOOST_CLASS_EXPORT_KEY(iso14649::booleanTrue)
+BOOST_CLASS_EXPORT_KEY(iso14649::booleanFalse)
+BOOST_CLASS_EXPORT_KEY(iso14649::toolReferencePointCcp)
+BOOST_CLASS_EXPORT_KEY(iso14649::toolReferencePointTcp)
+BOOST_CLASS_EXPORT_KEY(iso14649::diameterTaper)
+BOOST_CLASS_EXPORT_KEY(iso14649::angleTaper)
+BOOST_CLASS_EXPORT_KEY(iso14649::throughBottomCondition)
+BOOST_CLASS_EXPORT_KEY(iso14649::conicalHoleBottom)
+BOOST_CLASS_EXPORT_KEY(iso14649::flatHoleBottom)
+BOOST_CLASS_EXPORT_KEY(iso14649::flatWithRadiusHoleBottom)
+BOOST_CLASS_EXPORT_KEY(iso14649::sphericalHoleBottom)
+BOOST_CLASS_EXPORT_KEY(iso14649::backBoring)
+BOOST_CLASS_EXPORT_KEY(iso14649::tapping)
+BOOST_CLASS_EXPORT_KEY(iso14649::threadDrilling)
+BOOST_CLASS_EXPORT_KEY(iso14649::drilling)
+BOOST_CLASS_EXPORT_KEY(iso14649::centerDrilling)
+BOOST_CLASS_EXPORT_KEY(iso14649::counterSinking)
+BOOST_CLASS_EXPORT_KEY(iso14649::multistepDrilling)
+BOOST_CLASS_EXPORT_KEY(iso14649::reaming)
+BOOST_CLASS_EXPORT_KEY(iso14649::boring)
+BOOST_CLASS_EXPORT_KEY(iso14649::polyline)
 /********************************************************************/
 #endif

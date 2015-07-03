@@ -11,7 +11,7 @@
 #include "ProcessPlan.h"
 #include "forte_uint.h"
 #include <cstdarg>
-
+using namespace iso14649;
 class PP_DDBB
 {
 private:
@@ -112,16 +112,22 @@ public:
 		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(diameterIn, NULL);
 		return new roundHole(SET_NAME(itsIdIn), itsWorkpieceIn, itsOperationsIn, featurePlacementIn, depthIn, l_TL1, changeInDiameterIn, bottomConditionIn);
 	}
-	static rectangularClosedProfile * RECTANGURAL_CLOSED_PROFILE(double profileWidthIn, double profileLengthIn)
-	{
-		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(profileWidthIn, NULL);
-		tolerancedLengthMeasure * l_TL2 = new tolerancedLengthMeasure(profileLengthIn, NULL);
-		return new rectangularClosedProfile(NULL, l_TL1, l_TL2);
+	static planarFace * PLANAR_FACE(char * itsIdIn, workpiece * itsWorkpieceIn, parenMachiningOperationList * itsOperationsIn, axis2placement3d * featurePlacementIn,
+		elementarySurface * depthIn, linearPath * courseOfTravelIn, linearProfile * removalBoundaryIn, closedProfile * faceBoundaryIn, parenBossList * itsBossIn){
+		return new planarFace(SET_NAME(itsIdIn), itsWorkpieceIn, itsOperationsIn, featurePlacementIn, depthIn, courseOfTravelIn, removalBoundaryIn, faceBoundaryIn,
+			itsBossIn);
 	}
-	static circularClosedProfile * CIRCULAR_CLOSED_PROFILE(double diameter)
-	{
-		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(diameter, NULL);
-		return new circularClosedProfile(NULL, l_TL1);
+	static slot * SLOT(const char * itsIdIn, workpiece * itsWorkpieceIn, parenMachiningOperationList * itsOperationsIn, axis2placement3d * featurePlacementIn,
+		elementarySurface * depthIn, travelPath * courseOfTravelIn, openProfile * sweptShapeIn, parenSlotEndTypeList * endConditionsIn){
+		return new slot(SET_NAME(itsIdIn), itsWorkpieceIn, itsOperationsIn, featurePlacementIn, depthIn, courseOfTravelIn, sweptShapeIn, endConditionsIn);
+	}
+	static step * STEP(const char * itsIdIn, workpiece * itsWorkpieceIn, parenMachiningOperationList * itsOperationsIn, axis2placement3d * featurePlacementIn,
+		elementarySurface * depthIn, linearPath * openBoundaryIn, veeProfile * wallBoundaryIn, parenBossList * itsBossIn){
+		return new step(SET_NAME(itsIdIn), itsWorkpieceIn, itsOperationsIn, featurePlacementIn, depthIn, openBoundaryIn, wallBoundaryIn, itsBossIn);
+	}
+	static generalOutsideProfile * GENERAL_OUTSIDE_PROFILE(const char * itsIdIn, workpiece * itsWorkpieceIn, parenMachiningOperationList * itsOperationsIn, axis2placement3d * featurePlacementIn,
+		elementarySurface * depthIn, linearPath * profileSweptShapeIn, profile * featureBoundaryIn){
+		return new generalOutsideProfile(SET_NAME(itsIdIn), itsWorkpieceIn, itsOperationsIn, featurePlacementIn, depthIn, profileSweptShapeIn, featureBoundaryIn);
 	}
 	static machiningWorkingstep * MACHINING_WORKINGSTEP(const char * itsIdIn, elementarySurface * itsSecplaneIn, manufacturingFeature * itsFeatureIn,
 		machiningOperation * itsOperationIn, inProcessGeometry * itsEffectIn){
@@ -136,7 +142,6 @@ public:
 			SET_REAL(overcutLengthIn), approachIn, retractIn, itsMachiningStrategyIn, SET_REAL(axialCuttingDepthIn), SET_REAL(radialCuttingDepthIn),
 			SET_REAL(allowanceSideIn), SET_REAL(allowanceBottomIn));
 	}
-
 	static drilling * DRILLING(char * itsIdIn, double retractPlaneIn, cartesianPoint * startPointIn, machiningTool * itsToolIn,technology * itsTechnologyIn, 
 		machineFunctions * itsMachineFunctionsIn, double overcutLengthIn, double cuttingDepthIn, double previousDiameterIn, double dwellTimeBottomIn,
 		double feedOnRetractIn, drillingTypeStrategy * itsMachiningStrategyIn){
@@ -180,6 +185,71 @@ public:
 	}
 	static angleTaper * ANGLE_TAPER(double angle){
 		return new angleTaper(SET_REAL(angle));
+	}
+	static apRetractAngle * AP_RETRACT_ANLGE(const char * name, const double &x, const double &y, const double &z, const double &angleIn, const double &travelLengthIn){
+		return new apRetractAngle(DIRECTION(name, x, y, z), angleIn, travelLengthIn);
+	}
+	static generalPath * GENERAL_PATH(axis2placement3d * placementIn, boundedCurve * sweptPathIn){
+		return new generalPath(placementIn, sweptPathIn);
+	}
+	static linearPath * LINEAR_PATH(axis2placement3d * placementIn, const double &distanceIn, direction * itsDirectionIn){
+		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(distanceIn, NULL);
+		return new linearPath(placementIn, l_TL1, itsDirectionIn);
+	}
+	static completeCircularPath * COMPLETE_CIRCULAR_PATH(axis2placement3d * placementIn, const double &radiusIn){
+		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(radiusIn, NULL);
+		return new completeCircularPath(placementIn, l_TL1);
+	}
+	static partialCircularPath * PARTIAL_CIRCULAR_PATH(axis2placement3d * placementIn, const double &radiusIn, const double &sweepAngleIn){
+		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(radiusIn, NULL);
+		return new partialCircularPath(placementIn, l_TL1, sweepAngleIn);
+	}
+	static linearProfile * LINEAR_PROFILE(axis2placement3d * placementIn, const double &profileLengthIn){
+			return new linearProfile(placementIn, NUMERIC_PERAMETER(profileLengthIn));
+	}
+	static squareUProfile * SQUARE_U_PROFILE(axis2placement3d * placementIn, const double &widthIn, const double &firstRadiusIn,
+		const double &firstAngleIn, const double &secondRadiusIn, double secondAngleIn){
+		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(widthIn, NULL);
+		tolerancedLengthMeasure * l_TL2 = new tolerancedLengthMeasure(firstRadiusIn, NULL);
+		tolerancedLengthMeasure * l_TL3 = new tolerancedLengthMeasure(secondRadiusIn, NULL);
+		return new squareUProfile(placementIn, l_TL1, l_TL2, firstAngleIn, l_TL3, secondAngleIn);
+	}
+	static roundedUProfile * ROUNDED_U_PROFILE(axis2placement3d * placementIn, const double &widthIn){
+		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(widthIn, NULL);
+		return new roundedUProfile(placementIn, l_TL1);
+	}
+	static veeProfile * V_PROFILE(axis2placement3d * placementIn, const double &profileRadiusIn, const double &profileAngleIn, const double &tiltAngleIn){
+		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(profileRadiusIn, NULL);
+		return new veeProfile(placementIn, l_TL1, profileAngleIn, tiltAngleIn);
+	}
+	static rectangularClosedProfile * RECTANGURAL_CLOSED_PROFILE(axis2placement3d * placementIn, double profileWidthIn, double profileLengthIn)
+	{
+		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(profileWidthIn, NULL);
+		tolerancedLengthMeasure * l_TL2 = new tolerancedLengthMeasure(profileLengthIn, NULL);
+		return new rectangularClosedProfile(placementIn, l_TL1, l_TL2);
+	}
+	static circularClosedProfile * CIRCULAR_CLOSED_PROFILE(double diameter)
+	{
+		tolerancedLengthMeasure * l_TL1 = new tolerancedLengthMeasure(diameter, NULL);
+		return new circularClosedProfile(NULL, l_TL1);
+	}
+	static numericParameter * NUMERIC_PERAMETER(const double &itsParameterValueIn){
+		return new numericParameter(NULL, itsParameterValueIn, NULL);
+	}
+	static unidirectionalMilling * UNIDIRECTIONAL_MILLING(const double  &overlapIn, const bool &allowMultiplePassesIn, direction * feedDirectionIn, cutmodeType * cutmodeIn){
+
+		return new unidirectionalMilling(SET_REAL(overlapIn), SET_BOOL(allowMultiplePassesIn), feedDirectionIn, cutmodeIn);
+	}
+	static bidirectionalMilling * BIDIRECTIONAL_MILLING(const double  &overlapIn, const bool &allowMultiplePassesIn, direction * feedDirectionIn,
+		leftOrRight * stepoverDirectionIn, strokeConnectionStrategy * itsStrokeConnectionStrategyIn){
+
+		return new bidirectionalMilling(SET_REAL(overlapIn), SET_BOOL(allowMultiplePassesIn), feedDirectionIn, stepoverDirectionIn, itsStrokeConnectionStrategyIn);
+	}
+	static centerMilling * CENTER_MILLING(const double &overlapIn, const bool &allowMultiplePassesIn){
+		return new centerMilling(SET_REAL(overlapIn), SET_BOOL(allowMultiplePassesIn));
+	}
+	static polyline * POLYLINE(const char * name, std::list<cartesianPoint *> * ThePoints){
+		return new polyline(SET_NAME(name), new parenCartesianPointListFull(ThePoints));
 	}
 };
 #endif

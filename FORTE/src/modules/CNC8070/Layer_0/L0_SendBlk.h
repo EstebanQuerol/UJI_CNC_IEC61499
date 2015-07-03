@@ -81,11 +81,11 @@ virtual void setInitialValues();
 
   void executeEvent(int pa_nEIID);
   int m_nExtEvHandID_inh;
-  std::list<std::string> m_CmdList;
+  std::string m_sNBlock;
 
 public:
 	EVENT_SOURCE_FUNCTION_BLOCK_CTOR(FORTE_L0_SendBlk){
-		m_CmdList.clear();
+		m_sNBlock = "";
 		m_stEventSourceEventEntry.m_poFB = this; 
 		setEventChainExecutor(pa_poSrcRes->getResourceEventExecution());
 		m_nExtEvHandID_inh = getDeviceExecution()->registerExternalEventHandler(this);
@@ -96,7 +96,7 @@ public:
   /*!\brief deserializes the command vector
   *
   */
-  void RetreiveCmd();
+  void RetrieveCmd();
 
   //CNC8070COmmunicationHandler methods
 
@@ -126,9 +126,9 @@ public:
   virtual void OnInterruptedByError();
   /*!\brief Enable this event source
   */
-  virtual void OnMagazineUpdateAdd(const char * pa_sID, int pa_nPos, int pa_nState, long pa_nLocalID);
+  virtual void OnMagazineUpdateAdd(const tool8070 &pa_stTool);
   virtual void OnMagazineUpdateDelete();
-  virtual void OnMagazineUpdateDelete(const char * pa_sID, int pa_nPos, int pa_nState, long pa_lITool);
+  virtual void OnMagazineUpdateDelete(const tool8070 &pa_stTool);
 
 
   virtual void enableHandler(void);

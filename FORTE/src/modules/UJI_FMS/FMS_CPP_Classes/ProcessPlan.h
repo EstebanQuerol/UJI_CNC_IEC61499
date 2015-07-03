@@ -26,7 +26,7 @@ public:
 	* \param pa_nIndex 1-based vector index
 	* \return pointer to a workplan 
 	*/
-	workplan * ProcessPlan::getWorkplaneByIndex(TForteUInt16 pa_nIndex);
+	iso14649::workplan * ProcessPlan::getWorkplaneByIndex(TForteUInt16 pa_nIndex);
 	/*!\Get the number of subphases in the processplan
 	*	Inlined function
 	* \return number of subphases
@@ -41,7 +41,7 @@ public:
 	* \param pa_nSetupIndex position within the vector where to insert the operation, 1-based index
 	* \return true if success, false otherwise
 	*/
-	bool ProcessPlan::addSubphase(int pa_nSetupIndex, TForteUInt8 pa_nMTypeID, workplan * pa_poWorkplan);
+	bool ProcessPlan::addSubphase(int pa_nSetupIndex, TForteUInt8 pa_nMTypeID, iso14649::workplan * pa_poWorkplan);
 
 };
 

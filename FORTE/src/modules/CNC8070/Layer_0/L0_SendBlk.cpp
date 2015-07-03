@@ -44,22 +44,27 @@ void FORTE_L0_SendBlk::setInitialValues(){
   CNCState() = 0;
 }
 
-void FORTE_L0_SendBlk::RetreiveCmd(){
-	m_CmdList.clear();
+void FORTE_L0_SendBlk::RetrieveCmd(){
 	std::istringstream iss;
+	std::list<std::string> CmdList;
 	char * pacTempString = (char*)forte_malloc(sizeof(char)* (sBlock().length() + 1));
 	if (pacTempString != NULL){
 		if (-1 != sBlock().toString(pacTempString, static_cast<unsigned int>(sBlock().length() + 1), 1)){
 			iss.str(std::string(pacTempString));
 			boost::archive::text_iarchive ia(iss);
-			ia >> m_CmdList;
+			ia >> CmdList;
 			ia.delete_created_pointers();
 		}
 		forte_free(pacTempString);
 		pacTempString = NULL;
+		//Convert the list with the commands in a single string
+		m_sNBlock = "";
+		for (std::list<std::string>::iterator it = CmdList.begin(); it != CmdList.end(); ++it){
+			m_sNBlock.append((*it) + "\r\n");
+		}
 	}
 	else{
-		DEVLOG_ERROR("Allocation error while desirealizing in L0_SendBlk\n");
+		DEVLOG_ERROR("Allocation error while deserializing in L0_SendBlk\n");
 	}
 }
 void FORTE_L0_SendBlk::executeEvent(int pa_nEIID){
@@ -76,8 +81,8 @@ void FORTE_L0_SendBlk::executeEvent(int pa_nEIID){
 		sendOutputEvent(scm_nEventINITOID);
       break;
     case scm_nEventREQID:
-		RetreiveCmd();
-		if (!m_CmdList.empty()){
+		RetrieveCmd();
+		if (!m_sNBlock.empty()){
 			CNC8070Start();
 		}
 		else{
@@ -135,30 +140,19 @@ void FORTE_L0_SendBlk::OnReady()
 {
 	DEVLOG_INFO("CNC Ready\n");
 	CNCState() = 1;
-	if (!m_CmdList.empty()){
-		//Keep sending commands until the list is empty
-		CNC8070Start();
+	//Operation execution completed
+	if (getDeviceExecution()->extEvHandlerIsAllowed(m_nExtEvHandID_inh)){
+		getDeviceExecution()->startNewEventChain(this);
 	}
 	else{
-		//Operation execution completed
-		if (getDeviceExecution()->extEvHandlerIsAllowed(m_nExtEvHandID_inh)){
-			getDeviceExecution()->startNewEventChain(this);
-		}
-		else{
-			DEVLOG_DEBUG("External Event Not allowed\n");
-		}
+		DEVLOG_DEBUG("External Event Not allowed\n");
 	}
 }
 
 void FORTE_L0_SendBlk::OnStarted()
 {
 	DEVLOG_INFO("CNC Started\n");
-	//Execute 1st command in the list and delete it after
-	DEVLOG_DEBUG("\n\n");
-	DEVLOG_DEBUG(m_CmdList.front().c_str());
-	DEVLOG_DEBUG("\n\n");
-	CNC8070ExecuteBlock(m_CmdList.front().c_str());
-	m_CmdList.pop_front();
+	CNC8070ExecuteBlock(m_sNBlock.c_str());
 }
 
 void FORTE_L0_SendBlk::OnExecuting()
@@ -198,15 +192,33 @@ void FORTE_L0_SendBlk::OnInterruptedByError()
 	}
 }
 
-void FORTE_L0_SendBlk::OnMagazineUpdateAdd(const char * pa_sID, int pa_nPos, int pa_nState, long pa_nLocalID){
-	Tool_Table::addTool(Tool(std::string(pa_sID), pa_nPos, (Tool_State) pa_nState, pa_nLocalID));
+void FORTE_L0_SendBlk::OnMagazineUpdateAdd(const tool8070 &pa_stTool){
+	double dLength = pa_stTool.m_lLength;
+	dLength /= 10000.0;
+	double dLengthWear = pa_stTool.m_lLengthWear;
+	dLengthWear /= 10000.0;
+	double dLengthCut = pa_stTool.m_lLengthCut;
+	dLengthCut /= 10000.0;
+	double dRadius = pa_stTool.m_lRadius;
+	dRadius /= 10000.0;
+	double dRadiusWear = pa_stTool.m_lRadiusWear;
+	dRadiusWear /= 10000.0;
+	double dNoseRadius = pa_stTool.m_lNoseRadius;
+	dNoseRadius /= 10000.0;
+	double dNoseRadiusWear = pa_stTool.m_lNoseRadiusWear;
+	dNoseRadiusWear /= 10000.0;
+	double dEntryAngle = pa_stTool.m_lEntryAngle;
+	dEntryAngle /= 10000.0;
+	Tool theTool = Tool(std::string(pa_stTool.m_acToolName), (int) pa_stTool.m_lToolPos, (Tool_State)pa_stTool.m_lToolState, pa_stTool.m_lToolID);
+	theTool.writeEdge(dLength, dLengthWear, dLengthCut, dRadius, dRadiusWear, dNoseRadius, dNoseRadiusWear, dEntryAngle);
+	Tool_Table::addTool(theTool);
 }
 
 void FORTE_L0_SendBlk::OnMagazineUpdateDelete(){
 	Tool_Table::deleteTable();
 }
 
-void FORTE_L0_SendBlk::OnMagazineUpdateDelete(const char * pa_sID, int pa_nPos, int pa_nState, long pa_lITool){
+void FORTE_L0_SendBlk::OnMagazineUpdateDelete(const tool8070 &pa_stTool){
 
 }
 //CExternalEventsHandler methods implementation

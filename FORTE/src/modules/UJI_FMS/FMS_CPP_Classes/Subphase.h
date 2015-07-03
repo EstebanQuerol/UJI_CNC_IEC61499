@@ -16,9 +16,9 @@ class Subphase
 {
 private :
 	TForteUInt8 m_nMTypeID; //Type of the machine needed to execute the Subphase
-	workplan * m_poWorkplan; //Workplan to be executed in this subphase
+	iso14649::workplan * m_poWorkplan; //Workplan to be executed in this subphase
 public:
-	Subphase(TForteUInt8 pa_nMTypeID,workplan * pa_poWorkplan);
+	Subphase(TForteUInt8 pa_nMTypeID, iso14649::workplan * pa_poWorkplan);
 	Subphase(const Subphase &pa_Subphase);
 	Subphase::Subphase();
 	~Subphase();
@@ -31,6 +31,6 @@ public:
 	*	Inlined function
 	* \return Subphase size
 	*/
-	workplan * getWorkplan(){ return m_poWorkplan; };
+	iso14649::workplan * getWorkplan(){ return m_poWorkplan; };
 };
 #endif

@@ -90,29 +90,29 @@ private:
   void executeEvent(int pa_nEIID);
 
   //SIFB own memebers
-  workplan * m_poCurrentWP;
+  iso14649::workplan * m_poCurrentWP;
   BOOL m_bSetupLoaded;
   boost::archive::text_iarchive * m_poIArchive;
   TForteUInt8 m_nPartState; //UINT to track part state;0 not fixed, 1 being fixed, 2 fixed
   TForteUInt8 m_nExecutionErrors; //UINT to track the number of back to back execution errors
-  std::list<executable *>::iterator m_itCurrentElement; //Iterator to the current element of the workplan's list
+  std::list<iso14649::executable *>::iterator m_itCurrentElement; //Iterator to the current element of the workplan's list
   //Methods
   /*!\Retrieve the new workplan and map it to m_poCurrentWP
   */
-  void RetreiveWP();
+  void RetrieveWP();
   /*!\Delete the current workplan
   */
   void DeleteCurrentWP();
-  /*!\INLINED Retreive the setup of the current workplan
+  /*!\INLINED Retrieve the setup of the current workplan
   *	\return string to be sent to the machine to fix the part
   */
-  setup * GetSetup(){
+  iso14649::setup * GetSetup(){
 	  return m_poCurrentWP->get_itsSetup();
   }
-  /*!\Retreive the next workingstep to be exeuted
+  /*!\Retrieve the next workingstep to be exeuted
   *	\return string to be sent to the machine
   */
-  workingstep * GetWorkingStep();
+  iso14649::workingstep * GetWorkingStep();
   /*!\INLINED check if there is any remaining action in the current workplan list
   *	\return boo, true elements remaining, false otherwise
   */
@@ -125,12 +125,12 @@ private:
   /*!\Get the L1MID of a machining workingstep
   *	\return USINT with the ID
   */
-  TForteUInt8 GetWSL1MID(workingstep * obj);
+  TForteUInt8 GetWSL1MID(iso14649::workingstep * obj);
   /*!\serialize an iso14649 object into a string using boost serialization
   *	\return serialized string
   */
-  std::string stringSerialize(const setup * obj);
-  std::string stringSerialize(const workingstep * obj);
+  std::string stringSerialize(const iso14649::setup * obj);
+  std::string stringSerialize(const iso14649::workingstep * obj);
 public:
   FUNCTION_BLOCK_CTOR(FORTE_L2_ExecutionManager){
 	  m_poCurrentWP = NULL;

@@ -170,8 +170,8 @@ BOOL CCNC8070APILib::ConnectCNC(CCNC8070CommunicationHandler * a_oHandler)
 			}
 		}
 		if (m_bConnected) {
-			//Initialize tool talbe
-			MagazineInitialize();
+			//Initialize tool table forcing a tool report
+			m_oCTTableChangeSink.OnReport(0);
 			m_oHandler->Log(LOG_INFORMATION, "CNC Connected!\n");
 		}
 		else {
@@ -314,68 +314,9 @@ BOOL CCNC8070APILib::ChkRV(LONG a_lRetVal)
 		return TRUE;
 	}
 }
-VOID CCNC8070APILib::MagazineInitialize(){
-	//Initialize tool table using CMTableChangeSink::OnReport code
-	BSTR l_sToolName;
-	long l_lRetVal;
-	long l_lToolState;
-	long l_lToolID;
-	long l_lToolPos;
-	HRESULT l_hr;
-	int l_ii;
-	long l_lMzNumber = 1;//Magazine number, using 1 by default
-	IFCDualITool * l_poTool = NULL;
-	BOOL l_bRet;
-	SAFEARRAY * l_paToolArray;
-	long l_lLBound;//Array lower bound
-	long l_lUBound;//Array upper bound
 
-	l_hr = theLib.m_oTTable->ReadAllToolIds(&l_paToolArray, &l_lRetVal);
-	//Verify that the SafeArray is the proper shape
-	if (SUCCEEDED(SafeArrayGetLBound(l_paToolArray, 1, &l_lLBound)) && SUCCEEDED(SafeArrayGetUBound(l_paToolArray, 1, &l_lUBound))){
-		long l_lElements = l_lUBound - l_lLBound + 1;
-		if (l_lElements > 0){
-			long * l_plIDS;
-			l_hr = SafeArrayAccessData(l_paToolArray, (void HUGEP* FAR*)&l_plIDS);
-			if (SUCCEEDED(l_hr)){
-				for (l_ii = 0; l_ii < l_lElements; l_ii++){
-					l_lToolID = l_plIDS[l_ii];
-					theLib.m_oTTable->ReadTool(l_lToolID, &l_poTool, &l_bRet);
-					if (l_bRet == true){
-						//Retreive tool info
-						l_poTool->get_Name(&l_sToolName);
-						l_poTool->GetStatus(&l_lToolState);
-						l_poTool->Release();
-						//Retrive tool position into the Mz
-						theLib.m_oMagazine->GetToolInfo(l_lMzNumber, l_lToolID, &l_lRetVal);
-						if (l_lRetVal > 0){
-							//The tool is currently in the magazine
-							l_lToolPos = l_lRetVal;
-						}
-						else if (l_lRetVal == POSACTIVE){
-							//the tool is in the spindle
-							l_lToolPos = 0;
-						}
-						else{
-							//The tool is not int the magazine
-							l_lToolPos = -1;
-						}
-						//Add an entry in the table
-						char * cstring = _com_util::ConvertBSTRToString(l_sToolName);
-						if (cstring != NULL){
-							theLib.m_oHandler->OnMagazineUpdateAdd(cstring, l_lToolPos, l_lToolState, l_lToolID);
-							delete[] cstring;
-						}
-					}
-
-				}
-				SafeArrayUnaccessData(l_paToolArray);
-			}
-		}
-	}
-}
-VOID CCNC8070APILib::OnMagazineUpdateAdd(const char * pa_sID, int pa_nPos, int pa_nState, long pa_nLocalID){
-	m_oHandler->OnMagazineUpdateAdd(pa_sID,pa_nPos, pa_nState, pa_nLocalID);
+VOID CCNC8070APILib::OnMagazineUpdateAdd(const tool8070 &pa_stTool){
+	m_oHandler->OnMagazineUpdateAdd(pa_stTool);
 }
 VOID CCNC8070APILib::OnMagazineUpdateDelete(){
 	m_oHandler->OnMagazineUpdateDelete();
