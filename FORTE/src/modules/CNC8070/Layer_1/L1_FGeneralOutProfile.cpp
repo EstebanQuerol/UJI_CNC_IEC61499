@@ -310,11 +310,13 @@ void FORTE_L1_FGeneralOutProfile::executeEvent(int pa_nEIID){
 					}
 				}
 			}
-			else if (TheFeature->get_featureBoundary()->isA(circularClosedProfile_E)){
-				DEVLOG_DEBUG("L1_GeneralOutProfile: Not supported profile\n");
-				forte_free(acBuffer);
-				acBuffer = NULL;
-				PARAM_ERROR_EXIT
+			else if (TheFeature->get_featureBoundary()->isA(partialCircularProfile_E)){
+				partialCircularProfile* TheProfile = (partialCircularProfile *)TheFeature->get_featureBoundary();
+				double nProfileRadius = TheProfile->get_radius()->get_theoreticalSize();
+				double nProfileAngle = TheProfile->get_sweepAngle();
+				if (TheProfile->get_placement() != NULL){
+					vProfileOrigin = GlobalUtils::V3DFromRealIter(TheProfile->get_placement()->get_location()->get_coordinates());
+				}
 			}
 			else{
 				DEVLOG_DEBUG("L1_GeneralOutProfile: Not supported profile\n");
@@ -338,7 +340,6 @@ void FORTE_L1_FGeneralOutProfile::executeEvent(int pa_nEIID){
 			//Clean memory
 			forte_free(acBuffer);
 			acBuffer = NULL;
-			CleanIArchive();
 			sendOutputEvent(scm_nEventCNFID);
 			break;
 		}

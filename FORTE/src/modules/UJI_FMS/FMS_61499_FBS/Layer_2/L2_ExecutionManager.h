@@ -92,7 +92,6 @@ private:
   //SIFB own memebers
   iso14649::workplan * m_poCurrentWP;
   BOOL m_bSetupLoaded;
-  boost::archive::text_iarchive * m_poIArchive;
   TForteUInt8 m_nPartState; //UINT to track part state;0 not fixed, 1 being fixed, 2 fixed
   TForteUInt8 m_nExecutionErrors; //UINT to track the number of back to back execution errors
   std::list<iso14649::executable *>::iterator m_itCurrentElement; //Iterator to the current element of the workplan's list
