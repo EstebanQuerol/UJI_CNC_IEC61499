@@ -13,19 +13,23 @@
     <virtualDNSEntries name="IP_LAYER_1_B" value="127.0.0.1"/>
     <virtualDNSEntries name="IP_LAYER_2_B" value="127.0.0.1"/>
     <virtualDNSEntries name="IP_LAYER_0_B" value="127.0.0.1"/>
+    <virtualDNSEntries name="IP_CNC8070_A_GUI" value="127.0.0.1"/>
+    <virtualDNSEntries name="IP_CNC8070_B_GUI" value="127.0.0.1"/>
   </availableDNSCollections>
   <availableDNSCollections name="Multi_PC">
     <virtualDNSEntries name="localhost" value="127.0.0.1"/>
-    <virtualDNSEntries name="IP_L3" value="192.168.0.101"/>
+    <virtualDNSEntries name="IP_L3" value="192.168.0.105"/>
     <virtualDNSEntries name="IP_GUI" value="192.168.0.101"/>
     <virtualDNSEntries name="MUL_IP_MACHINES" value="192.168.0.255"/>
-    <virtualDNSEntries name="IP_CNC8070_A" value="192.168.0.100"/>
-    <virtualDNSEntries name="IP_LAYER_1_A" value="192.168.0.100"/>
-    <virtualDNSEntries name="IP_LAYER_2_A" value="192.168.0.100"/>
-    <virtualDNSEntries name="IP_LAYER_0_A" value="192.168.0.100"/>
+    <virtualDNSEntries name="IP_CNC8070_A" value="192.168.0.105"/>
+    <virtualDNSEntries name="IP_LAYER_1_A" value="192.168.0.105"/>
+    <virtualDNSEntries name="IP_LAYER_2_A" value="192.168.0.105"/>
+    <virtualDNSEntries name="IP_LAYER_0_A" value="192.168.0.105"/>
     <virtualDNSEntries name="IP_CNC8070_B" value="192.168.0.102"/>
     <virtualDNSEntries name="IP_LAYER_1_B" value="192.168.0.102"/>
     <virtualDNSEntries name="IP_LAYER_2_B" value="192.168.0.102"/>
     <virtualDNSEntries name="IP_LAYER_0_B" value="192.168.0.102"/>
+    <virtualDNSEntries name="IP_CNC8070_A_GUI" value="192.168.0.101"/>
+    <virtualDNSEntries name="IP_CNC8070_B_GUI" value="192.168.0.101"/>
   </availableDNSCollections>
 </virtualDNS:VirtualDNSManagement>
