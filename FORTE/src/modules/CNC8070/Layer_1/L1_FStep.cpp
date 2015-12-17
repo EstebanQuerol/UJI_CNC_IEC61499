@@ -285,7 +285,6 @@ void FORTE_L1_FStep::executeEvent(int pa_nEIID){
 			//Clean memory
 			forte_free(acBuffer);
 			acBuffer = NULL;
-			CleanIArchive();
 			sendOutputEvent(scm_nEventCNFID);
 			break;
 		}

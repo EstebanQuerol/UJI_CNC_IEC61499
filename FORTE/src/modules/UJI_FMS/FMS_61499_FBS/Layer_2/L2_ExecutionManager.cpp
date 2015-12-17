@@ -40,11 +40,8 @@ const SFBInterfaceSpec FORTE_L2_ExecutionManager::scm_stFBInterfaceSpec = {
 };
 
 void FORTE_L2_ExecutionManager::DeleteCurrentWP(){
-	//After deserialization new objects are created once they are used they must be deleted
-	//GlobalUtils::utils_SerFree();
-	m_poIArchive->delete_created_pointers();
-	//delete m_poIArchive;
-	m_poIArchive = NULL;
+	//After deserialization new objects are created, once they are used they must be deleted
+	delete m_poCurrentWP;
 	//Reset internal variables
 	m_nPartState = PART_NOT_FIXED;
 	m_nExecutionErrors = 0;
@@ -62,9 +59,9 @@ void FORTE_L2_ExecutionManager::RetrieveWP(){
 	if (pacTempString != NULL){
 		if (-1 != Setup().toString(pacTempString, static_cast<unsigned int>(Setup().length() + 1), 1)){
 			iss.str(std::string(pacTempString));
-			m_poIArchive = new boost::archive::text_iarchive(iss);
-			if (m_poIArchive != NULL){
-				(*m_poIArchive) >> m_poCurrentWP;
+			boost::archive::text_iarchive oIArchive(iss);
+			oIArchive >> m_poCurrentWP;
+			if (m_poCurrentWP != NULL){
 				m_itCurrentElement = m_poCurrentWP->get_itsElements()->get_theList()->begin();
 				m_bSetupLoaded = TRUE;
 			}

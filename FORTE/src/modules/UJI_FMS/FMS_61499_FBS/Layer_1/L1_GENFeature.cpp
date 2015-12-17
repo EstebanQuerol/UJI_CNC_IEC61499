@@ -23,10 +23,8 @@ iso14649::setup * L1_GENFeature::DeserializeSetup(const CIEC_STRING & pa_theStri
 	if (pacTempString != NULL){
 		if (-1 != pa_theString.toString(pacTempString, static_cast<unsigned int>(pa_theString.length() + 1), 1)){
 			iss.str(std::string(pacTempString));
-			m_pIArchive = new boost::archive::text_iarchive(iss);
-			if (m_pIArchive != NULL){
-				(*m_pIArchive) >> rvalue;
-			}
+			boost::archive::text_iarchive IArchive(iss);
+			IArchive >> rvalue;
 		}
 		forte_free(pacTempString);
 		pacTempString = NULL;
@@ -44,10 +42,8 @@ iso14649::workingstep * L1_GENFeature::DeserializeWorkingstep(const CIEC_STRING 
 	if (pacTempString != NULL){
 		if (-1 != pa_theString.toString(pacTempString, static_cast<unsigned int>(pa_theString.length() + 1), 1)){
 			iss.str(std::string(pacTempString));
-			m_pIArchive = new boost::archive::text_iarchive(iss);
-			if (m_pIArchive != NULL){
-				(*m_pIArchive) >> rvalue;
-			}
+			boost::archive::text_iarchive IArchive(iss);
+			IArchive >> rvalue;
 		}
 		forte_free(pacTempString);
 		pacTempString = NULL;
@@ -56,16 +52,4 @@ iso14649::workingstep * L1_GENFeature::DeserializeWorkingstep(const CIEC_STRING 
 		DEVLOG_ERROR("Allocation error while deserializing in L1 Feature\n");
 	}
 	return rvalue;
-}
-void L1_GENFeature::CleanIArchive(){
-	//NOTE: if Layers 2 and 1 are executed in different devices
-	//memory allocated with GlobalUtils::utils_SerMalloc()
-	//needs to be deleted here, if not it will be deleted
-	//in layer 2 when deleting the workplan
-	//TODO: Clean up not working
-	if (m_pIArchive != NULL){
-		m_pIArchive->delete_created_pointers();
-		//delete m_pIArchive;
-		m_pIArchive = NULL;
-	}
 }

@@ -56,7 +56,6 @@ void FORTE_L1_FSetup::executeEvent(int pa_nEIID){
 				acBuffer = NULL;
 				Cmd() = "";
 				L1MIDOut() = L1MID_PARAM_ERROR;
-				CleanIArchive();
 				sendOutputEvent(scm_nEventCNFID);
 				break;
 			}
@@ -91,7 +90,6 @@ void FORTE_L1_FSetup::executeEvent(int pa_nEIID){
 			//Clean memory
 			forte_free(acBuffer);
 			acBuffer = NULL;
-			CleanIArchive();
 			sendOutputEvent(scm_nEventCNFID);
 		}
 		break;

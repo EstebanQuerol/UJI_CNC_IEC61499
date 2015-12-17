@@ -191,7 +191,6 @@ void FORTE_L1_FClosedPocket::executeEvent(int pa_nEIID){
 			//Clean memory
 			forte_free(acBuffer);
 			acBuffer = NULL;
-			CleanIArchive();
 			sendOutputEvent(scm_nEventCNFID);
 		}
       break;
