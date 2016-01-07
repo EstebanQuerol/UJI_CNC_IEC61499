@@ -10,6 +10,7 @@
 //Macros
 #define PARAM_ERROR_EXIT Cmd() = "";\
 						 L1MIDOut() = L1MID_PARAM_ERROR;\
+						 CleanIArchive();\
 						 sendOutputEvent(scm_nEventCNFID);\
 						 break;\
 
@@ -27,6 +28,8 @@
 
 class L1_GENFeature
 {
+private:
+	boost::archive::text_iarchive * m_pIArchive; //Input archive used in deserialization
 
 public:
 	L1_GENFeature();
@@ -47,5 +50,6 @@ public:
 	/*!\brief destroys the objects created by the IArchive when deserializing
 	*
 	*/
+	void CleanIArchive();
 };
 #endif;

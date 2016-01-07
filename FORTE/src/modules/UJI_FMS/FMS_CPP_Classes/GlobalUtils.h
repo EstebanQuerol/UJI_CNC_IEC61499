@@ -32,6 +32,16 @@ public:
 	GlobalUtils();
 	~GlobalUtils();
 
+#ifdef WIN32
+	static void * utils_SerMalloc(size_t pa_nSize){
+		//Memory allocated with this function don't have to be freed by the user
+		//It will be freed when deleting the objects loaded by the serialization
+		void * ptr = malloc(pa_nSize);
+		sm_vSerallocLog.push_back(ptr);
+		return ptr;
+	}
+	static void utils_SerFree();
+#endif
 	/*!\ Create an Eigen 3 doubles vector from a RealList from iso14649 lib
 	* return a vector with x y z components on success
 	* rerurn a vector 0.0 0.0 0.0 on error
@@ -52,6 +62,8 @@ public:
 	* rerurn false if points are not equal
 	*/
 	static bool isPlacementEqual(iso14649::cartesianPoint *pa_oA, const double &x, const double &y);
+private:
+	static std::vector<void *> sm_vSerallocLog;
 };
 
 #endif

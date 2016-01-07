@@ -53,10 +53,11 @@ void FORTE_L0_SendBlk::RetrieveCmd(){
 			iss.str(std::string(pacTempString));
 			boost::archive::text_iarchive ia(iss);
 			ia >> CmdList;
+			ia.delete_created_pointers();
 		}
 		forte_free(pacTempString);
 		pacTempString = NULL;
-		//Convert the list with the commands into a single string
+		//Convert the list with the commands in a single string
 		m_sNBlock = "";
 		for (std::list<std::string>::iterator it = CmdList.begin(); it != CmdList.end(); ++it){
 			m_sNBlock.append((*it) + "\r\n");
