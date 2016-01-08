@@ -208,6 +208,7 @@ void FORTE_L1_FRoundHole::executeEvent(int pa_nEIID){
 			//Clean memory
 			forte_free(acBuffer);
 			acBuffer = NULL;
+			CleanIArchive();
 			sendOutputEvent(scm_nEventCNFID);
 			break;
 		}

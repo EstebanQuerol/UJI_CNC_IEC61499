@@ -1026,6 +1026,9 @@ channel::channel(
 channel::~channel()
 {
   //delete itsId;
+	if (isItsIdLoaded){
+		delete[] itsId;
+	}
 }
 
 int channel::isA(int aType)
@@ -1909,7 +1912,11 @@ executable::executable(
   itsId = itsIdIn;
 }
 
-executable::~executable(){}
+executable::~executable(){
+	if (isItsIdLoaded){
+		delete[] itsId;
+	}
+}
 
 int executable::isA(int aType)
     { return (aType == executable_E); }
@@ -2911,7 +2918,11 @@ machiningTool::machiningTool(
   itsId = itsIdIn;
 }
 
-machiningTool::~machiningTool(){}
+machiningTool::~machiningTool(){
+	if (isItsIdLoaded){
+		delete[] itsId;
+	}
+}
 
 int machiningTool::isA(int aType)
     { return (aType == machiningTool_E); }
@@ -2937,7 +2948,11 @@ manufacturingFeature::manufacturingFeature(
   itsOperations = itsOperationsIn;
 }
 
-manufacturingFeature::~manufacturingFeature(){}
+manufacturingFeature::~manufacturingFeature(){
+	if (isItsIdLoaded){
+		delete[] itsId;
+	}
+}
 
 int manufacturingFeature::isA(int aType)
     { return (aType == manufacturingFeature_E); }
@@ -3369,7 +3384,7 @@ optionalStop::optionalStop(
 
 optionalStop::~optionalStop()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
 }
 
 int optionalStop::isA(int aType)
@@ -5856,7 +5871,7 @@ programStop::programStop(
 
 programStop::~programStop()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
 }
 
 int programStop::isA(int aType)
@@ -6174,7 +6189,7 @@ regionProjection::regionProjection(
 
 regionProjection::~regionProjection()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
 }
 
@@ -6243,7 +6258,7 @@ regionSurfaceList::regionSurfaceList(
 
 regionSurfaceList::~regionSurfaceList()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
   //delete surfaceList;
 }
@@ -6330,7 +6345,7 @@ representation::representation(
 
 representation::~representation()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_items();
   //delete get_contextOfItems();
 }
@@ -6406,7 +6421,11 @@ representationItem::representationItem(
   name = nameIn;
 }
 
-representationItem::~representationItem(){}
+representationItem::~representationItem(){
+	if (isItsIdLoaded){
+		delete[] name;
+	}
+}
 
 int representationItem::isA(int aType)
     { return (aType == representationItem_E); }
@@ -6511,7 +6530,7 @@ selective::selective(
 
 selective::~selective()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete itsElements;
 }
 
@@ -6550,7 +6569,7 @@ setMark::setMark(
 
 setMark::~setMark()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
 }
 
 int setMark::isA(int aType)
@@ -6589,6 +6608,9 @@ setup::~setup()
 {
   //delete itsId;
   //delete itsWorkpieceSetup;
+	if (isItsIdLoaded){
+		delete[] itsId;
+	}
 }
 
 int setup::isA(int aType)
@@ -6717,7 +6739,7 @@ shapeRepresentation::shapeRepresentation(
 
 shapeRepresentation::~shapeRepresentation()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_items();
   //delete get_contextOfItems();
 }
@@ -8085,7 +8107,7 @@ unloadTool::unloadTool(
 
 unloadTool::~unloadTool()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
 }
 
 int unloadTool::isA(int aType)
@@ -8214,7 +8236,7 @@ vertexPoint::vertexPoint(
 
 vertexPoint::~vertexPoint()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int vertexPoint::isA(int aType)
@@ -8256,7 +8278,7 @@ waitForMark::waitForMark(
 
 waitForMark::~waitForMark()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
 }
 
 int waitForMark::isA(int aType)
@@ -8350,7 +8372,7 @@ whileStatement::whileStatement(
 
 whileStatement::~whileStatement()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
 }
 
 int whileStatement::isA(int aType)
@@ -8634,7 +8656,7 @@ workplan::workplan(
 
 workplan::~workplan()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete itsElements;
 }
 
@@ -8926,7 +8948,7 @@ assignment::assignment(
 
 assignment::~assignment()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
 }
 
 int assignment::isA(int aType)
@@ -9380,7 +9402,7 @@ chamfer::chamfer(
 
 chamfer::~chamfer()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
 }
 
@@ -10054,7 +10076,7 @@ counterboreHole::counterboreHole(
 
 counterboreHole::~counterboreHole()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
   //delete get_elements();
 }
@@ -10104,7 +10126,7 @@ countersunkHole::countersunkHole(
 
 countersunkHole::~countersunkHole()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
   //delete get_elements();
 }
@@ -10328,7 +10350,7 @@ definitionalRepresentation::definitionalRepresentation(
 
 definitionalRepresentation::~definitionalRepresentation()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_items();
   //delete get_contextOfItems();
 }
@@ -10442,7 +10464,7 @@ displayMessage::displayMessage(
 
 displayMessage::~displayMessage()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete itsText;
 }
 
@@ -10524,7 +10546,7 @@ edgeCurve::edgeCurve(
 
 edgeCurve::~edgeCurve()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete sameSense;
 }
 
@@ -10589,7 +10611,7 @@ edgeRound::edgeRound(
 
 edgeRound::~edgeRound()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
 }
 
@@ -10655,7 +10677,7 @@ exchangePallet::exchangePallet(
 
 exchangePallet::~exchangePallet()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
 }
 
 int exchangePallet::isA(int aType)
@@ -10793,7 +10815,7 @@ faceBound::faceBound(
 
 faceBound::~faceBound()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_orientation();
 }
 
@@ -10834,7 +10856,7 @@ faceOuterBound::faceOuterBound(
 
 faceOuterBound::~faceOuterBound()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_orientation();
 }
 
@@ -11285,7 +11307,7 @@ ifStatement::ifStatement(
 
 ifStatement::~ifStatement()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
 }
 
 int ifStatement::isA(int aType)
@@ -11341,7 +11363,7 @@ indexPallet::indexPallet(
 
 indexPallet::~indexPallet()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
 }
 
 int indexPallet::isA(int aType)
@@ -11382,7 +11404,7 @@ indexTable::indexTable(
 
 indexTable::~indexTable()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
 }
 
 int indexTable::isA(int aType)
@@ -11527,7 +11549,7 @@ loadTool::loadTool(
 
 loadTool::~loadTool()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
 }
 
 int loadTool::isA(int aType)
@@ -11656,7 +11678,11 @@ machiningOperation::machiningOperation(
    itsMachineFunctions = itsMachineFunctionsIn;
 }
 
-machiningOperation::~machiningOperation(){}
+machiningOperation::~machiningOperation(){
+	if (isItsIdLoaded){
+		delete[] itsId;
+	}
+}
 
 int machiningOperation::isA(int aType)
     { return ((aType == machiningOperation_E) ||
@@ -11711,7 +11737,7 @@ machiningWorkingstep::machiningWorkingstep(
 
 machiningWorkingstep::~machiningWorkingstep()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
 }
 
 int machiningWorkingstep::isA(int aType)
@@ -11777,7 +11803,7 @@ millingCuttingTool::millingCuttingTool(
 
 millingCuttingTool::~millingCuttingTool()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsCuttingEdge();
   //delete get_overallAssemblyLength();
   //delete toolHolderDiameterForSpindleOrientation;
@@ -12252,7 +12278,7 @@ nonSequential::nonSequential(
 
 nonSequential::~nonSequential()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete itsElements;
 }
 
@@ -12414,7 +12440,7 @@ openShell::openShell(
 
 openShell::~openShell()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_cfsFaces();
 }
 
@@ -12482,7 +12508,7 @@ orientedEdge::orientedEdge(
 
 orientedEdge::~orientedEdge()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete orientation;
 }
 
@@ -12535,7 +12561,7 @@ parallel::parallel(
 
 parallel::~parallel()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete branches;
 }
 
@@ -12744,7 +12770,7 @@ planarFace::planarFace(
 
 planarFace::~planarFace()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
   //delete itsBoss;
 }
@@ -13068,7 +13094,7 @@ rapidMovement::rapidMovement(
 
 rapidMovement::~rapidMovement()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
 }
 
 int rapidMovement::isA(int aType)
@@ -13264,7 +13290,7 @@ rightCircularCylinder::rightCircularCylinder(
 
 rightCircularCylinder::~rightCircularCylinder()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int rightCircularCylinder::isA(int aType)
@@ -13329,7 +13355,7 @@ roundedEnd::roundedEnd(
 
 roundedEnd::~roundedEnd()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
 }
 
@@ -13442,7 +13468,7 @@ roundHole::roundHole(
 
 roundHole::~roundHole()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
 }
 
@@ -13568,7 +13594,7 @@ slot::slot(
 
 slot::~slot()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
   //delete endConditions;
 }
@@ -13684,7 +13710,7 @@ sphericalCap::sphericalCap(
 
 sphericalCap::~sphericalCap()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
 }
 
@@ -13864,7 +13890,7 @@ step::step(
 
 step::~step()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
   //delete itsBoss;
 }
@@ -14325,7 +14351,7 @@ toolpathFeature::toolpathFeature(
 
 toolpathFeature::~toolpathFeature()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
 }
 
@@ -14412,9 +14438,9 @@ topologicalRegion::topologicalRegion(
 
 topologicalRegion::~topologicalRegion()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_cfsFaces();
 }
 
@@ -14627,7 +14653,7 @@ vector::vector(
 
 vector::~vector()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int vector::isA(int aType)
@@ -14733,7 +14759,7 @@ vertexLoop::vertexLoop(
 
 vertexLoop::~vertexLoop()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int vertexLoop::isA(int aType)
@@ -14789,7 +14815,7 @@ workpieceCompleteProbing::workpieceCompleteProbing(
 
 workpieceCompleteProbing::~workpieceCompleteProbing()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete computedOffset;
 }
 
@@ -14881,7 +14907,7 @@ workpieceProbing::workpieceProbing(
 
 workpieceProbing::~workpieceProbing()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
 }
 
 int workpieceProbing::isA(int aType)
@@ -14997,7 +15023,7 @@ advancedBrepShapeRepresentation::advancedBrepShapeRepresentation(
 
 advancedBrepShapeRepresentation::~advancedBrepShapeRepresentation()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_items();
   //delete get_contextOfItems();
 }
@@ -15042,7 +15068,7 @@ advancedFace::advancedFace(
 
 advancedFace::~advancedFace()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_bounds();
   //delete get_sameSense();
 }
@@ -15130,7 +15156,7 @@ axis1placement::axis1placement(
 
 axis1placement::~axis1placement()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int axis1placement::isA(int aType)
@@ -15178,7 +15204,7 @@ axis2placement3d::axis2placement3d(
 
 axis2placement3d::~axis2placement3d()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int axis2placement3d::isA(int aType)
@@ -15237,7 +15263,7 @@ block::block(
 
 block::~block()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int block::isA(int aType)
@@ -15370,7 +15396,7 @@ boss::boss(
 
 boss::~boss()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
   //delete slope;
 }
@@ -15530,7 +15556,7 @@ bottomAndSideRoughMilling::bottomAndSideRoughMilling(
 
 bottomAndSideRoughMilling::~bottomAndSideRoughMilling()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_retractPlane();
   //delete get_overcutLength();
   //delete get_axialCuttingDepth();
@@ -15749,7 +15775,7 @@ bSplineSurfaceWithKnots::bSplineSurfaceWithKnots(
 
 bSplineSurfaceWithKnots::~bSplineSurfaceWithKnots()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_uDegree();
   //delete get_vDegree();
   //delete get_controlPointsList();
@@ -15843,7 +15869,7 @@ cartesianPoint::cartesianPoint(
 
 cartesianPoint::~cartesianPoint()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete coordinates;
 }
 
@@ -15913,7 +15939,7 @@ catalogueThread::catalogueThread(
 
 catalogueThread::~catalogueThread()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
   //delete get_appliedShape();
   //delete get_innerOrOuterThread();
@@ -16108,7 +16134,7 @@ circularClosedShapeProfile::circularClosedShapeProfile(
 
 circularClosedShapeProfile::~circularClosedShapeProfile()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
 }
 
@@ -16186,7 +16212,7 @@ circularPattern::circularPattern(
 
 circularPattern::~circularPattern()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
   //delete relocatedBaseFeature;
   //delete missingBaseFeature;
@@ -16290,7 +16316,7 @@ closedPocket::closedPocket(
 
 closedPocket::~closedPocket()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
   //delete get_itsBoss();
   //delete get_slope();
@@ -16363,7 +16389,7 @@ closedShell::closedShell(
 
 closedShell::~closedShell()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_cfsFaces();
 }
 
@@ -16770,7 +16796,7 @@ definedThread::definedThread(
 
 definedThread::~definedThread()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
   //delete get_appliedShape();
   //delete get_innerOrOuterThread();
@@ -16866,7 +16892,7 @@ direction::direction(
 
 direction::~direction()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete directionRatios;
 }
 
@@ -17005,7 +17031,7 @@ edgeLoop::edgeLoop(
 
 edgeLoop::~edgeLoop()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete edgeList;
 }
 
@@ -17101,7 +17127,7 @@ freeformOperation::freeformOperation(
 
 freeformOperation::~freeformOperation()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_retractPlane();
   //delete get_overcutLength();
 }
@@ -17200,7 +17226,7 @@ generalOutsideProfile::generalOutsideProfile(
 
 generalOutsideProfile::~generalOutsideProfile()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
 }
 
@@ -17263,7 +17289,7 @@ generalPattern::generalPattern(
 
 generalPattern::~generalPattern()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
   //delete replicateLocations;
 }
@@ -17421,7 +17447,7 @@ generalShapeProfile::generalShapeProfile(
 
 generalShapeProfile::~generalShapeProfile()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
 }
 
@@ -17485,7 +17511,7 @@ helix::helix(
 
 helix::~helix()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int helix::isA(int aType)
@@ -17541,7 +17567,7 @@ line::line(
 
 line::~line()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int line::isA(int aType)
@@ -17632,7 +17658,7 @@ manifoldSolidBrep::manifoldSolidBrep(
 
 manifoldSolidBrep::~manifoldSolidBrep()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int manifoldSolidBrep::isA(int aType)
@@ -17784,7 +17810,7 @@ openPocket::openPocket(
 
 openPocket::~openPocket()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
   //delete get_itsBoss();
   //delete get_slope();
@@ -17881,7 +17907,7 @@ partialCircularShapeProfile::partialCircularShapeProfile(
 
 partialCircularShapeProfile::~partialCircularShapeProfile()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
 }
 
@@ -18024,7 +18050,7 @@ plane::plane(
 
 plane::~plane()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int plane::isA(int aType)
@@ -18144,7 +18170,7 @@ planeRoughMilling::planeRoughMilling(
 
 planeRoughMilling::~planeRoughMilling()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_retractPlane();
   //delete get_overcutLength();
   //delete get_axialCuttingDepth();
@@ -18253,7 +18279,7 @@ quasiUniformSurface::quasiUniformSurface(
 
 quasiUniformSurface::~quasiUniformSurface()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_uDegree();
   //delete get_vDegree();
   //delete get_controlPointsList();
@@ -18325,7 +18351,7 @@ rationalBSplineSurface::rationalBSplineSurface(
 
 rationalBSplineSurface::~rationalBSplineSurface()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_uDegree();
   //delete get_vDegree();
   //delete get_controlPointsList();
@@ -18404,7 +18430,7 @@ rectangularClosedShapeProfile::rectangularClosedShapeProfile(
 
 rectangularClosedShapeProfile::~rectangularClosedShapeProfile()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
 }
 
@@ -18478,7 +18504,7 @@ rectangularOpenShapeProfile::rectangularOpenShapeProfile(
 
 rectangularOpenShapeProfile::~rectangularOpenShapeProfile()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
 }
 
@@ -18560,7 +18586,7 @@ rectangularPattern::rectangularPattern(
 
 rectangularPattern::~rectangularPattern()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_itsOperations();
   //delete numberOfRows;
   //delete relocatedBaseFeature;
@@ -18831,7 +18857,7 @@ sideFinishMilling::sideFinishMilling(
 
 sideFinishMilling::~sideFinishMilling()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_retractPlane();
   //delete get_overcutLength();
   //delete get_axialCuttingDepth();
@@ -18960,7 +18986,7 @@ sideRoughMilling::sideRoughMilling(
 
 sideRoughMilling::~sideRoughMilling()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_retractPlane();
   //delete get_overcutLength();
   //delete get_axialCuttingDepth();
@@ -19129,7 +19155,7 @@ sphericalSurface::sphericalSurface(
 
 sphericalSurface::~sphericalSurface()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int sphericalSurface::isA(int aType)
@@ -19176,7 +19202,7 @@ surfaceOfLinearExtrusion::surfaceOfLinearExtrusion(
 
 surfaceOfLinearExtrusion::~surfaceOfLinearExtrusion()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int surfaceOfLinearExtrusion::isA(int aType)
@@ -19223,7 +19249,7 @@ surfaceOfRevolution::surfaceOfRevolution(
 
 surfaceOfRevolution::~surfaceOfRevolution()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int surfaceOfRevolution::isA(int aType)
@@ -19434,7 +19460,7 @@ tapping::tapping(
 
 tapping::~tapping()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_retractPlane();
   //delete get_overcutLength();
   //delete get_cuttingDepth();
@@ -19565,7 +19591,7 @@ threadDrilling::threadDrilling(
 
 threadDrilling::~threadDrilling()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_retractPlane();
   //delete get_overcutLength();
   //delete get_cuttingDepth();
@@ -19794,7 +19820,7 @@ toolRadiusProbing::toolRadiusProbing(
 
 toolRadiusProbing::~toolRadiusProbing()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
 }
 
 int toolRadiusProbing::isA(int aType)
@@ -20032,7 +20058,7 @@ uniformSurface::uniformSurface(
 
 uniformSurface::~uniformSurface()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_uDegree();
   //delete get_vDegree();
   //delete get_controlPointsList();
@@ -20356,7 +20382,7 @@ backBoring::backBoring(
 
 backBoring::~backBoring()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_retractPlane();
   //delete get_overcutLength();
   //delete get_cuttingDepth();
@@ -20605,7 +20631,7 @@ bezierSurface::bezierSurface(
 
 bezierSurface::~bezierSurface()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_uDegree();
   //delete get_vDegree();
   //delete get_controlPointsList();
@@ -20758,7 +20784,7 @@ bottomAndSideFinishMilling::bottomAndSideFinishMilling(
 
 bottomAndSideFinishMilling::~bottomAndSideFinishMilling()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_retractPlane();
   //delete get_overcutLength();
   //delete get_axialCuttingDepth();
@@ -20890,7 +20916,7 @@ boundedPCurve::boundedPCurve(
 
 boundedPCurve::~boundedPCurve()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int boundedPCurve::isA(int aType)
@@ -20999,7 +21025,7 @@ bSplineCurveWithKnots::bSplineCurveWithKnots(
 
 bSplineCurveWithKnots::~bSplineCurveWithKnots()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_controlPointsList();
   //delete get_curveForm();
   //delete get_closedCurve();
@@ -21073,7 +21099,7 @@ compositeCurve::compositeCurve(
 
 compositeCurve::~compositeCurve()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete segments;
   //delete selfIntersect;
 }
@@ -21480,7 +21506,7 @@ ellipse::ellipse(
 
 ellipse::~ellipse()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int ellipse::isA(int aType)
@@ -21627,7 +21653,7 @@ hyperbola::hyperbola(
 
 hyperbola::~hyperbola()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int hyperbola::isA(int aType)
@@ -21710,7 +21736,7 @@ multistepDrilling::multistepDrilling(
 
 multistepDrilling::~multistepDrilling()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_retractPlane();
   //delete get_overcutLength();
   //delete get_cuttingDepth();
@@ -21840,7 +21866,7 @@ parabola::parabola(
 
 parabola::~parabola()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int parabola::isA(int aType)
@@ -21886,7 +21912,7 @@ pcurve::pcurve(
 
 pcurve::~pcurve()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int pcurve::isA(int aType)
@@ -21949,7 +21975,7 @@ planeFinishMilling::planeFinishMilling(
 
 planeFinishMilling::~planeFinishMilling()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_retractPlane();
   //delete get_overcutLength();
   //delete get_axialCuttingDepth();
@@ -22047,7 +22073,7 @@ polyline::polyline(
 
 polyline::~polyline()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete points;
 }
 
@@ -22098,7 +22124,7 @@ quasiUniformCurve::quasiUniformCurve(
 
 quasiUniformCurve::~quasiUniformCurve()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_controlPointsList();
   //delete get_curveForm();
   //delete get_closedCurve();
@@ -22159,7 +22185,7 @@ rationalBSplineCurve::rationalBSplineCurve(
 
 rationalBSplineCurve::~rationalBSplineCurve()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_controlPointsList();
   //delete get_curveForm();
   //delete get_closedCurve();
@@ -22247,7 +22273,7 @@ reaming::reaming(
 
 reaming::~reaming()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_retractPlane();
   //delete get_overcutLength();
   //delete get_cuttingDepth();
@@ -22527,7 +22553,7 @@ toolLengthProbing::toolLengthProbing(
 
 toolLengthProbing::~toolLengthProbing()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
 }
 
 int toolLengthProbing::isA(int aType)
@@ -22592,7 +22618,7 @@ trimmedCurve::trimmedCurve(
 
 trimmedCurve::~trimmedCurve()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete trim1;
   //delete trim2;
   //delete senseAgreement;
@@ -22670,7 +22696,7 @@ uniformCurve::uniformCurve(
 
 uniformCurve::~uniformCurve()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_controlPointsList();
   //delete get_curveForm();
   //delete get_closedCurve();
@@ -22792,7 +22818,7 @@ bezierCurve::bezierCurve(
 
 bezierCurve::~bezierCurve()
 {
-  delete[] get_name();
+  //delete[] get_name();
   //delete get_controlPointsList();
   //delete get_curveForm();
   //delete get_closedCurve();
@@ -22872,7 +22898,7 @@ boring::boring(
 
 boring::~boring()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_retractPlane();
   //delete get_overcutLength();
   //delete get_cuttingDepth();
@@ -23072,7 +23098,7 @@ centerDrilling::centerDrilling(
 
 centerDrilling::~centerDrilling()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_retractPlane();
   //delete get_overcutLength();
   //delete get_cuttingDepth();
@@ -23173,7 +23199,7 @@ circle::circle(
 
 circle::~circle()
 {
-  delete[] get_name();
+  //delete[] get_name();
 }
 
 int circle::isA(int aType)
@@ -23241,7 +23267,7 @@ counterSinking::counterSinking(
 
 counterSinking::~counterSinking()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_retractPlane();
   //delete get_overcutLength();
   //delete get_cuttingDepth();
@@ -23363,7 +23389,7 @@ drilling::drilling(
 
 drilling::~drilling()
 {
-  delete[] get_itsId();
+  //delete[] get_itsId();
   //delete get_retractPlane();
   //delete get_overcutLength();
   //delete get_cuttingDepth();

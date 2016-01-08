@@ -10,6 +10,7 @@
 //Macros
 #define PARAM_ERROR_EXIT Cmd() = "";\
 						 L1MIDOut() = L1MID_PARAM_ERROR;\
+						 CleanIArchive();\
 						 sendOutputEvent(scm_nEventCNFID);\
 						 break;\
 
@@ -27,9 +28,15 @@
 
 class L1_GENFeature
 {
+private:
+	std::istringstream m_ssIStringStream; //String stream used to deserialize
+	boost::archive::text_iarchive * m_poIArchive; //Archive is holded after deserializing to be able to use delete_created_pointers()
 
 public:
-	L1_GENFeature();
+	L1_GENFeature(){
+		m_ssIStringStream.str("");
+		m_poIArchive = NULL;
+	}
 	~L1_GENFeature();
 	/*!\brief serializes a list of strings into a CIEC_STRING
 	*
@@ -47,5 +54,6 @@ public:
 	/*!\brief destroys the objects created by the IArchive when deserializing
 	*
 	*/
+	void CleanIArchive();
 };
 #endif;

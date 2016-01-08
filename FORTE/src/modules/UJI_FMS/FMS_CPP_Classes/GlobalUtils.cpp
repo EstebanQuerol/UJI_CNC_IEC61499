@@ -2,6 +2,9 @@
 
 const double pi = acos(-1.0);
 
+GlobalUtils::GlobalUtils()
+{
+}
 
 
 GlobalUtils::~GlobalUtils()

@@ -318,6 +318,12 @@ void FORTE_L1_FGeneralOutProfile::executeEvent(int pa_nEIID){
 					vProfileOrigin = GlobalUtils::V3DFromRealIter(TheProfile->get_placement()->get_location()->get_coordinates());
 				}
 			}
+			else if (TheFeature->get_featureBoundary()->isA(circularClosedProfile_E)){
+				DEVLOG_DEBUG("L1_GeneralOutProfile: Not supported profile\n");
+				forte_free(acBuffer);
+				acBuffer = NULL;
+				PARAM_ERROR_EXIT
+			}
 			else{
 				DEVLOG_DEBUG("L1_GeneralOutProfile: Not supported profile\n");
 				forte_free(acBuffer);
@@ -340,6 +346,7 @@ void FORTE_L1_FGeneralOutProfile::executeEvent(int pa_nEIID){
 			//Clean memory
 			forte_free(acBuffer);
 			acBuffer = NULL;
+			CleanIArchive();
 			sendOutputEvent(scm_nEventCNFID);
 			break;
 		}
