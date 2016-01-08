@@ -2068,6 +2068,7 @@ public:
   void set_itsId(char * itsIdIn);
 private:
   char * itsId;
+  bool isItsIdLoaded = false;
 
   friend class boost::serialization::access;
   template<class Archive>
@@ -2099,6 +2100,7 @@ private:
 	  if (!istr.empty()){
 		  itsId = new char[istr.length() + 1];
 		  strcpy(itsId, istr.c_str());
+		  isItsIdLoaded = true;
 	  }
 	  else{
 		  itsId = NULL;
@@ -2809,6 +2811,7 @@ public:
   void set_itsId(char * itsIdIn);
 private:
   char * itsId;
+  bool isItsIdLoaded = false;
 
   friend class boost::serialization::access;
   template<class Archive>
@@ -2836,6 +2839,7 @@ private:
 	  if (!istr.empty()){
 		  itsId = new char[istr.length() + 1];
 		  strcpy(itsId, istr.c_str());
+		  isItsIdLoaded = true;
 	  }
 	  else{
 		  itsId = NULL;
@@ -3788,6 +3792,7 @@ public:
   void set_itsId(char * itsIdIn);
 private:
   char * itsId;
+  bool isItsIdLoaded = false;
 
   friend class boost::serialization::access;
   template<class Archive>
@@ -3815,6 +3820,7 @@ private:
 	  if (!istr.empty()){
 		  itsId = new char[istr.length() + 1];
 		  strcpy(itsId, istr.c_str());
+		  isItsIdLoaded = true;
 	  }
 	  else{
 		  itsId = NULL;
@@ -3861,6 +3867,7 @@ private:
   char * itsId;
   workpiece * itsWorkpiece;
   parenMachiningOperationList * itsOperations;
+  bool isItsIdLoaded = false;
 
   friend class boost::serialization::access;
   template<class Archive>
@@ -3888,6 +3895,7 @@ private:
 	  if (!istr.empty()){
 		  itsId = new char[istr.length() + 1];
 		  strcpy(itsId, istr.c_str());
+		  isItsIdLoaded = true;
 	  }
 	  else{
 		  itsId = NULL;
@@ -6376,7 +6384,7 @@ public:
   void set_name(char * nameIn);
 private:
   char * name;
-
+  bool isItsIdLoaded = false;
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive & ar, const unsigned int version) const
@@ -6390,7 +6398,7 @@ private:
 	  else{
 		  istr = std::string(name);
 	  }
-	  ar & istr;
+	  ar << istr;
   }
 
   template<class Archive>
@@ -6403,6 +6411,7 @@ private:
 	  if (!istr.empty()){
 		  name = new char[(istr.length() + 1)];
 		  strcpy(name, istr.c_str());
+		  isItsIdLoaded = true;
 	  }
 	  else{
 		  name = NULL;
@@ -6642,6 +6651,7 @@ private:
   axis2placement3d * itsOrigin;
   elementarySurface * itsSecplane;
   parenWorkpieceSetupList * itsWorkpieceSetup;
+  bool isItsIdLoaded = false;
 
   friend class boost::serialization::access;
   template<class Archive>
@@ -6673,6 +6683,7 @@ private:
 	  if (!istr.empty()){
 		  itsId = new char[istr.length() + 1];
 		  strcpy(itsId, istr.c_str());
+		  isItsIdLoaded = true;
 	  }
 	  else{
 		  itsId = NULL;
@@ -10992,6 +11003,7 @@ private:
   machiningTool * itsTool;
   technology * itsTechnology;
   machineFunctions * itsMachineFunctions;
+  bool isItsIdLoaded = false;
 
   friend class boost::serialization::access;
   template<class Archive>
@@ -11024,6 +11036,7 @@ private:
 	  if (!istr.empty()){
 		  itsId = new char[istr.length() + 1];
 		  strcpy(itsId, istr.c_str());
+		  isItsIdLoaded = true;
 	  }
 	  else{
 		  itsId = NULL;

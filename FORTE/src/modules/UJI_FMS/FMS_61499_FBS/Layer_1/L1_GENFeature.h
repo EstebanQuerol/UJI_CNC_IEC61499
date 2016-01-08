@@ -29,10 +29,14 @@
 class L1_GENFeature
 {
 private:
-	boost::archive::text_iarchive * m_pIArchive; //Input archive used in deserialization
+	std::istringstream m_ssIStringStream; //String stream used to deserialize
+	boost::archive::text_iarchive * m_poIArchive; //Archive is holded after deserializing to be able to use delete_created_pointers()
 
 public:
-	L1_GENFeature();
+	L1_GENFeature(){
+		m_ssIStringStream.str("");
+		m_poIArchive = NULL;
+	}
 	~L1_GENFeature();
 	/*!\brief serializes a list of strings into a CIEC_STRING
 	*

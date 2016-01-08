@@ -41,10 +41,14 @@ const SFBInterfaceSpec FORTE_L2_ExecutionManager::scm_stFBInterfaceSpec = {
 
 void FORTE_L2_ExecutionManager::DeleteCurrentWP(){
 	//After deserialization new objects are created once they are used they must be deleted
-	//GlobalUtils::utils_SerFree();
-	m_poIArchive->delete_created_pointers();
-	//delete m_poIArchive;
-	m_poIArchive = NULL;
+	if (m_poIArchive != NULL){
+		m_poIArchive->delete_created_pointers();
+		delete m_poIArchive;
+		m_poIArchive = NULL;
+	}
+	//Reset input string stream
+	m_ssIStringStream.clear();
+	m_ssIStringStream.seekg(0);
 	//Reset internal variables
 	m_nPartState = PART_NOT_FIXED;
 	m_nExecutionErrors = 0;
@@ -57,12 +61,11 @@ void FORTE_L2_ExecutionManager::RetrieveWP(){
 		// Delete the old one before setting up the new
 		DeleteCurrentWP();
 	}
-	std::istringstream iss;
 	char * pacTempString = (char*)forte_malloc(sizeof(char)* (Setup().length() + 1));
 	if (pacTempString != NULL){
 		if (-1 != Setup().toString(pacTempString, static_cast<unsigned int>(Setup().length() + 1), 1)){
-			iss.str(std::string(pacTempString));
-			m_poIArchive = new boost::archive::text_iarchive(iss);
+			m_ssIStringStream.str(std::string(pacTempString));
+			m_poIArchive = new boost::archive::text_iarchive(m_ssIStringStream);
 			if (m_poIArchive != NULL){
 				(*m_poIArchive) >> m_poCurrentWP;
 				m_itCurrentElement = m_poCurrentWP->get_itsElements()->get_theList()->begin();
