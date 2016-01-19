@@ -137,6 +137,10 @@ void FORTE_L2_ExecutionManager::executeEvent(int pa_nEIID){
 	iso14649::workingstep * l_workingstep = NULL;
   switch(pa_nEIID){
     case scm_nEventINITID:
+		if (QI() == false){
+			//Desinitialization algorithm
+			DeleteCurrentWP();
+		}
 		QO() = QI();
 		sendOutputEvent(scm_nEventINITOID);
 		break;

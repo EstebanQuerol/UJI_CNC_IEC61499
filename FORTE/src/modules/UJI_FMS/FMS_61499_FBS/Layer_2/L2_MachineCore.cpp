@@ -7,6 +7,7 @@
  *** Description: Basic Function Block Type
  *** Version: 
  ***     0.0: 2014-11-28/EQUEROL - UJI - 
+ ***     1.0: 2016-01-18/EQUEROL - UJI - 
  *************************************************************************/
 
 #include "L2_MachineCore.h"
@@ -28,8 +29,8 @@ const TForteInt16 FORTE_L2_MachineCore::scm_anEIWithIndexes[] = {0, 2, -1, -1, 4
 const TDataIOID FORTE_L2_MachineCore::scm_anEIWith[] = {0, 255, 1, 255, 2, 255, 3, 255};
 const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anEventInputNames[] = {g_nStringIdUPDT, g_nStringIdREQ, g_nStringIdRSP, g_nStringIdtimeout, g_nStringIdCompletedOP, g_nStringIdCompletedSetup};
 
-const TDataIOID FORTE_L2_MachineCore::scm_anEOWith[] = {0, 255, 1, 255, 1, 2, 255, 3, 255, 4, 255};
-const TForteInt16 FORTE_L2_MachineCore::scm_anEOWithIndexes[] = {-1, 0, 2, 4, -1, 7, 9, -1, -1};
+const TDataIOID FORTE_L2_MachineCore::scm_anEOWith[] = {1, 255, 0, 255, 1, 255, 1, 2, 255, 3, 255, 4, 255};
+const TForteInt16 FORTE_L2_MachineCore::scm_anEOWithIndexes[] = {0, 2, 4, 6, -1, 9, 11, -1, -1};
 const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anEventOutputNames[] = {g_nStringIdRENEW, g_nStringIdNEXT, g_nStringIdCNF, g_nStringIdIND, g_nStringIdFREE, g_nStringIdERROR, g_nStringIdstart, g_nStringIdstop};
 
 const CStringDictionary::TStringId FORTE_L2_MachineCore::scm_anInternalsNames[] = {g_nStringIdState, g_nStringIdCurrentPart, g_nStringIdCurrentFamily, g_nStringIdCurrentType, g_nStringIdLostCNF, g_nStringIdinError};
@@ -230,6 +231,9 @@ void FORTE_L2_MachineCore::executeEvent(int pa_nEIID){
         else
         if(scm_nEventREQID == pa_nEIID)
           enterStateREQ();
+        else
+        if((scm_nEventUPDTID == pa_nEIID) && (ServiceState() == 1))
+          enterStateToReady();
         else
           bTransitionCleared  = false; //no transition cleared
         break;

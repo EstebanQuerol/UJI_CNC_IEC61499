@@ -3,6 +3,7 @@
 <FBType Comment="Basic Function Block Type" Name="L2_MachineCore">
   <Identification Standard="61499-2"/>
   <VersionInfo Author="EQUEROL" Date="2014-11-28" Organization="UJI" Version="0.0"/>
+  <VersionInfo Author="EQUEROL" Date="2016-01-18" Organization="UJI" Version="1.0"/>
   <CompilerInfo/>
   <InterfaceList>
     <EventInputs>
@@ -22,7 +23,9 @@
       </Event>
     </EventInputs>
     <EventOutputs>
-      <Event Comment="Renew Machine buffer" Name="RENEW" Type="Event"/>
+      <Event Comment="Renew Machine buffer" Name="RENEW" Type="Event">
+        <With Var="PartInfoOut"/>
+      </Event>
       <Event Comment="Send request to execute next operation" Name="NEXT" Type="Event">
         <With Var="NextCode"/>
       </Event>
@@ -124,6 +127,7 @@
       <ECTransition Comment="" Condition="CompletedSetup" Destination="Completed" Source="Executing" x="3145.0" y="2575.0"/>
       <ECTransition Comment="" Condition="CompletedOP" Destination="SendNext" Source="Executing" x="3160.0" y="2250.0"/>
       <ECTransition Comment="" Condition="1" Destination="SendNext" Source="REQ" x="2785.0" y="1875.0"/>
+      <ECTransition Comment="" Condition="UPDT&amp;ServiceState = 1" Destination="ToReady" Source="Ready" x="-240.0" y="855.0"/>
     </ECC>
     <Algorithm Comment="Normally executed algorithm" Name="REQ">
       <ST Text="(*A new assignation request arrived*)&#10;(*The machine is free, confirm the assignation and modify the state*)&#10;CurrentPart := PartInfoIn[0];&#10;CurrentFamily := PartInfoIn[1];&#10;CurrentType := PartInfoIn[2];&#10;ENDOPID := 0;&#10;PartInfoOut[0] := CurrentPart;&#10;PartInfoOut[1] := CurrentFamily;&#10;PartInfoOut[2] := CurrentType;&#10;PartInfoOut[3] :=  PartInfoIn[3];"/>

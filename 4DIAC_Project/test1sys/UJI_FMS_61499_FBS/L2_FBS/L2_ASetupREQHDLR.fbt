@@ -3,6 +3,7 @@
 <FBType Comment="Basic Function Block Type" Name="L2_ASetupREQHDLR">
   <Identification Standard="61499-2"/>
   <VersionInfo Author="EQUEROL" Date="2014-11-28" Organization="UJI" Version="0.0"/>
+  <VersionInfo Author="EQUEROL" Date="2016-01-18" Organization="UJI" Version="1.0"/>
   <CompilerInfo/>
   <InterfaceList>
     <EventInputs>
@@ -45,24 +46,27 @@
       <VarDeclaration Comment="loop variable" InitialValue="0" Name="i" Type="USINT"/>
     </InternalVars>
     <ECC>
-      <ECState Comment="Initial State" Name="START" x="550.0" y="425.0"/>
+      <ECState Name="START" x="95.0" y="190.0"/>
+      <ECState Comment="Initial State" Name="IDLE" x="760.0" y="855.0"/>
       <ECState Comment="Initialization" Name="INIT" x="920.0" y="140.0">
         <ECAction Algorithm="INIT" Output="INITO"/>
       </ECState>
-      <ECState Comment="Normal execution" Name="REQ" x="950.0" y="855.0">
+      <ECState Comment="Normal execution" Name="REQ" x="1160.0" y="1285.0">
         <ECAction Algorithm="REQ"/>
       </ECState>
-      <ECState Name="AcceptPacket" x="1615.0" y="1330.0">
+      <ECState Name="AcceptPacket" x="1825.0" y="1760.0">
         <ECAction Output="CNF"/>
       </ECState>
-      <ECState Name="RejectPacket" x="475.0" y="1520.0"/>
-      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="START" x="915.0" y="335.0"/>
-      <ECTransition Comment="" Condition="1" Destination="START" Source="INIT" x="550.0" y="140.0"/>
-      <ECTransition Comment="" Condition="REQ" Destination="REQ" Source="START" x="960.0" y="710.0"/>
-      <ECTransition Comment="" Condition="Accepted = TRUE" Destination="AcceptPacket" Source="REQ" x="1255.0" y="1215.0"/>
-      <ECTransition Comment="" Condition="Accepted = FALSE" Destination="RejectPacket" Source="REQ" x="710.0" y="1145.0"/>
-      <ECTransition Comment="" Condition="1" Destination="START" Source="RejectPacket" x="135.0" y="590.0"/>
-      <ECTransition Comment="" Condition="1" Destination="START" Source="AcceptPacket" x="1420.0" y="655.0"/>
+      <ECState Name="RejectPacket" x="685.0" y="1950.0"/>
+      <ECTransition Comment="" Condition="REQ" Destination="REQ" Source="IDLE" x="1170.0" y="1140.0"/>
+      <ECTransition Comment="" Condition="Accepted = TRUE" Destination="AcceptPacket" Source="REQ" x="1465.0" y="1645.0"/>
+      <ECTransition Comment="" Condition="Accepted = FALSE" Destination="RejectPacket" Source="REQ" x="920.0" y="1575.0"/>
+      <ECTransition Comment="" Condition="1" Destination="IDLE" Source="RejectPacket" x="535.0" y="1235.0"/>
+      <ECTransition Comment="" Condition="1" Destination="IDLE" Source="AcceptPacket" x="1630.0" y="1085.0"/>
+      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="START" x="625.0" y="145.0"/>
+      <ECTransition Comment="" Condition="QI" Destination="IDLE" Source="INIT" x="1125.0" y="540.0"/>
+      <ECTransition Comment="" Condition="QI = FALSE" Destination="START" Source="INIT" x="650.0" y="310.0"/>
+      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="IDLE" x="890.0" y="545.0"/>
     </ECC>
     <Algorithm Comment="Initialization algorithm" Name="INIT">
       <ST Text="QO := QI;&#10;MIDOut := MID;"/>

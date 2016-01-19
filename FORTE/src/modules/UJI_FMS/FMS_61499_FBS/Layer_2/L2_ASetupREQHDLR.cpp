@@ -7,6 +7,7 @@
  *** Description: Basic Function Block Type
  *** Version: 
  ***     0.0: 2014-11-28/EQUEROL - UJI - 
+ ***     1.0: 2016-01-18/EQUEROL - UJI - 
  *************************************************************************/
 
 #include "L2_ASetupREQHDLR.h"
@@ -77,6 +78,10 @@ void FORTE_L2_ASetupREQHDLR::enterStateSTART(void){
   m_nECCState = scm_nStateSTART;
 }
 
+void FORTE_L2_ASetupREQHDLR::enterStateIDLE(void){
+  m_nECCState = scm_nStateIDLE;
+}
+
 void FORTE_L2_ASetupREQHDLR::enterStateINIT(void){
   m_nECCState = scm_nStateINIT;
   alg_INIT();
@@ -106,13 +111,22 @@ void FORTE_L2_ASetupREQHDLR::executeEvent(int pa_nEIID){
         if(scm_nEventINITID == pa_nEIID)
           enterStateINIT();
         else
+          bTransitionCleared  = false; //no transition cleared
+        break;
+      case scm_nStateIDLE:
         if(scm_nEventREQID == pa_nEIID)
           enterStateREQ();
+        else
+        if(scm_nEventINITID == pa_nEIID)
+          enterStateINIT();
         else
           bTransitionCleared  = false; //no transition cleared
         break;
       case scm_nStateINIT:
-        if(1)
+        if(QI())
+          enterStateIDLE();
+        else
+        if(QI() == false)
           enterStateSTART();
         else
           bTransitionCleared  = false; //no transition cleared
@@ -128,18 +142,18 @@ void FORTE_L2_ASetupREQHDLR::executeEvent(int pa_nEIID){
         break;
       case scm_nStateAcceptPacket:
         if(1)
-          enterStateSTART();
+          enterStateIDLE();
         else
           bTransitionCleared  = false; //no transition cleared
         break;
       case scm_nStateRejectPacket:
         if(1)
-          enterStateSTART();
+          enterStateIDLE();
         else
           bTransitionCleared  = false; //no transition cleared
         break;
       default:
-      DEVLOG_ERROR("The state is not in the valid range! The state value is: %d. The max value can be: 4.", m_nECCState.operator TForteUInt16 ());
+      DEVLOG_ERROR("The state is not in the valid range! The state value is: %d. The max value can be: 5.", m_nECCState.operator TForteUInt16 ());
         m_nECCState = 0; //0 is always the initial state
         break;
     }

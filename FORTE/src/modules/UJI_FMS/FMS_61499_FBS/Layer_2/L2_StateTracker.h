@@ -7,6 +7,7 @@
  *** Description: Basic Function Block Type
  *** Version: 
  ***     0.0: 2014-12-04/EQUEROL - UJI - 
+ ***     1.0: 2016-01-18/EQUEROL - UJI - 
  *************************************************************************/
 
 #ifndef _L2_STATETRACKER_H_
@@ -27,22 +28,18 @@ private:
     return *static_cast<CIEC_BOOL*>(getDI(0));
   };
 
-  CIEC_BOOL &QI2() {
-    return *static_cast<CIEC_BOOL*>(getDI(1));
-  };
-
   CIEC_USINT &ServiceStateIn() {
-    return *static_cast<CIEC_USINT*>(getDI(2));
+    return *static_cast<CIEC_USINT*>(getDI(1));
   };
 
   static const CStringDictionary::TStringId scm_anDataOutputNames[];
   static const CStringDictionary::TStringId scm_anDataOutputTypeIds[];
-  CIEC_USINT &ServiceStateOut() {
-    return *static_cast<CIEC_USINT*>(getDO(0));
+  CIEC_BOOL &QO() {
+    return *static_cast<CIEC_BOOL*>(getDO(0));
   };
 
-  CIEC_BOOL &QO() {
-    return *static_cast<CIEC_BOOL*>(getDO(1));
+  CIEC_USINT &ServiceStateOut() {
+    return *static_cast<CIEC_USINT*>(getDO(1));
   };
 
   CIEC_TIME &Delay() {
@@ -50,15 +47,14 @@ private:
   };
 
   static const TEventID scm_nEventINITID = 0;
-  static const TEventID scm_nEventRSP1ID = 1;
-  static const TEventID scm_nEventRSP2ID = 2;
-  static const TEventID scm_nEventTimeoutID = 3;
+  static const TEventID scm_nEventRSPID = 1;
+  static const TEventID scm_nEventTimeoutID = 2;
   static const TForteInt16 scm_anEIWithIndexes[];
   static const TDataIOID scm_anEIWith[];
   static const CStringDictionary::TStringId scm_anEventInputNames[];
 
-  static const TEventID scm_nEventUPDTID = 0;
-  static const TEventID scm_nEventINITOID = 1;
+  static const TEventID scm_nEventINITOID = 0;
+  static const TEventID scm_nEventUPDTID = 1;
   static const TEventID scm_nEventINDID = 2;
   static const TEventID scm_nEventStartID = 3;
   static const TEventID scm_nEventStopID = 4;
@@ -76,46 +72,42 @@ private:
     return *static_cast<CIEC_USINT*>(getVarInternal(1));
   };
 
-  CIEC_BOOL &ServiceWorking() {
-    return *static_cast<CIEC_BOOL*>(getVarInternal(2));
-  };
-
   static const SFBInterfaceSpec scm_stFBInterfaceSpec;
 
 
   static const SInternalVarsInformation scm_stInternalVars;
 
-   FORTE_BASIC_FB_DATA_ARRAY(5, 3, 3, 3, 0);
+   FORTE_BASIC_FB_DATA_ARRAY(5, 2, 3, 2, 0);
 
 virtual void setInitialValues();
-  void alg_INIT(void);
+  void alg_INIT_P(void);
   void alg_UPDT(void);
-  void alg_INITO(void);
   void alg_DT1(void);
   void alg_DT2(void);
   void alg_TO2(void);
   void alg_LOST(void);
+  void alg_DINIT(void);
   static const TForteInt16 scm_nStateSTART = 0;
-  static const TForteInt16 scm_nStateINIT = 1;
+  static const TForteInt16 scm_nStateDINIT = 1;
   static const TForteInt16 scm_nStateUPDT = 2;
-  static const TForteInt16 scm_nStateInitCompleted = 3;
-  static const TForteInt16 scm_nStateUPD = 4;
-  static const TForteInt16 scm_nStateRequestState = 5;
-  static const TForteInt16 scm_nStateKeepAlive = 6;
-  static const TForteInt16 scm_nStateRequesting = 7;
-  static const TForteInt16 scm_nStateTO2 = 8;
-  static const TForteInt16 scm_nStateLostCommunication = 9;
+  static const TForteInt16 scm_nStateUPD = 3;
+  static const TForteInt16 scm_nStateRequestState = 4;
+  static const TForteInt16 scm_nStateKeepAlive = 5;
+  static const TForteInt16 scm_nStateRequesting = 6;
+  static const TForteInt16 scm_nStateTO2 = 7;
+  static const TForteInt16 scm_nStateLostCommunication = 8;
+  static const TForteInt16 scm_nStateINIT = 9;
 
   void enterStateSTART(void);
-  void enterStateINIT(void);
+  void enterStateDINIT(void);
   void enterStateUPDT(void);
-  void enterStateInitCompleted(void);
   void enterStateUPD(void);
   void enterStateRequestState(void);
   void enterStateKeepAlive(void);
   void enterStateRequesting(void);
   void enterStateTO2(void);
   void enterStateLostCommunication(void);
+  void enterStateINIT(void);
 
   virtual void executeEvent(int pa_nEIID);
 

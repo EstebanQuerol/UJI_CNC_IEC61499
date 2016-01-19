@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L2_MachineState">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2016-01-18" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Machine initialization Request" Name="EXT_INIT" Type="Event">
+        <With Var="EXT_INIT_QI"/>
+      </Event>
+      <Event Comment="Machine initialization response" Name="M_INIT_RSP" Type="Event">
+        <With Var="M_INIT_QI"/>
+        <With Var="M_INIT_STATE"/>
+      </Event>
+      <Event Comment="Machine state changed to busy" Name="M_BUSY" Type="Event">
+        <With Var="CURRENT_PARTINFO"/>
+      </Event>
+      <Event Comment="Machine state changed to free" Name="M_FREE" Type="Event"/>
+      <Event Comment="Machine state changed to error" Name="M_ERROR" Type="Event">
+        <With Var="M_ERROR_STATE"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="MUI (Machine user inteface) indication" Name="MUI_IND" Type="Event">
+        <With Var="MUI_STATE"/>
+        <With Var="MUI_MSG"/>
+        <With Var="MUI_PART_ID"/>
+        <With Var="MUI_PART_FAMILY"/>
+        <With Var="MUI_PART_TYPE"/>
+      </Event>
+      <Event Comment="Machine initialization request" Name="M_INIT" Type="Event">
+        <With Var="M_INIT_QO"/>
+      </Event>
+      <Event Comment="Event to indicate L3 that the machine is free" Name="FREE" Type="Event"/>
+      <Event Comment="Event to indicate L3 that the machine is OK/KO" Name="ERROR" Type="Event">
+        <With Var="ERROR_STATE"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Input event qualifier" Name="EXT_INIT_QI" Type="BOOL"/>
+      <VarDeclaration Comment="Machine initialization process qualifier" Name="M_INIT_QI" Type="BOOL"/>
+      <VarDeclaration Comment="String containing the state of the initialization process" Name="M_INIT_STATE" Type="STRING"/>
+      <VarDeclaration ArraySize="4" Comment="Part's information of the new request" Name="CURRENT_PARTINFO" Type="UINT"/>
+      <VarDeclaration Comment="Bool flag associated with M_ERROR event" Name="M_ERROR_STATE" Type="BOOL"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="String containing the state of the machine" Name="MUI_STATE" Type="STRING"/>
+      <VarDeclaration Comment="Message for the MUI containing information about machine's state" Name="MUI_MSG" Type="STRING"/>
+      <VarDeclaration Comment="Current part identifier" Name="MUI_PART_ID" Type="UINT"/>
+      <VarDeclaration Comment="Current part family" Name="MUI_PART_FAMILY" Type="UINT"/>
+      <VarDeclaration Comment="Current part type" Name="MUI_PART_TYPE" Type="UINT"/>
+      <VarDeclaration Comment="Machine initialization process qualifier" Name="M_INIT_QO" Type="BOOL"/>
+      <VarDeclaration Comment="Qualifier associated with error event" Name="ERROR_STATE" Type="BOOL"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration Comment="Flag to delay desinitilazitaion process until machine is idle" InitialValue="FALSE" Name="initRequested" Type="BOOL"/>
+    </InternalVars>
+    <ECC>
+      <ECState Name="HALT" x="665.0" y="950.0">
+        <ECAction Algorithm="ENTER_HALT" Output="MUI_IND"/>
+      </ECState>
+      <ECState Name="DESINITIALIZING" x="665.0" y="2565.0">
+        <ECAction Algorithm="DINIT_START" Output="ERROR"/>
+        <ECAction Output="M_INIT"/>
+        <ECAction Output="MUI_IND"/>
+      </ECState>
+      <ECState Name="IDLE" x="3990.0" y="380.0">
+        <ECAction Algorithm="IDLE_ENTER" Output="MUI_IND"/>
+      </ECState>
+      <ECState Name="BUSY" x="5415.0" y="1235.0">
+        <ECAction Algorithm="ENTER_BUSY" Output="MUI_IND"/>
+      </ECState>
+      <ECState Name="ERROR" x="4085.0" y="2660.0">
+        <ECAction Algorithm="ERROR_ENTER" Output="MUI_IND"/>
+      </ECState>
+      <ECState Name="INITIALIZING_COMPLETE" x="1425.0" y="475.0">
+        <ECAction Algorithm="INIT_END"/>
+      </ECState>
+      <ECState Name="INITIALIZING_START" x="570.0" y="0.0">
+        <ECAction Algorithm="INIT_START" Output="M_INIT"/>
+        <ECAction Output="MUI_IND"/>
+      </ECState>
+      <ECState Name="DINIT_COMPLETE" x="570.0" y="1805.0">
+        <ECAction Algorithm="DINIT_END"/>
+      </ECState>
+      <ECState Name="SEND_FREE" x="5605.0" y="95.0">
+        <ECAction Algorithm="TO_FREE" Output="FREE"/>
+      </ECState>
+      <ECState Name="ERROR_OK" x="3325.0" y="1520.0">
+        <ECAction Algorithm="ERROR_OK" Output="ERROR"/>
+      </ECState>
+      <ECState Name="ERROR_KO" x="4465.0" y="2185.0">
+        <ECAction Algorithm="ERROR_KO" Output="ERROR"/>
+      </ECState>
+      <ECState Name="HOLD_INIT" x="6650.0" y="1235.0">
+        <ECAction Algorithm="HOLD_INIT"/>
+      </ECState>
+      <ECState Name="TO_BUSY" x="4560.0" y="855.0">
+        <ECAction Algorithm="TO_BUSY"/>
+      </ECState>
+      <ECState Name="TO_DINIT" x="3990.0" y="3325.0">
+        <ECAction Algorithm="TO_DINIT"/>
+      </ECState>
+      <ECTransition Comment="" Condition="M_INIT_QI" Destination="IDLE" Source="INITIALIZING_COMPLETE" x="2770.0" y="290.0"/>
+      <ECTransition Comment="" Condition="M_INIT_QI = FALSE" Destination="ERROR" Source="INITIALIZING_COMPLETE" x="2165.0" y="1020.0"/>
+      <ECTransition Comment="" Condition="M_INIT_RSP" Destination="INITIALIZING_COMPLETE" Source="INITIALIZING_START" x="1205.0" y="330.0"/>
+      <ECTransition Comment="" Condition="M_INIT_RSP" Destination="DINIT_COMPLETE" Source="DESINITIALIZING" x="940.0" y="2350.0"/>
+      <ECTransition Comment="" Condition="M_INIT_QI = FALSE" Destination="HALT" Source="DINIT_COMPLETE" x="800.0" y="1495.0"/>
+      <ECTransition Comment="" Condition="M_INIT_QI" Destination="ERROR" Source="DINIT_COMPLETE" x="470.0" y="2880.0"/>
+      <ECTransition Comment="" Condition="EXT_INIT&amp;EXT_INIT_QI" Destination="INITIALIZING_START" Source="HALT" x="860.0" y="630.0"/>
+      <ECTransition Comment="" Condition="EXT_INIT&amp;EXT_INIT_QI = FALSE" Destination="DESINITIALIZING" Source="ERROR" x="2455.0" y="2340.0"/>
+      <ECTransition Comment="" Condition="EXT_INIT&amp;EXT_INIT_QI = FALSE" Destination="DESINITIALIZING" Source="IDLE" x="2165.0" y="1915.0"/>
+      <ECTransition Comment="" Condition="M_FREE&amp;initRequested = FALSE" Destination="SEND_FREE" Source="BUSY" x="5920.0" y="705.0"/>
+      <ECTransition Comment="" Condition="1" Destination="IDLE" Source="SEND_FREE" x="4615.0" y="145.0"/>
+      <ECTransition Comment="" Condition="M_ERROR&amp;M_ERROR_STATE = FALSE" Destination="ERROR_KO" Source="BUSY" x="5245.0" y="1915.0"/>
+      <ECTransition Comment="" Condition="M_ERROR&amp;M_ERROR_STATE = FALSE" Destination="ERROR_KO" Source="IDLE" x="4590.0" y="1350.0"/>
+      <ECTransition Comment="" Condition="1" Destination="ERROR" Source="ERROR_KO" x="4500.0" y="2450.0"/>
+      <ECTransition Comment="" Condition="M_ERROR&amp;M_ERROR_STATE" Destination="ERROR_OK" Source="ERROR" x="3845.0" y="2000.0"/>
+      <ECTransition Comment="" Condition="1" Destination="IDLE" Source="ERROR_OK" x="3550.0" y="1080.0"/>
+      <ECTransition Comment="" Condition="M_ERROR&amp;M_ERROR_STATE" Destination="ERROR_OK" Source="IDLE" x="4000.0" y="1100.0"/>
+      <ECTransition Comment="" Condition="EXT_INIT&amp;EXT_INIT_QI = FALSE" Destination="HOLD_INIT" Source="BUSY" x="6235.0" y="1070.0"/>
+      <ECTransition Comment="" Condition="1" Destination="BUSY" Source="HOLD_INIT" x="6160.0" y="1500.0"/>
+      <ECTransition Comment="" Condition="M_BUSY" Destination="TO_BUSY" Source="IDLE" x="4505.0" y="715.0"/>
+      <ECTransition Comment="" Condition="1" Destination="BUSY" Source="TO_BUSY" x="5185.0" y="1075.0"/>
+      <ECTransition Comment="" Condition="M_FREE&amp;initRequested" Destination="TO_DINIT" Source="BUSY" x="6145.0" y="2110.0"/>
+      <ECTransition Comment="" Condition="1" Destination="DESINITIALIZING" Source="TO_DINIT" x="1685.0" y="3235.0"/>
+    </ECC>
+    <Algorithm Comment="Initialization algorithm" Name="INIT_START">
+      <ST Text="M_INIT_QO := TRUE;&#10;MUI_STATE := &quot;Initializing&quot;;&#10;MUI_MSG := &quot;Initializing machine...&quot;;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="INIT_END">
+      <ST Text="MUI_MSG := M_INIT_STATE;&#10;MUI_PART_ID:= 0;&#10;MUI_PART_FAMILY := 0;&#10;MUI_PART_TYPE := 0;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="IDLE_ENTER">
+      <ST Text="MUI_STATE := &quot;IDLE&quot;; "/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="ERROR_ENTER">
+      <ST Text="MUI_STATE := &quot;ERROR&quot;;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="DINIT_START">
+      <ST Text="M_INIT_QO := FALSE;&#10;MUI_STATE := &quot;Desinitializing&quot;;&#10;MUI_MSG := &quot;Desinitializing machine...&quot;;&#10;ERROR_STATE := FALSE;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="ENTER_HALT">
+      <ST Text="MUI_STATE := &quot;HALT&quot;;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="DINIT_END">
+      <ST Text="MUI_MSG := M_INIT_STATE;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="ENTER_BUSY">
+      <ST Text="MUI_STATE :=&quot;BUSY&quot;;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="ERROR_KO">
+      <ST Text="ERROR_STATE := M_ERROR_STATE;&#10;MUI_MSG := &quot;An error occurred&quot;;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="HOLD_INIT">
+      <ST Text="initRequested := TRUE;&#10;MUI_MSG := &quot;Desinitialization request registered&quot;;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="TO_FREE">
+      <ST Text="MUI_MSG := &quot;Part completed&quot;;&#10;MUI_PART_ID:= 0;&#10;MUI_PART_FAMILY := 0;&#10;MUI_PART_TYPE := 0;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="ERROR_OK">
+      <ST Text="ERROR_STATE := M_ERROR_STATE;&#10;MUI_MSG := &quot;Recovered from an error&quot;;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="TO_BUSY">
+      <ST Text="MUI_MSG := &quot;New part arrived&quot;;&#10;MUI_PART_ID:= CURRENT_PARTINFO[0];&#10;MUI_PART_FAMILY := CURRENT_PARTINFO[1];&#10;MUI_PART_TYPE := CURRENT_PARTINFO[2];"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="TO_DINIT">
+      <ST Text="MUI_PART_ID:= 0;&#10;MUI_PART_FAMILY := 0;&#10;MUI_PART_TYPE := 0;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>
