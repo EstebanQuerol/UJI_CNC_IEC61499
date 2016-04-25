@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Basic Function Block Type" Name="L2_MachineINIT">
+  <Identification Standard="61499-2"/>
+  <VersionInfo Author="EQUEROL" Date="2016-01-15" Organization="UJI" Version="0.0"/>
+  <CompilerInfo/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Initialization Request" Name="INIT" Type="Event">
+        <With Var="INIT_QI"/>
+      </Event>
+      <Event Comment="Communication initialization response" Name="COM_INIT_RSP" Type="Event">
+        <With Var="COM_INIT_QI"/>
+      </Event>
+      <Event Comment="Respone to the initialization request sent to L0" Name="L0_INIT_RSP" Type="Event">
+        <With Var="L0_INIT_QI"/>
+      </Event>
+      <Event Comment="Layer 2 blocks initialization response" Name="L2_INIT_RSP" Type="Event">
+        <With Var="L2_INIT_QI"/>
+      </Event>
+      <Event Comment="Initialization timeout" Name="TimeOut" Type="Event"/>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Indicate initialization result" Name="IND" Type="Event">
+        <With Var="INIT_STATE"/>
+        <With Var="INIT_QO"/>
+      </Event>
+      <Event Comment="Initialize the communications FBs with L3,L1 and L0" Name="COM_INIT" Type="Event">
+        <With Var="COM_INIT_QO"/>
+      </Event>
+      <Event Comment="Initialization Confirm" Name="L0_INIT" Type="Event">
+        <With Var="L0_INIT_QO"/>
+      </Event>
+      <Event Comment="Layer 2 blocks initialization request" Name="L2_INIT" Type="Event">
+        <With Var="L2_INIT_QO"/>
+      </Event>
+      <Event Comment="Start the delay to control initialization timeout" Name="Start" Type="Event">
+        <With Var="TODelay"/>
+      </Event>
+      <Event Comment="Stop the delay to control initialization timeout" Name="Stop" Type="Event"/>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="Initialization qualifier" Name="INIT_QI" Type="BOOL"/>
+      <VarDeclaration Comment="Comunications initialization qualifier" Name="COM_INIT_QI" Type="BOOL"/>
+      <VarDeclaration Comment="L0 initialization qualifier" Name="L0_INIT_QI" Type="BOOL"/>
+      <VarDeclaration Comment="Layer 2 initialization qualifier" Name="L2_INIT_QI" Type="BOOL"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="String containing the state of the initialization" Name="INIT_STATE" Type="STRING"/>
+      <VarDeclaration Comment="Initialization output qualifier" Name="INIT_QO" Type="BOOL"/>
+      <VarDeclaration Comment="Communication initialization qualifier" Name="COM_INIT_QO" Type="BOOL"/>
+      <VarDeclaration Comment="Output event qualifier" Name="L0_INIT_QO" Type="BOOL"/>
+      <VarDeclaration Comment="Layer 2 blocks initialization qualifier" Name="L2_INIT_QO" Type="BOOL"/>
+      <VarDeclaration Comment="Timeout delay" Name="TODelay" Type="TIME"/>
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <ECC>
+      <ECState Comment="Initial State" Name="START" x="1615.0" y="-190.0"/>
+      <ECState Name="INITIALIZING_COM" x="2755.0" y="380.0">
+        <ECAction Algorithm="COM_INIT_P" Output="COM_INIT"/>
+      </ECState>
+      <ECState Name="DESINITIALIZING_L0" x="0.0" y="1045.0">
+        <ECAction Algorithm="L0_INIT_M" Output="L0_INIT"/>
+      </ECState>
+      <ECState Name="INIT_COMPLETE" x="2755.0" y="2185.0">
+        <ECAction Algorithm="INIT_OK" Output="IND"/>
+      </ECState>
+      <ECState Name="INIT_SINK" x="5415.0" y="1045.0">
+        <ECAction Output="Stop"/>
+      </ECState>
+      <ECState Name="INITIALIZING_L0" x="2755.0" y="1045.0">
+        <ECAction Algorithm="L0_INIT_P" Output="L0_INIT"/>
+      </ECState>
+      <ECState Name="COM_INIT_FAIL" x="3420.0" y="760.0">
+        <ECAction Algorithm="COM_INIT_FAIL" Output="IND"/>
+      </ECState>
+      <ECState Name="L0_INIT_FAIL" x="3515.0" y="1425.0">
+        <ECAction Algorithm="L0_INIT_FAIL" Output="IND"/>
+      </ECState>
+      <ECState Name="INITIALIZING_L2" x="2755.0" y="1615.0">
+        <ECAction Algorithm="L2_INIT_P" Output="L2_INIT"/>
+      </ECState>
+      <ECState Name="L2_INIT_FAIL" x="3515.0" y="1995.0">
+        <ECAction Algorithm="L2_INIT_FAIL" Output="IND"/>
+      </ECState>
+      <ECState Name="DESINITIALIZING_COM" x="95.0" y="1805.0">
+        <ECAction Algorithm="COM_INIT_M" Output="COM_INIT"/>
+      </ECState>
+      <ECState Name="DESINITIALIZING_L2" x="95.0" y="380.0">
+        <ECAction Algorithm="L2_INIT_M" Output="L2_INIT"/>
+      </ECState>
+      <ECState Name="StartTimer" x="1615.0" y="380.0">
+        <ECAction Algorithm="Delay" Output="Start"/>
+      </ECState>
+      <ECState Name="INIT_TIMEOUT" x="1520.0" y="1045.0">
+        <ECAction Algorithm="INIT_P_TO" Output="IND"/>
+      </ECState>
+      <ECState Name="DINIT_COMPLETE" x="95.0" y="2375.0">
+        <ECAction Algorithm="DINT_OK" Output="IND"/>
+      </ECState>
+      <ECState Name="State" x="-1520.0" y="1045.0">
+        <ECAction Output="Stop"/>
+      </ECState>
+      <ECState Name="DINIT_L2_FAIL" x="-855.0" y="665.0">
+        <ECAction Algorithm="L2_DINT_FAIL" Output="IND"/>
+      </ECState>
+      <ECState Name="DINT_L0_FAIL" x="-855.0" y="1330.0">
+        <ECAction Algorithm="L0_DINT_FAIL" Output="IND"/>
+      </ECState>
+      <ECState Name="DINT_COM_FAIL" x="-1140.0" y="1995.0">
+        <ECAction Algorithm="COM_DINT_FAIL" Output="IND"/>
+      </ECState>
+      <ECState Name="DINT_TIMEOUT" x="1235.0" y="1520.0">
+        <ECAction Algorithm="INIT_M_TO" Output="IND"/>
+      </ECState>
+      <ECTransition Comment="" Condition="COM_INIT_RSP&amp;COM_INIT_QI" Destination="INITIALIZING_L0" Source="INITIALIZING_COM" x="2930.0" y="805.0"/>
+      <ECTransition Comment="" Condition="COM_INIT_RSP&amp;COM_INIT_QI = FALSE" Destination="COM_INIT_FAIL" Source="INITIALIZING_COM" x="3730.0" y="620.0"/>
+      <ECTransition Comment="" Condition="1" Destination="INIT_SINK" Source="COM_INIT_FAIL" x="4490.0" y="1055.0"/>
+      <ECTransition Comment="" Condition="1" Destination="INIT_SINK" Source="L0_INIT_FAIL" x="4375.0" y="1285.0"/>
+      <ECTransition Comment="" Condition="L0_INIT_RSP&amp;L0_INIT_QI" Destination="INITIALIZING_L2" Source="INITIALIZING_L0" x="2680.0" y="1315.0"/>
+      <ECTransition Comment="" Condition="L0_INIT_RSP&amp;L0_INIT_QI = FALSE" Destination="L0_INIT_FAIL" Source="INITIALIZING_L0" x="3555.0" y="1280.0"/>
+      <ECTransition Comment="" Condition="1" Destination="INIT_SINK" Source="L2_INIT_FAIL" x="4525.0" y="1735.0"/>
+      <ECTransition Comment="" Condition="L2_INIT_RSP&amp;L0_INIT_QI = FALSE" Destination="L2_INIT_FAIL" Source="INITIALIZING_L2" x="3460.0" y="1860.0"/>
+      <ECTransition Comment="" Condition="L2_INIT_RSP&amp;L2_INIT_QI" Destination="INIT_COMPLETE" Source="INITIALIZING_L2" x="2585.0" y="1920.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="INIT_SINK" x="5015.0" y="370.0"/>
+      <ECTransition Comment="" Condition="INIT" Destination="StartTimer" Source="START" x="1720.0" y="210.0"/>
+      <ECTransition Comment="" Condition="INIT_QI" Destination="INITIALIZING_COM" Source="StartTimer" x="2435.0" y="230.0"/>
+      <ECTransition Comment="" Condition="INIT_QI = FALSE" Destination="DESINITIALIZING_L2" Source="StartTimer" x="1055.0" y="190.0"/>
+      <ECTransition Comment="" Condition="TimeOut" Destination="INIT_TIMEOUT" Source="INITIALIZING_COM" x="2220.0" y="830.0"/>
+      <ECTransition Comment="" Condition="TimeOut" Destination="INIT_TIMEOUT" Source="INITIALIZING_L0" x="2290.0" y="950.0"/>
+      <ECTransition Comment="" Condition="TimeOut" Destination="INIT_TIMEOUT" Source="INITIALIZING_L2" x="2230.0" y="1390.0"/>
+      <ECTransition Comment="" Condition="1" Destination="INIT_SINK" Source="INIT_COMPLETE" x="4530.0" y="2420.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="INIT_TIMEOUT" x="1970.0" y="555.0"/>
+      <ECTransition Comment="" Condition="L2_INIT_RSP&amp;L2_INIT_QI = FALSE" Destination="DESINITIALIZING_L0" Source="DESINITIALIZING_L2" x="705.0" y="850.0"/>
+      <ECTransition Comment="" Condition="L2_INIT_RSP&amp;L2_INIT_QI" Destination="DINIT_L2_FAIL" Source="DESINITIALIZING_L2" x="-410.0" y="390.0"/>
+      <ECTransition Comment="" Condition="1" Destination="State" Source="DINIT_L2_FAIL" x="-975.0" y="890.0"/>
+      <ECTransition Comment="" Condition="L0_INIT_RSP&amp;L0_INIT_QI = FALSE" Destination="DESINITIALIZING_COM" Source="DESINITIALIZING_L0" x="515.0" y="1550.0"/>
+      <ECTransition Comment="" Condition="L0_INIT_RSP" Destination="DINT_L0_FAIL" Source="DESINITIALIZING_L0" x="-210.0" y="1210.0"/>
+      <ECTransition Comment="" Condition="1" Destination="State" Source="DINT_L0_FAIL" x="-1160.0" y="1250.0"/>
+      <ECTransition Comment="" Condition="COM_INIT_RSP&amp;COM_INIT_QI = FALSE" Destination="DINIT_COMPLETE" Source="DESINITIALIZING_COM" x="785.0" y="2075.0"/>
+      <ECTransition Comment="" Condition="COM_INIT_RSP&amp;COM_INIT_QI" Destination="DINT_COM_FAIL" Source="DESINITIALIZING_COM" x="-470.0" y="1805.0"/>
+      <ECTransition Comment="" Condition="1" Destination="State" Source="DINT_COM_FAIL" x="-1250.0" y="1560.0"/>
+      <ECTransition Comment="" Condition="1" Destination="State" Source="DINIT_COMPLETE" x="-1175.0" y="2285.0"/>
+      <ECTransition Comment="" Condition="TimeOut" Destination="DINT_TIMEOUT" Source="DESINITIALIZING_COM" x="1035.0" y="1620.0"/>
+      <ECTransition Comment="" Condition="TimeOut" Destination="DINT_TIMEOUT" Source="DESINITIALIZING_L0" x="1035.0" y="1315.0"/>
+      <ECTransition Comment="" Condition="TimeOut" Destination="DINT_TIMEOUT" Source="DESINITIALIZING_L2" x="1265.0" y="965.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="DINT_TIMEOUT" x="1440.0" y="610.0"/>
+      <ECTransition Comment="" Condition="1" Destination="START" Source="State" x="-895.0" y="305.0"/>
+    </ECC>
+    <Algorithm Comment="new algorithm" Name="COM_INIT_P">
+      <ST Text="COM_INIT_QO := TRUE;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="COM_INIT_FAIL">
+      <ST Text="INIT_STATE := &quot;Unable to start communications with L3,L1 and L0&quot;;&#10;INIT_QO := FALSE;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="L0_INIT_P">
+      <ST Text="L0_INIT_QO := TRUE;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="L0_INIT_FAIL">
+      <ST Text="INIT_STATE := &quot;Unable to initialize L0 device&quot;;&#10;INIT_QO := FALSE;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="L2_INIT_P">
+      <ST Text="L2_INIT_QO := TRUE;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="L2_INIT_FAIL">
+      <ST Text="INIT_STATE := &quot;Unable to initialize machine own FBs&quot;;&#10;INIT_QO := FALSE;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="INIT_OK">
+      <ST Text="INIT_STATE := &quot;Initialization OK&quot;;&#10;INIT_QO := TRUE;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="Delay">
+      <ST Text="TODelay := TIME#30s;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="INIT_P_TO">
+      <ST Text="INIT_STATE := &quot;Initialization timeout (30s timer expired)&quot;;&#10;INIT_QO := FALSE;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="L2_INIT_M">
+      <ST Text="L2_INIT_QO := FALSE;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="L2_DINT_FAIL">
+      <ST Text="INIT_STATE := &quot;Unable to stop machine own FBs&quot;;&#10;INIT_QO := TRUE;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="L0_INIT_M">
+      <ST Text="L0_INIT_QO := FALSE;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="L0_DINT_FAIL">
+      <ST Text="INIT_STATE := &quot;Unable to desinitialize L0 device&quot;;&#10;INIT_QO := TRUE;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="COM_INIT_M">
+      <ST Text="COM_INIT_QO := FALSE;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="COM_DINT_FAIL">
+      <ST Text="INIT_STATE := &quot;Unable to stop communications with L3,L1 and L0&quot;;&#10;INIT_QO := TRUE;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="DINT_OK">
+      <ST Text="INIT_STATE := &quot;Desinitialization OK&quot;;&#10;INIT_QO := FALSE;"/>
+    </Algorithm>
+    <Algorithm Comment="new algorithm" Name="INIT_M_TO">
+      <ST Text="INIT_STATE := &quot;Desinitialization timeout (30s timer expired)&quot;;&#10;INIT_QO := TRUE;"/>
+    </Algorithm>
+  </BasicFB>
+</FBType>

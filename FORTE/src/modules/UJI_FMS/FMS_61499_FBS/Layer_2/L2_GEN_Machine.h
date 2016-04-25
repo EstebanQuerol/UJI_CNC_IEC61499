@@ -6,7 +6,8 @@
  *** Name: L2_GEN_Machine
  *** Description: Composite Function Block Type
  *** Version: 
- ***     0.0: 2015-03-17/4DIAC-IDE - 4DIAC-Consortium - 
+ ***     0.0: 2015-03-17/EQUEROL - UJI - 
+ ***     1.0: 2016-01-19/EQUEROL - UJI - 
  *************************************************************************/
 
 #ifndef _L2_GEN_MACHINE_H_
@@ -34,98 +35,124 @@ private:
     return *static_cast<CIEC_USINT*>(getDI(1));
   };
 
+  CIEC_BOOL &COM_INIT_QI() {
+    return *static_cast<CIEC_BOOL*>(getDI(2));
+  };
+
   CIEC_UINT *PartInfoIn1() {
-    return (CIEC_UINT*)(*static_cast<CIEC_ARRAY *>(getDI(2)))[0]; //the first element marks the start of the array
+    return (CIEC_UINT*)(*static_cast<CIEC_ARRAY *>(getDI(3)))[0]; //the first element marks the start of the array
   };
 
   CIEC_ARRAY &PartInfoIn1_Array() {
-    return *static_cast<CIEC_ARRAY*>(getDI(2));
+    return *static_cast<CIEC_ARRAY*>(getDI(3));
   };
 
   CIEC_STRING &SetupIn() {
-    return *static_cast<CIEC_STRING*>(getDI(3));
+    return *static_cast<CIEC_STRING*>(getDI(4));
   };
 
   CIEC_UINT *PartInfoIn2() {
-    return (CIEC_UINT*)(*static_cast<CIEC_ARRAY *>(getDI(4)))[0]; //the first element marks the start of the array
+    return (CIEC_UINT*)(*static_cast<CIEC_ARRAY *>(getDI(5)))[0]; //the first element marks the start of the array
   };
 
   CIEC_ARRAY &PartInfoIn2_Array() {
-    return *static_cast<CIEC_ARRAY*>(getDI(4));
+    return *static_cast<CIEC_ARRAY*>(getDI(5));
   };
 
   CIEC_BOOL &QI2() {
-    return *static_cast<CIEC_BOOL*>(getDI(5));
+    return *static_cast<CIEC_BOOL*>(getDI(6));
   };
 
   CIEC_USINT &ServiceStateIn() {
-    return *static_cast<CIEC_USINT*>(getDI(6));
+    return *static_cast<CIEC_USINT*>(getDI(7));
   };
 
   CIEC_USINT &ENDOPIDIn() {
-    return *static_cast<CIEC_USINT*>(getDI(7));
+    return *static_cast<CIEC_USINT*>(getDI(8));
   };
 
   static const CStringDictionary::TStringId scm_anDataOutputNames[];
   static const CStringDictionary::TStringId scm_anDataOutputTypeIds[];
-  CIEC_BOOL &QO() {
-    return *static_cast<CIEC_BOOL*>(getDO(0));
+  CIEC_STRING &MUI_STATE() {
+    return *static_cast<CIEC_STRING*>(getDO(0));
   };
 
-  CIEC_STRING &OperationOut() {
+  CIEC_STRING &MUI_MSG() {
     return *static_cast<CIEC_STRING*>(getDO(1));
   };
 
-  CIEC_USINT &L1MIDOut() {
-    return *static_cast<CIEC_USINT*>(getDO(2));
+  CIEC_UINT &MUI_PART_ID() {
+    return *static_cast<CIEC_UINT*>(getDO(2));
   };
 
-  CIEC_UINT *PartInfoOut() {
-    return (CIEC_UINT*)(*static_cast<CIEC_ARRAY *>(getDO(3)))[0]; //the first element marks the start of the array
+  CIEC_UINT &MUI_PART_FAMILY() {
+    return *static_cast<CIEC_UINT*>(getDO(3));
   };
 
-  CIEC_ARRAY &PartInfoOut_Array() {
-    return *static_cast<CIEC_ARRAY*>(getDO(3));
+  CIEC_UINT &MUI_PART_TYPE() {
+    return *static_cast<CIEC_UINT*>(getDO(4));
   };
 
-  CIEC_USINT &ENDID() {
-    return *static_cast<CIEC_USINT*>(getDO(4));
-  };
-
-  CIEC_BOOL &MachineState() {
+  CIEC_BOOL &COM_INIT_QO() {
     return *static_cast<CIEC_BOOL*>(getDO(5));
   };
 
+  CIEC_STRING &OperationOut() {
+    return *static_cast<CIEC_STRING*>(getDO(6));
+  };
+
+  CIEC_USINT &L1MIDOut() {
+    return *static_cast<CIEC_USINT*>(getDO(7));
+  };
+
+  CIEC_UINT *PartInfoOut() {
+    return (CIEC_UINT*)(*static_cast<CIEC_ARRAY *>(getDO(8)))[0]; //the first element marks the start of the array
+  };
+
+  CIEC_ARRAY &PartInfoOut_Array() {
+    return *static_cast<CIEC_ARRAY*>(getDO(8));
+  };
+
+  CIEC_USINT &ENDID() {
+    return *static_cast<CIEC_USINT*>(getDO(9));
+  };
+
+  CIEC_BOOL &MachineState() {
+    return *static_cast<CIEC_BOOL*>(getDO(10));
+  };
+
   CIEC_BOOL &QO2() {
-    return *static_cast<CIEC_BOOL*>(getDO(6));
+    return *static_cast<CIEC_BOOL*>(getDO(11));
   };
 
   static const TEventID scm_nEventINITID = 0;
-  static const TEventID scm_nEventL3REQID = 1;
-  static const TEventID scm_nEventL3RSPID = 2;
-  static const TEventID scm_nEventL0RSP1ID = 3;
-  static const TEventID scm_nEventL0RSP2ID = 4;
-  static const TEventID scm_nEventL1RSPID = 5;
-  static const TEventID scm_nEventL1INDID = 6;
+  static const TEventID scm_nEventCOM_INIT_RSPID = 1;
+  static const TEventID scm_nEventL3REQID = 2;
+  static const TEventID scm_nEventL3RSPID = 3;
+  static const TEventID scm_nEventL0RSP1ID = 4;
+  static const TEventID scm_nEventL0RSP2ID = 5;
+  static const TEventID scm_nEventL1RSPID = 6;
+  static const TEventID scm_nEventL1INDID = 7;
   static const TForteInt16 scm_anEIWithIndexes[];
   static const TDataIOID scm_anEIWith[];
   static const CStringDictionary::TStringId scm_anEventInputNames[];
 
-  static const TEventID scm_nEventINITOID = 0;
-  static const TEventID scm_nEventSendID = 1;
-  static const TEventID scm_nEventCNFID = 2;
-  static const TEventID scm_nEventINDID = 3;
-  static const TEventID scm_nEventFREEID = 4;
-  static const TEventID scm_nEventERRORID = 5;
-  static const TEventID scm_nEventL0INITOID = 6;
-  static const TEventID scm_nEventL0IND1ID = 7;
+  static const TEventID scm_nEventMUI_INDID = 0;
+  static const TEventID scm_nEventCOM_INITID = 1;
+  static const TEventID scm_nEventSendID = 2;
+  static const TEventID scm_nEventCNFID = 3;
+  static const TEventID scm_nEventINDID = 4;
+  static const TEventID scm_nEventFREEID = 5;
+  static const TEventID scm_nEventERRORID = 6;
+  static const TEventID scm_nEventL0INITOID = 7;
+  static const TEventID scm_nEventL0IND1ID = 8;
   static const TForteInt16 scm_anEOWithIndexes[];
   static const TDataIOID scm_anEOWith[];
   static const CStringDictionary::TStringId scm_anEventOutputNames[];
 
   static const SFBInterfaceSpec scm_stFBInterfaceSpec;
 
-   FORTE_FB_DATA_ARRAY(8, 8, 7, 0);
+   FORTE_FB_DATA_ARRAY(9, 9, 12, 0);
 
   static const SCFB_FBInstanceData scm_astInternalFBs[];
 

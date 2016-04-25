@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Tool Library</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Tool Library</name>
+			<type>2</type>
+			<location>C:/Users/laboratorio/Documents/Datos_Proyecto_61499/4DIAC-IDE_1.6.1_win32.x86_64/typelibrary</location>
+		</link>
+	</linkedResources>
+</projectDescription>

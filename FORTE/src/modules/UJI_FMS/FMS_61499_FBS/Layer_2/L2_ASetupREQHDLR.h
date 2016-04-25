@@ -7,6 +7,7 @@
  *** Description: Basic Function Block Type
  *** Version: 
  ***     0.0: 2014-11-28/EQUEROL - UJI - 
+ ***     1.0: 2016-01-18/EQUEROL - UJI - 
  *************************************************************************/
 
 #ifndef _L2_ASETUPREQHDLR_H_
@@ -100,12 +101,14 @@ virtual void setInitialValues();
   void alg_INIT(void);
   void alg_REQ(void);
   static const TForteInt16 scm_nStateSTART = 0;
-  static const TForteInt16 scm_nStateINIT = 1;
-  static const TForteInt16 scm_nStateREQ = 2;
-  static const TForteInt16 scm_nStateAcceptPacket = 3;
-  static const TForteInt16 scm_nStateRejectPacket = 4;
+  static const TForteInt16 scm_nStateIDLE = 1;
+  static const TForteInt16 scm_nStateINIT = 2;
+  static const TForteInt16 scm_nStateREQ = 3;
+  static const TForteInt16 scm_nStateAcceptPacket = 4;
+  static const TForteInt16 scm_nStateRejectPacket = 5;
 
   void enterStateSTART(void);
+  void enterStateIDLE(void);
   void enterStateINIT(void);
   void enterStateREQ(void);
   void enterStateAcceptPacket(void);

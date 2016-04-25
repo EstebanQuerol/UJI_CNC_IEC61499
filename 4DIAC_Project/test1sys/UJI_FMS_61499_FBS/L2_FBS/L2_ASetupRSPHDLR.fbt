@@ -3,6 +3,7 @@
 <FBType Comment="Basic Function Block Type" Name="L2_ASetupRSPHDLR">
   <Identification Standard="61499-2"/>
   <VersionInfo Author="EQUEROL" Date="2014-11-28" Organization="UJI" Version="0.0"/>
+  <VersionInfo Author="EQUEROL" Date="2016-01-18" Organization="UJI" Version="1.0"/>
   <CompilerInfo/>
   <InterfaceList>
     <EventInputs>
@@ -34,24 +35,27 @@
       <VarDeclaration Comment="This variable allow to diferentiate between accepted and rejected request" InitialValue="FALSE" Name="Accepted" Type="BOOL"/>
     </InternalVars>
     <ECC>
-      <ECState Comment="Initial State" Name="START" x="550.0" y="425.0"/>
+      <ECState Name="START" x="95.0" y="95.0"/>
+      <ECState Comment="Initial State" Name="IDLE" x="665.0" y="760.0"/>
       <ECState Comment="Initialization" Name="INIT" x="920.0" y="140.0">
         <ECAction Algorithm="INIT" Output="INITO"/>
       </ECState>
-      <ECState Comment="Normal execution" Name="RSP" x="1045.0" y="855.0">
+      <ECState Comment="Normal execution" Name="RSP" x="1160.0" y="1190.0">
         <ECAction Algorithm="RSP"/>
       </ECState>
-      <ECState Name="Accept" x="1520.0" y="1330.0">
+      <ECState Name="Accept" x="1635.0" y="1665.0">
         <ECAction Output="CNF"/>
       </ECState>
-      <ECState Name="Reject" x="570.0" y="1425.0"/>
-      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="START" x="920.0" y="425.0"/>
-      <ECTransition Comment="" Condition="1" Destination="START" Source="INIT" x="550.0" y="140.0"/>
-      <ECTransition Comment="" Condition="RSP" Destination="RSP" Source="START" x="920.0" y="805.0"/>
-      <ECTransition Comment="" Condition="Accepted = TRUE" Destination="Accept" Source="RSP" x="1500.0" y="1170.0"/>
-      <ECTransition Comment="" Condition="1" Destination="START" Source="Accept" x="1570.0" y="665.0"/>
-      <ECTransition Comment="" Condition="1" Destination="START" Source="Reject" x="495.0" y="1000.0"/>
-      <ECTransition Comment="" Condition="Accepted = FALSE" Destination="Reject" Source="RSP" x="940.0" y="1175.0"/>
+      <ECState Name="Reject" x="685.0" y="1760.0"/>
+      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="IDLE" x="955.0" y="515.0"/>
+      <ECTransition Comment="" Condition="QI" Destination="IDLE" Source="INIT" x="755.0" y="550.0"/>
+      <ECTransition Comment="" Condition="RSP" Destination="RSP" Source="IDLE" x="1035.0" y="1140.0"/>
+      <ECTransition Comment="" Condition="Accepted = TRUE" Destination="Accept" Source="RSP" x="1615.0" y="1505.0"/>
+      <ECTransition Comment="" Condition="1" Destination="IDLE" Source="Accept" x="1685.0" y="1000.0"/>
+      <ECTransition Comment="" Condition="1" Destination="IDLE" Source="Reject" x="610.0" y="1335.0"/>
+      <ECTransition Comment="" Condition="Accepted = FALSE" Destination="Reject" Source="RSP" x="1055.0" y="1510.0"/>
+      <ECTransition Comment="" Condition="INIT" Destination="INIT" Source="START" x="605.0" y="95.0"/>
+      <ECTransition Comment="" Condition="QI = FALSE" Destination="START" Source="INIT" x="600.0" y="330.0"/>
     </ECC>
     <Algorithm Comment="Initialization algorithm" Name="INIT">
       <ST Text="QO := QI;"/>

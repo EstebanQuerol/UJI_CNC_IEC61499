@@ -7,6 +7,7 @@
  *** Description: Basic Function Block Type
  *** Version: 
  ***     0.0: 2014-11-28/EQUEROL - UJI - 
+ ***     1.0: 2016-01-18/EQUEROL - UJI - 
  *************************************************************************/
 
 #ifndef _L2_MACHINECORE_H_
